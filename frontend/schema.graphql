@@ -147,15 +147,6 @@ enum CardPackage {
   PROMOTION_CARD # 프로모션 카드
 }
 
-interface Mech {
-  zone: [Zone!]! # 지형
-}
-
-interface StateUnit {
-  AP: Int! # 공격력
-  HP: Int! # 체력
-}
-
 type PlayableCard {
   level: Int! #레벨
   cost: Int! # 비용
@@ -169,15 +160,16 @@ type PlayableCard {
 union UnitLink = LinkTrait | LinkPilot
 
 type LinkTrait {
-  trait: [CardTrait!]!
+  trait: CardTrait!
 }
 
 type LinkPilot {
-  pilot: Pilot!
+  pilot: PilotCard!
 }
 
-type Pilot implements StateUnit & Node & PlayableCard {
+type PilotCard implements Node & PlayableCard {
   id: ID!
+  name: String!
   level: Int! #레벨
   cost: Int! # 비용
   series: GundamSeries! # 시리즈
@@ -187,11 +179,12 @@ type Pilot implements StateUnit & Node & PlayableCard {
   keywords: [CardKeyword!]! #키워드
   AP: Int! # 공격력
   HP: Int! # 체력
-  description: String # 효과 정보
+  description: [String!]! # 효과 정보
 }
 
-type Unit implements Mech & PlayableCard & StateUnit & Node {
+type UnitCard implements PlayableCard & Node {
   id: ID!
+  name: String!
   level: Int! #레벨
   cost: Int! # 비용
   series: GundamSeries! # 시리즈
@@ -199,18 +192,35 @@ type Unit implements Mech & PlayableCard & StateUnit & Node {
   rarity: CardRarity! #희귀도
   pack: CardPackage! # 패키지
   keywords: [CardKeyword!]! #키워드
-  zone: [Zone!]!
+  zone: [Zone!]! # 지형
   AP: Int! # 공격력
   HP: Int! # 체력
   links: [UnitLink!]! # 링크 정보
-  description: String # 효과 정보
+  description: [String!]! # 효과 정보
 }
 
 type Resource implements Node {
   id: ID!
+  name: String!
 }
 
-union Card = Resource | Base | Unit | Pilot | Command
+type BaseCard implements PlayableCard & Node {
+  id: ID!
+  name: String!
+  AP: Int!
+  HP: Int!
+  zone: [Zone!]!
+  level: Int!
+  cost: Int!
+  series: GundamSeries!
+  color: CardColor!
+  rarity: CardRarity!
+  package: CardPackage!
+  keywords: [CardKeyword!]!
+  description: [String!]!
+}
+
+union Card = Resource | BaseCard | UnitCard | PilotCard | CommandCard
 
 type CardConnection {
   totalCount: Int!
