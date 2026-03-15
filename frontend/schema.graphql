@@ -104,6 +104,7 @@ enum CardKeyword {
   HIGH_MANEUVER # 고기동
   MAIN # 메인
   ONCE_PER_TURN # 턴에 1회
+  END_OF_TURN # 내 턴이 끝날 때
   PILOT # 파일럿
   REPAIR # 리페어
   SUPPORT # 원호
@@ -218,6 +219,14 @@ type BaseCard implements PlayableCard & Node {
   package: CardPackage!
   keywords: [CardKeyword!]!
   description: [String!]!
+}
+
+type CommandCard implements PlayableCard & Node {
+  id: ID!
+  name: String!
+  level: Int!
+  cost: Int!
+  series: GundamSeries!
 }
 
 union Card = Resource | BaseCard | UnitCard | PilotCard | CommandCard

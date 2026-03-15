@@ -85,6 +85,7 @@ type CardKeyword =
   | "HIGH_MANEUVER"
   | "MAIN"
   | "ONCE_PER_TURN"
+  | "END_OF_TURN"
   | "PILOT"
   | "REPAIR"
   | "SUPPORT"

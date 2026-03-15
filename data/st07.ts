@@ -34,6 +34,13 @@ export const ST07: Record<string, Card> = {
     ],
     series: "MOBILE_SUIT_GUNDAM_00",
     pack: "ST07",
+    AP: 4,
+    HP: 4,
+    keywords: ["WHEN_PAIRED", "END_OF_TURN"],
+    description: [
+      "내 턴이 끝날때, 만약 트래시에 7장 이상의 (CB) 카드가 있다면, 플레이어의 리소스 하나를 선택하고 액티브로 설정합니다.",
+      "[페어 시] 덱의 맨 위의 카드 2장을 트래시로 보냅니다. 만약 (CB) 카드가 이 효과에 영향을 받았다면, 카드 1장을 뽑습니다.",
+    ],
   },
   "ST07-009": {
     id: "ST07-009",
@@ -51,10 +58,17 @@ export const ST07: Record<string, Card> = {
     HP: 1,
     series: "MOBILE_SUIT_GUNDAM_00",
     pack: "ST07",
+    rarity: "COMMON",
   },
   "ST07-015": {
     id: "ST07-015",
     __typename: "BaseCard",
+    keywords: ["BURST", "DEPLOY"],
+    name: "프톨레마이오스",
+    pack: "ST07",
+    rarity: "COMMON",
+    zone: ["SPACE"],
+    series: "MOBILE_SUIT_GUNDAM_00",
     AP: 0,
     HP: 5,
     color: "PURPLE",
@@ -63,7 +77,7 @@ export const ST07: Record<string, Card> = {
     description: [
       "[버스트] 이 카드를 배포합니다.",
       "[배포 시] 실드 1장을 손패로 가져옵니다.",
-      "만약 레스팅된 아군 (CB) 유닛이 있다면, 이 베이스는 유닛 토큰이 아닌 레벨 3 이하의 적 유닛으로부터 피해를 받지 않습니다."
-    ]
-  }
+      "만약 레스팅된 아군 (CB) 유닛이 있다면, 이 베이스는 유닛 토큰이 아닌 레벨 3 이하의 적 유닛으로부터 피해를 받지 않습니다.",
+    ],
+  },
 };
