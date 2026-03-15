@@ -1,15 +1,9 @@
 # crawler
 
-To install dependencies:
 
-```bash
-bun install
-```
-
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.3.8. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+www.gundam-gcg.com/en/cards/?package=616001 와 같이 호출, document parsing
+부스트팩 : package=616101~616103
+other product card pack : 616701
+Edition beta : 616000
+basic card : 616801
+Promotion Card : 616901
