@@ -479,7 +479,7 @@
     ],
     "description": [
       "【버스트】Choose 1 (Cyclops Team) Pilot card from your trash. Add it to your hand.",
-      "【When Paired･(Cyclops Team) Pilot】All your (Cyclops Team) Units may choose an active enemy Unit with 5 or less AP as their attack target during this turn."
+      "【세트 시･(Cyclops Team) Pilot】All your (Cyclops Team) Units may choose an active enemy Unit with 5 or less AP as their attack target during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD03-017",
@@ -937,7 +937,7 @@
       "ZAFT"
     ],
     "description": [
-      "【During Pair･(ZAFT) Pilot】During your turn, all your (ZAFT) Units get AP+2.",
+      "【세트 중･(ZAFT) Pilot】During your turn, all your (ZAFT) Units get AP+2.",
       "【어택 시】Choose 1 enemy Unit. Deal 1 damage to it for each 4 AP this Unit has."
     ],
     "__typename": "UnitCard",
@@ -1547,7 +1547,7 @@
     ],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
-      "【When Paired･(X-Rounder) Pilot】You may choose 4 (Vagan) cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit that is Lv.4 or lower. Destroy it."
+      "【세트 시･(X-Rounder) Pilot】You may choose 4 (Vagan) cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit that is Lv.4 or lower. Destroy it."
     ],
     "__typename": "UnitCard",
     "id": "GD03-054",
@@ -1577,7 +1577,7 @@
       "GUNDAM_FRAME"
     ],
     "description": [
-      "【When Paired･Purple Pilot】Choose 1 enemy Unit that is Lv.2 or lower. Destroy it."
+      "【세트 시･Purple Pilot】Choose 1 enemy Unit that is Lv.2 or lower. Destroy it."
     ],
     "__typename": "UnitCard",
     "id": "GD03-055",
@@ -2084,7 +2084,7 @@
     ],
     "description": [
       "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
-      "【링크 중】【Activate･Action】【턴 1회】If there are 6 or more (Gjallarhorn) cards in your trash, choose 1 enemy Unit battling this Unit. It gets AP-3 during this battle."
+      "【링크 중】【기동･액션】【턴 1회】If there are 6 or more (Gjallarhorn) cards in your trash, choose 1 enemy Unit battling this Unit. It gets AP-3 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD03-073",

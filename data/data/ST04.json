@@ -15,7 +15,7 @@
     ],
     "description": [
       "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
-      "【When Paired･Lv.4 or Higher Pilot】Choose 1 enemy Unit with 4 or less HP. Return it to its owner's hand."
+      "【세트 시･Lv.4 or Higher Pilot】Choose 1 enemy Unit with 4 or less HP. Return it to its owner's hand."
     ],
     "__typename": "UnitCard",
     "id": "ST04-001",

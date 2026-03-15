@@ -15,7 +15,7 @@
     ],
     "description": [
       "<돌파 3> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【During Pair･(Cyber-Newtype) Pilot】When one of your (Titans) Units destroys an enemy shield area card with damage, this Unit recovers 2 HP."
+      "【세트 중･(Cyber-Newtype) Pilot】When one of your (Titans) Units destroys an enemy shield area card with damage, this Unit recovers 2 HP."
     ],
     "__typename": "UnitCard",
     "id": "GD02-001",
@@ -75,7 +75,7 @@
       "TITANS"
     ],
     "description": [
-      "【During Pair･Lv.3 or Lower Pilot】【파괴 시】You may discard 1 Unit card. If you do, return the card paired with this Unit to your hand."
+      "【세트 중･Lv.3 or Lower Pilot】【파괴 시】You may discard 1 Unit card. If you do, return the card paired with this Unit to your hand."
     ],
     "__typename": "UnitCard",
     "id": "GD02-003",
@@ -309,7 +309,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "【Activate･Action】Destroy this Unit：Choose 1 enemy Base/enemy Shield this Unit is battling. Deal 6 damage to it."
+      "【기동･액션】Destroy this Unit：Choose 1 enemy Base/enemy Shield this Unit is battling. Deal 6 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-011",
@@ -927,7 +927,7 @@
       "ZEON"
     ],
     "description": [
-      "【During Pair･Red Pilot】This Unit gets AP+2."
+      "【세트 중･Red Pilot】This Unit gets AP+2."
     ],
     "__typename": "UnitCard",
     "id": "GD02-034",
@@ -980,7 +980,7 @@
     "description": [
       "【링크 시】This Unit gains <제압> during this turn.",
       "(어택으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
-      "【During Pair･(Neo Zeon) Pilot】【어택 시】Choose 1 damaged enemy Unit. Deal 2 damage to it."
+      "【세트 중･(Neo Zeon) Pilot】【어택 시】Choose 1 damaged enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-036",
@@ -1526,7 +1526,7 @@
       "VULTURE"
     ],
     "description": [
-      "【During Pair･(Vulture) Pilot】【파괴 시】Choose 1 (Vulture) Unit card that is Lv.5 or higher from your trash. Add it to your hand."
+      "【세트 중･(Vulture) Pilot】【파괴 시】Choose 1 (Vulture) Unit card that is Lv.5 or higher from your trash. Add it to your hand."
     ],
     "__typename": "UnitCard",
     "id": "GD02-056",
@@ -1673,7 +1673,7 @@
       "TEIWAZ"
     ],
     "description": [
-      "【When Paired･Purple Pilot】If there are 3 or more (Teiwaz)/(Tekkadan) cards in your trash, choose 1 enemy Unit with 3 or less AP. Rest it."
+      "【세트 시･Purple Pilot】If there are 3 or more (Teiwaz)/(Tekkadan) cards in your trash, choose 1 enemy Unit with 3 or less AP. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-061",

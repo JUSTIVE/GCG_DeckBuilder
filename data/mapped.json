@@ -46,7 +46,7 @@
       "WHITE_BASE_TEAM"
     ],
     "description": [
-      "【When Paired･(White Base Team) Pilot】Draw 1."
+      "【세트 시･(White Base Team) Pilot】Draw 1."
     ],
     "__typename": "UnitCard",
     "id": "ST01-002",
@@ -594,7 +594,7 @@
     ],
     "description": [
       "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
-      "【When Paired･Lv.4 or Higher Pilot】Choose 1 enemy Unit with 4 or less HP. Return it to its owner's hand."
+      "【세트 시･Lv.4 or Higher Pilot】Choose 1 enemy Unit with 4 or less HP. Return it to its owner's hand."
     ],
     "__typename": "UnitCard",
     "id": "ST04-001",
@@ -4817,7 +4817,7 @@
       "WHITE_BASE_TEAM"
     ],
     "description": [
-      "【링크 중】【Activate･Action】【턴 1회】Choose 1 Unit. It recovers 1 HP."
+      "【링크 중】【기동･액션】【턴 1회】Choose 1 Unit. It recovers 1 HP."
     ],
     "__typename": "UnitCard",
     "id": "GD01-014",
@@ -5026,7 +5026,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【When Paired･(Operation Meteor) Pilot】Place 1 rested Resource. Then, this Unit gains <선제 공격> during this turn.",
+      "【세트 시･(Operation Meteor) Pilot】Place 1 rested Resource. Then, this Unit gains <선제 공격> during this turn.",
       "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -5119,7 +5119,7 @@
       "ZEON"
     ],
     "description": [
-      "【When Paired･(Zeon) Pilot】Choose 1 enemy Unit with <블로커> that is Lv.2 or lower. Destroy it."
+      "【세트 시･(Zeon) Pilot】Choose 1 enemy Unit with <블로커> that is Lv.2 or lower. Destroy it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-032",
@@ -5345,7 +5345,7 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【When Paired･(Cyber-Newtype)/(Newtype) Pilot】Choose 1 to 2 enemy Units. Deal 1 damage to them."
+      "【세트 시･(Cyber-Newtype)/(Newtype) Pilot】Choose 1 to 2 enemy Units. Deal 1 damage to them."
     ],
     "__typename": "UnitCard",
     "id": "GD01-044",
@@ -5408,7 +5408,7 @@
     ],
     "description": [
       "【기동･메인】<원호 3> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
-      "【During Pair･(Coordinator) Pilot】【턴 1회】When you use this Unit's <원호> to increase a (ZAFT) Unit's AP, set this Unit as active."
+      "【세트 중･(Coordinator) Pilot】【턴 1회】When you use this Unit's <원호> to increase a (ZAFT) Unit's AP, set this Unit as active."
     ],
     "__typename": "UnitCard",
     "id": "GD01-046",
@@ -5673,7 +5673,7 @@
       "ZEON"
     ],
     "description": [
-      "【Activate･Action】【턴 1회】①：Choose 1 Unit that is Lv.4 or higher. It gets AP+1 during this battle."
+      "【기동･액션】【턴 1회】①：Choose 1 Unit that is Lv.4 or higher. It gets AP+1 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-058",
@@ -6128,7 +6128,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【세트 중】【Activate･Action】【턴 1회】②：Choose 1 enemy Unit. It gets AP-1 during this battle."
+      "【세트 중】【기동･액션】【턴 1회】②：Choose 1 enemy Unit. It gets AP-1 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-082",
@@ -6422,7 +6422,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【Activate･Action】【턴 1회】If an enemy Unit with 1 or less AP is in play, this Unit recovers 1 HP."
+      "【기동･액션】【턴 1회】If an enemy Unit with 1 or less AP is in play, this Unit recovers 1 HP."
     ],
     "__typename": "PilotCard",
     "id": "GD01-098",
@@ -6910,7 +6910,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【Activate･Action】Rest this Base：Choose 1 friendly (ZAFT) Unit with 5 or more AP. It gains <돌파 3> during this battle.",
+      "【기동･액션】Rest this Base：Choose 1 friendly (ZAFT) Unit with 5 or more AP. It gains <돌파 3> during this battle.",
       "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "BaseCard",
@@ -7065,7 +7065,7 @@
     ],
     "description": [
       "<돌파 3> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【During Pair･(Cyber-Newtype) Pilot】When one of your (Titans) Units destroys an enemy shield area card with damage, this Unit recovers 2 HP."
+      "【세트 중･(Cyber-Newtype) Pilot】When one of your (Titans) Units destroys an enemy shield area card with damage, this Unit recovers 2 HP."
     ],
     "__typename": "UnitCard",
     "id": "GD02-001",
@@ -7125,7 +7125,7 @@
       "TITANS"
     ],
     "description": [
-      "【During Pair･Lv.3 or Lower Pilot】【파괴 시】You may discard 1 Unit card. If you do, return the card paired with this Unit to your hand."
+      "【세트 중･Lv.3 or Lower Pilot】【파괴 시】You may discard 1 Unit card. If you do, return the card paired with this Unit to your hand."
     ],
     "__typename": "UnitCard",
     "id": "GD02-003",
@@ -7359,7 +7359,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "【Activate･Action】Destroy this Unit：Choose 1 enemy Base/enemy Shield this Unit is battling. Deal 6 damage to it."
+      "【기동･액션】Destroy this Unit：Choose 1 enemy Base/enemy Shield this Unit is battling. Deal 6 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-011",
@@ -7977,7 +7977,7 @@
       "ZEON"
     ],
     "description": [
-      "【During Pair･Red Pilot】This Unit gets AP+2."
+      "【세트 중･Red Pilot】This Unit gets AP+2."
     ],
     "__typename": "UnitCard",
     "id": "GD02-034",
@@ -8030,7 +8030,7 @@
     "description": [
       "【링크 시】This Unit gains <제압> during this turn.",
       "(어택으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
-      "【During Pair･(Neo Zeon) Pilot】【어택 시】Choose 1 damaged enemy Unit. Deal 2 damage to it."
+      "【세트 중･(Neo Zeon) Pilot】【어택 시】Choose 1 damaged enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-036",
@@ -8576,7 +8576,7 @@
       "VULTURE"
     ],
     "description": [
-      "【During Pair･(Vulture) Pilot】【파괴 시】Choose 1 (Vulture) Unit card that is Lv.5 or higher from your trash. Add it to your hand."
+      "【세트 중･(Vulture) Pilot】【파괴 시】Choose 1 (Vulture) Unit card that is Lv.5 or higher from your trash. Add it to your hand."
     ],
     "__typename": "UnitCard",
     "id": "GD02-056",
@@ -8723,7 +8723,7 @@
       "TEIWAZ"
     ],
     "description": [
-      "【When Paired･Purple Pilot】If there are 3 or more (Teiwaz)/(Tekkadan) cards in your trash, choose 1 enemy Unit with 3 or less AP. Rest it."
+      "【세트 시･Purple Pilot】If there are 3 or more (Teiwaz)/(Tekkadan) cards in your trash, choose 1 enemy Unit with 3 or less AP. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-061",
@@ -10963,7 +10963,7 @@
     ],
     "description": [
       "【버스트】Choose 1 (Cyclops Team) Pilot card from your trash. Add it to your hand.",
-      "【When Paired･(Cyclops Team) Pilot】All your (Cyclops Team) Units may choose an active enemy Unit with 5 or less AP as their attack target during this turn."
+      "【세트 시･(Cyclops Team) Pilot】All your (Cyclops Team) Units may choose an active enemy Unit with 5 or less AP as their attack target during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD03-017",
@@ -11421,7 +11421,7 @@
       "ZAFT"
     ],
     "description": [
-      "【During Pair･(ZAFT) Pilot】During your turn, all your (ZAFT) Units get AP+2.",
+      "【세트 중･(ZAFT) Pilot】During your turn, all your (ZAFT) Units get AP+2.",
       "【어택 시】Choose 1 enemy Unit. Deal 1 damage to it for each 4 AP this Unit has."
     ],
     "__typename": "UnitCard",
@@ -12031,7 +12031,7 @@
     ],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
-      "【When Paired･(X-Rounder) Pilot】You may choose 4 (Vagan) cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit that is Lv.4 or lower. Destroy it."
+      "【세트 시･(X-Rounder) Pilot】You may choose 4 (Vagan) cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit that is Lv.4 or lower. Destroy it."
     ],
     "__typename": "UnitCard",
     "id": "GD03-054",
@@ -12061,7 +12061,7 @@
       "GUNDAM_FRAME"
     ],
     "description": [
-      "【When Paired･Purple Pilot】Choose 1 enemy Unit that is Lv.2 or lower. Destroy it."
+      "【세트 시･Purple Pilot】Choose 1 enemy Unit that is Lv.2 or lower. Destroy it."
     ],
     "__typename": "UnitCard",
     "id": "GD03-055",
@@ -12568,7 +12568,7 @@
     ],
     "description": [
       "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
-      "【링크 중】【Activate･Action】【턴 1회】If there are 6 or more (Gjallarhorn) cards in your trash, choose 1 enemy Unit battling this Unit. It gets AP-3 during this battle."
+      "【링크 중】【기동･액션】【턴 1회】If there are 6 or more (Gjallarhorn) cards in your trash, choose 1 enemy Unit battling this Unit. It gets AP-3 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD03-073",

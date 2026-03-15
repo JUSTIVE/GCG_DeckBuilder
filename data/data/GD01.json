@@ -399,7 +399,7 @@
       "WHITE_BASE_TEAM"
     ],
     "description": [
-      "【링크 중】【Activate･Action】【턴 1회】Choose 1 Unit. It recovers 1 HP."
+      "【링크 중】【기동･액션】【턴 1회】Choose 1 Unit. It recovers 1 HP."
     ],
     "__typename": "UnitCard",
     "id": "GD01-014",
@@ -676,7 +676,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【When Paired･(Operation Meteor) Pilot】Place 1 rested Resource. Then, this Unit gains <선제 공격> during this turn.",
+      "【세트 시･(Operation Meteor) Pilot】Place 1 rested Resource. Then, this Unit gains <선제 공격> during this turn.",
       "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -876,7 +876,7 @@
       "ZEON"
     ],
     "description": [
-      "【When Paired･(Zeon) Pilot】Choose 1 enemy Unit with <블로커> that is Lv.2 or lower. Destroy it."
+      "【세트 시･(Zeon) Pilot】Choose 1 enemy Unit with <블로커> that is Lv.2 or lower. Destroy it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-032",
@@ -1185,7 +1185,7 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【When Paired･(Cyber-Newtype)/(Newtype) Pilot】Choose 1 to 2 enemy Units. Deal 1 damage to them."
+      "【세트 시･(Cyber-Newtype)/(Newtype) Pilot】Choose 1 to 2 enemy Units. Deal 1 damage to them."
     ],
     "__typename": "UnitCard",
     "id": "GD01-044",
@@ -1248,7 +1248,7 @@
     ],
     "description": [
       "【기동･메인】<원호 3> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
-      "【During Pair･(Coordinator) Pilot】【턴 1회】When you use this Unit's <원호> to increase a (ZAFT) Unit's AP, set this Unit as active."
+      "【세트 중･(Coordinator) Pilot】【턴 1회】When you use this Unit's <원호> to increase a (ZAFT) Unit's AP, set this Unit as active."
     ],
     "__typename": "UnitCard",
     "id": "GD01-046",
@@ -1574,7 +1574,7 @@
       "ZEON"
     ],
     "description": [
-      "【Activate･Action】【턴 1회】①：Choose 1 Unit that is Lv.4 or higher. It gets AP+1 during this battle."
+      "【기동･액션】【턴 1회】①：Choose 1 Unit that is Lv.4 or higher. It gets AP+1 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-058",
@@ -2223,7 +2223,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【세트 중】【Activate･Action】【턴 1회】②：Choose 1 enemy Unit. It gets AP-1 during this battle."
+      "【세트 중】【기동･액션】【턴 1회】②：Choose 1 enemy Unit. It gets AP-1 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-082",
@@ -2611,7 +2611,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【Activate･Action】【턴 1회】If an enemy Unit with 1 or less AP is in play, this Unit recovers 1 HP."
+      "【기동･액션】【턴 1회】If an enemy Unit with 1 or less AP is in play, this Unit recovers 1 HP."
     ],
     "__typename": "PilotCard",
     "id": "GD01-098",
@@ -3281,7 +3281,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【Activate･Action】Rest this Base：Choose 1 friendly (ZAFT) Unit with 5 or more AP. It gains <돌파 3> during this battle.",
+      "【기동･액션】Rest this Base：Choose 1 friendly (ZAFT) Unit with 5 or more AP. It gains <돌파 3> during this battle.",
       "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "BaseCard",

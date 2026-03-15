@@ -8,7 +8,8 @@ const mapped = raw.map((x) => {
     description: x.description.map((x) =>
       x
         .replaceAll("<Repair", "<리페어")
-        .replaceAll("【During Pair】", "【세트 중】")
+        .replaceAll("【During Pair", "【세트 중")
+        .replaceAll("【During Link", "【링크 중")
         .replaceAll("<Blocker>", "<블로커>")
         .replaceAll(
           "(Rest this Unit to change the attack target to it.)",
@@ -46,8 +47,8 @@ const mapped = raw.map((x) => {
           "(레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
         )
         .replaceAll("【Destroyed】", "【파괴 시】")
-        .replaceAll("【When Paired】", "【세트 시】")
-        .replaceAll("【When Linked】", "【링크 시】")
+        .replaceAll("【When Paired", "【세트 시")
+        .replaceAll("【When Linked", "【링크 시")
         .replaceAll("<Suppression>", "<제압>")
         .replaceAll(
           "(Damage to Shields by an attack is dealt to the first 2 cards simultaneously.)",
@@ -58,7 +59,8 @@ const mapped = raw.map((x) => {
           "(While this Unit is attacking, it deals damage before the enemy Unit.)",
           "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)",
         )
-        .replaceAll("At the end of your turn", "자신의 턴 종료 시,"),
+        .replaceAll("At the end of your turn", "자신의 턴 종료 시,")
+        .replaceAll("【Activate･Action】", "【기동･액션】"),
     ),
   };
 });
