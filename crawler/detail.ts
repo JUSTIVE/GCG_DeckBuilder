@@ -74,7 +74,9 @@ export function parseCard(html: string): Card {
 
   const series: GundamSeries = field($, "Source Title")
     .replaceAll(" ", "_")
+    .replaceAll("-", "_")
     .replaceAll(":", "")
+    .replaceAll("'", "")
     .toUpperCase() as GundamSeries;
 
   const trait = [...field($, "Trait").matchAll(/\((.*?)\)/g)].map((m) =>
