@@ -1,0 +1,247 @@
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+enum CardTrait {
+  ACADEMY # 학원
+  OZ # OZ
+  NEO_ZEON # 네오 지온
+  ZEON # 지온
+  EARTH_ALLIANCE # 지구 연합
+  EARTH_FEDERATION # 지구 연방
+  MAGANAC_CORPS # 마그아낙 부대
+  ZAFT # 자프트
+  OPERATION_METEOR # 오퍼레이션 메테오
+  NEWTYPE # 뉴타입
+  COORDINATOR # 코디네이터
+  CYBER_NEWTYPE # 강화인간
+  STRONGHOLD # 거점
+  WARSHIP # 함선
+  TRIPLE_SHIP_ALLIANCE # 삼척동맹
+  CIVILIAN # 민간
+  WHITE_BASE_TEAM # 화이트베이스 부대
+  G_TEAM # G-팀
+  VANADIS_INSTITUTE # 바나디스 기관
+  ORB # 오브
+  TEKKADAN # 철화단
+  TEIWAZ # 테이와즈
+  GJALLARHORN # 걀라르호른
+  GUNDAM_FRAME # 건담 프레임
+  ALAYA_VIJNANA # 아라야식
+  TITANS # 티탄즈
+  VULTURE # 벌쳐
+  AEUG # 에우고
+  CLAN # 클랜
+  AGE_SYSTEM # 에이지 시스템
+  WHITE_FANG # 화이트 팽
+  SIDE_6 # 사이드 6
+  NEW_UNE # 신지구연방군
+  UE # UE
+  VAGAN # 베이건
+  BIOLOGICAL_CPU # 생체 CPU
+  ASUNO_FAMILY # 아스노 일가
+  X_ROUNDER # X-라운더
+  SUPERPOWER_BLOC #초대국군
+  CB #솔레스탈 비잉
+  INNOVADE # 이노베이드
+  GN_DRIVE # GN 드라이브
+  SUPER_SOLDIER # 초인병
+  MAFTY # 마프티
+  SRA # 우주혁명군
+  OLD_UNE # 지구연방군
+  JUPITRIS # 주피트리스
+  CYCLOPS_TEAM # 사이클롭스 부대
+  UN # UN
+  MINERVA_SQUAD # 미네르바 부대
+}
+
+enum CardColor {
+  BLUE # 파랑
+  GREEN # 초록
+  RED # 빨강
+  YELLOW # 노랑
+  PURPLE # 보라
+}
+
+enum GundamSeries {
+  MOBILE_SUIT_GUNDAM # 기동전사 건담
+  MOBILE_SUIT_Z_GUNDAM # 기동전사 Z 건담
+  MOBILE_SUIT_GUNDAM_CHARS_COUNTERATTACK # 기동전사 건담 샤아의 역습
+  MOBILE_SUIT_GUNDAM_0080_WAR_IN_THE_POCKET # 기동전사 건담 0080 주머니 속의 전쟁
+  MOBILE_SUIT_GUNDAM_WING # 신기동전기 건담 W
+  AFTER_WAR_GUNDAM_X # 기동신세기 건담 X
+  MOBILE_SUIT_GUNDAM_SEED # 기동전사 건담 SEED
+  MOBILE_SUIT_GUNDAM_SEED_DESTINY #기동전사 건담 SEED Destiny
+  MOBILE_SUIT_GUNDAM_00 #기동전사 건담 00
+  MOBILE_SUIT_GUNDAM_UNICORN #기동전사 건담 유니콘
+  MOBILE_SUIT_GUNDAM_AGE #기동전사 건담 AGE
+  MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS # 기동전사 건담 철혈의 오펀스
+  MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH # 기동전사 건담 섬광의 하사웨이
+  MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY # 기동전사 건담 수성의 마녀
+  MOBILE_SUIT_GUNDAM_GQUUUUUUX # 기동전사 건담 GQUUUUUUX
+}
+
+enum CardKeyword {
+  ACTION # 액션
+  ACTIVATE_ACTION # 기동 - 액션
+  ACTIVATE_MAIN # 기동 - 메인
+  ATTACK # 공격시
+  BLOCKER # 블로커
+  BREACH # 돌파
+  BURST # 버스트
+  DEPLOY # 배포 시
+  DESTROYED # 파괴 시
+  DURING_LINK # 링크 중
+  DURING_PAIR # 페어 중
+  FIRST_STRIKE # 선제공격
+  HIGH_MANEUVER # 고기동
+  MAIN # 메인
+  ONCE_PER_TURN # 턴에 1회
+  PILOT # 파일럿
+  REPAIR # 리페어
+  SUPPORT # 원호
+  WHEN_LINKED # 링크시
+  WHEN_PAIRED # 페어시
+}
+
+enum CardRarity {
+  COMMON # C
+  UNCOMMON #U
+  RARE #R
+  LEGENDARY_RARE #LR
+  P #P
+}
+
+enum Zone {
+  SPACE # 우주
+  EARTH # 지구
+}
+
+type Deck {
+  cards: [Card!]! # 카드뭉치
+}
+
+enum CardPackage {
+  GD01 # 부스트팩 1
+  GD02 # 부스트팩 2
+  GD03 # 부스트팩 3
+  ST01 # 스타터덱 1
+  ST02 # 스타터덱 2
+  ST03 # 스타터덱 3
+  ST04 # 스타터덱 4
+  ST05 # 스타터덱 5
+  ST06 # 스타터덱 6
+  ST07 # 스타터덱 7
+  ST08 # 스타터덱 8
+  ST09 # 스타터덱 9
+  OTHER_PRODUCT_CARD # 기타 상품 카드
+  EDITION_BETA # 베타 에디션
+  BASIC_CARDS # 기본 카드
+  PROMOTION_CARD # 프로모션 카드
+}
+
+interface Mech {
+  zone: [Zone!]! # 지형
+}
+
+interface StateUnit {
+  AP: Int! # 공격력
+  HP: Int! # 체력
+}
+
+type PlayableCard {
+  level: Int! #레벨
+  cost: Int! # 비용
+  series: GundamSeries! # 시리즈
+  color: CardColor! # 색상
+  rarity: CardRarity! #희귀도
+  pack: CardPackage! # 패키지
+  keywords: [CardKeyword!]! #키워드
+}
+union UnitLink = LinkTrait | LinkPilot
+
+type LinkTrait {
+  trait: [CardTrait!]!
+}
+
+type LinkPilot {
+  pilot: Pilot!
+}
+
+type Pilot implements StateUnit & Node & PlayableCard {
+  id: ID!
+  level: Int! #레벨
+  cost: Int! # 비용
+  series: GundamSeries! # 시리즈
+  color: CardColor! # 색상
+  rarity: CardRarity! #희귀도
+  pack: CardPackage! # 패키지
+  keywords: [CardKeyword!]! #키워드
+  AP: Int! # 공격력
+  HP: Int! # 체력
+  description: String # 효과 정보
+}
+
+type Unit implements Mech & PlayableCard & StateUnit & Node {
+  id: ID!
+  level: Int! #레벨
+  cost: Int! # 비용
+  series: GundamSeries! # 시리즈
+  color: CardColor! # 색상
+  rarity: CardRarity! #희귀도
+  pack: CardPackage! # 패키지
+  keywords: [CardKeyword!]! #키워드
+  zone: [Zone!]!
+  AP: Int! # 공격력
+  HP: Int! # 체력
+  links: [UnitLink!]! # 링크 정보
+  description: String # 효과 정보
+}
+
+type Resource implements Node {
+  id: ID!
+}
+
+union Card = Resource | Base | Unit | Pilot | Command
+
+type CardConnection {
+  totalCount: Int!
+  edges: [CardEdges!]!
+  pageInfo: PageInfo!
+}
+
+type CardEdges {
+  cursor: String!
+  node: Card!
+}
+
+enum CardKind {
+  RESOURCE
+  BASE
+  UNIT
+  PILOT
+  COMMAND
+}
+
+input CardFilterInput {
+  level: [Int!] #레벨
+  cost: [Int!] # 비용
+  pack: CardPackage # 카드 팩
+  rarity: CardRarity # 레어도
+  keyword: [CardKeyword!] # 키워드
+  zone: [Zone!] # 지형
+  query: String # 이름/효과정보
+  kind: CardKind!
+}
+
+type Query {
+  node(id: ID!): Node
+  cards(first: Int, after: String, filter: CardFilterInput): CardConnection!
+}
