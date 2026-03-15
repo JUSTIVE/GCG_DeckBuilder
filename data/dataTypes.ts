@@ -132,7 +132,7 @@ type PilotCard = {
   series: GundamSeries;
   color: CardColor;
   rarity: CardRarity;
-  pack: CardPackage;
+  package: CardPackage;
   keywords: CardKeyword[];
   AP: number;
   HP: number;
@@ -148,7 +148,7 @@ type UnitCard = {
   series: GundamSeries;
   color: CardColor;
   rarity: CardRarity;
-  pack: CardPackage;
+  package: CardPackage;
   keywords: CardKeyword[];
   zone: Zone[];
   AP: number;
@@ -167,7 +167,7 @@ type BaseCard = {
   series: GundamSeries;
   color: CardColor;
   rarity: CardRarity;
-  pack: CardPackage;
+  package: CardPackage;
   keywords: CardKeyword[];
   zone: Zone[];
   AP: number;
@@ -184,7 +184,7 @@ type CommandCard = {
   series: GundamSeries;
   color: CardColor;
   rarity: CardRarity;
-  pack: CardPackage;
+  package: CardPackage;
   description: string[];
   keywords: CardKeyword[];
 };
