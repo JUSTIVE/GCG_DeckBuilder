@@ -52,4 +52,17 @@ export const ST07: Record<string, Card> = {
     series: "MOBILE_SUIT_GUNDAM_00",
     pack: "ST07",
   },
+  "ST07-015": {
+    id: "ST07-015",
+    __typename: "BaseCard",
+    AP: 0,
+    HP: 5,
+    color: "PURPLE",
+    cost: 1,
+    level: 2,
+    description: [
+      "[버스트] 이 카드를 배포합니다.",
+      "[배포 시] 실드 1장을 손패로 가져옵니다.",						"만약 레스팅된 아군 (CB) 유닛이 있다면, 이 베이스는 레벨 3 이이하의 "
+    ]
+  }
 };

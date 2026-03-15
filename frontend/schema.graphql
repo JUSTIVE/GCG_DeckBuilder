@@ -159,6 +159,7 @@ interface StateUnit {
 type PlayableCard {
   level: Int! #레벨
   cost: Int! # 비용
+  name: String! # 이름
   series: GundamSeries! # 시리즈
   color: CardColor! # 색상
   rarity: CardRarity! #희귀도
