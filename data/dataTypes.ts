@@ -1,4 +1,4 @@
-type CardTrait =
+export type CardTrait =
   | "ACADEMY"
   | "OZ"
   | "NEO_ZEON"
@@ -50,9 +50,9 @@ type CardTrait =
   | "UN"
   | "MINERVA_SQUAD";
 
-type CardColor = "BLUE" | "GREEN" | "RED" | "YELLOW" | "PURPLE";
+export type CardColor = "BLUE" | "GREEN" | "RED" | "YELLOW" | "PURPLE";
 
-type GundamSeries =
+export type GundamSeries =
   | "MOBILE_SUIT_GUNDAM"
   | "MOBILE_SUIT_Z_GUNDAM"
   | "MOBILE_SUIT_GUNDAM_CHARS_COUNTERATTACK"
@@ -69,7 +69,7 @@ type GundamSeries =
   | "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY"
   | "MOBILE_SUIT_GUNDAM_GQUUUUUUX";
 
-type CardKeyword =
+export type CardKeyword =
   | "ACTION"
   | "ACTIVATE_ACTION"
   | "ACTIVATE_MAIN"
@@ -92,10 +92,10 @@ type CardKeyword =
   | "WHEN_LINKED"
   | "WHEN_PAIRED";
 
-type CardRarity = "COMMON" | "UNCOMMON" | "RARE" | "LEGENDARY_RARE" | "P";
+export type CardRarity = "COMMON" | "UNCOMMON" | "RARE" | "LEGENDARY_RARE" | "P";
 
-type Zone = "SPACE" | "EARTH";
-type CardPackage =
+export type Zone = "SPACE" | "EARTH";
+export type CardPackage =
   | "GD01"
   | "GD02"
   | "GD03"
@@ -113,17 +113,17 @@ type CardPackage =
   | "BASIC_CARDS"
   | "PROMOTION_CARD";
 
-type LinkTrait = {
+export type LinkTrait = {
   trait: CardTrait;
 };
 
-type LinkPilot = {
+export type LinkPilot = {
   pilot: string;
 };
 
-type UnitLink = LinkTrait | LinkPilot;
+export type UnitLink = LinkTrait | LinkPilot;
 
-type PilotCard = {
+export type PilotCard = {
   __typename: "PilotCard";
   id: string;
   name: string;
@@ -139,7 +139,7 @@ type PilotCard = {
   description: string[];
 };
 
-type UnitCard = {
+export type UnitCard = {
   __typename: "UnitCard";
   id: string;
   name: string;
@@ -158,7 +158,7 @@ type UnitCard = {
   description: string[];
 };
 
-type BaseCard = {
+export type BaseCard = {
   __typename: "BaseCard";
   id: string;
   name: string;
@@ -175,7 +175,7 @@ type BaseCard = {
   description: string[];
 };
 
-type CommandCard = {
+export type CommandCard = {
   __typename: "CommandCard";
   id: string;
   name: string;
@@ -189,7 +189,7 @@ type CommandCard = {
   keywords: CardKeyword[];
 };
 
-type ResourceCard = {
+export type ResourceCard = {
   id: string;
 };
 export type Card = ResourceCard | BaseCard | UnitCard | PilotCard | CommandCard;
