@@ -15,9 +15,9 @@
       "GUNDAM_FRAME"
     ],
     "description": [
-      "【Deploy】Choose 1 of your other Units. Deal 1 damage to it. It gets AP+1 during this turn.",
-      "While this is damaged, it gains <Suppression>.",
-      "(Damage to Shields by an attack is dealt to the first 2 cards simultaneously.)"
+      "【배치 시】Choose 1 of your other Units. Deal 1 damage to it. It gets AP+1 during this turn.",
+      "While this is damaged, it gains <제압>.",
+      "(어택으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST05-001",
@@ -74,7 +74,7 @@
       "TEKKADAN"
     ],
     "description": [
-      "【Activate･Main】Rest this Unit：Choose 1 of your Units. Deal 1 damage to it. It gets AP+1 during this turn."
+      "【기동･메인】Rest this Unit：Choose 1 of your Units. Deal 1 damage to it. It gets AP+1 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "ST05-003",
@@ -120,7 +120,7 @@
       "GUNDAM_FRAME"
     ],
     "description": [
-      "【Destroyed】Choose 1 enemy Unit with 4 or less AP. Rest it."
+      "【파괴 시】Choose 1 enemy Unit with 4 or less AP. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "ST05-005",
@@ -171,8 +171,8 @@
       "GJALLARHORN"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)",
-      "【When Paired】Choose 1 enemy Unit that is Lv.3 or lower. It gets AP-2 during this turn."
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "【세트 시】Choose 1 enemy Unit that is Lv.3 or lower. It gets AP-2 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "ST05-007",
@@ -201,7 +201,7 @@
       "GJALLARHORN"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)"
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST05-008",
@@ -253,8 +253,8 @@
       "ALAYA_VIJNANA"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【When Paired】Choose 1 of your Units and 1 enemy Unit. Deal 1 damage to them."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【세트 시】Choose 1 of your Units and 1 enemy Unit. Deal 1 damage to them."
     ],
     "__typename": "PilotCard",
     "id": "ST05-010",
@@ -277,8 +277,8 @@
       "ALAYA_VIJNANA"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【During Link】During your turn, when this Unit destroys an enemy Unit with battle damage, choose 1 (Tekkadan) Unit card that is Lv.2 or lower from your trash. Add it to your hand."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【링크 중】During your turn, when this Unit destroys an enemy Unit with battle damage, choose 1 (Tekkadan) Unit card that is Lv.2 or lower from your trash. Add it to your hand."
     ],
     "__typename": "PilotCard",
     "id": "ST05-011",
@@ -300,8 +300,8 @@
       "GJALLARHORN"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【When Paired】If you have 2 or more other (Gjallarhorn)/(Tekkadan) Units in play, choose 1 enemy Unit with 3 or less HP. Rest it."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【세트 시】If you have 2 or more other (Gjallarhorn)/(Tekkadan) Units in play, choose 1 enemy Unit with 3 or less HP. Rest it."
     ],
     "__typename": "PilotCard",
     "id": "ST05-012",
@@ -321,7 +321,7 @@
     "package": "ST05",
     "trait": [],
     "description": [
-      "【Main】/【Action】Choose 1 of your Units. Deal 1 damage to it. It gets AP+3 during this turn."
+      "【메인】/【액션】Choose 1 of your Units. Deal 1 damage to it. It gets AP+3 during this turn."
     ],
     "__typename": "CommandCard",
     "id": "ST05-013"
@@ -339,8 +339,8 @@
     "package": "ST05",
     "trait": [],
     "description": [
-      "【Burst】Choose 1 enemy Unit. Deal 1 damage to it.",
-      "【Main】Choose 1 enemy Unit that is Lv.3 or lower. Destroy it."
+      "【버스트】Choose 1 enemy Unit. Deal 1 damage to it.",
+      "【메인】Choose 1 enemy Unit that is Lv.3 or lower. Destroy it."
     ],
     "__typename": "CommandCard",
     "id": "ST05-014"
@@ -362,9 +362,9 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand.",
-      "【Activate･Main】Rest this Base：Choose 1 of your damaged Units. It gets AP+2 during this turn."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다.",
+      "【기동･메인】Rest this Base：Choose 1 of your damaged Units. It gets AP+2 during this turn."
     ],
     "__typename": "BaseCard",
     "id": "ST05-015",

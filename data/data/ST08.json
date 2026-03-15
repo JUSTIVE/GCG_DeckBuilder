@@ -14,7 +14,7 @@
     ],
     "description": [
       "While you have no Units that are Lv.6 or higher in play, this card in your hand gets Lv. -1 and cost -1 for each enemy Unit in play.",
-      "【When Paired】Choose 1 enemy Unit with the highest Lv. Deal 3 damage to it."
+      "【세트 시】Choose 1 enemy Unit with the highest Lv. Deal 3 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "ST08-001",
@@ -43,7 +43,7 @@
       "MAFTY"
     ],
     "description": [
-      "【Deploy】Choose 1 enemy Unit. Deal 1 damage to it."
+      "【배치 시】Choose 1 enemy Unit. Deal 1 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "ST08-002",
@@ -97,7 +97,7 @@
       "MAFTY"
     ],
     "description": [
-      "【Attack】If this Unit is attacking an enemy Unit, choose 1 enemy Unit. Deal 1 damage to it."
+      "【어택 시】If this Unit is attacking an enemy Unit, choose 1 enemy Unit. Deal 1 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "ST08-004",
@@ -149,7 +149,7 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【During Pair】【Attack】【Once per Turn】If this Unit is attacking the enemy player, reveal 1 (Earth Federation) Unit card from your hand. Return it to the bottom of your deck. If you do, draw 2."
+      "【세트 중】【어택 시】【턴 1회】If this Unit is attacking the enemy player, reveal 1 (Earth Federation) Unit card from your hand. Return it to the bottom of your deck. If you do, draw 2."
     ],
     "__typename": "UnitCard",
     "id": "ST08-006",
@@ -203,8 +203,8 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "While 3 or more enemy Units are in play, this Unit gains <Blocker>.",
-      "(Rest this Unit to change the attack target to it.)"
+      "While 3 or more enemy Units are in play, this Unit gains <블로커>.",
+      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST08-008",
@@ -229,7 +229,7 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【Deploy】Choose 1 rested enemy Unit that is Lv.2 or lower. It won' t be set as active during the start phase of your opponent' s next turn."
+      "【배치 시】Choose 1 rested enemy Unit that is Lv.2 or lower. It won' t be set as active during the start phase of your opponent' s next turn."
     ],
     "__typename": "UnitCard",
     "id": "ST08-009",
@@ -255,8 +255,8 @@
       "NEWTYPE"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【When Paired】If this is a (Mafty) Unit, choose 1 of your (Mafty) Units. During this turn, it may choose a damaged active enemy Unit as its attack target."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【세트 시】If this is a (Mafty) Unit, choose 1 of your (Mafty) Units. During this turn, it may choose a damaged active enemy Unit as its attack target."
     ],
     "__typename": "PilotCard",
     "id": "ST08-010",
@@ -278,8 +278,8 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "When you draw with an effect, if this is a blue Unit, it gains <High-Maneuver> during this turn.",
+      "【버스트】 이 카드를 패에 추가한다.",
+      "When you draw with an effect, if this is a blue Unit, it gains <고기동> during this turn.",
       "(This Unit can' t be blocked.)"
     ],
     "__typename": "PilotCard",
@@ -303,9 +303,9 @@
       "MAFTY"
     ],
     "description": [
-      "【Main】Choose 1 friendly Link Unit. It gains <Breach 1> during this turn.",
+      "【메인】Choose 1 friendly Link Unit. It gains <돌파 1> during this turn.",
       "(When this Unit' s attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent' s shield area.)",
-      "【Pilot】[Gawman Nobile]"
+      "【파일럿】[Gawman Nobile]"
     ],
     "__typename": "CommandCard",
     "id": "ST08-012",
@@ -328,7 +328,7 @@
     "package": "ST08",
     "trait": [],
     "description": [
-      "【Main】/【Action】Choose 1 enemy Unit. Deal 1 damage to it. If a friendly (Mafty) Link Unit is in play, deal 2 damage instead."
+      "【메인】/【액션】Choose 1 enemy Unit. Deal 1 damage to it. If a friendly (Mafty) Link Unit is in play, deal 2 damage instead."
     ],
     "__typename": "CommandCard",
     "id": "ST08-013"
@@ -349,8 +349,8 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand. Then, choose 1 of your Units. It gets AP+2 during this turn."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 of your Units. It gets AP+2 during this turn."
     ],
     "__typename": "BaseCard",
     "id": "ST08-014",
@@ -378,9 +378,9 @@
       "STRONGHOLD"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand.",
-      "【Activate･Main】【Once per Turn】②：Choose 1 of your Units. It recovers 2 HP."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다.",
+      "【기동･메인】【턴 1회】②：Choose 1 of your Units. It recovers 2 HP."
     ],
     "__typename": "BaseCard",
     "id": "ST08-015",

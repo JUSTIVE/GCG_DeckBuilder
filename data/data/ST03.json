@@ -14,8 +14,8 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【During Pair】This Unit gains <High-Maneuver>.",
-      "(This Unit can't be blocked.)",
+      "【세트 중】This Unit gains <고기동>.",
+      "(이 유닛은 블록당하지 않는다.)",
       "During your turn, when this Unit destroys an enemy shield area card with battle damage, choose 1 enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
@@ -46,7 +46,7 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【Activate･Main】<Support 2> (Rest this Unit. 1 other friendly Unit gets AP+(specified amount) during this turn.)"
+      "【기동･메인】<원호 2> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST03-002",
@@ -101,7 +101,7 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【Activate･Main】<Support 2> (Rest this Unit. 1 other friendly Unit gets AP+(specified amount) during this turn.)"
+      "【기동･메인】<원호 2> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST03-004",
@@ -146,7 +146,7 @@
       "ZEON"
     ],
     "description": [
-      "【Destroyed】Look at the top 3 cards of your deck. You may reveal 1 (Zeon)/(Neo Zeon) Unit card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
+      "【파괴 시】Look at the top 3 cards of your deck. You may reveal 1 (Zeon)/(Neo Zeon) Unit card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
     ],
     "__typename": "UnitCard",
     "id": "ST03-006",
@@ -196,7 +196,7 @@
       "ZEON"
     ],
     "description": [
-      "【Attack】This Unit gets AP+2 during this turn."
+      "【어택 시】This Unit gets AP+2 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "ST03-008",
@@ -221,7 +221,7 @@
       "ZEON"
     ],
     "description": [
-      "【Deploy】Deploy 1 rested [Zaku Ⅱ]((Zeon)･AP1･HP1) Unit token."
+      "【배치 시】Deploy 1 rested [Zaku Ⅱ]((Zeon)･AP1･HP1) Unit token."
     ],
     "__typename": "UnitCard",
     "id": "ST03-009",
@@ -251,8 +251,8 @@
       "CYBER_NEWTYPE"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【When Paired】You may deploy 1 (Neo Zeon)/(Zeon) Unit card that is Lv.4 or lower from your hand."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【세트 시】You may deploy 1 (Neo Zeon)/(Zeon) Unit card that is Lv.4 or lower from your hand."
     ],
     "__typename": "PilotCard",
     "id": "ST03-010",
@@ -276,9 +276,9 @@
       "NEWTYPE"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【Attack】During this turn, this Unit gets AP+1 and, if it is a Link Unit, it gains <High-Maneuver>.",
-      "(This Unit can't be blocked.)"
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【어택 시】During this turn, this Unit gets AP+1 and, if it is a Link Unit, it gains <고기동>.",
+      "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "PilotCard",
     "id": "ST03-011",
@@ -301,8 +301,8 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【Main】/【Action】Choose 1 friendly Unit. It gets AP+2 during this turn.",
-      "【Pilot】[Angelo Sauper]"
+      "【메인】/【액션】Choose 1 friendly Unit. It gets AP+2 during this turn.",
+      "【파일럿】[Angelo Sauper]"
     ],
     "__typename": "CommandCard",
     "id": "ST03-012",
@@ -327,8 +327,8 @@
     "package": "ST03",
     "trait": [],
     "description": [
-      "【Burst】Activate this card's 【Main】.",
-      "【Main】/【Action】Choose 1 enemy Unit. Deal 2 damage to it."
+      "【버스트】Activate this card's 【메인】.",
+      "【메인】/【액션】Choose 1 enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "CommandCard",
     "id": "ST03-013"
@@ -348,8 +348,8 @@
       "ZEON"
     ],
     "description": [
-      "【Action】Choose 1 friendly Unit. It can't receive battle damage from enemy Units with 2 or less AP during this battle.",
-      "【Pilot】[Ramba Ral]"
+      "【액션】Choose 1 friendly Unit. It can't receive battle damage from enemy Units with 2 or less AP during this battle.",
+      "【파일럿】[Ramba Ral]"
     ],
     "__typename": "CommandCard",
     "id": "ST03-014",
@@ -375,8 +375,8 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand. Then, choose 1 enemy Unit with 5 or less AP. Deal 1 damage to it."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 enemy Unit with 5 or less AP. Deal 1 damage to it."
     ],
     "__typename": "BaseCard",
     "id": "ST03-015",
@@ -402,8 +402,8 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand. Then, if it is your turn, deploy 1 rested [Char's Zaku Ⅱ]((Zeon)･AP3･HP1) Unit token."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, deploy 1 rested [Char's Zaku Ⅱ]((Zeon)･AP3･HP1) Unit token."
     ],
     "__typename": "BaseCard",
     "id": "ST03-016",

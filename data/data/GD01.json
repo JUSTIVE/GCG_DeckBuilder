@@ -15,9 +15,9 @@
       "WHITE_BASE_TEAM"
     ],
     "description": [
-      "All your (White Base Team) Units gain <Repair 1>.",
-      "(At the end of your turn, this Unit recovers the specified number of HP.)",
-      "【When Paired】If you have 2 or more other Units in play, draw 1."
+      "All your (White Base Team) Units gain <리페어 1>.",
+      "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
+      "【세트 시】If you have 2 or more other Units in play, draw 1."
     ],
     "__typename": "UnitCard",
     "id": "GD01-001",
@@ -47,7 +47,7 @@
     ],
     "description": [
       "When playing this card from your hand, you may destroy 1 of your Link Units with \"Unicorn Mode\" in its card name that is Lv.5. If you do, play this card as if it has 0 Lv. and cost.",
-      "【Attack】Choose 1 enemy Unit. Rest it."
+      "【어택 시】Choose 1 enemy Unit. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-002",
@@ -78,8 +78,8 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【During Link】【Attack】Choose 12 cards from your trash. Return them to their owner's deck and shuffle it. If you do, set this Unit as active. It gains <First Strike> during this turn.",
-      "(While this Unit is attacking, it deals damage before the enemy Unit.)"
+      "【링크 중】【어택 시】Choose 12 cards from your trash. Return them to their owner's deck and shuffle it. If you do, set this Unit as active. It gains <선제 공격> during this turn.",
+      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-003",
@@ -110,8 +110,8 @@
       "WHITE_BASE_TEAM"
     ],
     "description": [
-      "<Repair 1> (At the end of your turn, this Unit recovers the specified number of HP.)",
-      "【When Paired】Choose 1 enemy Unit with 2 or less HP. Rest it."
+      "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
+      "【세트 시】Choose 1 enemy Unit with 2 or less HP. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-004",
@@ -141,7 +141,7 @@
       "CIVILIAN"
     ],
     "description": [
-      "【During Link】【Destroyed】Return this Unit's paired Pilot to its owner's hand. Then, discard 1."
+      "【링크 중】【파괴 시】Return this Unit's paired Pilot to its owner's hand. Then, discard 1."
     ],
     "__typename": "UnitCard",
     "id": "GD01-005",
@@ -171,8 +171,8 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "<Repair 1> (At the end of your turn, this Unit recovers the specified number of HP.)",
-      "【During Link】This Unit gets HP+1."
+      "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
+      "【링크 중】This Unit gets HP+1."
     ],
     "__typename": "UnitCard",
     "id": "GD01-006",
@@ -201,7 +201,7 @@
       "OZ"
     ],
     "description": [
-      "【Destroyed】If you have another (OZ) Unit in play, draw 1."
+      "【파괴 시】If you have another (OZ) Unit in play, draw 1."
     ],
     "__typename": "UnitCard",
     "id": "GD01-007",
@@ -230,7 +230,7 @@
       "WHITE_BASE_TEAM"
     ],
     "description": [
-      "【Deploy】Choose 1 rested enemy Unit. Deal 1 damage to it."
+      "【배치 시】Choose 1 rested enemy Unit. Deal 1 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-008",
@@ -257,8 +257,8 @@
       "WHITE_BASE_TEAM"
     ],
     "description": [
-      "【Deploy】Choose 1 of your (White Base Team) Units. It gains <High-Maneuver> during this turn.",
-      "(This Unit can't be blocked.)"
+      "【배치 시】Choose 1 of your (White Base Team) Units. It gains <고기동> during this turn.",
+      "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-009",
@@ -287,7 +287,7 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【When Paired】Choose 1 enemy Unit with 3 or less HP. Rest it."
+      "【세트 시】Choose 1 enemy Unit with 3 or less HP. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-010",
@@ -341,7 +341,7 @@
       "OZ"
     ],
     "description": [
-      "【When Paired】Choose 1 enemy Unit with 3 or less HP. Rest it."
+      "【세트 시】Choose 1 enemy Unit with 3 or less HP. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-012",
@@ -399,7 +399,7 @@
       "WHITE_BASE_TEAM"
     ],
     "description": [
-      "【During Link】【Activate･Action】【Once per Turn】Choose 1 Unit. It recovers 1 HP."
+      "【링크 중】【Activate･Action】【턴 1회】Choose 1 Unit. It recovers 1 HP."
     ],
     "__typename": "UnitCard",
     "id": "GD01-014",
@@ -428,7 +428,7 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【Attack】Choose 1 of your Units. It recovers 1 HP."
+      "【어택 시】Choose 1 of your Units. It recovers 1 HP."
     ],
     "__typename": "UnitCard",
     "id": "GD01-015",
@@ -475,7 +475,7 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "<Repair 1> (At the end of your turn, this Unit recovers the specified number of HP.)"
+      "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-017",
@@ -525,8 +525,8 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "While 4 or more enemy Units are in play, this Unit gains <Blocker>.",
-      "(Rest this Unit to change the attack target to it.)"
+      "While 4 or more enemy Units are in play, this Unit gains <블로커>.",
+      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-019",
@@ -551,7 +551,7 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【Deploy】Choose 1 rested enemy Unit. Deal 1 damage to it."
+      "【배치 시】Choose 1 rested enemy Unit. Deal 1 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-020",
@@ -615,7 +615,7 @@
       "ZEON"
     ],
     "description": [
-      "【Activate･Main】Discard 1 (Zeon)/(Neo Zeon) Unit card：If a Pilot is not paired with this Unit, choose 1 (Newtype) Pilot card that is Lv.3 or lower from your trash. Pair it with this Unit."
+      "【기동･메인】Discard 1 (Zeon)/(Neo Zeon) Unit card：If a Pilot is not paired with this Unit, choose 1 (Newtype) Pilot card that is Lv.3 or lower from your trash. Pair it with this Unit."
     ],
     "__typename": "UnitCard",
     "id": "GD01-023",
@@ -645,8 +645,8 @@
       "G_TEAM"
     ],
     "description": [
-      "<High-Maneuver> (This Unit can't be blocked.)",
-      "【Deploy】Deal 3 damage to all Units that are Lv.5 or lower."
+      "<고기동> (이 유닛은 블록당하지 않는다.)",
+      "【배치 시】Deal 3 damage to all Units that are Lv.5 or lower."
     ],
     "__typename": "UnitCard",
     "id": "GD01-024",
@@ -676,8 +676,8 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【When Paired･(Operation Meteor) Pilot】Place 1 rested Resource. Then, this Unit gains <First Strike> during this turn.",
-      "(While this Unit is attacking, it deals damage before the enemy Unit.)"
+      "【When Paired･(Operation Meteor) Pilot】Place 1 rested Resource. Then, this Unit gains <선제 공격> during this turn.",
+      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-025",
@@ -706,7 +706,7 @@
       "ZEON"
     ],
     "description": [
-      "【During Pair】【Destroyed】Deploy 1 rested [Char's Zaku Ⅱ]((Zeon)･AP3･HP1) Unit token."
+      "【세트 중】【파괴 시】Deploy 1 rested [Char's Zaku Ⅱ]((Zeon)･AP3･HP1) Unit token."
     ],
     "__typename": "UnitCard",
     "id": "GD01-026",
@@ -737,8 +737,8 @@
       "ZEON"
     ],
     "description": [
-      "<Breach 4> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
-      "【Deploy】If there are 10 or more (Zeon)/(Neo Zeon) Unit cards in your trash, deal 4 damage to all Units with <Blocker>."
+      "<돌파 4> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "【배치 시】If there are 10 or more (Zeon)/(Neo Zeon) Unit cards in your trash, deal 4 damage to all Units with <블로커>."
     ],
     "__typename": "UnitCard",
     "id": "GD01-027",
@@ -767,7 +767,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【Deploy】You may deploy 1 (Maganac Corps) Unit card from your hand."
+      "【배치 시】You may deploy 1 (Maganac Corps) Unit card from your hand."
     ],
     "__typename": "UnitCard",
     "id": "GD01-028",
@@ -797,8 +797,8 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "<Breach 4> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
-      "【Attack】Choose 1 enemy Unit with <Blocker> that is Lv.3 or lower. Destroy it."
+      "<돌파 4> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "【어택 시】Choose 1 enemy Unit with <블로커> that is Lv.3 or lower. Destroy it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-029",
@@ -826,7 +826,7 @@
       "ZEON"
     ],
     "description": [
-      "<Breach 2> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+      "<돌파 2> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-030",
@@ -876,7 +876,7 @@
       "ZEON"
     ],
     "description": [
-      "【When Paired･(Zeon) Pilot】Choose 1 enemy Unit with <Blocker> that is Lv.2 or lower. Destroy it."
+      "【When Paired･(Zeon) Pilot】Choose 1 enemy Unit with <블로커> that is Lv.2 or lower. Destroy it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-032",
@@ -905,7 +905,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "<Repair 1> (At the end of your turn, this Unit recovers the specified number of HP.)"
+      "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-033",
@@ -934,8 +934,8 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【During Pair】This Unit gains <Breach 3>.",
-      "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+      "【세트 중】This Unit gains <돌파 3>.",
+      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-034",
@@ -1024,7 +1024,7 @@
       "ZEON"
     ],
     "description": [
-      "【Deploy】If 5 or more enemy Units are in play, deal 1 damage to all enemy Units."
+      "【배치 시】If 5 or more enemy Units are in play, deal 1 damage to all enemy Units."
     ],
     "__typename": "UnitCard",
     "id": "GD01-038",
@@ -1052,7 +1052,7 @@
       "ZEON"
     ],
     "description": [
-      "【Deploy】Look at the top card of your deck. Return it to the top or bottom of your deck."
+      "【배치 시】Look at the top card of your deck. Return it to the top or bottom of your deck."
     ],
     "__typename": "UnitCard",
     "id": "GD01-039",
@@ -1101,7 +1101,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "<Breach 3> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+      "<돌파 3> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-041",
@@ -1156,7 +1156,7 @@
       "MAGANAC_CORPS"
     ],
     "description": [
-      "【Deploy】Choose 1 of your green Units. During this turn, it may choose an active enemy Unit with 4 or less AP as its attack target."
+      "【배치 시】Choose 1 of your green Units. During this turn, it may choose an active enemy Unit with 4 or less AP as its attack target."
     ],
     "__typename": "UnitCard",
     "id": "GD01-043",
@@ -1214,7 +1214,7 @@
       "ZAFT"
     ],
     "description": [
-      "【When Paired】Look at the top 3 cards of your deck. You may deploy 1 (ZAFT) Unit card that is Lv.4 or lower among them. Return the remaining cards randomly to the bottom of your deck."
+      "【세트 시】Look at the top 3 cards of your deck. You may deploy 1 (ZAFT) Unit card that is Lv.4 or lower among them. Return the remaining cards randomly to the bottom of your deck."
     ],
     "__typename": "UnitCard",
     "id": "GD01-045",
@@ -1247,8 +1247,8 @@
       "ZAFT"
     ],
     "description": [
-      "【Activate･Main】<Support 3> (Rest this Unit. 1 other friendly Unit gets AP+(specified amount) during this turn.)",
-      "【During Pair･(Coordinator) Pilot】【Once per Turn】When you use this Unit's <Support> to increase a (ZAFT) Unit's AP, set this Unit as active."
+      "【기동･메인】<원호 3> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
+      "【During Pair･(Coordinator) Pilot】【턴 1회】When you use this Unit's <원호> to increase a (ZAFT) Unit's AP, set this Unit as active."
     ],
     "__typename": "UnitCard",
     "id": "GD01-046",
@@ -1277,7 +1277,7 @@
       "ZEON"
     ],
     "description": [
-      "【Attack】If 2 or more other rested friendly Units are in play, choose 1 enemy Unit. Deal 3 damage to it."
+      "【어택 시】If 2 or more other rested friendly Units are in play, choose 1 enemy Unit. Deal 3 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-047",
@@ -1307,8 +1307,8 @@
       "ZEON"
     ],
     "description": [
-      "【Activate･Main】<Support 1> (Rest this Unit. 1 other friendly Unit gets AP+(specified amount) during this turn.)",
-      "【Deploy】Look at the top card of your deck. If it is a (Zeon)/(Neo Zeon) Unit card, you may reveal it and add it to your hand. Return any remaining card to the bottom of your deck."
+      "【기동･메인】<원호 1> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
+      "【배치 시】Look at the top card of your deck. If it is a (Zeon)/(Neo Zeon) Unit card, you may reveal it and add it to your hand. Return any remaining card to the bottom of your deck."
     ],
     "__typename": "UnitCard",
     "id": "GD01-048",
@@ -1338,8 +1338,8 @@
       "ZAFT"
     ],
     "description": [
-      "【Deploy】Choose 1 of your (ZAFT) Units with 5 or more AP. It gains <First Strike> during this turn.",
-      "(While this Unit is attacking, it deals damage before the enemy Unit.)"
+      "【배치 시】Choose 1 of your (ZAFT) Units with 5 or more AP. It gains <선제 공격> during this turn.",
+      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-049",
@@ -1368,7 +1368,7 @@
       "ZAFT"
     ],
     "description": [
-      "【Attack】If this Unit has 5 or more AP and it is attacking an enemy Unit, choose 1 enemy Unit. Deal 2 damage to it."
+      "【어택 시】If this Unit has 5 or more AP and it is attacking an enemy Unit, choose 1 enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-050",
@@ -1421,7 +1421,7 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【Deploy】Choose 1 enemy Unit. Deal 1 damage to it."
+      "【배치 시】Choose 1 enemy Unit. Deal 1 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-052",
@@ -1447,7 +1447,7 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【Activate･Main】【Once per Turn】①：Choose 1 enemy Unit with 2 or less AP. Deal 1 damage to it."
+      "【기동･메인】【턴 1회】①：Choose 1 enemy Unit with 2 or less AP. Deal 1 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-053",
@@ -1472,8 +1472,8 @@
       "ZAFT"
     ],
     "description": [
-      "While this Unit has 5 or more AP, it gains <Breach 3>.",
-      "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+      "While this Unit has 5 or more AP, it gains <돌파 3>.",
+      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-054",
@@ -1503,7 +1503,7 @@
       "ZAFT"
     ],
     "description": [
-      "【Activate･Main】<Support 2> (Rest this Unit. 1 other friendly Unit gets AP+(specified amount) during this turn.)"
+      "【기동･메인】<원호 2> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-055",
@@ -1527,7 +1527,7 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【Destroyed】Choose 1 enemy Unit with 5 or less AP. Deal 1 damage to it."
+      "【파괴 시】Choose 1 enemy Unit with 5 or less AP. Deal 1 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-056",
@@ -1574,7 +1574,7 @@
       "ZEON"
     ],
     "description": [
-      "【Activate･Action】【Once per Turn】①：Choose 1 Unit that is Lv.4 or higher. It gets AP+1 during this battle."
+      "【Activate･Action】【턴 1회】①：Choose 1 Unit that is Lv.4 or higher. It gets AP+1 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-058",
@@ -1599,7 +1599,7 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【Attack】If you are attacking the enemy player, this Unit gets AP+2 during this battle."
+      "【어택 시】If you are attacking the enemy player, this Unit gets AP+2 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-059",
@@ -1644,7 +1644,7 @@
       "ZAFT"
     ],
     "description": [
-      "【Activate･Main】<Support 1> (Rest this Unit. 1 other friendly Unit gets AP+(specified amount) during this turn.)"
+      "【기동･메인】<원호 1> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-061",
@@ -1688,8 +1688,8 @@
       "ZAFT"
     ],
     "description": [
-      "During your turn, while this Unit is battling an enemy Unit that is Lv.2 or lower, it gains <First Strike>.",
-      "(While this Unit is attacking, it deals damage before the enemy Unit.)"
+      "During your turn, while this Unit is battling an enemy Unit that is Lv.2 or lower, it gains <선제 공격>.",
+      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-063",
@@ -1739,8 +1739,8 @@
       "TRIPLE_SHIP_ALLIANCE"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)",
-      "【During Pair】【Once per Turn】When you pair a Pilot with this Unit or one of your white Units, choose 1 enemy Unit. It gets AP-2 during this turn."
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "【세트 중】【턴 1회】When you pair a Pilot with this Unit or one of your white Units, choose 1 enemy Unit. It gets AP-2 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD01-065",
@@ -1772,8 +1772,8 @@
       "TRIPLE_SHIP_ALLIANCE"
     ],
     "description": [
-      "【Deploy】Deploy 1 [Fatum-00]((Triple Ship Alliance)･AP2･HP2･<Blocker>) Unit token.",
-      "【During Pair】【Attack】Choose 1 of your (Triple Ship Alliance) Unit tokens. It may attack on the turn it is deployed."
+      "【배치 시】Deploy 1 [Fatum-00]((Triple Ship Alliance)･AP2･HP2･<블로커>) Unit token.",
+      "【세트 중】【어택 시】Choose 1 of your (Triple Ship Alliance) Unit tokens. It may attack on the turn it is deployed."
     ],
     "__typename": "UnitCard",
     "id": "GD01-066",
@@ -1802,7 +1802,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【When Paired】Choose 1 Command card that is Lv.5 or lower from your trash. Add it to your hand."
+      "【세트 시】Choose 1 Command card that is Lv.5 or lower from your trash. Add it to your hand."
     ],
     "__typename": "UnitCard",
     "id": "GD01-067",
@@ -1832,8 +1832,8 @@
       "TRIPLE_SHIP_ALLIANCE"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)",
-      "【Deploy】Choose 1 enemy Unit with 1 HP. Return it to its owner's hand."
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "【배치 시】Choose 1 enemy Unit with 1 HP. Return it to its owner's hand."
     ],
     "__typename": "UnitCard",
     "id": "GD01-068",
@@ -1864,7 +1864,7 @@
       "TRIPLE_SHIP_ALLIANCE"
     ],
     "description": [
-      "【Activate･Main】【Once per Turn】①：Choose 1 of your rested white Units with <Blocker>. Set it as active. It can't attack during this turn."
+      "【기동･메인】【턴 1회】①：Choose 1 of your rested white Units with <블로커>. Set it as active. It can't attack during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD01-069",
@@ -1921,7 +1921,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【During Link】【Attack】Choose 1 enemy Unit. It gets AP-2 during this battle."
+      "【링크 중】【어택 시】Choose 1 enemy Unit. It gets AP-2 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-071",
@@ -1950,7 +1950,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)"
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-072",
@@ -1980,7 +1980,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "【During Link】【Attack】Choose 1 enemy Unit with 2 or less HP. Return it to its owner's hand."
+      "【링크 중】【어택 시】Choose 1 enemy Unit with 2 or less HP. Return it to its owner's hand."
     ],
     "__typename": "UnitCard",
     "id": "GD01-073",
@@ -2009,7 +2009,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【Attack】Draw 1. Then, discard 1."
+      "【어택 시】Draw 1. Then, discard 1."
     ],
     "__typename": "UnitCard",
     "id": "GD01-074",
@@ -2038,7 +2038,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【Deploy】Choose 1 enemy Unit with 1 HP. Return it to its owner's hand."
+      "【배치 시】Choose 1 enemy Unit with 1 HP. Return it to its owner's hand."
     ],
     "__typename": "UnitCard",
     "id": "GD01-075",
@@ -2119,7 +2119,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "【Deploy】Choose 1 enemy Unit. It gets AP-1 during this turn."
+      "【배치 시】Choose 1 enemy Unit. It gets AP-1 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD01-078",
@@ -2167,7 +2167,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "【Destroyed】Choose 1 enemy Unit that is Lv.2 or lower. Return it to its owner's hand."
+      "【파괴 시】Choose 1 enemy Unit that is Lv.2 or lower. Return it to its owner's hand."
     ],
     "__typename": "UnitCard",
     "id": "GD01-080",
@@ -2195,8 +2195,8 @@
       "TRIPLE_SHIP_ALLIANCE"
     ],
     "description": [
-      "While you have another (Triple Ship Alliance) Unit in play, this Unit gets AP+1 and <Blocker>.",
-      "(Rest this Unit to change the attack target to it.)"
+      "While you have another (Triple Ship Alliance) Unit in play, this Unit gets AP+1 and <블로커>.",
+      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-081",
@@ -2223,7 +2223,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【During Pair】【Activate･Action】【Once per Turn】②：Choose 1 enemy Unit. It gets AP-1 during this battle."
+      "【세트 중】【Activate･Action】【턴 1회】②：Choose 1 enemy Unit. It gets AP-1 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-082",
@@ -2319,7 +2319,7 @@
       "VANADIS_INSTITUTE"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)"
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-086",
@@ -2347,9 +2347,9 @@
       "NEWTYPE"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "While this Unit is blue, it gains <Repair 1>.",
-      "(At the end of your turn, this Unit recovers the specified number of HP.)"
+      "【버스트】 이 카드를 패에 추가한다.",
+      "While this Unit is blue, it gains <리페어 1>.",
+      "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
     "__typename": "PilotCard",
     "id": "GD01-087",
@@ -2372,8 +2372,8 @@
       "NEWTYPE"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【When Linked】Draw 1."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【링크 시】Draw 1."
     ],
     "__typename": "PilotCard",
     "id": "GD01-088",
@@ -2395,8 +2395,8 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "While this Unit has <Repair>, it gets AP+1."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "While this Unit has <리페어>, it gets AP+1."
     ],
     "__typename": "PilotCard",
     "id": "GD01-089",
@@ -2418,8 +2418,8 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【During Link】This Unit's AP can't be reduced by enemy effects."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【링크 중】This Unit's AP can't be reduced by enemy effects."
     ],
     "__typename": "PilotCard",
     "id": "GD01-090",
@@ -2441,8 +2441,8 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "During your turn, while this Unit has <Breach>, it can't receive battle damage from enemy Units with 3 or less AP."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "During your turn, while this Unit has <돌파>, it can't receive battle damage from enemy Units with 3 or less AP."
     ],
     "__typename": "PilotCard",
     "id": "GD01-091",
@@ -2464,9 +2464,9 @@
       "ZEON"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "While this Unit is (Zeon), it gains <Breach 1>.",
-      "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+      "【버스트】 이 카드를 패에 추가한다.",
+      "While this Unit is (Zeon), it gains <돌파 1>.",
+      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
     "id": "GD01-092",
@@ -2490,8 +2490,8 @@
       "CYBER_NEWTYPE"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【During Link】【Attack】Choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. Deal 1 damage to it."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【링크 중】【어택 시】Choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. Deal 1 damage to it."
     ],
     "__typename": "PilotCard",
     "id": "GD01-093",
@@ -2514,8 +2514,8 @@
       "COORDINATOR"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【Once per Turn】 When an enemy Link Unit is destroyed with damage while this Unit is attacking, draw 1."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【턴 1회】 When an enemy Link Unit is destroyed with damage while this Unit is attacking, draw 1."
     ],
     "__typename": "PilotCard",
     "id": "GD01-094",
@@ -2538,8 +2538,8 @@
       "COORDINATOR"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【When Linked】Discard 1. If you do, draw 1."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【링크 시】Discard 1. If you do, draw 1."
     ],
     "__typename": "PilotCard",
     "id": "GD01-095",
@@ -2561,9 +2561,9 @@
       "ORB"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "While this Unit is white, it gains <Blocker>.",
-      "(Rest this Unit to change the attack target to it.)"
+      "【버스트】 이 카드를 패에 추가한다.",
+      "While this Unit is white, it gains <블로커>.",
+      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "PilotCard",
     "id": "GD01-096",
@@ -2586,8 +2586,8 @@
       "ACADEMY"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【Activate･Main】【Once per Turn】If your opponent has 8 or more cards in their hand, set this Unit as active. It can't attack during this turn."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【기동･메인】【턴 1회】If your opponent has 8 or more cards in their hand, set this Unit as active. It can't attack during this turn."
     ],
     "__typename": "PilotCard",
     "id": "GD01-097",
@@ -2610,8 +2610,8 @@
       "ACADEMY"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【Activate･Action】【Once per Turn】If an enemy Unit with 1 or less AP is in play, this Unit recovers 1 HP."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【Activate･Action】【턴 1회】If an enemy Unit with 1 or less AP is in play, this Unit recovers 1 HP."
     ],
     "__typename": "PilotCard",
     "id": "GD01-098",
@@ -2632,8 +2632,8 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Burst】Choose 1 enemy Unit with 5 or less HP. Rest it.",
-      "【Main】/【Action】Choose 1 to 2 enemy Units with 3 or less HP. Rest them."
+      "【버스트】Choose 1 enemy Unit with 5 or less HP. Rest it.",
+      "【메인】/【액션】Choose 1 to 2 enemy Units with 3 or less HP. Rest them."
     ],
     "__typename": "CommandCard",
     "id": "GD01-099"
@@ -2650,7 +2650,7 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Main】Draw 2."
+      "【메인】Draw 2."
     ],
     "__typename": "CommandCard",
     "id": "GD01-100"
@@ -2671,8 +2671,8 @@
       "OZ"
     ],
     "description": [
-      "【Main】/【Action】Choose 1 friendly Link Unit. It recovers 3 HP.",
-      "【Pilot】[Lucrezia Noin]"
+      "【메인】/【액션】Choose 1 friendly Link Unit. It recovers 3 HP.",
+      "【파일럿】[Lucrezia Noin]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-101",
@@ -2694,7 +2694,7 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Main】All friendly Units that are Lv.4 or lower recover 2 HP."
+      "【메인】All friendly Units that are Lv.4 or lower recover 2 HP."
     ],
     "__typename": "CommandCard",
     "id": "GD01-102"
@@ -2714,8 +2714,8 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【Main】Choose 1 active friendly (Earth Federation) Unit and 1 active enemy Unit. Rest them.",
-      "【Pilot】[Daguza Mackle]"
+      "【메인】Choose 1 active friendly (Earth Federation) Unit and 1 active enemy Unit. Rest them.",
+      "【파일럿】[Daguza Mackle]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-103",
@@ -2738,8 +2738,8 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Burst】Draw 1.",
-      "【Main】Choose 1 rested enemy Unit. Deal 2 damage to it."
+      "【버스트】Draw 1.",
+      "【메인】Choose 1 rested enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "CommandCard",
     "id": "GD01-104"
@@ -2757,8 +2757,8 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【Main】All your Units get AP+2 during this turn."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【메인】All your Units get AP+2 during this turn."
     ],
     "__typename": "CommandCard",
     "id": "GD01-105"
@@ -2778,8 +2778,8 @@
       "ZEON"
     ],
     "description": [
-      "【Main】Deploy 2 [Zaku Ⅱ]((Zeon)･AP1･HP1) Unit tokens.",
-      "【Pilot】[Dozle Zabi]"
+      "【메인】Deploy 2 [Zaku Ⅱ]((Zeon)･AP1･HP1) Unit tokens.",
+      "【파일럿】[Dozle Zabi]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-106",
@@ -2802,8 +2802,8 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Burst】Place 1 EX Resource.",
-      "【Main】Place 1 rested Resource."
+      "【버스트】Place 1 EX Resource.",
+      "【메인】Place 1 rested Resource."
     ],
     "__typename": "CommandCard",
     "id": "GD01-107"
@@ -2821,7 +2821,7 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Main】Deal 2 damage to all Units with <Blocker>."
+      "【메인】Deal 2 damage to all Units with <블로커>."
     ],
     "__typename": "CommandCard",
     "id": "GD01-108"
@@ -2838,7 +2838,7 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Main】Look at the top 5 cards of your deck. You may reveal 1 (Operation Meteor)/(G Team) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
+      "【메인】Look at the top 5 cards of your deck. You may reveal 1 (Operation Meteor)/(G Team) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
     ],
     "__typename": "CommandCard",
     "id": "GD01-109"
@@ -2859,8 +2859,8 @@
       "MAGANAC_CORPS"
     ],
     "description": [
-      "【Main】/【Action】Choose 1 Unit that is Lv.4 or higher. During this turn, it may choose an active enemy Unit with 6 or less AP as its attack target.",
-      "【Pilot】[Rasid Kurama]"
+      "【메인】/【액션】Choose 1 Unit that is Lv.4 or higher. During this turn, it may choose an active enemy Unit with 6 or less AP as its attack target.",
+      "【파일럿】[Rasid Kurama]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-110",
@@ -2884,8 +2884,8 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Burst】Choose 1 enemy Unit. Deal 2 damage to it.",
-      "【Main】/【Action】Choose 1 damaged enemy Unit. Deal 3 damage to it."
+      "【버스트】Choose 1 enemy Unit. Deal 2 damage to it.",
+      "【메인】/【액션】Choose 1 damaged enemy Unit. Deal 3 damage to it."
     ],
     "__typename": "CommandCard",
     "id": "GD01-111"
@@ -2906,8 +2906,8 @@
       "NEWTYPE"
     ],
     "description": [
-      "【Main】Choose 2 of your active Units. Rest them. If you do, choose 1 enemy Unit. Deal 3 damage to it.",
-      "【Pilot】[Loni Garvey]"
+      "【메인】Choose 2 of your active Units. Rest them. If you do, choose 1 enemy Unit. Deal 3 damage to it.",
+      "【파일럿】[Loni Garvey]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-112",
@@ -2934,8 +2934,8 @@
       "COORDINATOR"
     ],
     "description": [
-      "【Main】/【Action】Choose 1 friendly (ZAFT) Unit. It gets AP+3 during this turn.",
-      "【Pilot】[Andrew Waldfeld]"
+      "【메인】/【액션】Choose 1 friendly (ZAFT) Unit. It gets AP+3 during this turn.",
+      "【파일럿】[Andrew Waldfeld]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-113",
@@ -2960,8 +2960,8 @@
       "ZEON"
     ],
     "description": [
-      "【Action】Choose 2 friendly Units. They get AP+1 during this turn.",
-      "【Pilot】[Yonem Kirks]"
+      "【액션】Choose 2 friendly Units. They get AP+1 during this turn.",
+      "【파일럿】[Yonem Kirks]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-114",
@@ -2984,7 +2984,7 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Main】/【Action】Choose 1 enemy Unit. Deal 1 damage to it."
+      "【메인】/【액션】Choose 1 enemy Unit. Deal 1 damage to it."
     ],
     "__typename": "CommandCard",
     "id": "GD01-115"
@@ -3006,8 +3006,8 @@
       "COORDINATOR"
     ],
     "description": [
-      "【Main】/【Action】Choose 1 enemy Unit with 2 or less AP. Deal 2 damage to it.",
-      "【Pilot】[Nicol Amarfi]"
+      "【메인】/【액션】Choose 1 enemy Unit with 2 or less AP. Deal 2 damage to it.",
+      "【파일럿】[Nicol Amarfi]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-116",
@@ -3032,8 +3032,8 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Burst】Activate this card's 【Main】.",
-      "【Main】/【Action】Choose 1 enemy Unit with 5 or less HP. Return it to its owner's hand."
+      "【버스트】Activate this card's 【메인】.",
+      "【메인】/【액션】Choose 1 enemy Unit with 5 or less HP. Return it to its owner's hand."
     ],
     "__typename": "CommandCard",
     "id": "GD01-117"
@@ -3050,7 +3050,7 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Main】Draw 2. Then, discard 1."
+      "【메인】Draw 2. Then, discard 1."
     ],
     "__typename": "CommandCard",
     "id": "GD01-118"
@@ -3071,8 +3071,8 @@
       "ACADEMY"
     ],
     "description": [
-      "【Main】/【Action】Choose 1 enemy Unit that is Lv.4 or lower. It gets AP-2 during this turn.",
-      "【Pilot】[Chuatury Panlunch]"
+      "【메인】/【액션】Choose 1 enemy Unit that is Lv.4 or lower. It gets AP-2 during this turn.",
+      "【파일럿】[Chuatury Panlunch]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-119",
@@ -3096,8 +3096,8 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Burst】Choose 1 enemy Unit. It gets AP-3 during this turn.",
-      "【Action】Choose 1 friendly Unit with <Blocker>. It gets AP+3 during this turn."
+      "【버스트】Choose 1 enemy Unit. It gets AP-3 during this turn.",
+      "【액션】Choose 1 friendly Unit with <블로커>. It gets AP+3 during this turn."
     ],
     "__typename": "CommandCard",
     "id": "GD01-120"
@@ -3117,8 +3117,8 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【Burst】Activate this card's 【Main】.",
-      "【Main】Choose 1 rested Unit with <Blocker>. Set it as active. It can't attack during this turn."
+      "【버스트】Activate this card's 【메인】.",
+      "【메인】Choose 1 rested Unit with <블로커>. Set it as active. It can't attack during this turn."
     ],
     "__typename": "CommandCard",
     "id": "GD01-121"
@@ -3138,8 +3138,8 @@
       "ACADEMY"
     ],
     "description": [
-      "【Main】Choose 1 enemy Unit with 2 or less HP. Return it to its owner's hand. If you have a Link Unit in play, choose 1 enemy Unit with 4 or less HP instead.",
-      "【Pilot】[Shaddiq Zenelli]"
+      "【메인】Choose 1 enemy Unit with 2 or less HP. Return it to its owner's hand. If you have a Link Unit in play, choose 1 enemy Unit with 4 or less HP instead.",
+      "【파일럿】[Shaddiq Zenelli]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-122",
@@ -3165,8 +3165,8 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand. Then, choose 1 enemy Unit with 3 or less HP. Rest it."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 enemy Unit with 3 or less HP. Rest it."
     ],
     "__typename": "BaseCard",
     "id": "GD01-123",
@@ -3194,9 +3194,9 @@
       "STRONGHOLD"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand.",
-      "【Activate･Main】Rest this Base：Choose 1 friendly Unit. It recovers 1 HP."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다.",
+      "【기동･메인】Rest this Base：Choose 1 friendly Unit. It recovers 1 HP."
     ],
     "__typename": "BaseCard",
     "id": "GD01-124",
@@ -3222,8 +3222,8 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand. Then, if it is your turn, you may deploy 1 (Zeon) Unit card that is Lv.4 or lower from your hand."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, you may deploy 1 (Zeon) Unit card that is Lv.4 or lower from your hand."
     ],
     "__typename": "BaseCard",
     "id": "GD01-125",
@@ -3250,8 +3250,8 @@
       "STRONGHOLD"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다."
     ],
     "__typename": "BaseCard",
     "id": "GD01-126",
@@ -3279,10 +3279,10 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand.",
-      "【Activate･Action】Rest this Base：Choose 1 friendly (ZAFT) Unit with 5 or more AP. It gains <Breach 3> during this battle.",
-      "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다.",
+      "【Activate･Action】Rest this Base：Choose 1 friendly (ZAFT) Unit with 5 or more AP. It gains <돌파 3> during this battle.",
+      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "BaseCard",
     "id": "GD01-127",
@@ -3308,8 +3308,8 @@
       "STRONGHOLD"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다."
     ],
     "__typename": "BaseCard",
     "id": "GD01-128",
@@ -3335,8 +3335,8 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand. Then, choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand."
     ],
     "__typename": "BaseCard",
     "id": "GD01-129",
@@ -3363,9 +3363,9 @@
       "STRONGHOLD"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand.",
-      "【Activate･Main】Rest this Base：If a friendly (Academy) Unit is in play, choose 1 enemy Unit. It gets AP-1 during this turn."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다.",
+      "【기동･메인】Rest this Base：If a friendly (Academy) Unit is in play, choose 1 enemy Unit. It gets AP-1 during this turn."
     ],
     "__typename": "BaseCard",
     "id": "GD01-130",

@@ -14,7 +14,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)",
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
       "【When Paired･Lv.4 or Higher Pilot】Choose 1 enemy Unit with 4 or less HP. Return it to its owner's hand."
     ],
     "__typename": "UnitCard",
@@ -44,7 +44,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "【Deploy】Draw 1. Then, discard 1."
+      "【배치 시】Draw 1. Then, discard 1."
     ],
     "__typename": "UnitCard",
     "id": "ST04-002",
@@ -97,7 +97,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)"
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST04-004",
@@ -142,7 +142,7 @@
       "ZAFT"
     ],
     "description": [
-      "【Attack】If this Unit has 5 or more AP, choose 1 enemy Unit that is Lv.5 or higher. Deal 3 damage to it."
+      "【어택 시】If this Unit has 5 or more AP, choose 1 enemy Unit that is Lv.5 or higher. Deal 3 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "ST04-006",
@@ -171,7 +171,7 @@
       "ZAFT"
     ],
     "description": [
-      "<Breach 3> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+      "<돌파 3> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST04-007",
@@ -222,7 +222,7 @@
       "ZAFT"
     ],
     "description": [
-      "【During Pair】【Destroyed】If you have another Link Unit in play, draw 1."
+      "【세트 중】【파괴 시】If you have another Link Unit in play, draw 1."
     ],
     "__typename": "UnitCard",
     "id": "ST04-009",
@@ -253,8 +253,8 @@
       "COORDINATOR"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【Attack】Choose 1 enemy Unit. It gets AP-2 during this battle."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【어택 시】Choose 1 enemy Unit. It gets AP-2 during this battle."
     ],
     "__typename": "PilotCard",
     "id": "ST04-010",
@@ -277,8 +277,8 @@
       "COORDINATOR"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【When Linked】During this turn, this Unit may choose an active enemy Unit that is Lv.5 or lower as its attack target."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【링크 시】During this turn, this Unit may choose an active enemy Unit that is Lv.5 or lower as its attack target."
     ],
     "__typename": "PilotCard",
     "id": "ST04-011",
@@ -301,8 +301,8 @@
     "package": "ST04",
     "trait": [],
     "description": [
-      "【Burst】If you have no (Earth Alliance) Unit tokens in play, deploy 1 [Aile Strike Gundam]((Earth Alliance)･AP3･HP3･<Blocker>) Unit token.",
-      "【Main】If you have no (Earth Alliance) Unit tokens in play, deploy 1 [Sword Strike Gundam]((Earth Alliance)･AP4･HP2･<Blocker>) or 1 [Launcher Strike Gundam]((Earth Alliance)･AP2･HP4･<Blocker>) Unit token."
+      "【버스트】If you have no (Earth Alliance) Unit tokens in play, deploy 1 [Aile Strike Gundam]((Earth Alliance)･AP3･HP3･<블로커>) Unit token.",
+      "【메인】If you have no (Earth Alliance) Unit tokens in play, deploy 1 [Sword Strike Gundam]((Earth Alliance)･AP4･HP2･<블로커>) or 1 [Launcher Strike Gundam]((Earth Alliance)･AP2･HP4･<블로커>) Unit token."
     ],
     "__typename": "CommandCard",
     "id": "ST04-012"
@@ -323,8 +323,8 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "【Main】/【Action】Choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand.",
-      "【Pilot】[Mu La Flaga]"
+      "【메인】/【액션】Choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand.",
+      "【파일럿】[Mu La Flaga]"
     ],
     "__typename": "CommandCard",
     "id": "ST04-013",
@@ -352,9 +352,9 @@
       "COORDINATOR"
     ],
     "description": [
-      "【Main】/【Action】Choose 1 friendly Unit that is Lv.2 or lower. It gains <First Strike> during this turn.",
-      "(While this Unit is attacking, it deals damage before the enemy Unit.)",
-      "【Pilot】[Miguel Ayman]"
+      "【메인】/【액션】Choose 1 friendly Unit that is Lv.2 or lower. It gains <선제 공격> during this turn.",
+      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)",
+      "【파일럿】[Miguel Ayman]"
     ],
     "__typename": "CommandCard",
     "id": "ST04-014",
@@ -383,9 +383,9 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand.",
-      "【Activate･Main】【Once per Turn】②：Choose 1 friendly Unit with <Blocker>. Set it as active. It can't attack during this turn."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다.",
+      "【기동･메인】【턴 1회】②：Choose 1 friendly Unit with <블로커>. Set it as active. It can't attack during this turn."
     ],
     "__typename": "BaseCard",
     "id": "ST04-015",
@@ -413,9 +413,9 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand.",
-      "【Activate･Main】Rest this Base：Choose 1 friendly Unit. It gets AP+1 during this turn."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다.",
+      "【기동･메인】Rest this Base：Choose 1 friendly Unit. It gets AP+1 during this turn."
     ],
     "__typename": "BaseCard",
     "id": "ST04-016",

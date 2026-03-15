@@ -13,7 +13,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "<Breach 5> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+      "<돌파 5> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "This Unit may choose an active enemy Unit that is Lv.4 or lower as its attack target."
     ],
     "__typename": "UnitCard",
@@ -43,7 +43,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【Deploy】Place 1 EX Resource."
+      "【배치 시】Place 1 EX Resource."
     ],
     "__typename": "UnitCard",
     "id": "ST02-002",
@@ -72,7 +72,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【During Pair】During your turn, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
+      "【세트 중】During your turn, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
     ],
     "__typename": "UnitCard",
     "id": "ST02-003",
@@ -146,7 +146,7 @@
       "OZ"
     ],
     "description": [
-      "【Activate･Main】【Once per Turn】④：Set this Unit as active."
+      "【기동･메인】【턴 1회】④：Set this Unit as active."
     ],
     "__typename": "UnitCard",
     "id": "ST02-006",
@@ -200,7 +200,7 @@
       "OZ"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)"
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST02-008",
@@ -224,7 +224,7 @@
       "OZ"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)"
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST02-009",
@@ -249,8 +249,8 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【During Link】This Unit gets AP+1 and HP+1."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【링크 중】This Unit gets AP+1 and HP+1."
     ],
     "__typename": "PilotCard",
     "id": "ST02-010",
@@ -272,8 +272,8 @@
       "OZ"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【During Link】During your turn, when this Unit destroys an enemy Unit with battle damage, draw 1."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【링크 중】During your turn, when this Unit destroys an enemy Unit with battle damage, draw 1."
     ],
     "__typename": "PilotCard",
     "id": "ST02-011",
@@ -296,9 +296,9 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【Main】Choose 1 of your Units. It gains <Breach 3> during this turn.",
-      "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
-      "【Pilot】[Trowa Barton]"
+      "【메인】Choose 1 of your Units. It gains <돌파 3> during this turn.",
+      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "【파일럿】[Trowa Barton]"
     ],
     "__typename": "CommandCard",
     "id": "ST02-012",
@@ -323,8 +323,8 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【Action】During this battle, your shield area cards can't receive damage from enemy Units that are Lv.4 or lower.",
-      "【Pilot】[Quatre Raberba Winner]"
+      "【액션】During this battle, your shield area cards can't receive damage from enemy Units that are Lv.4 or lower.",
+      "【파일럿】[Quatre Raberba Winner]"
     ],
     "__typename": "CommandCard",
     "id": "ST02-013",
@@ -349,8 +349,8 @@
     "package": "ST02",
     "trait": [],
     "description": [
-      "【Burst】Activate this card's 【Main】.",
-      "【Main】/【Action】Choose 1 enemy Unit with 5 or less HP. Rest it."
+      "【버스트】Activate this card's 【메인】.",
+      "【메인】/【액션】Choose 1 enemy Unit with 5 or less HP. Rest it."
     ],
     "__typename": "CommandCard",
     "id": "ST02-014"
@@ -371,8 +371,8 @@
       "STRONGHOLD"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand. Then, look at the top 2 cards of your deck and return 1 to the top and 1 to the bottom."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, look at the top 2 cards of your deck and return 1 to the top and 1 to the bottom."
     ],
     "__typename": "BaseCard",
     "id": "ST02-015",
@@ -398,8 +398,8 @@
       "STRONGHOLD"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand. Then, if it is your turn, deploy 1 [Tallgeese]((OZ)･AP4･HP2) Unit token. If it is your turn and a card with \"Corsica Base\" in its card name is in your trash, deploy 2 [Leo]((OZ)･AP1･HP1) Unit tokens instead."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, deploy 1 [Tallgeese]((OZ)･AP4･HP2) Unit token. If it is your turn and a card with \"Corsica Base\" in its card name is in your trash, deploy 2 [Leo]((OZ)･AP1･HP1) Unit tokens instead."
     ],
     "__typename": "BaseCard",
     "id": "ST02-016",

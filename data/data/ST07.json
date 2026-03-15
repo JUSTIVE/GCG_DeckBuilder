@@ -14,8 +14,8 @@
       "GN_DRIVE"
     ],
     "description": [
-      "At the end of your turn, if there are 7 or more (CB) cards in your trash, choose 1 of your Resources. Set it as active.",
-      "【When Paired】Place the top 2 cards of your deck into your trash. If you place a (CB) card with this effect, draw 1."
+      "자신의 턴 종료 시,, if there are 7 or more (CB) cards in your trash, choose 1 of your Resources. Set it as active.",
+      "【세트 시】Place the top 2 cards of your deck into your trash. If you place a (CB) card with this effect, draw 1."
     ],
     "__typename": "UnitCard",
     "id": "ST07-001",
@@ -97,8 +97,8 @@
       "GN_DRIVE"
     ],
     "description": [
-      "While you have a (CB) Pilot in play, this Unit gains <Blocker>.",
-      "(Rest this Unit to change the attack target to it.)"
+      "While you have a (CB) Pilot in play, this Unit gains <블로커>.",
+      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST07-004",
@@ -129,7 +129,7 @@
     ],
     "description": [
       "During your turn, when this Unit destroys an enemy Unit with battle damage, this Unit recovers 2 HP.",
-      "【During Link】This Unit gets AP+2."
+      "【링크 중】This Unit gets AP+2."
     ],
     "__typename": "UnitCard",
     "id": "ST07-005",
@@ -239,8 +239,8 @@
       "CB"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【Attack】This Unit gets AP+1 during this turn. If there are 7 or more (CB) cards in your trash, all your (CB) Units get AP+1 instead."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【어택 시】This Unit gets AP+1 during this turn. If there are 7 or more (CB) cards in your trash, all your (CB) Units get AP+1 instead."
     ],
     "__typename": "PilotCard",
     "id": "ST07-009",
@@ -263,8 +263,8 @@
       "INNOVADE"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【Destroyed】If it is your opponent's turn and this is a (CB) Unit, draw 1."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【파괴 시】If it is your opponent's turn and this is a (CB) Unit, draw 1."
     ],
     "__typename": "PilotCard",
     "id": "ST07-010",
@@ -286,8 +286,8 @@
       "CB"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【When Paired】If this is a (CB) Unit, it may choose an active enemy Unit whose Lv. is equal to or lower than this Unit as its attack target during this turn."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【세트 시】If this is a (CB) Unit, it may choose an active enemy Unit whose Lv. is equal to or lower than this Unit as its attack target during this turn."
     ],
     "__typename": "PilotCard",
     "id": "ST07-011",
@@ -309,7 +309,7 @@
       "SUPER_SOLDIER"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
+      "【버스트】 이 카드를 패에 추가한다.",
       "During your turn, while you have a (CB) Link Unit in play, this Unit can't receive battle damage from enemy Units with 3 or less AP."
     ],
     "__typename": "PilotCard",
@@ -330,8 +330,8 @@
     "package": "ST07",
     "trait": [],
     "description": [
-      "【Burst】Draw 1.",
-      "【Action】Choose 1 rested friendly (CB) Unit. Change the attack target of the battling enemy Unit to it."
+      "【버스트】Draw 1.",
+      "【액션】Choose 1 rested friendly (CB) Unit. Change the attack target of the battling enemy Unit to it."
     ],
     "__typename": "CommandCard",
     "id": "ST07-013"
@@ -348,7 +348,7 @@
     "package": "ST07",
     "trait": [],
     "description": [
-      "【Main】Look at the top 3 cards of your deck. You may reveal 1 (CB) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
+      "【메인】Look at the top 3 cards of your deck. You may reveal 1 (CB) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
     ],
     "__typename": "CommandCard",
     "id": "ST07-014"
@@ -369,8 +369,8 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand.",
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다.",
       "While a rested friendly (CB) Unit is in play, this Base can't receive damage from enemy Units that are Lv.3 or lower, other than Unit tokens."
     ],
     "__typename": "BaseCard",

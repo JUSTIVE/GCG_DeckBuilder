@@ -14,7 +14,7 @@
       "MINERVA_SQUAD"
     ],
     "description": [
-      "【Activate･Main】②, return this Unit to the bottom of its owner's deck：Choose 1 Unit card with \"Impulse Gundam\" in its card name that is Lv.4 or higher from your trash. Deploy it."
+      "【기동･메인】②, return this Unit to the bottom of its owner's deck：Choose 1 Unit card with \"Impulse Gundam\" in its card name that is Lv.4 or higher from your trash. Deploy it."
     ],
     "__typename": "UnitCard",
     "id": "ST09-001",
@@ -44,7 +44,7 @@
       "MINERVA_SQUAD"
     ],
     "description": [
-      "【Destroyed】Choose 1 (Minerva Squad) Unit card without \"Force Impulse Gundam\" in its card name from your trash. Add it to your hand."
+      "【파괴 시】Choose 1 (Minerva Squad) Unit card without \"Force Impulse Gundam\" in its card name from your trash. Add it to your hand."
     ],
     "__typename": "UnitCard",
     "id": "ST09-002",
@@ -75,8 +75,8 @@
       "MINERVA_SQUAD"
     ],
     "description": [
-      "<Breach 3> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
-      "【When Linked】If there are 5 or more purple cards in your trash, deal 2 damage to all Units with 5 or less AP."
+      "<돌파 3> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "【링크 시】If there are 5 or more purple cards in your trash, deal 2 damage to all Units with 5 or less AP."
     ],
     "__typename": "UnitCard",
     "id": "ST09-003",
@@ -106,9 +106,9 @@
       "ORB"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)",
-      "While a friendly Base in play, this Unit gains <Suppression>.",
-      "(Damage to Shields by an attack is dealt to the first 2 cards simultaneously.)"
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "While a friendly Base in play, this Unit gains <제압>.",
+      "(어택으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST09-004",
@@ -160,7 +160,7 @@
       "MINERVA_SQUAD"
     ],
     "description": [
-      "【Deploy】If you deploy this Unit from your trash, choose 1 enemy Unit that is Lv.3 or lower. Destroy it."
+      "【배치 시】If you deploy this Unit from your trash, choose 1 enemy Unit that is Lv.3 or lower. Destroy it."
     ],
     "__typename": "UnitCard",
     "id": "ST09-006",
@@ -190,7 +190,7 @@
       "MINERVA_SQUAD"
     ],
     "description": [
-      "<Blocker> (Rest this Unit to change the attack target to it.)"
+      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST09-007",
@@ -222,8 +222,8 @@
       "COORDINATOR"
     ],
     "description": [
-      "【Burst】Add this card to your hand.",
-      "【Attack】If this is a (Minerva Squad) Unit, choose 1 of your Resources. Set it as active."
+      "【버스트】 이 카드를 패에 추가한다.",
+      "【어택 시】If this is a (Minerva Squad) Unit, choose 1 of your Resources. Set it as active."
     ],
     "__typename": "PilotCard",
     "id": "ST09-008",
@@ -243,7 +243,7 @@
     "package": "ST09",
     "trait": [],
     "description": [
-      "【Main】/【Action】Choose 1 active enemy Unit with 4 or less AP. Destroy it."
+      "【메인】/【액션】Choose 1 active enemy Unit with 4 or less AP. Destroy it."
     ],
     "__typename": "CommandCard",
     "id": "ST09-009"
@@ -265,8 +265,8 @@
       "WARSHIP"
     ],
     "description": [
-      "【Burst】Deploy this card.",
-      "【Deploy】Add 1 of your Shields to your hand. Then, if it is your turn, look at the top 2 cards of your deck and return 1 to the top. Place the remaining card into your trash."
+      "【버스트】 이 카드를 배치한다.",
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, look at the top 2 cards of your deck and return 1 to the top. Place the remaining card into your trash."
     ],
     "__typename": "BaseCard",
     "id": "ST09-010",

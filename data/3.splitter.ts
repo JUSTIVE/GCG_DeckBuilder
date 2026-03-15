@@ -1,4 +1,4 @@
-import CardList from "./raw.json";
+import CardList from "./mapped.json";
 import { writeFile } from "node:fs/promises";
 
 Object.entries(
