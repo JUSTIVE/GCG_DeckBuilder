@@ -68,6 +68,7 @@ enum CardColor {
   RED # 빨강
   YELLOW # 노랑
   PURPLE # 보라
+  WHITE # 화이트
 }
 
 enum GundamSeries {
@@ -117,6 +118,12 @@ enum CardRarity {
   UNCOMMON #U
   RARE #R
   LEGENDARY_RARE #LR
+  COMMON_PLUS #C+
+  UNCOMMON_PLUS #U+
+  RARE_PLUS #R+
+  LEGENDARY_RARE_PLUS #LR+
+  COMMON_PLUS_PLUS #C++
+  LEGENDARY_RARE_PLUS_PLUS #LR++
   P #P
 }
 

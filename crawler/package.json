@@ -12,6 +12,7 @@
   "dependencies": {
     "cheerio": "^1.2.0",
     "cli-progress": "^3.12.0",
-    "p-limit": "^7.3.0"
+    "p-limit": "^7.3.0",
+    "zod": "^4.3.6"
   }
 }

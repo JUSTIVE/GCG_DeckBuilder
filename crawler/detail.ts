@@ -1,5 +1,14 @@
 import * as cheerio from "cheerio";
-import type { CardPackage, CardRarity, CardTrait, UnitLink } from "../data/dataTypes";
+import type {
+  Card,
+  CardColor,
+  CardPackage,
+  CardRarity,
+  CardTrait,
+  GundamSeries,
+  UnitLink,
+  Zone,
+} from "../data/dataTypes";
 import CardList from "./cards.json";
 import pLimit from "p-limit";
 import { writeFile } from "node:fs/promises";
@@ -18,21 +27,41 @@ export function parseCard(html: string): Card {
   const level = Number(field($, "Lv."));
   const cost = Number(field($, "COST"));
 
-  const color = field($, "COLOR").toUpperCase();
+  const color: CardColor = field($, "COLOR").toUpperCase() as CardColor;
+
+  const rawType = field($, "TYPE");
+  const type: Card["__typename"] =
+    rawType === "UNIT"
+      ? ("UnitCard" as const)
+      : rawType === "BASE"
+        ? ("BaseCard" as const)
+        : rawType === "PILOT"
+          ? ("PilotCard" as const)
+          : rawType === "COMMAND"
+            ? ("CommandCard" as const)
+            : ("ResourceCard" as const);
 
   const rarityMap: Record<string, CardRarity> = {
     C: "COMMON",
     U: "UNCOMMON",
     R: "RARE",
     LR: "LEGENDARY_RARE",
+    "C+": "COMMON_PLUS",
+    "U+": "UNCOMMON_PLUS",
+    "R+": "RARE_PLUS",
+    "LR+": "LEGENDARY_RARE_PLUS",
+    "C++": "COMMON_PLUS_PLUS",
+    "LR++": "LEGENDARY_RARE_PLUS_PLUS",
     P: "P",
   };
 
-  const rarity = rarityMap[$(".rarity").text().trim()];
+  const rarity: CardRarity = rarityMap[
+    $(".rarity").text().trim().replaceAll(" ", "")
+  ] as CardRarity;
 
-  const zone = field($, "Zone")
+  const zone: Zone[] = field($, "Zone")
     .split(/\s+/)
-    .map((z) => z.toUpperCase());
+    .map((z) => z.toUpperCase()) as Zone[];
 
   const AP = Number(field($, "AP"));
   const HP = Number(field($, "HP"));
@@ -43,21 +72,24 @@ export function parseCard(html: string): Card {
     .map((v) => cheerio.load(v).text().trim())
     .filter(Boolean);
 
-  const series = field($, "Source Title").replaceAll(" ", "_").toUpperCase();
+  const series: GundamSeries = field($, "Source Title")
+    .replaceAll(" ", "_")
+    .replaceAll(":", "")
+    .toUpperCase() as GundamSeries;
 
-  const traitMap: Record<string, CardTrait> = {
-    "Earth Federation": "EARTH_FEDERATION",
-    "White Base Team": "WHITE_BASE_TEAM",
-  };
-
-  const trait = [...field($, "Trait").matchAll(/\((.*?)\)/g)].map((m) => traitMap[m[1]]);
+  const trait = [...field($, "Trait").matchAll(/\((.*?)\)/g)].map((m) =>
+    m[1]
+      ?.replace(/[\(\)]/, "")
+      ?.replaceAll(" ", "_")
+      ?.toUpperCase(),
+  ) as CardTrait[];
 
   const linkText = field($, "Link");
 
   const links: UnitLink[] = linkText ? [{ pilot: linkText.replace(/[\[\]]/g, "") }] : [];
 
   return {
-    __typename: "UnitCard",
+    __typename: type,
     id,
     name,
     level,
@@ -76,7 +108,7 @@ export function parseCard(html: string): Card {
   };
 }
 
-async function fetchCard(cardUrl: string): Card {
+async function fetchCard(cardUrl: string): Promise<Card> {
   const url = `${BASE}${cardUrl}`;
   const res = await (await fetch(url)).text();
   return parseCard(res);

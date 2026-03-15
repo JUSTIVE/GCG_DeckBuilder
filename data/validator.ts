@@ -1,12 +1,24 @@
 import { z } from "zod";
-
+import raw from "./raw.json";
 /* ENUMS */
 
-export const CardColorSchema = z.enum(["BLUE", "GREEN", "RED", "YELLOW", "PURPLE"]);
+export const CardColorSchema = z.enum(["BLUE", "GREEN", "RED", "YELLOW", "PURPLE", "WHITE"]);
 
 export const ZoneSchema = z.enum(["SPACE", "EARTH"]);
 
-export const CardRaritySchema = z.enum(["COMMON", "UNCOMMON", "RARE", "LEGENDARY_RARE", "P"]);
+export const CardRaritySchema = z.enum([
+  "COMMON",
+  "UNCOMMON",
+  "RARE",
+  "LEGENDARY_RARE",
+  "COMMON_PLUS",
+  "UNCOMMON_PLUS",
+  "RARE_PLUS",
+  "LEGENDARY_RARE_PLUS",
+  "COMMON_PLUS_PLUS",
+  "LEGENDARY_RARE_PLUS_PLUS",
+  "P",
+]);
 
 export const CardKeywordSchema = z.enum([
   "ACTION",
@@ -32,6 +44,96 @@ export const CardKeywordSchema = z.enum([
   "WHEN_PAIRED",
 ]);
 
+export const CardPackageSchema = z.enum([
+  "GD01",
+  "GD02",
+  "GD03",
+  "ST01",
+  "ST02",
+  "ST03",
+  "ST04",
+  "ST05",
+  "ST06",
+  "ST07",
+  "ST08",
+  "ST09",
+  "OTHER_PRODUCT_CARD",
+  "EDITION_BETA",
+  "BASIC_CARDS",
+  "PROMOTION_CARD",
+]);
+
+export const CardTraitSchema = z.enum([
+  "ACADEMY",
+  "OZ",
+  "NEO_ZEON",
+  "ZEON",
+  "EARTH_ALLIANCE",
+  "EARTH_FEDERATION",
+  "MAGANAC_CORPS",
+  "ZAFT",
+  "OPERATION_METEOR",
+  "NEWTYPE",
+  "COORDINATOR",
+  "CYBER_NEWTYPE",
+  "STRONGHOLD",
+  "WARSHIP",
+  "TRIPLE_SHIP_ALLIANCE",
+  "CIVILIAN",
+  "WHITE_BASE_TEAM",
+  "G_TEAM",
+  "VANADIS_INSTITUTE",
+  "ORB",
+  "TEKKADAN",
+  "TEIWAZ",
+  "GJALLARHORN",
+  "GUNDAM_FRAME",
+  "ALAYA_VIJNANA",
+  "TITANS",
+  "VULTURE",
+  "AEUG",
+  "CLAN",
+  "AGE_SYSTEM",
+  "WHITE_FANG",
+  "SIDE_6",
+  "NEW_UNE",
+  "UE",
+  "VAGAN",
+  "BIOLOGICAL_CPU",
+  "ASUNO_FAMILY",
+  "X_ROUNDER",
+  "SUPERPOWER_BLOC",
+  "CB",
+  "INNOVADE",
+  "GN_DRIVE",
+  "SUPER_SOLDIER",
+  "MAFTY",
+  "SRA",
+  "OLD_UNE",
+  "JUPITRIS",
+  "CYCLOPS_TEAM",
+  "UN",
+  "MINERVA_SQUAD",
+]);
+
+export const GundamSeriesSchema = z.enum([
+  "MOBILE_SUIT_GUNDAM",
+  "MOBILE_SUIT_Z_GUNDAM",
+  "MOBILE_SUIT_GUNDAM_CHARS_COUNTERATTACK",
+  "MOBILE_SUIT_GUNDAM_0080_WAR_IN_THE_POCKET",
+  "MOBILE_SUIT_GUNDAM_WING",
+  "AFTER_WAR_GUNDAM_X",
+  "MOBILE_SUIT_GUNDAM_SEED",
+  "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+  "MOBILE_SUIT_GUNDAM_00",
+  "MOBILE_SUIT_GUNDAM_UNICORN",
+  "MOBILE_SUIT_GUNDAM_AGE",
+  "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+  "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+  "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+  "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+]);
+
 export const CardKindSchema = z.enum(["RESOURCE", "BASE", "UNIT", "PILOT", "COMMAND"]);
 
 /* BASE INTERFACES */
@@ -41,13 +143,13 @@ export const NodeSchema = z.object({
 });
 
 export const PlayableCardSchema = z.object({
-  level: z.number().int(),
-  cost: z.number().int(),
+  level: z.number().int().catch(0),
+  cost: z.number().int().catch(0),
   name: z.string(),
-  series: z.string(),
+  series: GundamSeriesSchema,
   color: CardColorSchema,
   rarity: CardRaritySchema,
-  pack: z.string(),
+  package: CardPackageSchema,
   keywords: z.array(CardKeywordSchema),
 });
 
@@ -55,8 +157,9 @@ export const PlayableCardSchema = z.object({
 
 export const PilotCardSchema = NodeSchema.merge(
   PlayableCardSchema.extend({
-    AP: z.number().int(),
-    HP: z.number().int(),
+    __typename: z.literal("PilotCard"),
+    AP: z.number().int().catch(0),
+    HP: z.number().int().catch(0),
     description: z.array(z.string()),
   }),
 );
@@ -64,7 +167,7 @@ export const PilotCardSchema = NodeSchema.merge(
 /* UNIT LINK */
 
 export const LinkTraitSchema = z.object({
-  trait: z.string(),
+  trait: CardTraitSchema,
 });
 
 export const LinkPilotSchema = z.object({
@@ -76,11 +179,12 @@ export const UnitLinkSchema = z.union([LinkTraitSchema, LinkPilotSchema]);
 /* UNIT */
 
 export const UnitCardSchema = NodeSchema.merge(
-  PlayableCardSchema.extend({
+  PlayableCardSchema.safeExtend({
+    __typename: z.literal("UnitCard"),
     zone: z.array(ZoneSchema),
-    AP: z.number().int(),
-    HP: z.number().int(),
-    links: z.array(UnitLinkSchema),
+    AP: z.number().int().catch(0),
+    HP: z.number().int().catch(0),
+    // links: z.array(UnitLinkSchema),
     description: z.array(z.string()),
   }),
 );
@@ -88,9 +192,10 @@ export const UnitCardSchema = NodeSchema.merge(
 /* BASE */
 
 export const BaseCardSchema = NodeSchema.merge(
-  PlayableCardSchema.extend({
-    AP: z.number().int(),
-    HP: z.number().int(),
+  PlayableCardSchema.safeExtend({
+    __typename: z.literal("BaseCard"),
+    AP: z.number().int().catch(0),
+    HP: z.number().int().catch(0),
     zone: z.array(ZoneSchema),
     description: z.array(z.string()),
   }),
@@ -99,23 +204,21 @@ export const BaseCardSchema = NodeSchema.merge(
 /* COMMAND */
 
 export const CommandCardSchema = NodeSchema.merge(
-  PlayableCardSchema.partial({
-    color: true,
-    rarity: true,
-    pack: true,
-    keywords: true,
+  PlayableCardSchema.safeExtend({
+    __typename: z.literal("CommandCard"),
   }),
 );
 
 /* RESOURCE */
 
-export const ResourceSchema = NodeSchema.extend({
+export const ResourceSchema = NodeSchema.safeExtend({
+  __typename: z.literal("ResourceCard"),
   name: z.string(),
 });
 
 /* UNION CARD */
 
-export const CardSchema = z.union([
+export const CardSchema = z.discriminatedUnion("__typename", [
   ResourceSchema,
   BaseCardSchema,
   UnitCardSchema,
@@ -150,10 +253,19 @@ export const CardConnectionSchema = z.object({
 export const CardFilterInputSchema = z.object({
   level: z.array(z.number().int()).optional(),
   cost: z.array(z.number().int()).optional(),
-  pack: z.string().optional(),
+  package: CardPackageSchema.optional(),
   rarity: CardRaritySchema.optional(),
   keyword: z.array(CardKeywordSchema).optional(),
   zone: z.array(ZoneSchema).optional(),
   query: z.string().optional(),
   kind: CardKindSchema,
+});
+
+raw.forEach((item) => {
+  try {
+    const res = CardSchema.parse(item);
+    // console.log(res);
+  } catch (e) {
+    console.log(`${item.id} failed`, e);
+  }
 });
