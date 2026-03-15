@@ -28,6 +28,7 @@ export const CardKeywordSchema = z.enum([
   "BLOCKER",
   "BREACH",
   "BURST",
+  "SUPPRESSION",
   "DEPLOY",
   "DESTROYED",
   "DURING_LINK",
@@ -151,30 +152,26 @@ export const PlayableCardSchema = z.object({
   rarity: CardRaritySchema,
   package: CardPackageSchema,
   keywords: z.array(CardKeywordSchema),
+  trait: z.array(CardTraitSchema),
+  description: z.array(z.string()),
 });
-
-/* PILOT */
-
-export const PilotCardSchema = NodeSchema.merge(
-  PlayableCardSchema.extend({
-    __typename: z.literal("PilotCard"),
-    AP: z.number().int().catch(0),
-    HP: z.number().int().catch(0),
-    description: z.array(z.string()),
-  }),
-);
 
 /* UNIT LINK */
 
 export const LinkTraitSchema = z.object({
+  __typename: z.literal("LinkTrait"),
   trait: CardTraitSchema,
 });
 
 export const LinkPilotSchema = z.object({
-  pilot: z.lazy(() => PilotCardSchema),
+  __typename: z.literal("LinkPilot"),
+  pilotName: z.string(),
 });
 
-export const UnitLinkSchema = z.union([LinkTraitSchema, LinkPilotSchema]);
+export const UnitLinkSchema = z.discriminatedUnion("__typename", [
+  LinkTraitSchema,
+  LinkPilotSchema,
+]);
 
 /* UNIT */
 
@@ -184,8 +181,7 @@ export const UnitCardSchema = NodeSchema.merge(
     zone: z.array(ZoneSchema),
     AP: z.number().int().catch(0),
     HP: z.number().int().catch(0),
-    // links: z.array(UnitLinkSchema),
-    description: z.array(z.string()),
+    link: UnitLinkSchema.optional(),
   }),
 );
 
@@ -197,7 +193,6 @@ export const BaseCardSchema = NodeSchema.merge(
     AP: z.number().int().catch(0),
     HP: z.number().int().catch(0),
     zone: z.array(ZoneSchema),
-    description: z.array(z.string()),
   }),
 );
 
@@ -206,6 +201,22 @@ export const BaseCardSchema = NodeSchema.merge(
 export const CommandCardSchema = NodeSchema.merge(
   PlayableCardSchema.safeExtend({
     __typename: z.literal("CommandCard"),
+    pilot: z
+      .object({
+        name: z.string(),
+        AP: z.number().int().catch(0),
+        HP: z.number().int().catch(0),
+      })
+      .optional(),
+  }),
+);
+
+/* PILOT */
+export const PilotCardSchema = NodeSchema.merge(
+  PlayableCardSchema.extend({
+    __typename: z.literal("PilotCard"),
+    AP: z.number().int().catch(0),
+    HP: z.number().int().catch(0),
   }),
 );
 

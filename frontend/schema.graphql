@@ -95,7 +95,7 @@ enum CardKeyword {
   ACTIVATE_MAIN # 기동 - 메인
   ATTACK # 공격시
   BLOCKER # 블로커
-  BREACH # 돌파
+  BREACH # 돌파 (유닛 파괴시 실드에 N만큼 데미지)
   BURST # 버스트
   DEPLOY # 배포 시
   DESTROYED # 파괴 시
@@ -103,6 +103,7 @@ enum CardKeyword {
   DURING_PAIR # 페어 중
   FIRST_STRIKE # 선제공격
   HIGH_MANEUVER # 고기동
+  SUPPRESSION
   MAIN # 메인
   ONCE_PER_TURN # 턴에 1회
   END_OF_TURN # 내 턴이 끝날 때
@@ -203,7 +204,7 @@ type UnitCard implements PlayableCard & Node {
   zone: [Zone!]! # 지형
   AP: Int! # 공격력
   HP: Int! # 체력
-  links: [UnitLink!]! # 링크 정보
+  link: UnitLink # 링크 정보
   description: [String!]! # 효과 정보
 }
 
