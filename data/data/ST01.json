@@ -1,0 +1,309 @@
+[
+  {
+    "name": "건담",
+    "level": 4,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": ["REPAIR", "DURING_PAIR"],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "ST01",
+    "trait": ["EARTH_FEDERATION", "WHITE_BASE_TEAM"],
+    "description": [
+      "<Repair 2> (At the end of your turn, this Unit recovers the specified number of HP.)",
+      "【During Pair】During your turn, all your Units get AP+1."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST01-001",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Amuro Ray"
+    },
+    "zone": ["SPACE", "EARTH"]
+  },
+  {
+    "name": "Gundam (MA Form)",
+    "level": 5,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": ["WHEN_PAIRED"],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "ST01",
+    "trait": ["EARTH_FEDERATION", "WHITE_BASE_TEAM"],
+    "description": ["【When Paired･(White Base Team) Pilot】Draw 1."],
+    "__typename": "UnitCard",
+    "id": "ST01-002",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Amuro Ray"
+    },
+    "zone": ["SPACE"]
+  },
+  {
+    "name": "Guncannon",
+    "level": 3,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "ST01",
+    "trait": ["EARTH_FEDERATION", "WHITE_BASE_TEAM"],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST01-003",
+    "AP": 2,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Kai Shiden"
+    },
+    "zone": ["SPACE", "EARTH"]
+  },
+  {
+    "name": "Guntank",
+    "level": 3,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": ["DEPLOY"],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "ST01",
+    "trait": ["EARTH_FEDERATION", "WHITE_BASE_TEAM"],
+    "description": ["【Deploy】Choose 1 enemy Unit with 2 or less HP. Rest it."],
+    "__typename": "UnitCard",
+    "id": "ST01-004",
+    "AP": 2,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Hayato Kobayashi"
+    },
+    "zone": ["SPACE", "EARTH"]
+  },
+  {
+    "name": "GM",
+    "level": 2,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "ST01",
+    "trait": ["EARTH_FEDERATION"],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST01-005",
+    "AP": 2,
+    "HP": 2,
+    "zone": ["SPACE", "EARTH"]
+  },
+  {
+    "name": "Gundam Aerial (Permet Score Six)",
+    "level": 5,
+    "cost": 4,
+    "color": "WHITE",
+    "keywords": ["WHEN_PAIRED"],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "ST01",
+    "trait": ["ACADEMY"],
+    "description": [
+      "【When Paired】Choose 1 enemy Unit that is Lv.5 or lower. It gets AP-3 during this turn."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST01-006",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Suletta Mercury"
+    },
+    "zone": ["SPACE", "EARTH"]
+  },
+  {
+    "name": "Gundam Aerial (Bit on Form)",
+    "level": 4,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "ST01",
+    "trait": ["ACADEMY"],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST01-007",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Suletta Mercury"
+    },
+    "zone": ["SPACE", "EARTH"]
+  },
+  {
+    "name": "Demi Trainer",
+    "level": 1,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": ["BLOCKER"],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "ST01",
+    "trait": ["ACADEMY"],
+    "description": ["<Blocker> (Rest this Unit to change the attack target to it.)"],
+    "__typename": "UnitCard",
+    "id": "ST01-008",
+    "AP": 1,
+    "HP": 1,
+    "zone": ["SPACE", "EARTH"]
+  },
+  {
+    "name": "Zowort",
+    "level": 2,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": ["BLOCKER"],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "ST01",
+    "trait": ["ACADEMY"],
+    "description": [
+      "<Blocker> (Rest this Unit to change the attack target to it.)",
+      "This Unit can't choose the enemy player as its attack target."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST01-009",
+    "AP": 3,
+    "HP": 2,
+    "zone": ["SPACE", "EARTH"]
+  },
+  {
+    "name": "Amuro Ray",
+    "level": 4,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": ["BURST", "WHEN_PAIRED"],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "ST01",
+    "trait": ["EARTH_FEDERATION", "WHITE_BASE_TEAM", "NEWTYPE"],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Paired】Choose 1 enemy Unit with 5 or less HP. Rest it."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST01-010",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Suletta Mercury",
+    "level": 4,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": ["BURST", "ATTACK", "ONCE_PER_TURN"],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "ST01",
+    "trait": ["ACADEMY"],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【Attack】【Once per Turn】Choose 1 of your Resources. Set it as active."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST01-011",
+    "AP": 1,
+    "HP": 2
+  },
+  {
+    "name": "Thoroughly Damaged",
+    "level": 2,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": ["MAIN", "PILOT"],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "ST01",
+    "trait": ["EARTH_FEDERATION", "WHITE_BASE_TEAM"],
+    "description": [
+      "【Main】Choose 1 rested enemy Unit. Deal 1 damage to it.",
+      "【Pilot】[Hayato Kobayashi]"
+    ],
+    "__typename": "CommandCard",
+    "id": "ST01-012",
+    "pilot": {
+      "AP": 0,
+      "HP": 1,
+      "name": ""
+    }
+  },
+  {
+    "name": "Kai's Resolve",
+    "level": 3,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": ["MAIN", "PILOT"],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "ST01",
+    "trait": ["EARTH_FEDERATION", "WHITE_BASE_TEAM"],
+    "description": ["【Main】Choose 1 friendly Unit. It recovers 3 HP.", "【Pilot】[Kai Shiden]"],
+    "__typename": "CommandCard",
+    "id": "ST01-013",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    }
+  },
+  {
+    "name": "Unforeseen Incident",
+    "level": 3,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": ["BURST", "MAIN", "MAIN", "ACTION"],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "ST01",
+    "trait": [],
+    "description": [
+      "【Burst】Activate this card's 【Main】.",
+      "【Main】/【Action】Choose 1 enemy Unit. It gets AP-3 during this turn."
+    ],
+    "__typename": "CommandCard",
+    "id": "ST01-014"
+  },
+  {
+    "name": "White Base",
+    "level": 3,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": ["BURST", "DEPLOY", "ACTIVATE_MAIN", "ONCE_PER_TURN"],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "ST01",
+    "trait": ["EARTH_FEDERATION", "WHITE_BASE_TEAM", "WARSHIP"],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "【Activate･Main】【Once per Turn】②：Deploy 1 [Gundam]((White Base Team)･AP3･HP3) Unit token if you have no Units in play, deploy 1 [Guncannon]((White Base Team)･AP2･HP2) Unit token if you have only 1 Unit in play, or deploy 1 [Guntank]((White Base Team)･AP1･HP1) Unit token if you have 2 or more Units in play."
+    ],
+    "__typename": "BaseCard",
+    "id": "ST01-015",
+    "AP": null,
+    "HP": 5,
+    "zone": ["SPACE", "EARTH"]
+  },
+  {
+    "name": "Asticassia School of Technology, Earth House",
+    "level": 2,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": ["BURST", "DEPLOY", "ACTIVATE_MAIN"],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "ST01",
+    "trait": ["ACADEMY", "STRONGHOLD"],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "【Activate･Main】Rest this Base：All friendly Link Units get AP+1 during this turn."
+    ],
+    "__typename": "BaseCard",
+    "id": "ST01-016",
+    "AP": null,
+    "HP": 5,
+    "zone": ["SPACE"]
+  }
+]

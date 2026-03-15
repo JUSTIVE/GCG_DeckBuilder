@@ -6,20 +6,6 @@ export const CardColorSchema = z.enum(["BLUE", "GREEN", "RED", "YELLOW", "PURPLE
 
 export const ZoneSchema = z.enum(["SPACE", "EARTH"]);
 
-export const CardRaritySchema = z.enum([
-  "COMMON",
-  "UNCOMMON",
-  "RARE",
-  "LEGENDARY_RARE",
-  "COMMON_PLUS",
-  "UNCOMMON_PLUS",
-  "RARE_PLUS",
-  "LEGENDARY_RARE_PLUS",
-  "COMMON_PLUS_PLUS",
-  "LEGENDARY_RARE_PLUS_PLUS",
-  "P",
-]);
-
 export const CardKeywordSchema = z.enum([
   "ACTION",
   "ACTIVATE_ACTION",
@@ -149,7 +135,6 @@ export const PlayableCardSchema = z.object({
   name: z.string(),
   series: GundamSeriesSchema,
   color: CardColorSchema,
-  rarity: CardRaritySchema,
   package: CardPackageSchema,
   keywords: z.array(CardKeywordSchema),
   trait: z.array(CardTraitSchema),
@@ -265,7 +250,7 @@ export const CardFilterInputSchema = z.object({
   level: z.array(z.number().int()).optional(),
   cost: z.array(z.number().int()).optional(),
   package: CardPackageSchema.optional(),
-  rarity: CardRaritySchema.optional(),
+
   keyword: z.array(CardKeywordSchema).optional(),
   zone: z.array(ZoneSchema).optional(),
   query: z.string().optional(),

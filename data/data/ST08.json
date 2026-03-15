@@ -1,0 +1,393 @@
+[
+  {
+    "name": "Ξ Gundam",
+    "level": 9,
+    "cost": 8,
+    "color": "RED",
+    "keywords": [
+      "WHEN_PAIRED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "MAFTY"
+    ],
+    "description": [
+      "While you have no Units that are Lv.6 or higher in play, this card in your hand gets Lv. -1 and cost -1 for each enemy Unit in play.",
+      "【When Paired】Choose 1 enemy Unit with the highest Lv. Deal 3 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST08-001",
+    "AP": 5,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Hathaway Noa"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Ξ Gundam",
+    "level": 5,
+    "cost": 4,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "MAFTY"
+    ],
+    "description": [
+      "【Deploy】Choose 1 enemy Unit. Deal 1 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST08-002",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Hathaway Noa"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Messer (Type-F Naked) (Commander Type)",
+    "level": 4,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "MAFTY"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST08-003",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "MAFTY"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Messer Type-F01",
+    "level": 2,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "MAFTY"
+    ],
+    "description": [
+      "【Attack】If this Unit is attacking an enemy Unit, choose 1 enemy Unit. Deal 1 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST08-004",
+    "AP": 2,
+    "HP": 1,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "MAFTY"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Messer Type-F02 Minelayer",
+    "level": 3,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "MAFTY"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST08-005",
+    "AP": 4,
+    "HP": 3,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Penelope",
+    "level": 7,
+    "cost": 6,
+    "color": "BLUE",
+    "keywords": [
+      "DURING_PAIR",
+      "ATTACK",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [
+      "【During Pair】【Attack】【Once per Turn】If this Unit is attacking the enemy player, reveal 1 (Earth Federation) Unit card from your hand. Return it to the bottom of your deck. If you do, draw 2."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST08-006",
+    "AP": 5,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Lane Aim"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Penelope",
+    "level": 5,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST08-007",
+    "AP": 5,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Lane Aim"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gustav Karl Type-00",
+    "level": 3,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [
+      "While 3 or more enemy Units are in play, this Unit gains <Blocker>.",
+      "(Rest this Unit to change the attack target to it.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "ST08-008",
+    "AP": 3,
+    "HP": 4,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Jegan Ground Type-A (Man Hunter)",
+    "level": 1,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [
+      "【Deploy】Choose 1 rested enemy Unit that is Lv.2 or lower. It won' t be set as active during the start phase of your opponent' s next turn."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST08-009",
+    "AP": null,
+    "HP": 1,
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Hathaway Noa",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "WHEN_PAIRED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "MAFTY",
+      "NEWTYPE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Paired】If this is a (Mafty) Unit, choose 1 of your (Mafty) Units. During this turn, it may choose a damaged active enemy Unit as its attack target."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST08-010",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Lane Aim",
+    "level": 4,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "HIGH_MANEUVER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "When you draw with an effect, if this is a blue Unit, it gains <High-Maneuver> during this turn.",
+      "(This Unit can' t be blocked.)"
+    ],
+    "__typename": "PilotCard",
+    "id": "ST08-011",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Words for Hathaway",
+    "level": 3,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "MAIN",
+      "BREACH",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "MAFTY"
+    ],
+    "description": [
+      "【Main】Choose 1 friendly Link Unit. It gains <Breach 1> during this turn.",
+      "(When this Unit' s attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent' s shield area.)",
+      "【Pilot】[Gawman Nobile]"
+    ],
+    "__typename": "CommandCard",
+    "id": "ST08-012",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    }
+  },
+  {
+    "name": "Lady Luck",
+    "level": 5,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "MAIN",
+      "ACTION"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [],
+    "description": [
+      "【Main】/【Action】Choose 1 enemy Unit. Deal 1 damage to it. If a friendly (Mafty) Link Unit is in play, deal 2 damage instead."
+    ],
+    "__typename": "CommandCard",
+    "id": "ST08-013"
+  },
+  {
+    "name": "Valiant",
+    "level": 2,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "MAFTY",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand. Then, choose 1 of your Units. It gets AP+2 during this turn."
+    ],
+    "__typename": "BaseCard",
+    "id": "ST08-014",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Davao",
+    "level": 3,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "ACTIVATE_MAIN",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "ST08",
+    "trait": [
+      "EARTH_FEDERATION",
+      "STRONGHOLD"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "【Activate･Main】【Once per Turn】②：Choose 1 of your Units. It recovers 2 HP."
+    ],
+    "__typename": "BaseCard",
+    "id": "ST08-015",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "EARTH"
+    ]
+  }
+]

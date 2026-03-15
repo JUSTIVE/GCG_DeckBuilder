@@ -1,0 +1,428 @@
+[
+  {
+    "name": "Aile Strike Gundam",
+    "level": 5,
+    "cost": 4,
+    "color": "WHITE",
+    "keywords": [
+      "BLOCKER",
+      "WHEN_PAIRED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "EARTH_ALLIANCE"
+    ],
+    "description": [
+      "<Blocker> (Rest this Unit to change the attack target to it.)",
+      "【When Paired･Lv.4 or Higher Pilot】Choose 1 enemy Unit with 4 or less HP. Return it to its owner's hand."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST04-001",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Kira Yamato"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Strike Gundam",
+    "level": 4,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "EARTH_ALLIANCE"
+    ],
+    "description": [
+      "【Deploy】Draw 1. Then, discard 1."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST04-002",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Kira Yamato"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Moebius Zero",
+    "level": 3,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "EARTH_ALLIANCE"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST04-003",
+    "AP": 2,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Mu La Flaga"
+    },
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Moebius",
+    "level": 1,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "EARTH_ALLIANCE"
+    ],
+    "description": [
+      "<Blocker> (Rest this Unit to change the attack target to it.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "ST04-004",
+    "AP": 1,
+    "HP": 1,
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Strike Dagger",
+    "level": 2,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "EARTH_ALLIANCE"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST04-005",
+    "AP": 3,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Aegis Gundam",
+    "level": 4,
+    "cost": 3,
+    "color": "RED",
+    "keywords": [
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "ZAFT"
+    ],
+    "description": [
+      "【Attack】If this Unit has 5 or more AP, choose 1 enemy Unit that is Lv.5 or higher. Deal 3 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST04-006",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Athrun Zala"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Aegis Gundam (MA Mode)",
+    "level": 4,
+    "cost": 3,
+    "color": "RED",
+    "keywords": [
+      "BREACH"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "ZAFT"
+    ],
+    "description": [
+      "<Breach 3> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "ST04-007",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Athrun Zala"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Ginn",
+    "level": 2,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "ZAFT"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST04-008",
+    "AP": 2,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Miguel's Ginn",
+    "level": 2,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "DURING_PAIR",
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "ZAFT"
+    ],
+    "description": [
+      "【During Pair】【Destroyed】If you have another Link Unit in play, draw 1."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST04-009",
+    "AP": 3,
+    "HP": 1,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Miguel Ayman"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Kira Yamato",
+    "level": 4,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "EARTH_ALLIANCE",
+      "COORDINATOR"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【Attack】Choose 1 enemy Unit. It gets AP-2 during this battle."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST04-010",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Athrun Zala",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "ZAFT",
+      "COORDINATOR"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Linked】During this turn, this Unit may choose an active enemy Unit that is Lv.5 or lower as its attack target."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST04-011",
+    "AP": 1,
+    "HP": 2
+  },
+  {
+    "name": "Striker Pack",
+    "level": 4,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "BLOCKER",
+      "MAIN",
+      "BLOCKER",
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [],
+    "description": [
+      "【Burst】If you have no (Earth Alliance) Unit tokens in play, deploy 1 [Aile Strike Gundam]((Earth Alliance)･AP3･HP3･<Blocker>) Unit token.",
+      "【Main】If you have no (Earth Alliance) Unit tokens in play, deploy 1 [Sword Strike Gundam]((Earth Alliance)･AP4･HP2･<Blocker>) or 1 [Launcher Strike Gundam]((Earth Alliance)･AP2･HP4･<Blocker>) Unit token."
+    ],
+    "__typename": "CommandCard",
+    "id": "ST04-012"
+  },
+  {
+    "name": "Hawk of Endymion",
+    "level": 2,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "EARTH_ALLIANCE"
+    ],
+    "description": [
+      "【Main】/【Action】Choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand.",
+      "【Pilot】[Mu La Flaga]"
+    ],
+    "__typename": "CommandCard",
+    "id": "ST04-013",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    }
+  },
+  {
+    "name": "The Magic Bullet of Dusk",
+    "level": 3,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "FIRST_STRIKE",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "ZAFT",
+      "COORDINATOR"
+    ],
+    "description": [
+      "【Main】/【Action】Choose 1 friendly Unit that is Lv.2 or lower. It gains <First Strike> during this turn.",
+      "(While this Unit is attacking, it deals damage before the enemy Unit.)",
+      "【Pilot】[Miguel Ayman]"
+    ],
+    "__typename": "CommandCard",
+    "id": "ST04-014",
+    "pilot": {
+      "AP": 0,
+      "HP": 1,
+      "name": ""
+    }
+  },
+  {
+    "name": "Archangel",
+    "level": 3,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "ACTIVATE_MAIN",
+      "ONCE_PER_TURN",
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "EARTH_ALLIANCE",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "【Activate･Main】【Once per Turn】②：Choose 1 friendly Unit with <Blocker>. Set it as active. It can't attack during this turn."
+    ],
+    "__typename": "BaseCard",
+    "id": "ST04-015",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Vesalius",
+    "level": 3,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "ACTIVATE_MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "ST04",
+    "trait": [
+      "ZAFT",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "【Activate･Main】Rest this Base：Choose 1 friendly Unit. It gets AP+1 during this turn."
+    ],
+    "__typename": "BaseCard",
+    "id": "ST04-016",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ]
+  }
+]

@@ -1,0 +1,400 @@
+[
+  {
+    "name": "GQuuuuuuX (Omega Psycommu)",
+    "level": 5,
+    "cost": 3,
+    "color": "RED",
+    "keywords": [
+      "WHEN_LINKED",
+      "FIRST_STRIKE"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [
+      "【When Linked】If another friendly (Clan) Unit is in play, this gains <First Strike> during this turn.",
+      "(While this Unit is attacking, it deals damage before the enemy Unit.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "ST06-001",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Amate Yuzuriha (Machu)"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "GQuuuuuuX (Omega Psycommu)",
+    "level": 4,
+    "cost": 3,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [
+      "【Deploy】If another friendly (Clan) Unit is in play, choose 1 enemy Unit. Deal 1 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST06-002",
+    "AP": 4,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Amate Yuzuriha (Machu)"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gaia's Rick Dom (GQ)",
+    "level": 2,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "ACTIVATE_MAIN",
+      "SUPPORT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [
+      "【Activate･Main】<Support 1> (Rest this Unit. 1 other friendly Unit gets AP+(specified amount) during this turn.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "ST06-003",
+    "AP": 2,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Gaia"
+    },
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Gelgoog (GQ)",
+    "level": 2,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "ZEON"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST06-004",
+    "AP": 2,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Red Gundam",
+    "level": 4,
+    "cost": 3,
+    "color": "GREEN",
+    "keywords": [
+      "BREACH",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [
+      "<Breach 1> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+      "【Attack】Choose 1 to 2 friendly (Clan) Units. They get AP+2 during this turn."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST06-005",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Shuji Itō"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Red Gundam",
+    "level": 4,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST06-006",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Shuji Itō"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Ortega's Rick Dom (GQ)",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [
+      "【Deploy】Choose 1 of your other (Clan) Units. During this turn, it may choose an active enemy Unit with 3 or less AP as its attack target."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST06-007",
+    "AP": 3,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Ortega"
+    },
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Sugai's Gelgoog (GQ)",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST06-008",
+    "AP": null,
+    "HP": null,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "CLAN"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Amate Yuzuriha (Machu)",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN",
+      "NEWTYPE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Linked】Look at the top card of your deck. If it is a (Clan) card, you may reveal it and add it to your hand. Return any remaining card to the bottom of your deck."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST06-009",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Shuji Itō",
+    "level": 4,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "DURING_LINK",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN",
+      "NEWTYPE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【During Link】【Attack】If you have a (Clan) Unit in play, look at the top card of your deck. Return it to the top or bottom of your deck."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST06-010",
+    "AP": 1,
+    "HP": 2
+  },
+  {
+    "name": "Ruthless Tactics",
+    "level": 3,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [
+      "【Main】/【Action】Choose 1 to 2 friendly (Clan) Units. They get AP+2 during this turn.",
+      "【Pilot】[Gaia (GQ)]"
+    ],
+    "__typename": "CommandCard",
+    "id": "ST06-011",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": "GQ"
+    }
+  },
+  {
+    "name": "Schoolgirl and Smuggler",
+    "level": 1,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [],
+    "description": [
+      "【Main】Look at the top 3 cards of your deck. You may reveal 1 (Clan) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
+    ],
+    "__typename": "CommandCard",
+    "id": "ST06-012"
+  },
+  {
+    "name": "Fierce Unity",
+    "level": 3,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [
+      "【Action】Choose 1 to 2 friendly (Clan) Units. They can't receive battle damage from enemy Units that are Lv.2 or lower during this turn.",
+      "【Pilot】[Ortega (GQ)]"
+    ],
+    "__typename": "CommandCard",
+    "id": "ST06-013",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": "GQ"
+    }
+  },
+  {
+    "name": "Clan Battle",
+    "level": 3,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "ACTIVATE_MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN",
+      "STRONGHOLD"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "【Activate･Main】Rest this Base：If a friendly (Clan) Link Unit is in play, choose 1 friendly Unit. It gets AP+2 during this turn."
+    ],
+    "__typename": "BaseCard",
+    "id": "ST06-014",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Kaneban Co., Ltd.",
+    "level": 4,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "ONCE_PER_TURN",
+      "BREACH"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "ST06",
+    "trait": [
+      "CLAN",
+      "STRONGHOLD"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "【Once per Turn】When a friendly (Clan) Unit links, it gains <Breach 3> during this turn.",
+      "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+    ],
+    "__typename": "BaseCard",
+    "id": "ST06-015",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ]
+  }
+]

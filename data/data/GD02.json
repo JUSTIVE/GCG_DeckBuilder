@@ -1,0 +1,3428 @@
+[
+  {
+    "name": "Psycho Gundam",
+    "level": 6,
+    "cost": 4,
+    "color": "BLUE",
+    "keywords": [
+      "BREACH",
+      "DURING_PAIR"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS"
+    ],
+    "description": [
+      "<Breach 3> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+      "【During Pair･(Cyber-Newtype) Pilot】When one of your (Titans) Units destroys an enemy shield area card with damage, this Unit recovers 2 HP."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-001",
+    "AP": 4,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Four Murasame"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Epyon",
+    "level": 8,
+    "cost": 7,
+    "color": "BLUE",
+    "keywords": [
+      "DURING_LINK",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "GD02",
+    "trait": [
+      "WHITE_FANG"
+    ],
+    "description": [
+      "【During Link】【Once per Turn】During your turn, when one of your Units destroys an enemy Unit with battle damage, set this Unit as active."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-002",
+    "AP": 6,
+    "HP": 6,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Zechs Merquise"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Mk-II (Titans)",
+    "level": 4,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "DURING_PAIR",
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS"
+    ],
+    "description": [
+      "【During Pair･Lv.3 or Lower Pilot】【Destroyed】You may discard 1 Unit card. If you do, return the card paired with this Unit to your hand."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-003",
+    "AP": 4,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "TITANS"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Byarlant",
+    "level": 5,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "WHEN_PAIRED"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS"
+    ],
+    "description": [
+      "【When Paired】Choose 1 rested enemy Unit with 3 or less HP. It won't be set as active during the start phase of your opponent's next turn."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-004",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Jerid Messa"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Tallgeese",
+    "level": 4,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "DURING_LINK",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "GD02",
+    "trait": [
+      "OZ"
+    ],
+    "description": [
+      "【During Link】【Attack】Choose 1 enemy Unit with 2 or less HP. Rest it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-005",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "OZ"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Forbidden Gundam",
+    "level": 5,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "GD02",
+    "trait": [
+      "EARTH_ALLIANCE"
+    ],
+    "description": [
+      "<Blocker> (Rest this Unit to change the attack target to it.)",
+      "During your turn, this Unit can't receive battle damage from enemy Units that are Lv.2 or lower."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-006",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "BIOLOGICAL_CPU"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Psycho Gundam (MA Mode)",
+    "level": 5,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "REPAIR"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS"
+    ],
+    "description": [
+      "<Repair 2> (At the end of your turn, this Unit recovers the specified number of HP.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-007",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "CYBER_NEWTYPE"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gabthley",
+    "level": 4,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS"
+    ],
+    "description": [
+      "【When Linked】Choose 1 rested enemy Unit. Deal 1 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-008",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "TITANS"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Calamity Gundam",
+    "level": 5,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "GD02",
+    "trait": [
+      "EARTH_ALLIANCE"
+    ],
+    "description": [
+      "【Once per Turn】When this Unit's AP is reduced by an enemy effect, choose 1 rested enemy Unit. Deal 2 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-009",
+    "AP": 3,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "BIOLOGICAL_CPU"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Raider Gundam",
+    "level": 5,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "GD02",
+    "trait": [
+      "EARTH_ALLIANCE"
+    ],
+    "description": [
+      "【Once per Turn】When this Unit receives enemy effect damage, draw 1."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-010",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "BIOLOGICAL_CPU"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Moebius (Peacemaker Team)",
+    "level": 4,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [
+      "ACTIVATE_ACTION"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "GD02",
+    "trait": [
+      "EARTH_ALLIANCE"
+    ],
+    "description": [
+      "【Activate･Action】Destroy this Unit：Choose 1 enemy Base/enemy Shield this Unit is battling. Deal 6 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-011",
+    "AP": null,
+    "HP": 1,
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Core Booster",
+    "level": 2,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION",
+      "WHITE_BASE_TEAM"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-012",
+    "AP": 2,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "WHITE_BASE_TEAM"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Hizack",
+    "level": 2,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-013",
+    "AP": 2,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Galbaldy Beta",
+    "level": 2,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS"
+    ],
+    "description": [
+      "【Deploy】Choose 1 of your (Titans) Units. It gets AP+1 during this turn."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-014",
+    "AP": 3,
+    "HP": 1,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Marasai",
+    "level": 3,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-015",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "TITANS"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Barzam",
+    "level": 3,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS"
+    ],
+    "description": [
+      "【Deploy】Choose 1 of your (Titans) Units. It gets AP+1 during this turn."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-016",
+    "AP": 3,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Delta Plus (Waverider Mode)",
+    "level": 3,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [
+      "REPAIR"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [
+      "<Repair 2> (At the end of your turn, this Unit recovers the specified number of HP.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-017",
+    "AP": 2,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Riddhe Marcenas"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Taurus",
+    "level": 2,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "GD02",
+    "trait": [
+      "OZ"
+    ],
+    "description": [
+      "This Unit can't choose the enemy player as its attack target."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-018",
+    "AP": 3,
+    "HP": 3,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Raider Gundam (MA Mode)",
+    "level": 4,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "GD02",
+    "trait": [
+      "EARTH_ALLIANCE"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-019",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "BIOLOGICAL_CPU"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Elmeth",
+    "level": 6,
+    "cost": 5,
+    "color": "GREEN",
+    "keywords": [
+      "DEPLOY",
+      "DURING_LINK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "ZEON"
+    ],
+    "description": [
+      "【Deploy】Look at the top 5 cards of your deck. You may reveal 1 green (Zeon) Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck.",
+      "【During Link】 This Unit gets AP+2."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-020",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Lalah Sune"
+    },
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Gundam AGE-1 Normal",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION",
+      "AGE_SYSTEM"
+    ],
+    "description": [
+      "【Deploy】You may discard 1 green (Earth Federation) Unit card. If you do, place 1 EX Resource. Then, if you are Lv.7 or higher, draw 1."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-021",
+    "AP": 2,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "ASUNO_FAMILY"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "G-Exes",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [
+      "ONCE_PER_TURN",
+      "BREACH"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [
+      "【Once per Turn】When you place an EX Resource, choose 1 of your (AGE System) Units. It gains <Breach 2> during this turn.",
+      "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-022",
+    "AP": 2,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Woolf Enneacle"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam AGE-1 Spallow",
+    "level": 4,
+    "cost": 3,
+    "color": "GREEN",
+    "keywords": [
+      "DURING_LINK",
+      "FIRST_STRIKE"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION",
+      "AGE_SYSTEM"
+    ],
+    "description": [
+      "【During Link】While you are Lv.7 or higher, this Unit gains <First Strike>.",
+      "(While this Unit is attacking, it deals damage before the enemy Unit.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-023",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Flit Asuno"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Red Gundam",
+    "level": 5,
+    "cost": 3,
+    "color": "GREEN",
+    "keywords": [
+      "DURING_LINK",
+      "HIGH_MANEUVER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [
+      "【During Link】This Unit gains <High-Maneuver>.",
+      "(This Unit can't be blocked.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-024",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "CLAN"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Heavyarms",
+    "level": 4,
+    "cost": 3,
+    "color": "GREEN",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "GD02",
+    "trait": [
+      "OPERATION_METEOR"
+    ],
+    "description": [
+      "【Deploy】Look at the top card of your deck. Return it to the top or bottom of your deck."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-025",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "OPERATION_METEOR"
+    },
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Genoace Custom",
+    "level": 2,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [
+      "【Deploy】If you are Lv.7 or higher, choose 1 of your (AGE System) Units. It gets AP+2 during this turn."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-026",
+    "AP": 2,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Woolf Enneacle"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam AGE-1 Titus",
+    "level": 7,
+    "cost": 4,
+    "color": "GREEN",
+    "keywords": [
+      "BREACH"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION",
+      "AGE_SYSTEM"
+    ],
+    "description": [
+      "<Breach 3> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-027",
+    "AP": 5,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Flit Asuno"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Abdul's Maganac",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "GD02",
+    "trait": [
+      "MAGANAC_CORPS"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-028",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "MAGANAC_CORPS"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam AGE-1 Normal",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION",
+      "AGE_SYSTEM"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-029",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "ASUNO_FAMILY"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Genoace",
+    "level": 1,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-030",
+    "AP": 1,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam AGE-1 Titus",
+    "level": 4,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION",
+      "AGE_SYSTEM"
+    ],
+    "description": [
+      "While you are Lv.7 or higher, this Unit gets AP+2."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-031",
+    "AP": 2,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Flit Asuno"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "White Gundam",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "ZEON"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-032",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Char Aznable"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Kikeroga (MA Mode) (GQ)",
+    "level": 5,
+    "cost": 4,
+    "color": "GREEN",
+    "keywords": [
+      "BREACH"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "ZEON"
+    ],
+    "description": [
+      "While another friendly (Zeon) Link Unit is in play, this Unit gains <Breach 5>.",
+      "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-033",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Challia Bull"
+    },
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "GQuuuuuuX",
+    "level": 2,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "DURING_PAIR"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "ZEON"
+    ],
+    "description": [
+      "【During Pair･Red Pilot】This Unit gets AP+2."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-034",
+    "AP": null,
+    "HP": 3,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Police Zaku (Armored RRU Type)",
+    "level": 2,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "SIDE_6"
+    ],
+    "description": [
+      "This Unit can't choose the enemy player as its attack target."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-035",
+    "AP": 2,
+    "HP": 3,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Qubeley",
+    "level": 7,
+    "cost": 5,
+    "color": "RED",
+    "keywords": [
+      "WHEN_LINKED",
+      "SUPPRESSION",
+      "DURING_PAIR",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "NEO_ZEON"
+    ],
+    "description": [
+      "【When Linked】This Unit gains <Suppression> during this turn.",
+      "(Damage to Shields by an attack is dealt to the first 2 cards simultaneously.)",
+      "【During Pair･(Neo Zeon) Pilot】【Attack】Choose 1 damaged enemy Unit. Deal 2 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-036",
+    "AP": 5,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Haman Karn"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Virsago",
+    "level": 5,
+    "cost": 4,
+    "color": "RED",
+    "keywords": [
+      "BREACH",
+      "DEPLOY"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "NEW_UNE"
+    ],
+    "description": [
+      "<Breach 1> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+      "【Deploy】If there are 3 or less enemy Shields, choose 1 enemy Unit with 5 or less AP. Deal 2 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-037",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Shagia Frost"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "GQuuuuuuX (Omega Psycommu)",
+    "level": 7,
+    "cost": 5,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [
+      "【Deploy】Look at the top 3 cards of your deck. You may deploy 1 (Clan) Unit card that is Lv.4 or lower among them. Return the remaining cards randomly to the bottom of your deck."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-038",
+    "AP": 5,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Amate Yuzuriha (Machu)"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Haman Karn's Gaza C",
+    "level": 3,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "WHEN_PAIRED"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "NEO_ZEON"
+    ],
+    "description": [
+      "【When Paired】Choose 1 enemy Unit that is Lv.3 or lower. Deal 1 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-039",
+    "AP": 2,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Haman Karn"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Ashtaron",
+    "level": 4,
+    "cost": 3,
+    "color": "RED",
+    "keywords": [
+      "ACTIVATE_MAIN",
+      "SUPPORT",
+      "DEPLOY"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "NEW_UNE"
+    ],
+    "description": [
+      "【Activate･Main】<Support 2> (Rest this Unit. 1 other friendly Unit gets AP+(specified amount) during this turn.)",
+      "【Deploy】Choose 1 of your other (New UNE) Units. It can't receive battle damage from enemy Units with 2 or less HP during this turn."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-040",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "NEW_UNE"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Sugai's Gelgoog (GQ)",
+    "level": 4,
+    "cost": 4,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "CLAN"
+    ],
+    "description": [
+      "【Deploy】Choose 1 enemy Unit that is Lv.5 or higher. Deal 2 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-041",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Shiiko Sugai"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Ashtaron (MA Mode)",
+    "level": 3,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY",
+      "HIGH_MANEUVER"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "NEW_UNE"
+    ],
+    "description": [
+      "【Deploy】Choose 1 of your (New UNE) Units. It gains <High-Maneuver> during this turn.",
+      "(This Unit can't be blocked.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-042",
+    "AP": 3,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Olba Frost"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Daughtress Weapon",
+    "level": 2,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "NEW_UNE"
+    ],
+    "description": [
+      "【Deploy】If you have another (New UNE) Unit in play, deploy 1 rested [Daughtress]((New UNE)･AP0･HP1) Unit token."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-043",
+    "AP": 2,
+    "HP": 1,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Daughtress Command",
+    "level": 2,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "DESTROYED"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "NEW_UNE"
+    ],
+    "description": [
+      "【Destroyed】If you have another (New UNE) Unit in play, deploy 1 rested [Daughtress]((New UNE)･AP0･HP1) Unit token."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-044",
+    "AP": 3,
+    "HP": 1,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "GINN Long-Range Reconnaissance Type",
+    "level": 2,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "GD02",
+    "trait": [
+      "ZAFT"
+    ],
+    "description": [
+      "【Attack】If this Unit has 5 or more AP and it is attacking an enemy Unit, draw 1."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-045",
+    "AP": 1,
+    "HP": 1,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Sayla's Light-Type Guncannon",
+    "level": 4,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [
+      "【Deploy】Choose 1 enemy Unit token. Deal 2 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-046",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Sayla Mass"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gaza C",
+    "level": 1,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "ACTIVATE_MAIN"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "NEO_ZEON"
+    ],
+    "description": [
+      "【Activate･Main】Rest this Unit：Destroy this and choose 1 enemy Unit that is Lv.5 or lower. Deal 1 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-047",
+    "AP": null,
+    "HP": 1,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Zaku Ⅲ (Sleeves)",
+    "level": 3,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD02",
+    "trait": [
+      "NEO_ZEON"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-048",
+    "AP": 4,
+    "HP": 1,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "NEO_ZEON"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Daughtress",
+    "level": 1,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "ACTIVATE_MAIN",
+      "SUPPORT"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "NEW_UNE"
+    ],
+    "description": [
+      "【Activate･Main】<Support 1> (Rest this Unit. 1 other friendly Unit gets AP+(specified amount) during this turn.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-049",
+    "AP": 1,
+    "HP": 1,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Ga-Zowmn (Sleeves)",
+    "level": 2,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD02",
+    "trait": [
+      "NEO_ZEON"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-050",
+    "AP": 3,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "01 Gundam",
+    "level": 2,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-051",
+    "AP": 2,
+    "HP": 3,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Guncannon (GQ)",
+    "level": 2,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-052",
+    "AP": 3,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam X",
+    "level": 7,
+    "cost": 5,
+    "color": "PURPLE",
+    "keywords": [
+      "DURING_LINK"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "VULTURE"
+    ],
+    "description": [
+      "[Suppression] (Damage to Shields by an attack is dealt to the first 2 cards simultaneously.)",
+      "【During Link】During your turn, while there are 7 or more cards in your trash, all your other (Vulture) Units get AP+2."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-053",
+    "AP": 6,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Garrod Ran"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Barbatos 1st Form",
+    "level": 3,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "TEKKADAN",
+      "GUNDAM_FRAME"
+    ],
+    "description": [
+      "【Attack】If this Unit is damaged, draw 1."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-054",
+    "AP": 3,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Mikazuki Augus"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Gusion Rebake",
+    "level": 5,
+    "cost": 4,
+    "color": "PURPLE",
+    "keywords": [
+      "BLOCKER",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "TEKKADAN",
+      "GUNDAM_FRAME"
+    ],
+    "description": [
+      "<Blocker> (Rest this Unit to change the attack target to it.)",
+      "【Deploy】Choose 1 of your Units and 1 enemy Unit. Deal 1 damage to them."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-055",
+    "AP": 3,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Akihiro Altland"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam X",
+    "level": 4,
+    "cost": 3,
+    "color": "PURPLE",
+    "keywords": [
+      "DURING_PAIR",
+      "DESTROYED"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "VULTURE"
+    ],
+    "description": [
+      "【During Pair･(Vulture) Pilot】【Destroyed】Choose 1 (Vulture) Unit card that is Lv.5 or higher from your trash. Add it to your hand."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-056",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Garrod Ran"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Zedas",
+    "level": 5,
+    "cost": 3,
+    "color": "PURPLE",
+    "keywords": [
+      "DURING_PAIR",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "UE",
+      "VAGAN"
+    ],
+    "description": [
+      "【During Pair】【Attack】You may choose 1 of your other Units. Destroy it. If you do, choose 1 enemy Unit that is Lv.4 or lower. Deal 2 damage to it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-057",
+    "AP": 5,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Desil Galette"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Ryusei-Go (Graze Custom Ⅱ)",
+    "level": 3,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "TEKKADAN"
+    ],
+    "description": [
+      "【Deploy】Choose 1 of your Units. Deal 1 damage to it. If you do, draw 1. Then, discard 1."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-058",
+    "AP": 2,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "TEKKADAN"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Airmaster",
+    "level": 4,
+    "cost": 3,
+    "color": "PURPLE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "VULTURE"
+    ],
+    "description": [
+      "<Blocker> (Rest this Unit to change the attack target to it.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-059",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "VULTURE"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Leopard",
+    "level": 5,
+    "cost": 4,
+    "color": "PURPLE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "VULTURE"
+    ],
+    "description": [
+      "【Deploy】If there are 7 or more cards in your trash, choose 1 enemy Unit that is Lv.4 or lower. Rest it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-060",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Roybea Loy"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Hyakuri",
+    "level": 4,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "WHEN_PAIRED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "TEIWAZ"
+    ],
+    "description": [
+      "【When Paired･Purple Pilot】If there are 3 or more (Teiwaz)/(Tekkadan) cards in your trash, choose 1 enemy Unit with 3 or less AP. Rest it."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-061",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "TEIWAZ"
+    },
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Amida's Hyakuren",
+    "level": 4,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "TEIWAZ"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-062",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "TEIWAZ"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Airmaster (Fighter Mode)",
+    "level": 3,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "VULTURE"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-063",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "VULTURE"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Leopard",
+    "level": 5,
+    "cost": 4,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "VULTURE"
+    ],
+    "description": [
+      "During your turn, while there are 7 or more cards in your trash, this Unit can't receive effect damage from enemy Commands."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-064",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "VULTURE"
+    },
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Jenice Custom",
+    "level": 1,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "VULTURE"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-065",
+    "AP": 1,
+    "HP": 2,
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gafran",
+    "level": 2,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "UE",
+      "VAGAN"
+    ],
+    "description": [
+      "This Unit can't choose the enemy player as its attack target."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-066",
+    "AP": 2,
+    "HP": 3,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Baqto",
+    "level": 2,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "UE",
+      "VAGAN"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-067",
+    "AP": 2,
+    "HP": 3,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Barbatos 3rd Form",
+    "level": 4,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "TEKKADAN",
+      "GUNDAM_FRAME"
+    ],
+    "description": [
+      "【Deploy】Deal 2 damage to this Unit."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-068",
+    "AP": 3,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "TEKKADAN"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Zeta Gundam",
+    "level": 6,
+    "cost": 5,
+    "color": "WHITE",
+    "keywords": [
+      "DURING_LINK",
+      "ACTIVATE_MAIN",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "AEUG"
+    ],
+    "description": [
+      "【During Link】【Activate･Main】【Once per Turn】Choose 1 active friendly Base. Rest it. If you do, set this Unit as active. It can't choose the enemy player as its attack target during this turn."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-069",
+    "AP": 5,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Kamille Bidan"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Kimaris",
+    "level": 5,
+    "cost": 4,
+    "color": "WHITE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "GJALLARHORN",
+      "GUNDAM_FRAME"
+    ],
+    "description": [
+      "【Deploy】If there are 4 or more (Gjallarhorn) cards in your trash, draw 2. If you do, discard 2."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-070",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Gaelio Bauduin"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Mk-II (AEUG)",
+    "level": 4,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "AEUG"
+    ],
+    "description": [
+      "【Deploy】If a friendly white Base is in play, you may pair 1 (AEUG) Pilot card from your hand with this Unit."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-071",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "AEUG"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Hyaku-Shiki",
+    "level": 5,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [
+      "BLOCKER",
+      "REPAIR"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "AEUG"
+    ],
+    "description": [
+      "<Blocker> (Rest this Unit to change the attack target to it.)",
+      "While a friendly white Base is in play, this Unit gains <Repair 1>.",
+      "(At the end of your turn, this Unit recovers the specified number of HP.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-072",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Quattro Bajeena"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Carta's Graze Ritter (Ground Type)",
+    "level": 4,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [
+      "FIRST_STRIKE"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "GJALLARHORN"
+    ],
+    "description": [
+      "During your opponent's turn, the enemy Unit battling this Unit gains <First Strike>.",
+      "(While this Unit is attacking, it deals damage before the enemy Unit.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-073",
+    "AP": 5,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Carta Issue"
+    },
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Aerial Rebuild",
+    "level": 7,
+    "cost": 5,
+    "color": "WHITE",
+    "keywords": [
+      "HIGH_MANEUVER",
+      "DURING_PAIR",
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD02",
+    "trait": [
+      "ACADEMY"
+    ],
+    "description": [
+      "<High-Maneuver> (This Unit can't be blocked.)",
+      "【During Pair】While there are 4 or more Command cards in your trash, this Unit gains <Blocker>.",
+      "(Rest this Unit to change the attack target to it.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-074",
+    "AP": 5,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Suletta Mercury"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Rick Dias (Red)",
+    "level": 4,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "AEUG"
+    ],
+    "description": [
+      "【Attack】Choose 1 active friendly Base. Rest it. If you do, choose 1 enemy Unit that is Lv.4 or lower. It gets AP-2 during this battle."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-075",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "AEUG"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Buster Gundam",
+    "level": 4,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "GD02",
+    "trait": [
+      "TRIPLE_SHIP_ALLIANCE"
+    ],
+    "description": [
+      "While this Unit has 5 or more AP, it gains <Blocker>.",
+      "(Rest this Unit to change the attack target to it.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-076",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "COORDINATOR"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Ein's Schwalbe Graze",
+    "level": 4,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "GJALLARHORN"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-077",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "GJALLARHORN"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Pharact",
+    "level": 5,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD02",
+    "trait": [
+      "ACADEMY"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-078",
+    "AP": 5,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Elan Ceres"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Rick Dias",
+    "level": 3,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "AEUG"
+    ],
+    "description": [
+      "<Blocker> (Rest this Unit to change the attack target to it.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-079",
+    "AP": 3,
+    "HP": 3,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Nemo",
+    "level": 2,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "AEUG"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-080",
+    "AP": 2,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Methuss",
+    "level": 2,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "AEUG"
+    ],
+    "description": [
+      "【Deploy】If a friendly white Base is in play, choose 1 enemy Unit. It gets AP-2 during this turn."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-081",
+    "AP": 1,
+    "HP": 1,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Fa Yuiry"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gaelio's Schwalbe Graze",
+    "level": 3,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "GJALLARHORN"
+    ],
+    "description": [
+      "While you have another (Gjallarhorn) Unit in play, this Unit gains <Blocker>.",
+      "(Rest this Unit to change the attack target to it.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-082",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Gaelio Bauduin"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Graze Ritter (Ground Type)",
+    "level": 3,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "GJALLARHORN"
+    ],
+    "description": [
+      "【Destroyed】If it is your opponent's turn, choose 1 of your (Gjallarhorn) Units. Set it as active."
+    ],
+    "__typename": "UnitCard",
+    "id": "GD02-083",
+    "AP": 3,
+    "HP": 2,
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Lauda's Dilanza",
+    "level": 2,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD02",
+    "trait": [
+      "ACADEMY"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "GD02-084",
+    "AP": 1,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "ACADEMY"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Four Murasame",
+    "level": 5,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "DURING_LINK",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS",
+      "CYBER_NEWTYPE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【During Link】【Once per Turn】During your turn, when this Unit recovers HP, if you have 4 or less cards in your hand, draw 1."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-085",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Jerid Messa",
+    "level": 3,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "While you have another (Titans) Unit in play, this gets AP+1."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-086",
+    "AP": 1,
+    "HP": 1
+  },
+  {
+    "name": "Orga, Crot, and Shani",
+    "level": 5,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED",
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "GD02",
+    "trait": [
+      "EARTH_ALLIANCE",
+      "BIOLOGICAL_CPU"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Linked】If this is a blue Unit, choose 1 enemy Unit with <Blocker>. Rest it."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-087",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Flit Asuno",
+    "level": 3,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION",
+      "ASUNO_FAMILY",
+      "X_ROUNDER"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Linked】Look at the top 3 cards of your deck. You may reveal 1 green (Earth Federation) Unit card/1 card with \"AGE Device\" in its card name among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-088",
+    "AP": 1,
+    "HP": 1
+  },
+  {
+    "name": "Lalah Sune",
+    "level": 3,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "WHEN_PAIRED",
+      "BREACH"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "ZEON",
+      "NEWTYPE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Paired】Choose 1 of your other (Zeon) Link Units. It gains <Breach 1> during this turn.",
+      "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)"
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-089",
+    "AP": 1,
+    "HP": 1
+  },
+  {
+    "name": "Challia Bull (GQ)",
+    "level": 5,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "HIGH_MANEUVER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "ZEON",
+      "NEWTYPE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "While you have another Unit with <High-Maneuver> in play, this Unit gets AP+1."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-090",
+    "AP": 1,
+    "HP": 2
+  },
+  {
+    "name": "Haman Karn",
+    "level": 5,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "WHEN_PAIRED"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "NEO_ZEON",
+      "NEWTYPE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Paired】If this Unit is red, choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. Deal 1 damage to it."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-091",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Shagia Frost",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "DURING_LINK",
+      "ATTACK"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "NEW_UNE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【During Link】【Attack】Choose 1 of your (New UNE) Units. It gets AP+2 during this turn."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-092",
+    "AP": 1,
+    "HP": 2
+  },
+  {
+    "name": "Olba Frost",
+    "level": 3,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "NEW_UNE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "During your turn, when this Unit destroys an enemy Unit paired with a (Newtype) Pilot with battle damage, draw 1."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-093",
+    "AP": 1,
+    "HP": 1
+  },
+  {
+    "name": "Garrod Ran & Tiffa Adill",
+    "level": 4,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "WHEN_PAIRED"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "VULTURE",
+      "NEWTYPE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Paired】You may discard 1. If you do, look at the top 3 cards of your deck. You may reveal 1 (Vulture) Unit card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-094",
+    "AP": 1,
+    "HP": 2
+  },
+  {
+    "name": "Lafter Frankland",
+    "level": 4,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "ATTACK",
+      "HIGH_MANEUVER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "TEIWAZ"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【Attack】If this Unit is damaged and Lv.5 or lower, it gains <High-Maneuver> during this battle.",
+      "(This Unit can't be blocked.)"
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-095",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Desil Galette",
+    "level": 4,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "VAGAN",
+      "X_ROUNDER"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Linked】You may choose 1 (Vagan) Unit card that is Lv.2 or lower from your trash. Pay its cost to deploy it."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-096",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Kamille Bidan",
+    "level": 5,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "AEUG",
+      "NEWTYPE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "While there is a friendly white Base in play, this Unit gets AP+2."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-097",
+    "AP": 1,
+    "HP": 2
+  },
+  {
+    "name": "Quattro Bajeena",
+    "level": 4,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "AEUG",
+      "NEWTYPE"
+    ],
+    "description": [
+      "This card's name is also treated as [Char Aznable].",
+      "【Burst】Add this card to your hand.",
+      "【When Linked】If this is an (AEUG) Unit, draw 1. If you do, discard 1."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-098",
+    "AP": 1,
+    "HP": 2
+  },
+  {
+    "name": "Gaelio Bauduin",
+    "level": 3,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "WHEN_PAIRED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "GJALLARHORN"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Paired】If there are 4 or more (Gjallarhorn) cards in your trash, choose 1 enemy Unit. It gets AP-2 during this turn."
+    ],
+    "__typename": "PilotCard",
+    "id": "GD02-099",
+    "AP": 1,
+    "HP": 1
+  },
+  {
+    "name": "Dramatic Turnabout",
+    "level": 5,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "GD02",
+    "trait": [],
+    "description": [
+      "【Burst】Draw 1.",
+      "【Main】Choose 1 friendly damaged Unit. It recovers 2 HP. Then, draw 1."
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-100"
+  },
+  {
+    "name": "Beneath the Mask",
+    "level": 1,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "MAIN",
+      "ACTION"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "GD02",
+    "trait": [],
+    "description": [
+      "【Main】/【Action】Choose 1 to 2 enemy Units that are Lv.2 or lower. Rest them."
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-101"
+  },
+  {
+    "name": "Mouar’s Determination",
+    "level": 2,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS"
+    ],
+    "description": [
+      "【Main】/【Action】Choose 1 friendly (Titans) Unit. It gets AP+2 during this turn.",
+      "【Pilot】[Mouar Pharaoh]"
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-102",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    }
+  },
+  {
+    "name": "AGE Device",
+    "level": 4,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [],
+    "description": [
+      "【Burst】Choose 1 (Asuno Family) Pilot card from your trash. Add it to your hand.",
+      "【Main】If you have an (AGE System) Unit in play, place 1 EX Resource."
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-103"
+  },
+  {
+    "name": "Turning Point of History",
+    "level": 1,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [],
+    "description": [
+      "【Main】Look at the top 3 cards of your deck and return 1 to the top. Return the remaining cards to the bottom of your deck. Then, if you have a (Newtype) Pilot in play, draw 1."
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-104"
+  },
+  {
+    "name": "Valedictorian",
+    "level": 2,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "ZEON",
+      "NEWTYPE"
+    ],
+    "description": [
+      "【Action】Choose 1 of your Unit tokens. It can't receive battle damage from enemy Units during this battle.",
+      "【Pilot】[Xavier Olivette]"
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-105",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    }
+  },
+  {
+    "name": "White Wolf",
+    "level": 3,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "description": [
+      "【Action】During this battle, your shield area cards can't receive damage from enemy Units that are Lv.3 or lower.",
+      "【Pilot】[Woolf Enneacle]"
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-106",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    }
+  },
+  {
+    "name": "All-Range Attack",
+    "level": 4,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "MAIN"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [],
+    "description": [
+      "【Burst】Choose 1 enemy Unit. Deal 1 damage to it.",
+      "【Main】Deal 1 damage to all enemy Units other than Link Units."
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-107"
+  },
+  {
+    "name": "That One Looks A Lot Stronger?",
+    "level": 3,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [],
+    "description": [
+      "【Main】Choose 1 friendly (Clan) Unit. During this turn, it may choose an active enemy Unit that is Lv.4 or lower as its attack target."
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-108"
+  },
+  {
+    "name": "Undying Persistence",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "CLAN",
+      "NEWTYPE"
+    ],
+    "description": [
+      "【Main】/【Action】Choose 1 enemy Unit. Deal 1 damage to it.",
+      "【Pilot】[Shiiko Sugai]"
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-109",
+    "pilot": {
+      "AP": 1,
+      "HP": 1,
+      "name": ""
+    }
+  },
+  {
+    "name": "Awakened Power",
+    "level": 6,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "MAIN"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [],
+    "description": [
+      "【Main】Choose 1 Unit card that is Lv.5 or lower from your trash. Pay its cost to deploy it."
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-110"
+  },
+  {
+    "name": "Decisive Last Resort",
+    "level": 5,
+    "cost": 4,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "MAIN"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [],
+    "description": [
+      "【Burst】Choose 1 enemy Unit that is Lv.3 or lower. Deal 2 damage to it.",
+      "【Main】Choose 6 purple Unit cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit. Destroy it."
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-111"
+  },
+  {
+    "name": "Momentary Respite",
+    "level": 4,
+    "cost": 3,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [],
+    "description": [
+      "【Burst】Draw 1.",
+      "【Main】Choose 1 purple Pilot card from your trash. Add it to your hand."
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-112"
+  },
+  {
+    "name": "Sisterly Care",
+    "level": 4,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "TEIWAZ"
+    ],
+    "description": [
+      "【Main】/【Action】If a friendly (Teiwaz) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. Destroy it.",
+      "【Pilot】[Amida Arca]"
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-113",
+    "pilot": {
+      "AP": 1,
+      "HP": 1,
+      "name": ""
+    }
+  },
+  {
+    "name": "It's Name is Ryusei-Go",
+    "level": 2,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "TEKKADAN",
+      "ALAYA_VIJNANA"
+    ],
+    "description": [
+      "【Main】/【Action】Choose 1 damaged friendly Unit. It gets AP+2 during this turn.",
+      "【Pilot】[Norba Shino]"
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-114",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    }
+  },
+  {
+    "name": "Familial Devotion",
+    "level": 2,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "VULTURE"
+    ],
+    "description": [
+      "【Main】/【Action】Choose 1 friendly  (Vulture) Unit. It gets AP+2 during this turn.",
+      "【Pilot】[Witz Sou]"
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-115",
+    "pilot": {
+      "AP": 0,
+      "HP": 1,
+      "name": ""
+    }
+  },
+  {
+    "name": "Comrades Come First",
+    "level": 3,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "MAIN",
+      "PILOT"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "VULTURE"
+    ],
+    "description": [
+      "【Main】If there are 7 or more cards in your trash, choose 1 friendly (Vulture) Unit. During this turn, it may choose an active enemy Unit that is Lv.4 or lower as its attack target.",
+      "【Pilot】[Roybea Loy]"
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-116",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    }
+  },
+  {
+    "name": "A New Sign",
+    "level": 4,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "MAIN"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [],
+    "description": [
+      "【Burst】Choose 1 (AEUG) Base card from your trash. Add it to your hand.",
+      "【Main】Draw 3. Then, discard 2."
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-117"
+  },
+  {
+    "name": "Heart Set on Revenge",
+    "level": 3,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "ACTION",
+      "BLOCKER",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "GJALLARHORN"
+    ],
+    "description": [
+      "【Action】Choose 1 enemy Unit with 4 or less HP battling a friendly Unit with <Blocker>. Return it to its owner's hand.",
+      "【Pilot】[Ein Dalton]"
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-118",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    }
+  },
+  {
+    "name": "Persistent and Fortudinous",
+    "level": 2,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "GJALLARHORN"
+    ],
+    "description": [
+      "【Action】If you have a (Gjallarhorn) Link Unit in play, choose 1 enemy Unit. It gets AP-3 during this battle.",
+      "【Pilot】[Carta Issue]"
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-119",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    }
+  },
+  {
+    "name": "Aspiring Pilot",
+    "level": 3,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "AEUG"
+    ],
+    "description": [
+      "【Action】Choose 1 of your (AEUG) Units/Bases. It recovers 2 HP.",
+      "【Pilot】[Fa Yuiry]"
+    ],
+    "__typename": "CommandCard",
+    "id": "GD02-120",
+    "pilot": {
+      "AP": 0,
+      "HP": 1,
+      "name": ""
+    }
+  },
+  {
+    "name": "Dominion",
+    "level": 4,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED",
+    "package": "GD02",
+    "trait": [
+      "EARTH_ALLIANCE",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand. Then, choose 1 friendly blue Unit. It recovers 2 HP."
+    ],
+    "__typename": "BaseCard",
+    "id": "GD02-121",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Alexandria",
+    "level": 3,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "TITANS",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand. Then, choose 1 rested enemy Unit that is Lv.4 or lower. Deal 1 damage to it."
+    ],
+    "__typename": "BaseCard",
+    "id": "GD02-122",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Sodon",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "ZEON",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand. Then, choose 1 friendly Unit token. During this turn, it may choose an active enemy Unit with 5 or less AP as its attack target."
+    ],
+    "__typename": "BaseCard",
+    "id": "GD02-123",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Diva",
+    "level": 3,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_AGE",
+    "package": "GD02",
+    "trait": [
+      "EARTH_FEDERATION",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "During your turn, while you are Lv.7 or higher, all friendly green (Earth Federation) Units get AP+1."
+    ],
+    "__typename": "BaseCard",
+    "id": "GD02-124",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gwadan",
+    "level": 4,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "NEO_ZEON",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand. Then, if it is your turn, you may discard 1 red card. If you do, draw 1."
+    ],
+    "__typename": "BaseCard",
+    "id": "GD02-125",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Shuji's Hideout",
+    "level": 3,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD02",
+    "trait": [
+      "CLAN",
+      "STRONGHOLD"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "【Destroyed】Choose 1 enemy Unit that is Lv.4 or lower. Deal 1 damage to it."
+    ],
+    "__typename": "BaseCard",
+    "id": "GD02-126",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Freeden",
+    "level": 2,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "DESTROYED"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD02",
+    "trait": [
+      "VULTURE",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "【Destroyed】Place the top 2 cards of your deck into your trash."
+    ],
+    "__typename": "BaseCard",
+    "id": "GD02-127",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Hammerhead",
+    "level": 4,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "TEIWAZ",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand. Then, if it is your turn and a friendly (Teiwaz) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. Destroy it."
+    ],
+    "__typename": "BaseCard",
+    "id": "GD02-128",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ]
+  },
+  {
+    "name": "Argama",
+    "level": 3,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD02",
+    "trait": [
+      "AEUG",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "This Base can't receive enemy effect damage."
+    ],
+    "__typename": "BaseCard",
+    "id": "GD02-129",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Sleipnir",
+    "level": 4,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+    "package": "GD02",
+    "trait": [
+      "GJALLARHORN",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand. Then, if a friendly (Gjallarhorn) Unit is in play, choose 1 enemy Unit. It gets AP-2 during this turn."
+    ],
+    "__typename": "BaseCard",
+    "id": "GD02-130",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ]
+  }
+]

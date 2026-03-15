@@ -1,0 +1,412 @@
+[
+  {
+    "name": "Wing Gundam",
+    "level": 6,
+    "cost": 4,
+    "color": "GREEN",
+    "keywords": [
+      "BREACH"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OPERATION_METEOR"
+    ],
+    "description": [
+      "<Breach 5> (When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+      "This Unit may choose an active enemy Unit that is Lv.4 or lower as its attack target."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST02-001",
+    "AP": 4,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Heero Yuy"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Wing Gundam (Bird Mode)",
+    "level": 3,
+    "cost": 3,
+    "color": "GREEN",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OPERATION_METEOR"
+    ],
+    "description": [
+      "【Deploy】Place 1 EX Resource."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST02-002",
+    "AP": 2,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Heero Yuy"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Heavyarms",
+    "level": 5,
+    "cost": 3,
+    "color": "GREEN",
+    "keywords": [
+      "DURING_PAIR"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OPERATION_METEOR"
+    ],
+    "description": [
+      "【During Pair】During your turn, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST02-003",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Trowa Barton"
+    },
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Sandrock",
+    "level": 4,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OPERATION_METEOR"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST02-004",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Quatre Raberba Winner"
+    },
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Maganac",
+    "level": 2,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "MAGANAC_CORPS"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST02-005",
+    "AP": 3,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Tallgeese",
+    "level": 5,
+    "cost": 4,
+    "color": "BLUE",
+    "keywords": [
+      "ACTIVATE_MAIN",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OZ"
+    ],
+    "description": [
+      "【Activate･Main】【Once per Turn】④：Set this Unit as active."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST02-006",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Zechs Merquise"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Leo",
+    "level": 2,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OZ"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST02-007",
+    "AP": 2,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "OZ"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Aries",
+    "level": 2,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OZ"
+    ],
+    "description": [
+      "<Blocker> (Rest this Unit to change the attack target to it.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "ST02-008",
+    "AP": 2,
+    "HP": 1,
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Tragos",
+    "level": 1,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OZ"
+    ],
+    "description": [
+      "<Blocker> (Rest this Unit to change the attack target to it.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "ST02-009",
+    "AP": 1,
+    "HP": 1,
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Heero Yuy",
+    "level": 4,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "DURING_LINK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OPERATION_METEOR"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【During Link】This Unit gets AP+1 and HP+1."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST02-010",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Zechs Merquise",
+    "level": 5,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "DURING_LINK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OZ"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【During Link】During your turn, when this Unit destroys an enemy Unit with battle damage, draw 1."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST02-011",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Simultaneous Fire",
+    "level": 4,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "MAIN",
+      "BREACH",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OPERATION_METEOR"
+    ],
+    "description": [
+      "【Main】Choose 1 of your Units. It gains <Breach 3> during this turn.",
+      "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+      "【Pilot】[Trowa Barton]"
+    ],
+    "__typename": "CommandCard",
+    "id": "ST02-012",
+    "pilot": {
+      "AP": 1,
+      "HP": 1,
+      "name": ""
+    }
+  },
+  {
+    "name": "Peaceful Timbre",
+    "level": 4,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OPERATION_METEOR"
+    ],
+    "description": [
+      "【Action】During this battle, your shield area cards can't receive damage from enemy Units that are Lv.4 or lower.",
+      "【Pilot】[Quatre Raberba Winner]"
+    ],
+    "__typename": "CommandCard",
+    "id": "ST02-013",
+    "pilot": {
+      "AP": 1,
+      "HP": 1,
+      "name": ""
+    }
+  },
+  {
+    "name": "Siege Ploy",
+    "level": 3,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "MAIN",
+      "MAIN",
+      "ACTION"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [],
+    "description": [
+      "【Burst】Activate this card's 【Main】.",
+      "【Main】/【Action】Choose 1 enemy Unit with 5 or less HP. Rest it."
+    ],
+    "__typename": "CommandCard",
+    "id": "ST02-014"
+  },
+  {
+    "name": "Saint Gabriel Institute",
+    "level": 2,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "ACADEMY",
+      "STRONGHOLD"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand. Then, look at the top 2 cards of your deck and return 1 to the top and 1 to the bottom."
+    ],
+    "__typename": "BaseCard",
+    "id": "ST02-015",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Corsica Base",
+    "level": 3,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_WING",
+    "package": "ST02",
+    "trait": [
+      "OZ",
+      "STRONGHOLD"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand. Then, if it is your turn, deploy 1 [Tallgeese]((OZ)･AP4･HP2) Unit token. If it is your turn and a card with \"Corsica Base\" in its card name is in your trash, deploy 2 [Leo]((OZ)･AP1･HP1) Unit tokens instead."
+    ],
+    "__typename": "BaseCard",
+    "id": "ST02-016",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "EARTH"
+    ]
+  }
+]

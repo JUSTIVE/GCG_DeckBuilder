@@ -1,0 +1,384 @@
+[
+  {
+    "name": "Gundam Exia",
+    "level": 5,
+    "cost": 4,
+    "color": "PURPLE",
+    "keywords": [
+      "WHEN_PAIRED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "description": [
+      "At the end of your turn, if there are 7 or more (CB) cards in your trash, choose 1 of your Resources. Set it as active.",
+      "【When Paired】Place the top 2 cards of your deck into your trash. If you place a (CB) card with this effect, draw 1."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST07-001",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Setsuna F. Seiei"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Exia",
+    "level": 4,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST07-002",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Setsuna F. Seiei"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Virtue",
+    "level": 5,
+    "cost": 3,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST07-003",
+    "AP": 5,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Tieria Erde"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Virtue",
+    "level": 3,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "description": [
+      "While you have a (CB) Pilot in play, this Unit gains <Blocker>.",
+      "(Rest this Unit to change the attack target to it.)"
+    ],
+    "__typename": "UnitCard",
+    "id": "ST07-004",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Tieria Erde"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Dynames",
+    "level": 4,
+    "cost": 3,
+    "color": "GREEN",
+    "keywords": [
+      "DURING_LINK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "description": [
+      "During your turn, when this Unit destroys an enemy Unit with battle damage, this Unit recovers 2 HP.",
+      "【During Link】This Unit gets AP+2."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST07-005",
+    "AP": 2,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Lockon Stratos"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Dynames",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST07-006",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Lockon Stratos"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Kyrios",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "description": [
+      "During your turn, while you have a (CB) Pilot in play, this Unit gets AP+2."
+    ],
+    "__typename": "UnitCard",
+    "id": "ST07-007",
+    "AP": 2,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Allelujah Haptism / Hallelujah Haptism"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Gundam Kyrios (Flight Mode)",
+    "level": 2,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "description": [],
+    "__typename": "UnitCard",
+    "id": "ST07-008",
+    "AP": 3,
+    "HP": 1,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": "Allelujah Haptism / Hallelujah Haptism"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ]
+  },
+  {
+    "name": "Setsuna F. Seiei",
+    "level": 4,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【Attack】This Unit gets AP+1 during this turn. If there are 7 or more (CB) cards in your trash, all your (CB) Units get AP+1 instead."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST07-009",
+    "AP": 2,
+    "HP": 1
+  },
+  {
+    "name": "Tieria Erde",
+    "level": 4,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB",
+      "INNOVADE"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【Destroyed】If it is your opponent's turn and this is a (CB) Unit, draw 1."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST07-010",
+    "AP": 1,
+    "HP": 1
+  },
+  {
+    "name": "Lockon Stratos (Neil)",
+    "level": 4,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "WHEN_PAIRED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "【When Paired】If this is a (CB) Unit, it may choose an active enemy Unit whose Lv. is equal to or lower than this Unit as its attack target during this turn."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST07-011",
+    "AP": 1,
+    "HP": 2
+  },
+  {
+    "name": "Allelujah Haptism",
+    "level": 3,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB",
+      "SUPER_SOLDIER"
+    ],
+    "description": [
+      "【Burst】Add this card to your hand.",
+      "During your turn, while you have a (CB) Link Unit in play, this Unit can't receive battle damage from enemy Units with 3 or less AP."
+    ],
+    "__typename": "PilotCard",
+    "id": "ST07-012",
+    "AP": 1,
+    "HP": 1
+  },
+  {
+    "name": "Armed Intervention",
+    "level": 4,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "ACTION"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [],
+    "description": [
+      "【Burst】Draw 1.",
+      "【Action】Choose 1 rested friendly (CB) Unit. Change the attack target of the battling enemy Unit to it."
+    ],
+    "__typename": "CommandCard",
+    "id": "ST07-013"
+  },
+  {
+    "name": "Tactical Visionary",
+    "level": 1,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [],
+    "description": [
+      "【Main】Look at the top 3 cards of your deck. You may reveal 1 (CB) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
+    ],
+    "__typename": "CommandCard",
+    "id": "ST07-014"
+  },
+  {
+    "name": "Ptolemaios",
+    "level": 2,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "ST07",
+    "trait": [
+      "CB",
+      "WARSHIP"
+    ],
+    "description": [
+      "【Burst】Deploy this card.",
+      "【Deploy】Add 1 of your Shields to your hand.",
+      "While a rested friendly (CB) Unit is in play, this Base can't receive damage from enemy Units that are Lv.3 or lower, other than Unit tokens."
+    ],
+    "__typename": "BaseCard",
+    "id": "ST07-015",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ]
+  }
+]

@@ -4,7 +4,6 @@ import type {
   CardColorSchema,
   CardKeywordSchema,
   CardPackageSchema,
-  CardRaritySchema,
   CardSchema,
   CardTraitSchema,
   CommandCardSchema,
@@ -22,7 +21,6 @@ export type CardTrait = z.infer<typeof CardTraitSchema>;
 export type CardColor = z.infer<typeof CardColorSchema>;
 export type GundamSeries = z.infer<typeof GundamSeriesSchema>;
 export type CardKeyword = z.infer<typeof CardKeywordSchema>;
-export type CardRarity = z.infer<typeof CardRaritySchema>;
 export type Zone = z.infer<typeof ZoneSchema>;
 export type CardPackage = z.infer<typeof CardPackageSchema>;
 export type LinkTrait = z.infer<typeof LinkTraitSchema>;

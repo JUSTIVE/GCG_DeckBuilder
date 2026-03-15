@@ -5,7 +5,6 @@ import type {
   CardColor,
   CardKeyword,
   CardPackage,
-  CardRarity,
   CardTrait,
   CommandCard,
   GundamSeries,
@@ -14,7 +13,6 @@ import type {
   PilotCard,
   ResourceCard,
   UnitCard,
-  UnitLink,
   Zone,
 } from "../data/dataTypes";
 import CardList from "./cards.json";
@@ -28,22 +26,6 @@ function field($: cheerio.CheerioAPI, label: string) {
   return $(`dt.dataTit:contains("${label}")`).next("dd").text().trim();
 }
 
-const rarityMap: Record<string, CardRarity> = {
-  C: "COMMON",
-  U: "UNCOMMON",
-  R: "RARE",
-  LR: "LEGENDARY_RARE",
-  "C+": "COMMON_PLUS",
-  "U+": "UNCOMMON_PLUS",
-  "R+": "RARE_PLUS",
-  "LR+": "LEGENDARY_RARE_PLUS",
-  "C++": "COMMON_PLUS_PLUS",
-  "LR++": "LEGENDARY_RARE_PLUS_PLUS",
-  P: "P",
-};
-
-function parseTrait(v: string): CardTrait {}
-
 function parsePlayableCardSchema(html: string): z.infer<typeof PlayableCardSchema> {
   const $ = cheerio.load(html);
   const id = $(".cardNo").text().trim();
@@ -51,9 +33,7 @@ function parsePlayableCardSchema(html: string): z.infer<typeof PlayableCardSchem
   const level = Number(field($, "Lv."));
   const cost = Number(field($, "COST"));
   const color: CardColor = field($, "COLOR").toUpperCase() as CardColor;
-  const rarity: CardRarity = rarityMap[
-    $(".rarity").text().trim().replaceAll(" ", "")
-  ] as CardRarity;
+
   const description = $(".overview .dataTxt")
     .html()!
     .split("<br>")
@@ -94,7 +74,6 @@ function parsePlayableCardSchema(html: string): z.infer<typeof PlayableCardSchem
     level,
     cost,
     color,
-    rarity,
     keywords,
     series,
     package: id.slice(0, 4) as CardPackage,
@@ -250,10 +229,13 @@ async function fetchCard(cardUrl: string): Promise<Card> {
 const limit = pLimit(3);
 
 let completed = 0;
-const total = CardList.length;
+
+const dedupe = [...new Set(CardList.map((x) => x.split("_")[0] ?? ""))];
+
+const total = dedupe.length;
 
 const rawData = await Promise.all(
-  CardList.map((id) =>
+  dedupe.map((id) =>
     limit(async () => {
       const res = await fetchCard(id);
 
