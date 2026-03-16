@@ -53,7 +53,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Zechs Merquise"
+      "pilotName": "젝스 마키스"
     },
     "zone": [
       "SPACE",
@@ -877,7 +877,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Char Aznable"
+      "pilotName": "샤아 아즈나블"
     },
     "zone": [
       "SPACE",
@@ -1048,7 +1048,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amate Yuzuriha (Machu)"
+      "pilotName": "아마테 유즈리하 (마츄)"
     },
     "zone": [
       "SPACE",
@@ -1472,7 +1472,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "SPACE",
@@ -1504,7 +1504,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Akihiro Altland"
+      "pilotName": "아키히로 앨트랜드"
     },
     "zone": [
       "SPACE",
@@ -2036,7 +2036,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",
@@ -2635,7 +2635,7 @@
       "NEWTYPE"
     ],
     "description": [
-      "This card's name is also treated as [Char Aznable].",
+      "This card's name is also treated as [샤아 아즈나블].",
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】If this is an (AEUG) Unit, draw 1. If you do, discard 1."
     ],

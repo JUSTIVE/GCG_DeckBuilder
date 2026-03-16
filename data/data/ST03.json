@@ -24,7 +24,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Full Frontal"
+      "pilotName": "풀 프론탈"
     },
     "zone": [
       "SPACE",
@@ -54,7 +54,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Angelo Sauper"
+      "pilotName": "안젤로 자우퍼"
     },
     "zone": [
       "SPACE",
@@ -154,7 +154,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Char Aznable"
+      "pilotName": "샤아 아즈나블"
     },
     "zone": [
       "SPACE",
@@ -229,14 +229,14 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Ramba Ral"
+      "pilotName": "람바 랄"
     },
     "zone": [
       "EARTH"
     ]
   },
   {
-    "name": "Full Frontal",
+    "name": "풀 프론탈",
     "level": 6,
     "cost": 1,
     "color": "RED",
@@ -260,7 +260,7 @@
     "HP": 2
   },
   {
-    "name": "Char Aznable",
+    "name": "샤아 아즈나블",
     "level": 3,
     "cost": 1,
     "color": "GREEN",
@@ -302,7 +302,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 friendly Unit. It gets AP+2 during this turn.",
-      "【파일럿】[Angelo Sauper]"
+      "【파일럿】[안젤로 자우퍼]"
     ],
     "__typename": "CommandCard",
     "id": "ST03-012",
@@ -349,7 +349,7 @@
     ],
     "description": [
       "【액션】Choose 1 friendly Unit. It can't receive battle damage from enemy Units with 2 or less AP during this battle.",
-      "【파일럿】[Ramba Ral]"
+      "【파일럿】[람바 랄]"
     ],
     "__typename": "CommandCard",
     "id": "ST03-014",

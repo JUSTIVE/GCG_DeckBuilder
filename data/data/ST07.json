@@ -23,7 +23,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Setsuna F. Seiei"
+      "pilotName": "세츠나 F. 세이에이"
     },
     "zone": [
       "SPACE",
@@ -49,7 +49,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Setsuna F. Seiei"
+      "pilotName": "세츠나 F. 세이에이"
     },
     "zone": [
       "SPACE",
@@ -75,7 +75,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Tieria Erde"
+      "pilotName": "티에리아 아데"
     },
     "zone": [
       "SPACE",
@@ -106,7 +106,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Tieria Erde"
+      "pilotName": "티에리아 아데"
     },
     "zone": [
       "SPACE",
@@ -137,7 +137,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lockon Stratos"
+      "pilotName": "록온 스트라토스"
     },
     "zone": [
       "SPACE",
@@ -163,7 +163,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lockon Stratos"
+      "pilotName": "록온 스트라토스"
     },
     "zone": [
       "SPACE",
@@ -191,7 +191,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Allelujah Haptism / Hallelujah Haptism"
+      "pilotName": "알레루야 햅티즘 / 할레루야 햅티즘"
     },
     "zone": [
       "SPACE",
@@ -217,7 +217,7 @@
     "HP": 1,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Allelujah Haptism / Hallelujah Haptism"
+      "pilotName": "알레루야 햅티즘 / 할레루야 햅티즘"
     },
     "zone": [
       "SPACE",
@@ -225,7 +225,7 @@
     ]
   },
   {
-    "name": "Setsuna F. Seiei",
+    "name": "세츠나 F. 세이에이",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -248,7 +248,7 @@
     "HP": 1
   },
   {
-    "name": "Tieria Erde",
+    "name": "티에리아 아데",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -272,7 +272,7 @@
     "HP": 1
   },
   {
-    "name": "Lockon Stratos (Neil)",
+    "name": "록온 스트라토스 (Neil)",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -295,7 +295,7 @@
     "HP": 2
   },
   {
-    "name": "Allelujah Haptism",
+    "name": "알레루야 햅티즘",
     "level": 3,
     "cost": 1,
     "color": "GREEN",

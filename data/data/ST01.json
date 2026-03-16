@@ -24,7 +24,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amuro Ray"
+      "pilotName": "아무로 레이"
     },
     "zone": [
       "SPACE",
@@ -54,7 +54,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amuro Ray"
+      "pilotName": "아무로 레이"
     },
     "zone": [
       "SPACE"
@@ -79,7 +79,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kai Shiden"
+      "pilotName": "카이 시덴"
     },
     "zone": [
       "SPACE",
@@ -109,7 +109,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Hayato Kobayashi"
+      "pilotName": "하야토 코바야시"
     },
     "zone": [
       "SPACE",
@@ -159,7 +159,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",
@@ -184,7 +184,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",
@@ -243,7 +243,7 @@
     ]
   },
   {
-    "name": "Amuro Ray",
+    "name": "아무로 레이",
     "level": 4,
     "cost": 1,
     "color": "BLUE",
@@ -268,7 +268,7 @@
     "HP": 1
   },
   {
-    "name": "Suletta Mercury",
+    "name": "슬레타 머큐리",
     "level": 4,
     "cost": 1,
     "color": "WHITE",
@@ -308,7 +308,7 @@
     ],
     "description": [
       "【메인】Choose 1 rested enemy Unit. Deal 1 damage to it.",
-      "【파일럿】[Hayato Kobayashi]"
+      "【파일럿】[하야토 코바야시]"
     ],
     "__typename": "CommandCard",
     "id": "ST01-012",
@@ -335,7 +335,7 @@
     ],
     "description": [
       "【메인】Choose 1 friendly Unit. It recovers 3 HP.",
-      "【파일럿】[Kai Shiden]"
+      "【파일럿】[카이 시덴]"
     ],
     "__typename": "CommandCard",
     "id": "ST01-013",

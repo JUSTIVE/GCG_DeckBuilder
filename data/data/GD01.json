@@ -25,7 +25,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amuro Ray"
+      "pilotName": "아무로 레이"
     },
     "zone": [
       "SPACE",
@@ -375,7 +375,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amuro Ray"
+      "pilotName": "아무로 레이"
     },
     "zone": [
       "SPACE",
@@ -623,7 +623,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Char Aznable"
+      "pilotName": "샤아 아즈나블"
     },
     "zone": [
       "SPACE",
@@ -654,7 +654,7 @@
     "HP": 7,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Heero Yuy"
+      "pilotName": "히이로 유이"
     },
     "zone": [
       "SPACE",
@@ -714,7 +714,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Char Aznable"
+      "pilotName": "샤아 아즈나블"
     },
     "zone": [
       "SPACE",
@@ -775,7 +775,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Quatre Raberba Winner"
+      "pilotName": "카토르 라바바 위너"
     },
     "zone": [
       "EARTH"
@@ -943,7 +943,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Trowa Barton"
+      "pilotName": "트로와 바톤"
     },
     "zone": [
       "EARTH"
@@ -1080,7 +1080,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Heero Yuy"
+      "pilotName": "히이로 유이"
     },
     "zone": [
       "SPACE",
@@ -1748,7 +1748,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE",
@@ -1781,7 +1781,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Athrun Zala"
+      "pilotName": "아스란 자라"
     },
     "zone": [
       "SPACE",
@@ -1810,7 +1810,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",
@@ -1899,7 +1899,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",
@@ -2098,7 +2098,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE",
@@ -2231,7 +2231,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",

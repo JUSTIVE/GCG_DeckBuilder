@@ -24,7 +24,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amuro Ray"
+      "pilotName": "아무로 레이"
     },
     "zone": [
       "SPACE",
@@ -54,7 +54,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amuro Ray"
+      "pilotName": "아무로 레이"
     },
     "zone": [
       "SPACE"
@@ -99,7 +99,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",
@@ -132,7 +132,7 @@
     ]
   },
   {
-    "name": "Amuro Ray",
+    "name": "아무로 레이",
     "level": 4,
     "cost": 1,
     "color": "BLUE",
@@ -157,7 +157,7 @@
     "HP": 1
   },
   {
-    "name": "Suletta Mercury",
+    "name": "슬레타 머큐리",
     "level": 4,
     "cost": 1,
     "color": "WHITE",
@@ -197,7 +197,7 @@
     ],
     "description": [
       "【메인】Choose 1 rested enemy Unit. Deal 1 damage to it.",
-      "【파일럿】[Hayato Kobayashi]"
+      "【파일럿】[하야토 코바야시]"
     ],
     "__typename": "CommandCard",
     "id": "ST01-012",
@@ -224,7 +224,7 @@
     ],
     "description": [
       "【메인】Choose 1 friendly Unit. It recovers 3 HP.",
-      "【파일럿】[Kai Shiden]"
+      "【파일럿】[카이 시덴]"
     ],
     "__typename": "CommandCard",
     "id": "ST01-013",
@@ -318,7 +318,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Heero Yuy"
+      "pilotName": "히이로 유이"
     },
     "zone": [
       "SPACE",
@@ -347,7 +347,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Heero Yuy"
+      "pilotName": "히이로 유이"
     },
     "zone": [
       "SPACE",
@@ -376,7 +376,7 @@
     ]
   },
   {
-    "name": "Heero Yuy",
+    "name": "히이로 유이",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -416,7 +416,7 @@
     "description": [
       "【메인】Choose 1 of your Units. It gains <돌파 3> during this turn.",
       "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【파일럿】[Trowa Barton]"
+      "【파일럿】[트로와 바톤]"
     ],
     "__typename": "CommandCard",
     "id": "ST02-012",
@@ -442,7 +442,7 @@
     ],
     "description": [
       "【액션】During this battle, your shield area cards can't receive damage from enemy Units that are Lv.4 or lower.",
-      "【파일럿】[Quatre Raberba Winner]"
+      "【파일럿】[카토르 라바바 위너]"
     ],
     "__typename": "CommandCard",
     "id": "ST02-013",
@@ -526,7 +526,7 @@
     ]
   },
   {
-    "name": "Char Aznable",
+    "name": "샤아 아즈나블",
     "level": 3,
     "cost": 1,
     "color": "GREEN",
@@ -602,7 +602,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE",
@@ -631,7 +631,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE",
@@ -660,7 +660,7 @@
     ]
   },
   {
-    "name": "Kira Yamato",
+    "name": "키라 야마토",
     "level": 4,
     "cost": 1,
     "color": "WHITE",
@@ -700,7 +700,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand.",
-      "【파일럿】[Mu La Flaga]"
+      "【파일럿】[무우 라 프라가]"
     ],
     "__typename": "CommandCard",
     "id": "ST04-013",
@@ -906,7 +906,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amuro Ray"
+      "pilotName": "아무로 레이"
     },
     "zone": [
       "SPACE",
@@ -1004,7 +1004,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Char Aznable"
+      "pilotName": "샤아 아즈나블"
     },
     "zone": [
       "SPACE",
@@ -1033,7 +1033,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Quatre Raberba Winner"
+      "pilotName": "카토르 라바바 위너"
     },
     "zone": [
       "EARTH"
@@ -1112,7 +1112,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Trowa Barton"
+      "pilotName": "트로와 바톤"
     },
     "zone": [
       "EARTH"
@@ -1136,7 +1136,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Heero Yuy"
+      "pilotName": "히이로 유이"
     },
     "zone": [
       "SPACE",
@@ -1222,7 +1222,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",
@@ -1332,7 +1332,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE",
@@ -1675,7 +1675,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kai Shiden"
+      "pilotName": "카이 시덴"
     },
     "zone": [
       "SPACE",
@@ -1705,7 +1705,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Hayato Kobayashi"
+      "pilotName": "하야토 코바야시"
     },
     "zone": [
       "SPACE",
@@ -1734,7 +1734,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",
@@ -1810,7 +1810,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Trowa Barton"
+      "pilotName": "트로와 바톤"
     },
     "zone": [
       "EARTH"
@@ -1834,7 +1834,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Quatre Raberba Winner"
+      "pilotName": "카토르 라바바 위너"
     },
     "zone": [
       "EARTH"
@@ -1863,7 +1863,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Zechs Merquise"
+      "pilotName": "젝스 마키스"
     },
     "zone": [
       "SPACE",
@@ -1944,7 +1944,7 @@
     ]
   },
   {
-    "name": "Zechs Merquise",
+    "name": "젝스 마키스",
     "level": 5,
     "cost": 1,
     "color": "BLUE",
@@ -2049,7 +2049,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Full Frontal"
+      "pilotName": "풀 프론탈"
     },
     "zone": [
       "SPACE",
@@ -2079,7 +2079,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Angelo Sauper"
+      "pilotName": "안젤로 자우퍼"
     },
     "zone": [
       "SPACE",
@@ -2179,7 +2179,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Char Aznable"
+      "pilotName": "샤아 아즈나블"
     },
     "zone": [
       "SPACE",
@@ -2208,14 +2208,14 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Ramba Ral"
+      "pilotName": "람바 랄"
     },
     "zone": [
       "EARTH"
     ]
   },
   {
-    "name": "Full Frontal",
+    "name": "풀 프론탈",
     "level": 6,
     "cost": 1,
     "color": "RED",
@@ -2255,7 +2255,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 friendly Unit. It gets AP+2 during this turn.",
-      "【파일럿】[Angelo Sauper]"
+      "【파일럿】[안젤로 자우퍼]"
     ],
     "__typename": "CommandCard",
     "id": "ST03-012",
@@ -2302,7 +2302,7 @@
     ],
     "description": [
       "【액션】Choose 1 friendly Unit. It can't receive battle damage from enemy Units with 2 or less AP during this battle.",
-      "【파일럿】[Ramba Ral]"
+      "【파일럿】[람바 랄]"
     ],
     "__typename": "CommandCard",
     "id": "ST03-014",
@@ -2362,7 +2362,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mu La Flaga"
+      "pilotName": "무우 라 프라가"
     },
     "zone": [
       "SPACE"
@@ -2414,7 +2414,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Athrun Zala"
+      "pilotName": "아스란 자라"
     },
     "zone": [
       "SPACE",
@@ -2443,7 +2443,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Athrun Zala"
+      "pilotName": "아스란 자라"
     },
     "zone": [
       "SPACE",
@@ -2494,7 +2494,7 @@
     "HP": 1,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Miguel Ayman"
+      "pilotName": "미겔 아이만"
     },
     "zone": [
       "SPACE",
@@ -2502,7 +2502,7 @@
     ]
   },
   {
-    "name": "Athrun Zala",
+    "name": "아스란 자라",
     "level": 4,
     "cost": 1,
     "color": "RED",
@@ -2567,7 +2567,7 @@
     "description": [
       "【메인】/【액션】Choose 1 friendly Unit that is Lv.2 or lower. It gains <선제 공격> during this turn.",
       "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)",
-      "【파일럿】[Miguel Ayman]"
+      "【파일럿】[미겔 아이만]"
     ],
     "__typename": "CommandCard",
     "id": "ST04-014",
@@ -2647,7 +2647,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "SPACE",
@@ -2675,7 +2675,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "SPACE",
@@ -2750,7 +2750,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Akihiro Altland"
+      "pilotName": "아키히로 앨트랜드"
     },
     "zone": [
       "SPACE",
@@ -2802,7 +2802,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "McGillis Fareed"
+      "pilotName": "맥길리스 파리드"
     },
     "zone": [
       "SPACE",
@@ -2860,7 +2860,7 @@
     ]
   },
   {
-    "name": "Mikazuki Augus",
+    "name": "미카즈키 아우구스",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -2884,7 +2884,7 @@
     "HP": 1
   },
   {
-    "name": "Akihiro Altland",
+    "name": "아키히로 앨트랜드",
     "level": 3,
     "cost": 1,
     "color": "PURPLE",
@@ -2908,7 +2908,7 @@
     "HP": 1
   },
   {
-    "name": "McGillis Fareed",
+    "name": "맥길리스 파리드",
     "level": 4,
     "cost": 1,
     "color": "WHITE",
@@ -3020,7 +3020,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amate Yuzuriha (Machu)"
+      "pilotName": "아마테 유즈리하 (마츄)"
     },
     "zone": [
       "SPACE",
@@ -3049,7 +3049,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amate Yuzuriha (Machu)"
+      "pilotName": "아마테 유즈리하 (마츄)"
     },
     "zone": [
       "SPACE",
@@ -3057,7 +3057,7 @@
     ]
   },
   {
-    "name": "Gaia's Rick Dom (GQ)",
+    "name": "가이아's Rick Dom (GQ)",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -3079,7 +3079,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Gaia"
+      "pilotName": "가이아"
     },
     "zone": [
       "SPACE"
@@ -3130,7 +3130,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Shuji Itō"
+      "pilotName": "슈우지 이토"
     },
     "zone": [
       "SPACE",
@@ -3155,7 +3155,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Shuji Itō"
+      "pilotName": "슈우지 이토"
     },
     "zone": [
       "SPACE",
@@ -3163,7 +3163,7 @@
     ]
   },
   {
-    "name": "Ortega's Rick Dom (GQ)",
+    "name": "오르테가's Rick Dom (GQ)",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -3184,7 +3184,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Ortega"
+      "pilotName": "오르테가"
     },
     "zone": [
       "SPACE"
@@ -3216,7 +3216,7 @@
     ]
   },
   {
-    "name": "Amate Yuzuriha (Machu)",
+    "name": "아마테 유즈리하 (마츄)",
     "level": 4,
     "cost": 1,
     "color": "RED",
@@ -3240,7 +3240,7 @@
     "HP": 1
   },
   {
-    "name": "Shuji Itō",
+    "name": "슈우지 이토",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -3281,7 +3281,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 to 2 friendly (Clan) Units. They get AP+2 during this turn.",
-      "【파일럿】[Gaia (GQ)]"
+      "【파일럿】[가이아 (GQ)]"
     ],
     "__typename": "CommandCard",
     "id": "ST06-011",
@@ -3324,7 +3324,7 @@
     ],
     "description": [
       "【액션】Choose 1 to 2 friendly (Clan) Units. They can't receive battle damage from enemy Units that are Lv.2 or lower during this turn.",
-      "【파일럿】[Ortega (GQ)]"
+      "【파일럿】[오르테가 (GQ)]"
     ],
     "__typename": "CommandCard",
     "id": "ST06-013",
@@ -3418,7 +3418,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Setsuna F. Seiei"
+      "pilotName": "세츠나 F. 세이에이"
     },
     "zone": [
       "SPACE",
@@ -3444,7 +3444,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Setsuna F. Seiei"
+      "pilotName": "세츠나 F. 세이에이"
     },
     "zone": [
       "SPACE",
@@ -3470,7 +3470,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Tieria Erde"
+      "pilotName": "티에리아 아데"
     },
     "zone": [
       "SPACE",
@@ -3501,7 +3501,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Tieria Erde"
+      "pilotName": "티에리아 아데"
     },
     "zone": [
       "SPACE",
@@ -3532,7 +3532,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lockon Stratos"
+      "pilotName": "록온 스트라토스"
     },
     "zone": [
       "SPACE",
@@ -3558,7 +3558,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lockon Stratos"
+      "pilotName": "록온 스트라토스"
     },
     "zone": [
       "SPACE",
@@ -3586,7 +3586,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Allelujah Haptism / Hallelujah Haptism"
+      "pilotName": "알레루야 햅티즘 / 할레루야 햅티즘"
     },
     "zone": [
       "SPACE",
@@ -3612,7 +3612,7 @@
     "HP": 1,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Allelujah Haptism / Hallelujah Haptism"
+      "pilotName": "알레루야 햅티즘 / 할레루야 햅티즘"
     },
     "zone": [
       "SPACE",
@@ -3620,7 +3620,7 @@
     ]
   },
   {
-    "name": "Setsuna F. Seiei",
+    "name": "세츠나 F. 세이에이",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -3643,7 +3643,7 @@
     "HP": 1
   },
   {
-    "name": "Tieria Erde",
+    "name": "티에리아 아데",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -3667,7 +3667,7 @@
     "HP": 1
   },
   {
-    "name": "Lockon Stratos (Neil)",
+    "name": "록온 스트라토스 (Neil)",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -3690,7 +3690,7 @@
     "HP": 2
   },
   {
-    "name": "Allelujah Haptism",
+    "name": "알레루야 햅티즘",
     "level": 3,
     "cost": 1,
     "color": "GREEN",
@@ -3799,7 +3799,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Hathaway Noa"
+      "pilotName": "하사웨이 노아"
     },
     "zone": [
       "SPACE",
@@ -3828,7 +3828,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Hathaway Noa"
+      "pilotName": "하사웨이 노아"
     },
     "zone": [
       "SPACE",
@@ -3934,7 +3934,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lane Aim"
+      "pilotName": "레인 에임"
     },
     "zone": [
       "SPACE",
@@ -3959,7 +3959,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lane Aim"
+      "pilotName": "레인 에임"
     },
     "zone": [
       "SPACE",
@@ -4017,7 +4017,7 @@
     ]
   },
   {
-    "name": "Hathaway Noa",
+    "name": "하사웨이 노아",
     "level": 4,
     "cost": 1,
     "color": "RED",
@@ -4041,7 +4041,7 @@
     "HP": 1
   },
   {
-    "name": "Lane Aim",
+    "name": "레인 에임",
     "level": 4,
     "cost": 1,
     "color": "BLUE",
@@ -4082,7 +4082,7 @@
     "description": [
       "【메인】Choose 1 friendly Link Unit. It gains <돌파 1> during this turn.",
       "(When this Unit' s attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent' s shield area.)",
-      "【파일럿】[Gawman Nobile]"
+      "【파일럿】[가우만 노빌]"
     ],
     "__typename": "CommandCard",
     "id": "ST08-012",
@@ -4190,7 +4190,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Shinn Asuka"
+      "pilotName": "신 아스카"
     },
     "zone": [
       "SPACE",
@@ -4220,7 +4220,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Shinn Asuka"
+      "pilotName": "신 아스카"
     },
     "zone": [
       "SPACE",
@@ -4252,7 +4252,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Athrun Zala"
+      "pilotName": "아스란 자라"
     },
     "zone": [
       "SPACE",
@@ -4284,7 +4284,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE",
@@ -4366,7 +4366,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Shinn Asuka"
+      "pilotName": "신 아스카"
     },
     "zone": [
       "SPACE",
@@ -4374,7 +4374,7 @@
     ]
   },
   {
-    "name": "Shinn Asuka",
+    "name": "신 아스카",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -4614,7 +4614,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amuro Ray"
+      "pilotName": "아무로 레이"
     },
     "zone": [
       "SPACE",
@@ -4973,7 +4973,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Char Aznable"
+      "pilotName": "샤아 아즈나블"
     },
     "zone": [
       "SPACE",
@@ -5004,7 +5004,7 @@
     "HP": 7,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Heero Yuy"
+      "pilotName": "히이로 유이"
     },
     "zone": [
       "SPACE",
@@ -5847,7 +5847,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE",
@@ -5880,7 +5880,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Athrun Zala"
+      "pilotName": "아스란 자라"
     },
     "zone": [
       "SPACE",
@@ -5909,7 +5909,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",
@@ -6136,7 +6136,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",
@@ -7103,7 +7103,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Zechs Merquise"
+      "pilotName": "젝스 마키스"
     },
     "zone": [
       "SPACE",
@@ -7927,7 +7927,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Char Aznable"
+      "pilotName": "샤아 아즈나블"
     },
     "zone": [
       "SPACE",
@@ -8098,7 +8098,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amate Yuzuriha (Machu)"
+      "pilotName": "아마테 유즈리하 (마츄)"
     },
     "zone": [
       "SPACE",
@@ -8522,7 +8522,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "SPACE",
@@ -8554,7 +8554,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Akihiro Altland"
+      "pilotName": "아키히로 앨트랜드"
     },
     "zone": [
       "SPACE",
@@ -9086,7 +9086,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Suletta Mercury"
+      "pilotName": "슬레타 머큐리"
     },
     "zone": [
       "SPACE",
@@ -9655,7 +9655,7 @@
       "NEWTYPE"
     ],
     "description": [
-      "This card's name is also treated as [Char Aznable].",
+      "This card's name is also treated as [샤아 아즈나블].",
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】If this is an (AEUG) Unit, draw 1. If you do, discard 1."
     ],
@@ -10507,7 +10507,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Christina Mackenzie / Amuro Ray"
+      "pilotName": "Christina Mackenzie / 아무로 레이"
     },
     "zone": [
       "SPACE",
@@ -10661,7 +10661,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lane Aim"
+      "pilotName": "레인 에임"
     },
     "zone": [
       "SPACE",
@@ -11125,7 +11125,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Allelujah Haptism / Hallelujah Haptism"
+      "pilotName": "알레루야 햅티즘 / 할레루야 햅티즘"
     },
     "zone": [
       "SPACE",
@@ -11211,7 +11211,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Quatre Raberba Winner"
+      "pilotName": "카토르 라바바 위너"
     },
     "zone": [
       "SPACE",
@@ -11241,7 +11241,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lockon Stratos"
+      "pilotName": "록온 스트라토스"
     },
     "zone": [
       "SPACE",
@@ -11324,7 +11324,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Trowa Barton"
+      "pilotName": "트로와 바톤"
     },
     "zone": [
       "SPACE",
@@ -11352,7 +11352,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Allelujah Haptism / Hallelujah Haptism"
+      "pilotName": "알레루야 햅티즘 / 할레루야 햅티즘"
     },
     "zone": [
       "SPACE",
@@ -11461,7 +11461,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amate Yuzuriha (Machu) / Nyaan"
+      "pilotName": "아마테 유즈리하 (마츄) / Nyaan"
     },
     "zone": [
       "SPACE",
@@ -11522,7 +11522,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Hathaway Noa"
+      "pilotName": "하사웨이 노아"
     },
     "zone": [
       "SPACE",
@@ -11884,7 +11884,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Setsuna F. Seiei"
+      "pilotName": "세츠나 F. 세이에이"
     },
     "zone": [
       "SPACE",
@@ -11914,7 +11914,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "SPACE",
@@ -11975,7 +11975,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Tieria Erde"
+      "pilotName": "티에리아 아데"
     },
     "zone": [
       "SPACE",
@@ -12008,7 +12008,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Akihiro Altland"
+      "pilotName": "아키히로 앨트랜드"
     },
     "zone": [
       "SPACE",
@@ -12099,7 +12099,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "SPACE",
@@ -12241,7 +12241,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "SPACE",
@@ -12366,7 +12366,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "EARTH"
@@ -12483,7 +12483,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE",
@@ -12543,7 +12543,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mu La Flaga"
+      "pilotName": "무우 라 프라가"
     },
     "zone": [
       "SPACE",
@@ -12664,7 +12664,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE"
@@ -12692,7 +12692,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Athrun Zala"
+      "pilotName": "아스란 자라"
     },
     "zone": [
       "SPACE"

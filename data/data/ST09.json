@@ -22,7 +22,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Shinn Asuka"
+      "pilotName": "신 아스카"
     },
     "zone": [
       "SPACE",
@@ -52,7 +52,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Shinn Asuka"
+      "pilotName": "신 아스카"
     },
     "zone": [
       "SPACE",
@@ -84,7 +84,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Athrun Zala"
+      "pilotName": "아스란 자라"
     },
     "zone": [
       "SPACE",
@@ -116,7 +116,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE",
@@ -198,7 +198,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Shinn Asuka"
+      "pilotName": "신 아스카"
     },
     "zone": [
       "SPACE",
@@ -206,7 +206,7 @@
     ]
   },
   {
-    "name": "Shinn Asuka",
+    "name": "신 아스카",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",

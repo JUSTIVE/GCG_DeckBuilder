@@ -23,7 +23,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Christina Mackenzie / Amuro Ray"
+      "pilotName": "Christina Mackenzie / 아무로 레이"
     },
     "zone": [
       "SPACE",
@@ -177,7 +177,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lane Aim"
+      "pilotName": "레인 에임"
     },
     "zone": [
       "SPACE",
@@ -641,7 +641,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Allelujah Haptism / Hallelujah Haptism"
+      "pilotName": "알레루야 햅티즘 / 할레루야 햅티즘"
     },
     "zone": [
       "SPACE",
@@ -727,7 +727,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Quatre Raberba Winner"
+      "pilotName": "카토르 라바바 위너"
     },
     "zone": [
       "SPACE",
@@ -757,7 +757,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lockon Stratos"
+      "pilotName": "록온 스트라토스"
     },
     "zone": [
       "SPACE",
@@ -840,7 +840,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Trowa Barton"
+      "pilotName": "트로와 바톤"
     },
     "zone": [
       "SPACE",
@@ -868,7 +868,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Allelujah Haptism / Hallelujah Haptism"
+      "pilotName": "알레루야 햅티즘 / 할레루야 햅티즘"
     },
     "zone": [
       "SPACE",
@@ -977,7 +977,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amate Yuzuriha (Machu) / Nyaan"
+      "pilotName": "아마테 유즈리하 (마츄) / Nyaan"
     },
     "zone": [
       "SPACE",
@@ -1038,7 +1038,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Hathaway Noa"
+      "pilotName": "하사웨이 노아"
     },
     "zone": [
       "SPACE",
@@ -1400,7 +1400,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Setsuna F. Seiei"
+      "pilotName": "세츠나 F. 세이에이"
     },
     "zone": [
       "SPACE",
@@ -1430,7 +1430,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "SPACE",
@@ -1491,7 +1491,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Tieria Erde"
+      "pilotName": "티에리아 아데"
     },
     "zone": [
       "SPACE",
@@ -1524,7 +1524,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Akihiro Altland"
+      "pilotName": "아키히로 앨트랜드"
     },
     "zone": [
       "SPACE",
@@ -1615,7 +1615,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "SPACE",
@@ -1757,7 +1757,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "SPACE",
@@ -1882,7 +1882,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikazuki Augus"
+      "pilotName": "미카즈키 아우구스"
     },
     "zone": [
       "EARTH"
@@ -1999,7 +1999,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE",
@@ -2059,7 +2059,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mu La Flaga"
+      "pilotName": "무우 라 프라가"
     },
     "zone": [
       "SPACE",
@@ -2180,7 +2180,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kira Yamato"
+      "pilotName": "키라 야마토"
     },
     "zone": [
       "SPACE"
@@ -2208,7 +2208,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Athrun Zala"
+      "pilotName": "아스란 자라"
     },
     "zone": [
       "SPACE"

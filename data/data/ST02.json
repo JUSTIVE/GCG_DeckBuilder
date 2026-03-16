@@ -22,7 +22,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Heero Yuy"
+      "pilotName": "히이로 유이"
     },
     "zone": [
       "SPACE",
@@ -51,7 +51,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Heero Yuy"
+      "pilotName": "히이로 유이"
     },
     "zone": [
       "SPACE",
@@ -80,7 +80,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Trowa Barton"
+      "pilotName": "트로와 바톤"
     },
     "zone": [
       "EARTH"
@@ -104,7 +104,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Quatre Raberba Winner"
+      "pilotName": "카토르 라바바 위너"
     },
     "zone": [
       "EARTH"
@@ -154,7 +154,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Zechs Merquise"
+      "pilotName": "젝스 마키스"
     },
     "zone": [
       "SPACE",
@@ -235,7 +235,7 @@
     ]
   },
   {
-    "name": "Heero Yuy",
+    "name": "히이로 유이",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -258,7 +258,7 @@
     "HP": 1
   },
   {
-    "name": "Zechs Merquise",
+    "name": "젝스 마키스",
     "level": 5,
     "cost": 1,
     "color": "BLUE",
@@ -298,7 +298,7 @@
     "description": [
       "【메인】Choose 1 of your Units. It gains <돌파 3> during this turn.",
       "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【파일럿】[Trowa Barton]"
+      "【파일럿】[트로와 바톤]"
     ],
     "__typename": "CommandCard",
     "id": "ST02-012",
@@ -324,7 +324,7 @@
     ],
     "description": [
       "【액션】During this battle, your shield area cards can't receive damage from enemy Units that are Lv.4 or lower.",
-      "【파일럿】[Quatre Raberba Winner]"
+      "【파일럿】[카토르 라바바 위너]"
     ],
     "__typename": "CommandCard",
     "id": "ST02-013",

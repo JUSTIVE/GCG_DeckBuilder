@@ -22,7 +22,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Hathaway Noa"
+      "pilotName": "하사웨이 노아"
     },
     "zone": [
       "SPACE",
@@ -51,7 +51,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Hathaway Noa"
+      "pilotName": "하사웨이 노아"
     },
     "zone": [
       "SPACE",
@@ -157,7 +157,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lane Aim"
+      "pilotName": "레인 에임"
     },
     "zone": [
       "SPACE",
@@ -182,7 +182,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Lane Aim"
+      "pilotName": "레인 에임"
     },
     "zone": [
       "SPACE",
@@ -240,7 +240,7 @@
     ]
   },
   {
-    "name": "Hathaway Noa",
+    "name": "하사웨이 노아",
     "level": 4,
     "cost": 1,
     "color": "RED",
@@ -264,7 +264,7 @@
     "HP": 1
   },
   {
-    "name": "Lane Aim",
+    "name": "레인 에임",
     "level": 4,
     "cost": 1,
     "color": "BLUE",
@@ -305,7 +305,7 @@
     "description": [
       "【메인】Choose 1 friendly Link Unit. It gains <돌파 1> during this turn.",
       "(When this Unit' s attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent' s shield area.)",
-      "【파일럿】[Gawman Nobile]"
+      "【파일럿】[가우만 노빌]"
     ],
     "__typename": "CommandCard",
     "id": "ST08-012",

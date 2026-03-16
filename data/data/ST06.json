@@ -23,7 +23,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amate Yuzuriha (Machu)"
+      "pilotName": "아마테 유즈리하 (마츄)"
     },
     "zone": [
       "SPACE",
@@ -52,7 +52,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Amate Yuzuriha (Machu)"
+      "pilotName": "아마테 유즈리하 (마츄)"
     },
     "zone": [
       "SPACE",
@@ -60,7 +60,7 @@
     ]
   },
   {
-    "name": "Gaia's Rick Dom (GQ)",
+    "name": "가이아's Rick Dom (GQ)",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -82,7 +82,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Gaia"
+      "pilotName": "가이아"
     },
     "zone": [
       "SPACE"
@@ -133,7 +133,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Shuji Itō"
+      "pilotName": "슈우지 이토"
     },
     "zone": [
       "SPACE",
@@ -158,7 +158,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Shuji Itō"
+      "pilotName": "슈우지 이토"
     },
     "zone": [
       "SPACE",
@@ -166,7 +166,7 @@
     ]
   },
   {
-    "name": "Ortega's Rick Dom (GQ)",
+    "name": "오르테가's Rick Dom (GQ)",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -187,7 +187,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Ortega"
+      "pilotName": "오르테가"
     },
     "zone": [
       "SPACE"
@@ -219,7 +219,7 @@
     ]
   },
   {
-    "name": "Amate Yuzuriha (Machu)",
+    "name": "아마테 유즈리하 (마츄)",
     "level": 4,
     "cost": 1,
     "color": "RED",
@@ -243,7 +243,7 @@
     "HP": 1
   },
   {
-    "name": "Shuji Itō",
+    "name": "슈우지 이토",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -284,7 +284,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 to 2 friendly (Clan) Units. They get AP+2 during this turn.",
-      "【파일럿】[Gaia (GQ)]"
+      "【파일럿】[가이아 (GQ)]"
     ],
     "__typename": "CommandCard",
     "id": "ST06-011",
@@ -327,7 +327,7 @@
     ],
     "description": [
       "【액션】Choose 1 to 2 friendly (Clan) Units. They can't receive battle damage from enemy Units that are Lv.2 or lower during this turn.",
-      "【파일럿】[Ortega (GQ)]"
+      "【파일럿】[오르테가 (GQ)]"
     ],
     "__typename": "CommandCard",
     "id": "ST06-013",
