@@ -797,7 +797,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Banagher Links"
+      "pilotName": "바나지 링크스"
     },
     "zone": [
       "SPACE",
@@ -1366,7 +1366,7 @@
     ]
   },
   {
-    "name": "Banagher Links",
+    "name": "바나지 링크스",
     "level": 5,
     "cost": 1,
     "color": "BLUE",
@@ -4644,7 +4644,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Banagher Links"
+      "pilotName": "바나지 링크스"
     },
     "zone": [
       "SPACE",
@@ -10781,7 +10781,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Banagher Links"
+      "pilotName": "바나지 링크스"
     },
     "zone": [
       "SPACE",
@@ -10939,7 +10939,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Banagher Links"
+      "pilotName": "바나지 링크스"
     },
     "zone": [
       "SPACE",

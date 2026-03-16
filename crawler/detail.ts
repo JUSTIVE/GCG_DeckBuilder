@@ -14,19 +14,19 @@ import type {
   ResourceCard,
   UnitCard,
   Zone,
+  PlayableCard,
 } from "../data/dataTypes";
 import CardList from "./cards.json";
 import pLimit from "p-limit";
 import { writeFile } from "node:fs/promises";
 import type z from "zod";
-import type { PlayableCardSchema } from "../data/validator";
 
 const BASE = "https://www.gundam-gcg.com/en/cards/";
 function field($: cheerio.CheerioAPI, label: string) {
   return $(`dt.dataTit:contains("${label}")`).next("dd").text().trim();
 }
 
-function parsePlayableCardSchema(html: string): z.infer<typeof PlayableCardSchema> {
+function parsePlayableCardSchema(html: string): PlayableCard {
   const $ = cheerio.load(html);
   const id = $(".cardNo").text().trim();
   const name = $(".cardName").text().trim();

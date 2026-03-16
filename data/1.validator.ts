@@ -166,7 +166,7 @@ export const UnitCardSchema = NodeSchema.merge(
     zone: z.array(ZoneSchema),
     AP: z.number().int().catch(0),
     HP: z.number().int().catch(0),
-    link: UnitLinkSchema.optional(),
+    link: z.array(UnitLinkSchema),
   }),
 );
 

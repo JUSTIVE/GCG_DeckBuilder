@@ -297,7 +297,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Banagher Links"
+      "pilotName": "바나지 링크스"
     },
     "zone": [
       "SPACE",
@@ -455,7 +455,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Banagher Links"
+      "pilotName": "바나지 링크스"
     },
     "zone": [
       "SPACE",

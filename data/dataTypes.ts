@@ -15,7 +15,8 @@ import type {
   UnitCardSchema,
   UnitLinkSchema,
   ZoneSchema,
-} from "./validator";
+  PlayableCardSchema,
+} from "./1.validator";
 
 export type CardTrait = z.infer<typeof CardTraitSchema>;
 export type CardColor = z.infer<typeof CardColorSchema>;
@@ -32,3 +33,4 @@ export type BaseCard = z.infer<typeof BaseCardSchema>;
 export type CommandCard = z.infer<typeof CommandCardSchema>;
 export type ResourceCard = z.infer<typeof ResourceSchema>;
 export type Card = z.infer<typeof CardSchema>;
+export type PlayableCard = z.infer<typeof PlayableCardSchema>;
