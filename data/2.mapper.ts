@@ -7,7 +7,7 @@ const nameEntries = Object.entries(names);
 const effectEntries = Object.entries(effects);
 const allEntries = [...effectEntries, ...nameEntries];
 
-function maps(target: string[], kvMap: [string, string][]): string {
+function maps(target: string[], kvMap: [string, string][]): string[] {
   return kvMap.reduce((acc, [k, v]) => acc.replaceAll(k, v), target);
 }
 
@@ -38,8 +38,4 @@ const mapped = raw
     };
   });
 
-await writeFile(
-  "../data/mapped.json",
-  JSON.stringify(mapped, null, 2),
-  "utf-8",
-);
+await writeFile("../data/mapped.json", JSON.stringify(mapped, null, 2), "utf-8");
