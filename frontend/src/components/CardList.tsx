@@ -5,6 +5,7 @@ import { Card } from "./Card";
 
 const Fragment = graphql`
   fragment CardListFragment on Query
+  @refetchable(queryName: "CardListFragmentRefetchQuery")
   @argumentDefinitions(
     filter: { type: "CardFilterInput" }
     first: { type: "Int" }
