@@ -156,18 +156,16 @@ enum CardPackage {
   PROMOTION_CARD # 프로모션 카드
 }
 
-# PlayableCard는 레벨/코스트를 가진 모든 카드가 구현하는 인터페이스
-interface PlayableCard {
+type PlayableCard {
   level: Int! #레벨
   cost: Int! # 비용
   name: String! # 이름
   series: GundamSeries! # 시리즈
   color: CardColor! # 색상
-  rarity: CardRarity # 희귀도 (데이터 미수집 시 null)
-  package: CardPackage! # 패키지
+  rarity: CardRarity! #희귀도
+  pack: CardPackage! # 패키지
   keywords: [CardKeyword!]! #키워드
 }
-
 union UnitLink = LinkTrait | LinkPilot
 
 type LinkTrait {
@@ -175,7 +173,7 @@ type LinkTrait {
 }
 
 type LinkPilot {
-  pilot: PilotCard # null when the referenced pilot card is not in the dataset
+  pilot: PilotCard!
 }
 
 type PilotCard implements Node & PlayableCard {
@@ -185,7 +183,7 @@ type PilotCard implements Node & PlayableCard {
   cost: Int! # 비용
   series: GundamSeries! # 시리즈
   color: CardColor! # 색상
-  rarity: CardRarity # 희귀도
+  rarity: CardRarity! #희귀도
   package: CardPackage! # 패키지
   keywords: [CardKeyword!]! #키워드
   AP: Int! # 공격력
@@ -200,13 +198,13 @@ type UnitCard implements PlayableCard & Node {
   cost: Int! # 비용
   series: GundamSeries! # 시리즈
   color: CardColor! # 색상
-  rarity: CardRarity # 희귀도
+  rarity: CardRarity! #희귀도
   package: CardPackage! # 패키지
   keywords: [CardKeyword!]! #키워드
   zone: [Zone!]! # 지형
   AP: Int! # 공격력
   HP: Int! # 체력
-  link: [UnitLink!]! # 링크 정보
+  link: UnitLink # 링크 정보
   description: [String!]! # 효과 정보
 }
 
@@ -225,7 +223,7 @@ type BaseCard implements PlayableCard & Node {
   cost: Int!
   series: GundamSeries!
   color: CardColor!
-  rarity: CardRarity # 희귀도
+  rarity: CardRarity!
   package: CardPackage!
   keywords: [CardKeyword!]!
   description: [String!]!
@@ -237,11 +235,6 @@ type CommandCard implements PlayableCard & Node {
   level: Int!
   cost: Int!
   series: GundamSeries!
-  color: CardColor!
-  rarity: CardRarity # 희귀도
-  package: CardPackage!
-  keywords: [CardKeyword!]!
-  description: [String!]!
 }
 
 union Card = Resource | BaseCard | UnitCard | PilotCard | CommandCard
