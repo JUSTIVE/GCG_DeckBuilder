@@ -1,17 +1,31 @@
 /**
  * serve.ts — In-browser GraphQL execution backed by the local card dataset.
  *
- * • Builds an executable schema from schema.graphql via graphql-js buildSchema.
- * • Wires resolveType handlers onto the Card and UnitLink union types.
+ * • Builds an executable schema from schema.graphql via graphql-js buildSchema,
+ *   after SDL preprocessing to fix three issues in schema.graphql
+ *   (schema.graphql is NOT modified — preprocessing happens at runtime):
+ *
+ *     1. `type PlayableCard` → `interface PlayableCard`
+ *     2. `pack: CardPackage!` → `package: CardPackage!` inside that interface
+ *        (all concrete types already use `package`)
+ *     3. `type CommandCard implements PlayableCard & Node` →
+ *        `type CommandCard implements Node`
+ *        (CommandCard only declares 5 fields and cannot satisfy the full
+ *        PlayableCard interface)
+ *
+ * • Wires resolveType handlers onto the Card union, UnitLink union,
+ *   Node interface, and PlayableCard interface.
  * • Provides root resolvers for Query.node and Query.cards
  *   (Relay-style cursor pagination + full CardFilterInput support).
- * • A custom fieldResolver bridges two mismatches between the raw JSON and
+ * • A custom fieldResolver bridges mismatches between the raw JSON and
  *   the GraphQL schema:
- *     – UnitCard.link  : raw JSON stores a single UnitLink object (or omits it);
- *                        the schema declares [UnitLink!]! (non-null array).
- *     – LinkPilot.pilot: raw JSON stores pilotName: string;
- *                        the schema declares pilot: PilotCard!.
- *     – AP / HP        : some BaseCard rows have null; the schema says Int!.
+ *     – LinkPilot.pilot : raw JSON stores pilotName: string;
+ *                         schema declares pilot: PilotCard! (non-null).
+ *                         Returns a stub PilotCard when the name is not found.
+ *     – rarity          : raw data may omit rarity; schema says CardRarity!.
+ *                         Defaults to "COMMON".
+ *     – AP / HP         : some rows have null; schema says Int!.
+ *                         Coerces null → 0.
  */
 
 import { buildSchema, execute, parse, defaultFieldResolver } from "graphql";
@@ -28,42 +42,52 @@ import allCardsRaw from "../../data/mapped.json";
 type RawCard = (typeof allCardsRaw)[number];
 type AnyRecord = Record<string, unknown>;
 
+// ─── SDL preprocessing ─────────────────────────────────────────────────────────
+
+const processedSDL = schemaSDL
+  // Fix 1: promote PlayableCard from a concrete type to an interface
+  .replace(/\btype PlayableCard\b/, "interface PlayableCard")
+  // Fix 2: rename `pack` → `package` in the PlayableCard interface
+  //        (only appears once in the SDL; all concrete types already say `package`)
+  .replace("  pack: CardPackage!", "  package: CardPackage!")
+  // Fix 3: CommandCard cannot satisfy the full PlayableCard interface
+  //        (it only declares 5 fields), so remove it from the implements clause
+  .replace(
+    "type CommandCard implements PlayableCard & Node",
+    "type CommandCard implements Node",
+  );
+
 // ─── Schema ────────────────────────────────────────────────────────────────────
 
-export const schema = buildSchema(schemaSDL);
+export const schema = buildSchema(processedSDL);
+
+// ─── resolveType hooks ─────────────────────────────────────────────────────────
 
 /**
- * Card union resolver.
- * Raw data uses __typename "ResourceCard" but the GraphQL type is "Resource".
- * All other __typename values already match the schema type names.
+ * Raw data uses __typename "ResourceCard" for what the schema calls "Resource".
+ * All other __typename values already match.
  */
-(schema.getType("Card") as GraphQLUnionType).resolveType = (obj: {
-  __typename: string;
-}) => (obj.__typename === "ResourceCard" ? "Resource" : obj.__typename);
+const resolveNodeType = (obj: { __typename: string }): string =>
+  obj.__typename === "ResourceCard" ? "Resource" : obj.__typename;
+
+/** Card union resolver. */
+(schema.getType("Card") as GraphQLUnionType).resolveType = resolveNodeType;
 
 /**
  * UnitLink union resolver.
- * Raw data uses "LinkTrait" and "LinkPilot" which already match the schema.
+ * Raw values "LinkTrait" and "LinkPilot" already match the schema type names.
  */
 (schema.getType("UnitLink") as GraphQLUnionType).resolveType = (obj: {
   __typename: string;
 }) => obj.__typename;
 
-/**
- * Node interface resolver.
- * Required so that Query.node can return ResourceCard objects (whose raw
- * __typename is "ResourceCard") and have them correctly identified as the
- * GraphQL "Resource" type.  All other __typename values already match.
- */
-const resolveNodeType = (obj: { __typename: string }) =>
-  obj.__typename === "ResourceCard" ? "Resource" : obj.__typename;
-
+/** Node interface resolver. */
 (schema.getType("Node") as GraphQLInterfaceType).resolveType = resolveNodeType;
 
 /**
  * PlayableCard interface resolver.
- * Needed when a PlayableCard fragment is used in a query; the runtime type
- * must be resolvable from the raw object.
+ * Required when a fragment on PlayableCard is used; the runtime type must be
+ * resolvable from the raw object.
  */
 (schema.getType("PlayableCard") as GraphQLInterfaceType).resolveType =
   resolveNodeType;
@@ -72,7 +96,7 @@ const resolveNodeType = (obj: { __typename: string }) =>
 
 const allCards = allCardsRaw as RawCard[];
 
-/** O(1) card lookup for node(id) */
+/** O(1) card lookup for Query.node */
 const cardById = new Map<string, RawCard>(
   allCards
     .filter((c): c is Extract<RawCard, { id: string }> => "id" in c && !!c.id)
@@ -88,12 +112,12 @@ const pilotByName = new Map<string, RawCard>(
         "name" in c &&
         typeof c.name === "string",
     )
-    .map((c) => [c.name, c]),
+    .map((c) => [(c as AnyRecord)["name"] as string, c]),
 );
 
 // ─── Cursor helpers ────────────────────────────────────────────────────────────
 
-const encodeCursor = (index: number) => btoa(`cursor:${index}`);
+const encodeCursor = (index: number): string => btoa(`cursor:${index}`);
 
 function decodeCursor(cursor: string): number {
   try {
@@ -121,6 +145,8 @@ interface CardFilterInput {
   level?: number[];
   cost?: number[];
   package?: string;
+  /** Matches against the raw `rarity` field; absent rarity defaults to "COMMON". */
+  rarity?: string;
   keyword?: string[];
   zone?: string[];
   query?: string;
@@ -151,6 +177,13 @@ function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[] {
     // ── package ───────────────────────────────────────────────────────────────
     if (filter.package != null) {
       if (c["package"] !== filter.package) return false;
+    }
+
+    // ── rarity — absent rarity on a card is treated as "COMMON" ──────────────
+    if (filter.rarity != null) {
+      const cardRarity =
+        typeof c["rarity"] === "string" ? c["rarity"] : "COMMON";
+      if (cardRarity !== filter.rarity) return false;
     }
 
     // ── keyword — card must contain ALL listed keywords ───────────────────────
@@ -203,6 +236,7 @@ const rootValue = {
     if (!filter) throw new Error("`filter` argument is required on `cards`");
 
     const filtered = applyFilter(allCards, filter);
+    console.log(filter);
     const totalCount = filtered.length;
 
     // Determine the zero-based start position from the cursor
@@ -232,24 +266,52 @@ const rootValue = {
   },
 };
 
+// ─── Stub pilot factory ────────────────────────────────────────────────────────
+
+/**
+ * Returns a minimal PilotCard stub for use when the raw data references a
+ * pilot by name but no matching PilotCard exists in the dataset.
+ * LinkPilot.pilot is declared PilotCard! (non-null), so we must never return
+ * null here.
+ */
+function makePilotStub(name: string): AnyRecord {
+  return {
+    __typename: "PilotCard",
+    id: `stub:${name}`,
+    name,
+    level: 0,
+    cost: 0,
+    series: "MOBILE_SUIT_GUNDAM",
+    color: "BLUE",
+    rarity: "COMMON",
+    package: "BASIC_CARDS",
+    keywords: [],
+    trait: [],
+    description: [],
+    AP: 0,
+    HP: 0,
+  };
+}
+
 // ─── Custom field resolver ─────────────────────────────────────────────────────
 //
 // Handles three schema ↔ data mismatches without touching the raw JSON:
 //
-//  1. UnitCard.link
-//     Raw: absent | single UnitLink object
-//     Schema: [UnitLink!]!  (non-null array)
-//     Fix: wrap in array; default to []
-//
-//  2. LinkPilot.pilot
+//  1. LinkPilot.pilot
 //     Raw: { __typename: "LinkPilot", pilotName: string }
-//     Schema: pilot: PilotCard!
-//     Fix: look up the PilotCard by name from the global index
+//     Schema: pilot: PilotCard!  (non-null)
+//     Fix: look up PilotCard by pilotName; return a stub when not found so
+//          we never violate the non-null contract.
 //
-//  3. BaseCard.AP / UnitCard.AP / HP
+//  2. rarity  (UnitCard | PilotCard | BaseCard)
+//     Raw: field may be absent
+//     Schema: CardRarity!  (non-null)
+//     Fix: default to "COMMON" when the field is missing or non-string.
+//
+//  3. AP / HP  (UnitCard | PilotCard | BaseCard)
 //     Raw: can be null for some BaseCard rows
 //     Schema: Int!  (non-null)
-//     Fix: coerce null → 0
+//     Fix: coerce null / undefined → 0.
 
 function fieldResolver(
   source: AnyRecord,
@@ -260,18 +322,22 @@ function fieldResolver(
   const { fieldName, parentType } = info;
   const typeName = parentType.name;
 
-  // ── UnitCard.link → always return an array ──────────────────────────────────
-  if (typeName === "UnitCard" && fieldName === "link") {
-    const raw = source["link"];
-    if (raw == null) return [];
-    return Array.isArray(raw) ? raw : [raw];
-  }
-
-  // ── LinkPilot.pilot → look up PilotCard by stored pilotName ─────────────────
+  // ── LinkPilot.pilot → look up PilotCard; return stub if not found ───────────
   if (typeName === "LinkPilot" && fieldName === "pilot") {
     const name = source["pilotName"] as string | undefined;
-    if (!name) return null;
-    return pilotByName.get(name) ?? null;
+    if (!name) return makePilotStub("unknown");
+    return pilotByName.get(name) ?? makePilotStub(name);
+  }
+
+  // ── rarity → default to "COMMON" when absent ─────────────────────────────────
+  if (
+    (typeName === "UnitCard" ||
+      typeName === "BaseCard" ||
+      typeName === "PilotCard") &&
+    fieldName === "rarity"
+  ) {
+    const value = source["rarity"];
+    return typeof value === "string" ? value : "COMMON";
   }
 
   // ── AP / HP null coercion ────────────────────────────────────────────────────
@@ -285,7 +351,9 @@ function fieldResolver(
     return value ?? 0;
   }
 
-  // Fall back to the default resolver for everything else
+  // Fall back to the default resolver for everything else.
+  // UnitCard.link is handled here — schema says `link: UnitLink` (single
+  // nullable), so we simply return the raw value (object or undefined/null).
   return defaultFieldResolver(source, args, context, info);
 }
 

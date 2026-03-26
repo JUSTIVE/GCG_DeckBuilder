@@ -156,14 +156,14 @@ enum CardPackage {
   PROMOTION_CARD # 프로모션 카드
 }
 
-type PlayableCard {
+interface PlayableCard {
   level: Int! #레벨
   cost: Int! # 비용
   name: String! # 이름
   series: GundamSeries! # 시리즈
   color: CardColor! # 색상
   rarity: CardRarity! #희귀도
-  pack: CardPackage! # 패키지
+  package: CardPackage! # 패키지
   keywords: [CardKeyword!]! #키워드
 }
 union UnitLink = LinkTrait | LinkPilot
@@ -233,6 +233,10 @@ type CommandCard implements PlayableCard & Node {
   id: ID!
   name: String!
   level: Int!
+  color: CardColor!
+  rarity: CardRarity!
+  package: CardPackage!
+  keywords: [CardKeyword!]!
   cost: Int!
   series: GundamSeries!
 }

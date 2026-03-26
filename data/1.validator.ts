@@ -31,6 +31,20 @@ export const CardKeywordSchema = z.enum([
   "WHEN_PAIRED",
 ]);
 
+export const CardRaritySchema = z.enum([
+  "COMMON",
+  "UNCOMMON",
+  "RARE",
+  "LEGENDARY_RARE",
+  "COMMON_PLUS",
+  "UNCOMMON_PLUS",
+  "RARE_PLUS",
+  "LEGENDARY_RARE_PLUS",
+  "COMMON_PLUS_PLUS",
+  "LEGENDARY_RARE_PLUS_PLUS",
+  "P",
+]);
+
 export const CardPackageSchema = z.enum([
   "GD01",
   "GD02",
@@ -139,6 +153,7 @@ export const PlayableCardSchema = z.object({
   keywords: z.array(CardKeywordSchema),
   trait: z.array(CardTraitSchema),
   description: z.array(z.string()),
+  rarity: CardRaritySchema.optional(),
 });
 
 /* UNIT LINK */
@@ -166,7 +181,7 @@ export const UnitCardSchema = NodeSchema.merge(
     zone: z.array(ZoneSchema),
     AP: z.number().int().catch(0),
     HP: z.number().int().catch(0),
-    link: z.array(UnitLinkSchema),
+    link: UnitLinkSchema.optional(),
   }),
 );
 
@@ -250,7 +265,7 @@ export const CardFilterInputSchema = z.object({
   level: z.array(z.number().int()).optional(),
   cost: z.array(z.number().int()).optional(),
   package: CardPackageSchema.optional(),
-
+  rarity: CardRaritySchema.optional(),
   keyword: z.array(CardKeywordSchema).optional(),
   zone: z.array(ZoneSchema).optional(),
   query: z.string().optional(),

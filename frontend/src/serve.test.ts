@@ -1,14 +1,12 @@
 /**
  * serve.test.ts — Integration tests for serveGraphQL
  *
- * Covers:
- *  • cards query: kind filter, level/cost/package/keyword/zone/query filters
- *  • Relay cursor pagination (first / after)
- *  • UnitCard.link: single object in JSON → [UnitLink!]! in GraphQL
- *  • LinkPilot.pilot: pilotName string → PilotCard lookup
- *  • BaseCard.AP / HP: null in JSON → 0 in GraphQL (Int! coercion)
- *  • ResourceCard __typename → Resource GraphQL type
- *  • node(id) lookup
+ * Mirrors the schema.graphql ground truth:
+ *  • link: UnitLink           → single nullable object (not an array)
+ *  • rarity: CardRarity!      → non-null; defaults to "COMMON" when absent from data
+ *  • LinkPilot.pilot: PilotCard! → non-null; stub returned when pilot not in dataset
+ *  • CommandCard              → only exposes id / name / level / cost / series
+ *  • CardFilterInput.rarity   → rarity filter (absent rarity treated as "COMMON")
  */
 
 import { describe, it, expect } from "vitest";
@@ -17,10 +15,7 @@ import { serveGraphQL } from "./serve";
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
 /** Run a query and assert there are no errors. */
-async function gql(
-  query: string,
-  variables?: Record<string, unknown>,
-) {
+async function gql(query: string, variables?: Record<string, unknown>) {
   const result = await serveGraphQL(query, variables);
   if (result.errors?.length) {
     throw new Error(
@@ -30,7 +25,7 @@ async function gql(
   return result.data as Record<string, unknown>;
 }
 
-// ─── Query.cards ──────────────────────────────────────────────────────────────
+// ─── Query.cards – kind filter ────────────────────────────────────────────────
 
 describe("Query.cards – kind filter", () => {
   it("returns only UnitCards when kind=UNIT", async () => {
@@ -102,7 +97,6 @@ describe("Query.cards – kind filter", () => {
     for (const edge of conn.edges) {
       expect(edge.node.__typename).toBe("Resource");
     }
-    // Known resource card
     const gundam = conn.edges.find((e) => e.node.id === "T-001");
     expect(gundam?.node.name).toBe("Gundam");
   });
@@ -152,7 +146,7 @@ describe("Query.cards – kind filter", () => {
   });
 });
 
-// ─── Filter combinations ──────────────────────────────────────────────────────
+// ─── Query.cards – filter combinations ───────────────────────────────────────
 
 describe("Query.cards – filter combinations", () => {
   it("filters by package", async () => {
@@ -287,12 +281,38 @@ describe("Query.cards – filter combinations", () => {
     }
   });
 
+  it("filters by rarity — absent rarity defaults to COMMON", async () => {
+    // All cards in the dataset have no rarity field; absent rarity → "COMMON".
+    // Filtering by COMMON should return all units; filtering by RARE → 0.
+    const commonData = await gql(
+      `query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`,
+      { f: { kind: "UNIT", rarity: "COMMON" } },
+    );
+    const rareData = await gql(
+      `query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`,
+      { f: { kind: "UNIT", rarity: "RARE" } },
+    );
+
+    const commonCount = (commonData["cards"] as { totalCount: number })
+      .totalCount;
+    const rareCount = (rareData["cards"] as { totalCount: number }).totalCount;
+
+    // Every unit has rarity=COMMON (default), so common === all units
+    const allData = await gql(
+      `query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`,
+      { f: { kind: "UNIT" } },
+    );
+    const allCount = (allData["cards"] as { totalCount: number }).totalCount;
+
+    expect(commonCount).toBe(allCount);
+    expect(rareCount).toBe(0);
+  });
+
   it("returns 0 results for an impossible filter combination", async () => {
     const data = await gql(
       `query($f: CardFilterInput!) {
         cards(filter: $f) { totalCount edges { cursor } }
       }`,
-      // ST01 only has BLUE and WHITE cards; RED + ST01 → no results
       { f: { kind: "UNIT", package: "ST01", level: [99] } },
     );
 
@@ -301,7 +321,7 @@ describe("Query.cards – filter combinations", () => {
   });
 });
 
-// ─── Cursor pagination ────────────────────────────────────────────────────────
+// ─── Query.cards – cursor pagination ─────────────────────────────────────────
 
 describe("Query.cards – cursor pagination", () => {
   it("first:2 returns 2 edges and a valid endCursor", async () => {
@@ -335,7 +355,7 @@ describe("Query.cards – cursor pagination", () => {
     expect(conn.pageInfo.endCursor).toBe(conn.edges[1]!.cursor);
   });
 
-  it("second page (after cursor) returns next items and correct pageInfo", async () => {
+  it("second page returns next items and correct pageInfo", async () => {
     // Page 1
     const page1 = await gql(
       `query($f: CardFilterInput!) {
@@ -351,7 +371,6 @@ describe("Query.cards – cursor pagination", () => {
       edges: Array<{ cursor: string; node: { id: string } }>;
       pageInfo: { endCursor: string };
     };
-    const afterCursor = p1.pageInfo.endCursor;
     const firstPageIds = p1.edges.map((e) => e.node.id);
 
     // Page 2
@@ -362,7 +381,7 @@ describe("Query.cards – cursor pagination", () => {
           pageInfo { hasPreviousPage hasNextPage }
         }
       }`,
-      { f: { kind: "UNIT" }, after: afterCursor },
+      { f: { kind: "UNIT" }, after: p1.pageInfo.endCursor },
     );
 
     const p2 = page2["cards"] as {
@@ -370,7 +389,6 @@ describe("Query.cards – cursor pagination", () => {
       pageInfo: { hasPreviousPage: boolean; hasNextPage: boolean };
     };
 
-    // No overlap between pages
     const secondPageIds = p2.edges.map((e) => e.node.id);
     for (const id of secondPageIds) {
       expect(firstPageIds).not.toContain(id);
@@ -379,15 +397,15 @@ describe("Query.cards – cursor pagination", () => {
   });
 
   it("full scan: concatenating all pages yields totalCount items", async () => {
-    const UNIT_PAGE_SIZE = 5;
+    const PAGE_SIZE = 5;
     let after: string | null = null;
     let collected = 0;
     let totalCount = 0;
 
-    for (let page = 0; page < 200; page++) {
+    for (let page = 0; page < 300; page++) {
       const data = await gql(
         `query($f: CardFilterInput!, $after: String) {
-          cards(first: ${UNIT_PAGE_SIZE}, after: $after, filter: $f) {
+          cards(first: ${PAGE_SIZE}, after: $after, filter: $f) {
             totalCount
             edges { cursor node { ... on PilotCard { id } } }
             pageInfo { hasNextPage endCursor }
@@ -413,10 +431,12 @@ describe("Query.cards – cursor pagination", () => {
   });
 });
 
-// ─── UnitCard.link field resolution ──────────────────────────────────────────
+// ─── UnitCard.link – single nullable UnitLink ─────────────────────────────────
+//
+// schema.graphql declares:  link: UnitLink   (single nullable, NOT [UnitLink!]!)
 
-describe("UnitCard.link – single object → [UnitLink!]!", () => {
-  it("link is always an array", async () => {
+describe("UnitCard.link – single nullable UnitLink", () => {
+  it("link is null or a plain object (never an array)", async () => {
     const data = await gql(
       `query($f: CardFilterInput!) {
         cards(first: 50, filter: $f) {
@@ -440,28 +460,32 @@ describe("UnitCard.link – single object → [UnitLink!]!", () => {
     const edges = (
       data["cards"] as {
         edges: Array<{
-          node: { id: string; link: Array<{ __typename: string }> };
+          node: { id: string; link: { __typename: string } | null };
         }>;
       }
     ).edges;
 
+    expect(edges.length).toBeGreaterThan(0);
     for (const edge of edges) {
-      expect(Array.isArray(edge.node.link)).toBe(true);
+      // link must be null or a plain object — never an array
+      expect(Array.isArray(edge.node.link)).toBe(false);
+      if (edge.node.link !== null) {
+        expect(["LinkTrait", "LinkPilot"]).toContain(edge.node.link.__typename);
+      }
     }
   });
 
-  it("UnitCards without a link in JSON return an empty array", async () => {
-    // ST01-005 (GM) has no link field in raw JSON
+  it("UnitCard without link field returns null", async () => {
+    // ST01-005 (GM) has no link field in the raw JSON
     const data = await gql(
       `{ node(id: "ST01-005") { ... on UnitCard { id link { __typename } } } }`,
     );
 
-    const node = data["node"] as { id: string; link: unknown[] };
-    expect(Array.isArray(node.link)).toBe(true);
-    expect(node.link).toHaveLength(0);
+    const node = data["node"] as { id: string; link: unknown };
+    expect(node.link).toBeNull();
   });
 
-  it("LinkTrait entries expose the trait field", async () => {
+  it("LinkTrait link exposes the trait field", async () => {
     const data = await gql(
       `query($f: CardFilterInput!) {
         cards(first: 100, filter: $f) {
@@ -481,17 +505,18 @@ describe("UnitCard.link – single object → [UnitLink!]!", () => {
       { f: { kind: "UNIT" } },
     );
 
-    const edges = (
+    const traitLinks = (
       data["cards"] as {
         edges: Array<{
-          node: { link: Array<{ __typename: string; trait?: string }> };
+          node: { link: { __typename: string; trait?: string } | null };
         }>;
       }
-    ).edges;
-
-    const traitLinks = edges
-      .flatMap((e) => e.node.link)
-      .filter((l) => l.__typename === "LinkTrait");
+    ).edges
+      .map((e) => e.node.link)
+      .filter(
+        (l): l is { __typename: "LinkTrait"; trait: string } =>
+          l !== null && l.__typename === "LinkTrait",
+      );
 
     expect(traitLinks.length).toBeGreaterThan(0);
     for (const l of traitLinks) {
@@ -500,11 +525,11 @@ describe("UnitCard.link – single object → [UnitLink!]!", () => {
   });
 });
 
-// ─── LinkPilot.pilot resolution ───────────────────────────────────────────────
+// ─── LinkPilot.pilot — pilotName → PilotCard lookup ──────────────────────────
 
 describe("LinkPilot.pilot – pilotName → PilotCard lookup", () => {
   it("pilot is resolved to a full PilotCard", async () => {
-    // ST01-001 (Gundam) links to pilot "아무로 레이" whose id is ST01-010
+    // ST01-001 (Gundam) → LinkPilot → pilot is "아무로 레이" = ST01-010
     const data = await gql(
       `{ node(id: "ST01-001") {
           ... on UnitCard {
@@ -519,19 +544,98 @@ describe("LinkPilot.pilot – pilotName → PilotCard lookup", () => {
     );
 
     const node = data["node"] as {
-      link: Array<{ pilot?: { id: string; name: string; AP: number; HP: number } }>;
+      link: {
+        pilot: { id: string; name: string; AP: number; HP: number };
+      } | null;
     };
 
-    const pilotLink = node.link[0];
-    expect(pilotLink).toBeDefined();
-    expect(pilotLink!.pilot).toBeDefined();
-    expect(pilotLink!.pilot!.id).toBe("ST01-010");
-    expect(typeof pilotLink!.pilot!.AP).toBe("number");
-    expect(typeof pilotLink!.pilot!.HP).toBe("number");
+    expect(node.link).not.toBeNull();
+    // pilot is non-null (PilotCard!) — always present (stub if not in dataset)
+    expect(node.link!.pilot).toBeDefined();
+    expect(node.link!.pilot.id).toBe("ST01-010");
+    expect(typeof node.link!.pilot.AP).toBe("number");
+    expect(typeof node.link!.pilot.HP).toBe("number");
+  });
+
+  it("pilot is never null even when the pilot card is not in the dataset (stub returned)", async () => {
+    // Query any 20 LinkPilot units; every pilot must be non-null
+    const data = await gql(
+      `query($f: CardFilterInput!) {
+        cards(first: 20, filter: $f) {
+          edges {
+            node {
+              ... on UnitCard {
+                link {
+                  __typename
+                  ... on LinkPilot { pilot { id name } }
+                }
+              }
+            }
+          }
+        }
+      }`,
+      { f: { kind: "UNIT" } },
+    );
+
+    const pilotLinks = (
+      data["cards"] as {
+        edges: Array<{
+          node: {
+            link: {
+              __typename: string;
+              pilot?: { id: string; name: string };
+            } | null;
+          };
+        }>;
+      }
+    ).edges
+      .map((e) => e.node.link)
+      .filter(
+        (
+          l,
+        ): l is {
+          __typename: "LinkPilot";
+          pilot: { id: string; name: string };
+        } => l !== null && l.__typename === "LinkPilot",
+      );
+
+    for (const l of pilotLinks) {
+      expect(l.pilot).toBeDefined();
+      expect(typeof l.pilot.name).toBe("string");
+      expect(l.pilot.name.length).toBeGreaterThan(0);
+    }
   });
 });
 
-// ─── AP / HP null coercion ────────────────────────────────────────────────────
+// ─── rarity field — defaults to "COMMON" ─────────────────────────────────────
+
+describe("rarity: CardRarity! – defaults to COMMON when absent from data", () => {
+  it("UnitCard.rarity is 'COMMON' (data has no rarity field)", async () => {
+    const data = await gql(
+      `{ node(id: "ST01-001") { ... on UnitCard { id rarity } } }`,
+    );
+    const node = data["node"] as { id: string; rarity: string };
+    expect(node.rarity).toBe("COMMON");
+  });
+
+  it("PilotCard.rarity is 'COMMON'", async () => {
+    const data = await gql(
+      `{ node(id: "ST01-010") { ... on PilotCard { id rarity } } }`,
+    );
+    const node = data["node"] as { id: string; rarity: string };
+    expect(node.rarity).toBe("COMMON");
+  });
+
+  it("BaseCard.rarity is 'COMMON'", async () => {
+    const data = await gql(
+      `{ node(id: "ST01-015") { ... on BaseCard { id rarity } } }`,
+    );
+    const node = data["node"] as { id: string; rarity: string };
+    expect(node.rarity).toBe("COMMON");
+  });
+});
+
+// ─── AP / HP null coercion → 0 ───────────────────────────────────────────────
 
 describe("BaseCard.AP null coercion → 0", () => {
   it("AP is never null even when JSON has null", async () => {
@@ -579,7 +683,7 @@ describe("Query.node", () => {
     const data = await gql(
       `{ node(id: "ST01-001") {
           id
-          ... on UnitCard { name AP HP level cost color series keywords zone }
+          ... on UnitCard { name AP HP level cost color series keywords zone rarity }
         }
       }`,
     );
@@ -589,12 +693,14 @@ describe("Query.node", () => {
       name: string;
       AP: number;
       HP: number;
+      rarity: string;
     };
 
     expect(node.id).toBe("ST01-001");
     expect(node.name).toBe("Gundam");
     expect(node.AP).toBe(3);
     expect(node.HP).toBe(4);
+    expect(node.rarity).toBe("COMMON");
   });
 
   it("returns null for an unknown id", async () => {
@@ -606,14 +712,19 @@ describe("Query.node", () => {
     const data = await gql(
       `{ node(id: "ST01-010") {
           id
-          ... on PilotCard { name AP HP }
+          ... on PilotCard { name AP HP rarity }
         }
       }`,
     );
 
-    const node = data["node"] as { id: string; name: string };
+    const node = data["node"] as {
+      id: string;
+      name: string;
+      rarity: string;
+    };
     expect(node.id).toBe("ST01-010");
     expect(node.name).toBeTruthy();
+    expect(node.rarity).toBe("COMMON");
   });
 
   it("returns a Resource by id", async () => {

@@ -18,7 +18,7 @@ type Props = {
 export function UnitCard({ unitCardRef }: Props) {
   const unitCard = useFragment(Fragment, unitCardRef);
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col aspect-100/160 max-w-[300px]">
       <div>{unitCard.name}</div>
       <div>{unitCard.AP}</div>
       <div>{unitCard.HP}</div>
