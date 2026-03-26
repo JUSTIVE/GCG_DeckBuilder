@@ -236,7 +236,7 @@ const rootValue = {
     if (!filter) throw new Error("`filter` argument is required on `cards`");
 
     const filtered = applyFilter(allCards, filter);
-    console.log(filter);
+
     const totalCount = filtered.length;
 
     // Determine the zero-based start position from the cursor

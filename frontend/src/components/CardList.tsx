@@ -31,7 +31,7 @@ export function CardList({ queryRef }: Props) {
   const { data } = usePaginationFragment(Fragment, queryRef);
 
   return (
-    <div className="grid grid-cols-4">
+    <div className="flex flex-wrap gap-4">
       {data.cards.edges.map(({ cursor, node }) => (
         <Card key={cursor} cardRef={node} />
       ))}

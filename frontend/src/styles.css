@@ -9,6 +9,15 @@
 
 @theme {
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  /* cutout (chamfer) size scale */
+  --cutout-none: 0px;
+  --cutout-sm: 0.5rem;
+  --cutout-md: 0.75rem;
+  --cutout-lg: 1rem;
+  --cutout-xl: 1.5rem;
+  --cutout-2xl: 2rem;
+  --cutout-3xl: 3rem;
 }
 
 :root {
@@ -129,7 +138,11 @@ body {
   background:
     radial-gradient(1100px 620px at -8% -10%, var(--hero-a), transparent 58%),
     radial-gradient(1050px 620px at 112% -12%, var(--hero-b), transparent 62%),
-    radial-gradient(720px 380px at 50% 115%, rgba(79, 184, 178, 0.1), transparent 68%),
+    radial-gradient(
+      720px 380px at 50% 115%,
+      rgba(79, 184, 178, 0.1),
+      transparent 68%
+    ),
     linear-gradient(
       180deg,
       color-mix(in oklab, var(--sand) 68%, white) 0%,
@@ -149,8 +162,16 @@ body::before {
   z-index: -1;
   opacity: 0.28;
   background:
-    radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.8), transparent 34%),
-    radial-gradient(circle at 78% 26%, rgba(79, 184, 178, 0.2), transparent 42%),
+    radial-gradient(
+      circle at 20% 15%,
+      rgba(255, 255, 255, 0.8),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 78% 26%,
+      rgba(79, 184, 178, 0.2),
+      transparent 42%
+    ),
     radial-gradient(circle at 42% 82%, rgba(47, 106, 74, 0.14), transparent 36%);
 }
 
@@ -342,7 +363,7 @@ a {
 }
 
 @theme inline {
-  --font-sans: 'Geist Variable', sans-serif;
+  --font-sans: "Geist Variable", sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -393,4 +414,79 @@ a {
   html {
     @apply font-sans;
   }
+}
+
+/*
+ * .cutout — diagonal chamfer mask
+ *
+ * Each corner reads its own variable first, then falls back to the
+ * all-corners shorthand --cut, then to 0px (no cut).
+ *
+ * Usage examples:
+ *   cutout cutout-lg                    → all four corners 1 rem
+ *   cutout cutout-lg cutout-tl-none     → three corners 1 rem, TL flat
+ *   cutout cutout-xl cutout-b-sm        → top corners xl, bottom corners sm
+ *   cutout cutout-tl-[2rem]             → arbitrary value on one corner
+ */
+.cutout {
+  mask:
+    linear-gradient(135deg, transparent var(--cut-tl, var(--cut, 0px)), #000 0)
+      top left,
+    linear-gradient(-135deg, transparent var(--cut-tr, var(--cut, 0px)), #000 0)
+      top right,
+    linear-gradient(-45deg, transparent var(--cut-br, var(--cut, 0px)), #000 0)
+      bottom right,
+    linear-gradient(45deg, transparent var(--cut-bl, var(--cut, 0px)), #000 0)
+      bottom left;
+  mask-size: 50% 50%;
+  mask-repeat: no-repeat;
+}
+
+/* ── all four corners ──────────────────────────────────────────────────────── */
+@utility cutout-* {
+  --cut: --value(--cutout-*, [length]);
+}
+
+/* ── top-left ──────────────────────────────────────────────────────────────── */
+@utility cutout-tl-* {
+  --cut-tl: --value(--cutout-*, [length]);
+}
+
+/* ── top-right ─────────────────────────────────────────────────────────────── */
+@utility cutout-tr-* {
+  --cut-tr: --value(--cutout-*, [length]);
+}
+
+/* ── bottom-right ──────────────────────────────────────────────────────────── */
+@utility cutout-br-* {
+  --cut-br: --value(--cutout-*, [length]);
+}
+
+/* ── bottom-left ───────────────────────────────────────────────────────────── */
+@utility cutout-bl-* {
+  --cut-bl: --value(--cutout-*, [length]);
+}
+
+/* ── top edge (tl + tr) ────────────────────────────────────────────────────── */
+@utility cutout-t-* {
+  --cut-tl: --value(--cutout-*, [length]);
+  --cut-tr: --value(--cutout-*, [length]);
+}
+
+/* ── bottom edge (bl + br) ─────────────────────────────────────────────────── */
+@utility cutout-b-* {
+  --cut-bl: --value(--cutout-*, [length]);
+  --cut-br: --value(--cutout-*, [length]);
+}
+
+/* ── left edge (tl + bl) ───────────────────────────────────────────────────── */
+@utility cutout-l-* {
+  --cut-tl: --value(--cutout-*, [length]);
+  --cut-bl: --value(--cutout-*, [length]);
+}
+
+/* ── right edge (tr + br) ──────────────────────────────────────────────────── */
+@utility cutout-r-* {
+  --cut-tr: --value(--cutout-*, [length]);
+  --cut-br: --value(--cutout-*, [length]);
 }
