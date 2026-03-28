@@ -5,7 +5,7 @@ import { graphql } from "relay-runtime";
 
 const Query = graphql`
   query CardListPageQuery {
-    ...CardListFragment @arguments(first: 999, filter: { kind: [UNIT, PILOT] })
+    ...CardListFragment @arguments(first: 999, filter: { kind: [UNIT] })
   }
 `;
 

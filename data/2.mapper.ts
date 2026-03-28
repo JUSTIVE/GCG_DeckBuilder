@@ -1,7 +1,7 @@
 import raw from "./raw.json";
 import { writeFile } from "node:fs/promises";
 import effects from "./effects.json";
-import names from "./names.json";
+import names from "./pilotnames.json";
 
 const nameEntries = Object.entries(names);
 const effectEntries = Object.entries(effects);

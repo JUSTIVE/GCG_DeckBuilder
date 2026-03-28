@@ -60,7 +60,7 @@ export function Marquee({ children, className, speed = 40, gap = 16 }: Props) {
         </div>
         {shouldScroll && (
           <div
-            className="flex shrink-0"
+            className="flex shrink-0 items-center"
             aria-hidden
             style={{ gap: `${gap}px` }}
           >

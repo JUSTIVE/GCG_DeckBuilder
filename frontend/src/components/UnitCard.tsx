@@ -49,21 +49,6 @@ export function UnitCard({ unitCardRef, focused }: Props) {
   if (!focusContext) return null;
   const { setFocusedCard } = focusContext;
 
-  const cardBorderColor =
-    unitCard.color === "BLUE"
-      ? "border-[#0272B6]"
-      : unitCard.color === "GREEN"
-        ? "border-[#62A43E]"
-        : unitCard.color === "RED"
-          ? "border-[#BD0152]"
-          : unitCard.color === "PURPLE"
-            ? "border-[#764A92]"
-            : unitCard.color === "YELLOW"
-              ? "border-[#D3B078]"
-              : unitCard.color === "WHITE"
-                ? "border-[#FFFFFF]"
-                : "border-[#000000]";
-
   const cardBackgroundColor =
     unitCard.color === "BLUE"
       ? "bg-[#0272B6]"
@@ -98,37 +83,18 @@ export function UnitCard({ unitCardRef, focused }: Props) {
       <button
         type="button"
         className={cn(
-          "relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl  justify-between    transform-all cursor-pointer text-white  overflow-hidden outline",
+          "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl  justify-between transform-all cursor-pointer text-white  overflow-hidden outline",
         )}
         onClick={() => {
           setFocusedCard(focused ? null : unitCard.id);
         }}
       >
-        <div className="absolute -right-0 bg-black text-[8px] px-2 cutout cutout-bl-sm pl-4 rounded rounded-tr-xl z-1">
-          {`${unitCard.id} ${renderRarity(unitCard.rarity)}`}
-        </div>
         <img
           className="absolute w-full h-full object-cover top-0 rounded-sm scale-100"
           src={tempimg}
           alt=""
         />
-        <div
-          className={cn("inline-flex flex-col font-bold w-fit items-start z-1")}
-        >
-          <div
-            className={cn(
-              "cutout-br-sm cutout px-2 w-10.5 self-start pl-1",
-              cardBackgroundColor,
-            )}
-          >
-            <span className="opacity-80 text-xs">Lv.{unitCard.level}</span>
-          </div>
-          <div
-            className={cn("px-2 cutout-br-[4px] cutout", cardBackgroundColor)}
-          >
-            <span className="text-2xl opacity-80">{unitCard.cost}</span>
-          </div>
-        </div>
+        <div></div>
 
         <div className="flex flex-col gap-2 z-1">
           <div className="grid grid-cols-1 gap-0.5 px-2">
@@ -145,17 +111,17 @@ export function UnitCard({ unitCardRef, focused }: Props) {
             <div
               className={cn("flex flex-row gap-1 pr-2", cardBackgroundColor50)}
             >
-              <div className="flex flex-col justify-start flex-1 overflow-hidden">
-                <div className="flex flex-row">
+              <div className="flex flex-col justify-end flex-1 overflow-hidden ">
+                <div className="flex flex-row translate-y-px">
                   <div className="w-2 bg-black -mr-5 " />
                   <div className="w-10 bg-black -mr-5 parallelogram parallelogram-sm" />
                   <div
                     className={cn(
-                      "w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 parallelogram parallelogram-sm px-2",
+                      "w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 parallelogram parallelogram-sm px-2 py-px",
                     )}
                   >
                     <div
-                      className={cn("flex text-end text-gray-900 text-[8px]")}
+                      className={cn("flex text-end text-gray-900 text-[4cqw]")}
                     >
                       <Marquee speed={8}>
                         {unitCard.traits.map((x) => (
@@ -165,16 +131,20 @@ export function UnitCard({ unitCardRef, focused }: Props) {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-row">
-                  <div className="w-4 bg-black -mr-4"></div>
-                  <div className="bg-black overflow-hidden w-full pl-7 parallelogram parallelogram-sm px-2 w-full h-3">
-                    <div className={cn("flex text-end text-white text-[8px]")}>
+                <div className="flex flex-row ">
+                  <div className="w-4 bg-black -mr-4 py-px pb-1"></div>
+                  <div className="bg-black overflow-hidden w-full pl-7 parallelogram parallelogram-sm px-2 w-full pt-px pb-0.5 min-h-3">
+                    <div
+                      className={cn(
+                        "flex text-end text-white text-[4cqw] items-center",
+                      )}
+                    >
                       <Marquee speed={6}>
                         {unitCard.links.map((x) => {
                           return x.__typename === "LinkPilot" ? (
-                            <span key={x.pilot.name}>{x.pilot.name}</span>
+                            <span key={x.pilot.name}>[{x.pilot.name}]</span>
                           ) : x.__typename === "LinkTrait" ? (
-                            <span>{renderTrait(x.trait)}</span>
+                            <span key={x.trait}>({renderTrait(x.trait)})</span>
                           ) : null;
                         })}
                       </Marquee>
@@ -182,11 +152,11 @@ export function UnitCard({ unitCardRef, focused }: Props) {
                   </div>
                 </div>
               </div>
-              <div className="@container flex  flex-row gap-0.5 min-w-8">
-                <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[40cqw]">
+              <div className=" flex  flex-row gap-0.5 min-w-8">
+                <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw]">
                   {unitCard.AP}
                 </div>
-                <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[40cqw]">
+                <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw]">
                   {unitCard.HP}
                 </div>
               </div>
@@ -197,7 +167,7 @@ export function UnitCard({ unitCardRef, focused }: Props) {
       {focused && unitCard.description.length > 0 && (
         <div
           className={cn(
-            "p-2 bg-black whitespace-pre-wrap text-sm origin-bottom overflow-hidden absolute  text-white z-2 cutout cutout-tl-sm p-4 top-[calc(100%+4px)]",
+            "p-2 bg-black whitespace-pre-wrap text-sm origin-bottom overflow-hidden absolute  text-white z-2 cutout cutout-tl-sm p-4 top-[calc(100%+4px)] isolate",
           )}
         >
           <ul className="flex flex-col gap-1">

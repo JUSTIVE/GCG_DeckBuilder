@@ -23,7 +23,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Christina Mackenzie / 아무로 레이"
+      "pilotName": "크리스티나 맥켄지 / 아무로 레이"
     },
     "zone": [
       "SPACE",
@@ -56,7 +56,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Paptimus Scirocco"
+      "pilotName": "팝티머스 시로코"
     },
     "zone": [
       "SPACE",
@@ -117,7 +117,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Yazan Gable"
+      "pilotName": "야잔 게이블"
     },
     "zone": [
       "SPACE",
@@ -148,7 +148,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Marida Cruz"
+      "pilotName": "마리다 크루즈"
     },
     "zone": [
       "SPACE",
@@ -206,7 +206,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Christina Mackenzie"
+      "pilotName": "크리스티나 맥켄지"
     },
     "zone": [
       "SPACE",
@@ -268,7 +268,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Reccoa Londe"
+      "pilotName": "레코아 론도"
     },
     "zone": [
       "SPACE",
@@ -430,7 +430,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Jerid Messa"
+      "pilotName": "제리드 메사"
     },
     "zone": [
       "SPACE",
@@ -487,7 +487,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Mikhail Kaminsky"
+      "pilotName": "미하일 카민스키"
     },
     "zone": [
       "SPACE",
@@ -519,7 +519,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Chang Wufei"
+      "pilotName": "창 우페이"
     },
     "zone": [
       "SPACE",
@@ -551,7 +551,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Asemu Asuno"
+      "pilotName": "아세무 아스노"
     },
     "zone": [
       "SPACE",
@@ -582,7 +582,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Bernard Wiseman"
+      "pilotName": "버나드 와이즈먼"
     },
     "zone": [
       "SPACE",
@@ -611,7 +611,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Duo Maxwell"
+      "pilotName": "듀오 맥스웰"
     },
     "zone": [
       "SPACE",
@@ -946,7 +946,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Rau Le Creuset"
+      "pilotName": "라우 루 크루제"
     },
     "zone": [
       "SPACE",
@@ -977,7 +977,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "아마테 유즈리하 (마츄) / Nyaan"
+      "pilotName": "아마테 유즈리하 (마츄) / 냐안"
     },
     "zone": [
       "SPACE",
@@ -1009,7 +1009,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Nyaan"
+      "pilotName": "냐안"
     },
     "zone": [
       "SPACE",
@@ -1101,7 +1101,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Rau Le Creuset"
+      "pilotName": "라우 루 크루제"
     },
     "zone": [
       "SPACE",
@@ -1161,7 +1161,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Shagia Frost / Olba Frost"
+      "pilotName": "샤기아 프로스트 / 올바 프로스트"
     },
     "zone": [
       "SPACE",
@@ -1190,7 +1190,7 @@
     "HP": 6,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Carris Nautilus"
+      "pilotName": "카리스 노틸러스"
     },
     "zone": [
       "SPACE",
@@ -1217,7 +1217,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Yzak Jule"
+      "pilotName": "이자크 줄"
     },
     "zone": [
       "SPACE",
@@ -1340,7 +1340,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Rau Le Creuset"
+      "pilotName": "라우 루 크루제"
     },
     "zone": [
       "SPACE",
@@ -1369,7 +1369,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Nyaan"
+      "pilotName": "냐안"
     },
     "zone": [
       "SPACE",
@@ -1459,7 +1459,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Garrod Ran / Jamil Neate"
+      "pilotName": "가로드 란 / 쟈밀 니트"
     },
     "zone": [
       "SPACE",
@@ -1555,7 +1555,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Zeheart Galette"
+      "pilotName": "제하트 가레트"
     },
     "zone": [
       "SPACE",
@@ -1585,7 +1585,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Wistario Afam"
+      "pilotName": "위스타리오 아팜"
     },
     "zone": [
       "SPACE",
@@ -1673,7 +1673,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Yurin L'Ciel"
+      "pilotName": "유린 루셸"
     },
     "zone": [
       "SPACE",
@@ -1941,7 +1941,7 @@
     "HP": 3,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Wistario Afam"
+      "pilotName": "위스타리오 아팜"
     },
     "zone": [
       "SPACE",
@@ -1972,7 +1972,7 @@
     "HP": 2,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Graham Aker"
+      "pilotName": "그라함 에이커"
     },
     "zone": [
       "SPACE",
@@ -2028,7 +2028,7 @@
     "HP": 5,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Kamille Bidan"
+      "pilotName": "카미유 비단"
     },
     "zone": [
       "SPACE",
@@ -2092,7 +2092,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Ein Dalton"
+      "pilotName": "아인 달튼"
     },
     "zone": [
       "SPACE",
@@ -2237,7 +2237,7 @@
     "HP": 1,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Sergei Smirnov"
+      "pilotName": "세르게이 스밀노프"
     },
     "zone": [
       "SPACE",
@@ -2294,7 +2294,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "Gaelio Bauduin"
+      "pilotName": "가엘리오 보드윈"
     },
     "zone": [
       "SPACE",
@@ -2377,7 +2377,7 @@
     ]
   },
   {
-    "name": "Paptimus Scirocco",
+    "name": "팝티머스 시로코",
     "level": 5,
     "cost": 1,
     "color": "BLUE",
@@ -2404,7 +2404,7 @@
     "HP": 2
   },
   {
-    "name": "Christina Mackenzie",
+    "name": "크리스티나 맥켄지",
     "level": 3,
     "cost": 1,
     "color": "BLUE",
@@ -2426,7 +2426,7 @@
     "HP": 1
   },
   {
-    "name": "Yazan Gable",
+    "name": "야잔 게이블",
     "level": 4,
     "cost": 1,
     "color": "BLUE",
@@ -2474,7 +2474,7 @@
     "HP": 1
   },
   {
-    "name": "Asemu Asuno",
+    "name": "아세무 아스노",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -2500,7 +2500,7 @@
     "HP": 1
   },
   {
-    "name": "Bernard Wiseman",
+    "name": "버나드 와이즈먼",
     "level": 2,
     "cost": 1,
     "color": "GREEN",
@@ -2523,7 +2523,7 @@
     "HP": 1
   },
   {
-    "name": "Mikhail Kaminsky",
+    "name": "미하일 카민스키",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -2549,7 +2549,7 @@
     "HP": 1
   },
   {
-    "name": "Rau Le Creuset",
+    "name": "라우 루 크루제",
     "level": 4,
     "cost": 1,
     "color": "RED",
@@ -2572,7 +2572,7 @@
     "HP": 1
   },
   {
-    "name": "Nyaan",
+    "name": "냐안",
     "level": 4,
     "cost": 1,
     "color": "RED",
@@ -2596,7 +2596,7 @@
     "HP": 2
   },
   {
-    "name": "Carris Nautilus",
+    "name": "카리스 노틸러스",
     "level": 4,
     "cost": 1,
     "color": "RED",
@@ -2619,7 +2619,7 @@
     "HP": 1
   },
   {
-    "name": "Zeheart Galette",
+    "name": "제하트 가레트",
     "level": 5,
     "cost": 1,
     "color": "PURPLE",
@@ -2666,7 +2666,7 @@
     "HP": 2
   },
   {
-    "name": "Jamil Neate",
+    "name": "쟈밀 니트",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -2691,7 +2691,7 @@
     "HP": 1
   },
   {
-    "name": "Wistario Afam",
+    "name": "위스타리오 아팜",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -2715,7 +2715,7 @@
     "HP": 2
   },
   {
-    "name": "Graham Aker",
+    "name": "그라함 에이커",
     "level": 4,
     "cost": 1,
     "color": "WHITE",
@@ -2860,7 +2860,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 enemy Unit with 3 or less HP. Rest it. If a friendly (Jupitris) Link Unit is in play, choose 1 to 2 enemy Units with 3 or less HP instead.",
-      "【파일럿】[Reccoa Londe]"
+      "【파일럿】[레코아 론도]"
     ],
     "__typename": "CommandCard",
     "id": "GD03-104",
@@ -3102,7 +3102,7 @@
     ],
     "description": [
       "【액션】Choose 1 friendly Unit paired with an (X-Rounder) Pilot. It can't receive battle damage from enemy Units with 2 or less AP during this battle. If you are Lv.7 or higher, it can't receive battle damage from enemy Units with 5 or less AP instead.",
-      "【파일럿】[Yurin L'Ciel]"
+      "【파일럿】[유린 루셸]"
     ],
     "__typename": "CommandCard",
     "id": "GD03-115",
@@ -3256,7 +3256,7 @@
     ],
     "description": [
       "【액션】Choose 1 enemy Unit that is Lv.3 or lower. Return it to its owner's hand.",
-      "【파일럿】[Sergei Smirnov]"
+      "【파일럿】[세르게이 스밀노프]"
     ],
     "__typename": "CommandCard",
     "id": "GD03-122",
