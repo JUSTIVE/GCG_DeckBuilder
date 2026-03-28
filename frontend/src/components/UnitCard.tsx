@@ -105,7 +105,14 @@ export function UnitCard({ unitCardRef, focused }: Props) {
           <div className="flex flex-col gap-0.5 ">
             <div className="flex flex-row px-3">
               {unitCard.zone.map((x) => (
-                <ZoneChip zone={x} className={cardBackgroundColor} key={x} />
+                <ZoneChip
+                  zone={x}
+                  className={cn(
+                    cardBackgroundColor,
+                    unitCard.color === "WHITE" ? "text-black" : "",
+                  )}
+                  key={x}
+                />
               ))}
             </div>
             <div
