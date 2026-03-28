@@ -24,6 +24,10 @@
  *  AP / HP : Int!
  *    Some BaseCard / UnitCard rows have null. Coerced to 0.
  *
+ *  UnitCard.traits : [CardTrait!]!
+ *    Raw UnitCard stores the array as "trait" (singular).
+ *    We rename it to "traits" to match the schema field name.
+ *
  *  ResourceCard __typename → "Resource"
  *    Raw data uses "__typename": "ResourceCard"; schema type is "Resource".
  */
@@ -317,6 +321,12 @@ function fieldResolver(
   //    Covers CommandCard.pilot.{AP,HP} resolved by the default resolver.
   if (typeName === "Pilot" && (fieldName === "AP" || fieldName === "HP")) {
     return (source[fieldName] as number | null | undefined) ?? 0;
+  }
+
+  // ── UnitCard.traits → raw field is "trait" (singular) ────────────────────
+  if (typeName === "UnitCard" && fieldName === "traits") {
+    const raw = source["trait"];
+    return Array.isArray(raw) ? raw : [];
   }
 
   // ── UnitCard / BaseCard AP / HP → null coercion ───────────────────────────

@@ -2,12 +2,13 @@ import { graphql } from "relay-runtime";
 import type { UnitCardFragment$key } from "@/__generated__/UnitCardFragment.graphql";
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
-import { renderZone } from "@/render/zone";
+import Marquee from "@/components/Marquee";
 import tempimg from "./tempimg.png";
 import { use } from "react";
 import { CardListFocusContext } from "./CardList";
 import { renderRarity } from "@/render/rarity";
 import { ZoneChip } from "./ZoneChip";
+import { TraitChip } from "./TraitChip";
 
 const Fragment = graphql`
   fragment UnitCardFragment on UnitCard {
@@ -21,6 +22,7 @@ const Fragment = graphql`
     AP
     HP
     zone
+    traits
   }
 `;
 
@@ -116,18 +118,32 @@ export function UnitCard({ unitCardRef, focused }: Props) {
           )}
         </div>
         <div className="flex flex-row gap-2 ">
-          <div className="flex flex-col justify-start">
+          <div className="flex flex-col justify-start flex-1 overflow-hidden">
             <div className="flex flex-row">
               {unitCard.zone.map((x) => (
                 <ZoneChip zone={x} className={cardBackgroundColor} key={x} />
               ))}
             </div>
+            <div className="w-full overflow-hidden">
+              <div
+                className={cn(
+                  "flex text-end text-gray-900 text-[8px] brightness-200 saturate-50 px-2",
+                  cardBackgroundColor,
+                )}
+              >
+                <Marquee speed={6}>
+                  {unitCard.traits.map((x) => (
+                    <TraitChip trait={x} key={x} />
+                  ))}
+                </Marquee>
+              </div>
+            </div>
           </div>
-          <div className="@container flex flex-1 flex-row gap-1">
-            <div className="bg-black aspect-square flex-1 flex justify-center items-center font-bold text-[28cqw]">
+          <div className="@container flex flex-1 flex-row gap-1 min-w-6">
+            <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[28cqw]">
               {unitCard.AP}
             </div>
-            <div className="bg-black aspect-square flex-1 flex justify-center items-center font-bold text-[28cqw]">
+            <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[28cqw]">
               {unitCard.HP}
             </div>
           </div>

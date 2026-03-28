@@ -195,6 +195,7 @@ type UnitCard implements Node {
   rarity: CardRarity! #희귀도
   package: CardPackage! # 패키지
   keywords: [CardKeyword!]! #키워드
+  traits: [CardTrait!]!
   zone: [Zone!]! # 지형
   AP: Int! # 공격력
   HP: Int! # 체력
