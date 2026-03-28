@@ -420,3 +420,27 @@ a {
   --cut-tr: --value(--cutout-*, [length]);
   --cut-br: --value(--cutout-*, [length]);
 }
+
+/*
+ * .parallelogram — 왼쪽 아래 + 오른쪽 위가 완전히 잘린 평행사변형 마스크
+ *
+ * --para-cut 변수로 잘리는 크기를 조절합니다.
+ * 기본값은 --cutout-sm (0.5rem) 입니다.
+ *
+ * Usage examples:
+ *   parallelogram parallelogram-sm   → 0.5rem 크기로 잘림
+ *   parallelogram parallelogram-lg   → 1rem 크기로 잘림
+ *   parallelogram parallelogram-[2rem] → 임의 크기
+ */
+.parallelogram {
+  clip-path: polygon(
+    0% 0%,
+    calc(100% - var(--para-cut, var(--cutout-sm))) 0%,
+    100% 100%,
+    var(--para-cut, var(--cutout-sm)) 100%
+  );
+}
+
+@utility parallelogram-* {
+  --para-cut: --value(--cutout-*, [length]);
+}

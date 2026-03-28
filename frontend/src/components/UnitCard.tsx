@@ -23,6 +23,17 @@ const Fragment = graphql`
     HP
     zone
     traits
+    links {
+      __typename
+      ... on LinkPilot {
+        pilot {
+          name
+        }
+      }
+      ... on LinkTrait {
+        trait
+      }
+    }
   }
 `;
 
@@ -66,23 +77,36 @@ export function UnitCard({ unitCardRef, focused }: Props) {
               : unitCard.color === "WHITE"
                 ? "bg-[#FFFFFF]"
                 : "bg-[#000000]";
+  const cardBackgroundColor50 =
+    unitCard.color === "BLUE"
+      ? "bg-[#7FB8DA]"
+      : unitCard.color === "GREEN"
+        ? "bg-[#B0D19E]"
+        : unitCard.color === "RED"
+          ? "bg-[#DE80A8]"
+          : unitCard.color === "PURPLE"
+            ? "bg-[#BAA4C8]"
+            : unitCard.color === "YELLOW"
+              ? "bg-[#E9D7BB]"
+              : unitCard.color === "WHITE"
+                ? "bg-[#FFFFFF]"
+                : "bg-[#808080]";
 
   return (
     <button
       type="button"
       className={cn(
-        "relative flex flex-col aspect-100/160 min-w-25 w-full rounded-xl  justify-between  border-8  transform-all cursor-pointer text-white",
-        cardBorderColor,
+        "relative flex flex-col aspect-100/160 min-w-40 w-full rounded-xl  justify-between    transform-all cursor-pointer text-white  overflow-hidden outline",
       )}
       onClick={() => {
         setFocusedCard(focused ? null : unitCard.id);
       }}
     >
-      <div className="absolute -right-2 bg-black text-[8px] px-2 -mt-2 cutout cutout-bl-sm pl-4 rounded rounded-tr-xl z-1">
+      <div className="absolute -right-0 bg-black text-[8px] px-2 cutout cutout-bl-sm pl-4 rounded rounded-tr-xl z-1">
         {`${unitCard.id} ${renderRarity(unitCard.rarity)}`}
       </div>
       <img
-        className="absolute w-full h-full object-cover top-0 rounded-sm"
+        className="absolute w-full h-full object-cover top-0 rounded-sm scale-100"
         src={tempimg}
         alt=""
       />
@@ -102,9 +126,9 @@ export function UnitCard({ unitCardRef, focused }: Props) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 px-2 z-1">
-        <div className="grid grid-cols-1 gap-0.5">
-          <div className="p-2 bg-black whitespace-pre-wrap cutout-tl-sm cutout text-sm font-bold ">
+      <div className="flex flex-col gap-2  z-1">
+        <div className="grid grid-cols-1 gap-0.5 px-2">
+          <div className="p-2 bg-black whitespace-pre-wrap cutout-tl-sm cutout text-xs font-bold ">
             {unitCard.name}
           </div>
           {focused && unitCard.description.length > 0 && (
@@ -117,34 +141,58 @@ export function UnitCard({ unitCardRef, focused }: Props) {
             </div>
           )}
         </div>
-        <div className="flex flex-row gap-2 ">
-          <div className="flex flex-col justify-start flex-1 overflow-hidden">
-            <div className="flex flex-row">
-              {unitCard.zone.map((x) => (
-                <ZoneChip zone={x} className={cardBackgroundColor} key={x} />
-              ))}
-            </div>
-            <div className="w-full overflow-hidden">
-              <div
-                className={cn(
-                  "flex text-end text-gray-900 text-[8px] brightness-200 saturate-50 px-2",
-                  cardBackgroundColor,
-                )}
-              >
-                <Marquee speed={6}>
-                  {unitCard.traits.map((x) => (
-                    <TraitChip trait={x} key={x} />
-                  ))}
-                </Marquee>
+        <div className="flex flex-col gap-0.5 ">
+          <div className="flex flex-row px-3">
+            {unitCard.zone.map((x) => (
+              <ZoneChip zone={x} className={cardBackgroundColor} key={x} />
+            ))}
+          </div>
+          <div
+            className={cn("flex flex-row gap-1 pr-2", cardBackgroundColor50)}
+          >
+            <div className="flex flex-col justify-start flex-1 overflow-hidden">
+              <div className="flex flex-row gap-0.5">
+                <div className="w-2 bg-black -mr-5 " />
+                <div className="w-10 bg-black -mr-5 parallelogram parallelogram-sm" />
+                <div
+                  className={cn(
+                    "w-[calc(100%-12px)] ml-3 overflow-hidden brightness-300 saturate-20 parallelogram parallelogram-sm px-2",
+                    cardBackgroundColor,
+                  )}
+                >
+                  <div className={cn("flex text-end text-gray-900 text-[8px]")}>
+                    <Marquee speed={8}>
+                      {unitCard.traits.map((x) => (
+                        <TraitChip trait={x} key={x} />
+                      ))}
+                    </Marquee>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-row">
+                <div className="w-4 bg-black -mr-4"></div>
+                <div className="bg-black overflow-hidden w-full pl-7 parallelogram parallelogram-sm px-2 ">
+                  <div className={cn("flex text-end text-white text-[8px]")}>
+                    <Marquee speed={6}>
+                      {unitCard.links.map((x) => {
+                        return x.__typename === "LinkPilot" ? (
+                          <span key={x.pilot.name}>{x.pilot.name}</span>
+                        ) : (
+                          <span>{x.trait}</span>
+                        );
+                      })}
+                    </Marquee>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="@container flex flex-1 flex-row gap-1 min-w-6">
-            <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[28cqw]">
-              {unitCard.AP}
-            </div>
-            <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[28cqw]">
-              {unitCard.HP}
+            <div className="@container flex  flex-row gap-0.5 min-w-8">
+              <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[28cqw]">
+                {unitCard.AP}
+              </div>
+              <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[28cqw]">
+                {unitCard.HP}
+              </div>
             </div>
           </div>
         </div>

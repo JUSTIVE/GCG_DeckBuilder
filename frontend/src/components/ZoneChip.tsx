@@ -11,7 +11,7 @@ export function ZoneChip({
   return (
     <div
       className={cn(
-        "w-10 text-[8px] cutout cutout-bl-sm cutout-tr-sm not-first:-ml-2",
+        "w-10 text-[8px] parallelogram  parallelogram-sm not-first:-ml-1.5",
         className,
       )}
     >

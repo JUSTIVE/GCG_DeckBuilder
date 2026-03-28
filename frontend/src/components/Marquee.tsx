@@ -9,29 +9,38 @@ type Props = {
 };
 
 export function Marquee({ children, className, speed = 40, gap = 16 }: Props) {
-  const trackRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [duration, setDuration] = useState(5);
   const [shouldScroll, setShouldScroll] = useState(false);
 
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
+    const content = contentRef.current;
+    const container = containerRef.current;
+    if (!content || !container) return;
 
-    const contentWidth = track.scrollWidth / 2;
-    const containerWidth = track.parentElement?.clientWidth ?? 0;
+    const measure = () => {
+      const contentWidth = content.offsetWidth;
+      const containerWidth = container.offsetWidth;
 
-    if (contentWidth > containerWidth) {
-      setShouldScroll(true);
-      setDuration(contentWidth / speed);
-    } else {
-      setShouldScroll(false);
-    }
+      if (contentWidth > containerWidth) {
+        setShouldScroll(true);
+        setDuration(contentWidth / speed);
+      } else {
+        setShouldScroll(false);
+      }
+    };
+
+    measure();
+
+    const ro = new ResizeObserver(measure);
+    ro.observe(container);
+    return () => ro.disconnect();
   }, [children, speed]);
 
   return (
-    <div className={cn("overflow-hidden w-full", className)}>
+    <div ref={containerRef} className={cn("overflow-hidden w-full", className)}>
       <div
-        ref={trackRef}
         className="flex w-max"
         style={
           shouldScroll
@@ -42,7 +51,11 @@ export function Marquee({ children, className, speed = 40, gap = 16 }: Props) {
             : { gap: `${gap}px` }
         }
       >
-        <div className="flex shrink-0" style={{ gap: `${gap}px` }}>
+        <div
+          ref={contentRef}
+          className="flex shrink-0"
+          style={{ gap: `${gap}px` }}
+        >
           {children}
         </div>
         {shouldScroll && (
