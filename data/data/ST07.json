@@ -1,18 +1,13 @@
 [
   {
-    "name": "Gundam Exia",
+    "name": "건담 엑시아",
     "level": 5,
     "cost": 4,
     "color": "PURPLE",
-    "keywords": [
-      "WHEN_PAIRED"
-    ],
+    "keywords": ["WHEN_PAIRED"],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB",
-      "GN_DRIVE"
-    ],
+    "trait": ["CB", "GN_DRIVE"],
     "description": [
       "자신의 턴 종료 시,, if there are 7 or more (CB) cards in your trash, choose 1 of your Resources. Set it as active.",
       "【세트 시】Place the top 2 cards of your deck into your trash. If you place a (CB) card with this effect, draw 1."
@@ -25,23 +20,17 @@
       "__typename": "LinkPilot",
       "pilotName": "세츠나 F. 세이에이"
     },
-    "zone": [
-      "SPACE",
-      "EARTH"
-    ]
+    "zone": ["SPACE", "EARTH"]
   },
   {
-    "name": "Gundam Exia",
+    "name": "건담 엑시아",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
     "keywords": [],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB",
-      "GN_DRIVE"
-    ],
+    "trait": ["CB", "GN_DRIVE"],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST07-002",
@@ -51,23 +40,17 @@
       "__typename": "LinkPilot",
       "pilotName": "세츠나 F. 세이에이"
     },
-    "zone": [
-      "SPACE",
-      "EARTH"
-    ]
+    "zone": ["SPACE", "EARTH"]
   },
   {
-    "name": "Gundam Virtue",
+    "name": "건담 버체",
     "level": 5,
     "cost": 3,
     "color": "PURPLE",
     "keywords": [],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB",
-      "GN_DRIVE"
-    ],
+    "trait": ["CB", "GN_DRIVE"],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST07-003",
@@ -77,25 +60,17 @@
       "__typename": "LinkPilot",
       "pilotName": "티에리아 아데"
     },
-    "zone": [
-      "SPACE",
-      "EARTH"
-    ]
+    "zone": ["SPACE", "EARTH"]
   },
   {
-    "name": "Gundam Virtue",
+    "name": "건담 버체",
     "level": 3,
     "cost": 2,
     "color": "PURPLE",
-    "keywords": [
-      "BLOCKER"
-    ],
+    "keywords": ["BLOCKER"],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB",
-      "GN_DRIVE"
-    ],
+    "trait": ["CB", "GN_DRIVE"],
     "description": [
       "While you have a (CB) Pilot in play, this Unit gains <블로커>.",
       "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
@@ -108,25 +83,17 @@
       "__typename": "LinkPilot",
       "pilotName": "티에리아 아데"
     },
-    "zone": [
-      "SPACE",
-      "EARTH"
-    ]
+    "zone": ["SPACE", "EARTH"]
   },
   {
-    "name": "Gundam Dynames",
+    "name": "건담 듀나메스",
     "level": 4,
     "cost": 3,
     "color": "GREEN",
-    "keywords": [
-      "DURING_LINK"
-    ],
+    "keywords": ["DURING_LINK"],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB",
-      "GN_DRIVE"
-    ],
+    "trait": ["CB", "GN_DRIVE"],
     "description": [
       "During your turn, when this Unit destroys an enemy Unit with battle damage, this Unit recovers 2 HP.",
       "【링크 중】This Unit gets AP+2."
@@ -139,23 +106,17 @@
       "__typename": "LinkPilot",
       "pilotName": "록온 스트라토스"
     },
-    "zone": [
-      "SPACE",
-      "EARTH"
-    ]
+    "zone": ["SPACE", "EARTH"]
   },
   {
-    "name": "Gundam Dynames",
+    "name": "건담 듀나메스",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
     "keywords": [],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB",
-      "GN_DRIVE"
-    ],
+    "trait": ["CB", "GN_DRIVE"],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST07-006",
@@ -165,26 +126,18 @@
       "__typename": "LinkPilot",
       "pilotName": "록온 스트라토스"
     },
-    "zone": [
-      "SPACE",
-      "EARTH"
-    ]
+    "zone": ["SPACE", "EARTH"]
   },
   {
-    "name": "Gundam Kyrios",
+    "name": "건담 큐리오스",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
     "keywords": [],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB",
-      "GN_DRIVE"
-    ],
-    "description": [
-      "During your turn, while you have a (CB) Pilot in play, this Unit gets AP+2."
-    ],
+    "trait": ["CB", "GN_DRIVE"],
+    "description": ["During your turn, while you have a (CB) Pilot in play, this Unit gets AP+2."],
     "__typename": "UnitCard",
     "id": "ST07-007",
     "AP": 2,
@@ -193,23 +146,17 @@
       "__typename": "LinkPilot",
       "pilotName": "알레루야 햅티즘 / 할레루야 햅티즘"
     },
-    "zone": [
-      "SPACE",
-      "EARTH"
-    ]
+    "zone": ["SPACE", "EARTH"]
   },
   {
-    "name": "Gundam Kyrios (Flight Mode)",
+    "name": "건담 큐리오스 (비행 모드)",
     "level": 2,
     "cost": 2,
     "color": "GREEN",
     "keywords": [],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB",
-      "GN_DRIVE"
-    ],
+    "trait": ["CB", "GN_DRIVE"],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST07-008",
@@ -219,25 +166,17 @@
       "__typename": "LinkPilot",
       "pilotName": "알레루야 햅티즘 / 할레루야 햅티즘"
     },
-    "zone": [
-      "SPACE",
-      "EARTH"
-    ]
+    "zone": ["SPACE", "EARTH"]
   },
   {
     "name": "세츠나 F. 세이에이",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
-    "keywords": [
-      "BURST",
-      "ATTACK"
-    ],
+    "keywords": ["BURST", "ATTACK"],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB"
-    ],
+    "trait": ["CB"],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【어택 시】This Unit gets AP+1 during this turn. If there are 7 or more (CB) cards in your trash, all your (CB) Units get AP+1 instead."
@@ -252,16 +191,10 @@
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
-    "keywords": [
-      "BURST",
-      "DESTROYED"
-    ],
+    "keywords": ["BURST", "DESTROYED"],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB",
-      "INNOVADE"
-    ],
+    "trait": ["CB", "INNOVADE"],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【파괴 시】If it is your opponent's turn and this is a (CB) Unit, draw 1."
@@ -276,15 +209,10 @@
     "level": 4,
     "cost": 1,
     "color": "GREEN",
-    "keywords": [
-      "BURST",
-      "WHEN_PAIRED"
-    ],
+    "keywords": ["BURST", "WHEN_PAIRED"],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB"
-    ],
+    "trait": ["CB"],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】If this is a (CB) Unit, it may choose an active enemy Unit whose Lv. is equal to or lower than this Unit as its attack target during this turn."
@@ -299,15 +227,10 @@
     "level": 3,
     "cost": 1,
     "color": "GREEN",
-    "keywords": [
-      "BURST"
-    ],
+    "keywords": ["BURST"],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB",
-      "SUPER_SOLDIER"
-    ],
+    "trait": ["CB", "SUPER_SOLDIER"],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "During your turn, while you have a (CB) Link Unit in play, this Unit can't receive battle damage from enemy Units with 3 or less AP."
@@ -318,14 +241,11 @@
     "HP": 1
   },
   {
-    "name": "Armed Intervention",
+    "name": "무력 개입",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
-    "keywords": [
-      "BURST",
-      "ACTION"
-    ],
+    "keywords": ["BURST", "ACTION"],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
     "trait": [],
@@ -337,13 +257,11 @@
     "id": "ST07-013"
   },
   {
-    "name": "Tactical Visionary",
+    "name": "전술 예측가",
     "level": 1,
     "cost": 1,
     "color": "GREEN",
-    "keywords": [
-      "MAIN"
-    ],
+    "keywords": ["MAIN"],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
     "trait": [],
@@ -354,20 +272,14 @@
     "id": "ST07-014"
   },
   {
-    "name": "Ptolemaios",
+    "name": "프톨레마이오스",
     "level": 2,
     "cost": 1,
     "color": "PURPLE",
-    "keywords": [
-      "BURST",
-      "DEPLOY"
-    ],
+    "keywords": ["BURST", "DEPLOY"],
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
-    "trait": [
-      "CB",
-      "WARSHIP"
-    ],
+    "trait": ["CB", "WARSHIP"],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -377,8 +289,6 @@
     "id": "ST07-015",
     "AP": null,
     "HP": 5,
-    "zone": [
-      "SPACE"
-    ]
+    "zone": ["SPACE"]
   }
 ]
