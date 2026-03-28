@@ -1,15 +1,10 @@
 # data
 
-To install dependencies:
+데이터를 처리하는 과정으로 생각한 것:
 
-```bash
-bun install
-```
-
-To run:
-
-```bash
-bun run 
-```
-
-This project was created using `bun init` in bun v1.3.8. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+0. crawler에서 raw.json을 가져옴.
+1. 1.validator로 가져온 데이터 검사
+2. 2.mapper로 mapped.json을 생성, 키워드/고유명사들을 우선적으로 대치번역합니다.
+3. 3.splitter로 ./data에 각 패키지별 카드 묶음으로 분리
+(여기서 인간번역 수행)
+4. 4.joiner combined.json을 생성
