@@ -21,7 +21,7 @@ const data = {
   navMain: [
     {
       title: "카드 찾기",
-      url: "#",
+      url: "/cardlist",
       items: [
         {
           title: "Installation",

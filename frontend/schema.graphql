@@ -267,7 +267,7 @@ input CardFilterInput {
   keyword: [CardKeyword!] # 키워드
   zone: [Zone!] # 지형
   query: String # 이름/효과정보
-  kind: CardKind!
+  kind: [CardKind!]!
 }
 
 enum CardSort {

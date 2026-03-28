@@ -44,7 +44,7 @@ describe("Query.cards – kind filter", () => {
           }
         }
       }`,
-      { f: { kind: "UNIT" } },
+      { f: { kind: ["UNIT"] } },
     );
 
     const conn = data["cards"] as {
@@ -66,7 +66,7 @@ describe("Query.cards – kind filter", () => {
           edges { node { __typename ... on PilotCard { id pilot { name AP HP } } } }
         }
       }`,
-      { f: { kind: "PILOT" } },
+      { f: { kind: ["PILOT"] } },
     );
 
     const conn = data["cards"] as {
@@ -90,7 +90,7 @@ describe("Query.cards – kind filter", () => {
           edges { node { __typename } }
         }
       }`,
-      { f: { kind: "RESOURCE" } },
+      { f: { kind: ["RESOURCE"] } },
     );
 
     const conn = data["cards"] as {
@@ -110,7 +110,7 @@ describe("Query.cards – kind filter", () => {
           edges { node { __typename ... on BaseCard { id name AP HP } } }
         }
       }`,
-      { f: { kind: "BASE" } },
+      { f: { kind: ["BASE"] } },
     );
 
     const conn = data["cards"] as {
@@ -132,7 +132,7 @@ describe("Query.cards – kind filter", () => {
           edges { node { __typename ... on CommandCard { id name } } }
         }
       }`,
-      { f: { kind: "COMMAND" } },
+      { f: { kind: ["COMMAND"] } },
     );
 
     const conn = data["cards"] as {
@@ -144,6 +144,62 @@ describe("Query.cards – kind filter", () => {
     for (const edge of conn.edges) {
       expect(edge.node.__typename).toBe("CommandCard");
     }
+  });
+
+  it("returns multiple card kinds when kind array has multiple values (OR condition)", async () => {
+    const data = await gql(
+      `query($f: CardFilterInput!) {
+        cards(first: 100, filter: $f) {
+          totalCount
+          edges {
+            node {
+              __typename
+              ... on UnitCard { id }
+              ... on PilotCard { id }
+            }
+          }
+        }
+      }`,
+      { f: { kind: ["UNIT", "PILOT"] } },
+    );
+
+    const conn = data["cards"] as {
+      totalCount: number;
+      edges: Array<{ node: { __typename: string } }>;
+    };
+
+    expect(conn.totalCount).toBeGreaterThan(0);
+
+    const typenames = new Set(conn.edges.map((e) => e.node.__typename));
+    expect(typenames.has("UnitCard")).toBe(true);
+    expect(typenames.has("PilotCard")).toBe(true);
+    expect(typenames.has("BaseCard")).toBe(false);
+    expect(typenames.has("CommandCard")).toBe(false);
+  });
+
+  it("returns all playable card kinds when kind=[UNIT, PILOT, BASE, COMMAND]", async () => {
+    const data = await gql(
+      `query($f: CardFilterInput!) {
+        cards(first: 200, filter: $f) {
+          totalCount
+          edges { node { __typename } }
+        }
+      }`,
+      { f: { kind: ["UNIT", "PILOT", "BASE", "COMMAND"] } },
+    );
+
+    const conn = data["cards"] as {
+      totalCount: number;
+      edges: Array<{ node: { __typename: string } }>;
+    };
+
+    expect(conn.totalCount).toBeGreaterThan(0);
+
+    const typenames = new Set(conn.edges.map((e) => e.node.__typename));
+    expect(typenames.has("UnitCard")).toBe(true);
+    expect(typenames.has("PilotCard")).toBe(true);
+    expect(typenames.has("BaseCard")).toBe(true);
+    expect(typenames.has("CommandCard")).toBe(true);
   });
 });
 
@@ -158,7 +214,7 @@ describe("Query.cards – filter combinations", () => {
           edges { node { ... on UnitCard { id package } } }
         }
       }`,
-      { f: { kind: "UNIT", package: "ST01" } },
+      { f: { kind: ["UNIT"], package: "ST01" } },
     );
 
     const conn = data["cards"] as {
@@ -180,7 +236,7 @@ describe("Query.cards – filter combinations", () => {
           edges { node { ... on UnitCard { id level } } }
         }
       }`,
-      { f: { kind: "UNIT", level: [4] } },
+      { f: { kind: ["UNIT"], level: [4] } },
     );
 
     const conn = data["cards"] as {
@@ -202,7 +258,7 @@ describe("Query.cards – filter combinations", () => {
           edges { node { ... on UnitCard { id cost } } }
         }
       }`,
-      { f: { kind: "UNIT", cost: [1, 2] } },
+      { f: { kind: ["UNIT"], cost: [1, 2] } },
     );
 
     const conn = data["cards"] as {
@@ -246,7 +302,7 @@ describe("Query.cards – filter combinations", () => {
           edges { node { ... on UnitCard { id zone } } }
         }
       }`,
-      { f: { kind: "UNIT", zone: ["SPACE"] } },
+      { f: { kind: ["UNIT"], zone: ["SPACE"] } },
     );
 
     const conn = data["cards"] as {
@@ -268,7 +324,7 @@ describe("Query.cards – filter combinations", () => {
           edges { node { ... on UnitCard { id name } } }
         }
       }`,
-      { f: { kind: "UNIT", query: "Gundam" } },
+      { f: { kind: ["UNIT"], query: "gundam" } },
     );
 
     const conn = data["cards"] as {
@@ -287,11 +343,11 @@ describe("Query.cards – filter combinations", () => {
     // Filtering by COMMON should return all units; filtering by RARE → 0.
     const commonData = await gql(
       `query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`,
-      { f: { kind: "UNIT", rarity: "COMMON" } },
+      { f: { kind: ["UNIT"], rarity: "COMMON" } },
     );
     const rareData = await gql(
       `query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`,
-      { f: { kind: "UNIT", rarity: "RARE" } },
+      { f: { kind: ["UNIT"], rarity: "RARE" } },
     );
 
     const commonCount = (commonData["cards"] as { totalCount: number })
@@ -301,7 +357,7 @@ describe("Query.cards – filter combinations", () => {
     // Every unit has rarity=COMMON (default), so common === all units
     const allData = await gql(
       `query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`,
-      { f: { kind: "UNIT" } },
+      { f: { kind: ["UNIT"] } },
     );
     const allCount = (allData["cards"] as { totalCount: number }).totalCount;
 
@@ -314,7 +370,7 @@ describe("Query.cards – filter combinations", () => {
       `query($f: CardFilterInput!) {
         cards(filter: $f) { totalCount edges { cursor } }
       }`,
-      { f: { kind: "UNIT", package: "ST01", level: [99] } },
+      { f: { kind: ["UNIT"], package: "ST01", level: [999] } },
     );
 
     const conn = data["cards"] as { totalCount: number };
@@ -334,7 +390,7 @@ describe("Query.cards – cursor pagination", () => {
           pageInfo { hasNextPage hasPreviousPage startCursor endCursor }
         }
       }`,
-      { f: { kind: "UNIT" } },
+      { f: { kind: ["UNIT"] } },
     );
 
     const conn = data["cards"] as {
@@ -365,7 +421,7 @@ describe("Query.cards – cursor pagination", () => {
           pageInfo { endCursor }
         }
       }`,
-      { f: { kind: "UNIT" } },
+      { f: { kind: ["UNIT"] } },
     );
 
     const p1 = page1["cards"] as {
@@ -382,7 +438,7 @@ describe("Query.cards – cursor pagination", () => {
           pageInfo { hasPreviousPage hasNextPage }
         }
       }`,
-      { f: { kind: "UNIT" }, after: p1.pageInfo.endCursor },
+      { f: { kind: ["UNIT"] }, after: p1.pageInfo.endCursor },
     );
 
     const p2 = page2["cards"] as {
@@ -457,7 +513,7 @@ describe("UnitCard.links – [UnitLink!]!", () => {
           }
         }
       }`,
-      { f: { kind: "UNIT", package: "ST01" } },
+      { f: { kind: ["UNIT"], package: "ST01" } },
     );
 
     const edges = (
@@ -533,7 +589,7 @@ describe("UnitCard.links – [UnitLink!]!", () => {
           }
         }
       }`,
-      { f: { kind: "UNIT" } },
+      { f: { kind: ["UNIT"] } },
     );
 
     const traitLinks = (
@@ -606,7 +662,7 @@ describe("LinkPilot.pilot – pilotName → Pilot lookup", () => {
           }
         }
       }`,
-      { f: { kind: "UNIT" } },
+      { f: { kind: ["UNIT"] } },
     );
 
     const pilotLinks = (
@@ -661,7 +717,7 @@ describe("PilotCard.pilot – flat raw fields → Pilot object", () => {
           }
         }
       }`,
-      { f: { kind: "PILOT" } },
+      { f: { kind: ["PILOT"] } },
     );
 
     const edges = (
@@ -704,7 +760,7 @@ describe("CommandCard.pilot – nullable Pilot", () => {
           }
         }
       }`,
-      { f: { kind: "COMMAND" } },
+      { f: { kind: ["COMMAND"] } },
     );
 
     const edges = (
@@ -774,7 +830,7 @@ describe("BaseCard.AP null coercion → 0", () => {
           }
         }
       }`,
-      { f: { kind: "BASE" } },
+      { f: { kind: ["BASE"] } },
     );
 
     const edges = (

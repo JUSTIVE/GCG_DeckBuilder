@@ -165,8 +165,8 @@ const KIND_TO_TYPENAME: Record<string, string> = {
 };
 
 interface CardFilterInput {
-  /** Required */
-  kind: string;
+  /** Required — array of CardKind values (OR condition) */
+  kind: string[];
   level?: number[];
   cost?: number[];
   package?: string;
@@ -177,11 +177,16 @@ interface CardFilterInput {
 }
 
 function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[] {
-  const targetTypename = KIND_TO_TYPENAME[filter.kind];
-  if (!targetTypename) return [];
+  // Map kind array to __typename values
+  const targetTypenames = filter.kind
+    .map((k) => KIND_TO_TYPENAME[k])
+    .filter((t): t is string => !!t);
+
+  if (targetTypenames.length === 0) return [];
 
   return cards.filter((card) => {
-    if (card.__typename !== targetTypename) return false;
+    // kind — card must match at least one of the requested kinds (OR condition)
+    if (!targetTypenames.includes(card.__typename)) return false;
 
     const c = card as AnyRecord;
 
