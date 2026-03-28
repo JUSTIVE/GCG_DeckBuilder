@@ -199,7 +199,7 @@ type UnitCard implements Node {
   zone: [Zone!]! # 지형
   AP: Int! # 공격력
   HP: Int! # 체력
-  link: UnitLink # 링크 정보
+  links: [UnitLink!]! # 링크 정보
   description: [String!]! # 효과 정보
 }
 

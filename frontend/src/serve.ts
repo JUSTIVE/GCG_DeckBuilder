@@ -28,6 +28,12 @@
  *    Raw UnitCard stores the array as "trait" (singular).
  *    We rename it to "traits" to match the schema field name.
  *
+ *  UnitCard.links : [UnitLink!]!
+ *    Schema changed from `link: UnitLink` (single nullable) to
+ *    `links: [UnitLink!]!` (non-null array).
+ *    Raw data still stores a single object under "link" (or omits the field).
+ *    We wrap it in an array; absent/null → empty array [].
+ *
  *  ResourceCard __typename → "Resource"
  *    Raw data uses "__typename": "ResourceCard"; schema type is "Resource".
  */
@@ -323,10 +329,18 @@ function fieldResolver(
     return (source[fieldName] as number | null | undefined) ?? 0;
   }
 
-  // ── UnitCard.traits → raw field is "trait" (singular) ────────────────────
+  // ── UnitCard.traits → raw field is "trait" (singular) ────────────────
   if (typeName === "UnitCard" && fieldName === "traits") {
     const raw = source["trait"];
     return Array.isArray(raw) ? raw : [];
+  }
+
+  // ── UnitCard.links → raw field is "link" (single object or absent) ───
+  //    Schema: links: [UnitLink!]!  — always an array, never null.
+  if (typeName === "UnitCard" && fieldName === "links") {
+    const raw = source["link"];
+    if (raw == null) return [];
+    return [raw];
   }
 
   // ── UnitCard / BaseCard AP / HP → null coercion ───────────────────────────
@@ -346,7 +360,6 @@ function fieldResolver(
   }
 
   // Default resolver — handles all remaining fields including:
-  //   • UnitCard.link  (single nullable UnitLink object or undefined → null)
   //   • CommandCard.pilot  (nullable Pilot already nested in raw data)
   return defaultFieldResolver(source, args, context, info);
 }

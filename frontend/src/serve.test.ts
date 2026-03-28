@@ -5,7 +5,7 @@
  *  • PilotCard.pilot: Pilot!  → constructed from flat { name, AP, HP } raw fields
  *  • LinkPilot.pilot: Pilot!  → looked up by pilotName; Pilot has no `id` field
  *  • CommandCard.pilot: Pilot → nullable; already nested in raw data
- *  • link: UnitLink           → single nullable object (not an array)
+ *  • links: [UnitLink!]!      → non-null array; raw "link" (single obj or absent) wrapped in []
  *  • rarity: CardRarity!      → non-null; defaults to "COMMON" when absent from data
  *  • CardFilterInput.rarity   → rarity filter (absent rarity treated as "COMMON")
  *  • kind=RESOURCE            → 0 results (ResourceCards have no package field and
@@ -432,12 +432,14 @@ describe("Query.cards – cursor pagination", () => {
   });
 });
 
-// ─── UnitCard.link – single nullable UnitLink ─────────────────────────────────
+// ─── UnitCard.links – [UnitLink!]! ────────────────────────────────────────────
 //
-// schema.graphql declares:  link: UnitLink   (single nullable, NOT [UnitLink!]!)
+// schema.graphql declares:  links: [UnitLink!]!  (non-null array)
+// Raw data stores a single object under "link" (or omits the field entirely).
+// serve.ts wraps it: absent/null → [], present → [rawLink].
 
-describe("UnitCard.link – single nullable UnitLink", () => {
-  it("link is null or a plain object (never an array)", async () => {
+describe("UnitCard.links – [UnitLink!]!", () => {
+  it("links is always an array (never null)", async () => {
     const data = await gql(
       `query($f: CardFilterInput!) {
         cards(first: 50, filter: $f) {
@@ -445,10 +447,10 @@ describe("UnitCard.link – single nullable UnitLink", () => {
             node {
               ... on UnitCard {
                 id
-                link {
+                links {
                   __typename
                   ... on LinkTrait { trait }
-                  ... on LinkPilot  { pilot { id name } }
+                  ... on LinkPilot  { pilot { name } }
                 }
               }
             }
@@ -461,29 +463,57 @@ describe("UnitCard.link – single nullable UnitLink", () => {
     const edges = (
       data["cards"] as {
         edges: Array<{
-          node: { id: string; link: { __typename: string } | null };
+          node: { id: string; links: Array<{ __typename: string }> };
         }>;
       }
     ).edges;
 
     expect(edges.length).toBeGreaterThan(0);
     for (const edge of edges) {
-      // link must be null or a plain object — never an array
-      expect(Array.isArray(edge.node.link)).toBe(false);
-      if (edge.node.link !== null) {
-        expect(["LinkTrait", "LinkPilot"]).toContain(edge.node.link.__typename);
+      // links must always be an array — never null
+      expect(Array.isArray(edge.node.links)).toBe(true);
+      for (const l of edge.node.links) {
+        expect(["LinkTrait", "LinkPilot"]).toContain(l.__typename);
       }
     }
   });
 
-  it("UnitCard without link field returns null", async () => {
-    // ST01-005 (GM) has no link field in the raw JSON
+  it("UnitCard without link in raw data returns empty array []", async () => {
+    // ST01-005 (GM) has no link field in the raw JSON → links: []
     const data = await gql(
-      `{ node(id: "ST01-005") { ... on UnitCard { id link { __typename } } } }`,
+      `{ node(id: "ST01-005") { ... on UnitCard { id links { __typename } } } }`,
     );
 
-    const node = data["node"] as { id: string; link: unknown };
-    expect(node.link).toBeNull();
+    const node = data["node"] as { id: string; links: unknown[] };
+    expect(Array.isArray(node.links)).toBe(true);
+    expect(node.links).toHaveLength(0);
+  });
+
+  it("UnitCard with a link returns array of length 1", async () => {
+    // ST01-001 (Gundam) has a LinkPilot → links: [{ __typename: "LinkPilot", ... }]
+    const data = await gql(
+      `{ node(id: "ST01-001") {
+          ... on UnitCard {
+            id
+            links {
+              __typename
+              ... on LinkPilot { pilot { name AP HP } }
+            }
+          }
+        }
+      }`,
+    );
+
+    const node = data["node"] as {
+      id: string;
+      links: Array<{
+        __typename: string;
+        pilot?: { name: string; AP: number; HP: number };
+      }>;
+    };
+    expect(Array.isArray(node.links)).toBe(true);
+    expect(node.links).toHaveLength(1);
+    expect(node.links[0].__typename).toBe("LinkPilot");
   });
 
   it("LinkTrait link exposes the trait field", async () => {
@@ -494,7 +524,7 @@ describe("UnitCard.link – single nullable UnitLink", () => {
             node {
               ... on UnitCard {
                 id
-                link {
+                links {
                   __typename
                   ... on LinkTrait { trait }
                 }
@@ -509,14 +539,14 @@ describe("UnitCard.link – single nullable UnitLink", () => {
     const traitLinks = (
       data["cards"] as {
         edges: Array<{
-          node: { link: { __typename: string; trait?: string } | null };
+          node: { links: Array<{ __typename: string; trait?: string }> };
         }>;
       }
     ).edges
-      .map((e) => e.node.link)
+      .flatMap((e) => e.node.links)
       .filter(
         (l): l is { __typename: "LinkTrait"; trait: string } =>
-          l !== null && l.__typename === "LinkTrait",
+          l.__typename === "LinkTrait",
       );
 
     expect(traitLinks.length).toBeGreaterThan(0);
@@ -530,12 +560,12 @@ describe("UnitCard.link – single nullable UnitLink", () => {
 
 describe("LinkPilot.pilot – pilotName → Pilot lookup", () => {
   it("pilot is resolved to a Pilot object with name/AP/HP", async () => {
-    // ST01-001 (Gundam) → LinkPilot → pilotName "아무로 레이" → Pilot { name, AP, HP }
+    // ST01-001 (Gundam) → links[0] is LinkPilot → pilotName "아무로 레이"
     // Note: Pilot is a value type, not a Node — it has no `id` field.
     const data = await gql(
       `{ node(id: "ST01-001") {
           ... on UnitCard {
-            link {
+            links {
               ... on LinkPilot {
                 pilot { name AP HP }
               }
@@ -546,27 +576,28 @@ describe("LinkPilot.pilot – pilotName → Pilot lookup", () => {
     );
 
     const node = data["node"] as {
-      link: {
-        pilot: { name: string; AP: number; HP: number };
-      } | null;
+      links: Array<{
+        pilot?: { name: string; AP: number; HP: number };
+      }>;
     };
 
-    expect(node.link).not.toBeNull();
-    expect(node.link!.pilot).toBeDefined();
-    expect(node.link!.pilot.name).toBe("아무로 레이");
-    expect(typeof node.link!.pilot.AP).toBe("number");
-    expect(typeof node.link!.pilot.HP).toBe("number");
+    expect(node.links).toHaveLength(1);
+    const pilot = node.links[0].pilot;
+    expect(pilot).toBeDefined();
+    expect(pilot!.name).toBe("아무로 레이");
+    expect(typeof pilot!.AP).toBe("number");
+    expect(typeof pilot!.HP).toBe("number");
   });
 
   it("pilot is never null even when the pilot card is not in the dataset (stub returned)", async () => {
-    // Query any 20 LinkPilot units; every pilot must be non-null (Pilot!, not nullable)
+    // Query any 20 UnitCards; for every LinkPilot entry pilot must be non-null
     const data = await gql(
       `query($f: CardFilterInput!) {
         cards(first: 20, filter: $f) {
           edges {
             node {
               ... on UnitCard {
-                link {
+                links {
                   __typename
                   ... on LinkPilot { pilot { name AP HP } }
                 }
@@ -582,22 +613,22 @@ describe("LinkPilot.pilot – pilotName → Pilot lookup", () => {
       data["cards"] as {
         edges: Array<{
           node: {
-            link: {
+            links: Array<{
               __typename: string;
               pilot?: { name: string; AP: number; HP: number };
-            } | null;
+            }>;
           };
         }>;
       }
     ).edges
-      .map((e) => e.node.link)
+      .flatMap((e) => e.node.links)
       .filter(
         (
           l,
         ): l is {
           __typename: "LinkPilot";
           pilot: { name: string; AP: number; HP: number };
-        } => l !== null && l.__typename === "LinkPilot",
+        } => l.__typename === "LinkPilot",
       );
 
     for (const l of pilotLinks) {
