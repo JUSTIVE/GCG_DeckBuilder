@@ -269,7 +269,25 @@ input CardFilterInput {
   kind: CardKind!
 }
 
+enum CardSort {
+  NAME_ASC
+  NAME_DESC
+  COST_ASC
+  COST_DESC
+  LEVEL_ASC
+  LEVEL_DESC
+  AP_ASC
+  AP_DESC
+  HP_ASC
+  HP_DESC
+}
+
 type Query {
   node(id: ID!): Node
-  cards(first: Int, after: String, filter: CardFilterInput): CardConnection!
+  cards(
+    first: Int
+    after: String
+    filter: CardFilterInput
+    sort: CardSort
+  ): CardConnection!
 }

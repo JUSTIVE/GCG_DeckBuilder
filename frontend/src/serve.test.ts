@@ -2,11 +2,14 @@
  * serve.test.ts — Integration tests for serveGraphQL
  *
  * Mirrors the schema.graphql ground truth:
+ *  • PilotCard.pilot: Pilot!  → constructed from flat { name, AP, HP } raw fields
+ *  • LinkPilot.pilot: Pilot!  → looked up by pilotName; Pilot has no `id` field
+ *  • CommandCard.pilot: Pilot → nullable; already nested in raw data
  *  • link: UnitLink           → single nullable object (not an array)
  *  • rarity: CardRarity!      → non-null; defaults to "COMMON" when absent from data
- *  • LinkPilot.pilot: PilotCard! → non-null; stub returned when pilot not in dataset
- *  • CommandCard              → only exposes id / name / level / cost / series
  *  • CardFilterInput.rarity   → rarity filter (absent rarity treated as "COMMON")
+ *  • kind=RESOURCE            → 0 results (ResourceCards have no package field and
+ *                               are not included in combined.json)
  */
 
 import { describe, it, expect } from "vitest";
@@ -60,7 +63,7 @@ describe("Query.cards – kind filter", () => {
       `query($f: CardFilterInput!) {
         cards(filter: $f) {
           totalCount
-          edges { node { __typename ... on PilotCard { id name AP HP } } }
+          edges { node { __typename ... on PilotCard { id pilot { name AP HP } } } }
         }
       }`,
       { f: { kind: "PILOT" } },
@@ -77,12 +80,14 @@ describe("Query.cards – kind filter", () => {
     }
   });
 
-  it("resolves ResourceCard __typename as 'Resource'", async () => {
+  it("kind=RESOURCE returns 0 results (ResourceCards have no package, not in combined.json)", async () => {
+    // ResourceCards are excluded from combined.json because 3.splitter.ts filters
+    // cards with package != null, and ResourceCards have no package field.
     const data = await gql(
       `query($f: CardFilterInput!) {
         cards(filter: $f) {
           totalCount
-          edges { node { __typename ... on Resource { id name } } }
+          edges { node { __typename } }
         }
       }`,
       { f: { kind: "RESOURCE" } },
@@ -90,15 +95,11 @@ describe("Query.cards – kind filter", () => {
 
     const conn = data["cards"] as {
       totalCount: number;
-      edges: Array<{ node: { __typename: string; id: string; name: string } }>;
+      edges: Array<unknown>;
     };
 
-    expect(conn.totalCount).toBeGreaterThan(0);
-    for (const edge of conn.edges) {
-      expect(edge.node.__typename).toBe("Resource");
-    }
-    const gundam = conn.edges.find((e) => e.node.id === "T-001");
-    expect(gundam?.node.name).toBe("Gundam");
+    expect(conn.totalCount).toBe(0);
+    expect(conn.edges).toHaveLength(0);
   });
 
   it("returns BaseCards when kind=BASE", async () => {
@@ -527,15 +528,16 @@ describe("UnitCard.link – single nullable UnitLink", () => {
 
 // ─── LinkPilot.pilot — pilotName → PilotCard lookup ──────────────────────────
 
-describe("LinkPilot.pilot – pilotName → PilotCard lookup", () => {
-  it("pilot is resolved to a full PilotCard", async () => {
-    // ST01-001 (Gundam) → LinkPilot → pilot is "아무로 레이" = ST01-010
+describe("LinkPilot.pilot – pilotName → Pilot lookup", () => {
+  it("pilot is resolved to a Pilot object with name/AP/HP", async () => {
+    // ST01-001 (Gundam) → LinkPilot → pilotName "아무로 레이" → Pilot { name, AP, HP }
+    // Note: Pilot is a value type, not a Node — it has no `id` field.
     const data = await gql(
       `{ node(id: "ST01-001") {
           ... on UnitCard {
             link {
               ... on LinkPilot {
-                pilot { id name AP HP }
+                pilot { name AP HP }
               }
             }
           }
@@ -545,20 +547,19 @@ describe("LinkPilot.pilot – pilotName → PilotCard lookup", () => {
 
     const node = data["node"] as {
       link: {
-        pilot: { id: string; name: string; AP: number; HP: number };
+        pilot: { name: string; AP: number; HP: number };
       } | null;
     };
 
     expect(node.link).not.toBeNull();
-    // pilot is non-null (PilotCard!) — always present (stub if not in dataset)
     expect(node.link!.pilot).toBeDefined();
-    expect(node.link!.pilot.id).toBe("ST01-010");
+    expect(node.link!.pilot.name).toBe("아무로 레이");
     expect(typeof node.link!.pilot.AP).toBe("number");
     expect(typeof node.link!.pilot.HP).toBe("number");
   });
 
   it("pilot is never null even when the pilot card is not in the dataset (stub returned)", async () => {
-    // Query any 20 LinkPilot units; every pilot must be non-null
+    // Query any 20 LinkPilot units; every pilot must be non-null (Pilot!, not nullable)
     const data = await gql(
       `query($f: CardFilterInput!) {
         cards(first: 20, filter: $f) {
@@ -567,7 +568,7 @@ describe("LinkPilot.pilot – pilotName → PilotCard lookup", () => {
               ... on UnitCard {
                 link {
                   __typename
-                  ... on LinkPilot { pilot { id name } }
+                  ... on LinkPilot { pilot { name AP HP } }
                 }
               }
             }
@@ -583,7 +584,7 @@ describe("LinkPilot.pilot – pilotName → PilotCard lookup", () => {
           node: {
             link: {
               __typename: string;
-              pilot?: { id: string; name: string };
+              pilot?: { name: string; AP: number; HP: number };
             } | null;
           };
         }>;
@@ -595,7 +596,7 @@ describe("LinkPilot.pilot – pilotName → PilotCard lookup", () => {
           l,
         ): l is {
           __typename: "LinkPilot";
-          pilot: { id: string; name: string };
+          pilot: { name: string; AP: number; HP: number };
         } => l !== null && l.__typename === "LinkPilot",
       );
 
@@ -603,6 +604,99 @@ describe("LinkPilot.pilot – pilotName → PilotCard lookup", () => {
       expect(l.pilot).toBeDefined();
       expect(typeof l.pilot.name).toBe("string");
       expect(l.pilot.name.length).toBeGreaterThan(0);
+      expect(typeof l.pilot.AP).toBe("number");
+      expect(typeof l.pilot.HP).toBe("number");
+    }
+  });
+});
+
+// ─── PilotCard.pilot field ────────────────────────────────────────────────────
+
+describe("PilotCard.pilot – flat raw fields → Pilot object", () => {
+  it("PilotCard.pilot contains name/AP/HP constructed from flat raw data", async () => {
+    // Raw PilotCard stores { name, AP, HP } as top-level fields.
+    // The schema exposes them through pilot: Pilot! (no direct name/AP/HP on PilotCard).
+    const data = await gql(
+      `query($f: CardFilterInput!) {
+        cards(first: 5, filter: $f) {
+          edges {
+            node {
+              ... on PilotCard {
+                id
+                pilot { name AP HP }
+                rarity
+              }
+            }
+          }
+        }
+      }`,
+      { f: { kind: "PILOT" } },
+    );
+
+    const edges = (
+      data["cards"] as {
+        edges: Array<{
+          node: {
+            id: string;
+            pilot: { name: string; AP: number; HP: number };
+            rarity: string;
+          };
+        }>;
+      }
+    ).edges;
+
+    expect(edges.length).toBeGreaterThan(0);
+    for (const edge of edges) {
+      expect(typeof edge.node.pilot.name).toBe("string");
+      expect(edge.node.pilot.name.length).toBeGreaterThan(0);
+      expect(typeof edge.node.pilot.AP).toBe("number");
+      expect(typeof edge.node.pilot.HP).toBe("number");
+    }
+  });
+});
+
+// ─── CommandCard.pilot field ──────────────────────────────────────────────────
+
+describe("CommandCard.pilot – nullable Pilot", () => {
+  it("some CommandCards have a pilot, others have null", async () => {
+    const data = await gql(
+      `query($f: CardFilterInput!) {
+        cards(first: 20, filter: $f) {
+          totalCount
+          edges {
+            node {
+              ... on CommandCard {
+                id name
+                pilot { name AP HP }
+              }
+            }
+          }
+        }
+      }`,
+      { f: { kind: "COMMAND" } },
+    );
+
+    const edges = (
+      data["cards"] as {
+        totalCount: number;
+        edges: Array<{
+          node: {
+            id: string;
+            name: string;
+            pilot: { name: string; AP: number; HP: number } | null;
+          };
+        }>;
+      }
+    ).edges;
+
+    expect(edges.length).toBeGreaterThan(0);
+    // pilot is nullable — some will be null, some will be an object
+    for (const edge of edges) {
+      if (edge.node.pilot !== null) {
+        expect(typeof edge.node.pilot.name).toBe("string");
+        expect(typeof edge.node.pilot.AP).toBe("number");
+        expect(typeof edge.node.pilot.HP).toBe("number");
+      }
     }
   });
 });
@@ -709,35 +803,30 @@ describe("Query.node", () => {
   });
 
   it("returns a PilotCard by id", async () => {
+    // PilotCard.pilot: Pilot! — name/AP/HP are nested, not direct fields
     const data = await gql(
       `{ node(id: "ST01-010") {
           id
-          ... on PilotCard { name AP HP rarity }
+          ... on PilotCard { pilot { name AP HP } rarity }
         }
       }`,
     );
 
     const node = data["node"] as {
       id: string;
-      name: string;
+      pilot: { name: string; AP: number; HP: number };
       rarity: string;
     };
     expect(node.id).toBe("ST01-010");
-    expect(node.name).toBeTruthy();
+    expect(node.pilot.name).toBeTruthy();
+    expect(typeof node.pilot.AP).toBe("number");
+    expect(typeof node.pilot.HP).toBe("number");
     expect(node.rarity).toBe("COMMON");
   });
 
-  it("returns a Resource by id", async () => {
-    const data = await gql(
-      `{ node(id: "T-001") {
-          id
-          ... on Resource { name }
-        }
-      }`,
-    );
-
-    const node = data["node"] as { id: string; name: string };
-    expect(node.id).toBe("T-001");
-    expect(node.name).toBe("Gundam");
+  it("node(id) returns null for a ResourceCard id (not in combined.json)", async () => {
+    // T-001 is a ResourceCard with no package field — excluded from combined.json
+    const data = await gql(`{ node(id: "T-001") { id } }`);
+    expect(data["node"]).toBeNull();
   });
 });
