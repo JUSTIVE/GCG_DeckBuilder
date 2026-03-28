@@ -115,19 +115,19 @@ export function UnitCard({ unitCardRef, focused }: Props) {
             </div>
           )}
         </div>
-        <div className="flex flex-row gap-2">
-          <div className="flex-1 flex-col">
+        <div className="flex flex-row gap-2 ">
+          <div className="flex flex-col justify-start">
             <div className="flex flex-row">
               {unitCard.zone.map((x) => (
                 <ZoneChip zone={x} className={cardBackgroundColor} key={x} />
               ))}
             </div>
           </div>
-          <div className="flex flex-row gap-1">
-            <div className="bg-black p-1 px-0.5 min-w-[30px] flex justify-center font-bold text-2xl">
+          <div className="@container flex flex-1 flex-row gap-1">
+            <div className="bg-black aspect-square flex-1 flex justify-center items-center font-bold text-[28cqw]">
               {unitCard.AP}
             </div>
-            <div className="bg-black p-1 px-0.5 min-w-[30px] flex justify-center font-bold text-2xl">
+            <div className="bg-black aspect-square flex-1 flex justify-center items-center font-bold text-[28cqw]">
               {unitCard.HP}
             </div>
           </div>
