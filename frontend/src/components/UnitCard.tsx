@@ -7,6 +7,7 @@ import tempimg from "./tempimg.png";
 import { use } from "react";
 import { CardListFocusContext } from "./CardList";
 import { renderRarity } from "@/render/rarity";
+import { ZoneChip } from "./ZoneChip";
 
 const Fragment = graphql`
   fragment UnitCardFragment on UnitCard {
@@ -68,7 +69,7 @@ export function UnitCard({ unitCardRef, focused }: Props) {
     <button
       type="button"
       className={cn(
-        "relative flex flex-col aspect-100/160 min-w-50 w-full rounded-xl  justify-between  border-8  transform-all cursor-pointer text-white",
+        "relative flex flex-col aspect-100/160 min-w-25 w-full rounded-xl  justify-between  border-8  transform-all cursor-pointer text-white",
         cardBorderColor,
       )}
       onClick={() => {
@@ -118,15 +119,7 @@ export function UnitCard({ unitCardRef, focused }: Props) {
           <div className="flex-1 flex-col">
             <div className="flex flex-row">
               {unitCard.zone.map((x) => (
-                <div
-                  className={cn(
-                    "px-3 text-xs cutout cutout-bl-sm cutout-tr-sm not-first:-ml-2",
-                    cardBackgroundColor,
-                  )}
-                  key={x}
-                >
-                  {renderZone(x)}
-                </div>
+                <ZoneChip zone={x} className={cardBackgroundColor} key={x} />
               ))}
             </div>
           </div>

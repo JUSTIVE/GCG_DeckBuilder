@@ -16,7 +16,7 @@ function RootComponent() {
       <Scaffold>
         <Outlet />
       </Scaffold>
-      <GlobalNavigation />
+
       <TanStackDevtools
         config={{
           position: "bottom-right",

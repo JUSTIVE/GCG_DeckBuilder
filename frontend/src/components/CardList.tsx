@@ -55,7 +55,7 @@ export function CardList({ queryRef }: Props) {
 
   return (
     <CardListFocusProvider>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 mx-auto max-w-[1080px]">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4 mx-auto w-full p-4">
         {data.cards.edges.map(({ cursor, node }) => (
           <Card key={cursor} cardRef={node} />
         ))}
