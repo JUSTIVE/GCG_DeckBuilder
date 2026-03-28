@@ -5,6 +5,12 @@ import { Environment, Network, type FetchFunction } from "relay-runtime";
 import { RelayEnvironmentProvider } from "react-relay";
 import { serveGraphQL } from "./serve";
 
+import setupLocatorUI from "@locator/runtime";
+
+if (process.env.NODE_ENV === "development") {
+  setupLocatorUI();
+}
+
 const fetchGraphQL: FetchFunction = async (request, variables) => {
   try {
     const resp = await serveGraphQL(request.text ?? "", variables);

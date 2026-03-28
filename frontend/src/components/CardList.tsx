@@ -2,6 +2,29 @@ import type { CardListFragment$key } from "@/__generated__/CardListFragment.grap
 import { usePaginationFragment } from "react-relay";
 import { graphql } from "relay-runtime";
 import { Card } from "./Card";
+import { createContext, useState } from "react";
+
+type FocusCardContextType = {
+  focusedCard: string | null;
+  setFocusedCard: (value: string | null) => void;
+};
+export const CardListFocusContext = createContext<FocusCardContextType | null>(
+  null,
+);
+
+export function CardListFocusProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [focusedCard, setFocusedCard] = useState<string | null>(null);
+
+  return (
+    <CardListFocusContext value={{ focusedCard, setFocusedCard }}>
+      {children}
+    </CardListFocusContext>
+  );
+}
 
 const Fragment = graphql`
   fragment CardListFragment on Query
@@ -31,10 +54,12 @@ export function CardList({ queryRef }: Props) {
   const { data } = usePaginationFragment(Fragment, queryRef);
 
   return (
-    <div className="flex flex-wrap gap-4">
-      {data.cards.edges.map(({ cursor, node }) => (
-        <Card key={cursor} cardRef={node} />
-      ))}
-    </div>
+    <CardListFocusProvider>
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 mx-auto max-w-[1080px]">
+        {data.cards.edges.map(({ cursor, node }) => (
+          <Card key={cursor} cardRef={node} />
+        ))}
+      </div>
+    </CardListFocusProvider>
   );
 }

@@ -3,6 +3,10 @@ import type { UnitCardFragment$key } from "@/__generated__/UnitCardFragment.grap
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import { renderZone } from "@/render/zone";
+import tempimg from "./tempimg.png";
+import { use } from "react";
+import { CardListFocusContext } from "./CardList";
+import { renderRarity } from "@/render/rarity";
 
 const Fragment = graphql`
   fragment UnitCardFragment on UnitCard {
@@ -12,19 +16,23 @@ const Fragment = graphql`
     name
     color
     description
+    rarity
     AP
     HP
     zone
-    trait
   }
 `;
 
 type Props = {
   unitCardRef: UnitCardFragment$key;
+  focused: boolean;
 };
 
-export function UnitCard({ unitCardRef }: Props) {
+export function UnitCard({ unitCardRef, focused }: Props) {
+  const focusContext = use(CardListFocusContext);
   const unitCard = useFragment(Fragment, unitCardRef);
+  if (!focusContext) return null;
+  const { setFocusedCard } = focusContext;
 
   const cardBorderColor =
     unitCard.color === "BLUE"
@@ -57,28 +65,51 @@ export function UnitCard({ unitCardRef }: Props) {
                 : "bg-[#000000]";
 
   return (
-    <div
+    <button
+      type="button"
       className={cn(
-        "flex flex-col aspect-100/160 min-w-50 w-75 rounded-xl bg-gray-100/50 justify-between border border-8",
+        "relative flex flex-col aspect-100/160 min-w-50 w-full rounded-xl  justify-between  border-8  transform-all cursor-pointer text-white",
         cardBorderColor,
       )}
+      onClick={() => {
+        setFocusedCard(focused ? null : unitCard.id);
+      }}
     >
-      <div className={cn("inline-flex flex-col font-bold w-fit  items-start")}>
-        <div className={cn("px-2 cutout-br-sm cutout", cardBackgroundColor)}>
-          <span className="opacity-50">Lv.{unitCard.level}</span>
+      <div className="absolute -right-2 bg-black text-[8px] px-2 -mt-2 cutout cutout-bl-sm pl-4 rounded rounded-tr-xl z-1">
+        {`${unitCard.id} ${renderRarity(unitCard.rarity)}`}
+      </div>
+      <img
+        className="absolute w-full h-full object-cover top-0 rounded-sm"
+        src={tempimg}
+        alt=""
+      />
+      <div
+        className={cn("inline-flex flex-col font-bold w-fit items-start z-1")}
+      >
+        <div
+          className={cn(
+            "cutout-br-sm cutout px-2 w-10.5 self-start pl-1",
+            cardBackgroundColor,
+          )}
+        >
+          <span className="opacity-80 text-xs">Lv.{unitCard.level}</span>
         </div>
         <div className={cn("px-2 cutout-br-[4px] cutout", cardBackgroundColor)}>
-          <span className="text-3xl opacity-50">{unitCard.cost}</span>
+          <span className="text-2xl opacity-80">{unitCard.cost}</span>
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 px-2">
-        <div className="flex flex-col gap-0.5">
-          <div className="p-2 bg-black whitespace-pre-wrap cutout-tl-sm cutout text-lg font-bold">
+      <div className="flex flex-col gap-2 px-2 z-1">
+        <div className="grid grid-cols-1 gap-0.5">
+          <div className="p-2 bg-black whitespace-pre-wrap cutout-tl-sm cutout text-sm font-bold ">
             {unitCard.name}
           </div>
-          {unitCard.description.length > 0 && (
-            <div className="p-2 bg-black whitespace-pre-wrap text-sm">
+          {focused && unitCard.description.length > 0 && (
+            <div
+              className={cn(
+                "p-2 bg-black whitespace-pre-wrap text-sm origin-bottom overflow-hidden",
+              )}
+            >
               {unitCard.description.join("\n")}
             </div>
           )}
@@ -109,6 +140,6 @@ export function UnitCard({ unitCardRef }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

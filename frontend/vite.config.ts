@@ -13,7 +13,19 @@ const config = defineConfig({
     tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tailwindcss(),
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
-    viteReact({ babel: { plugins: ["relay"] } }),
+    viteReact({
+      babel: {
+        plugins: [
+          "relay",
+          [
+            "@locator/babel-jsx/dist",
+            {
+              env: "development",
+            },
+          ],
+        ],
+      },
+    }),
   ],
 });
 
