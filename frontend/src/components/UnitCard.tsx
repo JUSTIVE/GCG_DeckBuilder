@@ -9,6 +9,7 @@ import { CardListFocusContext } from "./CardList";
 import { renderRarity } from "@/render/rarity";
 import { ZoneChip } from "./ZoneChip";
 import { TraitChip } from "./TraitChip";
+import { renderTrait } from "@/render/trait";
 
 const Fragment = graphql`
   fragment UnitCardFragment on UnitCard {
@@ -150,8 +151,7 @@ export function UnitCard({ unitCardRef, focused }: Props) {
                   <div className="w-10 bg-black -mr-5 parallelogram parallelogram-sm" />
                   <div
                     className={cn(
-                      "w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100 parallelogram parallelogram-sm px-2",
-                      cardBackgroundColor,
+                      "w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 parallelogram parallelogram-sm px-2",
                     )}
                   >
                     <div
@@ -174,7 +174,7 @@ export function UnitCard({ unitCardRef, focused }: Props) {
                           return x.__typename === "LinkPilot" ? (
                             <span key={x.pilot.name}>{x.pilot.name}</span>
                           ) : x.__typename === "LinkTrait" ? (
-                            <span>{x.trait}</span>
+                            <span>{renderTrait(x.trait)}</span>
                           ) : null;
                         })}
                       </Marquee>
@@ -183,10 +183,10 @@ export function UnitCard({ unitCardRef, focused }: Props) {
                 </div>
               </div>
               <div className="@container flex  flex-row gap-0.5 min-w-8">
-                <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[28cqw]">
+                <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[40cqw]">
                   {unitCard.AP}
                 </div>
-                <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[28cqw]">
+                <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[40cqw]">
                   {unitCard.HP}
                 </div>
               </div>
