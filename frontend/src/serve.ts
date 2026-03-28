@@ -45,7 +45,7 @@ import type {
   GraphQLResolveInfo,
 } from "graphql";
 import schemaSDL from "../schema.graphql?raw";
-import allCardsRaw from "../../data/combined.json";
+import allCardsRaw from "../../data/mapped.json";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

@@ -1,6 +1,6 @@
 [
   {
-    "name": "Gundam",
+    "name": "건담",
     "level": 4,
     "cost": 3,
     "color": "BLUE",
@@ -888,7 +888,7 @@
     ]
   },
   {
-    "name": "Gundam",
+    "name": "건담",
     "level": 4,
     "cost": 2,
     "color": "BLUE",
@@ -1624,7 +1624,7 @@
   {
     "__typename": "ResourceCard",
     "id": "T-001",
-    "name": "Gundam"
+    "name": "건담"
   },
   {
     "__typename": "ResourceCard",
@@ -4589,7 +4589,7 @@
     "name": "EX Resource"
   },
   {
-    "name": "Gundam",
+    "name": "건담",
     "level": 4,
     "cost": 3,
     "color": "BLUE",

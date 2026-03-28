@@ -155,33 +155,39 @@ function renderCardLine(
 
 // ── main ──────────────────────────────────────────────────────────────────────
 
-const DATA_DIR = join(import.meta.dir, "data");
-
-const files = readdirSync(DATA_DIR)
-  .filter((f) => f.endsWith(".json"))
-  .sort();
-
-const packageSummaries: Array<{ name: string; summary: Summary }> = [];
+const MAPPED_FILE = join(import.meta.dir, "mapped.json");
 
 console.log(styleText("bold", "\n📋 Translation Coverage Report\n"));
 
-files.forEach((file, fileIdx) => {
-  const isLastFile = fileIdx === files.length - 1;
-  const filePath = join(DATA_DIR, file);
-  const packageName = file.replace(".json", "");
-  const cards: Card[] = JSON.parse(readFileSync(filePath, "utf-8"));
+const cards: Card[] = JSON.parse(readFileSync(MAPPED_FILE, "utf-8"));
 
-  // 패키지 단위 집계
+// UnitCard만 필터링
+const unitCards = cards.filter((c) => c.__typename === "UnitCard") as UnitCard[];
+
+// 패키지별로 그룹화
+const cardsByPackage = new Map<string, UnitCard[]>();
+for (const card of unitCards) {
+  const packageName = (card as any).package || "UNKNOWN";
+  if (!cardsByPackage.has(packageName)) {
+    cardsByPackage.set(packageName, []);
+  }
+  cardsByPackage.get(packageName)!.push(card);
+}
+
+// 패키지 정렬
+const sortedPackages = Array.from(cardsByPackage.keys()).sort();
+const packageSummaries: Array<{ name: string; summary: Summary }> = [];
+
+// 패키지별 처리
+sortedPackages.forEach((packageName, pkgIdx) => {
+  const isLastPackage = pkgIdx === sortedPackages.length - 1;
+  const packageCards = cardsByPackage.get(packageName)!;
+
   let packageSummary: Summary = { total: 0, translated: 0 };
 
-  // 1depth: 패키지(파일)
-  const fileConnector = isLastFile ? TREE_LAST : TREE_BRANCH;
-  const unitCards = cards.filter((c) => c.__typename === "UnitCard") as UnitCard[];
-  const unitCount = unitCards.length;
-
-  // 먼저 전체 summary 계산 (표시용)
+  // 패키지 summary 미리 계산
   let previewSummary: Summary = { total: 0, translated: 0 };
-  for (const card of unitCards) {
+  for (const card of packageCards) {
     const fields = checkUnitCard(card);
     previewSummary = addSummary(previewSummary, {
       total: fields.length,
@@ -189,23 +195,21 @@ files.forEach((file, fileIdx) => {
     });
   }
 
+  // 패키지 헤더 출력
+  const packageConnector = isLastPackage ? TREE_LAST : TREE_BRANCH;
   const packageLabel = styleText("bold", packageName);
-  const cardCountLabel = styleText("gray", ` (UnitCard × ${unitCount})`);
-  console.log(`${fileConnector}${packageLabel}${cardCountLabel} ${renderPercent(previewSummary)}`);
+  const cardCountLabel = styleText("gray", ` (UnitCard × ${packageCards.length})`);
+  console.log(
+    `${packageConnector}${packageLabel}${cardCountLabel} ${renderPercent(previewSummary)}`,
+  );
 
-  const filePrefix = isLastFile ? TREE_INDENT : TREE_PIPE;
+  const packagePrefix = isLastPackage ? TREE_INDENT : TREE_PIPE;
 
-  if (unitCards.length === 0) {
-    console.log(`${filePrefix}${TREE_LAST}${styleText("gray", "(번역 대상 카드 없음)")}`);
-    packageSummaries.push({ name: packageName, summary: { total: 0, translated: 0 } });
-    return;
-  }
-
-  // 2depth: 각 카드
-  unitCards.forEach((card, cardIdx) => {
-    const isLastCard = cardIdx === unitCards.length - 1;
+  // 각 카드 처리
+  packageCards.forEach((card, cardIdx) => {
+    const isLastCard = cardIdx === packageCards.length - 1;
     const fields = checkUnitCard(card);
-    const cardSummary = renderCardLine(card, fields, filePrefix, isLastCard);
+    const cardSummary = renderCardLine(card, fields, packagePrefix, isLastCard);
     packageSummary = addSummary(packageSummary, cardSummary);
   });
 
