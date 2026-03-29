@@ -3,36 +3,61 @@ import { useState } from "react";
 type PlayerState = {
   level: number;
   resources: number;
-  hasEx: boolean;
+  Ex: {
+    usedTurn: number | null;
+  } | null;
   turnsCompleted: number;
 };
 
 type Phase = "select-first" | "playing";
 
 function effectiveLevel(p: PlayerState) {
-  return p.level + (p.hasEx ? 1 : 0);
+  return (
+    p.level +
+    ((
+      p.Ex != null
+        ? p.Ex.usedTurn == null
+          ? true
+          : p.Ex.usedTurn <= p.turnsCompleted + 1
+        : false
+    )
+      ? 1
+      : 0)
+  );
 }
 
-function initPlayers(firstPlayer: 1 | 2): [PlayerState, PlayerState] {
-  const p1HasEx = firstPlayer === 2;
-  const p2HasEx = firstPlayer === 1;
+function initPlayers(firstPlayer: PlayerTurn): [PlayerState, PlayerState] {
+  const p1HasEx = firstPlayer === "p2";
+  const p2HasEx = firstPlayer === "p1";
   return [
-    { level: 0, resources: p1HasEx ? 1 : 0, hasEx: p1HasEx, turnsCompleted: 0 },
-    { level: 0, resources: p2HasEx ? 1 : 0, hasEx: p2HasEx, turnsCompleted: 0 },
+    {
+      level: 0,
+      resources: p1HasEx ? 0 : 0,
+      Ex: p1HasEx ? { usedTurn: null } : null,
+      turnsCompleted: 0,
+    },
+    {
+      level: 0,
+      resources: p2HasEx ? 0 : 0,
+      Ex: p2HasEx ? { usedTurn: null } : null,
+      turnsCompleted: 0,
+    },
   ];
 }
 
+type PlayerTurn = "p1" | "p2";
+
 export function ResourceCounterPage() {
   const [phase, setPhase] = useState<Phase>("select-first");
-  const [firstPlayer, setFirstPlayer] = useState<1 | 2>(1);
-  const [currentTurn, setCurrentTurn] = useState<1 | 2>(1);
+  const [firstPlayer, setFirstPlayer] = useState<PlayerTurn>("p1");
+  const [currentTurn, setCurrentTurn] = useState<PlayerTurn>("p1");
   const [turnStarted, setTurnStarted] = useState(false);
   const [players, setPlayers] = useState<[PlayerState, PlayerState]>([
-    { level: 0, resources: 0, hasEx: false, turnsCompleted: 0 },
-    { level: 0, resources: 0, hasEx: false, turnsCompleted: 0 },
+    { level: 0, resources: 0, Ex: null, turnsCompleted: 0 },
+    { level: 0, resources: 0, Ex: null, turnsCompleted: 0 },
   ]);
 
-  function selectFirst(player: 1 | 2) {
+  function selectFirst(player: PlayerTurn) {
     setFirstPlayer(player);
     setCurrentTurn(player);
     setPlayers(initPlayers(player));
@@ -40,16 +65,16 @@ export function ResourceCounterPage() {
   }
 
   function handleStartTurn() {
-    const idx = currentTurn - 1;
+    const idx = currentTurn === "p1" ? 0 : 1;
     setPlayers((prev) => {
       const next: [PlayerState, PlayerState] = [{ ...prev[0] }, { ...prev[1] }];
       const p = next[idx];
       const newLevel = p.level + 1;
-      const newEffLevel = newLevel + (p.hasEx ? 1 : 0);
+      const newEffLevel = newLevel;
       next[idx] = {
         ...p,
         level: newLevel,
-        resources: newLevel,
+        resources: newEffLevel,
       };
       return next;
     });
@@ -57,9 +82,8 @@ export function ResourceCounterPage() {
   }
 
   function handleEndTurn() {
-    const idx = currentTurn - 1;
-    const nextTurn: 1 | 2 = currentTurn === 1 ? 2 : 1;
-    const nextIdx = nextTurn - 1;
+    const idx = currentTurn === "p1" ? 0 : 1;
+    const nextTurn: PlayerTurn = currentTurn === "p1" ? "p2" : "p1";
 
     setPlayers((prev) => {
       const next: [PlayerState, PlayerState] = [{ ...prev[0] }, { ...prev[1] }];
@@ -71,8 +95,8 @@ export function ResourceCounterPage() {
     });
 
     setCurrentTurn(nextTurn);
+    setTurnStarted(false);
     // Next player's first turn (turnsCompleted === 0) is auto-started
-    setTurnStarted(players[nextIdx].turnsCompleted === 0);
   }
 
   function adjustResource(idx: 0 | 1, delta: number) {
@@ -90,30 +114,28 @@ export function ResourceCounterPage() {
     });
   }
 
-  function useEx(idx: 0 | 1) {
+  function activateEx(idx: 0 | 1) {
     setPlayers((prev) => {
       const next: [PlayerState, PlayerState] = [{ ...prev[0] }, { ...prev[1] }];
       const p = next[idx];
       next[idx] = {
         ...p,
-        hasEx: false,
+        Ex: {
+          usedTurn: p.turnsCompleted + 1,
+        },
         resources: Math.min(p.resources, p.level),
       };
       return next;
     });
   }
 
-  function resetGame() {
-    setPhase("select-first");
-    setTurnStarted(true);
-  }
-
   if (phase === "select-first") {
     return (
       <div className="flex h-[calc(100dvh-4rem)]">
         <button
+          type="button"
           className="flex-1 flex flex-col items-center justify-center gap-3 bg-blue-950 hover:bg-blue-900 text-white transition-colors cursor-pointer"
-          onClick={() => selectFirst(1)}
+          onClick={() => selectFirst("p1")}
         >
           <span className="text-blue-400 text-lg font-semibold tracking-widest uppercase">
             Player 1
@@ -128,8 +150,9 @@ export function ResourceCounterPage() {
         </div>
 
         <button
+          type="button"
           className="flex-1 flex flex-col items-center justify-center gap-3 bg-red-950 hover:bg-red-900 text-white transition-colors cursor-pointer"
-          onClick={() => selectFirst(2)}
+          onClick={() => selectFirst("p2")}
         >
           <span className="text-red-400 text-lg font-semibold tracking-widest uppercase">
             Player 2
@@ -141,15 +164,15 @@ export function ResourceCounterPage() {
   }
 
   const [p1, p2] = players;
-  const isP1Turn = currentTurn === 1;
-  const isP2Turn = currentTurn === 2;
+  const isP1Turn = currentTurn === "p1";
+  const isP2Turn = currentTurn === "p2";
 
   return (
     <div className="flex flex-col h-[calc(100dvh-4rem)]">
       {/* Player panels */}
       <div className="flex flex-1 min-h-0">
         <PlayerPanel
-          playerNum={1}
+          playerId={"p1"}
           player={p1}
           isActive={isP1Turn}
           turnStarted={isP1Turn ? turnStarted : true}
@@ -157,13 +180,13 @@ export function ResourceCounterPage() {
           onStartTurn={handleStartTurn}
           onEndTurn={handleEndTurn}
           onAdjustResource={(d) => adjustResource(0, d)}
-          onUseEx={() => useEx(0)}
+          onUseEx={() => activateEx(0)}
         />
 
         <div className="w-px bg-[var(--line)]" />
 
         <PlayerPanel
-          playerNum={2}
+          playerId={"p2"}
           player={p2}
           isActive={isP2Turn}
           turnStarted={isP2Turn ? turnStarted : true}
@@ -171,7 +194,7 @@ export function ResourceCounterPage() {
           onStartTurn={handleStartTurn}
           onEndTurn={handleEndTurn}
           onAdjustResource={(d) => adjustResource(1, d)}
-          onUseEx={() => useEx(1)}
+          onUseEx={() => activateEx(1)}
         />
       </div>
     </div>
@@ -179,11 +202,12 @@ export function ResourceCounterPage() {
 }
 
 type PlayerPanelProps = {
-  playerNum: 1 | 2;
+  playerId: PlayerTurn;
+
   player: PlayerState;
   isActive: boolean;
   turnStarted: boolean;
-  firstPlayer: 1 | 2;
+  firstPlayer: PlayerTurn;
   onStartTurn: () => void;
   onEndTurn: () => void;
   onAdjustResource: (delta: number) => void;
@@ -191,7 +215,7 @@ type PlayerPanelProps = {
 };
 
 function PlayerPanel({
-  playerNum,
+  playerId,
   player,
   isActive,
   turnStarted,
@@ -201,23 +225,29 @@ function PlayerPanel({
   onAdjustResource,
   onUseEx,
 }: PlayerPanelProps) {
-  const isFirst = firstPlayer === playerNum;
+  const isFirst = firstPlayer === playerId;
+  const isP1 = playerId === "p1";
 
-  const bgClass = playerNum === 1 ? "bg-blue-950/60" : "bg-red-950/60";
-  const activeBgClass = playerNum === 1 ? "bg-blue-950/90" : "bg-red-950/90";
-  const accentClass = playerNum === 1 ? "text-blue-400" : "text-red-400";
-  const borderClass =
-    playerNum === 1 ? "border-blue-800/50" : "border-red-800/50";
-  const btnClass =
-    playerNum === 1
-      ? "bg-blue-700 hover:bg-blue-600 active:bg-blue-800"
-      : "bg-red-700 hover:bg-red-600 active:bg-red-800";
-  const dimBtnClass =
-    playerNum === 1
-      ? "bg-blue-900/60 hover:bg-blue-800/80"
-      : "bg-red-900/60 hover:bg-red-800/80";
+  const bgClass = isP1 ? "bg-blue-950/60" : "bg-red-950/60";
+  const activeBgClass = isP1 ? "bg-blue-950/90" : "bg-red-950/90";
+  const accentClass = isP1 ? "text-blue-400" : "text-red-400";
+  const borderClass = isP1 ? "border-blue-800/50" : "border-red-800/50";
+  const btnClass = isP1
+    ? "bg-blue-700 hover:bg-blue-600 active:bg-blue-800"
+    : "bg-red-700 hover:bg-red-600 active:bg-red-800";
+  const dimBtnClass = isP1
+    ? "bg-blue-900/60 hover:bg-blue-800/80"
+    : "bg-red-900/60 hover:bg-red-800/80";
 
-  console.log(playerNum, player, isActive);
+  console.log(playerId, player, isActive);
+
+  const isExAvailable =
+    player.Ex != null
+      ? player.Ex.usedTurn == null
+        ? true
+        : player.Ex.usedTurn > player.turnsCompleted + 1
+      : null;
+
   return (
     <div
       className={`@conatiner flex-1 flex flex-col items-center justify-center gap-6 px-4 py-4 transition-colors ${isActive ? activeBgClass : bgClass}`}
@@ -225,7 +255,7 @@ function PlayerPanel({
       {/* Player label */}
       <div className="flex items-center gap-2">
         <span className={`text-xl font-bold tracking-wider ${accentClass}`}>
-          PLAYER {playerNum}
+          PLAYER {playerId === "p1" ? "1" : "2"}
         </span>
         {isFirst ? (
           <span
@@ -265,7 +295,7 @@ function PlayerPanel({
           {/* Turn controls */}
           {isActive ? (
             <>
-              {player.hasEx ? (
+              {turnStarted && isExAvailable ? (
                 <button
                   type="button"
                   onClick={onUseEx}

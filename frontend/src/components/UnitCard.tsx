@@ -1,5 +1,6 @@
 import { graphql } from "relay-runtime";
 import type { UnitCardFragment$key } from "@/__generated__/UnitCardFragment.graphql";
+import type { UnitCard_UnitCardBody$key } from "@/__generated__/UnitCard_UnitCardBody.graphql";
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
@@ -10,59 +11,42 @@ import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { COLOR_BG, COLOR_BG20 } from "src/render/color";
 
-const Fragment = graphql`
-  fragment UnitCardFragment on UnitCard {
-    id
-    level
-    cost
-    name
-    color
-    description
-    rarity
-    AP
-    HP
-    zone
-    traits
-    links {
-      __typename
-      ... on LinkPilot {
-        pilot {
-          name
-        }
-      }
-      ... on LinkTrait {
-        trait
-      }
-    }
-  }
-`;
-
-type Props = {
-  unitCardRef: UnitCardFragment$key;
-};
-
 // Shared card body used in both thumbnail and dialog.
 export function UnitCardBody({
-  unitCard,
+  unitCardRefs,
   cardBg,
   isWhite,
 }: {
-  unitCard: {
-    name: string;
-    color: string;
-    AP: number;
-    HP: number;
-    zone: readonly string[];
-    traits: readonly string[];
-    links: readonly {
-      __typename: string;
-      pilot?: { name: string };
-      trait?: string;
-    }[];
-  };
+  unitCardRefs: UnitCard_UnitCardBody$key;
   cardBg: string;
   isWhite: boolean;
 }) {
+  const unitCard = useFragment(
+    graphql`
+      fragment UnitCard_UnitCardBody on UnitCard {
+        id
+        name
+        color
+        AP
+        HP
+        zone
+        traits
+        links {
+          __typename
+          ... on LinkPilot {
+            pilot {
+              name
+            }
+          }
+          ... on LinkTrait {
+            trait
+          }
+        }
+      }
+    `,
+    unitCardRefs,
+  );
+
   return (
     <>
       <img
@@ -70,7 +54,9 @@ export function UnitCardBody({
         src={tempimg}
         alt={unitCard.name}
       />
-      <div />
+      <div className="bg-black text-white z-1 w-fit self-end px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
+        {unitCard.id}
+      </div>
       <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
           <div className="p-2 bg-black whitespace-pre-wrap cutout-tl-sm cutout text-[6cqw] font-bold text-center">
@@ -143,6 +129,38 @@ export function UnitCardBody({
   );
 }
 
+const Fragment = graphql`
+  fragment UnitCardFragment on UnitCard {
+    ...UnitCard_UnitCardBody
+    id
+    level
+    cost
+    name
+    color
+    description
+    rarity
+    AP
+    HP
+    zone
+    traits
+    links {
+      __typename
+      ... on LinkPilot {
+        pilot {
+          name
+        }
+      }
+      ... on LinkTrait {
+        trait
+      }
+    }
+  }
+`;
+
+type Props = {
+  unitCardRef: UnitCardFragment$key;
+};
+
 export function UnitCard({ unitCardRef }: Props) {
   const unitCard = useFragment(Fragment, unitCardRef);
   const search = Route.useSearch();
@@ -172,7 +190,11 @@ export function UnitCard({ unitCardRef }: Props) {
         )}
         onClick={openDialog}
       >
-        <UnitCardBody unitCard={unitCard} cardBg={cardBg} isWhite={isWhite} />
+        <UnitCardBody
+          unitCardRefs={unitCard}
+          cardBg={cardBg}
+          isWhite={isWhite}
+        />
       </button>
     </>
   );

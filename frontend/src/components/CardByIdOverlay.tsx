@@ -18,28 +18,72 @@ const Query = graphql`
     node(id: $id) {
       __typename
       ... on UnitCard {
-        id name level cost color AP HP description
-        zone traits
+        ...UnitCard_UnitCardBody
+        id
+        name
+        level
+        cost
+        color
+        AP
+        HP
+        description
+        zone
+        traits
         links {
           __typename
-          ... on LinkPilot { pilot { name } }
-          ... on LinkTrait { trait }
+          ... on LinkPilot {
+            pilot {
+              name
+            }
+          }
+          ... on LinkTrait {
+            trait
+          }
         }
       }
       ... on PilotCard {
-        id level cost color traits description
-        pilot { name AP HP }
+        id
+        level
+        cost
+        color
+        traits
+        description
+        pilot {
+          name
+          AP
+          HP
+        }
       }
       ... on BaseCard {
-        id name level cost color AP HP description
-        zone traits
+        id
+        name
+        level
+        cost
+        color
+        AP
+        HP
+        description
+        zone
+        traits
       }
       ... on CommandCard {
-        id name level cost color traits description
-        commandPilot: pilot { name AP HP }
+        id
+        name
+        level
+        cost
+        color
+        traits
+        description
+        commandPilot: pilot {
+          name
+          AP
+          HP
+        }
       }
       ... on Resource {
-        id name rarity
+        id
+        name
+        rarity
       }
     }
   }
@@ -71,7 +115,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
       const cardBg = COLOR_BG[node.color] ?? "bg-black";
       const isWhite = node.color === "WHITE";
       return (
-        <UnitCardBody unitCard={node} cardBg={cardBg} isWhite={isWhite} />
+        <UnitCardBody unitCardRefs={node} cardBg={cardBg} isWhite={isWhite} />
       );
     }
     if (node.__typename === "PilotCard") {
