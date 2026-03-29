@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ResourceCounterRouteImport } from './routes/resource-counter'
 import { Route as CardlistRouteImport } from './routes/cardlist'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ResourceCounterRoute = ResourceCounterRouteImport.update({
+  id: '/resource-counter',
+  path: '/resource-counter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CardlistRoute = CardlistRouteImport.update({
   id: '/cardlist',
   path: '/cardlist',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cardlist': typeof CardlistRoute
+  '/resource-counter': typeof ResourceCounterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cardlist': typeof CardlistRoute
+  '/resource-counter': typeof ResourceCounterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cardlist': typeof CardlistRoute
+  '/resource-counter': typeof ResourceCounterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cardlist'
+  fullPaths: '/' | '/cardlist' | '/resource-counter'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cardlist'
-  id: '__root__' | '/' | '/cardlist'
+  to: '/' | '/cardlist' | '/resource-counter'
+  id: '__root__' | '/' | '/cardlist' | '/resource-counter'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CardlistRoute: typeof CardlistRoute
+  ResourceCounterRoute: typeof ResourceCounterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/resource-counter': {
+      id: '/resource-counter'
+      path: '/resource-counter'
+      fullPath: '/resource-counter'
+      preLoaderRoute: typeof ResourceCounterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cardlist': {
       id: '/cardlist'
       path: '/cardlist'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CardlistRoute: CardlistRoute,
+  ResourceCounterRoute: ResourceCounterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

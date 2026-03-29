@@ -14,6 +14,11 @@ export const navMain: NavItem[] = [
       { title: "스타터 덱", url: "#" },
     ],
   },
+  {
+    title: "도구",
+    url: "",
+    items: [{ title: "리소스 시뮬레이터", url: "/resource-counter" }],
+  },
 ];
 
 /** Returns [parentItem, childItem?] matching the given pathname. */
