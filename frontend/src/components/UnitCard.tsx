@@ -11,7 +11,6 @@ import { renderZone } from "@/render/zone";
 import { Dialog } from "@base-ui/react/dialog";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
-import { flushSync } from "react-dom";
 import { COLOR_BG, COLOR_BG50, COLOR_HEX } from "src/render/color";
 
 const Fragment = graphql`
@@ -44,23 +43,6 @@ const Fragment = graphql`
 type Props = {
   unitCardRef: UnitCardFragment$key;
 };
-
-function withTransition(cb: () => void) {
-  if ("startViewTransition" in document) {
-    (
-      document as Document & {
-        startViewTransition(cb: () => void): void;
-      }
-    ).startViewTransition(() => flushSync(cb));
-  } else {
-    cb();
-  }
-}
-
-// CSS view-transition-name must be a valid ident — sanitize the card id.
-function safeVTName(id: string) {
-  return `card-${id.replace(/[^a-zA-Z0-9-]/g, "-")}`;
-}
 
 // Shared card body used in both thumbnail and dialog.
 function CardBody({
@@ -162,7 +144,6 @@ export function UnitCard({ unitCardRef }: Props) {
   const router = useRouter();
 
   const open = search.cardId === unitCard.id;
-  const vtName = safeVTName(unitCard.id);
 
   const cardBg = COLOR_BG[unitCard.color] ?? "bg-black";
   const cardBg50 = COLOR_BG50[unitCard.color] ?? "bg-gray-500";
@@ -179,22 +160,18 @@ export function UnitCard({ unitCardRef }: Props) {
     .filter(Boolean);
 
   function openDialog() {
-    withTransition(() => {
-      router.navigate({
-        to: "/cardlist",
-        search: (prev) => ({ ...prev, cardId: unitCard.id }),
-        replace: true,
-      });
+    router.navigate({
+      to: "/cardlist",
+      search: (prev) => ({ ...prev, cardId: unitCard.id }),
+      replace: true,
     });
   }
 
   function closeDialog() {
-    withTransition(() => {
-      router.navigate({
-        to: "/cardlist",
-        search: (prev) => ({ ...prev, cardId: undefined }),
-        replace: true,
-      });
+    router.navigate({
+      to: "/cardlist",
+      search: (prev) => ({ ...prev, cardId: undefined }),
+      replace: true,
     });
   }
 
@@ -207,7 +184,6 @@ export function UnitCard({ unitCardRef }: Props) {
           "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline",
           open && "z-10",
         )}
-        style={open ? {} : { viewTransitionName: vtName }}
         onClick={openDialog}
       >
         <CardBody
@@ -232,10 +208,7 @@ export function UnitCard({ unitCardRef }: Props) {
           />
           <Dialog.Popup className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 p-6 pointer-events-none outline-none transition duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0">
             {/* Large card */}
-            <div
-              className="@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl shadow-2xl"
-              style={{ viewTransitionName: vtName }}
-            >
+            <div className="@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl shadow-2xl">
               <CardBody
                 unitCard={unitCard}
                 cardBg={cardBg}

@@ -20,10 +20,6 @@
   --cutout-3xl: 3rem;
 }
 
-::view-transition-group(*) {
-  z-index: 999999;
-  position: fixed;
-}
 :root {
   --sea-ink: #173a40;
   --sea-ink-soft: #416166;
