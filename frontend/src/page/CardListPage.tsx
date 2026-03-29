@@ -3,6 +3,8 @@ import type { CardFilterInput } from "@/__generated__/CardListFragmentRefetchQue
 import { CardList } from "@/components/CardList";
 import { useLazyLoadQuery } from "react-relay";
 import { graphql } from "relay-runtime";
+import { Route, type CardListSearch } from "@/routes/cardlist";
+import { useRouter } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { XIcon } from "lucide-react";
 import { useRef, useState, useEffect, Suspense } from "react";
@@ -13,9 +15,34 @@ const Query = graphql`
   }
 `;
 
-// ─── Constants ───────────────────────────────────────────────────────────────
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
-const INITIAL_FILTER: CardFilterInput = { kind: ["UNIT"] };
+function buildFilter(search: CardListSearch): CardFilterInput {
+  return {
+    kind: search.kind ?? ["UNIT"],
+    cost: search.cost ?? null,
+    level: search.level ?? null,
+    zone: search.zone ?? null,
+    query: search.query ?? null,
+  };
+}
+
+function filterToSearch(filter: CardFilterInput): CardListSearch {
+  const kind = filter.kind as CardListSearch["kind"];
+  const cost = filter.cost as number[] | null | undefined;
+  const level = filter.level as number[] | null | undefined;
+  const zone = filter.zone as CardListSearch["zone"] | null | undefined;
+  const query = filter.query as string | null | undefined;
+  return {
+    kind: kind?.join(",") === "UNIT" ? undefined : kind,
+    cost: cost?.length ? cost : undefined,
+    level: level?.length ? level : undefined,
+    zone: zone?.length ? zone : undefined,
+    query: query || undefined,
+  };
+}
+
+// ─── Constants ───────────────────────────────────────────────────────────────
 
 const KIND_LABELS: Record<string, string> = {
   UNIT: "유닛",
@@ -174,6 +201,7 @@ function FilterBar({ filter, onChange }: FilterBarProps) {
           />
           {queryText && (
             <button
+              type="button"
               onClick={() => onQueryChange("")}
               className="absolute right-1.5 text-muted-foreground hover:text-foreground"
             >
@@ -184,8 +212,9 @@ function FilterBar({ filter, onChange }: FilterBarProps) {
 
         {hasFilters && (
           <button
-            onClick={() => onChange(INITIAL_FILTER)}
-            className="text-xs text-muted-foreground underline-offset-2 hover:underline"
+            type="button"
+            onClick={() => onChange({ kind: ["UNIT"] })}
+            className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer"
           >
             초기화
           </button>
@@ -195,13 +224,14 @@ function FilterBar({ filter, onChange }: FilterBarProps) {
   );
 }
 
-// ─── Content (suspends) ──────────────────────────────────────────────────────
+// ─── Content (suspends on initial load only) ─────────────────────────────────
 
 function CardListContent({ filter }: { filter: CardFilterInput }) {
-  // useLazyLoadQuery fires only once on mount with INITIAL_FILTER.
+  // Capture the filter at first mount so useLazyLoadQuery only fires once.
   // Subsequent filter changes are handled by CardList via refetch.
+  const initialFilterRef = useRef(filter);
   const data = useLazyLoadQuery<CardListPageQuery>(Query, {
-    filter: INITIAL_FILTER,
+    filter: initialFilterRef.current,
   });
   return <CardList queryRef={data} filter={filter} />;
 }
@@ -209,11 +239,21 @@ function CardListContent({ filter }: { filter: CardFilterInput }) {
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export function CardListPage() {
-  const [filter, setFilter] = useState<CardFilterInput>(INITIAL_FILTER);
+  const search = Route.useSearch();
+  const router = useRouter();
+  const filter = buildFilter(search);
+
+  function handleFilterChange(newFilter: CardFilterInput) {
+    router.navigate({
+      to: "/cardlist",
+      search: filterToSearch(newFilter),
+      replace: true,
+    });
+  }
 
   return (
     <div className="flex flex-col">
-      <FilterBar filter={filter} onChange={setFilter} />
+      <FilterBar filter={filter} onChange={handleFilterChange} />
       <Suspense>
         <CardListContent filter={filter} />
       </Suspense>
