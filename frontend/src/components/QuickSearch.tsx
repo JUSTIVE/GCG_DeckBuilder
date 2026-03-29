@@ -13,7 +13,7 @@ const QUICKSEARCH_QUERY = `
       ... on UnitCard    { id name level cost color AP HP }
       ... on PilotCard   { id pilot { name AP HP } level cost color }
       ... on BaseCard    { id name level cost AP HP }
-      ... on CommandCard { id name cost color }
+      ... on CommandCard { id name cost color commandPilot: pilot { name AP HP } }
       ... on Resource    { id name }
     }
   }
@@ -54,6 +54,7 @@ type CommandResult = {
   name: string;
   cost: number;
   color: string;
+  commandPilot?: { name: string; AP: number; HP: number } | null;
 };
 type ResourceResult = { __typename: "Resource"; id: string; name: string };
 
@@ -79,7 +80,9 @@ function resultMeta(r: SearchResult): string {
     case "BaseCard":
       return `Lv${r.level} · ${r.cost}코 · AP${r.AP} HP${r.HP}`;
     case "CommandCard":
-      return `${r.cost}코스트`;
+      return r.commandPilot
+        ? `${r.cost}코스트 · AP${r.commandPilot.AP} HP${r.commandPilot.HP}`
+        : `${r.cost}코스트`;
     case "Resource":
       return "";
   }
