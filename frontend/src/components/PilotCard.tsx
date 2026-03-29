@@ -74,7 +74,7 @@ export function PilotCardBody({
                 <div className="flex text-end text-gray-900 text-[4cqw]">
                   <Marquee speed={8} gap={0}>
                     {pilotCard.traits.map((x) => (
-                      <span key={x} className="px-2">
+                      <span key={x} className="px-1">
                         ({renderTrait(x)})
                       </span>
                     ))}

@@ -48,6 +48,9 @@ export function CommandCardBody({
         src={tempimg}
         alt={commandCard.name}
       />
+      {commandCard.commandPilot == null && (
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+      )}
       <div />
       <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
@@ -91,7 +94,7 @@ export function CommandCardBody({
                   <div className="flex text-end text-gray-900 text-[4cqw] justify-end ">
                     <Marquee speed={8} gap={0}>
                       {commandCard.traits.map((x) => (
-                        <span key={x} className="px-2">
+                        <span key={x} className="px-1">
                           ({renderTrait(x)})
                         </span>
                       ))}

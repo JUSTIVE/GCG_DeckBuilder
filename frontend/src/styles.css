@@ -446,6 +446,15 @@ a {
   );
 }
 
+.parallelogramx {
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 100%,
+    var(--para-cut, var(--cutout-sm)) 100%
+  );
+}
+
 @utility parallelogram-* {
   --para-cut: --value(--cutout-*, [length]);
 }

@@ -88,8 +88,8 @@ export function UnitCardBody({
             ))}
           </div>
           <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
-            <div className="flex flex-col justify-end flex-1 overflow-hidden">
-              <div className="flex flex-row ">
+            <div className="flex flex-col justify-end flex-1 overflow-hidden ">
+              <div className="flex flex-row">
                 <div className="w-2 bg-black -mr-5" />
                 <div className="w-10 bg-black -mr-5 parallelogram parallelogram-sm" />
                 <div
@@ -101,7 +101,7 @@ export function UnitCardBody({
                   <div className="flex text-end text-gray-900 text-[4cqw]">
                     <Marquee speed={8} gap={0}>
                       {unitCard.traits.map((x) => (
-                        <span key={x} className="px-2">
+                        <span key={x} className="px-1">
                           ({renderTrait(x)})
                         </span>
                       ))}
@@ -109,8 +109,10 @@ export function UnitCardBody({
                   </div>
                 </div>
               </div>
-              <div className="flex flex-row">
-                <div className="w-4 bg-black -mr-4 py-px pb-1" />
+              <div className="flex flex-row items-center">
+                <div className="w-6 bg-black -mr-4 py-px pb-1 z-1 text-[3cqw] pl-1.5">
+                  링크
+                </div>
                 <div className="bg-black overflow-hidden w-full pl-7 parallelogram parallelogram-sm px-2 pt-px pb-0.5 min-h-3">
                   <div className="flex text-end text-white text-[4cqw] items-center min-h-[6cqw]">
                     <Marquee speed={6}>

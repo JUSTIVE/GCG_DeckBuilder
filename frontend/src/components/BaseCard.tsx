@@ -80,12 +80,12 @@ export function BaseCardBody({
             <div className="flex flex-col justify-end flex-1 overflow-hidden">
               <div className="flex flex-row translate-y-px">
                 <div className="w-2 bg-transparent -mr-5" />
-                <div className="w-10 bg-transparent -mr-5 parallelogram parallelogram-sm" />
-                <div className="w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 parallelogram parallelogram-sm px-2 py-px">
+                <div className="w-10 bg-transparent -mr-5 " />
+                <div className="w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 parallelogramx parallelogram-sm px-2 py-px">
                   <div className="flex text-end text-gray-900 text-[4cqw]">
                     <Marquee speed={8} gap={0}>
                       {baseCard.traits.map((x) => (
-                        <span key={x} className="px-2">
+                        <span key={x} className="px-1">
                           ({renderTrait(x)})
                         </span>
                       ))}
