@@ -65,6 +65,7 @@ function activeFilterCount(filter: CardFilterInput): number {
   const kind = filter.kind as string[];
   if (kind.join(",") !== "UNIT") count++;
   if ((filter.cost as number[] | null | undefined)?.length) count++;
+  if ((filter.level as number[] | null | undefined)?.length) count++;
   if ((filter.zone as string[] | null | undefined)?.length) count++;
   if (filter.package) count++;
   if (filter.query) count++;
@@ -97,6 +98,7 @@ const ALL_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND", "RESOURCE"] as const;
 const ALL_ZONES = ["SPACE", "EARTH"] as const;
 const ZONE_LABELS: Record<string, string> = { SPACE: "우주", EARTH: "지구" };
 const COST_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const LEVEL_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const INITIAL_FILTER: CardFilterInput = { kind: ["UNIT"] };
 
 const PACK_GROUPS: {
@@ -178,6 +180,14 @@ function FilterControls({
     patch({ cost: next.length > 0 ? next : null });
   }
 
+  function toggleLevel(l: number) {
+    const current = (filter.level as number[] | undefined) ?? [];
+    const next = current.includes(l)
+      ? current.filter((x) => x !== l)
+      : [...current, l];
+    patch({ level: next.length > 0 ? next : null });
+  }
+
   function toggleZone(z: (typeof ALL_ZONES)[number]) {
     const current = (filter.zone as string[] | undefined) ?? [];
     const next = current.includes(z)
@@ -202,6 +212,7 @@ function FilterControls({
 
   const activeKind = filter.kind as string[];
   const activeCost = (filter.cost as number[] | undefined) ?? [];
+  const activeLevel = (filter.level as number[] | undefined) ?? [];
   const activeZone = (filter.zone as string[] | undefined) ?? [];
   const activePackage = filter.package as string | null | undefined;
 
@@ -271,6 +282,30 @@ function FilterControls({
               )}
             >
               {c}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Level */}
+      <div className="flex flex-wrap items-center gap-1.5">
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          레벨
+        </span>
+        <div className="flex flex-wrap gap-1">
+          {LEVEL_OPTIONS.map((l) => (
+            <button
+              type="button"
+              key={l}
+              onClick={() => toggleLevel(l)}
+              className={cn(
+                "h-6 w-6 rounded border text-xs font-medium transition-colors cursor-pointer",
+                activeLevel.includes(l)
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+              )}
+            >
+              {l}
             </button>
           ))}
         </div>
