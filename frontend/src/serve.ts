@@ -167,7 +167,8 @@ function cardSearchTokens(card: AnyRecord): {
   if (link != null && typeof link === "object") {
     const l = link as AnyRecord;
     if (typeof l["trait"] === "string") links.push(l["trait"] as string);
-    if (typeof l["pilotName"] === "string") links.push(l["pilotName"] as string);
+    if (typeof l["pilotName"] === "string")
+      links.push(l["pilotName"] as string);
   }
 
   return { id, name, description, traits, links };
@@ -250,6 +251,7 @@ interface CardFilterInput {
   rarity?: string;
   keyword?: string[];
   zone?: string[];
+  color?: string[];
   query?: string;
 }
 
@@ -303,6 +305,12 @@ function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[] {
     if (filter.zone?.length) {
       const cardZones = Array.isArray(c["zone"]) ? (c["zone"] as string[]) : [];
       if (!filter.zone.some((z) => cardZones.includes(z))) return false;
+    }
+
+    // color — card must match at least one requested color
+    if (filter.color?.length) {
+      const cardColor = typeof c["color"] === "string" ? c["color"] : null;
+      if (!cardColor || !filter.color.includes(cardColor)) return false;
     }
 
     // full-text search across name and description

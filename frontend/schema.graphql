@@ -266,6 +266,7 @@ input CardFilterInput {
   rarity: CardRarity # 레어도
   keyword: [CardKeyword!] # 키워드
   zone: [Zone!] # 지형
+  color: [CardColor!] # 색상
   query: String # 이름/효과정보
   kind: [CardKind!]!
 }
@@ -291,8 +292,5 @@ type Query {
     filter: CardFilterInput
     sort: CardSort
   ): CardConnection!
-  quicksearch(
-    query: String!
-    first: Int
-  ): [Card!]!
+  quicksearch(query: String!, first: Int): [Card!]!
 }

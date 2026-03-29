@@ -12,6 +12,7 @@ import { Dialog } from "@base-ui/react/dialog";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { flushSync } from "react-dom";
+import { COLOR_BG, COLOR_BG50, COLOR_HEX } from "src/render/color";
 
 const Fragment = graphql`
   fragment UnitCardFragment on UnitCard {
@@ -42,36 +43,6 @@ const Fragment = graphql`
 
 type Props = {
   unitCardRef: UnitCardFragment$key;
-};
-
-const COLOR_BG: Record<string, string> = {
-  BLUE: "bg-[#0272B6]",
-  GREEN: "bg-[#62A43E]",
-  RED: "bg-[#BD0152]",
-  PURPLE: "bg-[#764A92]",
-  YELLOW: "bg-[#D3B078]",
-  WHITE: "bg-[#FFFFFF]",
-  BLACK: "bg-[#000000]",
-};
-
-const COLOR_BG50: Record<string, string> = {
-  BLUE: "bg-[#7FB8DA]",
-  GREEN: "bg-[#B0D19E]",
-  RED: "bg-[#DE80A8]",
-  PURPLE: "bg-[#BAA4C8]",
-  YELLOW: "bg-[#E9D7BB]",
-  WHITE: "bg-[#FFFFFF]",
-  BLACK: "bg-[#808080]",
-};
-
-const COLOR_HEX: Record<string, string> = {
-  BLUE: "#0272B6",
-  GREEN: "#62A43E",
-  RED: "#BD0152",
-  PURPLE: "#764A92",
-  YELLOW: "#D3B078",
-  WHITE: "#FFFFFF",
-  BLACK: "#000000",
 };
 
 function withTransition(cb: () => void) {

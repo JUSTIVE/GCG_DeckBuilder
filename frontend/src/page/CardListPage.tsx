@@ -15,6 +15,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { COLOR_BG, COLOR_BG50 } from "src/render/color";
 
 const Query = graphql`
   query CardListPageQuery($filter: CardFilterInput!, $sort: CardSort) {
@@ -30,6 +31,7 @@ function buildFilter(search: CardListSearch): CardFilterInput {
     cost: search.cost ?? null,
     level: search.level ?? null,
     zone: search.zone ?? null,
+    color: search.color ?? null,
     package: search.package ?? null,
     query: search.query ?? null,
   };
@@ -47,6 +49,7 @@ function filterToSearch(
   const cost = filter.cost as number[] | null | undefined;
   const level = filter.level as number[] | null | undefined;
   const zone = filter.zone as CardListSearch["zone"] | null | undefined;
+  const color = filter.color as CardListSearch["color"] | null | undefined;
   const pkg = filter.package as CardListSearch["package"] | null | undefined;
   const query = filter.query as string | null | undefined;
   return {
@@ -54,6 +57,7 @@ function filterToSearch(
     cost: cost?.length ? cost : undefined,
     level: level?.length ? level : undefined,
     zone: zone?.length ? zone : undefined,
+    color: color?.length ? color : undefined,
     package: pkg || undefined,
     query: query || undefined,
     sort: sort as CardListSearch["sort"] | undefined,
@@ -67,6 +71,7 @@ function activeFilterCount(filter: CardFilterInput): number {
   if ((filter.cost as number[] | null | undefined)?.length) count++;
   if ((filter.level as number[] | null | undefined)?.length) count++;
   if ((filter.zone as string[] | null | undefined)?.length) count++;
+  if ((filter.color as string[] | null | undefined)?.length) count++;
   if (filter.package) count++;
   if (filter.query) count++;
   return count;
@@ -97,6 +102,23 @@ const SORT_OPTIONS: Array<{ value: string; label: string }> = [
 const ALL_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND", "RESOURCE"] as const;
 const ALL_ZONES = ["SPACE", "EARTH"] as const;
 const ZONE_LABELS: Record<string, string> = { SPACE: "우주", EARTH: "지구" };
+const ALL_COLORS = [
+  "BLUE",
+  "GREEN",
+  "RED",
+  "YELLOW",
+  "PURPLE",
+  "WHITE",
+] as const;
+const COLOR_LABELS: Record<string, string> = {
+  BLUE: "파랑",
+  GREEN: "초록",
+  RED: "빨강",
+  YELLOW: "노랑",
+  PURPLE: "보라",
+  WHITE: "화이트",
+};
+
 const COST_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const LEVEL_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const INITIAL_FILTER: CardFilterInput = { kind: ["UNIT"] };
@@ -196,6 +218,16 @@ function FilterControls({
     patch({ zone: next.length > 0 ? (next as CardFilterInput["zone"]) : null });
   }
 
+  function toggleColor(c: (typeof ALL_COLORS)[number]) {
+    const current = (filter.color as string[] | undefined) ?? [];
+    const next = current.includes(c)
+      ? current.filter((x) => x !== c)
+      : [...current, c];
+    patch({
+      color: next.length > 0 ? (next as CardFilterInput["color"]) : null,
+    });
+  }
+
   function togglePackage(p: string) {
     patch({
       package: filter.package === p ? null : (p as CardFilterInput["package"]),
@@ -214,6 +246,7 @@ function FilterControls({
   const activeCost = (filter.cost as number[] | undefined) ?? [];
   const activeLevel = (filter.level as number[] | undefined) ?? [];
   const activeZone = (filter.zone as string[] | undefined) ?? [];
+  const activeColor = (filter.color as string[] | undefined) ?? [];
   const activePackage = filter.package as string | null | undefined;
 
   return (
@@ -330,6 +363,39 @@ function FilterControls({
               )}
             >
               {ZONE_LABELS[z]}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Color */}
+      <div className="flex flex-wrap items-center gap-1.5">
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          색상
+        </span>
+        <div className="flex flex-wrap gap-1">
+          {ALL_COLORS.map((c) => (
+            <button
+              type="button"
+              key={c}
+              onClick={() => toggleColor(c)}
+              className={cn(
+                "rounded-md border px-2.5 py-0.5 text-xs font-medium transition-colors cursor-pointer",
+                activeColor.includes(c)
+                  ? cn(
+                      COLOR_BG[c],
+                      c === "WHITE"
+                        ? "text-gray-600 ring-2 ring-offset-1 ring-current"
+                        : "text-white ring-2 ring-offset-1 ring-current",
+                    )
+                  : cn(
+                      c === "WHITE"
+                        ? "border-gray-300 bg-gray-50 text-gray-600 hover:bg-gray-100"
+                        : "border-border bg-background text-muted-foreground hover:bg-accent",
+                    ),
+              )}
+            >
+              {COLOR_LABELS[c]}
             </button>
           ))}
         </div>
