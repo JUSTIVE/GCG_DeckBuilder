@@ -6,8 +6,14 @@ import { graphql } from "relay-runtime";
 import { Route, type CardListSearch } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
-import { XIcon } from "lucide-react";
+import { SlidersHorizontalIcon, XIcon } from "lucide-react";
 import { useRef, useState, useEffect, Suspense } from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 
 const Query = graphql`
   query CardListPageQuery($filter: CardFilterInput!) {
@@ -42,6 +48,16 @@ function filterToSearch(filter: CardFilterInput): CardListSearch {
   };
 }
 
+function activeFilterCount(filter: CardFilterInput): number {
+  let count = 0;
+  const kind = filter.kind as string[];
+  if (kind.join(",") !== "UNIT") count++;
+  if ((filter.cost as number[] | null | undefined)?.length) count++;
+  if ((filter.zone as string[] | null | undefined)?.length) count++;
+  if (filter.query) count++;
+  return count;
+}
+
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 const KIND_LABELS: Record<string, string> = {
@@ -55,15 +71,16 @@ const ALL_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND", "RESOURCE"] as const;
 const ALL_ZONES = ["SPACE", "EARTH"] as const;
 const ZONE_LABELS: Record<string, string> = { SPACE: "우주", EARTH: "지구" };
 const COST_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const INITIAL_FILTER: CardFilterInput = { kind: ["UNIT"] };
 
-// ─── Filter bar ──────────────────────────────────────────────────────────────
+// ─── Filter controls (shared between bar and bottom sheet) ───────────────────
 
-type FilterBarProps = {
+type FilterControlsProps = {
   filter: CardFilterInput;
   onChange: (filter: CardFilterInput) => void;
 };
 
-function FilterBar({ filter, onChange }: FilterBarProps) {
+function FilterControls({ filter, onChange }: FilterControlsProps) {
   const [queryText, setQueryText] = useState(filter.query ?? "");
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -111,19 +128,11 @@ function FilterBar({ filter, onChange }: FilterBarProps) {
   const activeCost = (filter.cost as number[] | undefined) ?? [];
   const activeZone = (filter.zone as string[] | undefined) ?? [];
 
-  const hasFilters =
-    activeKind.join(",") !== "UNIT" ||
-    activeCost.length > 0 ||
-    activeZone.length > 0 ||
-    !!filter.query;
-
   return (
-    <div className="flex flex-col gap-2 border-b border-border px-4 py-3">
-      {/* Kind toggles */}
+    <div className="flex flex-col gap-3">
+      {/* Kind */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">
-          종류
-        </span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">종류</span>
         <div className="flex flex-wrap gap-1">
           {ALL_KINDS.map((k) => (
             <button
@@ -143,11 +152,9 @@ function FilterBar({ filter, onChange }: FilterBarProps) {
         </div>
       </div>
 
-      {/* Cost chips */}
+      {/* Cost */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">
-          코스트
-        </span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">코스트</span>
         <div className="flex flex-wrap gap-1">
           {COST_OPTIONS.map((c) => (
             <button
@@ -167,37 +174,37 @@ function FilterBar({ filter, onChange }: FilterBarProps) {
         </div>
       </div>
 
-      {/* Zone + Query row */}
-      <div className="flex flex-wrap items-center gap-3">
-        <div className="flex items-center gap-1.5">
-          <span className="text-xs text-muted-foreground w-10 shrink-0">
-            지형
-          </span>
-          <div className="flex gap-1">
-            {ALL_ZONES.map((z) => (
-              <button
-                type="button"
-                key={z}
-                onClick={() => toggleZone(z)}
-                className={cn(
-                  "rounded-md border px-2.5 py-0.5 text-xs font-medium transition-colors cursor-pointer",
-                  activeZone.includes(z)
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-                )}
-              >
-                {ZONE_LABELS[z]}
-              </button>
-            ))}
-          </div>
+      {/* Zone */}
+      <div className="flex items-center gap-1.5">
+        <span className="text-xs text-muted-foreground w-10 shrink-0">지형</span>
+        <div className="flex gap-1">
+          {ALL_ZONES.map((z) => (
+            <button
+              type="button"
+              key={z}
+              onClick={() => toggleZone(z)}
+              className={cn(
+                "rounded-md border px-2.5 py-0.5 text-xs font-medium transition-colors cursor-pointer",
+                activeZone.includes(z)
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+              )}
+            >
+              {ZONE_LABELS[z]}
+            </button>
+          ))}
         </div>
+      </div>
 
-        <div className="relative ml-auto flex items-center">
+      {/* Query */}
+      <div className="flex items-center gap-1.5">
+        <span className="text-xs text-muted-foreground w-10 shrink-0">검색</span>
+        <div className="relative flex-1 flex items-center">
           <input
             value={queryText}
             onChange={(e) => onQueryChange(e.target.value)}
             placeholder="이름 · 효과 검색"
-            className="h-7 rounded-md border border-input bg-background px-2.5 pr-7 text-xs outline-none placeholder:text-muted-foreground focus:border-primary"
+            className="h-7 w-full rounded-md border border-input bg-background px-2.5 pr-7 text-xs outline-none placeholder:text-muted-foreground focus:border-primary"
           />
           {queryText && (
             <button
@@ -209,17 +216,75 @@ function FilterBar({ filter, onChange }: FilterBarProps) {
             </button>
           )}
         </div>
+      </div>
+    </div>
+  );
+}
 
-        {hasFilters && (
+// ─── Desktop filter bar (md+) ─────────────────────────────────────────────────
+
+function FilterBar({ filter, onChange }: FilterControlsProps) {
+  const hasFilters = activeFilterCount(filter) > 0;
+
+  return (
+    <div className="hidden md:flex flex-col gap-2 border-b border-border px-4 py-3">
+      <FilterControls filter={filter} onChange={onChange} />
+      {hasFilters && (
+        <div className="flex justify-end">
           <button
             type="button"
-            onClick={() => onChange({ kind: ["UNIT"] })}
+            onClick={() => onChange(INITIAL_FILTER)}
             className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer"
           >
             초기화
           </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Mobile filter trigger + bottom sheet (<md) ───────────────────────────────
+
+function FilterBottomSheet({ filter, onChange }: FilterControlsProps) {
+  const [open, setOpen] = useState(false);
+  const count = activeFilterCount(filter);
+
+  return (
+    <div className="flex md:hidden items-center gap-2 border-b border-border px-4 py-2">
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer"
+      >
+        <SlidersHorizontalIcon className="h-3.5 w-3.5" />
+        필터
+        {count > 0 && (
+          <span className="ml-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+            {count}
+          </span>
         )}
-      </div>
+      </button>
+
+      {count > 0 && (
+        <button
+          type="button"
+          onClick={() => onChange(INITIAL_FILTER)}
+          className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer"
+        >
+          초기화
+        </button>
+      )}
+
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent side="bottom" showCloseButton={false} className="px-4 pb-8 pt-0 rounded-t-xl">
+          <div className="mx-auto mb-4 mt-3 h-1 w-10 rounded-full bg-muted-foreground/30" />
+          <SheetHeader className="p-0 mb-4">
+            <SheetTitle>필터</SheetTitle>
+          </SheetHeader>
+          <FilterControls filter={filter} onChange={onChange} />
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
@@ -227,8 +292,6 @@ function FilterBar({ filter, onChange }: FilterBarProps) {
 // ─── Content (suspends on initial load only) ─────────────────────────────────
 
 function CardListContent({ filter }: { filter: CardFilterInput }) {
-  // Capture the filter at first mount so useLazyLoadQuery only fires once.
-  // Subsequent filter changes are handled by CardList via refetch.
   const initialFilterRef = useRef(filter);
   const data = useLazyLoadQuery<CardListPageQuery>(Query, {
     filter: initialFilterRef.current,
@@ -254,6 +317,7 @@ export function CardListPage() {
   return (
     <div className="flex flex-col">
       <FilterBar filter={filter} onChange={handleFilterChange} />
+      <FilterBottomSheet filter={filter} onChange={handleFilterChange} />
       <Suspense>
         <CardListContent filter={filter} />
       </Suspense>
