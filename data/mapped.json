@@ -61,7 +61,7 @@
     ]
   },
   {
-    "name": "GM",
+    "name": "짐",
     "level": 2,
     "cost": 1,
     "color": "BLUE",
@@ -982,7 +982,7 @@
     ]
   },
   {
-    "name": "Zaku Ⅱ 샤아기",
+    "name": "Zaku Ⅱ 샤아 전용기",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -1639,7 +1639,7 @@
   {
     "__typename": "ResourceCard",
     "id": "T-006",
-    "name": "Zaku Ⅱ 샤아기"
+    "name": "Zaku Ⅱ 샤아 전용기"
   },
   {
     "__typename": "ResourceCard",
@@ -2057,7 +2057,7 @@
     ]
   },
   {
-    "name": "기라 줄루 안젤로기",
+    "name": "기라 줄루 안젤로 전용기",
     "level": 4,
     "cost": 3,
     "color": "RED",
@@ -2158,7 +2158,7 @@
     ]
   },
   {
-    "name": "Zaku Ⅱ 샤아기",
+    "name": "Zaku Ⅱ 샤아 전용기",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -2728,7 +2728,7 @@
     ]
   },
   {
-    "name": "Gundam Gusion Rebake",
+    "name": "건담 구시온 리베이크",
     "level": 4,
     "cost": 3,
     "color": "PURPLE",
@@ -2810,7 +2810,7 @@
     ]
   },
   {
-    "name": "Graze Commander Type",
+    "name": "그레이즈 지휘관기",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -3057,7 +3057,7 @@
     ]
   },
   {
-    "name": "릭 돔 가이아기 (GQ)",
+    "name": "릭 돔 가이아 전용기 (GQ)",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -3163,7 +3163,7 @@
     ]
   },
   {
-    "name": "오르테가's Rick Dom (GQ)",
+    "name": "릭 돔 오르테가 전용기 (GQ)",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -3191,7 +3191,7 @@
     ]
   },
   {
-    "name": "겔구그 스가이기 (GQ)",
+    "name": "겔구그 스가이 전용기 (GQ)",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -3452,7 +3452,7 @@
     ]
   },
   {
-    "name": "Gundam Virtue",
+    "name": "건담 버체",
     "level": 5,
     "cost": 3,
     "color": "PURPLE",
@@ -3478,7 +3478,7 @@
     ]
   },
   {
-    "name": "Gundam Virtue",
+    "name": "건담 버체",
     "level": 3,
     "cost": 2,
     "color": "PURPLE",
@@ -4952,7 +4952,7 @@
     ]
   },
   {
-    "name": "겔구그 샤아기",
+    "name": "겔구그 샤아 전용기",
     "level": 4,
     "cost": 4,
     "color": "GREEN",
@@ -6008,7 +6008,7 @@
     ]
   },
   {
-    "name": "데미 트레이너 츄츄기",
+    "name": "데미 트레이너 츄츄 전용기",
     "level": 2,
     "cost": 2,
     "color": "WHITE",
@@ -6085,7 +6085,7 @@
     ]
   },
   {
-    "name": "스카이그래스퍼 카가리기",
+    "name": "스카이그래스퍼 카가리 전용기",
     "level": 2,
     "cost": 2,
     "color": "WHITE",
@@ -6144,7 +6144,7 @@
     ]
   },
   {
-    "name": "Guel's Dilanza",
+    "name": "딜란자 구엘 전용기",
     "level": 2,
     "cost": 2,
     "color": "WHITE",
@@ -6190,7 +6190,7 @@
     ]
   },
   {
-    "name": "Demi Garrison",
+    "name": "데미 개리슨",
     "level": 2,
     "cost": 1,
     "color": "WHITE",
@@ -8167,7 +8167,7 @@
     ]
   },
   {
-    "name": "겔구그 스가이기 (GQ)",
+    "name": "겔구그 스가이 전용기 (GQ)",
     "level": 4,
     "cost": 4,
     "color": "RED",
@@ -8227,7 +8227,7 @@
     ]
   },
   {
-    "name": "Daughtress Weapon",
+    "name": "도트레스 웨폰",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -8252,7 +8252,7 @@
     ]
   },
   {
-    "name": "Daughtress Command",
+    "name": "도트레스 커맨드",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -8381,7 +8381,7 @@
     ]
   },
   {
-    "name": "Daughtress",
+    "name": "도트레스",
     "level": 1,
     "cost": 1,
     "color": "RED",
@@ -8530,7 +8530,7 @@
     ]
   },
   {
-    "name": "Gundam Gusion Rebake",
+    "name": "건담 구시온 리베이크",
     "level": 5,
     "cost": 4,
     "color": "PURPLE",
@@ -9123,7 +9123,7 @@
     ]
   },
   {
-    "name": "Ein's Schwalbe Graze",
+    "name": "슈발베 그레이즈 아인 전용기",
     "level": 4,
     "cost": 2,
     "color": "WHITE",
@@ -9248,7 +9248,7 @@
     ]
   },
   {
-    "name": "Gaelio's Schwalbe Graze",
+    "name": "슈발베 그레이즈 가엘리오 전용기",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -10431,7 +10431,7 @@
   {
     "__typename": "ResourceCard",
     "id": "T-012",
-    "name": "Daughtress"
+    "name": "도트레스"
   },
   {
     "__typename": "ResourceCard",
@@ -10789,7 +10789,7 @@
     ]
   },
   {
-    "name": "GM Sniper II",
+    "name": "짐 스나이퍼 II",
     "level": 2,
     "cost": 2,
     "color": "BLUE",
@@ -11738,7 +11738,7 @@
     ]
   },
   {
-    "name": "Daughtress Flyer",
+    "name": "도트레스 플라이어",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -11951,7 +11951,7 @@
     ]
   },
   {
-    "name": "Gundam Virtue",
+    "name": "건담 버체",
     "level": 5,
     "cost": 4,
     "color": "PURPLE",
@@ -11983,7 +11983,7 @@
     ]
   },
   {
-    "name": "Gundam Gusion Rebake Full City",
+    "name": "건담 구시온 리베이크 풀 시티",
     "level": 6,
     "cost": 5,
     "color": "PURPLE",
@@ -12433,7 +12433,7 @@
     ]
   },
   {
-    "name": "Graham's Union Flag Custom",
+    "name": "유니온 플래그 커스텀 그라함전용기",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
