@@ -15,6 +15,41 @@ import {
 } from "@/components/ui/sidebar";
 import type { PropsWithChildren } from "react";
 import { QuickSearch } from "@/components/QuickSearch";
+import { useRouterState, Link } from "@tanstack/react-router";
+import { resolveBreadcrumb } from "@/lib/nav";
+
+function AppBreadcrumb() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const crumbs = resolveBreadcrumb(pathname);
+
+  if (!crumbs) return null;
+  const [parent, child] = crumbs;
+
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        {child ? (
+          <>
+            <BreadcrumbItem className="hidden md:block">
+              <BreadcrumbLink render={<Link to={parent.url} />}>
+                {parent.title}
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator className="hidden md:block" />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{child.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </>
+        ) : (
+          <BreadcrumbItem>
+            <BreadcrumbPage>{parent.title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        )}
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+}
+
 export default function Scaffold({ children }: PropsWithChildren) {
   return (
     <SidebarProvider>
@@ -24,17 +59,7 @@ export default function Scaffold({ children }: PropsWithChildren) {
           <div className="flex items-center gap-2 px-3">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="/">카드 찾기</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+            <AppBreadcrumb />
           </div>
           <div className="ml-auto px-3">
             <QuickSearch />
