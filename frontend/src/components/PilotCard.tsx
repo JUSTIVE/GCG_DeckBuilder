@@ -7,7 +7,7 @@ import tempimg from "./tempimg.webp";
 import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
-import { COLOR_BG, COLOR_BG20 } from "src/render/color";
+import { COLOR_BG, COLOR_BG20, COLOR_TEXT20 } from "src/render/color";
 import type { PilotCard_PilotCardBody$key } from "src/__generated__/PilotCard_PilotCardBody.graphql";
 import { renderRarity } from "src/render/rarity";
 
@@ -42,30 +42,55 @@ export function PilotCardBody({
         src={tempimg}
         alt={pilotCard.pilot.name}
       />
-      <div className="flex flex-row items-start justify-between z-1">
-        <div className="flex flex-col font-bold">
-          <div
-            className={cn(
-              "text-white text-[6cqw] w-[20cqw] leading-[8cqw] cutout cutout-br-sm text-center",
-              COLOR_BG[pilotCard.color],
-              pilotCard.color === "WHITE" ? "text-gray-400" : undefined,
-            )}
-          >
-            <span className="text-[3cqw]">Lv.</span>
-            {pilotCard.level}
+      <div className="flex flex-col gap-[11cqw]">
+        <div className="flex flex-row items-start justify-between z-1">
+          <div className="flex flex-col font-bold">
+            <div
+              className={cn(
+                "text-white text-[6cqw] w-[20cqw] leading-[8cqw] cutout cutout-br-sm text-center",
+                COLOR_BG[pilotCard.color],
+                pilotCard.color === "WHITE" ? "text-gray-400" : undefined,
+              )}
+            >
+              <span className="text-[3cqw]">Lv.</span>
+              {pilotCard.level}
+            </div>
+            <div
+              className={cn(
+                "text-white w-[15cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-sm -translate-y-px text-center",
+                COLOR_BG[pilotCard.color],
+                pilotCard.color === "WHITE" ? "text-gray-400" : undefined,
+              )}
+            >
+              {pilotCard.level}
+            </div>
           </div>
-          <div
-            className={cn(
-              "text-white w-[15cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-sm -translate-y-px text-center",
-              COLOR_BG[pilotCard.color],
-              pilotCard.color === "WHITE" ? "text-gray-400" : undefined,
-            )}
-          >
-            {pilotCard.level}
+          <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
+            {pilotCard.id}-{renderRarity(pilotCard.rarity)}
           </div>
         </div>
-        <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
-          {pilotCard.id}-{renderRarity(pilotCard.rarity)}
+        <div>
+          <div
+            className={cn(
+              "w-[7cqw] cutout cutout-r-lg h-[40cqw] text-[4cqw] font-semibold pl-0.5 flex items-center",
+              COLOR_BG[pilotCard.color],
+            )}
+          >
+            <span
+              className={cn(
+                "rotate-90 min-w-[20cqw] translate-x-[-7cqw] scale-y-80",
+                pilotCard.color === "WHITE" ? "text-gray-400" : "text-white/80",
+              )}
+            >
+              파일럿
+            </span>
+          </div>
+          <div
+            className={cn(
+              "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[5cqw]",
+              COLOR_BG[pilotCard.color],
+            )}
+          />
         </div>
       </div>
       <div className="flex flex-col gap-2 z-1">
@@ -105,10 +130,20 @@ export function PilotCardBody({
             </div>
           </div>
           <div className="flex flex-row gap-0.5 min-w-8">
-            <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1">
+            <div
+              className={cn(
+                "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
+                COLOR_TEXT20[pilotCard.color],
+              )}
+            >
               +{pilotCard.pilot.AP}
             </div>
-            <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1">
+            <div
+              className={cn(
+                "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
+                COLOR_TEXT20[pilotCard.color],
+              )}
+            >
               +{pilotCard.pilot.HP}
             </div>
           </div>

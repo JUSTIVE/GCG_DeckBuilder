@@ -58,30 +58,55 @@ export function UnitCardBody({
         src={tempimg}
         alt={unitCard.name}
       />
-      <div className="flex flex-row items-start justify-between z-1">
-        <div className="flex flex-col font-bold">
-          <div
-            className={cn(
-              "text-white text-[6cqw] w-[20cqw] leading-[8cqw] cutout cutout-br-sm text-center",
-              COLOR_BG[unitCard.color],
-              unitCard.color === "WHITE" ? "text-gray-400" : undefined,
-            )}
-          >
-            <span className="text-[3cqw]">Lv.</span>
-            {unitCard.level}
+      <div className="flex flex-col gap-[11cqw]">
+        <div className="flex flex-row items-start justify-between z-1">
+          <div className="flex flex-col font-bold">
+            <div
+              className={cn(
+                "text-white text-[6cqw] w-[20cqw] leading-[8cqw] cutout cutout-br-sm text-center",
+                COLOR_BG[unitCard.color],
+                unitCard.color === "WHITE" ? "text-gray-400" : undefined,
+              )}
+            >
+              <span className="text-[3cqw]">Lv.</span>
+              {unitCard.level}
+            </div>
+            <div
+              className={cn(
+                "text-white w-[15cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-sm -translate-y-px text-center",
+                COLOR_BG[unitCard.color],
+                unitCard.color === "WHITE" ? "text-gray-400" : undefined,
+              )}
+            >
+              {unitCard.level}
+            </div>
           </div>
-          <div
-            className={cn(
-              "text-white w-[15cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-sm -translate-y-px text-center",
-              COLOR_BG[unitCard.color],
-              unitCard.color === "WHITE" ? "text-gray-400" : undefined,
-            )}
-          >
-            {unitCard.level}
+          <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
+            {unitCard.id}-{renderRarity(unitCard.rarity)}
           </div>
         </div>
-        <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
-          {unitCard.id}-{renderRarity(unitCard.rarity)}
+        <div>
+          <div
+            className={cn(
+              "w-[7cqw] cutout cutout-r-lg h-[40cqw] text-[4cqw] font-semibold pl-0.5 flex items-center",
+              COLOR_BG[unitCard.color],
+            )}
+          >
+            <span
+              className={cn(
+                "rotate-90 min-w-[20cqw] translate-x-[-7cqw] scale-y-80",
+                unitCard.color === "WHITE" ? "text-gray-400" : "text-white/80",
+              )}
+            >
+              유닛
+            </span>
+          </div>
+          <div
+            className={cn(
+              "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[5cqw]",
+              COLOR_BG[unitCard.color],
+            )}
+          />
         </div>
       </div>
       <div className="flex flex-col gap-2 ">

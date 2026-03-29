@@ -44,36 +44,62 @@ export function CommandCardBody({
         src={tempimg}
         alt={commandCard.name}
       />
-      <div className="flex flex-row items-start justify-between z-1">
-        <div className="flex flex-col font-bold">
-          <div
-            className={cn(
-              "text-white text-[6cqw] w-[20cqw] leading-[8cqw] cutout cutout-br-sm text-center",
-              COLOR_BG[commandCard.color],
-              commandCard.color === "WHITE" ? "text-gray-400" : undefined,
-            )}
-          >
-            <span className="text-[3cqw]">Lv.</span>
-            {commandCard.level}
+      <div className="flex flex-col gap-[11cqw]">
+        <div className="flex flex-row items-start justify-between z-1">
+          <div className="flex flex-col font-bold">
+            <div
+              className={cn(
+                "text-white text-[6cqw] w-[20cqw] leading-[8cqw] cutout cutout-br-sm text-center",
+                COLOR_BG[commandCard.color],
+                commandCard.color === "WHITE" ? "text-gray-400" : undefined,
+              )}
+            >
+              <span className="text-[3cqw]">Lv.</span>
+              {commandCard.level}
+            </div>
+            <div
+              className={cn(
+                "text-white w-[15cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-sm -translate-y-px text-center",
+                COLOR_BG[commandCard.color],
+                commandCard.color === "WHITE" ? "text-gray-400" : undefined,
+              )}
+            >
+              {commandCard.level}
+            </div>
           </div>
-          <div
-            className={cn(
-              "text-white w-[15cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-sm -translate-y-px text-center",
-              COLOR_BG[commandCard.color],
-              commandCard.color === "WHITE" ? "text-gray-400" : undefined,
-            )}
-          >
-            {commandCard.level}
+          <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
+            {commandCard.id}-{renderRarity(commandCard.rarity)}
           </div>
         </div>
-        <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
-          {commandCard.id}-{renderRarity(commandCard.rarity)}
+        {commandCard.commandPilot == null && (
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+        )}
+        <div>
+          <div
+            className={cn(
+              "w-[7cqw] cutout cutout-r-lg h-[40cqw] text-[4cqw] font-semibold pl-0.5 flex items-center",
+              COLOR_BG[commandCard.color],
+            )}
+          >
+            <span
+              className={cn(
+                "rotate-90 min-w-[20cqw] translate-x-[-7cqw] scale-y-80",
+                commandCard.color === "WHITE"
+                  ? "text-gray-400"
+                  : "text-white/80",
+              )}
+            >
+              커맨드
+            </span>
+          </div>
+          <div
+            className={cn(
+              "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[5cqw]",
+              COLOR_BG[commandCard.color],
+            )}
+          />
         </div>
       </div>
-      {commandCard.commandPilot == null && (
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
-      )}
-      <div />
       <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
           <div className="p-2 bg-black whitespace-pre-wrap cutout-tl-sm cutout text-[6cqw] font-bold text-center">
@@ -126,10 +152,20 @@ export function CommandCardBody({
               </div>
             </div>
             <div className="flex flex-row gap-0.5 min-w-8">
-              <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1">
+              <div
+                className={cn(
+                  "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
+                  COLOR_TEXT20[commandCard.color],
+                )}
+              >
                 +{commandCard.commandPilot?.AP}
               </div>
-              <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1">
+              <div
+                className={cn(
+                  "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
+                  COLOR_TEXT20[commandCard.color],
+                )}
+              >
                 +{commandCard.commandPilot?.HP}
               </div>
             </div>
