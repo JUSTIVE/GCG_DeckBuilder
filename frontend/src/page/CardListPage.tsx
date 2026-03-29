@@ -12,7 +12,13 @@ import {
 } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon, FileTextIcon, SlidersHorizontalIcon, XIcon } from "lucide-react";
+import { renderKeyword } from "@/render/keyword";
+import {
+  ChevronDownIcon,
+  FileTextIcon,
+  SlidersHorizontalIcon,
+  XIcon,
+} from "lucide-react";
 import { useRef, useState, useEffect, Suspense } from "react";
 import {
   Sheet,
@@ -163,30 +169,10 @@ const ALL_KEYWORDS: CardKeyword[] = [
   "WHEN_LINKED",
   "WHEN_PAIRED",
 ];
-const KEYWORD_LABELS: Record<CardKeyword, string> = {
-  ACTION: "액션",
-  ACTIVATE_ACTION: "기동-액션",
-  ACTIVATE_MAIN: "기동-메인",
-  ATTACK: "공격시",
-  BLOCKER: "블로커",
-  BREACH: "돌파",
-  BURST: "버스트",
-  DEPLOY: "배포시",
-  DESTROYED: "파괴시",
-  DURING_LINK: "링크중",
-  DURING_PAIR: "페어중",
-  FIRST_STRIKE: "선제공격",
-  HIGH_MANEUVER: "고기동",
-  SUPPRESSION: "제압",
-  MAIN: "메인",
-  ONCE_PER_TURN: "턴에1회",
-  END_OF_TURN: "턴종료시",
-  PILOT: "파일럿",
-  REPAIR: "리페어",
-  SUPPORT: "원호",
-  WHEN_LINKED: "링크시",
-  WHEN_PAIRED: "페어시",
-};
+
+const KEYWORD_LABELS = Object.fromEntries(
+  ALL_KEYWORDS.map((k) => [k, renderKeyword(k)]),
+) as Record<CardKeyword, string>;
 
 const ALL_TRAITS: CardTrait[] = [
   "EARTH_FEDERATION",
@@ -882,7 +868,14 @@ function CardListContent({
     filter: initialFilterRef.current,
     sort: initialSortRef.current,
   });
-  return <CardList queryRef={data} filter={filter} sort={sort} showDescription={showDescription} />;
+  return (
+    <CardList
+      queryRef={data}
+      filter={filter}
+      sort={sort}
+      showDescription={showDescription}
+    />
+  );
 }
 
 // ─── Page ────────────────────────────────────────────────────────────────────
@@ -947,7 +940,11 @@ export function CardListPage() {
           </button>
         </div>
         <Suspense>
-          <CardListContent filter={filter} sort={sort} showDescription={showDescription} />
+          <CardListContent
+            filter={filter}
+            sort={sort}
+            showDescription={showDescription}
+          />
         </Suspense>
       </div>
     </div>

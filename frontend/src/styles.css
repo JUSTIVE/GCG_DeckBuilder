@@ -449,3 +449,32 @@ a {
 @utility parallelogram-* {
   --para-cut: --value(--cutout-*, [length]);
 }
+
+/*
+ * .hex-chip — 좌우가 뾰족한 육각형(horizontal hexagon) 클립
+ *
+ * --hex-cut 변수로 좌우 꼭짓점의 돌출 크기를 조절합니다.
+ * 기본값은 --cutout-sm (0.5rem) 입니다.
+ * 꼭짓점이 내용을 가리지 않도록 padding-inline 에 자동으로 추가됩니다.
+ *
+ * Usage examples:
+ *   hex-chip hex-chip-sm   → 0.5rem 꼭짓점
+ *   hex-chip hex-chip-md   → 0.75rem 꼭짓점
+ *   hex-chip hex-chip-[6px] → 임의 크기
+ */
+.hex-chip {
+  --hex-cut: var(--cutout-sm);
+  clip-path: polygon(
+    var(--hex-cut) 0%,
+    calc(100% - var(--hex-cut)) 0%,
+    100% 50%,
+    calc(100% - var(--hex-cut)) 100%,
+    var(--hex-cut) 100%,
+    0% 50%
+  );
+  padding-inline: calc(var(--hex-cut) + 0.35em);
+}
+
+@utility hex-chip-* {
+  --hex-cut: --value(--cutout-*, [length]);
+}

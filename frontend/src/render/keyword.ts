@@ -3,11 +3,11 @@ export const renderKeyword = (keyword: string) => {
     case "ACTION":
       return "액션";
     case "ACTIVATE_ACTION":
-      return "기동 - 액션";
+      return "기동･액션";
     case "ACTIVATE_MAIN":
-      return "기동 - 메인";
+      return "기동･메인";
     case "ATTACK":
-      return "공격시";
+      return "공격 시";
     case "BLOCKER":
       return "블로커";
     case "BREACH":
@@ -15,11 +15,11 @@ export const renderKeyword = (keyword: string) => {
     case "BURST":
       return "버스트";
     case "DEPLOY":
-      return "배포시";
+      return "배치 시";
     case "DESTROYED":
-      return "파괴시";
+      return "파괴 시";
     case "DURING_LINK":
-      return "링크 중";
+      return "링크 시";
     case "DURING_PAIR":
       return "페어 중";
     case "FIRST_STRIKE":
@@ -41,7 +41,7 @@ export const renderKeyword = (keyword: string) => {
     case "SUPPORT":
       return "원호";
     case "WHEN_LINKED":
-      return "링크시";
+      return "링크 시";
     case "WHEN_PAIRED":
       return "페어시";
     default:

@@ -120,7 +120,7 @@
       "ACADEMY"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST01-008",
@@ -173,7 +173,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【어택 시】【턴 1회】Choose 1 of your Resources. Set it as active."
+      "【공격 시】【턴 1회】Choose 1 of your Resources. Set it as active."
     ],
     "__typename": "PilotCard",
     "id": "ST01-011",
@@ -309,7 +309,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "<돌파 5> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "<돌파 5> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "This Unit may choose an active enemy Unit that is Lv.4 or lower as its attack target."
     ],
     "__typename": "UnitCard",
@@ -415,7 +415,7 @@
     ],
     "description": [
       "【메인】Choose 1 of your Units. It gains <돌파 3> during this turn.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【파일럿】[트로와 바톤]"
     ],
     "__typename": "CommandCard",
@@ -514,7 +514,7 @@
       "ZEON"
     ],
     "description": [
-      "【어택 시】This Unit gets AP+2 during this turn."
+      "【공격 시】This Unit gets AP+2 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "ST03-008",
@@ -543,7 +543,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【어택 시】During this turn, this Unit gets AP+1 and, if it is a Link Unit, it gains <고기동>.",
+      "【공격 시】During this turn, this Unit gets AP+1 and, if it is a Link Unit, it gains <고기동>.",
       "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "PilotCard",
@@ -593,7 +593,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【세트 시･Lv.4 or Higher Pilot】Choose 1 enemy Unit with 4 or less HP. Return it to its owner's hand."
     ],
     "__typename": "UnitCard",
@@ -676,7 +676,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【어택 시】Choose 1 enemy Unit. It gets AP-2 during this battle."
+      "【공격 시】Choose 1 enemy Unit. It gets AP-2 during this battle."
     ],
     "__typename": "PilotCard",
     "id": "ST04-010",
@@ -927,7 +927,7 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【어택 시】Choose 1 of your Units. It recovers 1 HP."
+      "【공격 시】Choose 1 of your Units. It recovers 1 HP."
     ],
     "__typename": "UnitCard",
     "id": "GD01-015",
@@ -1053,7 +1053,7 @@
       "ZEON"
     ],
     "description": [
-      "<돌파 2> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "<돌파 2> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-030",
@@ -1104,7 +1104,7 @@
     ],
     "description": [
       "【세트 시】This Unit gains <돌파 3>.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-034",
@@ -1157,7 +1157,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "<돌파 3> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-041",
@@ -1186,7 +1186,7 @@
       "TRIPLE_SHIP_ALLIANCE"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【배치 시】Choose 1 enemy Unit with 1 HP. Return it to its owner's hand."
     ],
     "__typename": "UnitCard",
@@ -1243,7 +1243,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-072",
@@ -1354,7 +1354,7 @@
     ],
     "description": [
       "While you have another (Triple Ship Alliance) Unit in play, this Unit gets AP+1 and <블로커>.",
-      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-081",
@@ -1755,7 +1755,7 @@
       "ACADEMY"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "This Unit can't choose the enemy player as its attack target."
     ],
     "__typename": "UnitCard",
@@ -1909,7 +1909,7 @@
       "OZ"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST02-008",
@@ -1933,7 +1933,7 @@
       "OZ"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST02-009",
@@ -2382,7 +2382,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST04-004",
@@ -2406,7 +2406,7 @@
       "ZAFT"
     ],
     "description": [
-      "【어택 시】If this Unit has 5 or more AP, choose 1 enemy Unit that is Lv.5 or higher. Deal 3 damage to it."
+      "【공격 시】If this Unit has 5 or more AP, choose 1 enemy Unit that is Lv.5 or higher. Deal 3 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "ST04-006",
@@ -2435,7 +2435,7 @@
       "ZAFT"
     ],
     "description": [
-      "<돌파 3> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST04-007",
@@ -2566,7 +2566,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 friendly Unit that is Lv.2 or lower. It gains <선제 공격> during this turn.",
-      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)",
+      "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)",
       "【파일럿】[미겔 아이만]"
     ],
     "__typename": "CommandCard",
@@ -2639,7 +2639,7 @@
     "description": [
       "【배치 시】Choose 1 of your other Units. Deal 1 damage to it. It gets AP+1 during this turn.",
       "While this is damaged, it gains <제압>.",
-      "(어택으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)"
+      "(공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST05-001",
@@ -2793,7 +2793,7 @@
       "GJALLARHORN"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【세트 시】Choose 1 enemy Unit that is Lv.3 or lower. It gets AP-2 during this turn."
     ],
     "__typename": "UnitCard",
@@ -2823,7 +2823,7 @@
       "GJALLARHORN"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST05-008",
@@ -3012,7 +3012,7 @@
     ],
     "description": [
       "【링크 시】If another friendly (Clan) Unit is in play, this gains <선제 공격> during this turn.",
-      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
+      "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST06-001",
@@ -3121,8 +3121,8 @@
       "CLAN"
     ],
     "description": [
-      "<돌파 1> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【어택 시】Choose 1 to 2 friendly (Clan) Units. They get AP+2 during this turn."
+      "<돌파 1> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "【공격 시】Choose 1 to 2 friendly (Clan) Units. They get AP+2 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "ST06-005",
@@ -3257,7 +3257,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】【어택 시】If you have a (Clan) Unit in play, look at the top card of your deck. Return it to the top or bottom of your deck."
+      "【링크 시】【공격 시】If you have a (Clan) Unit in play, look at the top card of your deck. Return it to the top or bottom of your deck."
     ],
     "__typename": "PilotCard",
     "id": "ST06-010",
@@ -3384,7 +3384,7 @@
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
       "【턴 1회】When a friendly (Clan) Unit links, it gains <돌파 3> during this turn.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "BaseCard",
     "id": "ST06-015",
@@ -3493,7 +3493,7 @@
     ],
     "description": [
       "While you have a (CB) Pilot in play, this Unit gains <블로커>.",
-      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST07-004",
@@ -3635,7 +3635,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【어택 시】This Unit gets AP+1 during this turn. If there are 7 or more (CB) cards in your trash, all your (CB) Units get AP+1 instead."
+      "【공격 시】This Unit gets AP+1 during this turn. If there are 7 or more (CB) cards in your trash, all your (CB) Units get AP+1 instead."
     ],
     "__typename": "PilotCard",
     "id": "ST07-009",
@@ -3874,7 +3874,7 @@
       "MAFTY"
     ],
     "description": [
-      "【어택 시】If this Unit is attacking an enemy Unit, choose 1 enemy Unit. Deal 1 damage to it."
+      "【공격 시】If this Unit is attacking an enemy Unit, choose 1 enemy Unit. Deal 1 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "ST08-004",
@@ -3926,7 +3926,7 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【세트 시】【어택 시】【턴 1회】If this Unit is attacking the enemy player, reveal 1 (Earth Federation) Unit card from your hand. Return it to the bottom of your deck. If you do, draw 2."
+      "【세트 시】【공격 시】【턴 1회】If this Unit is attacking the enemy player, reveal 1 (Earth Federation) Unit card from your hand. Return it to the bottom of your deck. If you do, draw 2."
     ],
     "__typename": "UnitCard",
     "id": "ST08-006",
@@ -3981,7 +3981,7 @@
     ],
     "description": [
       "While 3 or more enemy Units are in play, this Unit gains <블로커>.",
-      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST08-008",
@@ -4243,7 +4243,7 @@
       "MINERVA_SQUAD"
     ],
     "description": [
-      "<돌파 3> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【링크 시】If there are 5 or more purple cards in your trash, deal 2 damage to all Units with 5 or less AP."
     ],
     "__typename": "UnitCard",
@@ -4274,9 +4274,9 @@
       "ORB"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "While a friendly Base in play, this Unit gains <제압>.",
-      "(어택으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)"
+      "(공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST09-004",
@@ -4358,7 +4358,7 @@
       "MINERVA_SQUAD"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "ST09-007",
@@ -4391,7 +4391,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【어택 시】If this is a (Minerva Squad) Unit, choose 1 of your Resources. Set it as active."
+      "【공격 시】If this is a (Minerva Squad) Unit, choose 1 of your Resources. Set it as active."
     ],
     "__typename": "PilotCard",
     "id": "ST09-008",
@@ -4461,7 +4461,7 @@
     ],
     "description": [
       "【배치 시】Choose 1 of your (ZAFT) Units with 5 or more AP. It gains <선제 공격> during this turn.",
-      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
+      "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-049",
@@ -4491,7 +4491,7 @@
     ],
     "description": [
       "While this Unit has 5 or more AP, it gains <돌파 3>.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-054",
@@ -4541,7 +4541,7 @@
     ],
     "description": [
       "While this Unit has 5 or more AP, it gains <블로커>.",
-      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD02-076",
@@ -4636,7 +4636,7 @@
     ],
     "description": [
       "When playing this card from your hand, you may destroy 1 of your Link Units with \"Unicorn Mode\" in its card name that is Lv.5. If you do, play this card as if it has 0 Lv. and cost.",
-      "【어택 시】Choose 1 enemy Unit. Rest it."
+      "【공격 시】Choose 1 enemy Unit. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-002",
@@ -4667,8 +4667,8 @@
       "EARTH_FEDERATION"
     ],
     "description": [
-      "【링크 시】【어택 시】Choose 12 cards from your trash. Return them to their owner's deck and shuffle it. If you do, set this Unit as active. It gains <선제 공격> during this turn.",
-      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
+      "【링크 시】【공격 시】Choose 12 cards from your trash. Return them to their owner's deck and shuffle it. If you do, set this Unit as active. It gains <선제 공격> during this turn.",
+      "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-003",
@@ -4876,7 +4876,7 @@
     ],
     "description": [
       "While 4 or more enemy Units are in play, this Unit gains <블로커>.",
-      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-019",
@@ -5027,7 +5027,7 @@
     ],
     "description": [
       "【세트 시･(Operation Meteor) Pilot】Place 1 rested Resource. Then, this Unit gains <선제 공격> during this turn.",
-      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
+      "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-025",
@@ -5057,7 +5057,7 @@
       "ZEON"
     ],
     "description": [
-      "<돌파 4> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "<돌파 4> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【배치 시】If there are 10 or more (Zeon)/(Neo Zeon) Unit cards in your trash, deal 4 damage to all Units with <블로커>."
     ],
     "__typename": "UnitCard",
@@ -5089,8 +5089,8 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "<돌파 4> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【어택 시】Choose 1 enemy Unit with <블로커> that is Lv.3 or lower. Destroy it."
+      "<돌파 4> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "【공격 시】Choose 1 enemy Unit with <블로커> that is Lv.3 or lower. Destroy it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-029",
@@ -5437,7 +5437,7 @@
       "ZEON"
     ],
     "description": [
-      "【어택 시】If 2 or more other rested friendly Units are in play, choose 1 enemy Unit. Deal 3 damage to it."
+      "【공격 시】If 2 or more other rested friendly Units are in play, choose 1 enemy Unit. Deal 3 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-047",
@@ -5497,7 +5497,7 @@
       "ZAFT"
     ],
     "description": [
-      "【어택 시】If this Unit has 5 or more AP and it is attacking an enemy Unit, choose 1 enemy Unit. Deal 2 damage to it."
+      "【공격 시】If this Unit has 5 or more AP and it is attacking an enemy Unit, choose 1 enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD01-050",
@@ -5698,7 +5698,7 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【어택 시】If you are attacking the enemy player, this Unit gets AP+2 during this battle."
+      "【공격 시】If you are attacking the enemy player, this Unit gets AP+2 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-059",
@@ -5788,7 +5788,7 @@
     ],
     "description": [
       "During your turn, while this Unit is battling an enemy Unit that is Lv.2 or lower, it gains <선제 공격>.",
-      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
+      "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-063",
@@ -5838,7 +5838,7 @@
       "TRIPLE_SHIP_ALLIANCE"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【세트 시】【턴 1회】When you pair a Pilot with this Unit or one of your white Units, choose 1 enemy Unit. It gets AP-2 during this turn."
     ],
     "__typename": "UnitCard",
@@ -5872,7 +5872,7 @@
     ],
     "description": [
       "【배치 시】Deploy 1 [Fatum-00]((Triple Ship Alliance)･AP2･HP2･<블로커>) Unit token.",
-      "【세트 시】【어택 시】Choose 1 of your (Triple Ship Alliance) Unit tokens. It may attack on the turn it is deployed."
+      "【세트 시】【공격 시】Choose 1 of your (Triple Ship Alliance) Unit tokens. It may attack on the turn it is deployed."
     ],
     "__typename": "UnitCard",
     "id": "GD01-066",
@@ -5962,7 +5962,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【링크 시】【어택 시】Choose 1 enemy Unit. It gets AP-2 during this battle."
+      "【링크 시】【공격 시】Choose 1 enemy Unit. It gets AP-2 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-071",
@@ -5992,7 +5992,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "【링크 시】【어택 시】Choose 1 enemy Unit with 2 or less HP. Return it to its owner's hand."
+      "【링크 시】【공격 시】Choose 1 enemy Unit with 2 or less HP. Return it to its owner's hand."
     ],
     "__typename": "UnitCard",
     "id": "GD01-073",
@@ -6021,7 +6021,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【어택 시】Draw 1. Then, discard 1."
+      "【공격 시】Draw 1. Then, discard 1."
     ],
     "__typename": "UnitCard",
     "id": "GD01-074",
@@ -6224,7 +6224,7 @@
       "VANADIS_INSTITUTE"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD01-086",
@@ -6301,7 +6301,7 @@
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "While this Unit is (Zeon), it gains <돌파 1>.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
     "id": "GD01-092",
@@ -6326,7 +6326,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】【어택 시】Choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. Deal 1 damage to it."
+      "【링크 시】【공격 시】Choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. Deal 1 damage to it."
     ],
     "__typename": "PilotCard",
     "id": "GD01-093",
@@ -6398,7 +6398,7 @@
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "While this Unit is white, it gains <블로커>.",
-      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "PilotCard",
     "id": "GD01-096",
@@ -6406,7 +6406,7 @@
     "HP": 1
   },
   {
-    "name": "엘란 케레스 (Enhanced Person Number 4)",
+    "name": "엘란 케레스 (강화인간 4호)",
     "level": 4,
     "cost": 1,
     "color": "WHITE",
@@ -6911,7 +6911,7 @@
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
       "【기동･액션】Rest this Base：Choose 1 friendly (ZAFT) Unit with 5 or more AP. It gains <돌파 3> during this battle.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "BaseCard",
     "id": "GD01-127",
@@ -7064,7 +7064,7 @@
       "TITANS"
     ],
     "description": [
-      "<돌파 3> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【세트 시･(Cyber-Newtype) Pilot】When one of your (Titans) Units destroys an enemy shield area card with damage, this Unit recovers 2 HP."
     ],
     "__typename": "UnitCard",
@@ -7184,7 +7184,7 @@
       "OZ"
     ],
     "description": [
-      "【링크 시】【어택 시】Choose 1 enemy Unit with 2 or less HP. Rest it."
+      "【링크 시】【공격 시】Choose 1 enemy Unit with 2 or less HP. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-005",
@@ -7213,7 +7213,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "During your turn, this Unit can't receive battle damage from enemy Units that are Lv.2 or lower."
     ],
     "__typename": "UnitCard",
@@ -7644,7 +7644,7 @@
     ],
     "description": [
       "【턴 1회】When you place an EX Resource, choose 1 of your (AGE System) Units. It gains <돌파 2> during this turn.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD02-022",
@@ -7676,7 +7676,7 @@
     ],
     "description": [
       "【링크 시】While you are Lv.7 or higher, this Unit gains <선제 공격>.",
-      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
+      "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD02-023",
@@ -7794,7 +7794,7 @@
       "AGE_SYSTEM"
     ],
     "description": [
-      "<돌파 3> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD02-027",
@@ -7949,7 +7949,7 @@
     ],
     "description": [
       "While another friendly (Zeon) Link Unit is in play, this Unit gains <돌파 5>.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD02-033",
@@ -8029,8 +8029,8 @@
     ],
     "description": [
       "【링크 시】This Unit gains <제압> during this turn.",
-      "(어택으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
-      "【세트 시･(Neo Zeon) Pilot】【어택 시】Choose 1 damaged enemy Unit. Deal 2 damage to it."
+      "(공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
+      "【세트 시･(Neo Zeon) Pilot】【공격 시】Choose 1 damaged enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-036",
@@ -8060,7 +8060,7 @@
       "NEW_UNE"
     ],
     "description": [
-      "<돌파 1> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "<돌파 1> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【배치 시】If there are 3 or less enemy Shields, choose 1 enemy Unit with 5 or less AP. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
@@ -8290,7 +8290,7 @@
       "ZAFT"
     ],
     "description": [
-      "【어택 시】If this Unit has 5 or more AP and it is attacking an enemy Unit, draw 1."
+      "【공격 시】If this Unit has 5 or more AP and it is attacking an enemy Unit, draw 1."
     ],
     "__typename": "UnitCard",
     "id": "GD02-045",
@@ -8483,7 +8483,7 @@
       "VULTURE"
     ],
     "description": [
-      "[Suppression] (어택으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
+      "[Suppression] (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
       "【링크 시】During your turn, while there are 7 or more cards in your trash, all your other (Vulture) Units get AP+2."
     ],
     "__typename": "UnitCard",
@@ -8514,7 +8514,7 @@
       "GUNDAM_FRAME"
     ],
     "description": [
-      "【어택 시】If this Unit is damaged, draw 1."
+      "【공격 시】If this Unit is damaged, draw 1."
     ],
     "__typename": "UnitCard",
     "id": "GD02-054",
@@ -8545,7 +8545,7 @@
       "GUNDAM_FRAME"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【배치 시】Choose 1 of your Units and 1 enemy Unit. Deal 1 damage to them."
     ],
     "__typename": "UnitCard",
@@ -8607,7 +8607,7 @@
       "VAGAN"
     ],
     "description": [
-      "【세트 시】【어택 시】You may choose 1 of your other Units. Destroy it. If you do, choose 1 enemy Unit that is Lv.4 or lower. Deal 2 damage to it."
+      "【세트 시】【공격 시】You may choose 1 of your other Units. Destroy it. If you do, choose 1 enemy Unit that is Lv.4 or lower. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-057",
@@ -8665,7 +8665,7 @@
       "VULTURE"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD02-059",
@@ -9014,7 +9014,7 @@
       "AEUG"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "While a friendly white Base is in play, this Unit gains <리페어 1>.",
       "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
@@ -9046,7 +9046,7 @@
     ],
     "description": [
       "During your opponent's turn, the enemy Unit battling this Unit gains <선제 공격>.",
-      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
+      "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD02-073",
@@ -9078,7 +9078,7 @@
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
       "【세트 시】While there are 4 or more Command cards in your trash, this Unit gains <블로커>.",
-      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD02-074",
@@ -9107,7 +9107,7 @@
       "AEUG"
     ],
     "description": [
-      "【어택 시】Choose 1 active friendly Base. Rest it. If you do, choose 1 enemy Unit that is Lv.4 or lower. It gets AP-2 during this battle."
+      "【공격 시】Choose 1 active friendly Base. Rest it. If you do, choose 1 enemy Unit that is Lv.4 or lower. It gets AP-2 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD02-075",
@@ -9165,7 +9165,7 @@
     "HP": 4,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "엘란 케레스"
+      "pilotName": "Elan Ceres"
     },
     "zone": [
       "SPACE",
@@ -9186,7 +9186,7 @@
       "AEUG"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD02-079",
@@ -9262,7 +9262,7 @@
     ],
     "description": [
       "While you have another (Gjallarhorn) Unit in play, this Unit gains <블로커>.",
-      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD02-082",
@@ -9442,7 +9442,7 @@
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】Choose 1 of your other (Zeon) Link Units. It gains <돌파 1> during this turn.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
     "id": "GD02-089",
@@ -9514,7 +9514,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】【어택 시】Choose 1 of your (New UNE) Units. It gets AP+2 during this turn."
+      "【링크 시】【공격 시】Choose 1 of your (New UNE) Units. It gets AP+2 during this turn."
     ],
     "__typename": "PilotCard",
     "id": "GD02-092",
@@ -9584,7 +9584,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【어택 시】If this Unit is damaged and Lv.5 or lower, it gains <고기동> during this battle.",
+      "【공격 시】If this Unit is damaged and Lv.5 or lower, it gains <고기동> during this battle.",
       "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "PilotCard",
@@ -10563,7 +10563,7 @@
       "JUPITRIS"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
     "__typename": "UnitCard",
@@ -10593,7 +10593,7 @@
       "TITANS"
     ],
     "description": [
-      "【어택 시】If you have 2 or more other (Titans) Units in play, choose 1 enemy Unit with 5 or less HP. Rest it."
+      "【공격 시】If you have 2 or more other (Titans) Units in play, choose 1 enemy Unit with 5 or less HP. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD03-004",
@@ -10906,7 +10906,7 @@
     ],
     "description": [
       "【기동･메인】【턴 1회】Exile 3 (Titans) cards from your trash: This Unit gains <돌파 4> during this turn.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD03-015",
@@ -10994,8 +10994,8 @@
       "G_TEAM"
     ],
     "description": [
-      "<돌파 5> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【어택 시】Choose 1 enemy Unit with <블로커>. Deal 5 damage to it."
+      "<돌파 5> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
+      "【공격 시】Choose 1 enemy Unit with <블로커>. Deal 5 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD03-018",
@@ -11233,7 +11233,7 @@
       "GN_DRIVE"
     ],
     "description": [
-      "<돌파 3> (어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD03-026",
@@ -11287,7 +11287,7 @@
       "MAGANAC_CORPS"
     ],
     "description": [
-      "【어택 시】If you are attacking an enemy Unit, this Unit gets AP+2 during this battle."
+      "【공격 시】If you are attacking an enemy Unit, this Unit gets AP+2 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD03-028",
@@ -11422,7 +11422,7 @@
     ],
     "description": [
       "【세트 시･(ZAFT) Pilot】During your turn, all your (ZAFT) Units get AP+2.",
-      "【어택 시】Choose 1 enemy Unit. Deal 1 damage to it for each 4 AP this Unit has."
+      "【공격 시】Choose 1 enemy Unit. Deal 1 damage to it for each 4 AP this Unit has."
     ],
     "__typename": "UnitCard",
     "id": "GD03-033",
@@ -11452,7 +11452,7 @@
       "CLAN"
     ],
     "description": [
-      "<제압> (어택으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
+      "<제압> (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
       "【배치 시】Choose 1 enemy Unit. Deal 3 damage to it."
     ],
     "__typename": "UnitCard",
@@ -11546,7 +11546,7 @@
     ],
     "description": [
       "【링크 시】During your turn, while this Unit is battling an enemy Unit with a 【파괴 시】 effect, it gains <선제 공격>.",
-      "(어택 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
+      "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD03-037",
@@ -11875,7 +11875,7 @@
       "GN_DRIVE"
     ],
     "description": [
-      "<제압> (어택으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
+      "<제압> (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
       "When this Unit destroys an enemy shield area card with battle damage, if there are 10 or more (CB) cards in your trash, choose 1 enemy Unit with the lowest HP. Destroy it."
     ],
     "__typename": "UnitCard",
@@ -11999,7 +11999,7 @@
       "GUNDAM_FRAME"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【세트 시】【턴 1회】During your turn, when one of your (Tekkadan)/(Teiwaz) Units receives effect damage, choose 1 enemy Unit that is Lv.4 or lower. Rest it."
     ],
     "__typename": "UnitCard",
@@ -12121,7 +12121,7 @@
       "GN_DRIVE"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD03-057",
@@ -12178,7 +12178,7 @@
       "VAGAN"
     ],
     "description": [
-      "【어택 시】You may choose 1 (Vagan) card from your trash. Exile it from the game. If you do, choose 1 of your (Vagan) Units. It gets AP+2 during this turn."
+      "【공격 시】You may choose 1 (Vagan) card from your trash. Exile it from the game. If you do, choose 1 of your (Vagan) Units. It gets AP+2 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD03-059",
@@ -12417,7 +12417,7 @@
     ],
     "description": [
       "While a friendly Base is in play, this Unit gains <블로커>.",
-      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD03-068",
@@ -12534,7 +12534,7 @@
       "TRIPLE_SHIP_ALLIANCE"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【배치 시】If you have another (Triple Ship Alliance) Unit in play, draw 1. Then, discard 1."
     ],
     "__typename": "UnitCard",
@@ -12567,7 +12567,7 @@
       "GJALLARHORN"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)",
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【링크 시】【기동･액션】【턴 1회】If there are 6 or more (Gjallarhorn) cards in your trash, choose 1 enemy Unit battling this Unit. It gets AP-3 during this battle."
     ],
     "__typename": "UnitCard",
@@ -12627,7 +12627,7 @@
       "AEUG"
     ],
     "description": [
-      "【링크 시】【어택 시】Choose 1 enemy Unit with no paired Pilot. It gets AP-2 during this turn."
+      "【링크 시】【공격 시】Choose 1 enemy Unit with no paired Pilot. It gets AP-2 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD03-075",
@@ -12849,7 +12849,7 @@
       "SUPERPOWER_BLOC"
     ],
     "description": [
-      "<블로커> (레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
     "id": "GD03-083",
@@ -12925,7 +12925,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【어택 시】Choose 1 of your (Titans) Units whose Lv. is equal to or lower than this Unit. It gets AP+1 during this turn."
+      "【공격 시】Choose 1 of your (Titans) Units whose Lv. is equal to or lower than this Unit. It gets AP+1 during this turn."
     ],
     "__typename": "PilotCard",
     "id": "GD03-086",
@@ -12976,7 +12976,7 @@
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】If this is an (AGE System) Unit, it gets AP+1 and <돌파 1>.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
     "id": "GD03-088",
@@ -13024,8 +13024,8 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【어택 시】Choose 1 of your (Cyclops Team) Units. It gains <돌파 1> during this turn.",
-      "(어택으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+      "【공격 시】Choose 1 of your (Cyclops Team) Units. It gains <돌파 1> during this turn.",
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
     "id": "GD03-090",
@@ -13167,7 +13167,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】【어택 시】You may discard 1. If you do, draw 1."
+      "【링크 시】【공격 시】You may discard 1. If you do, draw 1."
     ],
     "__typename": "PilotCard",
     "id": "GD03-096",
@@ -13647,7 +13647,7 @@
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【액션】Choose 1 rested enemy Unit that is Lv.4 or lower. Return it to its owner's hand. Then, if there are 2 or more cards with \"Awakened Potential\" in their card name in your trash, you may choose 1 friendly Unit. It gains <블로커> during this turn.",
-      "(레스트 하는 것으로 어택 대상을 이 유닛으로 한다.)"
+      "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "CommandCard",
     "id": "GD03-118"
