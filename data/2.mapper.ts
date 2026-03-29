@@ -3,6 +3,7 @@ import { writeFile } from "node:fs/promises";
 import effects from "./effects.json";
 import pilotnames from "./pilotnames.json";
 import unitnames from "./unitnames.json";
+import basenames from "./basenames.json";
 
 const pilotNameEntries = Object.entries(pilotnames);
 const effectEntries = Object.entries(effects);
@@ -42,7 +43,7 @@ const pilotAndEffectNameMapper = (raw: unknown[]) =>
 
 const unitNameMapper = (raw: unknown[]) => {
   return raw.map((x) => {
-    if (x.name == null) return x;
+    if (x.name == null && x.__typename !== "UnitCard") return x;
 
     return {
       ...x,
@@ -51,8 +52,18 @@ const unitNameMapper = (raw: unknown[]) => {
   });
 };
 
+const baseNameMapper = (raw: unknown[]) => {
+  return raw.map((x) => {
+    if (x.name == null && x.__typename !== "BaseCard") return x;
+    return {
+      ...x,
+      name: basenames[x.name] ?? x.name,
+    };
+  });
+};
+
 await writeFile(
   "../data/mapped.json",
-  JSON.stringify(pilotAndEffectNameMapper(unitNameMapper(raw)), null, 2),
+  JSON.stringify(pilotAndEffectNameMapper(baseNameMapper(unitNameMapper(raw))), null, 2),
   "utf-8",
 );

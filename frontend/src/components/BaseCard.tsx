@@ -10,13 +10,7 @@ import { renderZone } from "@/render/zone";
 import { Dialog } from "@base-ui/react/dialog";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
-import {
-  COLOR_BG,
-  COLOR_BG20,
-  COLOR_BG50,
-  COLOR_HEX,
-  COLOR_TEXT,
-} from "src/render/color";
+import { COLOR_BG, COLOR_BG20, COLOR_HEX, COLOR_TEXT } from "src/render/color";
 
 const Fragment = graphql`
   fragment BaseCardFragment on BaseCard {

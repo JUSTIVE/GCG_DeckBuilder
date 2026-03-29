@@ -235,7 +235,7 @@
     }
   },
   {
-    "name": "White Base",
+    "name": "화이트 베이스",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -267,7 +267,7 @@
     ]
   },
   {
-    "name": "Asticassia School of Technology, Earth House",
+    "name": "아스티카시아 고등 전문 학원 지구 기숙사",
     "level": 2,
     "cost": 1,
     "color": "WHITE",
@@ -453,7 +453,7 @@
     }
   },
   {
-    "name": "Saint Gabriel Institute",
+    "name": "세인트 가브리엘 학원",
     "level": 2,
     "cost": 2,
     "color": "GREEN",
@@ -552,7 +552,7 @@
     "HP": 1
   },
   {
-    "name": "Falmel",
+    "name": "팔멜",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -711,7 +711,7 @@
     }
   },
   {
-    "name": "Archangel",
+    "name": "아크엔젤",
     "level": 3,
     "cost": 1,
     "color": "WHITE",
@@ -1593,7 +1593,7 @@
     "id": "GD01-120"
   },
   {
-    "name": "Side 7",
+    "name": "사이드 7",
     "level": 1,
     "cost": 1,
     "color": "BLUE",
@@ -1988,7 +1988,7 @@
     "id": "ST02-014"
   },
   {
-    "name": "Corsica Base",
+    "name": "코르시카 기지",
     "level": 3,
     "cost": 3,
     "color": "BLUE",
@@ -2313,7 +2313,7 @@
     }
   },
   {
-    "name": "Rewloola",
+    "name": "레우루라",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -2578,7 +2578,7 @@
     }
   },
   {
-    "name": "Vesalius",
+    "name": "베사리우스",
     "level": 3,
     "cost": 1,
     "color": "RED",
@@ -2968,7 +2968,7 @@
     "id": "ST05-014"
   },
   {
-    "name": "Isaribi",
+    "name": "이사리비",
     "level": 3,
     "cost": 1,
     "color": "PURPLE",
@@ -3335,7 +3335,7 @@
     }
   },
   {
-    "name": "Clan Battle",
+    "name": "클랜 배틀",
     "level": 3,
     "cost": 1,
     "color": "RED",
@@ -3364,7 +3364,7 @@
     ]
   },
   {
-    "name": "Kaneban Co., Ltd.",
+    "name": "카네반 유한회사",
     "level": 4,
     "cost": 2,
     "color": "GREEN",
@@ -3749,7 +3749,7 @@
     "id": "ST07-014"
   },
   {
-    "name": "Ptolemaios",
+    "name": "프톨레마이오스",
     "level": 2,
     "cost": 1,
     "color": "PURPLE",
@@ -4111,7 +4111,7 @@
     "id": "ST08-013"
   },
   {
-    "name": "Valiant",
+    "name": "바리언트",
     "level": 2,
     "cost": 1,
     "color": "RED",
@@ -4138,7 +4138,7 @@
     ]
   },
   {
-    "name": "Davao",
+    "name": "다바오",
     "level": 3,
     "cost": 1,
     "color": "BLUE",
@@ -4417,7 +4417,7 @@
     "id": "ST09-009"
   },
   {
-    "name": "Minerva",
+    "name": "미네르바",
     "level": 2,
     "cost": 1,
     "color": "PURPLE",
@@ -6808,7 +6808,7 @@
     }
   },
   {
-    "name": "Nahel Argama",
+    "name": "넬 아가마",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -6836,7 +6836,7 @@
     ]
   },
   {
-    "name": "Zanzibar",
+    "name": "잔지바르",
     "level": 4,
     "cost": 2,
     "color": "GREEN",
@@ -6864,7 +6864,7 @@
     ]
   },
   {
-    "name": "Underground Desert Base",
+    "name": "사막 지하 기지",
     "level": 2,
     "cost": 1,
     "color": "GREEN",
@@ -6891,7 +6891,7 @@
     ]
   },
   {
-    "name": "Gamow",
+    "name": "가모프",
     "level": 2,
     "cost": 1,
     "color": "RED",
@@ -6922,7 +6922,7 @@
     ]
   },
   {
-    "name": "Mining Asteroid Palau",
+    "name": "자원 위성 팔라우",
     "level": 2,
     "cost": 1,
     "color": "RED",
@@ -6949,7 +6949,7 @@
     ]
   },
   {
-    "name": "Kusanagi",
+    "name": "쿠사나기",
     "level": 4,
     "cost": 2,
     "color": "WHITE",
@@ -6976,7 +6976,7 @@
     ]
   },
   {
-    "name": "13th Tactical Testing Sector",
+    "name": "제13전술시험구역 ",
     "level": 3,
     "cost": 1,
     "color": "WHITE",
@@ -10149,7 +10149,7 @@
     }
   },
   {
-    "name": "Dominion",
+    "name": "도미니온",
     "level": 4,
     "cost": 1,
     "color": "BLUE",
@@ -10177,7 +10177,7 @@
     ]
   },
   {
-    "name": "Alexandria",
+    "name": "알렉산드리아",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -10204,7 +10204,7 @@
     ]
   },
   {
-    "name": "Sodon",
+    "name": "소돈",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -10232,7 +10232,7 @@
     ]
   },
   {
-    "name": "Diva",
+    "name": "디바",
     "level": 3,
     "cost": 1,
     "color": "GREEN",
@@ -10261,7 +10261,7 @@
     ]
   },
   {
-    "name": "Gwadan",
+    "name": "그와단",
     "level": 4,
     "cost": 2,
     "color": "RED",
@@ -10288,7 +10288,7 @@
     ]
   },
   {
-    "name": "Shuji's Hideout",
+    "name": "슈우지의 은신처",
     "level": 3,
     "cost": 1,
     "color": "RED",
@@ -10317,7 +10317,7 @@
     ]
   },
   {
-    "name": "Freeden",
+    "name": "프리덴",
     "level": 2,
     "cost": 1,
     "color": "PURPLE",
@@ -10346,7 +10346,7 @@
     ]
   },
   {
-    "name": "Hammerhead",
+    "name": "해머 헤드",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -10373,7 +10373,7 @@
     ]
   },
   {
-    "name": "Argama",
+    "name": "아가마",
     "level": 3,
     "cost": 1,
     "color": "WHITE",
@@ -10402,7 +10402,7 @@
     ]
   },
   {
-    "name": "Sleipnir",
+    "name": "슬레이프니르",
     "level": 4,
     "cost": 2,
     "color": "WHITE",
@@ -13751,7 +13751,7 @@
     }
   },
   {
-    "name": "Jupitris",
+    "name": "주피트리스",
     "level": 3,
     "cost": 1,
     "color": "BLUE",
@@ -13779,7 +13779,7 @@
     ]
   },
   {
-    "name": "Ribo Colony",
+    "name": "리보 콜로니",
     "level": 3,
     "cost": 1,
     "color": "BLUE",
@@ -13808,7 +13808,7 @@
     ]
   },
   {
-    "name": "Peacemillion",
+    "name": "피스밀리온",
     "level": 6,
     "cost": 1,
     "color": "GREEN",
@@ -13837,7 +13837,7 @@
     ]
   },
   {
-    "name": "Cyclops Team",
+    "name": "사이클롭스 부대",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -13865,7 +13865,7 @@
     ]
   },
   {
-    "name": "Jachin Due",
+    "name": "야킨 두에",
     "level": 6,
     "cost": 1,
     "color": "RED",
@@ -13892,7 +13892,7 @@
     ]
   },
   {
-    "name": "Doritea",
+    "name": "도리테아",
     "level": 4,
     "cost": 1,
     "color": "RED",
@@ -13921,7 +13921,7 @@
     ]
   },
   {
-    "name": "Hotarubi",
+    "name": "호타루비",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -13949,7 +13949,7 @@
     ]
   },
   {
-    "name": "Downes",
+    "name": "다우네스",
     "level": 5,
     "cost": 2,
     "color": "PURPLE",
@@ -13976,7 +13976,7 @@
     ]
   },
   {
-    "name": "Eternal",
+    "name": "이터널",
     "level": 5,
     "cost": 2,
     "color": "WHITE",
@@ -14003,7 +14003,7 @@
     ]
   },
   {
-    "name": "Radish",
+    "name": "라디쉬",
     "level": 2,
     "cost": 1,
     "color": "WHITE",
