@@ -1,8 +1,9 @@
 import type { CardListFragment$key } from "@/__generated__/CardListFragment.graphql";
+import type { CardFilterInput } from "@/__generated__/CardListFragmentRefetchQuery.graphql";
 import { usePaginationFragment } from "react-relay";
 import { graphql } from "relay-runtime";
 import { Card } from "./Card";
-import { createContext, useRef, useState, useEffect } from "react";
+import { createContext, useRef, useState, useEffect, useTransition } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 
 type FocusCardContextType = {
@@ -50,13 +51,27 @@ const Fragment = graphql`
 
 type Props = {
   queryRef: CardListFragment$key;
+  filter?: CardFilterInput;
 };
 
-export function CardList({ queryRef }: Props) {
-  const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment(
+export function CardList({ queryRef, filter }: Props) {
+  const [, startTransition] = useTransition();
+  const { data, refetch, loadNext, hasNext, isLoadingNext } = usePaginationFragment(
     Fragment,
     queryRef,
   );
+
+  // refetch when filter changes, keeping old content visible via startTransition
+  const prevFilterRef = useRef(JSON.stringify(filter));
+  useEffect(() => {
+    const serialized = JSON.stringify(filter);
+    if (serialized === prevFilterRef.current) return;
+    prevFilterRef.current = serialized;
+    if (!filter) return;
+    startTransition(() => {
+      refetch({ filter }, { fetchPolicy: "network-only" });
+    });
+  }, [filter, refetch]);
   const parentRef = useRef<HTMLDivElement>(null);
   const [columns, setColumns] = useState(1);
 

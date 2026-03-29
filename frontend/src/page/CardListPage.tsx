@@ -3,11 +3,9 @@ import type { CardFilterInput } from "@/__generated__/CardListFragmentRefetchQue
 import { CardList } from "@/components/CardList";
 import { useLazyLoadQuery } from "react-relay";
 import { graphql } from "relay-runtime";
-import { Route, type CardListSearch } from "@/routes/cardlist";
-import { useRouter } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { XIcon } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, Suspense } from "react";
 
 const Query = graphql`
   query CardListPageQuery($filter: CardFilterInput!) {
@@ -15,7 +13,9 @@ const Query = graphql`
   }
 `;
 
-// ─── Kind labels ─────────────────────────────────────────────────────────────
+// ─── Constants ───────────────────────────────────────────────────────────────
+
+const INITIAL_FILTER: CardFilterInput = { kind: ["UNIT"] };
 
 const KIND_LABELS: Record<string, string> = {
   UNIT: "유닛",
@@ -31,81 +31,80 @@ const COST_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // ─── Filter bar ──────────────────────────────────────────────────────────────
 
-function FilterBar() {
-  const search = Route.useSearch();
-  const router = useRouter();
-  const activeKind = search.kind ?? ["UNIT"];
+type FilterBarProps = {
+  filter: CardFilterInput;
+  onChange: (filter: CardFilterInput) => void;
+};
 
-  // local text input state to debounce
-  const [queryText, setQueryText] = useState(search.query ?? "");
+function FilterBar({ filter, onChange }: FilterBarProps) {
+  const [queryText, setQueryText] = useState(filter.query ?? "");
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // sync if URL changes externally
   useEffect(() => {
-    setQueryText(search.query ?? "");
-  }, [search.query]);
+    setQueryText(filter.query ?? "");
+  }, [filter.query]);
 
-  function navigate(patch: Partial<CardListSearch>) {
-    router.navigate({
-      to: "/cardlist",
-      search: { ...search, ...patch },
-    });
+  function patch(next: Partial<CardFilterInput>) {
+    onChange({ ...filter, ...next });
   }
 
   function toggleKind(k: (typeof ALL_KINDS)[number]) {
-    const next = activeKind.includes(k)
-      ? activeKind.filter((x) => x !== k)
-      : [...activeKind, k];
-    navigate({ kind: next.length > 0 ? next : [k] });
+    const current = filter.kind as string[];
+    const next = current.includes(k)
+      ? current.filter((x) => x !== k)
+      : [...current, k];
+    patch({ kind: next.length > 0 ? (next as CardFilterInput["kind"]) : [k] });
   }
 
   function toggleCost(c: number) {
-    const current = search.cost ?? [];
+    const current = (filter.cost as number[] | undefined) ?? [];
     const next = current.includes(c)
       ? current.filter((x) => x !== c)
       : [...current, c];
-    navigate({ cost: next.length > 0 ? next : undefined });
+    patch({ cost: next.length > 0 ? next : null });
   }
 
   function toggleZone(z: (typeof ALL_ZONES)[number]) {
-    const current = search.zone ?? [];
+    const current = (filter.zone as string[] | undefined) ?? [];
     const next = current.includes(z)
       ? current.filter((x) => x !== z)
       : [...current, z];
-    navigate({ zone: next.length > 0 ? next : undefined });
+    patch({ zone: next.length > 0 ? (next as CardFilterInput["zone"]) : null });
   }
 
   function onQueryChange(value: string) {
     setQueryText(value);
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
-      navigate({ query: value.trim() || undefined });
+      patch({ query: value.trim() || null });
     }, 300);
   }
 
+  const activeKind = filter.kind as string[];
+  const activeCost = (filter.cost as number[] | undefined) ?? [];
+  const activeZone = (filter.zone as string[] | undefined) ?? [];
+
   const hasFilters =
     activeKind.join(",") !== "UNIT" ||
-    (search.cost?.length ?? 0) > 0 ||
-    (search.zone?.length ?? 0) > 0 ||
-    !!search.query;
-
-  function resetAll() {
-    setQueryText("");
-    router.navigate({ to: "/cardlist", search: { kind: ["UNIT"] } });
-  }
+    activeCost.length > 0 ||
+    activeZone.length > 0 ||
+    !!filter.query;
 
   return (
     <div className="flex flex-col gap-2 border-b border-border px-4 py-3">
       {/* Kind toggles */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">종류</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          종류
+        </span>
         <div className="flex flex-wrap gap-1">
           {ALL_KINDS.map((k) => (
             <button
+              type="button"
               key={k}
               onClick={() => toggleKind(k)}
               className={cn(
-                "rounded-md border px-2.5 py-0.5 text-xs font-medium transition-colors",
+                "rounded-md border px-2.5 py-0.5 text-xs font-medium transition-colors cursor-pointer",
                 activeKind.includes(k)
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
@@ -119,15 +118,18 @@ function FilterBar() {
 
       {/* Cost chips */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">코스트</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          코스트
+        </span>
         <div className="flex flex-wrap gap-1">
           {COST_OPTIONS.map((c) => (
             <button
+              type="button"
               key={c}
               onClick={() => toggleCost(c)}
               className={cn(
-                "h-6 w-6 rounded border text-xs font-medium transition-colors",
-                (search.cost ?? []).includes(c)
+                "h-6 w-6 rounded border text-xs font-medium transition-colors cursor-pointer",
+                activeCost.includes(c)
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
               )}
@@ -141,15 +143,18 @@ function FilterBar() {
       {/* Zone + Query row */}
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex items-center gap-1.5">
-          <span className="text-xs text-muted-foreground w-10 shrink-0">지형</span>
+          <span className="text-xs text-muted-foreground w-10 shrink-0">
+            지형
+          </span>
           <div className="flex gap-1">
             {ALL_ZONES.map((z) => (
               <button
+                type="button"
                 key={z}
                 onClick={() => toggleZone(z)}
                 className={cn(
-                  "rounded-md border px-2.5 py-0.5 text-xs font-medium transition-colors",
-                  (search.zone ?? []).includes(z)
+                  "rounded-md border px-2.5 py-0.5 text-xs font-medium transition-colors cursor-pointer",
+                  activeZone.includes(z)
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
                 )}
@@ -160,7 +165,6 @@ function FilterBar() {
           </div>
         </div>
 
-        {/* Text search */}
         <div className="relative ml-auto flex items-center">
           <input
             value={queryText}
@@ -180,7 +184,7 @@ function FilterBar() {
 
         {hasFilters && (
           <button
-            onClick={resetAll}
+            onClick={() => onChange(INITIAL_FILTER)}
             className="text-xs text-muted-foreground underline-offset-2 hover:underline"
           >
             초기화
@@ -191,27 +195,28 @@ function FilterBar() {
   );
 }
 
-// ─── Page ────────────────────────────────────────────────────────────────────
+// ─── Content (suspends) ──────────────────────────────────────────────────────
 
-function buildFilter(search: CardListSearch): CardFilterInput {
-  return {
-    kind: search.kind ?? ["UNIT"],
-    cost: search.cost ?? null,
-    level: search.level ?? null,
-    zone: search.zone ?? null,
-    query: search.query ?? null,
-  };
+function CardListContent({ filter }: { filter: CardFilterInput }) {
+  // useLazyLoadQuery fires only once on mount with INITIAL_FILTER.
+  // Subsequent filter changes are handled by CardList via refetch.
+  const data = useLazyLoadQuery<CardListPageQuery>(Query, {
+    filter: INITIAL_FILTER,
+  });
+  return <CardList queryRef={data} filter={filter} />;
 }
 
+// ─── Page ────────────────────────────────────────────────────────────────────
+
 export function CardListPage() {
-  const search = Route.useSearch();
-  const filter = buildFilter(search);
-  const data = useLazyLoadQuery<CardListPageQuery>(Query, { filter });
+  const [filter, setFilter] = useState<CardFilterInput>(INITIAL_FILTER);
 
   return (
     <div className="flex flex-col">
-      <FilterBar />
-      <CardList queryRef={data} />
+      <FilterBar filter={filter} onChange={setFilter} />
+      <Suspense>
+        <CardListContent filter={filter} />
+      </Suspense>
     </div>
   );
 }
