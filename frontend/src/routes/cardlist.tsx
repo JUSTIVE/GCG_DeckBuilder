@@ -16,6 +16,7 @@ export type CardListSearch = {
   zone?: Array<(typeof VALID_ZONES)[number]>;
   package?: (typeof VALID_PACKAGES)[number];
   query?: string;
+  cardId?: string;
 };
 
 export const Route = createFileRoute("/cardlist")({
@@ -46,6 +47,8 @@ export const Route = createFileRoute("/cardlist")({
       typeof raw.query === "string" && raw.query.trim()
         ? raw.query
         : undefined,
+    cardId:
+      typeof raw.cardId === "string" && raw.cardId ? raw.cardId : undefined,
   }),
   component: CardListPage,
 });

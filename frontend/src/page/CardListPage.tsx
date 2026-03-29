@@ -401,7 +401,7 @@ export function CardListPage() {
   function handleFilterChange(newFilter: CardFilterInput) {
     router.navigate({
       to: "/cardlist",
-      search: filterToSearch(newFilter),
+      search: (prev) => ({ ...filterToSearch(newFilter), cardId: prev.cardId }),
       replace: true,
     });
   }

@@ -3,36 +3,8 @@ import type { CardFilterInput } from "@/__generated__/CardListFragmentRefetchQue
 import { usePaginationFragment } from "react-relay";
 import { graphql } from "relay-runtime";
 import { Card } from "./Card";
-import {
-  createContext,
-  useRef,
-  useState,
-  useEffect,
-  useTransition,
-} from "react";
+import { useRef, useState, useEffect, useTransition } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
-
-type FocusCardContextType = {
-  focusedCard: string | null;
-  setFocusedCard: (value: string | null) => void;
-};
-export const CardListFocusContext = createContext<FocusCardContextType | null>(
-  null,
-);
-
-export function CardListFocusProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [focusedCard, setFocusedCard] = useState<string | null>(null);
-
-  return (
-    <CardListFocusContext value={{ focusedCard, setFocusedCard }}>
-      {children}
-    </CardListFocusContext>
-  );
-}
 
 const Fragment = graphql`
   fragment CardListFragment on Query
@@ -126,11 +98,10 @@ export function CardList({ queryRef, filter }: Props) {
   ]);
 
   return (
-    <CardListFocusProvider>
-      <div
-        ref={parentRef}
-        className="overflow-y-auto h-[calc(100dvh-65px)] py-5"
-      >
+    <div
+      ref={parentRef}
+      className="overflow-y-auto h-[calc(100dvh-65px)] py-5"
+    >
         <div
           style={{
             height: `${rowVirtualizer.getTotalSize()}px`,
@@ -151,11 +122,10 @@ export function CardList({ queryRef, filter }: Props) {
                 key={virtualRow.key}
                 style={{
                   position: "absolute",
-                  top: 0,
+                  top: `${virtualRow.start}px`,
                   left: 0,
                   width: "100%",
                   height: `${virtualRow.size}px`,
-                  transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
                 <div
@@ -177,7 +147,6 @@ export function CardList({ queryRef, filter }: Props) {
             <span className="text-gray-500">Loading...</span>
           </div>
         )}
-      </div>
-    </CardListFocusProvider>
+    </div>
   );
 }
