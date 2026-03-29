@@ -3,6 +3,7 @@ import { SearchIcon, XIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { serveGraphQL } from "@/serve";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "@tanstack/react-router";
 
 // ─── GraphQL ──────────────────────────────────────────────────────────────────
 
@@ -103,8 +104,11 @@ export function QuickSearch() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navigate = useNavigate();
 
   // cmd+k / ctrl+k
   useEffect(() => {
@@ -125,6 +129,7 @@ export function QuickSearch() {
     } else {
       setQuery("");
       setResults([]);
+      setActiveIndex(-1);
     }
   }, [open]);
 
@@ -147,12 +152,43 @@ export function QuickSearch() {
           "quicksearch"
         ] as SearchResult[]) ?? [];
       setResults(hits);
+      setActiveIndex(-1);
       setLoading(false);
     }, 150);
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
     };
   }, [query]);
+
+  function selectResult(r: SearchResult) {
+    setOpen(false);
+    navigate({
+      to: "/cardlist",
+      search: (prev) => ({ ...prev, cardId: r.id }),
+    });
+  }
+
+  function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (results.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIndex((i) => {
+        const next = Math.min(i + 1, results.length - 1);
+        listRef.current?.children[next]?.scrollIntoView({ block: "nearest" });
+        return next;
+      });
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIndex((i) => {
+        const next = Math.max(i - 1, 0);
+        listRef.current?.children[next]?.scrollIntoView({ block: "nearest" });
+        return next;
+      });
+    } else if (e.key === "Enter" && activeIndex >= 0) {
+      e.preventDefault();
+      selectResult(results[activeIndex]);
+    }
+  }
 
   return (
     <>
@@ -178,6 +214,7 @@ export function QuickSearch() {
                 ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={onKeyDown}
                 placeholder="카드 이름, 효과, 특성으로 검색…"
                 className="h-12 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               />
@@ -209,15 +246,18 @@ export function QuickSearch() {
                 </p>
               )}
               {!loading && results.length > 0 && (
-                <ul className="p-1">
-                  {results.map((r) => (
+                <ul ref={listRef} className="p-1">
+                  {results.map((r, i) => (
                     <li key={r.id}>
                       <button
                         className={cn(
                           "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left",
-                          "hover:bg-accent hover:text-accent-foreground",
+                          i === activeIndex
+                            ? "bg-accent text-accent-foreground"
+                            : "hover:bg-accent hover:text-accent-foreground",
                         )}
-                        onClick={() => setOpen(false)}
+                        onMouseEnter={() => setActiveIndex(i)}
+                        onClick={() => selectResult(r)}
                       >
                         <span className="w-14 shrink-0 rounded border border-border bg-muted px-1.5 py-0.5 text-center text-xs text-muted-foreground">
                           {KIND_LABEL[r.__typename] ?? r.__typename}

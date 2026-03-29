@@ -6,12 +6,9 @@ import Marquee from "@/components/Marquee";
 import tempimg from "./tempimg.webp";
 import { ZoneChip } from "./ZoneChip";
 import { renderTrait } from "@/render/trait";
-import { renderZone } from "@/render/zone";
-import { CardDescription } from "./CardDescription";
-import { Dialog } from "@base-ui/react/dialog";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
-import { COLOR_BG, COLOR_BG20, COLOR_HEX } from "src/render/color";
+import { COLOR_BG, COLOR_BG20 } from "src/render/color";
 
 const Fragment = graphql`
   fragment UnitCardFragment on UnitCard {
@@ -45,7 +42,7 @@ type Props = {
 };
 
 // Shared card body used in both thumbnail and dialog.
-function CardBody({
+export function UnitCardBody({
   unitCard,
   cardBg,
   isWhite,
@@ -154,28 +151,10 @@ export function UnitCard({ unitCardRef }: Props) {
   const cardBg = COLOR_BG[unitCard.color] ?? "bg-black";
   const isWhite = unitCard.color === "WHITE";
 
-  const linkLabels = unitCard.links
-    .map((x) =>
-      x.__typename === "LinkPilot" && x.pilot
-        ? `[${x.pilot.name}]`
-        : x.__typename === "LinkTrait" && x.trait
-          ? `(${renderTrait(x.trait)})`
-          : null,
-    )
-    .filter(Boolean);
-
   function openDialog() {
     router.navigate({
       to: "/cardlist",
       search: (prev) => ({ ...prev, cardId: unitCard.id }),
-      replace: true,
-    });
-  }
-
-  function closeDialog() {
-    router.navigate({
-      to: "/cardlist",
-      search: (prev) => ({ ...prev, cardId: undefined }),
       replace: true,
     });
   }
@@ -191,114 +170,8 @@ export function UnitCard({ unitCardRef }: Props) {
         )}
         onClick={openDialog}
       >
-        <CardBody unitCard={unitCard} cardBg={cardBg} isWhite={isWhite} />
+        <UnitCardBody unitCard={unitCard} cardBg={cardBg} isWhite={isWhite} />
       </button>
-
-      {/* ── Detail dialog ────────────────────────────────────────────────── */}
-      <Dialog.Root
-        open={open}
-        onOpenChange={(v) => {
-          if (!v) closeDialog();
-        }}
-      >
-        <Dialog.Portal>
-          <Dialog.Backdrop
-            onClick={closeDialog}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
-          />
-          <Dialog.Popup className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 p-6 pointer-events-none outline-none transition duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0">
-            {/* Large card */}
-            <div className="@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl shadow-2xl">
-              <CardBody unitCard={unitCard} cardBg={cardBg} isWhite={isWhite} />
-            </div>
-
-            {/* Description panel */}
-            <div className="pointer-events-auto max-h-[80dvh] w-72 overflow-y-auto rounded-xl bg-black/75 px-4 py-5 text-white backdrop-blur-md flex flex-col gap-4">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span
-                    className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/20"
-                    style={{ background: COLOR_HEX[unitCard.color] ?? "#000" }}
-                  />
-                  <h2 className="text-sm font-bold leading-tight">
-                    {unitCard.name}
-                  </h2>
-                </div>
-                <div className="text-xs text-white/60">{unitCard.id}</div>
-                <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
-                  <span>Lv {unitCard.level}</span>
-                  <span>코스트 {unitCard.cost}</span>
-                  <span>AP {unitCard.AP}</span>
-                  <span>HP {unitCard.HP}</span>
-                </div>
-              </div>
-
-              {unitCard.zone.length > 0 && (
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                    지형
-                  </span>
-                  <div className="flex flex-wrap gap-1">
-                    {unitCard.zone.map((z) => (
-                      <span
-                        key={z}
-                        className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
-                      >
-                        {renderZone(z)}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {unitCard.traits.length > 0 && (
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                    특성
-                  </span>
-                  <div className="flex flex-wrap gap-1">
-                    {unitCard.traits.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
-                      >
-                        {renderTrait(t)}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {linkLabels.length > 0 && (
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                    링크
-                  </span>
-                  <div className="flex flex-wrap gap-1">
-                    {linkLabels.map((l) => (
-                      <span
-                        key={l}
-                        className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
-                      >
-                        {l}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {unitCard.description.length > 0 && (
-                <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                    효과
-                  </span>
-                  <CardDescription lines={unitCard.description} />
-                </div>
-              )}
-            </div>
-          </Dialog.Popup>
-        </Dialog.Portal>
-      </Dialog.Root>
     </>
   );
 }

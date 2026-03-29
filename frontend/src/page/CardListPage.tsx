@@ -2,6 +2,7 @@ import type { CardListPageQuery } from "@/__generated__/CardListPageQuery.graphq
 import type { CardFilterInput } from "@/__generated__/CardListFragmentRefetchQuery.graphql";
 import type { CardSort } from "@/__generated__/CardListPageQuery.graphql";
 import { CardList } from "@/components/CardList";
+import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 import { useLazyLoadQuery } from "react-relay";
 import { graphql } from "relay-runtime";
 import {
@@ -966,6 +967,11 @@ export function CardListPage() {
             showDescription={showDescription}
           />
         </Suspense>
+        {search.cardId && (
+          <Suspense>
+            <CardByIdOverlay cardId={search.cardId} />
+          </Suspense>
+        )}
       </div>
     </div>
   );

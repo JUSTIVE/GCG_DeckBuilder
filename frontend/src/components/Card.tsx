@@ -75,7 +75,7 @@ export function Card({ cardRef, showDescription }: Props) {
     <div className="flex flex-col">
       {cardEl}
       {showDescription && description.length > 0 && (
-        <div className="mt-2 rounded-xl bg-black/80 px-3 py-3 text-white">
+        <div className="mt-2 rounded-xl bg-black px-3 py-3 text-white">
           <CardDescription lines={description} />
         </div>
       )}
