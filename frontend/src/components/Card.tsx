@@ -5,6 +5,7 @@ import { UnitCard } from "./UnitCard";
 import { PilotCard } from "./PilotCard";
 import { BaseCard } from "./BaseCard";
 import { CommandCard } from "./CommandCard";
+import { ResourceCard } from "./ResourceCard";
 
 const Fragment = graphql`
   fragment CardFragment on Card {
@@ -25,6 +26,10 @@ const Fragment = graphql`
       id
       ...CommandCardFragment
     }
+    ... on Resource {
+      id
+      ...ResourceCardFragment
+    }
   }
 `;
 
@@ -44,6 +49,8 @@ export function Card({ cardRef }: Props) {
       return <BaseCard baseCardRef={card} />;
     case "CommandCard":
       return <CommandCard commandCardRef={card} />;
+    case "Resource":
+      return <ResourceCard resourceCardRef={card} />;
     default:
       return null;
   }

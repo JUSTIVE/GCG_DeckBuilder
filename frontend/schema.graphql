@@ -176,6 +176,7 @@ type PilotCard implements Node {
   rarity: CardRarity! #희귀도
   package: CardPackage! # 패키지
   keywords: [CardKeyword!]! #키워드
+  traits: [CardTrait!]!
   description: [String!]! # 효과 정보
 }
 
@@ -235,6 +236,7 @@ type CommandCard implements Node {
   rarity: CardRarity!
   package: CardPackage!
   keywords: [CardKeyword!]!
+  traits: [CardTrait!]!
   cost: Int!
   series: GundamSeries!
   pilot: Pilot

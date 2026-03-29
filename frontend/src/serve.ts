@@ -454,6 +454,27 @@ function fieldResolver(
     };
   }
 
+  // ── CommandCard.pilot → extract pilot name from description ──────────────
+  //    Raw: pilot: { name: "", AP: number, HP: number }  (name is always "")
+  //    Actual name is embedded in description as 【파일럿】[<name>]
+  if (typeName === "CommandCard" && fieldName === "pilot") {
+    const raw = source["pilot"] as { AP?: number; HP?: number } | null | undefined;
+    if (raw == null) return null;
+    const desc = source["description"];
+    let name = "";
+    if (Array.isArray(desc)) {
+      for (const line of desc as string[]) {
+        const match = /【파일럿】\[([^\]]+)\]/.exec(line);
+        if (match?.[1]) { name = match[1]; break; }
+      }
+    }
+    return {
+      name,
+      AP: (raw["AP"] as number | null | undefined) ?? 0,
+      HP: (raw["HP"] as number | null | undefined) ?? 0,
+    };
+  }
+
   // ── LinkPilot.pilot → look up PilotCard by name, return Pilot ─────────────
   //    Raw: { __typename: "LinkPilot", pilotName: string }
   //    Schema: pilot: Pilot!  (non-null — stub when pilot not in dataset)
@@ -468,14 +489,13 @@ function fieldResolver(
     };
   }
 
-  // ── Pilot.AP / Pilot.HP → null coercion ───────────────────────────────────
-  //    Covers CommandCard.pilot.{AP,HP} resolved by the default resolver.
+  // ── Pilot.AP / Pilot.HP → null coercion ─────────────────────────────────
   if (typeName === "Pilot" && (fieldName === "AP" || fieldName === "HP")) {
     return (source[fieldName] as number | null | undefined) ?? 0;
   }
 
-  // ── UnitCard.traits / BaseCard.traits → raw field is "trait" (singular) ─────
-  if ((typeName === "UnitCard" || typeName === "BaseCard") && fieldName === "traits") {
+  // ── UnitCard.traits / BaseCard.traits / PilotCard.traits / CommandCard.traits → raw field is "trait" (singular) ─────
+  if ((typeName === "UnitCard" || typeName === "BaseCard" || typeName === "PilotCard" || typeName === "CommandCard") && fieldName === "traits") {
     const raw = source["trait"];
     return Array.isArray(raw) ? raw : [];
   }

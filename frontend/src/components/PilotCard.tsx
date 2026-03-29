@@ -4,11 +4,11 @@ import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
 import tempimg from "./tempimg.webp";
-import { renderKeyword } from "@/render/keyword";
+import { renderTrait } from "@/render/trait";
 import { Dialog } from "@base-ui/react/dialog";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
-import { COLOR_BG50, COLOR_HEX } from "src/render/color";
+import { COLOR_HEX } from "src/render/color";
 
 const Fragment = graphql`
   fragment PilotCardFragment on PilotCard {
@@ -17,7 +17,7 @@ const Fragment = graphql`
     cost
     color
     rarity
-    keywords
+    traits
     description
     pilot {
       name
@@ -33,13 +33,12 @@ type Props = {
 
 function CardBody({
   pilotCard,
-  cardBg50,
 }: {
   pilotCard: {
-    keywords: readonly string[];
+    color: string;
+    traits: readonly string[];
     pilot: { name: string; AP: number; HP: number };
   };
-  cardBg50: string;
 }) {
   return (
     <>
@@ -55,23 +54,22 @@ function CardBody({
             {pilotCard.pilot.name}
           </div>
         </div>
-        <div className={cn("flex flex-row gap-0.5 pr-2", cardBg50)}>
+        <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
           <div className="flex flex-col justify-end flex-1 overflow-hidden">
             <div className="flex flex-row translate-y-px">
-              <div className="w-2 bg-black -mr-5" />
-              <div className="w-10 bg-black -mr-5 parallelogram parallelogram-sm" />
+              <div className="w-2 bg-transparent -mr-5" />
+              <div className="w-10 bg-transparent -mr-5 parallelogram parallelogram-sm" />
               <div className="w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 parallelogram parallelogram-sm px-2 py-px">
                 <div className="flex text-end text-gray-900 text-[4cqw]">
-                  <Marquee speed={8}>
-                    {pilotCard.keywords.map((x) => (
-                      <span key={x} className="mr-2">
-                        {renderKeyword(x)}
-                      </span>
+                  <Marquee speed={8} gap={0}>
+                    {pilotCard.traits.map((x) => (
+                      <span key={x} className="px-2">({renderTrait(x)})</span>
                     ))}
                   </Marquee>
                 </div>
               </div>
             </div>
+            <div className="min-h-[6cqw]" />
           </div>
           <div className="flex flex-row gap-0.5 min-w-8">
             <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1">
@@ -94,7 +92,6 @@ export function PilotCard({ pilotCardRef }: Props) {
 
   const open = search.cardId === pilotCard.id;
 
-  const cardBg50 = COLOR_BG50[pilotCard.color] ?? "bg-gray-500";
 
   function openDialog() {
     router.navigate({
@@ -122,7 +119,7 @@ export function PilotCard({ pilotCardRef }: Props) {
         )}
         onClick={openDialog}
       >
-        <CardBody pilotCard={pilotCard} cardBg50={cardBg50} />
+        <CardBody pilotCard={pilotCard} />
       </button>
 
       <Dialog.Root
@@ -138,7 +135,7 @@ export function PilotCard({ pilotCardRef }: Props) {
           />
           <Dialog.Popup className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 p-6 pointer-events-none outline-none transition duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0">
             <div className="@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl shadow-2xl">
-              <CardBody pilotCard={pilotCard} cardBg50={cardBg50} />
+              <CardBody pilotCard={pilotCard} />
             </div>
 
             <div className="pointer-events-auto max-h-[80dvh] w-72 overflow-y-auto rounded-xl bg-black/75 px-4 py-5 text-white backdrop-blur-md flex flex-col gap-4">
@@ -161,18 +158,18 @@ export function PilotCard({ pilotCardRef }: Props) {
                 </div>
               </div>
 
-              {pilotCard.keywords.length > 0 && (
+              {pilotCard.traits.length > 0 && (
                 <div className="flex flex-col gap-1.5">
                   <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                    키워드
+                    특성
                   </span>
                   <div className="flex flex-wrap gap-1">
-                    {pilotCard.keywords.map((k) => (
+                    {pilotCard.traits.map((t) => (
                       <span
-                        key={k}
+                        key={t}
                         className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
                       >
-                        {renderKeyword(k)}
+                        {renderTrait(t)}
                       </span>
                     ))}
                   </div>

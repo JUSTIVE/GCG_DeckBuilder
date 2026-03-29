@@ -5,13 +5,12 @@ import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
 import tempimg from "./tempimg.webp";
 import { ZoneChip } from "./ZoneChip";
-import { TraitChip } from "./TraitChip";
 import { renderTrait } from "@/render/trait";
 import { renderZone } from "@/render/zone";
 import { Dialog } from "@base-ui/react/dialog";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
-import { COLOR_BG, COLOR_BG50, COLOR_HEX } from "src/render/color";
+import { COLOR_BG, COLOR_HEX } from "src/render/color";
 
 const Fragment = graphql`
   fragment UnitCardFragment on UnitCard {
@@ -48,11 +47,11 @@ type Props = {
 function CardBody({
   unitCard,
   cardBg,
-  cardBg50,
   isWhite,
 }: {
   unitCard: {
     name: string;
+    color: string;
     AP: number;
     HP: number;
     zone: readonly string[];
@@ -64,7 +63,6 @@ function CardBody({
     }[];
   };
   cardBg: string;
-  cardBg50: string;
   isWhite: boolean;
 }) {
   return (
@@ -91,16 +89,16 @@ function CardBody({
               />
             ))}
           </div>
-          <div className={cn("flex flex-row gap-0.5 pr-2", cardBg50)}>
+          <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
             <div className="flex flex-col justify-end flex-1 overflow-hidden">
               <div className="flex flex-row translate-y-px">
-                <div className="w-2 bg-black -mr-5" />
-                <div className="w-10 bg-black -mr-5 parallelogram parallelogram-sm" />
+                <div className="w-2 bg-transparent -mr-5" />
+                <div className="w-10 bg-transparent -mr-5 parallelogram parallelogram-sm" />
                 <div className="w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 parallelogram parallelogram-sm px-2 py-px">
                   <div className="flex text-end text-gray-900 text-[4cqw]">
-                    <Marquee speed={8}>
+                    <Marquee speed={8} gap={0}>
                       {unitCard.traits.map((x) => (
-                        <TraitChip trait={x} key={x} />
+                        <span key={x} className="px-2">({renderTrait(x)})</span>
                       ))}
                     </Marquee>
                   </div>
@@ -146,7 +144,6 @@ export function UnitCard({ unitCardRef }: Props) {
   const open = search.cardId === unitCard.id;
 
   const cardBg = COLOR_BG[unitCard.color] ?? "bg-black";
-  const cardBg50 = COLOR_BG50[unitCard.color] ?? "bg-gray-500";
   const isWhite = unitCard.color === "WHITE";
 
   const linkLabels = unitCard.links
@@ -189,7 +186,6 @@ export function UnitCard({ unitCardRef }: Props) {
         <CardBody
           unitCard={unitCard}
           cardBg={cardBg}
-          cardBg50={cardBg50}
           isWhite={isWhite}
         />
       </button>
@@ -212,7 +208,6 @@ export function UnitCard({ unitCardRef }: Props) {
               <CardBody
                 unitCard={unitCard}
                 cardBg={cardBg}
-                cardBg50={cardBg50}
                 isWhite={isWhite}
               />
             </div>

@@ -85,9 +85,9 @@ function CardBody({
                 <div className="w-10 bg-transparent -mr-5 parallelogram parallelogram-sm" />
                 <div className="w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 parallelogram parallelogram-sm px-2 py-px">
                   <div className="flex text-end text-gray-900 text-[4cqw]">
-                    <Marquee speed={8}>
+                    <Marquee speed={8} gap={0}>
                       {baseCard.traits.map((x) => (
-                        <span key={x} className="mr-2 px-2">
+                        <span key={x} className="px-2">
                           ({renderTrait(x)})
                         </span>
                       ))}

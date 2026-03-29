@@ -4,11 +4,11 @@ import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
 import tempimg from "./tempimg.webp";
-import { renderKeyword } from "@/render/keyword";
+import { renderTrait } from "@/render/trait";
 import { Dialog } from "@base-ui/react/dialog";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
-import { COLOR_BG50, COLOR_HEX } from "src/render/color";
+import { COLOR_HEX } from "src/render/color";
 
 const Fragment = graphql`
   fragment CommandCardFragment on CommandCard {
@@ -18,8 +18,8 @@ const Fragment = graphql`
     cost
     color
     rarity
-    keywords
-    linkedPilot: pilot {
+    traits
+    commandPilot: pilot {
       name
       AP
       HP
@@ -33,14 +33,12 @@ type Props = {
 
 function CardBody({
   commandCard,
-  cardBg50,
 }: {
   commandCard: {
     name: string;
-    keywords: readonly string[];
-    linkedPilot?: { name: string; AP: number; HP: number } | null;
+    traits: readonly string[];
+    commandPilot?: { name: string; AP: number; HP: number } | null;
   };
-  cardBg50: string;
 }) {
   return (
     <>
@@ -56,32 +54,35 @@ function CardBody({
             {commandCard.name}
           </div>
         </div>
-        <div className={cn("flex flex-row gap-0.5 pr-2", cardBg50)}>
+        <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
           <div className="flex flex-col justify-end flex-1 overflow-hidden">
             <div className="flex flex-row translate-y-px">
-              <div className="w-2 bg-black -mr-5" />
-              <div className="w-10 bg-black -mr-5 parallelogram parallelogram-sm" />
-              <div className="w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 parallelogram parallelogram-sm px-2 py-px">
+              <div className="w-2 bg-transparent -mr-5" />
+              <div className="w-10 bg-transparent -mr-5 parallelogram parallelogram-sm" />
+              <div className="w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 px-2 py-px">
                 <div className="flex text-end text-gray-900 text-[4cqw]">
-                  <Marquee speed={8}>
-                    {commandCard.keywords.map((x) => (
-                      <span key={x} className="mr-2">
-                        {renderKeyword(x)}
+                  <Marquee speed={8} gap={0}>
+                    {commandCard.traits.map((x) => (
+                      <span key={x} className="px-2">
+                        ({renderTrait(x)})
                       </span>
                     ))}
                   </Marquee>
                 </div>
               </div>
             </div>
-            {commandCard.linkedPilot && (
+
+            {commandCard.commandPilot != null ? (
               <div className="flex flex-row">
                 <div className="w-4 bg-black -mr-4 py-px pb-1" />
                 <div className="bg-black overflow-hidden w-full pl-7 parallelogram parallelogram-sm px-2 pt-px pb-0.5 min-h-3">
                   <div className="flex text-end text-white text-[4cqw] items-center min-h-[6cqw]">
-                    <span>[{commandCard.linkedPilot.name}]</span>
+                    <span>[{commandCard.commandPilot.name}]</span>
                   </div>
                 </div>
               </div>
+            ) : (
+              <div className="min-h-[6cqw]" />
             )}
           </div>
         </div>
@@ -96,8 +97,6 @@ export function CommandCard({ commandCardRef }: Props) {
   const router = useRouter();
 
   const open = search.cardId === commandCard.id;
-
-  const cardBg50 = COLOR_BG50[commandCard.color] ?? "bg-gray-500";
 
   function openDialog() {
     router.navigate({
@@ -125,7 +124,7 @@ export function CommandCard({ commandCardRef }: Props) {
         )}
         onClick={openDialog}
       >
-        <CardBody commandCard={commandCard} cardBg50={cardBg50} />
+        <CardBody commandCard={commandCard} />
       </button>
 
       <Dialog.Root
@@ -141,7 +140,7 @@ export function CommandCard({ commandCardRef }: Props) {
           />
           <Dialog.Popup className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 p-6 pointer-events-none outline-none transition duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0">
             <div className="@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl shadow-2xl">
-              <CardBody commandCard={commandCard} cardBg50={cardBg50} />
+              <CardBody commandCard={commandCard} />
             </div>
 
             <div className="pointer-events-auto max-h-[80dvh] w-72 overflow-y-auto rounded-xl bg-black/75 px-4 py-5 text-white backdrop-blur-md flex flex-col gap-4">
@@ -164,35 +163,35 @@ export function CommandCard({ commandCardRef }: Props) {
                 </div>
               </div>
 
-              {commandCard.linkedPilot && (
+              {commandCard.commandPilot && (
                 <div className="flex flex-col gap-1.5">
                   <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
                     파일럿
                   </span>
                   <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs">
-                    <span>{commandCard.linkedPilot.name}</span>
+                    <span>{commandCard.commandPilot.name}</span>
                     <span className="text-white/60">
-                      AP {commandCard.linkedPilot.AP}
+                      AP {commandCard.commandPilot.AP}
                     </span>
                     <span className="text-white/60">
-                      HP {commandCard.linkedPilot.HP}
+                      HP {commandCard.commandPilot.HP}
                     </span>
                   </div>
                 </div>
               )}
 
-              {commandCard.keywords.length > 0 && (
+              {commandCard.traits.length > 0 && (
                 <div className="flex flex-col gap-1.5">
                   <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                    키워드
+                    특성
                   </span>
                   <div className="flex flex-wrap gap-1">
-                    {commandCard.keywords.map((k) => (
+                    {commandCard.traits.map((t) => (
                       <span
-                        key={k}
+                        key={t}
                         className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
                       >
-                        {renderKeyword(k)}
+                        {renderTrait(t)}
                       </span>
                     ))}
                   </div>
