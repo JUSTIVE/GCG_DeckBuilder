@@ -142,7 +142,7 @@ export function UnitCard({ unitCardRef, focused }: Props) {
                   <div className="bg-black overflow-hidden w-full pl-7 parallelogram parallelogram-sm px-2 w-full pt-px pb-0.5 min-h-3">
                     <div
                       className={cn(
-                        "flex text-end text-white text-[4cqw] items-center",
+                        "flex text-end text-white text-[4cqw] items-center min-h-[6cqw]",
                       )}
                     >
                       <Marquee speed={6}>
