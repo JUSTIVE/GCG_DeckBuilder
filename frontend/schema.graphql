@@ -291,4 +291,8 @@ type Query {
     filter: CardFilterInput
     sort: CardSort
   ): CardConnection!
+  quicksearch(
+    query: String!
+    first: Int
+  ): [Card!]!
 }

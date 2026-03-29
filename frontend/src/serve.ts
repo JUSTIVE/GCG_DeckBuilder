@@ -96,6 +96,80 @@ const pilotByName = new Map<string, AnyRecord>(
     .map((c) => [(c as AnyRecord)["name"] as string, c as AnyRecord]),
 );
 
+// ─── FZF-style search ─────────────────────────────────────────────────────────
+
+/**
+ * Returns -1 if the pattern cannot be matched in order, otherwise a positive
+ * score (higher = better). Consecutive matches and word-boundary matches give
+ * bonus points, mirroring fzf's scoring heuristics.
+ */
+function fzfScore(pattern: string, target: string): number {
+  if (!pattern) return 0;
+  const p = pattern.toLowerCase();
+  const t = target.toLowerCase();
+
+  let score = 0;
+  let pi = 0;
+  let consecutive = 0;
+
+  for (let ti = 0; ti < t.length && pi < p.length; ti++) {
+    if (t[ti] === p[pi]) {
+      pi++;
+      consecutive++;
+      score += consecutive * 2;
+      if (ti === 0 || t[ti - 1] === " " || t[ti - 1] === "_") score += 3;
+    } else {
+      consecutive = 0;
+    }
+  }
+
+  return pi === p.length ? score : -1;
+}
+
+/** Returns the best fzf score across all strings in `targets`, or -1. */
+function bestFzfScore(pattern: string, targets: string[]): number {
+  return targets.reduce<number>((best, t) => {
+    const s = fzfScore(pattern, t);
+    return s > best ? s : best;
+  }, -1);
+}
+
+/** Extracts searchable text tokens from a raw card by field group. */
+function cardSearchTokens(card: AnyRecord): {
+  name: string[];
+  description: string[];
+  traits: string[];
+  links: string[];
+} {
+  const name: string[] = [];
+  const description: string[] = [];
+  const traits: string[] = [];
+  const links: string[] = [];
+
+  if (typeof card["name"] === "string") name.push(card["name"]);
+
+  if (Array.isArray(card["description"])) {
+    for (const line of card["description"] as unknown[])
+      if (typeof line === "string") description.push(line);
+  }
+
+  // UnitCard raw field: "trait" (array of CardTrait enum strings)
+  if (Array.isArray(card["trait"])) {
+    for (const t of card["trait"] as unknown[])
+      if (typeof t === "string") traits.push(t);
+  }
+
+  // UnitCard raw field: "link" (single LinkTrait | LinkPilot object)
+  const link = card["link"];
+  if (link != null && typeof link === "object") {
+    const l = link as AnyRecord;
+    if (typeof l["trait"] === "string") links.push(l["trait"] as string);
+    if (typeof l["pilotName"] === "string") links.push(l["pilotName"] as string);
+  }
+
+  return { name, description, traits, links };
+}
+
 // ─── Cursor helpers ───────────────────────────────────────────────────────────
 
 const encodeCursor = (index: number): string => btoa(`cursor:${index}`);
@@ -289,6 +363,32 @@ const rootValue = {
         endCursor: edges[edges.length - 1]?.cursor ?? null,
       },
     };
+  },
+
+  /** Query.quicksearch — fzf-style search across name, description, trait, link */
+  quicksearch({ query, first = 20 }: { query: string; first?: number }) {
+    if (!query.trim()) return [];
+
+    const scored: Array<{ score: number; card: RawCard }> = [];
+
+    for (const card of allCards) {
+      const tokens = cardSearchTokens(card as AnyRecord);
+
+      const nameScore = bestFzfScore(query, tokens.name);
+      const descScore = bestFzfScore(query, tokens.description);
+      const traitScore = bestFzfScore(query, tokens.traits);
+      const linkScore = bestFzfScore(query, tokens.links);
+
+      const maxScore = Math.max(nameScore, descScore, traitScore, linkScore);
+      if (maxScore >= 0) {
+        // Name matches get a significant boost over description/trait/link
+        const finalScore = nameScore >= 0 ? maxScore + 20 : maxScore;
+        scored.push({ score: finalScore, card });
+      }
+    }
+
+    scored.sort((a, b) => b.score - a.score);
+    return scored.slice(0, first).map((s) => s.card);
   },
 };
 
