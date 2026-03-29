@@ -285,6 +285,7 @@ export function UnitCard({ unitCardRef }: Props) {
                     {unitCard.name}
                   </h2>
                 </div>
+                <div className="text-xs text-white/60">{unitCard.id}</div>
                 <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
                   <span>Lv {unitCard.level}</span>
                   <span>코스트 {unitCard.cost}</span>

@@ -53,6 +53,6 @@ const unitNameMapper = (raw: unknown[]) => {
 
 await writeFile(
   "../data/mapped.json",
-  JSON.stringify(unitNameMapper(pilotAndEffectNameMapper(raw)), null, 2),
+  JSON.stringify(pilotAndEffectNameMapper(unitNameMapper(raw)), null, 2),
   "utf-8",
 );

@@ -32,7 +32,7 @@
     ]
   },
   {
-    "name": "Gundam (MA Form)",
+    "name": "건담 (MA 형태)",
     "level": 5,
     "cost": 3,
     "color": "BLUE",
@@ -82,7 +82,7 @@
     ]
   },
   {
-    "name": "Gundam Aerial (Bit on Form)",
+    "name": "건담 에어리얼 (비트 온 폼)",
     "level": 4,
     "cost": 2,
     "color": "WHITE",
@@ -107,7 +107,7 @@
     ]
   },
   {
-    "name": "Demi Trainer",
+    "name": "데미 트레이너",
     "level": 1,
     "cost": 1,
     "color": "WHITE",
@@ -296,7 +296,7 @@
     ]
   },
   {
-    "name": "Wing Gundam",
+    "name": "윙 건담",
     "level": 6,
     "cost": 4,
     "color": "GREEN",
@@ -326,7 +326,7 @@
     ]
   },
   {
-    "name": "Wing Gundam (Bird Mode)",
+    "name": "윙 건담 (버드 모드)",
     "level": 3,
     "cost": 3,
     "color": "GREEN",
@@ -480,7 +480,7 @@
     ]
   },
   {
-    "name": "Zaku Ⅰ",
+    "name": "자쿠 Ⅰ",
     "level": 1,
     "cost": 1,
     "color": "GREEN",
@@ -501,7 +501,7 @@
     ]
   },
   {
-    "name": "Zaku Ⅱ",
+    "name": "자쿠 Ⅱ",
     "level": 2,
     "cost": 1,
     "color": "GREEN",
@@ -579,7 +579,7 @@
     ]
   },
   {
-    "name": "Aile Strike Gundam",
+    "name": "에일 스트라이크 건담",
     "level": 5,
     "cost": 4,
     "color": "WHITE",
@@ -610,7 +610,7 @@
     ]
   },
   {
-    "name": "Strike Gundam",
+    "name": "스트라이크 건담",
     "level": 4,
     "cost": 2,
     "color": "WHITE",
@@ -639,7 +639,7 @@
     ]
   },
   {
-    "name": "Strike Dagger",
+    "name": "스트라이크 대거",
     "level": 2,
     "cost": 2,
     "color": "WHITE",
@@ -775,7 +775,7 @@
     ]
   },
   {
-    "name": "Unicorn Gundam (Unicorn Mode)",
+    "name": "유니콘 건담 (유니콘 모드)",
     "level": 5,
     "cost": 4,
     "color": "BLUE",
@@ -805,7 +805,7 @@
     ]
   },
   {
-    "name": "Guntank",
+    "name": "건탱크",
     "level": 2,
     "cost": 1,
     "color": "BLUE",
@@ -982,7 +982,7 @@
     ]
   },
   {
-    "name": "Char's Zaku Ⅱ",
+    "name": "Zaku Ⅱ 샤아기",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -1012,7 +1012,7 @@
     ]
   },
   {
-    "name": "Gundam Sandrock",
+    "name": "건담 샌드록",
     "level": 5,
     "cost": 3,
     "color": "GREEN",
@@ -1040,7 +1040,7 @@
     ]
   },
   {
-    "name": "Rick Dom",
+    "name": "릭 돔",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -1064,7 +1064,7 @@
     ]
   },
   {
-    "name": "Gelgoog",
+    "name": "겔구그",
     "level": 4,
     "cost": 2,
     "color": "GREEN",
@@ -1089,7 +1089,7 @@
     ]
   },
   {
-    "name": "Gundam Heavyarms",
+    "name": "건담 헤비암즈",
     "level": 4,
     "cost": 2,
     "color": "GREEN",
@@ -1119,7 +1119,7 @@
     ]
   },
   {
-    "name": "Wing Gundam",
+    "name": "윙 건담",
     "level": 5,
     "cost": 2,
     "color": "GREEN",
@@ -1144,7 +1144,7 @@
     ]
   },
   {
-    "name": "Shenlong Gundam",
+    "name": "셴롱 건담",
     "level": 4,
     "cost": 3,
     "color": "GREEN",
@@ -1172,7 +1172,7 @@
     ]
   },
   {
-    "name": "Perfect Strike Gundam",
+    "name": "퍼펙트 스트라이크 건담",
     "level": 5,
     "cost": 3,
     "color": "WHITE",
@@ -1203,7 +1203,7 @@
     ]
   },
   {
-    "name": "Gundam Aerial",
+    "name": "건담 에어리얼",
     "level": 5,
     "cost": 3,
     "color": "WHITE",
@@ -1230,7 +1230,7 @@
     ]
   },
   {
-    "name": "Launcher Strike Gundam",
+    "name": "런쳐 스트라이크 건담",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
@@ -1315,7 +1315,7 @@
     ]
   },
   {
-    "name": "Strike Gundam",
+    "name": "스트라이크 건담",
     "level": 4,
     "cost": 2,
     "color": "WHITE",
@@ -1340,7 +1340,7 @@
     ]
   },
   {
-    "name": "M1 Astray",
+    "name": "M1 아스트레이",
     "level": 2,
     "cost": 2,
     "color": "WHITE",
@@ -1634,12 +1634,12 @@
   {
     "__typename": "ResourceCard",
     "id": "T-003",
-    "name": "Guntank"
+    "name": "건탱크"
   },
   {
     "__typename": "ResourceCard",
     "id": "T-006",
-    "name": "Char's Zaku Ⅱ"
+    "name": "Zaku Ⅱ 샤아기"
   },
   {
     "__typename": "ResourceCard",
@@ -1683,7 +1683,7 @@
     ]
   },
   {
-    "name": "Guntank",
+    "name": "건탱크",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -1713,7 +1713,7 @@
     ]
   },
   {
-    "name": "Gundam Aerial (Permet Score Six)",
+    "name": "건담 에어리얼 (퍼메트 스코어 6)",
     "level": 5,
     "cost": 4,
     "color": "WHITE",
@@ -1789,7 +1789,7 @@
     "id": "ST01-014"
   },
   {
-    "name": "Gundam Heavyarms",
+    "name": "건담 헤비암즈",
     "level": 5,
     "cost": 3,
     "color": "GREEN",
@@ -1817,7 +1817,7 @@
     ]
   },
   {
-    "name": "Gundam Sandrock",
+    "name": "건담 샌드록",
     "level": 4,
     "cost": 2,
     "color": "GREEN",
@@ -1841,7 +1841,7 @@
     ]
   },
   {
-    "name": "Tallgeese",
+    "name": "톨기스",
     "level": 5,
     "cost": 4,
     "color": "BLUE",
@@ -1920,7 +1920,7 @@
     ]
   },
   {
-    "name": "Tragos",
+    "name": "트라고스",
     "level": 1,
     "cost": 1,
     "color": "BLUE",
@@ -2022,10 +2022,10 @@
   {
     "__typename": "ResourceCard",
     "id": "T-005",
-    "name": "Tallgeese"
+    "name": "톨기스"
   },
   {
-    "name": "Sinanju",
+    "name": "시난주",
     "level": 6,
     "cost": 5,
     "color": "RED",
@@ -2158,7 +2158,7 @@
     ]
   },
   {
-    "name": "Char's Zaku Ⅱ",
+    "name": "Zaku Ⅱ 샤아기",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -2187,7 +2187,7 @@
     ]
   },
   {
-    "name": "Gouf",
+    "name": "구프",
     "level": 3,
     "cost": 3,
     "color": "GREEN",
@@ -2342,10 +2342,10 @@
   {
     "__typename": "ResourceCard",
     "id": "T-007",
-    "name": "Zaku Ⅱ"
+    "name": "자쿠 Ⅱ"
   },
   {
-    "name": "Moebius Zero",
+    "name": "뫼비우스 제로",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -2369,7 +2369,7 @@
     ]
   },
   {
-    "name": "Moebius",
+    "name": "뫼비우스",
     "level": 1,
     "cost": 1,
     "color": "WHITE",
@@ -2393,7 +2393,7 @@
     ]
   },
   {
-    "name": "Aegis Gundam",
+    "name": "이지스 건담",
     "level": 4,
     "cost": 3,
     "color": "RED",
@@ -2422,7 +2422,7 @@
     ]
   },
   {
-    "name": "Aegis Gundam (MA Mode)",
+    "name": "이지스 건담 (MA 모드)",
     "level": 4,
     "cost": 3,
     "color": "RED",
@@ -2451,7 +2451,7 @@
     ]
   },
   {
-    "name": "Ginn",
+    "name": "진",
     "level": 2,
     "cost": 1,
     "color": "RED",
@@ -2609,17 +2609,17 @@
   {
     "__typename": "ResourceCard",
     "id": "T-008",
-    "name": "Aile Strike Gundam"
+    "name": "에일 스트라이크 건담"
   },
   {
     "__typename": "ResourceCard",
     "id": "T-009",
-    "name": "Launcher Strike Gundam"
+    "name": "런쳐 스트라이크 건담"
   },
   {
     "__typename": "ResourceCard",
     "id": "T-010",
-    "name": "Sword Strike Gundam"
+    "name": "소드 스트라이크 건담"
   },
   {
     "name": "Gundam Barbatos 4th Form",
@@ -2683,7 +2683,7 @@
     ]
   },
   {
-    "name": "CGS Mobile Worker",
+    "name": "철화단 모빌워커",
     "level": 1,
     "cost": 1,
     "color": "PURPLE",
@@ -2707,7 +2707,7 @@
     ]
   },
   {
-    "name": "Graze Custom",
+    "name": "그레이즈 커스텀",
     "level": 2,
     "cost": 1,
     "color": "PURPLE",
@@ -2839,7 +2839,7 @@
     ]
   },
   {
-    "name": "Graze",
+    "name": "그레이즈",
     "level": 2,
     "cost": 1,
     "color": "WHITE",
@@ -2997,7 +2997,7 @@
     ]
   },
   {
-    "name": "GQuuuuuuX (Omega Psycommu)",
+    "name": "지쿠악스 (오메가 사이코뮤)",
     "level": 5,
     "cost": 3,
     "color": "RED",
@@ -3028,7 +3028,7 @@
     ]
   },
   {
-    "name": "GQuuuuuuX (Omega Psycommu)",
+    "name": "지쿠악스 (오메가 사이코뮤)",
     "level": 4,
     "cost": 3,
     "color": "RED",
@@ -3057,7 +3057,7 @@
     ]
   },
   {
-    "name": "가이아's Rick Dom (GQ)",
+    "name": "릭 돔 가이아기 (GQ)",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -3086,7 +3086,7 @@
     ]
   },
   {
-    "name": "Gelgoog (GQ)",
+    "name": "겔구그 (GQ)",
     "level": 2,
     "cost": 1,
     "color": "RED",
@@ -3107,7 +3107,7 @@
     ]
   },
   {
-    "name": "Red Gundam",
+    "name": "붉은 건담",
     "level": 4,
     "cost": 3,
     "color": "GREEN",
@@ -3138,7 +3138,7 @@
     ]
   },
   {
-    "name": "Red Gundam",
+    "name": "붉은 건담",
     "level": 4,
     "cost": 2,
     "color": "GREEN",
@@ -3191,7 +3191,7 @@
     ]
   },
   {
-    "name": "Sugai's Gelgoog (GQ)",
+    "name": "겔구그 스가이기 (GQ)",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -3395,7 +3395,7 @@
     ]
   },
   {
-    "name": "Gundam Exia",
+    "name": "건담 엑시아",
     "level": 5,
     "cost": 4,
     "color": "PURPLE",
@@ -3426,7 +3426,7 @@
     ]
   },
   {
-    "name": "Gundam Exia",
+    "name": "건담 엑시아",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -3509,7 +3509,7 @@
     ]
   },
   {
-    "name": "Gundam Dynames",
+    "name": "건담 듀나메스",
     "level": 4,
     "cost": 3,
     "color": "GREEN",
@@ -3540,7 +3540,7 @@
     ]
   },
   {
-    "name": "Gundam Dynames",
+    "name": "건담 듀나메스",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -3566,7 +3566,7 @@
     ]
   },
   {
-    "name": "Gundam Kyrios",
+    "name": "건담 큐리오스",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -3594,7 +3594,7 @@
     ]
   },
   {
-    "name": "Gundam Kyrios (Flight Mode)",
+    "name": "건담 큐리오스 (비행 모드)",
     "level": 2,
     "cost": 2,
     "color": "GREEN",
@@ -3777,7 +3777,7 @@
     ]
   },
   {
-    "name": "Ξ Gundam",
+    "name": "크시 건담",
     "level": 9,
     "cost": 8,
     "color": "RED",
@@ -3807,7 +3807,7 @@
     ]
   },
   {
-    "name": "Ξ Gundam",
+    "name": "크시 건담",
     "level": 5,
     "cost": 4,
     "color": "RED",
@@ -3911,7 +3911,7 @@
     ]
   },
   {
-    "name": "Penelope",
+    "name": "페넬로페",
     "level": 7,
     "cost": 6,
     "color": "BLUE",
@@ -3942,7 +3942,7 @@
     ]
   },
   {
-    "name": "Penelope",
+    "name": "페넬로페",
     "level": 5,
     "cost": 3,
     "color": "BLUE",
@@ -4198,7 +4198,7 @@
     ]
   },
   {
-    "name": "Force Impulse Gundam",
+    "name": "포스 임펄스 건담",
     "level": 5,
     "cost": 4,
     "color": "PURPLE",
@@ -4260,7 +4260,7 @@
     ]
   },
   {
-    "name": "Freedom Gundam",
+    "name": "프리덤 건담",
     "level": 6,
     "cost": 5,
     "color": "WHITE",
@@ -4292,7 +4292,7 @@
     ]
   },
   {
-    "name": "Zaku Warrior",
+    "name": "자쿠 워리어",
     "level": 2,
     "cost": 1,
     "color": "PURPLE",
@@ -4314,7 +4314,7 @@
     ]
   },
   {
-    "name": "Sword Impulse Gundam",
+    "name": "소드 임펄스 건담",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -4477,7 +4477,7 @@
     ]
   },
   {
-    "name": "Duel Gundam",
+    "name": "듀얼 건담",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -4622,7 +4622,7 @@
     ]
   },
   {
-    "name": "Unicorn Gundam (Destroy Mode)",
+    "name": "유니콘 건담 (디스트로이 모드)",
     "level": 7,
     "cost": 6,
     "color": "BLUE",
@@ -4652,7 +4652,7 @@
     ]
   },
   {
-    "name": "Unicorn Gundam 02 Banshee (Destroy Mode)",
+    "name": "유니콘 건담 02 밴시 (디스트로이 모드)",
     "level": 6,
     "cost": 4,
     "color": "BLUE",
@@ -4743,7 +4743,7 @@
     ]
   },
   {
-    "name": "Unicorn Gundam 02 Banshee (Unicorn Mode)",
+    "name": "유니콘 건담 02 밴시 (유니콘 모드)",
     "level": 4,
     "cost": 3,
     "color": "BLUE",
@@ -4833,7 +4833,7 @@
     ]
   },
   {
-    "name": "Stark Jegan",
+    "name": "스타크 제간",
     "level": 3,
     "cost": 3,
     "color": "BLUE",
@@ -4952,7 +4952,7 @@
     ]
   },
   {
-    "name": "Char's Gelgoog",
+    "name": "겔구그 샤아기",
     "level": 4,
     "cost": 4,
     "color": "GREEN",
@@ -4981,7 +4981,7 @@
     ]
   },
   {
-    "name": "Wing Gundam Zero",
+    "name": "윙 건담 제로",
     "level": 8,
     "cost": 8,
     "color": "GREEN",
@@ -5012,7 +5012,7 @@
     ]
   },
   {
-    "name": "Gundam Deathscythe",
+    "name": "건담 데스사이즈",
     "level": 6,
     "cost": 4,
     "color": "GREEN",
@@ -5074,7 +5074,7 @@
     ]
   },
   {
-    "name": "Shenlong Gundam",
+    "name": "셴롱 건담",
     "level": 5,
     "cost": 4,
     "color": "GREEN",
@@ -5105,7 +5105,7 @@
     ]
   },
   {
-    "name": "Gyan",
+    "name": "걍",
     "level": 4,
     "cost": 3,
     "color": "GREEN",
@@ -5135,7 +5135,7 @@
     ]
   },
   {
-    "name": "Gundam Deathscythe",
+    "name": "건담 데스사이즈",
     "level": 4,
     "cost": 2,
     "color": "GREEN",
@@ -5163,7 +5163,7 @@
     ]
   },
   {
-    "name": "Zaku Ⅱ",
+    "name": "자쿠 Ⅱ",
     "level": 2,
     "cost": 1,
     "color": "GREEN",
@@ -5184,7 +5184,7 @@
     ]
   },
   {
-    "name": "Gouf",
+    "name": "구프",
     "level": 2,
     "cost": 2,
     "color": "GREEN",
@@ -5204,7 +5204,7 @@
     ]
   },
   {
-    "name": "Gogg",
+    "name": "곡그",
     "level": 2,
     "cost": 2,
     "color": "GREEN",
@@ -5332,7 +5332,7 @@
     ]
   },
   {
-    "name": "Kshatriya",
+    "name": "크샤트리아",
     "level": 5,
     "cost": 4,
     "color": "RED",
@@ -5361,7 +5361,7 @@
     ]
   },
   {
-    "name": "Duel Gundam (Assault Shroud)",
+    "name": "듀얼 건담 (어썰트 슈라우드)",
     "level": 5,
     "cost": 4,
     "color": "RED",
@@ -5452,7 +5452,7 @@
     ]
   },
   {
-    "name": "Zaku I Sniper Type",
+    "name": "자쿠 I 스나이퍼 타입",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -5484,7 +5484,7 @@
     ]
   },
   {
-    "name": "LaGOWE",
+    "name": "라고우",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -5512,7 +5512,7 @@
     ]
   },
   {
-    "name": "Kshatriya",
+    "name": "크샤트리아",
     "level": 4,
     "cost": 2,
     "color": "RED",
@@ -5709,7 +5709,7 @@
     ]
   },
   {
-    "name": "Zaku Mariner",
+    "name": "자쿠 마리너",
     "level": 2,
     "cost": 1,
     "color": "RED",
@@ -5823,7 +5823,7 @@
     ]
   },
   {
-    "name": "Freedom Gundam",
+    "name": "프리덤 건담",
     "level": 7,
     "cost": 5,
     "color": "WHITE",
@@ -5855,7 +5855,7 @@
     ]
   },
   {
-    "name": "Justice Gundam",
+    "name": "저스티스 건담",
     "level": 7,
     "cost": 5,
     "color": "WHITE",
@@ -5888,7 +5888,7 @@
     ]
   },
   {
-    "name": "Gundam Aerial Rebuild",
+    "name": "에어리얼 건담 (개수형)",
     "level": 6,
     "cost": 5,
     "color": "WHITE",
@@ -5917,7 +5917,7 @@
     ]
   },
   {
-    "name": "Strike Rouge",
+    "name": "스트라이크 루즈",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -5978,7 +5978,7 @@
     ]
   },
   {
-    "name": "Sword Strike Gundam",
+    "name": "소드 스트라이크 건담",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
@@ -6061,7 +6061,7 @@
     ]
   },
   {
-    "name": "Skygrasper",
+    "name": "스카이그래스퍼",
     "level": 2,
     "cost": 2,
     "color": "WHITE",
@@ -6085,7 +6085,7 @@
     ]
   },
   {
-    "name": "Cagalli's Skygrasper",
+    "name": "스카이그래스퍼 카가리기",
     "level": 2,
     "cost": 2,
     "color": "WHITE",
@@ -6113,7 +6113,7 @@
     ]
   },
   {
-    "name": "Gundam Aerial (Mirasoul Flight Unit)",
+    "name": "건담 에어리얼 (미라솔 비행 유닛)",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
@@ -6211,7 +6211,7 @@
     ]
   },
   {
-    "name": "Gundam Lfrith",
+    "name": "건담 르브리스",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -7050,7 +7050,7 @@
     "name": "Resource"
   },
   {
-    "name": "Psycho Gundam",
+    "name": "사이코 건담",
     "level": 6,
     "cost": 4,
     "color": "BLUE",
@@ -7081,7 +7081,7 @@
     ]
   },
   {
-    "name": "Gundam Epyon",
+    "name": "건담 에피온",
     "level": 8,
     "cost": 7,
     "color": "BLUE",
@@ -7170,7 +7170,7 @@
     ]
   },
   {
-    "name": "Tallgeese",
+    "name": "톨기스",
     "level": 4,
     "cost": 3,
     "color": "BLUE",
@@ -7200,7 +7200,7 @@
     ]
   },
   {
-    "name": "Forbidden Gundam",
+    "name": "포비든 건담",
     "level": 5,
     "cost": 3,
     "color": "BLUE",
@@ -7230,7 +7230,7 @@
     ]
   },
   {
-    "name": "Psycho Gundam (MA Mode)",
+    "name": "사이코 건담 (MA 모드)",
     "level": 5,
     "cost": 3,
     "color": "BLUE",
@@ -7317,7 +7317,7 @@
     ]
   },
   {
-    "name": "Raider Gundam",
+    "name": "레이더 건담",
     "level": 5,
     "cost": 3,
     "color": "BLUE",
@@ -7346,7 +7346,7 @@
     ]
   },
   {
-    "name": "Moebius (Peacemaker Team)",
+    "name": "뫼비우스 (피스메이커 부대)",
     "level": 4,
     "cost": 2,
     "color": "BLUE",
@@ -7396,7 +7396,7 @@
     ]
   },
   {
-    "name": "Hizack",
+    "name": "하이잭",
     "level": 2,
     "cost": 1,
     "color": "BLUE",
@@ -7544,7 +7544,7 @@
     ]
   },
   {
-    "name": "Raider Gundam (MA Mode)",
+    "name": "레이더 건담 (MA 모드)",
     "level": 4,
     "cost": 2,
     "color": "BLUE",
@@ -7569,7 +7569,7 @@
     ]
   },
   {
-    "name": "Elmeth",
+    "name": "엘메스",
     "level": 6,
     "cost": 5,
     "color": "GREEN",
@@ -7692,7 +7692,7 @@
     ]
   },
   {
-    "name": "Red Gundam",
+    "name": "붉은 건담",
     "level": 5,
     "cost": 3,
     "color": "GREEN",
@@ -7723,7 +7723,7 @@
     ]
   },
   {
-    "name": "Gundam Heavyarms",
+    "name": "건담 헤비암즈",
     "level": 4,
     "cost": 3,
     "color": "GREEN",
@@ -7935,7 +7935,7 @@
     ]
   },
   {
-    "name": "Kikeroga (MA Mode) (GQ)",
+    "name": "키케로가 (MA 모드) (GQ)",
     "level": 5,
     "cost": 4,
     "color": "GREEN",
@@ -7964,7 +7964,7 @@
     ]
   },
   {
-    "name": "GQuuuuuuX",
+    "name": "지쿠악스",
     "level": 2,
     "cost": 1,
     "color": "GREEN",
@@ -7989,7 +7989,7 @@
     ]
   },
   {
-    "name": "Police Zaku (Armored RRU Type)",
+    "name": "경찰 자쿠 (Armored RRU Type)",
     "level": 2,
     "cost": 1,
     "color": "GREEN",
@@ -8012,7 +8012,7 @@
     ]
   },
   {
-    "name": "Qubeley",
+    "name": "큐베레이",
     "level": 7,
     "cost": 5,
     "color": "RED",
@@ -8077,7 +8077,7 @@
     ]
   },
   {
-    "name": "GQuuuuuuX (Omega Psycommu)",
+    "name": "지쿠악스 (오메가 사이코뮤)",
     "level": 7,
     "cost": 5,
     "color": "RED",
@@ -8135,7 +8135,7 @@
     ]
   },
   {
-    "name": "Gundam Ashtaron",
+    "name": "건담 아슈타론",
     "level": 4,
     "cost": 3,
     "color": "RED",
@@ -8167,7 +8167,7 @@
     ]
   },
   {
-    "name": "Sugai's Gelgoog (GQ)",
+    "name": "겔구그 스가이기 (GQ)",
     "level": 4,
     "cost": 4,
     "color": "RED",
@@ -8196,7 +8196,7 @@
     ]
   },
   {
-    "name": "Gundam Ashtaron (MA Mode)",
+    "name": "건담 아슈타론 (MA 형태)",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -8356,7 +8356,7 @@
     ]
   },
   {
-    "name": "Zaku Ⅲ (Sleeves)",
+    "name": "자쿠 Ⅲ (Sleeves)",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -8470,7 +8470,7 @@
     ]
   },
   {
-    "name": "Gundam X",
+    "name": "건담 X",
     "level": 7,
     "cost": 5,
     "color": "PURPLE",
@@ -8562,7 +8562,7 @@
     ]
   },
   {
-    "name": "Gundam X",
+    "name": "건담 X",
     "level": 4,
     "cost": 3,
     "color": "PURPLE",
@@ -8623,7 +8623,7 @@
     ]
   },
   {
-    "name": "Ryusei-Go (Graze Custom Ⅱ)",
+    "name": "류세이고 (그레이즈 커스텀 Ⅱ)",
     "level": 3,
     "cost": 2,
     "color": "PURPLE",
@@ -8834,7 +8834,7 @@
     ]
   },
   {
-    "name": "Gafran",
+    "name": "가프랑",
     "level": 2,
     "cost": 1,
     "color": "PURPLE",
@@ -8910,7 +8910,7 @@
     ]
   },
   {
-    "name": "Zeta Gundam",
+    "name": "제타 건담",
     "level": 6,
     "cost": 5,
     "color": "WHITE",
@@ -8941,7 +8941,7 @@
     ]
   },
   {
-    "name": "Gundam Kimaris",
+    "name": "건담 키마리스",
     "level": 5,
     "cost": 4,
     "color": "WHITE",
@@ -9061,7 +9061,7 @@
     ]
   },
   {
-    "name": "Gundam Aerial Rebuild",
+    "name": "에어리얼 건담 (개수형)",
     "level": 7,
     "cost": 5,
     "color": "WHITE",
@@ -9173,7 +9173,7 @@
     ]
   },
   {
-    "name": "Rick Dias",
+    "name": "릭 디아스",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -10515,7 +10515,7 @@
     ]
   },
   {
-    "name": "The-O",
+    "name": "디오",
     "level": 7,
     "cost": 5,
     "color": "BLUE",
@@ -10580,7 +10580,7 @@
     ]
   },
   {
-    "name": "Hambrabi",
+    "name": "함브라비",
     "level": 5,
     "cost": 4,
     "color": "BLUE",
@@ -10760,7 +10760,7 @@
     ]
   },
   {
-    "name": "Full Armor Unicorn Gundam (Destroy Mode)",
+    "name": "풀 아머 유니콘 건담 (디스트로이 모드)",
     "level": 8,
     "cost": 6,
     "color": "BLUE",
@@ -10840,7 +10840,7 @@
     ]
   },
   {
-    "name": "Hizack",
+    "name": "하이잭",
     "level": 2,
     "cost": 2,
     "color": "BLUE",
@@ -10867,7 +10867,7 @@
     ]
   },
   {
-    "name": "Hizack Custom",
+    "name": "하이잭 커스텀",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -10922,7 +10922,7 @@
     ]
   },
   {
-    "name": "Full Armor Unicorn Gundam (Unicorn Mode)",
+    "name": "풀 아머 유니콘 건담 (유니콘 모드)",
     "level": 5,
     "cost": 3,
     "color": "BLUE",
@@ -10947,7 +10947,7 @@
     ]
   },
   {
-    "name": "Kämpfer",
+    "name": "캠퍼",
     "level": 4,
     "cost": 3,
     "color": "GREEN",
@@ -11043,7 +11043,7 @@
     ]
   },
   {
-    "name": "Zaku Ⅱ FZ",
+    "name": "자쿠 Ⅱ FZ",
     "level": 2,
     "cost": 2,
     "color": "GREEN",
@@ -11074,7 +11074,7 @@
     ]
   },
   {
-    "name": "Gundam Deathscythe Hell",
+    "name": "건담 데스사이즈 헬",
     "level": 8,
     "cost": 7,
     "color": "GREEN",
@@ -11103,7 +11103,7 @@
     ]
   },
   {
-    "name": "Gundam Kyrios",
+    "name": "건담 큐리오스",
     "level": 5,
     "cost": 3,
     "color": "GREEN",
@@ -11192,7 +11192,7 @@
     ]
   },
   {
-    "name": "Gundam Sandrock Custom",
+    "name": "건담 샌드록 커스텀",
     "level": 6,
     "cost": 5,
     "color": "GREEN",
@@ -11219,7 +11219,7 @@
     ]
   },
   {
-    "name": "Gundam Dynames",
+    "name": "건담 듀나메스",
     "level": 5,
     "cost": 3,
     "color": "GREEN",
@@ -11303,7 +11303,7 @@
     ]
   },
   {
-    "name": "Gundam Heavyarms Custom",
+    "name": "건담 헤비암즈 커스텀",
     "level": 6,
     "cost": 5,
     "color": "GREEN",
@@ -11332,7 +11332,7 @@
     ]
   },
   {
-    "name": "Gundam Kyrios (Tail Unit Flight Mode)",
+    "name": "건담 큐리오스 (테일 유닛 장비) (비행 모드)",
     "level": 3,
     "cost": 3,
     "color": "GREEN",
@@ -11386,7 +11386,7 @@
     ]
   },
   {
-    "name": "Zaku (Four Snake Eyes') [YETI] (GQ)",
+    "name": "자쿠 (Four Snake Eyes') [YETI] (GQ)",
     "level": 2,
     "cost": 1,
     "color": "GREEN",
@@ -11438,7 +11438,7 @@
     ]
   },
   {
-    "name": "GQuuuuuuX (Omega Psycommu)",
+    "name": "지쿠악스 (오메가 사이코뮤)",
     "level": 8,
     "cost": 7,
     "color": "RED",
@@ -11501,7 +11501,7 @@
     ]
   },
   {
-    "name": "Ξ Gundam (Flight Form)",
+    "name": "크시 건담 (플라이트 폼)",
     "level": 5,
     "cost": 4,
     "color": "RED",
@@ -11593,7 +11593,7 @@
     ]
   },
   {
-    "name": "Red Gundam",
+    "name": "붉은 건담",
     "level": 4,
     "cost": 2,
     "color": "RED",
@@ -11682,7 +11682,7 @@
     ]
   },
   {
-    "name": "Duel Gundam (Assault Shroud)",
+    "name": "듀얼 건담 (어썰트 슈라우드)",
     "level": 5,
     "cost": 3,
     "color": "RED",
@@ -11861,7 +11861,7 @@
     ]
   },
   {
-    "name": "Gundam Exia (Trans-Am)",
+    "name": "건담 엑시아 (트랜스-암)",
     "level": 7,
     "cost": 6,
     "color": "PURPLE",
@@ -11892,7 +11892,7 @@
     ]
   },
   {
-    "name": "Gundam Barbatos Lupus",
+    "name": "건담 발바토스 루프스",
     "level": 7,
     "cost": 6,
     "color": "PURPLE",
@@ -11922,7 +11922,7 @@
     ]
   },
   {
-    "name": "Gundam X Divider",
+    "name": "건담 X 디바이더",
     "level": 6,
     "cost": 4,
     "color": "PURPLE",
@@ -12194,7 +12194,7 @@
     ]
   },
   {
-    "name": "CGS Mobile Worker (Commander Type)",
+    "name": "철화단 모빌워커 (지휘관기)",
     "level": 2,
     "cost": 2,
     "color": "PURPLE",
@@ -12275,7 +12275,7 @@
     ]
   },
   {
-    "name": "0 Gundam",
+    "name": "0 건담",
     "level": 2,
     "cost": 1,
     "color": "PURPLE",
@@ -12464,7 +12464,7 @@
     ]
   },
   {
-    "name": "Freedom Gundam",
+    "name": "프리덤 건담",
     "level": 6,
     "cost": 5,
     "color": "WHITE",
@@ -12491,7 +12491,7 @@
     ]
   },
   {
-    "name": "Z Gundam (Biosensor)",
+    "name": "제타 건담 (바이오센서)",
     "level": 7,
     "cost": 5,
     "color": "WHITE",
@@ -12520,7 +12520,7 @@
     ]
   },
   {
-    "name": "Aile Strike Gundam",
+    "name": "에일 스트라이크 건담",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
@@ -12551,7 +12551,7 @@
     ]
   },
   {
-    "name": "Graze Ein",
+    "name": "그레이즈 아인",
     "level": 7,
     "cost": 5,
     "color": "WHITE",
@@ -12584,7 +12584,7 @@
     ]
   },
   {
-    "name": "Tieren Taozi",
+    "name": "티에렌 타오츠",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -12643,7 +12643,7 @@
     ]
   },
   {
-    "name": "Freedom Gundam (METEOR)",
+    "name": "프리덤 건담 (미티어)",
     "level": 8,
     "cost": 6,
     "color": "WHITE",
@@ -12671,7 +12671,7 @@
     ]
   },
   {
-    "name": "Justice Gundam (METEOR)",
+    "name": "저스티스 건담 (미티어)",
     "level": 8,
     "cost": 7,
     "color": "WHITE",
@@ -12699,7 +12699,7 @@
     ]
   },
   {
-    "name": "Tieren High Mobility Type",
+    "name": "티에렌 고기동형",
     "level": 2,
     "cost": 2,
     "color": "WHITE",
@@ -12729,7 +12729,7 @@
     ]
   },
   {
-    "name": "G-Defenser",
+    "name": "G-디펜서",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -12756,7 +12756,7 @@
     ]
   },
   {
-    "name": "Gundam Kimaris Trooper (Trooper Mode)",
+    "name": "건담 키마리스 트루퍼 (트루퍼 모드)",
     "level": 6,
     "cost": 4,
     "color": "WHITE",
@@ -12813,7 +12813,7 @@
     ]
   },
   {
-    "name": "Union Flag",
+    "name": "유니온 플래그",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -12836,7 +12836,7 @@
     ]
   },
   {
-    "name": "AEU Hellion",
+    "name": "AEU 헬리온",
     "level": 1,
     "cost": 1,
     "color": "WHITE",
@@ -14044,12 +14044,12 @@
   {
     "__typename": "ResourceCard",
     "id": "T-015",
-    "name": "CGS Mobile Worker"
+    "name": "철화단 모빌워커"
   },
   {
     "__typename": "ResourceCard",
     "id": "T-016",
-    "name": "Graze Custom"
+    "name": "그레이즈 커스텀"
   },
   {
     "__typename": "ResourceCard",
@@ -14059,12 +14059,12 @@
   {
     "__typename": "ResourceCard",
     "id": "T-018",
-    "name": "Red Gundam"
+    "name": "붉은 건담"
   },
   {
     "__typename": "ResourceCard",
     "id": "T-019",
-    "name": "GQuuuuuuX (Omega Psycommu)"
+    "name": "지쿠악스 (오메가 사이코뮤)"
   },
   {
     "__typename": "ResourceCard",

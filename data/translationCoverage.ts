@@ -32,7 +32,7 @@ const EN_REGEX = /[a-zA-Z]/;
 const exceptions = ["OZ", "UN", "세츠나 F. 세이에이"];
 
 const isTranslated = (value: string): boolean =>
-  !EN_REGEX.test(value) || exceptions.includes(value);
+  (value !== "" && !EN_REGEX.test(value)) || exceptions.includes(value);
 
 const isNameTranslated = (name: string) => isTranslated(name);
 
