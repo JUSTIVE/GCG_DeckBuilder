@@ -365,13 +365,16 @@ a {
  *   cutout cutout-tl-[2rem]             → arbitrary value on one corner
  */
 .cutout {
-  mask:
-    linear-gradient(135deg, transparent var(--cut-tl, var(--cut, 0px)), #000 0) top left,
-    linear-gradient(-135deg, transparent var(--cut-tr, var(--cut, 0px)), #000 0) top right,
-    linear-gradient(-45deg, transparent var(--cut-br, var(--cut, 0px)), #000 0) bottom right,
-    linear-gradient(45deg, transparent var(--cut-bl, var(--cut, 0px)), #000 0) bottom left;
-  mask-size: 50% 50%;
-  mask-repeat: no-repeat;
+  clip-path: polygon(
+    var(--cut-tl, var(--cut, 0px)) 0%,
+    calc(100% - var(--cut-tr, var(--cut, 0px))) 0%,
+    100% var(--cut-tr, var(--cut, 0px)),
+    100% calc(100% - var(--cut-br, var(--cut, 0px))),
+    calc(100% - var(--cut-br, var(--cut, 0px))) 100%,
+    var(--cut-bl, var(--cut, 0px)) 100%,
+    0% calc(100% - var(--cut-bl, var(--cut, 0px))),
+    0% var(--cut-tl, var(--cut, 0px))
+  );
 }
 
 /* ── all four corners ──────────────────────────────────────────────────────── */
