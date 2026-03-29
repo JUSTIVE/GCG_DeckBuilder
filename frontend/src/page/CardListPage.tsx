@@ -4,7 +4,12 @@ import type { CardSort } from "@/__generated__/CardListPageQuery.graphql";
 import { CardList } from "@/components/CardList";
 import { useLazyLoadQuery } from "react-relay";
 import { graphql } from "relay-runtime";
-import { Route, type CardListSearch, type CardKeyword, type CardTrait } from "@/routes/cardlist";
+import {
+  Route,
+  type CardListSearch,
+  type CardKeyword,
+  type CardTrait,
+} from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon, SlidersHorizontalIcon, XIcon } from "lucide-react";
@@ -52,7 +57,10 @@ function filterToSearch(
   const level = filter.level as number[] | null | undefined;
   const zone = filter.zone as CardListSearch["zone"] | null | undefined;
   const color = filter.color as CardListSearch["color"] | null | undefined;
-  const keyword = filter.keyword as CardListSearch["keyword"] | null | undefined;
+  const keyword = filter.keyword as
+    | CardListSearch["keyword"]
+    | null
+    | undefined;
   const trait = filter.trait as CardListSearch["trait"] | null | undefined;
   const pkg = filter.package as CardListSearch["package"] | null | undefined;
   const query = filter.query as string | null | undefined;
@@ -90,7 +98,7 @@ function activeFilterCount(filter: CardFilterInput): number {
 const KIND_LABELS: Record<string, string> = {
   UNIT: "유닛",
   PILOT: "파일럿",
-  BASE: "거점",
+  BASE: "베이스",
   COMMAND: "커맨드",
   RESOURCE: "리소스",
 };
@@ -361,7 +369,9 @@ function CollapsibleChips({
           )}
         />
       </button>
-      {open && <div className="flex flex-wrap gap-1 pl-[2.875rem]">{children}</div>}
+      {open && (
+        <div className="flex flex-wrap gap-1 pl-[2.875rem]">{children}</div>
+      )}
     </div>
   );
 }
@@ -445,7 +455,9 @@ function FilterControls({
     const next = current.includes(k)
       ? current.filter((x) => x !== k)
       : [...current, k];
-    patch({ keyword: next.length > 0 ? (next as CardFilterInput["keyword"]) : null });
+    patch({
+      keyword: next.length > 0 ? (next as CardFilterInput["keyword"]) : null,
+    });
   }
 
   function toggleTrait(t: CardTrait) {
@@ -453,7 +465,9 @@ function FilterControls({
     const next = current.includes(t)
       ? current.filter((x) => x !== t)
       : [...current, t];
-    patch({ trait: next.length > 0 ? (next as CardFilterInput["trait"]) : null });
+    patch({
+      trait: next.length > 0 ? (next as CardFilterInput["trait"]) : null,
+    });
   }
 
   function onQueryChange(value: string) {
@@ -660,10 +674,7 @@ function FilterControls({
       </div>
 
       {/* Keyword */}
-      <CollapsibleChips
-        label="키워드"
-        activeCount={activeKeyword.length}
-      >
+      <CollapsibleChips label="키워드" activeCount={activeKeyword.length}>
         {ALL_KEYWORDS.map((k) => (
           <button
             type="button"
@@ -682,10 +693,7 @@ function FilterControls({
       </CollapsibleChips>
 
       {/* Trait */}
-      <CollapsibleChips
-        label="특성"
-        activeCount={activeTrait.length}
-      >
+      <CollapsibleChips label="특성" activeCount={activeTrait.length}>
         {ALL_TRAITS.map((t) => (
           <button
             type="button"

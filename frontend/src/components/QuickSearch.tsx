@@ -88,7 +88,7 @@ function resultMeta(r: SearchResult): string {
 const KIND_LABEL: Record<string, string> = {
   UnitCard: "유닛",
   PilotCard: "파일럿",
-  BaseCard: "거점",
+  BaseCard: "베이스",
   CommandCard: "커맨드",
   Resource: "리소스",
 };
@@ -135,10 +135,14 @@ export function QuickSearch() {
     }
     setLoading(true);
     debounceRef.current = setTimeout(async () => {
-      const resp = await serveGraphQL(QUICKSEARCH_QUERY, { q: query, first: 15 });
+      const resp = await serveGraphQL(QUICKSEARCH_QUERY, {
+        q: query,
+        first: 15,
+      });
       const hits =
-        ((resp.data as Record<string, unknown>)?.["quicksearch"] as SearchResult[]) ??
-        [];
+        ((resp.data as Record<string, unknown>)?.[
+          "quicksearch"
+        ] as SearchResult[]) ?? [];
       setResults(hits);
       setLoading(false);
     }, 150);
