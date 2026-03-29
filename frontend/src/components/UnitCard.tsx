@@ -124,10 +124,10 @@ function CardBody({
               </div>
             </div>
             <div className="flex flex-row gap-0.5 min-w-8">
-              <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw]">
+              <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1">
                 {unitCard.AP}
               </div>
-              <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw]">
+              <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1">
                 {unitCard.HP}
               </div>
             </div>
