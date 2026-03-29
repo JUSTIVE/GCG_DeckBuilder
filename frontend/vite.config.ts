@@ -16,6 +16,7 @@ const config = defineConfig({
     viteReact({
       babel: {
         plugins: [
+          "babel-plugin-react-compiler",
           "relay",
           [
             "@locator/babel-jsx/dist",
