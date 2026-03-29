@@ -38,7 +38,12 @@ type Props = {
   showDescription?: boolean;
 };
 
-export function CardList({ queryRef, filter, sort, showDescription = false }: Props) {
+export function CardList({
+  queryRef,
+  filter,
+  sort,
+  showDescription = false,
+}: Props) {
   const [, startTransition] = useTransition();
   const { data, refetch, loadNext, hasNext, isLoadingNext } =
     usePaginationFragment(Fragment, queryRef);
@@ -102,7 +107,10 @@ export function CardList({ queryRef, filter, sort, showDescription = false }: Pr
   }, [hasNext, isLoadingNext, loadNext, rowCount, rowVirtualizer]);
 
   return (
-    <div ref={parentRef} className="overflow-y-auto h-[calc(100dvh-65px)] py-5">
+    <div
+      ref={parentRef}
+      className="overflow-y-auto h-[calc(100dvh-65px-48px)] py-5"
+    >
       <div
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
@@ -137,7 +145,11 @@ export function CardList({ queryRef, filter, sort, showDescription = false }: Pr
                 }}
               >
                 {rowItems.map((edge) => (
-                  <Card key={edge.cursor} cardRef={edge.node} showDescription={showDescription} />
+                  <Card
+                    key={edge.cursor}
+                    cardRef={edge.node}
+                    showDescription={showDescription}
+                  />
                 ))}
               </div>
             </div>
