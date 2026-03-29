@@ -38,12 +38,15 @@ type Props = {
   showDescription?: boolean;
 };
 
-export function CardList({ queryRef, filter, sort, showDescription = false }: Props) {
+export function CardList({
+  queryRef,
+  filter,
+  sort,
+  showDescription = false,
+}: Props) {
   const [, startTransition] = useTransition();
-  const { data, refetch, loadNext, hasNext, isLoadingNext } = usePaginationFragment(
-    Fragment,
-    queryRef,
-  );
+  const { data, refetch, loadNext, hasNext, isLoadingNext } =
+    usePaginationFragment(Fragment, queryRef);
 
   // refetch when filter or sort changes, keeping old content visible via startTransition
   const prevParamsRef = useRef(JSON.stringify({ filter, sort }));
@@ -83,25 +86,32 @@ export function CardList({ queryRef, filter, sort, showDescription = false }: Pr
     getScrollElement: () => parentRef.current,
     estimateSize: () => {
       const cardHeight =
-        ((parentRef.current?.offsetWidth ?? 0 - (columns - 1) * 32) / columns / 800) * 1117;
+        ((parentRef.current?.offsetWidth ?? 0 - (columns - 1) * 32) /
+          columns /
+          800) *
+        1117;
       return showDescription ? cardHeight + 120 : cardHeight;
     },
     measureElement: (el) => el.getBoundingClientRect().height,
     overscan: 2,
   });
-
+  const virtualItems = rowVirtualizer.getVirtualItems();
   // 스크롤 끝에 도달하면 다음 페이지 로드
   useEffect(() => {
-    const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();
+    const lastItem = virtualItems.at(-1);
+    // console.log(rowVirtualizer.getVirtualItems());
     if (!lastItem) return;
 
     if (lastItem.index >= rowCount - 1 && hasNext && !isLoadingNext) {
-      loadNext(20);
+      loadNext(30);
     }
-  }, [hasNext, isLoadingNext, loadNext, rowCount, rowVirtualizer]);
+  }, [hasNext, isLoadingNext, loadNext, rowCount, virtualItems]);
 
   return (
-    <div ref={parentRef} className="overflow-y-auto h-[calc(100dvh-65px-48px)] py-5">
+    <div
+      ref={parentRef}
+      className="overflow-y-auto h-[calc(100dvh-65px-48px)] py-5"
+    >
       <div
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
@@ -111,7 +121,10 @@ export function CardList({ queryRef, filter, sort, showDescription = false }: Pr
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
           const startIndex = virtualRow.index * columns;
-          const endIndex = Math.min(startIndex + columns, data.cards.edges.length);
+          const endIndex = Math.min(
+            startIndex + columns,
+            data.cards.edges.length,
+          );
           const rowItems = data.cards.edges.slice(startIndex, endIndex);
 
           return (
@@ -133,7 +146,11 @@ export function CardList({ queryRef, filter, sort, showDescription = false }: Pr
                 }}
               >
                 {rowItems.map((edge) => (
-                  <Card key={edge.cursor} cardRef={edge.node} showDescription={showDescription} />
+                  <Card
+                    key={edge.cursor}
+                    cardRef={edge.node}
+                    showDescription={showDescription}
+                  />
                 ))}
               </div>
             </div>

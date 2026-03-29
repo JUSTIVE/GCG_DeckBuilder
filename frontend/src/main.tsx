@@ -1,7 +1,12 @@
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
-import { Environment, Network, type FetchFunction, type GraphQLResponse } from "relay-runtime";
+import {
+  Environment,
+  Network,
+  type FetchFunction,
+  type GraphQLResponse,
+} from "relay-runtime";
 import { RelayEnvironmentProvider } from "react-relay";
 import { serveGraphQL } from "./serve";
 
@@ -11,10 +16,14 @@ if (process.env.NODE_ENV === "development") {
   setupLocatorUI();
 }
 
-const fetchGraphQL: FetchFunction = async (request, variables): Promise<GraphQLResponse> => {
+const fetchGraphQL: FetchFunction = async (
+  request,
+  variables,
+): Promise<GraphQLResponse> => {
   try {
     console.log("fetching", request.text?.split("\n").at(0), variables);
     const resp = await serveGraphQL(request.text ?? "", variables);
+    console.log(resp);
     return resp as GraphQLResponse;
   } catch {
     throw new Error("Response failed.");
