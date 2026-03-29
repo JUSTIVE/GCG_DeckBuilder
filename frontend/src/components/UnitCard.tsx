@@ -6,7 +6,6 @@ import Marquee from "@/components/Marquee";
 import tempimg from "./tempimg.webp";
 import { use } from "react";
 import { CardListFocusContext } from "./CardList";
-import { renderRarity } from "@/render/rarity";
 import { ZoneChip } from "./ZoneChip";
 import { TraitChip } from "./TraitChip";
 import { renderTrait } from "@/render/trait";

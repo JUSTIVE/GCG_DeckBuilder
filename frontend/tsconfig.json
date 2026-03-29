@@ -4,8 +4,9 @@
     "target": "ESNext",
     "jsx": "react-jsx",
     "module": "ESNext",
-    "baseUrl": ".",
+
     "paths": {
+      "*": ["./*"],
       "@/*": ["./src/*"],
     },
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
