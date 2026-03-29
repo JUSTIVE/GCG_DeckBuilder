@@ -18,6 +18,16 @@ export const COLOR_BG50: Record<string, string> = {
   BLACK: "bg-[#808080]",
 };
 
+export const COLOR_BG20: Record<string, string> = {
+  BLUE: "bg-[#D1E8F4]",
+  GREEN: "bg-[#DCE9D4]",
+  RED: "bg-[#F0D1DF]",
+  PURPLE: "bg-[#E5DDE9]",
+  YELLOW: "bg-[#F4EEDF]",
+  WHITE: "bg-[#FFFFFF]",
+  BLACK: "bg-[#CCCCCC]",
+};
+
 export const COLOR_HEX: Record<string, string> = {
   BLUE: "#0272B6",
   GREEN: "#62A43E",
@@ -26,4 +36,14 @@ export const COLOR_HEX: Record<string, string> = {
   YELLOW: "#D3B078",
   WHITE: "#FFFFFF",
   BLACK: "#000000",
+};
+
+export const COLOR_TEXT: Record<string, string> = {
+  BLUE: "text-[#0272B6]",
+  GREEN: "text-[#62A43E]",
+  RED: "text-[#BD0152]",
+  PURPLE: "text-[#764A92]",
+  YELLOW: "text-[#D3B078]",
+  WHITE: "text-[#FFFFFF]",
+  BLACK: "text-[#000000]",
 };

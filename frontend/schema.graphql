@@ -215,6 +215,7 @@ type BaseCard implements Node {
   AP: Int!
   HP: Int!
   zone: [Zone!]!
+  traits: [CardTrait!]!
   level: Int!
   cost: Int!
   series: GundamSeries!
@@ -222,6 +223,7 @@ type BaseCard implements Node {
   rarity: CardRarity!
   package: CardPackage!
   keywords: [CardKeyword!]!
+
   description: [String!]!
 }
 

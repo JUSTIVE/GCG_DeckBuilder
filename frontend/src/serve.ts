@@ -156,7 +156,7 @@ function cardSearchTokens(card: AnyRecord): {
       if (typeof line === "string") description.push(line);
   }
 
-  // UnitCard raw field: "trait" (array of CardTrait enum strings)
+  // UnitCard / BaseCard raw field: "trait" (array of CardTrait enum strings)
   if (Array.isArray(card["trait"])) {
     for (const t of card["trait"] as unknown[])
       if (typeof t === "string") traits.push(t);
@@ -474,8 +474,8 @@ function fieldResolver(
     return (source[fieldName] as number | null | undefined) ?? 0;
   }
 
-  // ── UnitCard.traits → raw field is "trait" (singular) ────────────────
-  if (typeName === "UnitCard" && fieldName === "traits") {
+  // ── UnitCard.traits / BaseCard.traits → raw field is "trait" (singular) ─────
+  if ((typeName === "UnitCard" || typeName === "BaseCard") && fieldName === "traits") {
     const raw = source["trait"];
     return Array.isArray(raw) ? raw : [];
   }
