@@ -1288,7 +1288,7 @@
     ]
   },
   {
-    "name": "Michaelis",
+    "name": "미카엘리스",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -1742,7 +1742,7 @@
     ]
   },
   {
-    "name": "Zowort",
+    "name": "조워트",
     "level": 2,
     "cost": 2,
     "color": "WHITE",
@@ -4228,7 +4228,7 @@
     ]
   },
   {
-    "name": "Saviour Gundam",
+    "name": "세이버 건담",
     "level": 6,
     "cost": 5,
     "color": "RED",
@@ -5424,7 +5424,7 @@
     ]
   },
   {
-    "name": "Shamblo",
+    "name": "샴블로",
     "level": 8,
     "cost": 7,
     "color": "RED",
@@ -5729,7 +5729,7 @@
     ]
   },
   {
-    "name": "ZuOOT",
+    "name": "자우트",
     "level": 1,
     "cost": 1,
     "color": "RED",
@@ -5774,7 +5774,7 @@
     ]
   },
   {
-    "name": "ZnO",
+    "name": "조노",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -6037,7 +6037,7 @@
     ]
   },
   {
-    "name": "Mistral",
+    "name": "미스트랄",
     "level": 1,
     "cost": 1,
     "color": "WHITE",
@@ -7521,7 +7521,7 @@
     ]
   },
   {
-    "name": "Taurus",
+    "name": "토라스",
     "level": 2,
     "cost": 2,
     "color": "BLUE",
@@ -8302,7 +8302,7 @@
     ]
   },
   {
-    "name": "Sayla's Light-Type Guncannon",
+    "name": "경캐논 세일러 기",
     "level": 4,
     "cost": 2,
     "color": "RED",
@@ -8356,7 +8356,7 @@
     ]
   },
   {
-    "name": "자쿠 Ⅲ (Sleeves)",
+    "name": "자쿠 Ⅲ (소데츠키)",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -8428,7 +8428,7 @@
     ]
   },
   {
-    "name": "01 Gundam",
+    "name": "01 건담",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -9094,7 +9094,7 @@
     ]
   },
   {
-    "name": "Rick Dias (Red)",
+    "name": "릭 디아스 (붉은 색)",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
@@ -9198,7 +9198,7 @@
     ]
   },
   {
-    "name": "Nemo",
+    "name": "네모",
     "level": 2,
     "cost": 1,
     "color": "WHITE",
@@ -9219,7 +9219,7 @@
     ]
   },
   {
-    "name": "Methuss",
+    "name": "메타스",
     "level": 2,
     "cost": 2,
     "color": "WHITE",
@@ -10730,7 +10730,7 @@
     ]
   },
   {
-    "name": "Palace Athene",
+    "name": "파라스 아테네",
     "level": 5,
     "cost": 3,
     "color": "BLUE",
@@ -11249,7 +11249,7 @@
     ]
   },
   {
-    "name": "Z’Gok E",
+    "name": "즈고크 E",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -11653,7 +11653,7 @@
     ]
   },
   {
-    "name": "Patulia",
+    "name": "파툴리아",
     "level": 7,
     "cost": 6,
     "color": "RED",
@@ -12016,7 +12016,7 @@
     ]
   },
   {
-    "name": "Zeydra",
+    "name": "제이드라",
     "level": 6,
     "cost": 5,
     "color": "PURPLE",
@@ -12373,7 +12373,7 @@
     ]
   },
   {
-    "name": "Rouei",
+    "name": "로우에이",
     "level": 4,
     "cost": 3,
     "color": "PURPLE",
@@ -12613,7 +12613,7 @@
     ]
   },
   {
-    "name": "Super Gundam",
+    "name": "슈퍼 건담",
     "level": 5,
     "cost": 4,
     "color": "WHITE",
