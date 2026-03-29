@@ -3,7 +3,13 @@ import type { CardFilterInput } from "@/__generated__/CardListFragmentRefetchQue
 import { usePaginationFragment } from "react-relay";
 import { graphql } from "relay-runtime";
 import { Card } from "./Card";
-import { createContext, useRef, useState, useEffect, useTransition } from "react";
+import {
+  createContext,
+  useRef,
+  useState,
+  useEffect,
+  useTransition,
+} from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 
 type FocusCardContextType = {
@@ -56,10 +62,8 @@ type Props = {
 
 export function CardList({ queryRef, filter }: Props) {
   const [, startTransition] = useTransition();
-  const { data, refetch, loadNext, hasNext, isLoadingNext } = usePaginationFragment(
-    Fragment,
-    queryRef,
-  );
+  const { data, refetch, loadNext, hasNext, isLoadingNext } =
+    usePaginationFragment(Fragment, queryRef);
 
   // refetch when filter changes, keeping old content visible via startTransition
   const prevFilterRef = useRef(JSON.stringify(filter));
@@ -123,7 +127,10 @@ export function CardList({ queryRef, filter }: Props) {
 
   return (
     <CardListFocusProvider>
-      <div ref={parentRef} className="overflow-y-auto h-[calc(100dvh-65px)]">
+      <div
+        ref={parentRef}
+        className="overflow-y-auto h-[calc(100dvh-65px)] py-5"
+      >
         <div
           style={{
             height: `${rowVirtualizer.getTotalSize()}px`,

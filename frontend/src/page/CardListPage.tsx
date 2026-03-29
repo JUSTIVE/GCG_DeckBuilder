@@ -77,7 +77,10 @@ const ZONE_LABELS: Record<string, string> = { SPACE: "우주", EARTH: "지구" }
 const COST_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const INITIAL_FILTER: CardFilterInput = { kind: ["UNIT"] };
 
-const PACK_GROUPS: { label: string; items: { value: string; label: string }[] }[] = [
+const PACK_GROUPS: {
+  label: string;
+  items: { value: string; label: string }[];
+}[] = [
   {
     label: "부스트팩",
     items: [
@@ -155,7 +158,9 @@ function FilterControls({ filter, onChange }: FilterControlsProps) {
   }
 
   function togglePackage(p: string) {
-    patch({ package: filter.package === p ? null : (p as CardFilterInput["package"]) });
+    patch({
+      package: filter.package === p ? null : (p as CardFilterInput["package"]),
+    });
   }
 
   function onQueryChange(value: string) {
@@ -175,7 +180,9 @@ function FilterControls({ filter, onChange }: FilterControlsProps) {
     <div className="flex flex-col gap-3">
       {/* Kind */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">종류</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          종류
+        </span>
         <div className="flex flex-wrap gap-1">
           {ALL_KINDS.map((k) => (
             <button
@@ -197,7 +204,9 @@ function FilterControls({ filter, onChange }: FilterControlsProps) {
 
       {/* Cost */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">코스트</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          코스트
+        </span>
         <div className="flex flex-wrap gap-1">
           {COST_OPTIONS.map((c) => (
             <button
@@ -219,7 +228,9 @@ function FilterControls({ filter, onChange }: FilterControlsProps) {
 
       {/* Zone */}
       <div className="flex items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">지형</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          지형
+        </span>
         <div className="flex gap-1">
           {ALL_ZONES.map((z) => (
             <button
@@ -240,29 +251,34 @@ function FilterControls({ filter, onChange }: FilterControlsProps) {
       </div>
 
       {/* Pack */}
-      <div className="flex flex-wrap items-start gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0 pt-0.5">팩</span>
+      <div className="grid grid-cols-[2.5rem_1fr] items-start gap-x-1.5">
+        <span className="text-xs text-muted-foreground pt-0.5">팩</span>
         <div className="flex flex-col gap-1.5">
           {PACK_GROUPS.map((group) => (
-            <div key={group.label} className="flex flex-wrap items-center gap-1">
-              <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">
+            <div
+              key={group.label}
+              className="grid grid-cols-[2.5rem_1fr] items-start gap-x-1"
+            >
+              <span className="text-[10px] text-muted-foreground/60 pt-0.5">
                 {group.label}
               </span>
-              {group.items.map(({ value, label }) => (
-                <button
-                  type="button"
-                  key={value}
-                  onClick={() => togglePackage(value)}
-                  className={cn(
-                    "rounded-md border px-2 py-0.5 text-xs font-medium transition-colors cursor-pointer",
-                    activePackage === value
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-                  )}
-                >
-                  {label}
-                </button>
-              ))}
+              <div className="flex flex-wrap gap-1">
+                {group.items.map(({ value, label }) => (
+                  <button
+                    type="button"
+                    key={value}
+                    onClick={() => togglePackage(value)}
+                    className={cn(
+                      "rounded-md border px-2 py-0.5 text-xs font-medium transition-colors cursor-pointer",
+                      activePackage === value
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                    )}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -270,7 +286,9 @@ function FilterControls({ filter, onChange }: FilterControlsProps) {
 
       {/* Query */}
       <div className="flex items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">검색</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          검색
+        </span>
         <div className="relative flex-1 flex items-center">
           <input
             value={queryText}
@@ -299,20 +317,18 @@ function FilterBar({ filter, onChange }: FilterControlsProps) {
   const hasFilters = activeFilterCount(filter) > 0;
 
   return (
-    <div className="hidden md:flex flex-col gap-2 border-b border-border px-4 py-3">
+    <aside className="hidden md:flex flex-col gap-4 w-70 shrink-0 border-r border-border px-4 py-4 overflow-y-auto h-[calc(100dvh-65px)]">
       <FilterControls filter={filter} onChange={onChange} />
       {hasFilters && (
-        <div className="flex justify-end">
-          <button
-            type="button"
-            onClick={() => onChange(INITIAL_FILTER)}
-            className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer"
-          >
-            초기화
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => onChange(INITIAL_FILTER)}
+          className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer self-start"
+        >
+          초기화
+        </button>
       )}
-    </div>
+    </aside>
   );
 }
 
@@ -349,7 +365,11 @@ function FilterBottomSheet({ filter, onChange }: FilterControlsProps) {
       )}
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="bottom" showCloseButton={false} className="px-4 pb-8 pt-0 rounded-t-xl">
+        <SheetContent
+          side="bottom"
+          showCloseButton={false}
+          className="px-4 pb-8 pt-0 rounded-t-xl"
+        >
           <div className="mx-auto mb-4 mt-3 h-1 w-10 rounded-full bg-muted-foreground/30" />
           <SheetHeader className="p-0 mb-4">
             <SheetTitle>필터</SheetTitle>
@@ -387,12 +407,14 @@ export function CardListPage() {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col md:flex-row">
       <FilterBar filter={filter} onChange={handleFilterChange} />
-      <FilterBottomSheet filter={filter} onChange={handleFilterChange} />
-      <Suspense>
-        <CardListContent filter={filter} />
-      </Suspense>
+      <div className="flex flex-col flex-1 min-w-0">
+        <FilterBottomSheet filter={filter} onChange={handleFilterChange} />
+        <Suspense>
+          <CardListContent filter={filter} />
+        </Suspense>
+      </div>
     </div>
   );
 }
