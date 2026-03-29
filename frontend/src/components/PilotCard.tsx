@@ -10,11 +10,7 @@ import { useRouter } from "@tanstack/react-router";
 import { COLOR_BG, COLOR_BG20 } from "src/render/color";
 import type { PilotCard_PilotCardBody$key } from "src/__generated__/PilotCard_PilotCardBody.graphql";
 
-export function PilotCardBody({
-  pilotCardRef,
-}: {
-  pilotCardRef: PilotCard_PilotCardBody$key;
-}) {
+export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotCardBody$key }) {
   const pilotCard = useFragment(
     graphql`
       fragment PilotCard_PilotCardBody on PilotCard {

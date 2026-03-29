@@ -22,9 +22,7 @@ export const navMain: NavItem[] = [
 ];
 
 /** Returns [parentItem, childItem?] matching the given pathname. */
-export function resolveBreadcrumb(
-  pathname: string,
-): [NavItem, NavItem?] | null {
+export function resolveBreadcrumb(pathname: string): [NavItem, NavItem?] | null {
   for (const parent of navMain) {
     if (parent.url !== "#" && parent.url === pathname) {
       return [parent];

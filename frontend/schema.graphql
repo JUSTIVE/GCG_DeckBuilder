@@ -292,11 +292,6 @@ enum CardSort {
 
 type Query {
   node(id: ID!): Node
-  cards(
-    first: Int
-    after: String
-    filter: CardFilterInput
-    sort: CardSort
-  ): CardConnection!
+  cards(first: Int, after: String, filter: CardFilterInput, sort: CardSort): CardConnection!
   quicksearch(query: String!, first: Int): [Card!]!
 }

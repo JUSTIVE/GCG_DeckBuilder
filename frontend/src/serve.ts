@@ -39,11 +39,7 @@
  */
 
 import { buildSchema, execute, parse, defaultFieldResolver } from "graphql";
-import type {
-  GraphQLUnionType,
-  GraphQLInterfaceType,
-  GraphQLResolveInfo,
-} from "graphql";
+import type { GraphQLUnionType, GraphQLInterfaceType, GraphQLResolveInfo } from "graphql";
 import schemaSDL from "../schema.graphql?raw";
 import allCardsRaw from "../../data/mapped.json";
 
@@ -64,9 +60,8 @@ const resolveNodeType = (obj: { __typename: string }): string =>
 
 (schema.getType("Card") as GraphQLUnionType).resolveType = resolveNodeType;
 
-(schema.getType("UnitLink") as GraphQLUnionType).resolveType = (obj: {
-  __typename: string;
-}) => obj.__typename;
+(schema.getType("UnitLink") as GraphQLUnionType).resolveType = (obj: { __typename: string }) =>
+  obj.__typename;
 
 (schema.getType("Node") as GraphQLInterfaceType).resolveType = resolveNodeType;
 
@@ -89,9 +84,7 @@ const pilotByName = new Map<string, AnyRecord>(
   allCards
     .filter(
       (c): c is RawCard & { name: string } =>
-        c.__typename === "PilotCard" &&
-        "name" in c &&
-        typeof c.name === "string",
+        c.__typename === "PilotCard" && "name" in c && typeof c.name === "string",
     )
     .map((c) => [(c as AnyRecord)["name"] as string, c as AnyRecord]),
 );
@@ -158,8 +151,7 @@ function cardSearchTokens(card: AnyRecord): {
 
   // UnitCard / BaseCard raw field: "trait" (array of CardTrait enum strings)
   if (Array.isArray(card["trait"])) {
-    for (const t of card["trait"] as unknown[])
-      if (typeof t === "string") traits.push(t);
+    for (const t of card["trait"] as unknown[]) if (typeof t === "string") traits.push(t);
   }
 
   // UnitCard raw field: "link" (single LinkTrait | LinkPilot object)
@@ -167,8 +159,7 @@ function cardSearchTokens(card: AnyRecord): {
   if (link != null && typeof link === "object") {
     const l = link as AnyRecord;
     if (typeof l["trait"] === "string") links.push(l["trait"] as string);
-    if (typeof l["pilotName"] === "string")
-      links.push(l["pilotName"] as string);
+    if (typeof l["pilotName"] === "string") links.push(l["pilotName"] as string);
   }
 
   return { id, name, description, traits, links };
@@ -272,14 +263,12 @@ function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[] {
 
     // level
     if (filter.level?.length) {
-      if (typeof c["level"] !== "number" || !filter.level.includes(c["level"]))
-        return false;
+      if (typeof c["level"] !== "number" || !filter.level.includes(c["level"])) return false;
     }
 
     // cost
     if (filter.cost?.length) {
-      if (typeof c["cost"] !== "number" || !filter.cost.includes(c["cost"]))
-        return false;
+      if (typeof c["cost"] !== "number" || !filter.cost.includes(c["cost"])) return false;
     }
 
     // package
@@ -289,24 +278,19 @@ function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[] {
 
     // rarity — absent rarity treated as "COMMON"
     if (filter.rarity != null) {
-      const cardRarity =
-        typeof c["rarity"] === "string" ? c["rarity"] : "COMMON";
+      const cardRarity = typeof c["rarity"] === "string" ? c["rarity"] : "COMMON";
       if (cardRarity !== filter.rarity) return false;
     }
 
     // keyword — card must contain ALL listed keywords
     if (filter.keyword?.length) {
-      const cardKws = Array.isArray(c["keywords"])
-        ? (c["keywords"] as string[])
-        : [];
+      const cardKws = Array.isArray(c["keywords"]) ? (c["keywords"] as string[]) : [];
       if (!filter.keyword.every((kw) => cardKws.includes(kw))) return false;
     }
 
     // trait — card must contain ALL listed traits
     if (filter.trait?.length) {
-      const cardTraits = Array.isArray(c["trait"])
-        ? (c["trait"] as string[])
-        : [];
+      const cardTraits = Array.isArray(c["trait"]) ? (c["trait"] as string[]) : [];
       if (!filter.trait.every((t) => cardTraits.includes(t))) return false;
     }
 
@@ -325,13 +309,10 @@ function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[] {
     // full-text search across name and description
     if (filter.query) {
       const q = filter.query.toLowerCase();
-      const nameHit =
-        typeof c["name"] === "string" && c["name"].toLowerCase().includes(q);
+      const nameHit = typeof c["name"] === "string" && c["name"].toLowerCase().includes(q);
       const descHit =
         Array.isArray(c["description"]) &&
-        (c["description"] as string[]).some((line) =>
-          line.toLowerCase().includes(q),
-        );
+        (c["description"] as string[]).some((line) => line.toLowerCase().includes(q));
       if (!nameHit && !descHit) return false;
     }
 
@@ -392,8 +373,7 @@ const rootValue = {
     // Parenthesised query → treat as trait-focused search and apply a large
     // trait bonus so that trait matches rank to the top.
     const trimmed = query.trim();
-    const traitFocused =
-      trimmed.startsWith("(") && trimmed.endsWith(")") && trimmed.length > 2;
+    const traitFocused = trimmed.startsWith("(") && trimmed.endsWith(")") && trimmed.length > 2;
     const cleanQuery = traitFocused ? trimmed.slice(1, -1).trim() : trimmed;
 
     const TRAIT_BONUS = 40;
@@ -412,17 +392,10 @@ const rootValue = {
       const boostedTraitScore =
         traitFocused && traitScore >= 0 ? traitScore + TRAIT_BONUS : traitScore;
 
-      const maxScore = Math.max(
-        idScore,
-        nameScore,
-        descScore,
-        boostedTraitScore,
-        linkScore,
-      );
+      const maxScore = Math.max(idScore, nameScore, descScore, boostedTraitScore, linkScore);
       if (maxScore >= 0) {
         // Name matches get a boost unless we're in trait-focused mode
-        const finalScore =
-          !traitFocused && nameScore >= 0 ? maxScore + 20 : maxScore;
+        const finalScore = !traitFocused && nameScore >= 0 ? maxScore + 20 : maxScore;
         scored.push({ score: finalScore, card });
       }
     }
@@ -465,7 +438,10 @@ function fieldResolver(
     if (Array.isArray(desc)) {
       for (const line of desc as string[]) {
         const match = /【파일럿】\[([^\]]+)\]/.exec(line);
-        if (match?.[1]) { name = match[1]; break; }
+        if (match?.[1]) {
+          name = match[1];
+          break;
+        }
       }
     }
     return {
@@ -495,7 +471,13 @@ function fieldResolver(
   }
 
   // ── UnitCard.traits / BaseCard.traits / PilotCard.traits / CommandCard.traits → raw field is "trait" (singular) ─────
-  if ((typeName === "UnitCard" || typeName === "BaseCard" || typeName === "PilotCard" || typeName === "CommandCard") && fieldName === "traits") {
+  if (
+    (typeName === "UnitCard" ||
+      typeName === "BaseCard" ||
+      typeName === "PilotCard" ||
+      typeName === "CommandCard") &&
+    fieldName === "traits"
+  ) {
     const raw = source["trait"];
     return Array.isArray(raw) ? raw : [];
   }
@@ -545,10 +527,7 @@ function fieldResolver(
  *   { f: { kind: "UNIT", package: "GD01" } },
  * );
  */
-export async function serveGraphQL(
-  query: string,
-  variables?: Record<string, unknown>,
-) {
+export async function serveGraphQL(query: string, variables?: Record<string, unknown>) {
   return execute({
     schema,
     document: parse(query),

@@ -21,9 +21,7 @@ import { serveGraphQL } from "./serve";
 async function gql(query: string, variables?: Record<string, unknown>) {
   const result = await serveGraphQL(query, variables);
   if (result.errors?.length) {
-    throw new Error(
-      `GraphQL errors:\n${result.errors.map((e) => e.message).join("\n")}`,
-    );
+    throw new Error(`GraphQL errors:\n${result.errors.map((e) => e.message).join("\n")}`);
   }
   return result.data as Record<string, unknown>;
 }
@@ -345,20 +343,17 @@ describe("Query.cards – filter combinations", () => {
       `query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`,
       { f: { kind: ["UNIT"], rarity: "COMMON" } },
     );
-    const rareData = await gql(
-      `query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`,
-      { f: { kind: ["UNIT"], rarity: "RARE" } },
-    );
+    const rareData = await gql(`query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`, {
+      f: { kind: ["UNIT"], rarity: "RARE" },
+    });
 
-    const commonCount = (commonData["cards"] as { totalCount: number })
-      .totalCount;
+    const commonCount = (commonData["cards"] as { totalCount: number }).totalCount;
     const rareCount = (rareData["cards"] as { totalCount: number }).totalCount;
 
     // Every unit has rarity=COMMON (default), so common === all units
-    const allData = await gql(
-      `query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`,
-      { f: { kind: ["UNIT"] } },
-    );
+    const allData = await gql(`query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`, {
+      f: { kind: ["UNIT"] },
+    });
     const allCount = (allData["cards"] as { totalCount: number }).totalCount;
 
     expect(commonCount).toBe(allCount);
@@ -600,10 +595,7 @@ describe("UnitCard.links – [UnitLink!]!", () => {
       }
     ).edges
       .flatMap((e) => e.node.links)
-      .filter(
-        (l): l is { __typename: "LinkTrait"; trait: string } =>
-          l.__typename === "LinkTrait",
-      );
+      .filter((l): l is { __typename: "LinkTrait"; trait: string } => l.__typename === "LinkTrait");
 
     expect(traitLinks.length).toBeGreaterThan(0);
     for (const l of traitLinks) {
@@ -792,25 +784,19 @@ describe("CommandCard.pilot – nullable Pilot", () => {
 
 describe("rarity: CardRarity! – defaults to COMMON when absent from data", () => {
   it("UnitCard.rarity is 'COMMON' (data has no rarity field)", async () => {
-    const data = await gql(
-      `{ node(id: "ST01-001") { ... on UnitCard { id rarity } } }`,
-    );
+    const data = await gql(`{ node(id: "ST01-001") { ... on UnitCard { id rarity } } }`);
     const node = data["node"] as { id: string; rarity: string };
     expect(node.rarity).toBe("COMMON");
   });
 
   it("PilotCard.rarity is 'COMMON'", async () => {
-    const data = await gql(
-      `{ node(id: "ST01-010") { ... on PilotCard { id rarity } } }`,
-    );
+    const data = await gql(`{ node(id: "ST01-010") { ... on PilotCard { id rarity } } }`);
     const node = data["node"] as { id: string; rarity: string };
     expect(node.rarity).toBe("COMMON");
   });
 
   it("BaseCard.rarity is 'COMMON'", async () => {
-    const data = await gql(
-      `{ node(id: "ST01-015") { ... on BaseCard { id rarity } } }`,
-    );
+    const data = await gql(`{ node(id: "ST01-015") { ... on BaseCard { id rarity } } }`);
     const node = data["node"] as { id: string; rarity: string };
     expect(node.rarity).toBe("COMMON");
   });
@@ -847,9 +833,7 @@ describe("BaseCard.AP null coercion → 0", () => {
 
   // ST01-015 (White Base) has "AP": null in mapped.json
   it("White Base AP is 0 after coercion", async () => {
-    const data = await gql(
-      `{ node(id: "ST01-015") { ... on BaseCard { id name AP HP } } }`,
-    );
+    const data = await gql(`{ node(id: "ST01-015") { ... on BaseCard { id name AP HP } } }`);
     const node = data["node"] as { id: string; AP: number; HP: number };
     expect(node.id).toBe("ST01-015");
     expect(node.AP).toBe(0);
@@ -912,9 +896,7 @@ describe("Query.node", () => {
   });
 
   it("node(id) returns a ResourceCard by id", async () => {
-    const data = await gql(
-      `{ node(id: "T-001") { id ... on Resource { name rarity } } }`,
-    );
+    const data = await gql(`{ node(id: "T-001") { id ... on Resource { name rarity } } }`);
     const node = data["node"] as { id: string; name: string; rarity: string };
     expect(node.id).toBe("T-001");
     expect(typeof node.name).toBe("string");

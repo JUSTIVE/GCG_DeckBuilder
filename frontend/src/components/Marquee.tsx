@@ -51,19 +51,11 @@ export function Marquee({ children, className, speed = 40, gap = 16 }: Props) {
             : { gap: `${gap}px` }
         }
       >
-        <div
-          ref={contentRef}
-          className="flex shrink-0"
-          style={{ gap: `${gap}px` }}
-        >
+        <div ref={contentRef} className="flex shrink-0" style={{ gap: `${gap}px` }}>
           {children}
         </div>
         {shouldScroll && (
-          <div
-            className="flex shrink-0 items-center"
-            aria-hidden
-            style={{ gap: `${gap}px` }}
-          >
+          <div className="flex shrink-0 items-center" aria-hidden style={{ gap: `${gap}px` }}>
             {children}
           </div>
         )}

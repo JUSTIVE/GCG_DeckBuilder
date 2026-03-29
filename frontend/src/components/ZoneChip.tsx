@@ -1,13 +1,7 @@
 import { cn } from "@/lib/utils";
 import { renderZone } from "@/render/zone";
 
-export function ZoneChip({
-  zone,
-  className,
-}: {
-  zone: string;
-  className?: string;
-}) {
+export function ZoneChip({ zone, className }: { zone: string; className?: string }) {
   return (
     <div
       className={cn(

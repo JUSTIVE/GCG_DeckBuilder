@@ -14,13 +14,7 @@ type Phase = "select-first" | "playing";
 function effectiveLevel(p: PlayerState) {
   return (
     p.level +
-    ((
-      p.Ex != null
-        ? p.Ex.usedTurn == null
-          ? true
-          : p.Ex.usedTurn <= p.turnsCompleted + 1
-        : false
-    )
+    ((p.Ex != null ? (p.Ex.usedTurn == null ? true : p.Ex.usedTurn <= p.turnsCompleted + 1) : false)
       ? 1
       : 0)
   );
@@ -105,10 +99,7 @@ export function ResourceCounterPage() {
       const p = next[idx];
       next[idx] = {
         ...p,
-        resources: Math.max(
-          0,
-          Math.min(effectiveLevel(p), p.resources + delta),
-        ),
+        resources: Math.max(0, Math.min(effectiveLevel(p), p.resources + delta)),
       };
       return next;
     });
@@ -271,9 +262,7 @@ function PlayerPanel({
           </span>
         )}
         {isActive && (
-          <span className="text-xs font-medium text-green-600 animate-pulse ">
-            ● 진행 중
-          </span>
+          <span className="text-xs font-medium text-green-600 animate-pulse ">● 진행 중</span>
         )}
       </div>
 

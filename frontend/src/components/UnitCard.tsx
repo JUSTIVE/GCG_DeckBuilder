@@ -66,11 +66,7 @@ export function UnitCardBody({
         <div className="flex flex-col gap-0.5">
           <div className="flex flex-row px-3">
             {unitCard.zone.map((x) => (
-              <ZoneChip
-                zone={x}
-                className={cn(cardBg, isWhite ? "text-black" : "")}
-                key={x}
-              />
+              <ZoneChip zone={x} className={cn(cardBg, isWhite ? "text-black" : "")} key={x} />
             ))}
           </div>
           <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
@@ -96,7 +92,7 @@ export function UnitCardBody({
                 </div>
               </div>
               <div className="flex flex-row items-center">
-                <div className="w-6 bg-black -mr-4 py-px pb-1 z-1 text-[3cqw] pl-1.5 min-h-3">
+                <div className="w-6 bg-black -mr-4 py-px z-1 text-[3cqw] pl-1.5 min-h-3 leading-[6cqw]">
                   링크
                 </div>
                 <div className="bg-black overflow-hidden w-full pl-7 parallelogram parallelogram-sm px-2 pt-px pb-0.5 min-h-3">
@@ -190,11 +186,7 @@ export function UnitCard({ unitCardRef }: Props) {
         )}
         onClick={openDialog}
       >
-        <UnitCardBody
-          unitCardRefs={unitCard}
-          cardBg={cardBg}
-          isWhite={isWhite}
-        />
+        <UnitCardBody unitCardRefs={unitCard} cardBg={cardBg} isWhite={isWhite} />
       </button>
     </>
   );

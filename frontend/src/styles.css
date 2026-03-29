@@ -366,14 +366,10 @@ a {
  */
 .cutout {
   mask:
-    linear-gradient(135deg, transparent var(--cut-tl, var(--cut, 0px)), #000 0)
-      top left,
-    linear-gradient(-135deg, transparent var(--cut-tr, var(--cut, 0px)), #000 0)
-      top right,
-    linear-gradient(-45deg, transparent var(--cut-br, var(--cut, 0px)), #000 0)
-      bottom right,
-    linear-gradient(45deg, transparent var(--cut-bl, var(--cut, 0px)), #000 0)
-      bottom left;
+    linear-gradient(135deg, transparent var(--cut-tl, var(--cut, 0px)), #000 0) top left,
+    linear-gradient(-135deg, transparent var(--cut-tr, var(--cut, 0px)), #000 0) top right,
+    linear-gradient(-45deg, transparent var(--cut-br, var(--cut, 0px)), #000 0) bottom right,
+    linear-gradient(45deg, transparent var(--cut-bl, var(--cut, 0px)), #000 0) bottom left;
   mask-size: 50% 50%;
   mask-repeat: no-repeat;
 }
@@ -448,12 +444,7 @@ a {
 }
 
 .parallelogramx {
-  clip-path: polygon(
-    0% 0%,
-    100% 0%,
-    100% 100%,
-    var(--para-cut, var(--cutout-sm)) 100%
-  );
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, var(--para-cut, var(--cutout-sm)) 100%);
 }
 
 @utility parallelogram-* {

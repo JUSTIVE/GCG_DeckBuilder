@@ -53,19 +53,12 @@ export function BaseCardBody({
             {baseCard.zone.map((x) => (
               <ZoneChip
                 zone={x}
-                className={cn(
-                  COLOR_BG[baseCard.color],
-                  isWhite ? "text-black" : "",
-                )}
+                className={cn(COLOR_BG[baseCard.color], isWhite ? "text-black" : "")}
                 key={x}
               />
             ))}
           </div>
-          <div
-            className={cn(
-              "flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm",
-            )}
-          >
+          <div className={cn("flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm")}>
             <div className="flex flex-col justify-end flex-1 overflow-hidden">
               <div className="flex flex-row translate-y-px">
                 <div className="w-2 bg-transparent -mr-5" />
@@ -89,9 +82,7 @@ export function BaseCardBody({
                 className={cn(
                   "aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_BG20[baseCard.color],
-                  baseCard.color === "WHITE"
-                    ? "text-black"
-                    : COLOR_TEXT[baseCard.color],
+                  baseCard.color === "WHITE" ? "text-black" : COLOR_TEXT[baseCard.color],
                 )}
               >
                 {baseCard.AP}
@@ -100,9 +91,7 @@ export function BaseCardBody({
                 className={cn(
                   "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_BG20[baseCard.color],
-                  baseCard.color === "WHITE"
-                    ? "text-black"
-                    : COLOR_TEXT[baseCard.color],
+                  baseCard.color === "WHITE" ? "text-black" : COLOR_TEXT[baseCard.color],
                 )}
               >
                 {baseCard.HP}

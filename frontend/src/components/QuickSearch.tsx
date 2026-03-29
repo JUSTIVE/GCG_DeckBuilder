@@ -59,12 +59,7 @@ type CommandResult = {
 };
 type ResourceResult = { __typename: "Resource"; id: string; name: string };
 
-type SearchResult =
-  | UnitResult
-  | PilotResult
-  | BaseResult
-  | CommandResult
-  | ResourceResult;
+type SearchResult = UnitResult | PilotResult | BaseResult | CommandResult | ResourceResult;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -148,9 +143,7 @@ export function QuickSearch() {
         first: 15,
       });
       const hits =
-        ((resp.data as Record<string, unknown>)?.[
-          "quicksearch"
-        ] as SearchResult[]) ?? [];
+        ((resp.data as Record<string, unknown>)?.["quicksearch"] as SearchResult[]) ?? [];
       setResults(hits);
       setActiveIndex(-1);
       setLoading(false);
@@ -236,14 +229,10 @@ export function QuickSearch() {
                 </p>
               )}
               {loading && (
-                <p className="px-4 py-8 text-center text-sm text-muted-foreground">
-                  검색 중…
-                </p>
+                <p className="px-4 py-8 text-center text-sm text-muted-foreground">검색 중…</p>
               )}
               {!loading && query.trim() && results.length === 0 && (
-                <p className="px-4 py-8 text-center text-sm text-muted-foreground">
-                  결과 없음
-                </p>
+                <p className="px-4 py-8 text-center text-sm text-muted-foreground">결과 없음</p>
               )}
               {!loading && results.length > 0 && (
                 <ul ref={listRef} className="p-1">

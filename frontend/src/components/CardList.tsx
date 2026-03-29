@@ -38,15 +38,12 @@ type Props = {
   showDescription?: boolean;
 };
 
-export function CardList({
-  queryRef,
-  filter,
-  sort,
-  showDescription = false,
-}: Props) {
+export function CardList({ queryRef, filter, sort, showDescription = false }: Props) {
   const [, startTransition] = useTransition();
-  const { data, refetch, loadNext, hasNext, isLoadingNext } =
-    usePaginationFragment(Fragment, queryRef);
+  const { data, refetch, loadNext, hasNext, isLoadingNext } = usePaginationFragment(
+    Fragment,
+    queryRef,
+  );
 
   // refetch when filter or sort changes, keeping old content visible via startTransition
   const prevParamsRef = useRef(JSON.stringify({ filter, sort }));
@@ -86,10 +83,7 @@ export function CardList({
     getScrollElement: () => parentRef.current,
     estimateSize: () => {
       const cardHeight =
-        ((parentRef.current?.offsetWidth ?? 0 - (columns - 1) * 32) /
-          columns /
-          800) *
-        1117;
+        ((parentRef.current?.offsetWidth ?? 0 - (columns - 1) * 32) / columns / 800) * 1117;
       return showDescription ? cardHeight + 120 : cardHeight;
     },
     measureElement: (el) => el.getBoundingClientRect().height,
@@ -107,10 +101,7 @@ export function CardList({
   }, [hasNext, isLoadingNext, loadNext, rowCount, rowVirtualizer]);
 
   return (
-    <div
-      ref={parentRef}
-      className="overflow-y-auto h-[calc(100dvh-65px-48px)] py-5"
-    >
+    <div ref={parentRef} className="overflow-y-auto h-[calc(100dvh-65px-48px)] py-5">
       <div
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
@@ -120,10 +111,7 @@ export function CardList({
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
           const startIndex = virtualRow.index * columns;
-          const endIndex = Math.min(
-            startIndex + columns,
-            data.cards.edges.length,
-          );
+          const endIndex = Math.min(startIndex + columns, data.cards.edges.length);
           const rowItems = data.cards.edges.slice(startIndex, endIndex);
 
           return (
@@ -145,11 +133,7 @@ export function CardList({
                 }}
               >
                 {rowItems.map((edge) => (
-                  <Card
-                    key={edge.cursor}
-                    cardRef={edge.node}
-                    showDescription={showDescription}
-                  />
+                  <Card key={edge.cursor} cardRef={edge.node} showDescription={showDescription} />
                 ))}
               </div>
             </div>

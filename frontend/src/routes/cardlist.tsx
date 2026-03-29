@@ -3,14 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 const VALID_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND", "RESOURCE"] as const;
 const VALID_ZONES = ["SPACE", "EARTH"] as const;
-const VALID_COLORS = [
-  "BLUE",
-  "GREEN",
-  "RED",
-  "YELLOW",
-  "PURPLE",
-  "WHITE",
-] as const;
+const VALID_COLORS = ["BLUE", "GREEN", "RED", "YELLOW", "PURPLE", "WHITE"] as const;
 const VALID_KEYWORDS = [
   "ACTION",
   "ACTIVATE_ACTION",
@@ -170,19 +163,15 @@ export const Route = createFileRoute("/cardlist")({
         ) as CardListSearch["trait"])
       : undefined,
     package:
-      typeof raw.package === "string" &&
-      (VALID_PACKAGES as readonly string[]).includes(raw.package)
+      typeof raw.package === "string" && (VALID_PACKAGES as readonly string[]).includes(raw.package)
         ? (raw.package as CardListSearch["package"])
         : undefined,
-    query:
-      typeof raw.query === "string" && raw.query.trim() ? raw.query : undefined,
+    query: typeof raw.query === "string" && raw.query.trim() ? raw.query : undefined,
     sort:
-      typeof raw.sort === "string" &&
-      (VALID_SORTS as readonly string[]).includes(raw.sort)
+      typeof raw.sort === "string" && (VALID_SORTS as readonly string[]).includes(raw.sort)
         ? (raw.sort as CardListSearch["sort"])
         : undefined,
-    cardId:
-      typeof raw.cardId === "string" && raw.cardId ? raw.cardId : undefined,
+    cardId: typeof raw.cardId === "string" && raw.cardId ? raw.cardId : undefined,
   }),
   component: CardListPage,
 });

@@ -117,9 +117,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
     if (node.__typename === "UnitCard") {
       const cardBg = COLOR_BG[node.color] ?? "bg-black";
       const isWhite = node.color === "WHITE";
-      return (
-        <UnitCardBody unitCardRefs={node} cardBg={cardBg} isWhite={isWhite} />
-      );
+      return <UnitCardBody unitCardRefs={node} cardBg={cardBg} isWhite={isWhite} />;
     }
     if (node.__typename === "PilotCard") {
       return <PilotCardBody pilotCardRef={node} />;
@@ -245,9 +243,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
                 className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/20"
                 style={{ background: COLOR_HEX[node.color] ?? "#000" }}
               />
-              <h2 className="text-sm font-bold leading-tight">
-                {node.pilot.name}
-              </h2>
+              <h2 className="text-sm font-bold leading-tight">{node.pilot.name}</h2>
             </div>
             <div className="text-xs text-white/60">{node.id}</div>
             <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
@@ -422,9 +418,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
         <div className="pointer-events-auto w-72 rounded-xl bg-black/75 px-4 py-5 text-white backdrop-blur-md flex flex-col gap-2">
           <h2 className="text-sm font-bold leading-tight">{node.name}</h2>
           <div className="text-xs text-white/60">{node.id}</div>
-          <div className="text-xs text-white/60">
-            {renderRarity(node.rarity)}
-          </div>
+          <div className="text-xs text-white/60">{renderRarity(node.rarity)}</div>
         </div>
       );
     }

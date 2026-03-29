@@ -8,11 +8,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import type { PropsWithChildren } from "react";
 import { QuickSearch } from "@/components/QuickSearch";
 import { useRouterState, Link } from "@tanstack/react-router";
@@ -31,9 +27,7 @@ function AppBreadcrumb() {
         {child ? (
           <>
             <BreadcrumbItem className="hidden md:block">
-              <BreadcrumbLink render={<Link to={parent.url} />}>
-                {parent.title}
-              </BreadcrumbLink>
+              <BreadcrumbLink render={<Link to={parent.url} />}>{parent.title}</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator className="hidden md:block" />
             <BreadcrumbItem>

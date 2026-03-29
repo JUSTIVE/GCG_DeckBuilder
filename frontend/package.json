@@ -54,6 +54,7 @@
     "@vitejs/plugin-react": "^5.1.4",
     "babel-plugin-relay": "^20.1.1",
     "jsdom": "^28.1.0",
+    "oxfmt": "^0.42.0",
     "typescript": "^5.7.2",
     "vite": "^8.0.0",
     "vite-tsconfig-paths": "^5.1.4",
