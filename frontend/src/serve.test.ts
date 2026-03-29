@@ -80,9 +80,7 @@ describe("Query.cards – kind filter", () => {
     }
   });
 
-  it("kind=RESOURCE returns 0 results (ResourceCards have no package, not in combined.json)", async () => {
-    // ResourceCards are excluded from combined.json because 3.splitter.ts filters
-    // cards with package != null, and ResourceCards have no package field.
+  it("kind=RESOURCE returns ResourceCards", async () => {
     const data = await gql(
       `query($f: CardFilterInput!) {
         cards(filter: $f) {
@@ -95,11 +93,13 @@ describe("Query.cards – kind filter", () => {
 
     const conn = data["cards"] as {
       totalCount: number;
-      edges: Array<unknown>;
+      edges: Array<{ node: { __typename: string } }>;
     };
 
-    expect(conn.totalCount).toBe(0);
-    expect(conn.edges).toHaveLength(0);
+    expect(conn.totalCount).toBeGreaterThan(0);
+    for (const edge of conn.edges) {
+      expect(edge.node.__typename).toBe("Resource");
+    }
   });
 
   it("returns BaseCards when kind=BASE", async () => {
@@ -324,7 +324,7 @@ describe("Query.cards – filter combinations", () => {
           edges { node { ... on UnitCard { id name } } }
         }
       }`,
-      { f: { kind: ["UNIT"], query: "gundam" } },
+      { f: { kind: ["UNIT"], query: "건담" } },
     );
 
     const conn = data["cards"] as {
@@ -334,7 +334,7 @@ describe("Query.cards – filter combinations", () => {
 
     expect(conn.totalCount).toBeGreaterThan(0);
     for (const edge of conn.edges) {
-      expect(edge.node.name.toLowerCase()).toContain("gundam");
+      expect(edge.node.name).toContain("건담");
     }
   });
 
@@ -878,7 +878,7 @@ describe("Query.node", () => {
     };
 
     expect(node.id).toBe("ST01-001");
-    expect(node.name).toBe("Gundam");
+    expect(node.name).toBe("건담");
     expect(node.AP).toBe(3);
     expect(node.HP).toBe(4);
     expect(node.rarity).toBe("COMMON");
@@ -911,9 +911,12 @@ describe("Query.node", () => {
     expect(node.rarity).toBe("COMMON");
   });
 
-  it("node(id) returns null for a ResourceCard id (not in combined.json)", async () => {
-    // T-001 is a ResourceCard with no package field — excluded from combined.json
-    const data = await gql(`{ node(id: "T-001") { id } }`);
-    expect(data["node"]).toBeNull();
+  it("node(id) returns a ResourceCard by id", async () => {
+    const data = await gql(
+      `{ node(id: "T-001") { id ... on Resource { name rarity } } }`,
+    );
+    const node = data["node"] as { id: string; name: string; rarity: string };
+    expect(node.id).toBe("T-001");
+    expect(typeof node.name).toBe("string");
   });
 });

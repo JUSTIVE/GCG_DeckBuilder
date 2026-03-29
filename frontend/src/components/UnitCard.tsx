@@ -10,7 +10,7 @@ import { renderZone } from "@/render/zone";
 import { Dialog } from "@base-ui/react/dialog";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
-import { COLOR_BG, COLOR_HEX } from "src/render/color";
+import { COLOR_BG, COLOR_BG20, COLOR_HEX } from "src/render/color";
 
 const Fragment = graphql`
   fragment UnitCardFragment on UnitCard {
@@ -91,14 +91,21 @@ function CardBody({
           </div>
           <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
             <div className="flex flex-col justify-end flex-1 overflow-hidden">
-              <div className="flex flex-row translate-y-px">
-                <div className="w-2 bg-transparent -mr-5" />
-                <div className="w-10 bg-transparent -mr-5 parallelogram parallelogram-sm" />
-                <div className="w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 parallelogram parallelogram-sm px-2 py-px">
+              <div className="flex flex-row ">
+                <div className="w-2 bg-black -mr-5" />
+                <div className="w-10 bg-black -mr-5 parallelogram parallelogram-sm" />
+                <div
+                  className={cn(
+                    "w-[calc(100%-12px)] ml-3 overflow-hidden px-2 py-px",
+                    COLOR_BG20[unitCard.color],
+                  )}
+                >
                   <div className="flex text-end text-gray-900 text-[4cqw]">
                     <Marquee speed={8} gap={0}>
                       {unitCard.traits.map((x) => (
-                        <span key={x} className="px-2">({renderTrait(x)})</span>
+                        <span key={x} className="px-2">
+                          ({renderTrait(x)})
+                        </span>
                       ))}
                     </Marquee>
                   </div>
@@ -183,11 +190,7 @@ export function UnitCard({ unitCardRef }: Props) {
         )}
         onClick={openDialog}
       >
-        <CardBody
-          unitCard={unitCard}
-          cardBg={cardBg}
-          isWhite={isWhite}
-        />
+        <CardBody unitCard={unitCard} cardBg={cardBg} isWhite={isWhite} />
       </button>
 
       {/* ── Detail dialog ────────────────────────────────────────────────── */}
@@ -205,11 +208,7 @@ export function UnitCard({ unitCardRef }: Props) {
           <Dialog.Popup className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 p-6 pointer-events-none outline-none transition duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0">
             {/* Large card */}
             <div className="@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl shadow-2xl">
-              <CardBody
-                unitCard={unitCard}
-                cardBg={cardBg}
-                isWhite={isWhite}
-              />
+              <CardBody unitCard={unitCard} cardBg={cardBg} isWhite={isWhite} />
             </div>
 
             {/* Description panel */}

@@ -47,3 +47,13 @@ export const COLOR_TEXT: Record<string, string> = {
   WHITE: "text-[#FFFFFF]",
   BLACK: "text-[#000000]",
 };
+
+export const COLOR_TEXT20: Record<string, string> = {
+  BLUE: "text-[#D1E8F4]",
+  GREEN: "text-[#DCE9D4]",
+  RED: "text-[#F0D1DF]",
+  PURPLE: "text-[#E5DDE9]",
+  YELLOW: "text-[#F4EEDF]",
+  WHITE: "text-[#FFFFFF]",
+  BLACK: "text-[#CCCCCC]",
+};

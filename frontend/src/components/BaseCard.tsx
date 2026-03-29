@@ -102,7 +102,9 @@ function CardBody({
                 className={cn(
                   "aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_BG20[baseCard.color],
-                  COLOR_TEXT[baseCard.color],
+                  baseCard.color === "WHITE"
+                    ? "text-black"
+                    : COLOR_TEXT[baseCard.color],
                 )}
               >
                 {baseCard.AP}
@@ -111,7 +113,9 @@ function CardBody({
                 className={cn(
                   "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_BG20[baseCard.color],
-                  COLOR_TEXT[baseCard.color],
+                  baseCard.color === "WHITE"
+                    ? "text-black"
+                    : COLOR_TEXT[baseCard.color],
                 )}
               >
                 {baseCard.HP}

@@ -8,7 +8,7 @@ import { renderTrait } from "@/render/trait";
 import { Dialog } from "@base-ui/react/dialog";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
-import { COLOR_HEX } from "src/render/color";
+import { COLOR_BG, COLOR_BG20, COLOR_HEX } from "src/render/color";
 
 const Fragment = graphql`
   fragment PilotCardFragment on PilotCard {
@@ -49,34 +49,47 @@ function CardBody({
       />
       <div />
       <div className="flex flex-col gap-2 z-1">
-        <div className="px-2">
-          <div className="p-2 bg-black whitespace-pre-wrap cutout-tl-sm cutout text-[6cqw] font-bold text-center">
-            {pilotCard.pilot.name}
-          </div>
-        </div>
         <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
           <div className="flex flex-col justify-end flex-1 overflow-hidden">
+            <div className="">
+              <div className="p-2 py-1 bg-black whitespace-pre-wrap cutout-tr-sm cutout text-[6cqw] font-bold text-center">
+                {pilotCard.pilot.name}
+              </div>
+            </div>
             <div className="flex flex-row translate-y-px">
-              <div className="w-2 bg-transparent -mr-5" />
-              <div className="w-10 bg-transparent -mr-5 parallelogram parallelogram-sm" />
-              <div className="w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 parallelogram parallelogram-sm px-2 py-px">
+              <div
+                className={cn(
+                  "w-12 bg-black -mr-5 text-[3cqw] px-2 items-center flex",
+                  COLOR_BG[pilotCard.color],
+                  pilotCard.color !== "WHITE" ? "text-white" : "text-black",
+                )}
+              >
+                파일럿
+              </div>
+              <div
+                className={cn(
+                  "w-[calc(100%-12px)] ml-3 overflow-hidden  px-2 py-px",
+                  COLOR_BG20[pilotCard.color],
+                )}
+              >
                 <div className="flex text-end text-gray-900 text-[4cqw]">
                   <Marquee speed={8} gap={0}>
                     {pilotCard.traits.map((x) => (
-                      <span key={x} className="px-2">({renderTrait(x)})</span>
+                      <span key={x} className="px-2">
+                        ({renderTrait(x)})
+                      </span>
                     ))}
                   </Marquee>
                 </div>
               </div>
             </div>
-            <div className="min-h-[6cqw]" />
           </div>
           <div className="flex flex-row gap-0.5 min-w-8">
             <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1">
-              {pilotCard.pilot.AP}
+              +{pilotCard.pilot.AP}
             </div>
             <div className="bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1">
-              {pilotCard.pilot.HP}
+              +{pilotCard.pilot.HP}
             </div>
           </div>
         </div>
@@ -91,7 +104,6 @@ export function PilotCard({ pilotCardRef }: Props) {
   const router = useRouter();
 
   const open = search.cardId === pilotCard.id;
-
 
   function openDialog() {
     router.navigate({
