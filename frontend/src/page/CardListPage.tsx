@@ -12,7 +12,7 @@ import {
 } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon, SlidersHorizontalIcon, XIcon } from "lucide-react";
+import { ChevronDownIcon, FileTextIcon, SlidersHorizontalIcon, XIcon } from "lucide-react";
 import { useRef, useState, useEffect, Suspense } from "react";
 import {
   Sheet,
@@ -870,9 +870,11 @@ function FilterBottomSheet({
 function CardListContent({
   filter,
   sort,
+  showDescription,
 }: {
   filter: CardFilterInput;
   sort: CardSort | null;
+  showDescription: boolean;
 }) {
   const initialFilterRef = useRef(filter);
   const initialSortRef = useRef(sort);
@@ -880,7 +882,7 @@ function CardListContent({
     filter: initialFilterRef.current,
     sort: initialSortRef.current,
   });
-  return <CardList queryRef={data} filter={filter} sort={sort} />;
+  return <CardList queryRef={data} filter={filter} sort={sort} showDescription={showDescription} />;
 }
 
 // ─── Page ────────────────────────────────────────────────────────────────────
@@ -890,6 +892,7 @@ export function CardListPage() {
   const router = useRouter();
   const filter = buildFilter(search);
   const sort = buildSort(search);
+  const [showDescription, setShowDescription] = useState(false);
 
   function handleFilterChange(newFilter: CardFilterInput) {
     router.navigate({
@@ -928,8 +931,23 @@ export function CardListPage() {
           onChange={handleFilterChange}
           onSortChange={handleSortChange}
         />
+        <div className="flex items-center gap-2 border-b border-border px-4 py-2">
+          <button
+            type="button"
+            onClick={() => setShowDescription((v) => !v)}
+            className={cn(
+              "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
+              showDescription
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+            )}
+          >
+            <FileTextIcon className="h-3.5 w-3.5" />
+            효과
+          </button>
+        </div>
         <Suspense>
-          <CardListContent filter={filter} sort={sort} />
+          <CardListContent filter={filter} sort={sort} showDescription={showDescription} />
         </Suspense>
       </div>
     </div>

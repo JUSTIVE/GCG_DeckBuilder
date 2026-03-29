@@ -35,9 +35,10 @@ type Props = {
   queryRef: CardListFragment$key;
   filter?: CardFilterInput;
   sort?: CardSort | null;
+  showDescription?: boolean;
 };
 
-export function CardList({ queryRef, filter, sort }: Props) {
+export function CardList({ queryRef, filter, sort, showDescription = false }: Props) {
   const [, startTransition] = useTransition();
   const { data, refetch, loadNext, hasNext, isLoadingNext } =
     usePaginationFragment(Fragment, queryRef);
@@ -78,11 +79,15 @@ export function CardList({ queryRef, filter, sort }: Props) {
   const rowVirtualizer = useVirtualizer({
     count: rowCount,
     getScrollElement: () => parentRef.current,
-    estimateSize: () =>
-      ((parentRef.current?.offsetWidth ?? 0 - (columns - 1) * 32) /
-        columns /
-        800) *
-      1117, // 카드 높이 추정값 (aspect-100/160 기준)
+    estimateSize: () => {
+      const cardHeight =
+        ((parentRef.current?.offsetWidth ?? 0 - (columns - 1) * 32) /
+          columns /
+          800) *
+        1117;
+      return showDescription ? cardHeight + 120 : cardHeight;
+    },
+    measureElement: (el) => el.getBoundingClientRect().height,
     overscan: 2,
   });
 
@@ -116,22 +121,23 @@ export function CardList({ queryRef, filter, sort }: Props) {
           return (
             <div
               key={virtualRow.key}
+              data-index={virtualRow.index}
+              ref={rowVirtualizer.measureElement}
               style={{
                 position: "absolute",
                 top: `${virtualRow.start}px`,
                 left: 0,
                 width: "100%",
-                height: `${virtualRow.size}px`,
               }}
             >
               <div
-                className="grid gap-4 px-4"
+                className="grid gap-4 px-4 py-2"
                 style={{
                   gridTemplateColumns: `repeat(${columns}, 1fr)`,
                 }}
               >
                 {rowItems.map((edge) => (
-                  <Card key={edge.cursor} cardRef={edge.node} />
+                  <Card key={edge.cursor} cardRef={edge.node} showDescription={showDescription} />
                 ))}
               </div>
             </div>
