@@ -132,7 +132,7 @@ const COLOR_LABELS: Record<string, string> = {
   RED: "빨강",
   YELLOW: "노랑",
   PURPLE: "보라",
-  WHITE: "화이트",
+  WHITE: "하양",
 };
 
 const COST_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -749,7 +749,7 @@ function FilterBar({
   const hasFilters = activeFilterCount(filter) > 0;
 
   return (
-    <aside className="hidden md:flex flex-col gap-4 w-70 shrink-0 border-r border-border px-4 py-4 overflow-y-auto h-[calc(100dvh-65px)]">
+    <aside className="hidden md:flex flex-col gap-4 w-85 shrink-0 border-r border-border px-4 py-4 overflow-y-auto h-[calc(100dvh-65px)]">
       <FilterControls
         filter={filter}
         sort={sort}
