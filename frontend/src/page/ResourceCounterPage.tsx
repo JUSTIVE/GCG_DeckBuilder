@@ -17,8 +17,8 @@ function initPlayers(firstPlayer: 1 | 2): [PlayerState, PlayerState] {
   const p1HasEx = firstPlayer === 2;
   const p2HasEx = firstPlayer === 1;
   return [
-    { level: 1, resources: p1HasEx ? 2 : 1, hasEx: p1HasEx, turnsCompleted: 0 },
-    { level: 1, resources: p2HasEx ? 2 : 1, hasEx: p2HasEx, turnsCompleted: 0 },
+    { level: 0, resources: p1HasEx ? 1 : 0, hasEx: p1HasEx, turnsCompleted: 0 },
+    { level: 0, resources: p2HasEx ? 1 : 0, hasEx: p2HasEx, turnsCompleted: 0 },
   ];
 }
 
@@ -26,7 +26,7 @@ export function ResourceCounterPage() {
   const [phase, setPhase] = useState<Phase>("select-first");
   const [firstPlayer, setFirstPlayer] = useState<1 | 2>(1);
   const [currentTurn, setCurrentTurn] = useState<1 | 2>(1);
-  const [turnStarted, setTurnStarted] = useState(true);
+  const [turnStarted, setTurnStarted] = useState(false);
   const [players, setPlayers] = useState<[PlayerState, PlayerState]>([
     { level: 0, resources: 0, hasEx: false, turnsCompleted: 0 },
     { level: 0, resources: 0, hasEx: false, turnsCompleted: 0 },
@@ -35,7 +35,6 @@ export function ResourceCounterPage() {
   function selectFirst(player: 1 | 2) {
     setFirstPlayer(player);
     setCurrentTurn(player);
-    setTurnStarted(true);
     setPlayers(initPlayers(player));
     setPhase("playing");
   }
@@ -218,6 +217,7 @@ function PlayerPanel({
       ? "bg-blue-900/60 hover:bg-blue-800/80"
       : "bg-red-900/60 hover:bg-red-800/80";
 
+  console.log(playerNum, player, isActive);
   return (
     <div
       className={`@conatiner flex-1 flex flex-col items-center justify-center gap-6 px-4 py-4 transition-colors ${isActive ? activeBgClass : bgClass}`}
@@ -261,39 +261,39 @@ function PlayerPanel({
           >
             {effectiveLevel(player)}
           </span>
-          {player.hasEx ? (
-            <button
-              type="button"
-              onClick={onUseEx}
-              className="flex items-center gap-2 px-5 py-2 rounded-xl border border-yellow-600/60 bg-yellow-900/40 hover:bg-yellow-800/50 active:bg-yellow-900/70 text-yellow-300 font-bold text-sm transition-colors"
-            >
-              <span className="text-yellow-400 text-base">⚡</span>
-              EX 리소스 사용
-            </button>
-          ) : null}
+
           {/* Turn controls */}
-          {isActive && (
-            <div className="flex gap-3">
+          {isActive ? (
+            <>
+              {player.hasEx ? (
+                <button
+                  type="button"
+                  onClick={onUseEx}
+                  className="flex items-center gap-2 px-5 py-2 rounded-xl border border-yellow-600/60 bg-yellow-900/40 hover:bg-yellow-800/50 active:bg-yellow-900/70 text-yellow-300 font-bold text-sm transition-colors w-full justify-center"
+                >
+                  <span className="text-yellow-400 text-base">⚡</span>
+                  EX 리소스 사용
+                </button>
+              ) : null}
               {!turnStarted ? (
                 <button
                   type="button"
                   onClick={onStartTurn}
-                  className={`px-6 py-2.5 rounded-xl text-white font-bold text-sm transition-colors ${btnClass}`}
+                  className={`w-full px-6 py-2.5 rounded-xl text-white font-bold text-sm transition-colors ${btnClass}`}
                 >
                   턴 시작 (+1 레벨 / 리소스 회복)
                 </button>
-              ) : null}
-              {turnStarted ? (
+              ) : (
                 <button
                   type="button"
                   onClick={onEndTurn}
-                  className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 active:bg-white/5 text-white/80 font-bold text-sm transition-colors border border-white/20"
+                  className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 active:bg-white/5 text-white/80 font-bold text-sm transition-colors border border-white/20 w-full"
                 >
                   턴 종료
                 </button>
-              ) : null}
-            </div>
-          )}
+              )}
+            </>
+          ) : null}
         </div>
 
         {/* Resources */}
