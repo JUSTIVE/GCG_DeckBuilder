@@ -15,7 +15,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { COLOR_BG, COLOR_BG50 } from "src/render/color";
+import { COLOR_BG } from "src/render/color";
 
 const Query = graphql`
   query CardListPageQuery($filter: CardFilterInput!, $sort: CardSort) {

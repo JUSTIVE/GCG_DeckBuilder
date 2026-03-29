@@ -355,7 +355,7 @@
     ]
   },
   {
-    "name": "Maganac",
+    "name": "마그아낙",
     "level": 2,
     "cost": 2,
     "color": "GREEN",
@@ -743,7 +743,7 @@
     ]
   },
   {
-    "name": "Guncannon",
+    "name": "건캐논",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -863,7 +863,7 @@
     ]
   },
   {
-    "name": "Loto",
+    "name": "로토",
     "level": 2,
     "cost": 2,
     "color": "BLUE",
@@ -961,7 +961,7 @@
     ]
   },
   {
-    "name": "ReZEL",
+    "name": "리젤",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -1629,7 +1629,7 @@
   {
     "__typename": "ResourceCard",
     "id": "T-002",
-    "name": "Guncannon"
+    "name": "건캐논"
   },
   {
     "__typename": "ResourceCard",
@@ -1657,7 +1657,7 @@
     "name": ""
   },
   {
-    "name": "Guncannon",
+    "name": "건캐논",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -1871,7 +1871,7 @@
     ]
   },
   {
-    "name": "Leo",
+    "name": "리오",
     "level": 2,
     "cost": 2,
     "color": "BLUE",
@@ -1896,7 +1896,7 @@
     ]
   },
   {
-    "name": "Aries",
+    "name": "에어리즈",
     "level": 2,
     "cost": 2,
     "color": "BLUE",
@@ -2017,7 +2017,7 @@
   {
     "__typename": "ResourceCard",
     "id": "T-004",
-    "name": "Leo"
+    "name": "리오"
   },
   {
     "__typename": "ResourceCard",
@@ -2087,7 +2087,7 @@
     ]
   },
   {
-    "name": "Geara Zulu",
+    "name": "기라 줄루",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -2112,7 +2112,7 @@
     ]
   },
   {
-    "name": "Gaza D (Sleeves)",
+    "name": "가자 D (소데츠키)",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -2138,7 +2138,7 @@
     ]
   },
   {
-    "name": "Dra-C (Sleeves)",
+    "name": "드라체 (소데츠키)",
     "level": 1,
     "cost": 1,
     "color": "RED",
@@ -2472,7 +2472,7 @@
     ]
   },
   {
-    "name": "Miguel's Ginn",
+    "name": "진 미겔 전용기",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -2622,7 +2622,7 @@
     "name": "소드 스트라이크 건담"
   },
   {
-    "name": "Gundam Barbatos 4th Form",
+    "name": "건담 발바토스 제4형태",
     "level": 6,
     "cost": 4,
     "color": "PURPLE",
@@ -2655,7 +2655,7 @@
     ]
   },
   {
-    "name": "Gundam Barbatos 2nd Form",
+    "name": "건담 발바토스 제2형태",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -2758,7 +2758,7 @@
     ]
   },
   {
-    "name": "Hyakuren",
+    "name": "햐쿠렌",
     "level": 3,
     "cost": 2,
     "color": "PURPLE",
@@ -2779,7 +2779,7 @@
     ]
   },
   {
-    "name": "McGillis' Schwalbe Graze",
+    "name": "슈발베 그레이즈 맥길리스 기",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
@@ -3057,7 +3057,7 @@
     ]
   },
   {
-    "name": "릭 돔 가이아 전용기 (GQ)",
+    "name": "릭 돔 가이아 기 (GQ)",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -3163,7 +3163,7 @@
     ]
   },
   {
-    "name": "릭 돔 오르테가 전용기 (GQ)",
+    "name": "릭 돔 오르테가 기 (GQ)",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -3191,7 +3191,7 @@
     ]
   },
   {
-    "name": "겔구그 스가이 전용기 (GQ)",
+    "name": "겔구그 스가이 기 (GQ)",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -3836,7 +3836,7 @@
     ]
   },
   {
-    "name": "Messer (Type-F Naked) (Commander Type)",
+    "name": "멧사 (Type-F 네이키드) (지휘관 기)",
     "level": 4,
     "cost": 2,
     "color": "RED",
@@ -3861,7 +3861,7 @@
     ]
   },
   {
-    "name": "Messer Type-F01",
+    "name": "멧사 Type-F01",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -3890,7 +3890,7 @@
     ]
   },
   {
-    "name": "Messer Type-F02 Minelayer",
+    "name": "멧사 Type-F02 마인레이어",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -3967,7 +3967,7 @@
     ]
   },
   {
-    "name": "Gustav Karl Type-00",
+    "name": "구스타프 칼 Type-00",
     "level": 3,
     "cost": 3,
     "color": "BLUE",
@@ -3993,7 +3993,7 @@
     ]
   },
   {
-    "name": "Jegan Ground Type-A (Man Hunter)",
+    "name": "육전용 제간 A형 (맨 헌터 사양)",
     "level": 1,
     "cost": 1,
     "color": "BLUE",
@@ -4715,7 +4715,7 @@
     ]
   },
   {
-    "name": "Noin's Aries",
+    "name": "에어리즈 노인 전용기",
     "level": 3,
     "cost": 3,
     "color": "BLUE",
@@ -4772,7 +4772,7 @@
     ]
   },
   {
-    "name": "Zechs' Leo",
+    "name": "리오 젝스 기",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -4801,7 +4801,7 @@
     ]
   },
   {
-    "name": "G-Sky Easy",
+    "name": "G-스카이 Ez",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -4862,7 +4862,7 @@
     ]
   },
   {
-    "name": "Byarlant Custom",
+    "name": "바이아란 커스텀",
     "level": 4,
     "cost": 2,
     "color": "BLUE",
@@ -4888,7 +4888,7 @@
     ]
   },
   {
-    "name": "Anksha",
+    "name": "안크샤",
     "level": 4,
     "cost": 2,
     "color": "BLUE",
@@ -4912,7 +4912,7 @@
     ]
   },
   {
-    "name": "Pisces",
+    "name": "파이시즈",
     "level": 1,
     "cost": 1,
     "color": "BLUE",
@@ -5042,7 +5042,7 @@
     ]
   },
   {
-    "name": "Big Zam",
+    "name": "빅 잠",
     "level": 7,
     "cost": 5,
     "color": "GREEN",
@@ -5224,7 +5224,7 @@
     ]
   },
   {
-    "name": "Adzam",
+    "name": "앗잠",
     "level": 5,
     "cost": 4,
     "color": "GREEN",
@@ -5252,7 +5252,7 @@
     ]
   },
   {
-    "name": "Dopp",
+    "name": "돕",
     "level": 1,
     "cost": 1,
     "color": "GREEN",
@@ -5276,7 +5276,7 @@
     ]
   },
   {
-    "name": "Duo's Leo",
+    "name": "리오 듀오 기",
     "level": 2,
     "cost": 2,
     "color": "GREEN",
@@ -5303,7 +5303,7 @@
     ]
   },
   {
-    "name": "Rasid's Maganac",
+    "name": "마그아낙 라시드 기",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -5537,7 +5537,7 @@
     ]
   },
   {
-    "name": "Geara Zulu (Guards Type)",
+    "name": "기라 줄루 (친위대 기)",
     "level": 4,
     "cost": 3,
     "color": "RED",
@@ -5562,7 +5562,7 @@
     ]
   },
   {
-    "name": "Geara Doga (Heavy Armed Type)",
+    "name": "기라 도가 중장형",
     "level": 4,
     "cost": 3,
     "color": "RED",
@@ -5613,7 +5613,7 @@
     ]
   },
   {
-    "name": "Geara Doga (Sleeves)",
+    "name": "기라 도가 (소데츠키)",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -5638,7 +5638,7 @@
     ]
   },
   {
-    "name": "Dreissen (Sleeves)",
+    "name": "드라이센 (소데츠키)",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -5659,7 +5659,7 @@
     ]
   },
   {
-    "name": "Galluss-K",
+    "name": "갈루스 K",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -5685,7 +5685,7 @@
     ]
   },
   {
-    "name": "Zee Zulu",
+    "name": "제 줄루",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -5754,7 +5754,7 @@
     ]
   },
   {
-    "name": "GOOhN",
+    "name": "군",
     "level": 1,
     "cost": 1,
     "color": "RED",
@@ -5948,7 +5948,7 @@
     ]
   },
   {
-    "name": "Gundam Pharact",
+    "name": "건담 파렉트",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
@@ -7111,7 +7111,7 @@
     ]
   },
   {
-    "name": "Gundam Mk-II (Titans)",
+    "name": "건담 Mk-II (티탄즈)",
     "level": 4,
     "cost": 3,
     "color": "BLUE",
@@ -7141,7 +7141,7 @@
     ]
   },
   {
-    "name": "Byarlant",
+    "name": "바이아란",
     "level": 5,
     "cost": 3,
     "color": "BLUE",
@@ -7259,7 +7259,7 @@
     ]
   },
   {
-    "name": "Gabthley",
+    "name": "가브스레이",
     "level": 4,
     "cost": 3,
     "color": "BLUE",
@@ -7417,7 +7417,7 @@
     ]
   },
   {
-    "name": "Galbaldy Beta",
+    "name": "가르발디 베타",
     "level": 2,
     "cost": 2,
     "color": "BLUE",
@@ -7442,7 +7442,7 @@
     ]
   },
   {
-    "name": "Marasai",
+    "name": "마라사이",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -7467,7 +7467,7 @@
     ]
   },
   {
-    "name": "Barzam",
+    "name": "바잠",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -7599,7 +7599,7 @@
     ]
   },
   {
-    "name": "Gundam AGE-1 Normal",
+    "name": "건담 AGE-1 노멀",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -7629,7 +7629,7 @@
     ]
   },
   {
-    "name": "G-Exes",
+    "name": "G-에그제스",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -7660,7 +7660,7 @@
     ]
   },
   {
-    "name": "Gundam AGE-1 Spallow",
+    "name": "건담 AGE-1 스말로",
     "level": 4,
     "cost": 3,
     "color": "GREEN",
@@ -7751,7 +7751,7 @@
     ]
   },
   {
-    "name": "Genoace Custom",
+    "name": "제노아스 커스텀",
     "level": 2,
     "cost": 2,
     "color": "GREEN",
@@ -7780,7 +7780,7 @@
     ]
   },
   {
-    "name": "Gundam AGE-1 Titus",
+    "name": "Gundam AGE-1 타이터스",
     "level": 7,
     "cost": 4,
     "color": "GREEN",
@@ -7810,7 +7810,7 @@
     ]
   },
   {
-    "name": "Abdul's Maganac",
+    "name": "마그아낙 압둘 기",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -7835,7 +7835,7 @@
     ]
   },
   {
-    "name": "Gundam AGE-1 Normal",
+    "name": "건담 AGE-1 노멀",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -7861,7 +7861,7 @@
     ]
   },
   {
-    "name": "Genoace",
+    "name": "제노아스",
     "level": 1,
     "cost": 1,
     "color": "GREEN",
@@ -7882,7 +7882,7 @@
     ]
   },
   {
-    "name": "Gundam AGE-1 Titus",
+    "name": "Gundam AGE-1 타이터스",
     "level": 4,
     "cost": 2,
     "color": "GREEN",
@@ -7910,7 +7910,7 @@
     ]
   },
   {
-    "name": "White Gundam",
+    "name": "하얀 건담",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -7989,7 +7989,7 @@
     ]
   },
   {
-    "name": "경찰 자쿠 (Armored RRU Type)",
+    "name": "군경 자쿠 (특수부대 사양)",
     "level": 2,
     "cost": 1,
     "color": "GREEN",
@@ -8046,7 +8046,7 @@
     ]
   },
   {
-    "name": "Gundam Virsago",
+    "name": "건담 버사고",
     "level": 5,
     "cost": 4,
     "color": "RED",
@@ -8106,7 +8106,7 @@
     ]
   },
   {
-    "name": "하만 칸's Gaza C",
+    "name": "가자 C 하만 칸 기",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -8167,7 +8167,7 @@
     ]
   },
   {
-    "name": "겔구그 스가이 전용기 (GQ)",
+    "name": "겔구그 스가이 기 (GQ)",
     "level": 4,
     "cost": 4,
     "color": "RED",
@@ -8277,7 +8277,7 @@
     ]
   },
   {
-    "name": "GINN Long-Range Reconnaissance Type",
+    "name": "장거리 강행 정찰 복좌형 진",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -8331,7 +8331,7 @@
     ]
   },
   {
-    "name": "Gaza C",
+    "name": "가자 C",
     "level": 1,
     "cost": 1,
     "color": "RED",
@@ -8407,7 +8407,7 @@
     ]
   },
   {
-    "name": "Ga-Zowmn (Sleeves)",
+    "name": "가 조움 (소데츠키)",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -8449,7 +8449,7 @@
     ]
   },
   {
-    "name": "Guncannon (GQ)",
+    "name": "건캐논 (GQ)",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -8500,7 +8500,7 @@
     ]
   },
   {
-    "name": "Gundam Barbatos 1st Form",
+    "name": "건담 발바토스 제1형태",
     "level": 3,
     "cost": 2,
     "color": "PURPLE",
@@ -8592,7 +8592,7 @@
     ]
   },
   {
-    "name": "Zedas",
+    "name": "제다스",
     "level": 5,
     "cost": 3,
     "color": "PURPLE",
@@ -8652,7 +8652,7 @@
     ]
   },
   {
-    "name": "Gundam Airmaster",
+    "name": "건담 에어마스터",
     "level": 4,
     "cost": 3,
     "color": "PURPLE",
@@ -8681,7 +8681,7 @@
     ]
   },
   {
-    "name": "Gundam Leopard",
+    "name": "건담 레오파드",
     "level": 5,
     "cost": 4,
     "color": "PURPLE",
@@ -8710,7 +8710,7 @@
     ]
   },
   {
-    "name": "Hyakuri",
+    "name": "햐쿠리",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -8738,7 +8738,7 @@
     ]
   },
   {
-    "name": "Amida's Hyakuren",
+    "name": "햐쿠렌 아미다 기",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -8763,7 +8763,7 @@
     ]
   },
   {
-    "name": "Gundam Airmaster (Fighter Mode)",
+    "name": "건담 에어마스터 (전투기 모드)",
     "level": 3,
     "cost": 2,
     "color": "PURPLE",
@@ -8788,7 +8788,7 @@
     ]
   },
   {
-    "name": "Gundam Leopard",
+    "name": "건담 레오파드",
     "level": 5,
     "cost": 4,
     "color": "PURPLE",
@@ -8814,7 +8814,7 @@
     ]
   },
   {
-    "name": "Jenice Custom",
+    "name": "제니스 커스텀",
     "level": 1,
     "cost": 1,
     "color": "PURPLE",
@@ -8858,7 +8858,7 @@
     ]
   },
   {
-    "name": "Baqto",
+    "name": "바쿠토",
     "level": 2,
     "cost": 2,
     "color": "PURPLE",
@@ -8880,7 +8880,7 @@
     ]
   },
   {
-    "name": "Gundam Barbatos 3rd Form",
+    "name": "건담 발바토스 제3형태",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -8971,7 +8971,7 @@
     ]
   },
   {
-    "name": "Gundam Mk-II (AEUG)",
+    "name": "건담 Mk-II (에우고)",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
@@ -9000,7 +9000,7 @@
     ]
   },
   {
-    "name": "Hyaku-Shiki",
+    "name": "백식",
     "level": 5,
     "cost": 3,
     "color": "WHITE",
@@ -9032,7 +9032,7 @@
     ]
   },
   {
-    "name": "Carta's Graze Ritter (Ground Type)",
+    "name": "그레이즈 리터 카르타 기 (지상전 사양)",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
@@ -9148,7 +9148,7 @@
     ]
   },
   {
-    "name": "Gundam Pharact",
+    "name": "건담 파렉트",
     "level": 5,
     "cost": 3,
     "color": "WHITE",
@@ -9278,7 +9278,7 @@
     ]
   },
   {
-    "name": "Graze Ritter (Ground Type)",
+    "name": "그레이즈 리터 (지상전 사양)",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -9302,7 +9302,7 @@
     ]
   },
   {
-    "name": "Lauda's Dilanza",
+    "name": "딜란자 라우더 전용기",
     "level": 2,
     "cost": 2,
     "color": "WHITE",
@@ -10484,7 +10484,7 @@
     "name": "Resource"
   },
   {
-    "name": "Gundam NT-1",
+    "name": "건담 NT-1",
     "level": 5,
     "cost": 4,
     "color": "BLUE",
@@ -10548,7 +10548,7 @@
     ]
   },
   {
-    "name": "Messala",
+    "name": "멧사라",
     "level": 6,
     "cost": 4,
     "color": "BLUE",
@@ -10609,7 +10609,7 @@
     ]
   },
   {
-    "name": "Kshatriya Besserung",
+    "name": "크샤트리아 벳세룽",
     "level": 6,
     "cost": 5,
     "color": "BLUE",
@@ -10640,7 +10640,7 @@
     ]
   },
   {
-    "name": "Penelope (Middle Form)",
+    "name": "페넬로페 (미들 폼)",
     "level": 6,
     "cost": 5,
     "color": "BLUE",
@@ -10669,7 +10669,7 @@
     ]
   },
   {
-    "name": "Gundam NT-1 Full Armor",
+    "name": "건담 NT-1 풀 아머",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -10698,7 +10698,7 @@
     ]
   },
   {
-    "name": "Bolinoak Sammahn",
+    "name": "보리노크 사만",
     "level": 4,
     "cost": 2,
     "color": "BLUE",
@@ -10810,7 +10810,7 @@
     ]
   },
   {
-    "name": "Messala (MA Mode)",
+    "name": "멧사라 (MA 모드)",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -10890,7 +10890,7 @@
     ]
   },
   {
-    "name": "Baund Doc",
+    "name": "바운드 독",
     "level": 6,
     "cost": 5,
     "color": "BLUE",
@@ -11011,7 +11011,7 @@
     ]
   },
   {
-    "name": "Gundam AGE-2 Normal",
+    "name": "Gundam AGE-2 노멀",
     "level": 5,
     "cost": 4,
     "color": "GREEN",
@@ -11133,7 +11133,7 @@
     ]
   },
   {
-    "name": "G-Bouncer",
+    "name": "G-바운서",
     "level": 4,
     "cost": 3,
     "color": "GREEN",
@@ -11274,7 +11274,7 @@
     ]
   },
   {
-    "name": "Auda's Maganac",
+    "name": "마그아낙 아우다 기",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -11360,7 +11360,7 @@
     ]
   },
   {
-    "name": "Gundam AGE-1 Flat",
+    "name": "건담 AGE-1 플랫",
     "level": 4,
     "cost": 2,
     "color": "GREEN",
@@ -11386,7 +11386,7 @@
     ]
   },
   {
-    "name": "자쿠 (Four Snake Eyes') [YETI] (GQ)",
+    "name": "자쿠 (포 스네이크 아이즈 사양) [YETI] (GQ)",
     "level": 2,
     "cost": 1,
     "color": "GREEN",
@@ -11407,7 +11407,7 @@
     ]
   },
   {
-    "name": "Providence Gundam",
+    "name": "프로비던스 건담",
     "level": 7,
     "cost": 5,
     "color": "RED",
@@ -11530,7 +11530,7 @@
     ]
   },
   {
-    "name": "Bertigo",
+    "name": "베르티고",
     "level": 5,
     "cost": 4,
     "color": "RED",
@@ -11562,7 +11562,7 @@
     ]
   },
   {
-    "name": "GuAIZ (Commander Type)",
+    "name": "게이츠 (지휘관기)",
     "level": 4,
     "cost": 3,
     "color": "RED",
@@ -11622,7 +11622,7 @@
     ]
   },
   {
-    "name": "Gundam Virsago & Gundam Ashtaron",
+    "name": "건담 버사고 & 건담 아슈타론",
     "level": 5,
     "cost": 3,
     "color": "RED",
@@ -11709,7 +11709,7 @@
     ]
   },
   {
-    "name": "Messer Type-F02",
+    "name": "멧사 Type-F02",
     "level": 4,
     "cost": 3,
     "color": "RED",
@@ -11763,7 +11763,7 @@
     ]
   },
   {
-    "name": "Balient",
+    "name": "발리엔트",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -12047,7 +12047,7 @@
     ]
   },
   {
-    "name": "Gundam Hajiroboshi (2nd Form)",
+    "name": "건담 하지로보시 (제2형태)",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -12077,7 +12077,7 @@
     ]
   },
   {
-    "name": "Gundam Barbatos Adapt",
+    "name": "건담 발바토스 어댑트",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -12107,7 +12107,7 @@
     ]
   },
   {
-    "name": "GN Armor (Type-E)",
+    "name": "GN 아머 (Type-E)",
     "level": 6,
     "cost": 4,
     "color": "PURPLE",
@@ -12137,7 +12137,7 @@
     ]
   },
   {
-    "name": "Farsia",
+    "name": "파르시아",
     "level": 2,
     "cost": 2,
     "color": "PURPLE",
@@ -12165,7 +12165,7 @@
     ]
   },
   {
-    "name": "Zedas R",
+    "name": "제다스 R",
     "level": 4,
     "cost": 3,
     "color": "PURPLE",
@@ -12218,7 +12218,7 @@
     ]
   },
   {
-    "name": "Gundam Barbatos 6th Form",
+    "name": "건담 발바토스 제6형태",
     "level": 6,
     "cost": 5,
     "color": "PURPLE",
@@ -12249,7 +12249,7 @@
     ]
   },
   {
-    "name": "GX-Bit",
+    "name": "GX 비트",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -12297,7 +12297,7 @@
     ]
   },
   {
-    "name": "Defurse",
+    "name": "데퍼스",
     "level": 5,
     "cost": 4,
     "color": "PURPLE",
@@ -12323,7 +12323,7 @@
     ]
   },
   {
-    "name": "Zedas M",
+    "name": "제다스 M",
     "level": 3,
     "cost": 2,
     "color": "PURPLE",
@@ -12348,7 +12348,7 @@
     ]
   },
   {
-    "name": "Gundam Barbatos 5th Form (Ground Type)",
+    "name": "건담 발바토스 제5형태 (지상전 사양)",
     "level": 5,
     "cost": 3,
     "color": "PURPLE",
@@ -12402,7 +12402,7 @@
     ]
   },
   {
-    "name": "Gundam Hajiroboshi",
+    "name": "건담 하지로보시",
     "level": 3,
     "cost": 2,
     "color": "PURPLE",
@@ -12433,7 +12433,7 @@
     ]
   },
   {
-    "name": "유니온 플래그 커스텀 그라함전용기",
+    "name": "유니온 플래그 커스텀 그라함 전용기",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
@@ -14054,7 +14054,7 @@
   {
     "__typename": "ResourceCard",
     "id": "T-017",
-    "name": "Gundam Barbatos 4th Form"
+    "name": "건담 발바토스 제4형태"
   },
   {
     "__typename": "ResourceCard",
