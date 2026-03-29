@@ -240,6 +240,7 @@ type CommandCard implements Node {
   cost: Int!
   series: GundamSeries!
   pilot: Pilot
+  description: [String!]!
 }
 
 union Card = Resource | BaseCard | UnitCard | PilotCard | CommandCard

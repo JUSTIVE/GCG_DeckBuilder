@@ -7,6 +7,7 @@ import tempimg from "./tempimg.webp";
 import { ZoneChip } from "./ZoneChip";
 import { renderTrait } from "@/render/trait";
 import { renderZone } from "@/render/zone";
+import { CardDescription } from "./CardDescription";
 import { Dialog } from "@base-ui/react/dialog";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
@@ -243,16 +244,7 @@ export function BaseCard({ baseCardRef }: Props) {
                   <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
                     효과
                   </span>
-                  <ul className="flex flex-col gap-2">
-                    {baseCard.description.map((line) => (
-                      <li
-                        key={line}
-                        className="text-xs leading-relaxed text-white/90"
-                      >
-                        {line}
-                      </li>
-                    ))}
-                  </ul>
+                  <CardDescription lines={baseCard.description} />
                 </div>
               )}
             </div>

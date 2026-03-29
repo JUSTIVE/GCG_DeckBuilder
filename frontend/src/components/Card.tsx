@@ -6,6 +6,7 @@ import { PilotCard } from "./PilotCard";
 import { BaseCard } from "./BaseCard";
 import { CommandCard } from "./CommandCard";
 import { ResourceCard } from "./ResourceCard";
+import { CardDescription } from "./CardDescription";
 
 const Fragment = graphql`
   fragment CardFragment on Card {
@@ -27,6 +28,7 @@ const Fragment = graphql`
     }
     ... on CommandCard {
       id
+      description
       ...CommandCardFragment
     }
     ... on Resource {
@@ -47,7 +49,8 @@ export function Card({ cardRef, showDescription }: Props) {
   const description: readonly string[] =
     card.__typename === "UnitCard" ||
     card.__typename === "PilotCard" ||
-    card.__typename === "BaseCard"
+    card.__typename === "BaseCard" ||
+    card.__typename === "CommandCard"
       ? card.description
       : [];
 
@@ -72,14 +75,8 @@ export function Card({ cardRef, showDescription }: Props) {
     <div className="flex flex-col">
       {cardEl}
       {showDescription && description.length > 0 && (
-        <div className="mt-2 rounded-xl bg-black/80 px-3 py-3 text-white flex flex-col gap-1.5">
-          <ul className="flex flex-col gap-1.5">
-            {description.map((line) => (
-              <li key={line} className="text-xs leading-relaxed text-white/90">
-                {line}
-              </li>
-            ))}
-          </ul>
+        <div className="mt-2 rounded-xl bg-black/80 px-3 py-3 text-white">
+          <CardDescription lines={description} />
         </div>
       )}
     </div>

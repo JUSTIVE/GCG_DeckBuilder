@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
 import tempimg from "./tempimg.webp";
 import { renderTrait } from "@/render/trait";
+import { CardDescription } from "./CardDescription";
 import { Dialog } from "@base-ui/react/dialog";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
@@ -29,6 +30,7 @@ const Fragment = graphql`
       AP
       HP
     }
+    description
   }
 `;
 
@@ -224,6 +226,15 @@ export function CommandCard({ commandCardRef }: Props) {
                       </span>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {commandCard.description.length > 0 && (
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
+                    효과
+                  </span>
+                  <CardDescription lines={commandCard.description} />
                 </div>
               )}
             </div>
