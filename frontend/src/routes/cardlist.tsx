@@ -3,12 +3,18 @@ import { createFileRoute } from "@tanstack/react-router";
 
 const VALID_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND", "RESOURCE"] as const;
 const VALID_ZONES = ["SPACE", "EARTH"] as const;
+const VALID_PACKAGES = [
+  "GD01", "GD02", "GD03",
+  "ST01", "ST02", "ST03", "ST04", "ST05", "ST06", "ST07", "ST08", "ST09",
+  "OTHER_PRODUCT_CARD", "EDITION_BETA", "BASIC_CARDS", "PROMOTION_CARD",
+] as const;
 
 export type CardListSearch = {
   kind?: Array<(typeof VALID_KINDS)[number]>;
   cost?: number[];
   level?: number[];
   zone?: Array<(typeof VALID_ZONES)[number]>;
+  package?: (typeof VALID_PACKAGES)[number];
   query?: string;
 };
 
@@ -31,6 +37,11 @@ export const Route = createFileRoute("/cardlist")({
           (VALID_ZONES as readonly string[]).includes(z),
         ) as CardListSearch["zone"]
       : undefined,
+    package:
+      typeof raw.package === "string" &&
+      (VALID_PACKAGES as readonly string[]).includes(raw.package)
+        ? (raw.package as CardListSearch["package"])
+        : undefined,
     query:
       typeof raw.query === "string" && raw.query.trim()
         ? raw.query

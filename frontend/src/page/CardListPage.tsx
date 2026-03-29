@@ -29,6 +29,7 @@ function buildFilter(search: CardListSearch): CardFilterInput {
     cost: search.cost ?? null,
     level: search.level ?? null,
     zone: search.zone ?? null,
+    package: search.package ?? null,
     query: search.query ?? null,
   };
 }
@@ -38,12 +39,14 @@ function filterToSearch(filter: CardFilterInput): CardListSearch {
   const cost = filter.cost as number[] | null | undefined;
   const level = filter.level as number[] | null | undefined;
   const zone = filter.zone as CardListSearch["zone"] | null | undefined;
+  const pkg = filter.package as CardListSearch["package"] | null | undefined;
   const query = filter.query as string | null | undefined;
   return {
     kind: kind?.join(",") === "UNIT" ? undefined : kind,
     cost: cost?.length ? cost : undefined,
     level: level?.length ? level : undefined,
     zone: zone?.length ? zone : undefined,
+    package: pkg || undefined,
     query: query || undefined,
   };
 }
@@ -54,6 +57,7 @@ function activeFilterCount(filter: CardFilterInput): number {
   if (kind.join(",") !== "UNIT") count++;
   if ((filter.cost as number[] | null | undefined)?.length) count++;
   if ((filter.zone as string[] | null | undefined)?.length) count++;
+  if (filter.package) count++;
   if (filter.query) count++;
   return count;
 }
@@ -72,6 +76,40 @@ const ALL_ZONES = ["SPACE", "EARTH"] as const;
 const ZONE_LABELS: Record<string, string> = { SPACE: "우주", EARTH: "지구" };
 const COST_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const INITIAL_FILTER: CardFilterInput = { kind: ["UNIT"] };
+
+const PACK_GROUPS: { label: string; items: { value: string; label: string }[] }[] = [
+  {
+    label: "부스트팩",
+    items: [
+      { value: "GD01", label: "GD01" },
+      { value: "GD02", label: "GD02" },
+      { value: "GD03", label: "GD03" },
+    ],
+  },
+  {
+    label: "스타터덱",
+    items: [
+      { value: "ST01", label: "ST01" },
+      { value: "ST02", label: "ST02" },
+      { value: "ST03", label: "ST03" },
+      { value: "ST04", label: "ST04" },
+      { value: "ST05", label: "ST05" },
+      { value: "ST06", label: "ST06" },
+      { value: "ST07", label: "ST07" },
+      { value: "ST08", label: "ST08" },
+      { value: "ST09", label: "ST09" },
+    ],
+  },
+  {
+    label: "기타",
+    items: [
+      { value: "BASIC_CARDS", label: "기본" },
+      { value: "EDITION_BETA", label: "베타" },
+      { value: "PROMOTION_CARD", label: "프로모" },
+      { value: "OTHER_PRODUCT_CARD", label: "기타 상품" },
+    ],
+  },
+];
 
 // ─── Filter controls (shared between bar and bottom sheet) ───────────────────
 
@@ -116,6 +154,10 @@ function FilterControls({ filter, onChange }: FilterControlsProps) {
     patch({ zone: next.length > 0 ? (next as CardFilterInput["zone"]) : null });
   }
 
+  function togglePackage(p: string) {
+    patch({ package: filter.package === p ? null : (p as CardFilterInput["package"]) });
+  }
+
   function onQueryChange(value: string) {
     setQueryText(value);
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -127,6 +169,7 @@ function FilterControls({ filter, onChange }: FilterControlsProps) {
   const activeKind = filter.kind as string[];
   const activeCost = (filter.cost as number[] | undefined) ?? [];
   const activeZone = (filter.zone as string[] | undefined) ?? [];
+  const activePackage = filter.package as string | null | undefined;
 
   return (
     <div className="flex flex-col gap-3">
@@ -192,6 +235,35 @@ function FilterControls({ filter, onChange }: FilterControlsProps) {
             >
               {ZONE_LABELS[z]}
             </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Pack */}
+      <div className="flex flex-wrap items-start gap-1.5">
+        <span className="text-xs text-muted-foreground w-10 shrink-0 pt-0.5">팩</span>
+        <div className="flex flex-col gap-1.5">
+          {PACK_GROUPS.map((group) => (
+            <div key={group.label} className="flex flex-wrap items-center gap-1">
+              <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">
+                {group.label}
+              </span>
+              {group.items.map(({ value, label }) => (
+                <button
+                  type="button"
+                  key={value}
+                  onClick={() => togglePackage(value)}
+                  className={cn(
+                    "rounded-md border px-2 py-0.5 text-xs font-medium transition-colors cursor-pointer",
+                    activePackage === value
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                  )}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           ))}
         </div>
       </div>
