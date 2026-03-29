@@ -10,6 +10,7 @@ import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { COLOR_BG, COLOR_BG20, COLOR_TEXT20 } from "src/render/color";
+import { renderRarity } from "src/render/rarity";
 
 export function CommandCardBody({
   commandCardRef,
@@ -19,7 +20,9 @@ export function CommandCardBody({
   const commandCard = useFragment(
     graphql`
       fragment CommandCard_CommandCardBody on CommandCard {
+        id
         name
+        rarity
         color
         traits
         commandPilot: pilot {
@@ -39,6 +42,9 @@ export function CommandCardBody({
         src={tempimg}
         alt={commandCard.name}
       />
+      <div className="bg-black text-white z-1 w-fit self-end px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
+        {commandCard.id}-{renderRarity(commandCard.rarity)}
+      </div>
       {commandCard.commandPilot == null && (
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
       )}

@@ -10,6 +10,7 @@ import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { COLOR_BG, COLOR_BG20, COLOR_TEXT } from "src/render/color";
 import type { BaseCard_BaseCardBody$key } from "src/__generated__/BaseCard_BaseCardBody.graphql";
+import { renderRarity } from "src/render/rarity";
 
 export function BaseCardBody({
   baseCardRef,
@@ -23,6 +24,7 @@ export function BaseCardBody({
     graphql`
       fragment BaseCard_BaseCardBody on BaseCard {
         id
+        rarity
         name
         color
         AP
@@ -41,6 +43,9 @@ export function BaseCardBody({
         src={tempimg}
         alt={baseCard.name}
       />
+      <div className="bg-black text-white z-1 w-fit self-end px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
+        {baseCard.id}-{renderRarity(baseCard.rarity)}
+      </div>
       <div />
       <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
@@ -53,12 +58,19 @@ export function BaseCardBody({
             {baseCard.zone.map((x) => (
               <ZoneChip
                 zone={x}
-                className={cn(COLOR_BG[baseCard.color], isWhite ? "text-black" : "")}
+                className={cn(
+                  COLOR_BG[baseCard.color],
+                  isWhite ? "text-black" : "",
+                )}
                 key={x}
               />
             ))}
           </div>
-          <div className={cn("flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm")}>
+          <div
+            className={cn(
+              "flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm",
+            )}
+          >
             <div className="flex flex-col justify-end flex-1 overflow-hidden">
               <div className="flex flex-row translate-y-px">
                 <div className="w-2 bg-transparent -mr-5" />
@@ -82,7 +94,9 @@ export function BaseCardBody({
                 className={cn(
                   "aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_BG20[baseCard.color],
-                  baseCard.color === "WHITE" ? "text-black" : COLOR_TEXT[baseCard.color],
+                  baseCard.color === "WHITE"
+                    ? "text-black"
+                    : COLOR_TEXT[baseCard.color],
                 )}
               >
                 {baseCard.AP}
@@ -91,7 +105,9 @@ export function BaseCardBody({
                 className={cn(
                   "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_BG20[baseCard.color],
-                  baseCard.color === "WHITE" ? "text-black" : COLOR_TEXT[baseCard.color],
+                  baseCard.color === "WHITE"
+                    ? "text-black"
+                    : COLOR_TEXT[baseCard.color],
                 )}
               >
                 {baseCard.HP}

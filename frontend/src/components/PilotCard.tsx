@@ -9,11 +9,18 @@ import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { COLOR_BG, COLOR_BG20 } from "src/render/color";
 import type { PilotCard_PilotCardBody$key } from "src/__generated__/PilotCard_PilotCardBody.graphql";
+import { renderRarity } from "src/render/rarity";
 
-export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotCardBody$key }) {
+export function PilotCardBody({
+  pilotCardRef,
+}: {
+  pilotCardRef: PilotCard_PilotCardBody$key;
+}) {
   const pilotCard = useFragment(
     graphql`
       fragment PilotCard_PilotCardBody on PilotCard {
+        id
+        rarity
         color
         traits
         pilot {
@@ -34,6 +41,9 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
         alt={pilotCard.pilot.name}
       />
       <div />
+      <div className="bg-black text-white z-1 w-fit self-end px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
+        {pilotCard.id}-{renderRarity(pilotCard.rarity)}
+      </div>
       <div className="flex flex-col gap-2 z-1">
         <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
           <div className="flex flex-col justify-end flex-1 overflow-hidden">

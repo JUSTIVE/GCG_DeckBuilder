@@ -10,6 +10,7 @@ import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { COLOR_BG, COLOR_BG20 } from "src/render/color";
+import { renderRarity } from "src/render/rarity";
 
 // Shared card body used in both thumbnail and dialog.
 export function UnitCardBody({
@@ -26,6 +27,7 @@ export function UnitCardBody({
       fragment UnitCard_UnitCardBody on UnitCard {
         id
         name
+        rarity
         color
         AP
         HP
@@ -55,7 +57,7 @@ export function UnitCardBody({
         alt={unitCard.name}
       />
       <div className="bg-black text-white z-1 w-fit self-end px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
-        {unitCard.id}
+        {unitCard.id}-{renderRarity(unitCard.rarity)}
       </div>
       <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
@@ -66,7 +68,11 @@ export function UnitCardBody({
         <div className="flex flex-col gap-0.5">
           <div className="flex flex-row px-3">
             {unitCard.zone.map((x) => (
-              <ZoneChip zone={x} className={cn(cardBg, isWhite ? "text-black" : "")} key={x} />
+              <ZoneChip
+                zone={x}
+                className={cn(cardBg, isWhite ? "text-black" : "")}
+                key={x}
+              />
             ))}
           </div>
           <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
@@ -186,7 +192,11 @@ export function UnitCard({ unitCardRef }: Props) {
         )}
         onClick={openDialog}
       >
-        <UnitCardBody unitCardRefs={unitCard} cardBg={cardBg} isWhite={isWhite} />
+        <UnitCardBody
+          unitCardRefs={unitCard}
+          cardBg={cardBg}
+          isWhite={isWhite}
+        />
       </button>
     </>
   );
