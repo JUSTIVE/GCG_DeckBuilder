@@ -4,7 +4,7 @@ import type { UnitCard_UnitCardBody$key } from "@/__generated__/UnitCard_UnitCar
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
-import tempimg from "./tempimg.webp";
+import unitCardTemp from "./unitcardtemp.webp";
 import { ZoneChip } from "./ZoneChip";
 import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
@@ -54,9 +54,9 @@ export function UnitCardBody({
   return (
     <>
       <img
-        className="absolute w-full h-full object-cover top-0"
-        src={tempimg}
-        alt={unitCard.name}
+        className="absolute w-full h-full object-cover top-0 bg-gray-200"
+        src={unitCardTemp}
+        alt={""}
       />
       <div className="flex flex-col gap-[11cqw]">
         <div className="flex flex-row items-start justify-between z-1">
@@ -78,7 +78,7 @@ export function UnitCardBody({
                 unitCard.color === "WHITE" ? "text-gray-400" : undefined,
               )}
             >
-              {unitCard.level}
+              {unitCard.cost}
             </div>
           </div>
           <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">

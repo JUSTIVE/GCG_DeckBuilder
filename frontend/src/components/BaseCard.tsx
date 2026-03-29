@@ -3,7 +3,7 @@ import type { BaseCardFragment$key } from "@/__generated__/BaseCardFragment.grap
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
-import tempimg from "./tempimg.webp";
+import tempimg from "./basetemp.webp";
 import { ZoneChip } from "./ZoneChip";
 import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
@@ -45,7 +45,7 @@ export function BaseCardBody({
         src={tempimg}
         alt={baseCard.name}
       />
-      <div className="flex flex-col gap-[11cqw]">
+      <div className="flex flex-col gap-[5cqw]">
         <div className="flex flex-row items-start justify-between z-1">
           <div className="flex flex-col font-bold">
             <div
@@ -60,12 +60,12 @@ export function BaseCardBody({
             </div>
             <div
               className={cn(
-                "text-white w-[15cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-sm -translate-y-px text-center",
+                "text-white w-[16cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-[4px] -translate-y-px text-center",
                 COLOR_BG[baseCard.color],
                 baseCard.color === "WHITE" ? "text-gray-400" : undefined,
               )}
             >
-              {baseCard.level}
+              {baseCard.cost}
             </div>
           </div>
           <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
@@ -75,7 +75,7 @@ export function BaseCardBody({
         <div>
           <div
             className={cn(
-              "w-[7cqw] cutout cutout-r-lg h-[40cqw] text-[4cqw] font-semibold pl-0.5 flex items-center",
+              "w-[8cqw] cutout cutout-r-2xl h-[55cqw] text-[4cqw] font-semibold pl-0.5 flex items-center",
               COLOR_BG[baseCard.color],
             )}
           >
@@ -90,7 +90,7 @@ export function BaseCardBody({
           </div>
           <div
             className={cn(
-              "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[5cqw]",
+              "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[8cqw]",
               COLOR_BG[baseCard.color],
             )}
           />

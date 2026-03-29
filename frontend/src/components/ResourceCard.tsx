@@ -2,7 +2,7 @@ import { graphql } from "relay-runtime";
 import type { ResourceCardFragment$key } from "@/__generated__/ResourceCardFragment.graphql";
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
-import tempimg from "./tempimg.webp";
+import resourceImg from "./resource.webp";
 import { renderRarity } from "@/render/rarity";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
@@ -28,8 +28,8 @@ export function ResourceCardBody({
     <>
       <img
         className="absolute w-full h-full object-cover top-0"
-        src={tempimg}
-        alt={resourceCard.name}
+        src={resourceImg}
+        alt={""}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
       <div className="bg-black text-white z-1 w-fit self-end px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">

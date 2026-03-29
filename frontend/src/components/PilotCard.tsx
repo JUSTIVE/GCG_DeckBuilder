@@ -3,7 +3,7 @@ import type { PilotCardFragment$key } from "@/__generated__/PilotCardFragment.gr
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
-import tempimg from "./tempimg.webp";
+import tempimg from "./pilotTemp.webp";
 import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
@@ -42,7 +42,7 @@ export function PilotCardBody({
         src={tempimg}
         alt={pilotCard.pilot.name}
       />
-      <div className="flex flex-col gap-[11cqw]">
+      <div className="flex flex-col gap-[5cqw]">
         <div className="flex flex-row items-start justify-between z-1">
           <div className="flex flex-col font-bold">
             <div
@@ -57,12 +57,12 @@ export function PilotCardBody({
             </div>
             <div
               className={cn(
-                "text-white w-[15cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-sm -translate-y-px text-center",
+                "text-white w-[16cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-[4px] -translate-y-px text-center",
                 COLOR_BG[pilotCard.color],
                 pilotCard.color === "WHITE" ? "text-gray-400" : undefined,
               )}
             >
-              {pilotCard.level}
+              {pilotCard.cost}
             </div>
           </div>
           <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
@@ -72,7 +72,7 @@ export function PilotCardBody({
         <div>
           <div
             className={cn(
-              "w-[7cqw] cutout cutout-r-lg h-[40cqw] text-[4cqw] font-semibold pl-0.5 flex items-center",
+              "w-[8cqw] cutout cutout-r-2xl h-[55cqw] text-[4cqw] font-semibold pl-0.5 flex items-center",
               COLOR_BG[pilotCard.color],
             )}
           >
@@ -87,14 +87,14 @@ export function PilotCardBody({
           </div>
           <div
             className={cn(
-              "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[5cqw]",
+              "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[8cqw]",
               COLOR_BG[pilotCard.color],
             )}
           />
         </div>
       </div>
       <div className="flex flex-col gap-2 z-1">
-        <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
+        <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm h-[35cqw] items-start">
           <div className="flex flex-col justify-end flex-1 overflow-hidden">
             <div className="">
               <div className="p-2 py-1 bg-black whitespace-pre-wrap cutout-tr-sm cutout text-[6cqw] font-bold text-center">
