@@ -1,5 +1,6 @@
 import type { CardListPageQuery } from "@/__generated__/CardListPageQuery.graphql";
 import type { CardFilterInput } from "@/__generated__/CardListFragmentRefetchQuery.graphql";
+import type { CardSort } from "@/__generated__/CardListPageQuery.graphql";
 import { CardList } from "@/components/CardList";
 import { useLazyLoadQuery } from "react-relay";
 import { graphql } from "relay-runtime";
@@ -16,8 +17,8 @@ import {
 } from "@/components/ui/sheet";
 
 const Query = graphql`
-  query CardListPageQuery($filter: CardFilterInput!) {
-    ...CardListFragment @arguments(first: 20, filter: $filter)
+  query CardListPageQuery($filter: CardFilterInput!, $sort: CardSort) {
+    ...CardListFragment @arguments(first: 20, filter: $filter, sort: $sort)
   }
 `;
 
@@ -34,7 +35,14 @@ function buildFilter(search: CardListSearch): CardFilterInput {
   };
 }
 
-function filterToSearch(filter: CardFilterInput): CardListSearch {
+function buildSort(search: CardListSearch): CardSort | null {
+  return (search.sort as CardSort) ?? null;
+}
+
+function filterToSearch(
+  filter: CardFilterInput,
+  sort: CardSort | null,
+): CardListSearch {
   const kind = filter.kind as CardListSearch["kind"];
   const cost = filter.cost as number[] | null | undefined;
   const level = filter.level as number[] | null | undefined;
@@ -48,6 +56,7 @@ function filterToSearch(filter: CardFilterInput): CardListSearch {
     zone: zone?.length ? zone : undefined,
     package: pkg || undefined,
     query: query || undefined,
+    sort: sort as CardListSearch["sort"] | undefined,
   };
 }
 
@@ -71,6 +80,19 @@ const KIND_LABELS: Record<string, string> = {
   COMMAND: "커맨드",
   RESOURCE: "리소스",
 };
+
+const SORT_OPTIONS: Array<{ value: string; label: string }> = [
+  { value: "NAME_ASC", label: "이름 ↑" },
+  { value: "NAME_DESC", label: "이름 ↓" },
+  { value: "COST_ASC", label: "코스트 ↑" },
+  { value: "COST_DESC", label: "코스트 ↓" },
+  { value: "LEVEL_ASC", label: "레벨 ↑" },
+  { value: "LEVEL_DESC", label: "레벨 ↓" },
+  { value: "AP_ASC", label: "공격력 ↑" },
+  { value: "AP_DESC", label: "공격력 ↓" },
+  { value: "HP_ASC", label: "체력 ↑" },
+  { value: "HP_DESC", label: "체력 ↓" },
+];
 const ALL_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND", "RESOURCE"] as const;
 const ALL_ZONES = ["SPACE", "EARTH"] as const;
 const ZONE_LABELS: Record<string, string> = { SPACE: "우주", EARTH: "지구" };
@@ -118,10 +140,17 @@ const PACK_GROUPS: {
 
 type FilterControlsProps = {
   filter: CardFilterInput;
+  sort: CardSort | null;
   onChange: (filter: CardFilterInput) => void;
+  onSortChange: (sort: CardSort | null) => void;
 };
 
-function FilterControls({ filter, onChange }: FilterControlsProps) {
+function FilterControls({
+  filter,
+  sort,
+  onChange,
+  onSortChange,
+}: FilterControlsProps) {
   const [queryText, setQueryText] = useState(filter.query ?? "");
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -178,6 +207,27 @@ function FilterControls({ filter, onChange }: FilterControlsProps) {
 
   return (
     <div className="flex flex-col gap-3">
+      {/* Sort */}
+      <div className="flex items-center gap-1.5">
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          정렬
+        </span>
+        <select
+          value={sort || ""}
+          onChange={(e) =>
+            onSortChange(e.target.value ? (e.target.value as CardSort) : null)
+          }
+          className="h-7 flex-1 rounded-md border border-input bg-background px-2.5 text-xs outline-none focus:border-primary cursor-pointer"
+        >
+          <option value="">기본</option>
+          {SORT_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {/* Kind */}
       <div className="flex flex-wrap items-center gap-1.5">
         <span className="text-xs text-muted-foreground w-10 shrink-0">
@@ -313,12 +363,22 @@ function FilterControls({ filter, onChange }: FilterControlsProps) {
 
 // ─── Desktop filter bar (md+) ─────────────────────────────────────────────────
 
-function FilterBar({ filter, onChange }: FilterControlsProps) {
+function FilterBar({
+  filter,
+  sort,
+  onChange,
+  onSortChange,
+}: FilterControlsProps) {
   const hasFilters = activeFilterCount(filter) > 0;
 
   return (
     <aside className="hidden md:flex flex-col gap-4 w-70 shrink-0 border-r border-border px-4 py-4 overflow-y-auto h-[calc(100dvh-65px)]">
-      <FilterControls filter={filter} onChange={onChange} />
+      <FilterControls
+        filter={filter}
+        sort={sort}
+        onChange={onChange}
+        onSortChange={onSortChange}
+      />
       {hasFilters && (
         <button
           type="button"
@@ -334,7 +394,12 @@ function FilterBar({ filter, onChange }: FilterControlsProps) {
 
 // ─── Mobile filter trigger + bottom sheet (<md) ───────────────────────────────
 
-function FilterBottomSheet({ filter, onChange }: FilterControlsProps) {
+function FilterBottomSheet({
+  filter,
+  sort,
+  onChange,
+  onSortChange,
+}: FilterControlsProps) {
   const [open, setOpen] = useState(false);
   const count = activeFilterCount(filter);
 
@@ -374,7 +439,12 @@ function FilterBottomSheet({ filter, onChange }: FilterControlsProps) {
           <SheetHeader className="p-0 mb-4">
             <SheetTitle>필터</SheetTitle>
           </SheetHeader>
-          <FilterControls filter={filter} onChange={onChange} />
+          <FilterControls
+            filter={filter}
+            sort={sort}
+            onChange={onChange}
+            onSortChange={onSortChange}
+          />
         </SheetContent>
       </Sheet>
     </div>
@@ -383,12 +453,20 @@ function FilterBottomSheet({ filter, onChange }: FilterControlsProps) {
 
 // ─── Content (suspends on initial load only) ─────────────────────────────────
 
-function CardListContent({ filter }: { filter: CardFilterInput }) {
+function CardListContent({
+  filter,
+  sort,
+}: {
+  filter: CardFilterInput;
+  sort: CardSort | null;
+}) {
   const initialFilterRef = useRef(filter);
+  const initialSortRef = useRef(sort);
   const data = useLazyLoadQuery<CardListPageQuery>(Query, {
     filter: initialFilterRef.current,
+    sort: initialSortRef.current,
   });
-  return <CardList queryRef={data} filter={filter} />;
+  return <CardList queryRef={data} filter={filter} sort={sort} />;
 }
 
 // ─── Page ────────────────────────────────────────────────────────────────────
@@ -397,22 +475,47 @@ export function CardListPage() {
   const search = Route.useSearch();
   const router = useRouter();
   const filter = buildFilter(search);
+  const sort = buildSort(search);
 
   function handleFilterChange(newFilter: CardFilterInput) {
     router.navigate({
       to: "/cardlist",
-      search: (prev) => ({ ...filterToSearch(newFilter), cardId: prev.cardId }),
+      search: (prev) => ({
+        ...filterToSearch(newFilter, sort),
+        cardId: prev.cardId,
+      }),
+      replace: true,
+    });
+  }
+
+  function handleSortChange(newSort: CardSort | null) {
+    router.navigate({
+      to: "/cardlist",
+      search: (prev) => ({
+        ...filterToSearch(filter, newSort),
+        cardId: prev.cardId,
+      }),
       replace: true,
     });
   }
 
   return (
     <div className="flex flex-col md:flex-row">
-      <FilterBar filter={filter} onChange={handleFilterChange} />
+      <FilterBar
+        filter={filter}
+        sort={sort}
+        onChange={handleFilterChange}
+        onSortChange={handleSortChange}
+      />
       <div className="flex flex-col flex-1 min-w-0">
-        <FilterBottomSheet filter={filter} onChange={handleFilterChange} />
+        <FilterBottomSheet
+          filter={filter}
+          sort={sort}
+          onChange={handleFilterChange}
+          onSortChange={handleSortChange}
+        />
         <Suspense>
-          <CardListContent filter={filter} />
+          <CardListContent filter={filter} sort={sort} />
         </Suspense>
       </div>
     </div>

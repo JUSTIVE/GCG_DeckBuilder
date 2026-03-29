@@ -1,5 +1,8 @@
 import type { CardListFragment$key } from "@/__generated__/CardListFragment.graphql";
-import type { CardFilterInput } from "@/__generated__/CardListFragmentRefetchQuery.graphql";
+import type {
+  CardFilterInput,
+  CardSort,
+} from "@/__generated__/CardListFragmentRefetchQuery.graphql";
 import { usePaginationFragment } from "react-relay";
 import { graphql } from "relay-runtime";
 import { Card } from "./Card";
@@ -11,10 +14,11 @@ const Fragment = graphql`
   @refetchable(queryName: "CardListFragmentRefetchQuery")
   @argumentDefinitions(
     filter: { type: "CardFilterInput" }
+    sort: { type: "CardSort" }
     first: { type: "Int" }
     after: { type: "String" }
   ) {
-    cards(after: $after, first: $first, filter: $filter)
+    cards(after: $after, first: $first, filter: $filter, sort: $sort)
       @connection(key: "CardListFragment_cards") {
       totalCount
       edges {
@@ -30,24 +34,25 @@ const Fragment = graphql`
 type Props = {
   queryRef: CardListFragment$key;
   filter?: CardFilterInput;
+  sort?: CardSort | null;
 };
 
-export function CardList({ queryRef, filter }: Props) {
+export function CardList({ queryRef, filter, sort }: Props) {
   const [, startTransition] = useTransition();
   const { data, refetch, loadNext, hasNext, isLoadingNext } =
     usePaginationFragment(Fragment, queryRef);
 
-  // refetch when filter changes, keeping old content visible via startTransition
-  const prevFilterRef = useRef(JSON.stringify(filter));
+  // refetch when filter or sort changes, keeping old content visible via startTransition
+  const prevParamsRef = useRef(JSON.stringify({ filter, sort }));
   useEffect(() => {
-    const serialized = JSON.stringify(filter);
-    if (serialized === prevFilterRef.current) return;
-    prevFilterRef.current = serialized;
+    const serialized = JSON.stringify({ filter, sort });
+    if (serialized === prevParamsRef.current) return;
+    prevParamsRef.current = serialized;
     if (!filter) return;
     startTransition(() => {
-      refetch({ filter }, { fetchPolicy: "network-only" });
+      refetch({ filter, sort: sort ?? null }, { fetchPolicy: "network-only" });
     });
-  }, [filter, refetch]);
+  }, [filter, sort, refetch]);
   const parentRef = useRef<HTMLDivElement>(null);
   const [columns, setColumns] = useState(1);
 
@@ -89,64 +94,55 @@ export function CardList({ queryRef, filter }: Props) {
     if (lastItem.index >= rowCount - 1 && hasNext && !isLoadingNext) {
       loadNext(20);
     }
-  }, [
-    hasNext,
-    isLoadingNext,
-    loadNext,
-    rowCount,
-    rowVirtualizer.getVirtualItems(),
-  ]);
+  }, [hasNext, isLoadingNext, loadNext, rowCount, rowVirtualizer]);
 
   return (
-    <div
-      ref={parentRef}
-      className="overflow-y-auto h-[calc(100dvh-65px)] py-5"
-    >
-        <div
-          style={{
-            height: `${rowVirtualizer.getTotalSize()}px`,
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-            const startIndex = virtualRow.index * columns;
-            const endIndex = Math.min(
-              startIndex + columns,
-              data.cards.edges.length,
-            );
-            const rowItems = data.cards.edges.slice(startIndex, endIndex);
+    <div ref={parentRef} className="overflow-y-auto h-[calc(100dvh-65px)] py-5">
+      <div
+        style={{
+          height: `${rowVirtualizer.getTotalSize()}px`,
+          width: "100%",
+          position: "relative",
+        }}
+      >
+        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+          const startIndex = virtualRow.index * columns;
+          const endIndex = Math.min(
+            startIndex + columns,
+            data.cards.edges.length,
+          );
+          const rowItems = data.cards.edges.slice(startIndex, endIndex);
 
-            return (
+          return (
+            <div
+              key={virtualRow.key}
+              style={{
+                position: "absolute",
+                top: `${virtualRow.start}px`,
+                left: 0,
+                width: "100%",
+                height: `${virtualRow.size}px`,
+              }}
+            >
               <div
-                key={virtualRow.key}
+                className="grid gap-4 px-4"
                 style={{
-                  position: "absolute",
-                  top: `${virtualRow.start}px`,
-                  left: 0,
-                  width: "100%",
-                  height: `${virtualRow.size}px`,
+                  gridTemplateColumns: `repeat(${columns}, 1fr)`,
                 }}
               >
-                <div
-                  className="grid gap-4 px-4"
-                  style={{
-                    gridTemplateColumns: `repeat(${columns}, 1fr)`,
-                  }}
-                >
-                  {rowItems.map((edge) => (
-                    <Card key={edge.cursor} cardRef={edge.node} />
-                  ))}
-                </div>
+                {rowItems.map((edge) => (
+                  <Card key={edge.cursor} cardRef={edge.node} />
+                ))}
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
+      </div>
+      {isLoadingNext && (
+        <div className="flex justify-center p-4">
+          <span className="text-gray-500">Loading...</span>
         </div>
-        {isLoadingNext && (
-          <div className="flex justify-center p-4">
-            <span className="text-gray-500">Loading...</span>
-          </div>
-        )}
+      )}
     </div>
   );
 }
