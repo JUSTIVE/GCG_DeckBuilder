@@ -5,13 +5,28 @@ import { CardList } from "@/components/CardList";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 import { useLazyLoadQuery } from "react-relay";
 import { graphql } from "relay-runtime";
-import { Route, type CardListSearch, type CardKeyword, type CardTrait } from "@/routes/cardlist";
+import {
+  Route,
+  type CardListSearch,
+  type CardKeyword,
+  type CardTrait,
+} from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { renderKeyword } from "@/render/keyword";
-import { ChevronDownIcon, FileTextIcon, SlidersHorizontalIcon, XIcon } from "lucide-react";
+import {
+  ChevronDownIcon,
+  FileTextIcon,
+  SlidersHorizontalIcon,
+  XIcon,
+} from "lucide-react";
 import { useRef, useState, useEffect, Suspense } from "react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { COLOR_BG } from "src/render/color";
 
 const Query = graphql`
@@ -24,7 +39,7 @@ const Query = graphql`
 
 function buildFilter(search: CardListSearch): CardFilterInput {
   return {
-    kind: search.kind ?? ["UNIT"],
+    kind: search.kind ?? [],
     cost: search.cost ?? null,
     level: search.level ?? null,
     zone: search.zone ?? null,
@@ -40,18 +55,24 @@ function buildSort(search: CardListSearch): CardSort | null {
   return (search.sort as CardSort) ?? null;
 }
 
-function filterToSearch(filter: CardFilterInput, sort: CardSort | null): CardListSearch {
+function filterToSearch(
+  filter: CardFilterInput,
+  sort: CardSort | null,
+): CardListSearch {
   const kind = filter.kind as CardListSearch["kind"];
   const cost = filter.cost as number[] | null | undefined;
   const level = filter.level as number[] | null | undefined;
   const zone = filter.zone as CardListSearch["zone"] | null | undefined;
   const color = filter.color as CardListSearch["color"] | null | undefined;
-  const keyword = filter.keyword as CardListSearch["keyword"] | null | undefined;
+  const keyword = filter.keyword as
+    | CardListSearch["keyword"]
+    | null
+    | undefined;
   const trait = filter.trait as CardListSearch["trait"] | null | undefined;
   const pkg = filter.package as CardListSearch["package"] | null | undefined;
   const query = filter.query as string | null | undefined;
   return {
-    kind: kind?.join(",") === "UNIT" ? undefined : kind,
+    kind: kind,
     cost: cost?.length ? cost : undefined,
     level: level?.length ? level : undefined,
     zone: zone?.length ? zone : undefined,
@@ -67,7 +88,7 @@ function filterToSearch(filter: CardFilterInput, sort: CardSort | null): CardLis
 function activeFilterCount(filter: CardFilterInput): number {
   let count = 0;
   const kind = filter.kind as string[];
-  if (kind.join(",") !== "UNIT") count++;
+  if (kind.length > 0) count++;
   if ((filter.cost as number[] | null | undefined)?.length) count++;
   if ((filter.level as number[] | null | undefined)?.length) count++;
   if ((filter.zone as string[] | null | undefined)?.length) count++;
@@ -104,7 +125,14 @@ const SORT_OPTIONS: Array<{ value: string; label: string }> = [
 const ALL_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND", "RESOURCE"] as const;
 const ALL_ZONES = ["SPACE", "EARTH"] as const;
 const ZONE_LABELS: Record<string, string> = { SPACE: "우주", EARTH: "지구" };
-const ALL_COLORS = ["BLUE", "GREEN", "RED", "YELLOW", "PURPLE", "WHITE"] as const;
+const ALL_COLORS = [
+  "BLUE",
+  "GREEN",
+  "RED",
+  "YELLOW",
+  "PURPLE",
+  "WHITE",
+] as const;
 const COLOR_LABELS: Record<string, string> = {
   BLUE: "파랑",
   GREEN: "초록",
@@ -116,7 +144,7 @@ const COLOR_LABELS: Record<string, string> = {
 
 const COST_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const LEVEL_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const INITIAL_FILTER: CardFilterInput = { kind: ["UNIT"] };
+const INITIAL_FILTER: CardFilterInput = { kind: [] };
 
 const ALL_KEYWORDS: CardKeyword[] = [
   "ACTION",
@@ -143,10 +171,9 @@ const ALL_KEYWORDS: CardKeyword[] = [
   "WHEN_PAIRED",
 ];
 
-const KEYWORD_LABELS = Object.fromEntries(ALL_KEYWORDS.map((k) => [k, renderKeyword(k)])) as Record<
-  CardKeyword,
-  string
->;
+const KEYWORD_LABELS = Object.fromEntries(
+  ALL_KEYWORDS.map((k) => [k, renderKeyword(k)]),
+) as Record<CardKeyword, string>;
 
 const ALL_TRAITS: CardTrait[] = [
   "EARTH_FEDERATION",
@@ -314,7 +341,9 @@ function CollapsibleChips({
         onClick={() => setOpen((v) => !v)}
         className="flex items-center gap-1 cursor-pointer w-fit"
       >
-        <span className="text-xs text-muted-foreground w-10 shrink-0 text-left">{label}</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0 text-left">
+          {label}
+        </span>
         {activeCount > 0 && (
           <span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
             {activeCount}
@@ -327,7 +356,9 @@ function CollapsibleChips({
           )}
         />
       </button>
-      {open && <div className="flex flex-wrap gap-1 pl-[2.875rem]">{children}</div>}
+      {open && (
+        <div className="flex flex-wrap gap-1 pl-[2.875rem]">{children}</div>
+      )}
     </div>
   );
 }
@@ -341,7 +372,12 @@ type FilterControlsProps = {
   onSortChange: (sort: CardSort | null) => void;
 };
 
-function FilterControls({ filter, sort, onChange, onSortChange }: FilterControlsProps) {
+function FilterControls({
+  filter,
+  sort,
+  onChange,
+  onSortChange,
+}: FilterControlsProps) {
   const [queryText, setQueryText] = useState(filter.query ?? "");
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -355,31 +391,41 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
 
   function toggleKind(k: (typeof ALL_KINDS)[number]) {
     const current = filter.kind as string[];
-    const next = current.includes(k) ? current.filter((x) => x !== k) : [...current, k];
-    patch({ kind: next.length > 0 ? (next as CardFilterInput["kind"]) : [k] });
+    const next = current.includes(k)
+      ? current.filter((x) => x !== k)
+      : [...current, k];
+    patch({ kind: next as CardFilterInput["kind"] });
   }
 
   function toggleCost(c: number) {
     const current = (filter.cost as number[] | undefined) ?? [];
-    const next = current.includes(c) ? current.filter((x) => x !== c) : [...current, c];
+    const next = current.includes(c)
+      ? current.filter((x) => x !== c)
+      : [...current, c];
     patch({ cost: next.length > 0 ? next : null });
   }
 
   function toggleLevel(l: number) {
     const current = (filter.level as number[] | undefined) ?? [];
-    const next = current.includes(l) ? current.filter((x) => x !== l) : [...current, l];
+    const next = current.includes(l)
+      ? current.filter((x) => x !== l)
+      : [...current, l];
     patch({ level: next.length > 0 ? next : null });
   }
 
   function toggleZone(z: (typeof ALL_ZONES)[number]) {
     const current = (filter.zone as string[] | undefined) ?? [];
-    const next = current.includes(z) ? current.filter((x) => x !== z) : [...current, z];
+    const next = current.includes(z)
+      ? current.filter((x) => x !== z)
+      : [...current, z];
     patch({ zone: next.length > 0 ? (next as CardFilterInput["zone"]) : null });
   }
 
   function toggleColor(c: (typeof ALL_COLORS)[number]) {
     const current = (filter.color as string[] | undefined) ?? [];
-    const next = current.includes(c) ? current.filter((x) => x !== c) : [...current, c];
+    const next = current.includes(c)
+      ? current.filter((x) => x !== c)
+      : [...current, c];
     patch({
       color: next.length > 0 ? (next as CardFilterInput["color"]) : null,
     });
@@ -393,7 +439,9 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
 
   function toggleKeyword(k: CardKeyword) {
     const current = (filter.keyword as string[] | undefined) ?? [];
-    const next = current.includes(k) ? current.filter((x) => x !== k) : [...current, k];
+    const next = current.includes(k)
+      ? current.filter((x) => x !== k)
+      : [...current, k];
     patch({
       keyword: next.length > 0 ? (next as CardFilterInput["keyword"]) : null,
     });
@@ -401,7 +449,9 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
 
   function toggleTrait(t: CardTrait) {
     const current = (filter.trait as string[] | undefined) ?? [];
-    const next = current.includes(t) ? current.filter((x) => x !== t) : [...current, t];
+    const next = current.includes(t)
+      ? current.filter((x) => x !== t)
+      : [...current, t];
     patch({
       trait: next.length > 0 ? (next as CardFilterInput["trait"]) : null,
     });
@@ -428,10 +478,14 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
     <div className="flex flex-col gap-3">
       {/* Sort */}
       <div className="flex items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">정렬</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          정렬
+        </span>
         <select
           value={sort || ""}
-          onChange={(e) => onSortChange(e.target.value ? (e.target.value as CardSort) : null)}
+          onChange={(e) =>
+            onSortChange(e.target.value ? (e.target.value as CardSort) : null)
+          }
           className="h-7 flex-1 rounded-md border border-input bg-background px-2.5 text-xs outline-none focus:border-primary cursor-pointer"
         >
           <option value="">기본</option>
@@ -445,7 +499,9 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
 
       {/* Kind */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">종류</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          종류
+        </span>
         <div className="flex flex-wrap gap-1">
           {ALL_KINDS.map((k) => (
             <button
@@ -467,7 +523,9 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
 
       {/* Cost */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">코스트</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          코스트
+        </span>
         <div className="flex flex-wrap gap-1">
           {COST_OPTIONS.map((c) => (
             <button
@@ -489,7 +547,9 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
 
       {/* Level */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">레벨</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          레벨
+        </span>
         <div className="flex flex-wrap gap-1">
           {LEVEL_OPTIONS.map((l) => (
             <button
@@ -511,7 +571,9 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
 
       {/* Zone */}
       <div className="flex items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">지형</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          지형
+        </span>
         <div className="flex gap-1">
           {ALL_ZONES.map((z) => (
             <button
@@ -533,7 +595,9 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
 
       {/* Color */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">색상</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          색상
+        </span>
         <div className="flex flex-wrap gap-1">
           {ALL_COLORS.map((c) => (
             <button
@@ -567,8 +631,13 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
         <span className="text-xs text-muted-foreground pt-0.5">팩</span>
         <div className="flex flex-col gap-1.5">
           {PACK_GROUPS.map((group) => (
-            <div key={group.label} className="grid grid-cols-[2.5rem_1fr] items-start gap-x-1">
-              <span className="text-[10px] text-muted-foreground/60 pt-0.5">{group.label}</span>
+            <div
+              key={group.label}
+              className="grid grid-cols-[2.5rem_1fr] items-start gap-x-1"
+            >
+              <span className="text-[10px] text-muted-foreground/60 pt-0.5">
+                {group.label}
+              </span>
               <div className="flex flex-wrap gap-1">
                 {group.items.map(({ value, label }) => (
                   <button
@@ -631,7 +700,9 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
 
       {/* Query */}
       <div className="flex items-center gap-1.5">
-        <span className="text-xs text-muted-foreground w-10 shrink-0">검색</span>
+        <span className="text-xs text-muted-foreground w-10 shrink-0">
+          검색
+        </span>
         <div className="relative flex-1 flex items-center">
           <input
             value={queryText}
@@ -656,12 +727,22 @@ function FilterControls({ filter, sort, onChange, onSortChange }: FilterControls
 
 // ─── Desktop filter bar (md+) ─────────────────────────────────────────────────
 
-function FilterBar({ filter, sort, onChange, onSortChange }: FilterControlsProps) {
+function FilterBar({
+  filter,
+  sort,
+  onChange,
+  onSortChange,
+}: FilterControlsProps) {
   const hasFilters = activeFilterCount(filter) > 0;
 
   return (
     <aside className="hidden md:flex flex-col gap-4 w-85 shrink-0 border-r border-border px-4 py-4 overflow-y-auto h-[calc(100dvh-65px)]">
-      <FilterControls filter={filter} sort={sort} onChange={onChange} onSortChange={onSortChange} />
+      <FilterControls
+        filter={filter}
+        sort={sort}
+        onChange={onChange}
+        onSortChange={onSortChange}
+      />
       {hasFilters && (
         <button
           type="button"
@@ -806,7 +887,14 @@ function CardListContent({
     filter: initialFilterRef.current,
     sort: initialSortRef.current,
   });
-  return <CardList queryRef={data} filter={filter} sort={sort} showDescription={showDescription} />;
+  return (
+    <CardList
+      queryRef={data}
+      filter={filter}
+      sort={sort}
+      showDescription={showDescription}
+    />
+  );
 }
 
 // ─── Page ────────────────────────────────────────────────────────────────────
@@ -873,7 +961,11 @@ export function CardListPage() {
           </button>
         </div>
         <Suspense>
-          <CardListContent filter={filter} sort={sort} showDescription={showDescription} />
+          <CardListContent
+            filter={filter}
+            sort={sort}
+            showDescription={showDescription}
+          />
         </Suspense>
         {search.cardId && (
           <Suspense>
