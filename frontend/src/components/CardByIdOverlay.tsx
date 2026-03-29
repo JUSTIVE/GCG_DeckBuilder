@@ -8,6 +8,8 @@ import { ResourceCardBody } from "./ResourceCard";
 import { renderTrait } from "@/render/trait";
 import { renderZone } from "@/render/zone";
 import { renderRarity } from "@/render/rarity";
+import { renderSeries } from "@/render/series";
+import { renderPackage } from "@/render/package";
 import { COLOR_BG, COLOR_HEX } from "src/render/color";
 import { CardDescription } from "./CardDescription";
 import { Dialog } from "@base-ui/react/dialog";
@@ -29,6 +31,8 @@ const Query = graphql`
         description
         zone
         traits
+        series
+        package
         links {
           __typename
           ... on LinkPilot {
@@ -49,6 +53,8 @@ const Query = graphql`
         color
         traits
         description
+        series
+        package
         pilot {
           name
           AP
@@ -67,6 +73,8 @@ const Query = graphql`
         description
         zone
         traits
+        series
+        package
       }
       ... on CommandCard {
         ...CommandCard_CommandCardBody
@@ -77,6 +85,8 @@ const Query = graphql`
         color
         traits
         description
+        series
+        package
         commandPilot: pilot {
           name
           AP
@@ -171,6 +181,11 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
             </div>
           </div>
 
+          <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
+            <span>{renderSeries(node.series)}</span>
+            <span>{renderPackage(node.package)}</span>
+          </div>
+
           {node.zone.length > 0 && (
             <div className="flex flex-col gap-1.5">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
@@ -259,6 +274,11 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
             </div>
           </div>
 
+          <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
+            <span>{renderSeries(node.series)}</span>
+            <span>{renderPackage(node.package)}</span>
+          </div>
+
           {node.traits.length > 0 && (
             <div className="flex flex-col gap-1.5">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
@@ -307,6 +327,11 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
               <span>AP {node.AP}</span>
               <span>HP {node.HP}</span>
             </div>
+          </div>
+
+          <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
+            <span>{renderSeries(node.series)}</span>
+            <span>{renderPackage(node.package)}</span>
           </div>
 
           {node.zone.length > 0 && (
@@ -373,6 +398,11 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
               <span>Lv {node.level}</span>
               <span>코스트 {node.cost}</span>
             </div>
+          </div>
+
+          <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
+            <span>{renderSeries(node.series)}</span>
+            <span>{renderPackage(node.package)}</span>
           </div>
 
           {node.commandPilot && (
