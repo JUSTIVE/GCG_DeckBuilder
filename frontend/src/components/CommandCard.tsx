@@ -63,7 +63,7 @@ export function CommandCardBody({
                 <div className="bg-black overflow-hidden w-full pl-7 cutout cutout-tr-sm px-2 pt-px pb-0.5 min-h-3">
                   <div
                     className={cn(
-                      "flex text-end text-white text-[6cqw] items-center min-h-[6cqw] justify-center",
+                      "flex text-center text-white text-[6cqw] items-center min-h-[6cqw] justify-center",
                       COLOR_TEXT20[commandCard.color],
                     )}
                   >
