@@ -110,7 +110,7 @@ export function UnitCardBody({
                 </div>
               </div>
               <div className="flex flex-row items-center">
-                <div className="w-6 bg-black -mr-4 py-px pb-1 z-1 text-[3cqw] pl-1.5">
+                <div className="w-6 bg-black -mr-4 py-px pb-1 z-1 text-[3cqw] pl-1.5 min-h-3">
                   링크
                 </div>
                 <div className="bg-black overflow-hidden w-full pl-7 parallelogram parallelogram-sm px-2 pt-px pb-0.5 min-h-3">
