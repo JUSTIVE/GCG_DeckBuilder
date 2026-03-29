@@ -11,6 +11,82 @@ const VALID_COLORS = [
   "PURPLE",
   "WHITE",
 ] as const;
+const VALID_KEYWORDS = [
+  "ACTION",
+  "ACTIVATE_ACTION",
+  "ACTIVATE_MAIN",
+  "ATTACK",
+  "BLOCKER",
+  "BREACH",
+  "BURST",
+  "DEPLOY",
+  "DESTROYED",
+  "DURING_LINK",
+  "DURING_PAIR",
+  "FIRST_STRIKE",
+  "HIGH_MANEUVER",
+  "SUPPRESSION",
+  "MAIN",
+  "ONCE_PER_TURN",
+  "END_OF_TURN",
+  "PILOT",
+  "REPAIR",
+  "SUPPORT",
+  "WHEN_LINKED",
+  "WHEN_PAIRED",
+] as const;
+const VALID_TRAITS = [
+  "ACADEMY",
+  "OZ",
+  "NEO_ZEON",
+  "ZEON",
+  "EARTH_ALLIANCE",
+  "EARTH_FEDERATION",
+  "MAGANAC_CORPS",
+  "ZAFT",
+  "OPERATION_METEOR",
+  "NEWTYPE",
+  "COORDINATOR",
+  "CYBER_NEWTYPE",
+  "STRONGHOLD",
+  "WARSHIP",
+  "TRIPLE_SHIP_ALLIANCE",
+  "CIVILIAN",
+  "WHITE_BASE_TEAM",
+  "G_TEAM",
+  "VANADIS_INSTITUTE",
+  "ORB",
+  "TEKKADAN",
+  "TEIWAZ",
+  "GJALLARHORN",
+  "GUNDAM_FRAME",
+  "ALAYA_VIJNANA",
+  "TITANS",
+  "VULTURE",
+  "AEUG",
+  "CLAN",
+  "AGE_SYSTEM",
+  "WHITE_FANG",
+  "SIDE_6",
+  "NEW_UNE",
+  "UE",
+  "VAGAN",
+  "BIOLOGICAL_CPU",
+  "ASUNO_FAMILY",
+  "X_ROUNDER",
+  "SUPERPOWER_BLOC",
+  "CB",
+  "INNOVADE",
+  "GN_DRIVE",
+  "SUPER_SOLDIER",
+  "MAFTY",
+  "SRA",
+  "OLD_UNE",
+  "JUPITRIS",
+  "CYCLOPS_TEAM",
+  "UN",
+  "MINERVA_SQUAD",
+] as const;
 const VALID_PACKAGES = [
   "GD01",
   "GD02",
@@ -48,11 +124,16 @@ export type CardListSearch = {
   level?: number[];
   zone?: Array<(typeof VALID_ZONES)[number]>;
   color?: Array<(typeof VALID_COLORS)[number]>;
+  keyword?: Array<(typeof VALID_KEYWORDS)[number]>;
+  trait?: Array<(typeof VALID_TRAITS)[number]>;
   package?: (typeof VALID_PACKAGES)[number];
   query?: string;
   sort?: (typeof VALID_SORTS)[number];
   cardId?: string;
 };
+
+export type CardKeyword = (typeof VALID_KEYWORDS)[number];
+export type CardTrait = (typeof VALID_TRAITS)[number];
 
 export const Route = createFileRoute("/cardlist")({
   validateSearch: (raw: Record<string, unknown>): CardListSearch => ({
@@ -77,6 +158,16 @@ export const Route = createFileRoute("/cardlist")({
       ? ((raw.color as string[]).filter((c) =>
           (VALID_COLORS as readonly string[]).includes(c),
         ) as CardListSearch["color"])
+      : undefined,
+    keyword: Array.isArray(raw.keyword)
+      ? ((raw.keyword as string[]).filter((k) =>
+          (VALID_KEYWORDS as readonly string[]).includes(k),
+        ) as CardListSearch["keyword"])
+      : undefined,
+    trait: Array.isArray(raw.trait)
+      ? ((raw.trait as string[]).filter((t) =>
+          (VALID_TRAITS as readonly string[]).includes(t),
+        ) as CardListSearch["trait"])
       : undefined,
     package:
       typeof raw.package === "string" &&

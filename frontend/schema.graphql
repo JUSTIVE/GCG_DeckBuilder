@@ -265,6 +265,7 @@ input CardFilterInput {
   package: CardPackage # 카드 팩
   rarity: CardRarity # 레어도
   keyword: [CardKeyword!] # 키워드
+  trait: [CardTrait!] # 특성
   zone: [Zone!] # 지형
   color: [CardColor!] # 색상
   query: String # 이름/효과정보

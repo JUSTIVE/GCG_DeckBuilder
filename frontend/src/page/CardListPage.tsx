@@ -4,10 +4,10 @@ import type { CardSort } from "@/__generated__/CardListPageQuery.graphql";
 import { CardList } from "@/components/CardList";
 import { useLazyLoadQuery } from "react-relay";
 import { graphql } from "relay-runtime";
-import { Route, type CardListSearch } from "@/routes/cardlist";
+import { Route, type CardListSearch, type CardKeyword, type CardTrait } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
-import { SlidersHorizontalIcon, XIcon } from "lucide-react";
+import { ChevronDownIcon, SlidersHorizontalIcon, XIcon } from "lucide-react";
 import { useRef, useState, useEffect, Suspense } from "react";
 import {
   Sheet,
@@ -32,6 +32,8 @@ function buildFilter(search: CardListSearch): CardFilterInput {
     level: search.level ?? null,
     zone: search.zone ?? null,
     color: search.color ?? null,
+    keyword: search.keyword ?? null,
+    trait: search.trait ?? null,
     package: search.package ?? null,
     query: search.query ?? null,
   };
@@ -50,6 +52,8 @@ function filterToSearch(
   const level = filter.level as number[] | null | undefined;
   const zone = filter.zone as CardListSearch["zone"] | null | undefined;
   const color = filter.color as CardListSearch["color"] | null | undefined;
+  const keyword = filter.keyword as CardListSearch["keyword"] | null | undefined;
+  const trait = filter.trait as CardListSearch["trait"] | null | undefined;
   const pkg = filter.package as CardListSearch["package"] | null | undefined;
   const query = filter.query as string | null | undefined;
   return {
@@ -58,6 +62,8 @@ function filterToSearch(
     level: level?.length ? level : undefined,
     zone: zone?.length ? zone : undefined,
     color: color?.length ? color : undefined,
+    keyword: keyword?.length ? keyword : undefined,
+    trait: trait?.length ? trait : undefined,
     package: pkg || undefined,
     query: query || undefined,
     sort: sort as CardListSearch["sort"] | undefined,
@@ -72,6 +78,8 @@ function activeFilterCount(filter: CardFilterInput): number {
   if ((filter.level as number[] | null | undefined)?.length) count++;
   if ((filter.zone as string[] | null | undefined)?.length) count++;
   if ((filter.color as string[] | null | undefined)?.length) count++;
+  if ((filter.keyword as string[] | null | undefined)?.length) count++;
+  if ((filter.trait as string[] | null | undefined)?.length) count++;
   if (filter.package) count++;
   if (filter.query) count++;
   return count;
@@ -123,6 +131,160 @@ const COST_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const LEVEL_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const INITIAL_FILTER: CardFilterInput = { kind: ["UNIT"] };
 
+const ALL_KEYWORDS: CardKeyword[] = [
+  "ACTION",
+  "ACTIVATE_ACTION",
+  "ACTIVATE_MAIN",
+  "ATTACK",
+  "BLOCKER",
+  "BREACH",
+  "BURST",
+  "DEPLOY",
+  "DESTROYED",
+  "DURING_LINK",
+  "DURING_PAIR",
+  "FIRST_STRIKE",
+  "HIGH_MANEUVER",
+  "SUPPRESSION",
+  "MAIN",
+  "ONCE_PER_TURN",
+  "END_OF_TURN",
+  "PILOT",
+  "REPAIR",
+  "SUPPORT",
+  "WHEN_LINKED",
+  "WHEN_PAIRED",
+];
+const KEYWORD_LABELS: Record<CardKeyword, string> = {
+  ACTION: "액션",
+  ACTIVATE_ACTION: "기동-액션",
+  ACTIVATE_MAIN: "기동-메인",
+  ATTACK: "공격시",
+  BLOCKER: "블로커",
+  BREACH: "돌파",
+  BURST: "버스트",
+  DEPLOY: "배포시",
+  DESTROYED: "파괴시",
+  DURING_LINK: "링크중",
+  DURING_PAIR: "페어중",
+  FIRST_STRIKE: "선제공격",
+  HIGH_MANEUVER: "고기동",
+  SUPPRESSION: "제압",
+  MAIN: "메인",
+  ONCE_PER_TURN: "턴에1회",
+  END_OF_TURN: "턴종료시",
+  PILOT: "파일럿",
+  REPAIR: "리페어",
+  SUPPORT: "원호",
+  WHEN_LINKED: "링크시",
+  WHEN_PAIRED: "페어시",
+};
+
+const ALL_TRAITS: CardTrait[] = [
+  "EARTH_FEDERATION",
+  "ZEON",
+  "NEO_ZEON",
+  "OZ",
+  "ACADEMY",
+  "EARTH_ALLIANCE",
+  "MAGANAC_CORPS",
+  "ZAFT",
+  "OPERATION_METEOR",
+  "NEWTYPE",
+  "COORDINATOR",
+  "CYBER_NEWTYPE",
+  "STRONGHOLD",
+  "WARSHIP",
+  "TRIPLE_SHIP_ALLIANCE",
+  "CIVILIAN",
+  "WHITE_BASE_TEAM",
+  "G_TEAM",
+  "VANADIS_INSTITUTE",
+  "ORB",
+  "TEKKADAN",
+  "TEIWAZ",
+  "GJALLARHORN",
+  "GUNDAM_FRAME",
+  "ALAYA_VIJNANA",
+  "TITANS",
+  "VULTURE",
+  "AEUG",
+  "CLAN",
+  "AGE_SYSTEM",
+  "WHITE_FANG",
+  "SIDE_6",
+  "NEW_UNE",
+  "UE",
+  "VAGAN",
+  "BIOLOGICAL_CPU",
+  "ASUNO_FAMILY",
+  "X_ROUNDER",
+  "SUPERPOWER_BLOC",
+  "CB",
+  "INNOVADE",
+  "GN_DRIVE",
+  "SUPER_SOLDIER",
+  "MAFTY",
+  "SRA",
+  "OLD_UNE",
+  "JUPITRIS",
+  "CYCLOPS_TEAM",
+  "UN",
+  "MINERVA_SQUAD",
+];
+const TRAIT_LABELS: Record<CardTrait, string> = {
+  ACADEMY: "학원",
+  OZ: "OZ",
+  NEO_ZEON: "네오 지온",
+  ZEON: "지온",
+  EARTH_ALLIANCE: "지구 연합",
+  EARTH_FEDERATION: "지구 연방",
+  MAGANAC_CORPS: "마그아낙",
+  ZAFT: "자프트",
+  OPERATION_METEOR: "오퍼레이션 메테오",
+  NEWTYPE: "뉴타입",
+  COORDINATOR: "코디네이터",
+  CYBER_NEWTYPE: "강화인간",
+  STRONGHOLD: "거점",
+  WARSHIP: "함선",
+  TRIPLE_SHIP_ALLIANCE: "삼척동맹",
+  CIVILIAN: "민간",
+  WHITE_BASE_TEAM: "화이트베이스",
+  G_TEAM: "G-팀",
+  VANADIS_INSTITUTE: "바나디스",
+  ORB: "오브",
+  TEKKADAN: "철화단",
+  TEIWAZ: "테이와즈",
+  GJALLARHORN: "걀라르호른",
+  GUNDAM_FRAME: "건담 프레임",
+  ALAYA_VIJNANA: "아라야식",
+  TITANS: "티탄즈",
+  VULTURE: "벌쳐",
+  AEUG: "에우고",
+  CLAN: "클랜",
+  AGE_SYSTEM: "에이지",
+  WHITE_FANG: "화이트 팽",
+  SIDE_6: "사이드 6",
+  NEW_UNE: "신지구연방",
+  UE: "UE",
+  VAGAN: "베이건",
+  BIOLOGICAL_CPU: "생체 CPU",
+  ASUNO_FAMILY: "아스노 일가",
+  X_ROUNDER: "X-라운더",
+  SUPERPOWER_BLOC: "초대국군",
+  CB: "솔레스탈 비잉",
+  INNOVADE: "이노베이드",
+  GN_DRIVE: "GN 드라이브",
+  SUPER_SOLDIER: "초인병",
+  MAFTY: "마프티",
+  SRA: "우주혁명군",
+  OLD_UNE: "지구연방군",
+  JUPITRIS: "주피트리스",
+  CYCLOPS_TEAM: "사이클롭스",
+  UN: "UN",
+  MINERVA_SQUAD: "미네르바",
+};
+
 const PACK_GROUPS: {
   label: string;
   items: { value: string; label: string }[];
@@ -159,6 +321,50 @@ const PACK_GROUPS: {
     ],
   },
 ];
+
+// ─── CollapsibleChips ────────────────────────────────────────────────────────
+
+function CollapsibleChips({
+  label,
+  activeCount,
+  children,
+}: {
+  label: string;
+  activeCount: number;
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(activeCount > 0);
+
+  useEffect(() => {
+    if (activeCount > 0) setOpen(true);
+  }, [activeCount]);
+
+  return (
+    <div className="flex flex-col gap-1.5">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-1 cursor-pointer w-fit"
+      >
+        <span className="text-xs text-muted-foreground w-10 shrink-0 text-left">
+          {label}
+        </span>
+        {activeCount > 0 && (
+          <span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+            {activeCount}
+          </span>
+        )}
+        <ChevronDownIcon
+          className={cn(
+            "h-3.5 w-3.5 text-muted-foreground transition-transform",
+            open && "rotate-180",
+          )}
+        />
+      </button>
+      {open && <div className="flex flex-wrap gap-1 pl-[2.875rem]">{children}</div>}
+    </div>
+  );
+}
 
 // ─── Filter controls (shared between bar and bottom sheet) ───────────────────
 
@@ -234,6 +440,22 @@ function FilterControls({
     });
   }
 
+  function toggleKeyword(k: CardKeyword) {
+    const current = (filter.keyword as string[] | undefined) ?? [];
+    const next = current.includes(k)
+      ? current.filter((x) => x !== k)
+      : [...current, k];
+    patch({ keyword: next.length > 0 ? (next as CardFilterInput["keyword"]) : null });
+  }
+
+  function toggleTrait(t: CardTrait) {
+    const current = (filter.trait as string[] | undefined) ?? [];
+    const next = current.includes(t)
+      ? current.filter((x) => x !== t)
+      : [...current, t];
+    patch({ trait: next.length > 0 ? (next as CardFilterInput["trait"]) : null });
+  }
+
   function onQueryChange(value: string) {
     setQueryText(value);
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -247,6 +469,8 @@ function FilterControls({
   const activeLevel = (filter.level as number[] | undefined) ?? [];
   const activeZone = (filter.zone as string[] | undefined) ?? [];
   const activeColor = (filter.color as string[] | undefined) ?? [];
+  const activeKeyword = (filter.keyword as string[] | undefined) ?? [];
+  const activeTrait = (filter.trait as string[] | undefined) ?? [];
   const activePackage = filter.package as string | null | undefined;
 
   return (
@@ -435,6 +659,50 @@ function FilterControls({
         </div>
       </div>
 
+      {/* Keyword */}
+      <CollapsibleChips
+        label="키워드"
+        activeCount={activeKeyword.length}
+      >
+        {ALL_KEYWORDS.map((k) => (
+          <button
+            type="button"
+            key={k}
+            onClick={() => toggleKeyword(k)}
+            className={cn(
+              "rounded-md border px-2 py-0.5 text-xs font-medium transition-colors cursor-pointer",
+              activeKeyword.includes(k)
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+            )}
+          >
+            {KEYWORD_LABELS[k]}
+          </button>
+        ))}
+      </CollapsibleChips>
+
+      {/* Trait */}
+      <CollapsibleChips
+        label="특성"
+        activeCount={activeTrait.length}
+      >
+        {ALL_TRAITS.map((t) => (
+          <button
+            type="button"
+            key={t}
+            onClick={() => toggleTrait(t)}
+            className={cn(
+              "rounded-md border px-2 py-0.5 text-xs font-medium transition-colors cursor-pointer",
+              activeTrait.includes(t)
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+            )}
+          >
+            {TRAIT_LABELS[t]}
+          </button>
+        ))}
+      </CollapsibleChips>
+
       {/* Query */}
       <div className="flex items-center gap-1.5">
         <span className="text-xs text-muted-foreground w-10 shrink-0">
@@ -502,7 +770,32 @@ function FilterBottomSheet({
   onSortChange,
 }: FilterControlsProps) {
   const [open, setOpen] = useState(false);
+  const [dragY, setDragY] = useState(0);
+  const dragStartY = useRef<number | null>(null);
   const count = activeFilterCount(filter);
+
+  function onHandlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    dragStartY.current = e.clientY;
+    setDragY(0);
+    (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
+  }
+
+  function onHandlePointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    if (dragStartY.current === null) return;
+    const delta = Math.max(0, e.clientY - dragStartY.current);
+    setDragY(delta);
+  }
+
+  function onHandlePointerUp() {
+    if (dragStartY.current === null) return;
+    if (dragY > 80) {
+      setOpen(false);
+    }
+    dragStartY.current = null;
+    setDragY(0);
+  }
+
+  const isDragging = dragStartY.current !== null;
 
   return (
     <div className="flex md:hidden items-center gap-2 border-b border-border px-4 py-2">
@@ -534,18 +827,30 @@ function FilterBottomSheet({
         <SheetContent
           side="bottom"
           showCloseButton={false}
-          className="px-4 pb-8 pt-0 rounded-t-xl"
+          className="px-4 pb-0 pt-0 rounded-t-xl max-h-[80dvh] flex flex-col"
+          style={{
+            transform: `translateY(${dragY}px)`,
+            transition: isDragging ? "none" : undefined,
+          }}
         >
-          <div className="mx-auto mb-4 mt-3 h-1 w-10 rounded-full bg-muted-foreground/30" />
-          <SheetHeader className="p-0 mb-4">
+          <div
+            className="mx-auto mb-4 mt-3 h-1 w-10 rounded-full bg-muted-foreground/30 shrink-0 touch-none cursor-grab active:cursor-grabbing"
+            onPointerDown={onHandlePointerDown}
+            onPointerMove={onHandlePointerMove}
+            onPointerUp={onHandlePointerUp}
+            onPointerCancel={onHandlePointerUp}
+          />
+          <SheetHeader className="p-0 mb-4 shrink-0">
             <SheetTitle>필터</SheetTitle>
           </SheetHeader>
-          <FilterControls
-            filter={filter}
-            sort={sort}
-            onChange={onChange}
-            onSortChange={onSortChange}
-          />
+          <div className="overflow-y-auto pb-8">
+            <FilterControls
+              filter={filter}
+              sort={sort}
+              onChange={onChange}
+              onSortChange={onSortChange}
+            />
+          </div>
         </SheetContent>
       </Sheet>
     </div>

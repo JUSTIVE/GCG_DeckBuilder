@@ -250,6 +250,7 @@ interface CardFilterInput {
   package?: string;
   rarity?: string;
   keyword?: string[];
+  trait?: string[];
   zone?: string[];
   color?: string[];
   query?: string;
@@ -299,6 +300,14 @@ function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[] {
         ? (c["keywords"] as string[])
         : [];
       if (!filter.keyword.every((kw) => cardKws.includes(kw))) return false;
+    }
+
+    // trait — card must contain ALL listed traits
+    if (filter.trait?.length) {
+      const cardTraits = Array.isArray(c["trait"])
+        ? (c["trait"] as string[])
+        : [];
+      if (!filter.trait.every((t) => cardTraits.includes(t))) return false;
     }
 
     // zone — card must overlap at least one requested zone
