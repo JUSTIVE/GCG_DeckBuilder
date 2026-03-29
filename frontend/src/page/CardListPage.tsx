@@ -762,7 +762,12 @@ function FilterBottomSheet({
   sort,
   onChange,
   onSortChange,
-}: FilterControlsProps) {
+  showDescription,
+  onToggleDescription,
+}: FilterControlsProps & {
+  showDescription: boolean;
+  onToggleDescription: () => void;
+}) {
   const [open, setOpen] = useState(false);
   const [dragY, setDragY] = useState(0);
   const dragStartY = useRef<number | null>(null);
@@ -793,6 +798,19 @@ function FilterBottomSheet({
 
   return (
     <div className="flex md:hidden items-center gap-2 border-b border-border px-4 py-2">
+      <button
+        type="button"
+        onClick={onToggleDescription}
+        className={cn(
+          "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
+          showDescription
+            ? "border-primary bg-primary text-primary-foreground"
+            : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+        )}
+      >
+        <FileTextIcon className="h-3.5 w-3.5" />
+        효과
+      </button>
       <button
         type="button"
         onClick={() => setOpen(true)}
@@ -923,8 +941,10 @@ export function CardListPage() {
           sort={sort}
           onChange={handleFilterChange}
           onSortChange={handleSortChange}
+          showDescription={showDescription}
+          onToggleDescription={() => setShowDescription((v) => !v)}
         />
-        <div className="flex items-center gap-2 border-b border-border px-4 py-2">
+        <div className="hidden md:flex items-center gap-2 border-b border-border px-4 py-2">
           <button
             type="button"
             onClick={() => setShowDescription((v) => !v)}
