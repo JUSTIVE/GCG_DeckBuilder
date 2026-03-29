@@ -14,6 +14,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import type { PropsWithChildren } from "react";
+import { QuickSearch } from "@/components/QuickSearch";
 export default function Scaffold({ children }: PropsWithChildren) {
   return (
     <SidebarProvider>
@@ -34,6 +35,9 @@ export default function Scaffold({ children }: PropsWithChildren) {
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
+          </div>
+          <div className="ml-auto px-3">
+            <QuickSearch />
           </div>
         </header>
         {children}

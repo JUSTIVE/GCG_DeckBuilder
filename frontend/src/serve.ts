@@ -136,16 +136,19 @@ function bestFzfScore(pattern: string, targets: string[]): number {
 
 /** Extracts searchable text tokens from a raw card by field group. */
 function cardSearchTokens(card: AnyRecord): {
+  id: string[];
   name: string[];
   description: string[];
   traits: string[];
   links: string[];
 } {
+  const id: string[] = [];
   const name: string[] = [];
   const description: string[] = [];
   const traits: string[] = [];
   const links: string[] = [];
 
+  if (typeof card["id"] === "string") id.push(card["id"]);
   if (typeof card["name"] === "string") name.push(card["name"]);
 
   if (Array.isArray(card["description"])) {
@@ -167,7 +170,7 @@ function cardSearchTokens(card: AnyRecord): {
     if (typeof l["pilotName"] === "string") links.push(l["pilotName"] as string);
   }
 
-  return { name, description, traits, links };
+  return { id, name, description, traits, links };
 }
 
 // ─── Cursor helpers ───────────────────────────────────────────────────────────
@@ -369,20 +372,40 @@ const rootValue = {
   quicksearch({ query, first = 20 }: { query: string; first?: number }) {
     if (!query.trim()) return [];
 
+    // Parenthesised query → treat as trait-focused search and apply a large
+    // trait bonus so that trait matches rank to the top.
+    const trimmed = query.trim();
+    const traitFocused =
+      trimmed.startsWith("(") && trimmed.endsWith(")") && trimmed.length > 2;
+    const cleanQuery = traitFocused ? trimmed.slice(1, -1).trim() : trimmed;
+
+    const TRAIT_BONUS = 40;
+
     const scored: Array<{ score: number; card: RawCard }> = [];
 
     for (const card of allCards) {
       const tokens = cardSearchTokens(card as AnyRecord);
 
-      const nameScore = bestFzfScore(query, tokens.name);
-      const descScore = bestFzfScore(query, tokens.description);
-      const traitScore = bestFzfScore(query, tokens.traits);
-      const linkScore = bestFzfScore(query, tokens.links);
+      const idScore = bestFzfScore(cleanQuery, tokens.id);
+      const nameScore = bestFzfScore(cleanQuery, tokens.name);
+      const descScore = bestFzfScore(cleanQuery, tokens.description);
+      const traitScore = bestFzfScore(cleanQuery, tokens.traits);
+      const linkScore = bestFzfScore(cleanQuery, tokens.links);
 
-      const maxScore = Math.max(nameScore, descScore, traitScore, linkScore);
+      const boostedTraitScore =
+        traitFocused && traitScore >= 0 ? traitScore + TRAIT_BONUS : traitScore;
+
+      const maxScore = Math.max(
+        idScore,
+        nameScore,
+        descScore,
+        boostedTraitScore,
+        linkScore,
+      );
       if (maxScore >= 0) {
-        // Name matches get a significant boost over description/trait/link
-        const finalScore = nameScore >= 0 ? maxScore + 20 : maxScore;
+        // Name matches get a boost unless we're in trait-focused mode
+        const finalScore =
+          !traitFocused && nameScore >= 0 ? maxScore + 20 : maxScore;
         scored.push({ score: finalScore, card });
       }
     }
