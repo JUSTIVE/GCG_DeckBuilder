@@ -120,7 +120,7 @@ const COLOR_LABELS: Record<string, string> = {
 };
 
 const COST_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const LEVEL_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const LEVEL_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const INITIAL_FILTER: CardFilterInput = { kind: ["UNIT"] };
 
 const PACK_GROUPS: {
