@@ -21,6 +21,7 @@ const fetchGraphQL: FetchFunction = async (
   variables,
 ): Promise<GraphQLResponse> => {
   try {
+    console.log("fetching", request.text?.split("\n").at(0), variables);
     const resp = await serveGraphQL(request.text ?? "", variables);
     return resp as GraphQLResponse;
   } catch {

@@ -8,37 +8,28 @@ import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { COLOR_BG, COLOR_BG20 } from "src/render/color";
-
-const Fragment = graphql`
-  fragment PilotCardFragment on PilotCard {
-    id
-    level
-    cost
-    color
-    rarity
-    traits
-    description
-    pilot {
-      name
-      AP
-      HP
-    }
-  }
-`;
-
-type Props = {
-  pilotCardRef: PilotCardFragment$key;
-};
+import type { PilotCard_PilotCardBody$key } from "src/__generated__/PilotCard_PilotCardBody.graphql";
 
 export function PilotCardBody({
-  pilotCard,
+  pilotCardRef,
 }: {
-  pilotCard: {
-    color: string;
-    traits: readonly string[];
-    pilot: { name: string; AP: number; HP: number };
-  };
+  pilotCardRef: PilotCard_PilotCardBody$key;
 }) {
+  const pilotCard = useFragment(
+    graphql`
+      fragment PilotCard_PilotCardBody on PilotCard {
+        color
+        traits
+        pilot {
+          name
+          AP
+          HP
+        }
+      }
+    `,
+    pilotCardRef,
+  );
+
   return (
     <>
       <img
@@ -97,6 +88,28 @@ export function PilotCardBody({
   );
 }
 
+const Fragment = graphql`
+  fragment PilotCardFragment on PilotCard {
+    ...PilotCard_PilotCardBody
+    id
+    level
+    cost
+    color
+    rarity
+    traits
+    description
+    pilot {
+      name
+      AP
+      HP
+    }
+  }
+`;
+
+type Props = {
+  pilotCardRef: PilotCardFragment$key;
+};
+
 export function PilotCard({ pilotCardRef }: Props) {
   const pilotCard = useFragment(Fragment, pilotCardRef);
   const search = Route.useSearch();
@@ -122,7 +135,7 @@ export function PilotCard({ pilotCardRef }: Props) {
         )}
         onClick={openDialog}
       >
-        <PilotCardBody pilotCard={pilotCard} />
+        <PilotCardBody pilotCardRef={pilotCard} />
       </button>
     </>
   );

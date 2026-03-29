@@ -9,42 +9,31 @@ import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { COLOR_BG, COLOR_BG20, COLOR_TEXT } from "src/render/color";
-
-const Fragment = graphql`
-  fragment BaseCardFragment on BaseCard {
-    id
-    name
-    level
-    cost
-    color
-    rarity
-    AP
-    HP
-    zone
-    traits
-    description
-  }
-`;
-
-type Props = {
-  baseCardRef: BaseCardFragment$key;
-};
+import type { BaseCard_BaseCardBody$key } from "src/__generated__/BaseCard_BaseCardBody.graphql";
 
 export function BaseCardBody({
-  baseCard,
+  baseCardRef,
   isWhite,
 }: {
-  baseCard: {
-    name: string;
-    color: string;
-    AP: number;
-    HP: number;
-    zone: readonly string[];
-    traits: readonly string[];
-  };
+  baseCardRef: BaseCard_BaseCardBody$key;
 
   isWhite: boolean;
 }) {
+  const baseCard = useFragment(
+    graphql`
+      fragment BaseCard_BaseCardBody on BaseCard {
+        id
+        name
+        color
+        AP
+        HP
+        zone
+        traits
+        description
+      }
+    `,
+    baseCardRef,
+  );
   return (
     <>
       <img
@@ -126,6 +115,27 @@ export function BaseCardBody({
   );
 }
 
+const Fragment = graphql`
+  fragment BaseCardFragment on BaseCard {
+    ...BaseCard_BaseCardBody
+    id
+    name
+    level
+    cost
+    color
+    rarity
+    AP
+    HP
+    zone
+    traits
+    description
+  }
+`;
+
+type Props = {
+  baseCardRef: BaseCardFragment$key;
+};
+
 export function BaseCard({ baseCardRef }: Props) {
   const baseCard = useFragment(Fragment, baseCardRef);
   const search = Route.useSearch();
@@ -144,17 +154,15 @@ export function BaseCard({ baseCardRef }: Props) {
   }
 
   return (
-    <>
-      <button
-        type="button"
-        className={cn(
-          "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline",
-          open && "z-10",
-        )}
-        onClick={openDialog}
-      >
-        <BaseCardBody baseCard={baseCard} isWhite={isWhite} />
-      </button>
-    </>
+    <button
+      type="button"
+      className={cn(
+        "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline",
+        open && "z-10",
+      )}
+      onClick={openDialog}
+    >
+      <BaseCardBody baseCardRef={baseCard} isWhite={isWhite} />
+    </button>
   );
 }

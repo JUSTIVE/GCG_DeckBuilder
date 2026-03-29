@@ -42,6 +42,7 @@ const Query = graphql`
         }
       }
       ... on PilotCard {
+        ...PilotCard_PilotCardBody
         id
         level
         cost
@@ -55,6 +56,7 @@ const Query = graphql`
         }
       }
       ... on BaseCard {
+        ...BaseCard_BaseCardBody
         id
         name
         level
@@ -67,6 +69,7 @@ const Query = graphql`
         traits
       }
       ... on CommandCard {
+        ...CommandCard_CommandCardBody
         id
         name
         level
@@ -119,14 +122,14 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
       );
     }
     if (node.__typename === "PilotCard") {
-      return <PilotCardBody pilotCard={node} />;
+      return <PilotCardBody pilotCardRef={node} />;
     }
     if (node.__typename === "BaseCard") {
       const isWhite = node.color === "WHITE";
-      return <BaseCardBody baseCard={node} isWhite={isWhite} />;
+      return <BaseCardBody baseCardRef={node} isWhite={isWhite} />;
     }
     if (node.__typename === "CommandCard") {
-      return <CommandCardBody commandCard={node} />;
+      return <CommandCardBody commandCardRef={node} />;
     }
     if (node.__typename === "Resource") {
       return <ResourceCardBody resourceCard={node} />;

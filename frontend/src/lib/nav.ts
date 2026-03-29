@@ -17,7 +17,7 @@ export const navMain: NavItem[] = [
   {
     title: "도구",
     url: "",
-    items: [{ title: "리소스 시뮬레이터", url: "/resource-counter" }],
+    items: [{ title: "리소스 카운터", url: "/resource-counter" }],
   },
 ];
 

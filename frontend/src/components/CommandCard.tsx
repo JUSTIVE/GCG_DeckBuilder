@@ -1,5 +1,7 @@
 import { graphql } from "relay-runtime";
 import type { CommandCardFragment$key } from "@/__generated__/CommandCardFragment.graphql";
+import type { CommandCard_CommandCardBody$key } from "@/__generated__/CommandCard_CommandCardBody.graphql";
+
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
@@ -9,38 +11,27 @@ import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { COLOR_BG, COLOR_BG20, COLOR_TEXT20 } from "src/render/color";
 
-const Fragment = graphql`
-  fragment CommandCardFragment on CommandCard {
-    id
-    name
-    level
-    cost
-    color
-    rarity
-    traits
-    commandPilot: pilot {
-      name
-      AP
-      HP
-    }
-    description
-  }
-`;
-
-type Props = {
-  commandCardRef: CommandCardFragment$key;
-};
-
 export function CommandCardBody({
-  commandCard,
+  commandCardRef,
 }: {
-  commandCard: {
-    name: string;
-    color: string;
-    traits: readonly string[];
-    commandPilot?: { name: string; AP: number; HP: number } | null;
-  };
+  commandCardRef: CommandCard_CommandCardBody$key;
 }) {
+  const commandCard = useFragment(
+    graphql`
+      fragment CommandCard_CommandCardBody on CommandCard {
+        name
+        color
+        traits
+        commandPilot: pilot {
+          name
+          AP
+          HP
+        }
+      }
+    `,
+    commandCardRef,
+  );
+
   return (
     <>
       <img
@@ -118,6 +109,29 @@ export function CommandCardBody({
   );
 }
 
+const Fragment = graphql`
+  fragment CommandCardFragment on CommandCard {
+    ...CommandCard_CommandCardBody
+    id
+    name
+    level
+    cost
+    color
+    rarity
+    traits
+    commandPilot: pilot {
+      name
+      AP
+      HP
+    }
+    description
+  }
+`;
+
+type Props = {
+  commandCardRef: CommandCardFragment$key;
+};
+
 export function CommandCard({ commandCardRef }: Props) {
   const commandCard = useFragment(Fragment, commandCardRef);
   const search = Route.useSearch();
@@ -143,7 +157,7 @@ export function CommandCard({ commandCardRef }: Props) {
         )}
         onClick={openDialog}
       >
-        <CommandCardBody commandCard={commandCard} />
+        <CommandCardBody commandCardRef={commandCard} />
       </button>
     </>
   );
