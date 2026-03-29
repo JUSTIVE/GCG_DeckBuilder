@@ -24,6 +24,8 @@ export function BaseCardBody({
     graphql`
       fragment BaseCard_BaseCardBody on BaseCard {
         id
+        level
+        cost
         rarity
         name
         color
@@ -43,8 +45,31 @@ export function BaseCardBody({
         src={tempimg}
         alt={baseCard.name}
       />
-      <div className="bg-black text-white z-1 w-fit self-end px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
-        {baseCard.id}-{renderRarity(baseCard.rarity)}
+      <div className="flex flex-row items-start justify-between z-1">
+        <div className="flex flex-col font-bold">
+          <div
+            className={cn(
+              "text-white text-[6cqw] w-[20cqw] leading-[8cqw] cutout cutout-br-sm text-center",
+              COLOR_BG[baseCard.color],
+              baseCard.color === "WHITE" ? "text-gray-400" : undefined,
+            )}
+          >
+            <span className="text-[3cqw]">Lv.</span>
+            {baseCard.level}
+          </div>
+          <div
+            className={cn(
+              "text-white w-[15cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-sm -translate-y-px text-center",
+              COLOR_BG[baseCard.color],
+              baseCard.color === "WHITE" ? "text-gray-400" : undefined,
+            )}
+          >
+            {baseCard.level}
+          </div>
+        </div>
+        <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
+          {baseCard.id}-{renderRarity(baseCard.rarity)}
+        </div>
       </div>
       <div />
       <div className="flex flex-col gap-2 z-1">
@@ -95,7 +120,7 @@ export function BaseCardBody({
                   "aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_BG20[baseCard.color],
                   baseCard.color === "WHITE"
-                    ? "text-black"
+                    ? "text-gray-400"
                     : COLOR_TEXT[baseCard.color],
                 )}
               >
@@ -106,7 +131,7 @@ export function BaseCardBody({
                   "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_BG20[baseCard.color],
                   baseCard.color === "WHITE"
-                    ? "text-black"
+                    ? "text-gray-400"
                     : COLOR_TEXT[baseCard.color],
                 )}
               >
