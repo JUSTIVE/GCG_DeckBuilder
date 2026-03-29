@@ -40,7 +40,7 @@ export function PilotCardBody({
         src={tempimg}
         alt={pilotCard.pilot.name}
       />
-      <div />
+
       <div className="bg-black text-white z-1 w-fit self-end px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
         {pilotCard.id}-{renderRarity(pilotCard.rarity)}
       </div>
