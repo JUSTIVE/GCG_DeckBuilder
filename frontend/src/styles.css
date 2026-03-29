@@ -123,6 +123,7 @@
 * {
   box-sizing: border-box;
   scrollbar-width: none;
+  font-variant-numeric: tabular-nums;
 }
 
 *::-webkit-scrollbar {
