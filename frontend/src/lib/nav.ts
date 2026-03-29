@@ -9,10 +9,7 @@ export const navMain: NavItem[] = [
   {
     title: "카드 찾기",
     url: "",
-    items: [
-      { title: "전체 카드", url: "/cardlist" },
-      { title: "스타터 덱", url: "#" },
-    ],
+    items: [{ title: "전체 카드", url: "/cardlist" }],
   },
   {
     title: "도구",
@@ -22,7 +19,9 @@ export const navMain: NavItem[] = [
 ];
 
 /** Returns [parentItem, childItem?] matching the given pathname. */
-export function resolveBreadcrumb(pathname: string): [NavItem, NavItem?] | null {
+export function resolveBreadcrumb(
+  pathname: string,
+): [NavItem, NavItem?] | null {
   for (const parent of navMain) {
     if (parent.url !== "#" && parent.url === pathname) {
       return [parent];
