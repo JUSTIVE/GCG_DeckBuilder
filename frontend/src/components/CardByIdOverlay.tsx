@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { CardDescription } from "./CardDescription";
 import { Dialog } from "@base-ui/react/dialog";
 import { useRouter } from "@tanstack/react-router";
+import type { CardListSearch, CardTrait } from "@/routes/cardlist";
 
 const Query = graphql`
   query CardByIdOverlayQuery($id: ID!) {
@@ -124,6 +125,14 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
     });
   }
 
+  function navigateWithFilter(filter: Partial<CardListSearch>) {
+    router.navigate({
+      to: "/cardlist",
+      search: filter,
+      replace: true,
+    });
+  }
+
   function renderThumbnail() {
     if (!node) return null;
     if (node.__typename === "UnitCard") {
@@ -153,23 +162,27 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
     if (!node) return null;
 
     if (node.__typename === "UnitCard") {
-      const linkLabels = node.links
-        .map((x) =>
-          x.__typename === "LinkPilot" && x.pilot
-            ? `[${x.pilot.name}]`
-            : x.__typename === "LinkTrait" && x.trait
-              ? `(${renderTrait(x.trait)})`
-              : null,
-        )
-        .filter((x): x is string => x !== null);
+      const linkItems = node.links
+        .map((x) => {
+          if (x.__typename === "LinkPilot" && x.pilot) {
+            return { label: `[${x.pilot.name}]`, onClick: () => navigateWithFilter({ query: x.pilot!.name }) };
+          }
+          if (x.__typename === "LinkTrait" && x.trait) {
+            return { label: `(${renderTrait(x.trait)})`, onClick: () => navigateWithFilter({ trait: [x.trait as CardTrait] }) };
+          }
+          return null;
+        })
+        .filter((x): x is NonNullable<typeof x> => x !== null);
 
       return (
         <div className="pointer-events-auto max-h-[80dvh] w-72 overflow-y-auto rounded-xl bg-black/75 px-4 py-5 text-white backdrop-blur-md flex flex-col gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span
-                className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/20"
+              <button
+                type="button"
+                className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/20 cursor-pointer hover:scale-125 transition-transform"
                 style={{ background: COLOR_HEX[node.color] ?? "#000" }}
+                onClick={() => navigateWithFilter({ color: [node.color as any] })}
               />
               <h2 className="text-sm font-bold leading-tight">{node.name}</h2>
             </div>
@@ -184,22 +197,24 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
 
           <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
             <span>{renderSeries(node.series)}</span>
-            <span>{renderPackage(node.package)}</span>
+            <button type="button" className="hover:text-white cursor-pointer" onClick={() => navigateWithFilter({ package: node.package as CardListSearch["package"] })}>
+              {renderPackage(node.package)}
+            </button>
           </div>
 
           {node.zone.length > 0 && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                지형
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">지형</span>
               <div className="flex flex-wrap gap-1">
                 {node.zone.map((z) => (
-                  <span
+                  <button
                     key={z}
-                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
+                    type="button"
+                    onClick={() => navigateWithFilter({ zone: [z as any] })}
+                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
                   >
                     {renderZone(z)}
-                  </span>
+                  </button>
                 ))}
               </div>
             </div>
@@ -207,35 +222,35 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
 
           {node.traits.length > 0 && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                특성
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">특성</span>
               <div className="flex flex-wrap gap-1">
                 {node.traits.map((t) => (
-                  <span
+                  <button
                     key={t}
-                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
+                    type="button"
+                    onClick={() => navigateWithFilter({ trait: [t as CardTrait] })}
+                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
                   >
                     {renderTrait(t)}
-                  </span>
+                  </button>
                 ))}
               </div>
             </div>
           )}
 
-          {linkLabels.length > 0 && (
+          {linkItems.length > 0 && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                링크
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">링크</span>
               <div className="flex flex-wrap gap-1">
-                {linkLabels.map((l) => (
-                  <span
-                    key={l}
-                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
+                {linkItems.map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={item.onClick}
+                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
                   >
-                    {l}
-                  </span>
+                    {item.label}
+                  </button>
                 ))}
               </div>
             </div>
@@ -243,9 +258,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
 
           {node.description.length > 0 && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                효과
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">효과</span>
               <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
@@ -258,13 +271,13 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
         <div className="pointer-events-auto max-h-[80dvh] w-72 overflow-y-auto rounded-xl bg-black/75 px-4 py-5 text-white backdrop-blur-md flex flex-col gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span
-                className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/20"
+              <button
+                type="button"
+                className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/20 cursor-pointer hover:scale-125 transition-transform"
                 style={{ background: COLOR_HEX[node.color] ?? "#000" }}
+                onClick={() => navigateWithFilter({ color: [node.color as any] })}
               />
-              <h2 className="text-sm font-bold leading-tight">
-                {node.pilot.name}
-              </h2>
+              <h2 className="text-sm font-bold leading-tight">{node.pilot.name}</h2>
             </div>
             <div className="text-xs text-white/60">{node.id}</div>
             <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
@@ -277,22 +290,24 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
 
           <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
             <span>{renderSeries(node.series)}</span>
-            <span>{renderPackage(node.package)}</span>
+            <button type="button" className="hover:text-white cursor-pointer" onClick={() => navigateWithFilter({ package: node.package as any })}>
+              {renderPackage(node.package)}
+            </button>
           </div>
 
           {node.traits.length > 0 && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                특성
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">특성</span>
               <div className="flex flex-wrap gap-1">
                 {node.traits.map((t) => (
-                  <span
+                  <button
                     key={t}
-                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
+                    type="button"
+                    onClick={() => navigateWithFilter({ trait: [t as CardTrait] })}
+                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
                   >
                     {renderTrait(t)}
-                  </span>
+                  </button>
                 ))}
               </div>
             </div>
@@ -300,9 +315,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
 
           {node.description.length > 0 && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                효과
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">효과</span>
               <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
@@ -315,9 +328,11 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
         <div className="pointer-events-auto max-h-[80dvh] w-72 overflow-y-auto rounded-xl bg-black/75 px-4 py-5 text-white backdrop-blur-md flex flex-col gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span
-                className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/20"
+              <button
+                type="button"
+                className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/20 cursor-pointer hover:scale-125 transition-transform"
                 style={{ background: COLOR_HEX[node.color] ?? "#000" }}
+                onClick={() => navigateWithFilter({ color: [node.color as any] })}
               />
               <h2 className="text-sm font-bold leading-tight">{node.name}</h2>
             </div>
@@ -332,22 +347,24 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
 
           <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
             <span>{renderSeries(node.series)}</span>
-            <span>{renderPackage(node.package)}</span>
+            <button type="button" className="hover:text-white cursor-pointer" onClick={() => navigateWithFilter({ package: node.package as any })}>
+              {renderPackage(node.package)}
+            </button>
           </div>
 
           {node.zone.length > 0 && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                지형
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">지형</span>
               <div className="flex flex-wrap gap-1">
                 {node.zone.map((z) => (
-                  <span
+                  <button
                     key={z}
-                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
+                    type="button"
+                    onClick={() => navigateWithFilter({ zone: [z as any] })}
+                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
                   >
                     {renderZone(z)}
-                  </span>
+                  </button>
                 ))}
               </div>
             </div>
@@ -355,17 +372,17 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
 
           {node.traits.length > 0 && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                특성
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">특성</span>
               <div className="flex flex-wrap gap-1">
                 {node.traits.map((t) => (
-                  <span
+                  <button
                     key={t}
-                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
+                    type="button"
+                    onClick={() => navigateWithFilter({ trait: [t as CardTrait] })}
+                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
                   >
                     {renderTrait(t)}
-                  </span>
+                  </button>
                 ))}
               </div>
             </div>
@@ -373,9 +390,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
 
           {node.description.length > 0 && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                효과
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">효과</span>
               <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
@@ -388,9 +403,11 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
         <div className="pointer-events-auto max-h-[80dvh] w-72 overflow-y-auto rounded-xl bg-black/75 px-4 py-5 text-white backdrop-blur-md flex flex-col gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span
-                className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/20"
+              <button
+                type="button"
+                className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/20 cursor-pointer hover:scale-125 transition-transform"
                 style={{ background: COLOR_HEX[node.color] ?? "#000" }}
+                onClick={() => navigateWithFilter({ color: [node.color as any] })}
               />
               <h2 className="text-sm font-bold leading-tight">{node.name}</h2>
             </div>
@@ -403,16 +420,18 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
 
           <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
             <span>{renderSeries(node.series)}</span>
-            <span>{renderPackage(node.package)}</span>
+            <button type="button" className="hover:text-white cursor-pointer" onClick={() => navigateWithFilter({ package: node.package as any })}>
+              {renderPackage(node.package)}
+            </button>
           </div>
 
           {node.commandPilot && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                파일럿
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">파일럿</span>
               <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs">
-                <span>{node.commandPilot.name}</span>
+                <button type="button" className="hover:text-white cursor-pointer" onClick={() => navigateWithFilter({ query: node.commandPilot!.name })}>
+                  {node.commandPilot.name}
+                </button>
                 <span className="text-white/60">AP {node.commandPilot.AP}</span>
                 <span className="text-white/60">HP {node.commandPilot.HP}</span>
               </div>
@@ -421,17 +440,17 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
 
           {node.traits.length > 0 && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                특성
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">특성</span>
               <div className="flex flex-wrap gap-1">
                 {node.traits.map((t) => (
-                  <span
+                  <button
                     key={t}
-                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs"
+                    type="button"
+                    onClick={() => navigateWithFilter({ trait: [t as CardTrait] })}
+                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
                   >
                     {renderTrait(t)}
-                  </span>
+                  </button>
                 ))}
               </div>
             </div>
@@ -439,9 +458,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
 
           {node.description.length > 0 && (
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
-                효과
-              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">효과</span>
               <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
