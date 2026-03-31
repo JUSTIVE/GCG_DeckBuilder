@@ -6474,7 +6474,7 @@
     "id": "GD01-102"
   },
   {
-    "name": "뚝심바퀴의 고집",
+    "name": "톱니바퀴의 고집",
     "level": 1,
     "cost": 1,
     "color": "BLUE",
@@ -6489,7 +6489,7 @@
     ],
     "description": [
       "【메인】Choose 1 active friendly (Earth Federation) Unit and 1 active enemy Unit. Rest them.",
-      "【파일럿】[Daguza Mackle]"
+      "【파일럿】[다구자 맥클]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-103",
@@ -6596,7 +6596,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 Unit that is Lv.4 or higher. During this turn, it may choose an active enemy Unit with 6 or less AP as its attack target.",
-      "【파일럿】[Rasid Kurama]"
+      "【파일럿】[라시드 쿠라마]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-110",
@@ -9374,7 +9374,7 @@
     "HP": 1
   },
   {
-    "name": "Orga, Crot, and Shani",
+    "name": "올가 & 클로토 & 샤니",
     "level": 5,
     "cost": 1,
     "color": "BLUE",
@@ -9544,7 +9544,7 @@
     "HP": 1
   },
   {
-    "name": "가로드 란 & Tiffa Adill",
+    "name": "가로드 란 & 티파 아딜",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -9568,7 +9568,7 @@
     "HP": 2
   },
   {
-    "name": "Lafter Frankland",
+    "name": "라프터 프랭크랜드",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -9725,7 +9725,7 @@
     "id": "GD02-101"
   },
   {
-    "name": "Mouar’s Determination",
+    "name": "마우아의 믿음",
     "level": 2,
     "cost": 1,
     "color": "BLUE",
@@ -9741,7 +9741,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 friendly (Titans) Unit. It gets AP+2 during this turn.",
-      "【파일럿】[Mouar Pharaoh]"
+      "【파일럿】[마우아 파라오]"
     ],
     "__typename": "CommandCard",
     "id": "GD02-102",
@@ -9959,7 +9959,7 @@
     ],
     "description": [
       "【메인】/【액션】If a friendly (Teiwaz) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. Destroy it.",
-      "【파일럿】[Amida Arca]"
+      "【파일럿】[아미다 아르카]"
     ],
     "__typename": "CommandCard",
     "id": "GD02-113",
@@ -9987,7 +9987,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 damaged friendly Unit. It gets AP+2 during this turn.",
-      "【파일럿】[Norba Shino]"
+      "【파일럿】[노르바 시노]"
     ],
     "__typename": "CommandCard",
     "id": "GD02-114",
@@ -10014,7 +10014,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 friendly  (Vulture) Unit. It gets AP+2 during this turn.",
-      "【파일럿】[Witz Sou]"
+      "【파일럿】[위츠 수]"
     ],
     "__typename": "CommandCard",
     "id": "GD02-115",
@@ -12933,7 +12933,7 @@
     "HP": 2
   },
   {
-    "name": "Sarah Zabiarov",
+    "name": "사라 자비아로프",
     "level": 3,
     "cost": 1,
     "color": "BLUE",
@@ -13127,7 +13127,7 @@
     "HP": 2
   },
   {
-    "name": "Azee Gurumin",
+    "name": "아지 그루민",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -13407,7 +13407,7 @@
     ],
     "description": [
       "【메인】Choose 1 enemy Unit that is Lv.5 or lower. Deal damage to it equal to the number of friendly Unit tokens in play.",
-      "【파일럿】[Hardie Steiner]"
+      "【파일럿】[하디 슈타이너]"
     ],
     "__typename": "CommandCard",
     "id": "GD03-107",
@@ -13434,7 +13434,7 @@
     ],
     "description": [
       "【메인】Deploy 1 [Hy-Gogg]((Cyclops Team)･AP2･HP1) Unit token.",
-      "【파일럿】[Gabriel Ramirez Garcia]"
+      "【파일럿】[가브리엘 라미레스 가르시아]"
     ],
     "__typename": "CommandCard",
     "id": "GD03-108",

@@ -265,9 +265,18 @@ function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[] {
           .map((k) => KIND_TO_TYPENAME[k])
           .filter((t): t is string => !!t);
 
+  // When PILOT kind is requested, CommandCards with a pilot are also included.
+  const includePilotedCommands =
+    filter.kind.length === 0 || filter.kind.includes("PILOT");
+
   return cards.filter((card) => {
     // kind — card must match at least one of the requested kinds (OR condition)
-    if (!targetTypenames.includes(card.__typename)) return false;
+    const typeMatch = targetTypenames.includes(card.__typename);
+    const pilotedCommandMatch =
+      includePilotedCommands &&
+      card.__typename === "CommandCard" &&
+      (card as AnyRecord)["pilot"] != null;
+    if (!typeMatch && !pilotedCommandMatch) return false;
 
     const c = card as AnyRecord;
 
