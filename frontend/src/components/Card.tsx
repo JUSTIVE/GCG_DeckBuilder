@@ -7,27 +7,33 @@ import { BaseCard } from "./BaseCard";
 import { CommandCard } from "./CommandCard";
 import { ResourceCard } from "./ResourceCard";
 import { CardDescription } from "./CardDescription";
+import { COLOR_BORDER50 } from "src/render/color";
+import { cn } from "src/lib/utils";
 
 const Fragment = graphql`
   fragment CardFragment on Card {
     __typename
     ... on UnitCard {
       id
+      color
       description
       ...UnitCardFragment
     }
     ... on PilotCard {
       id
+      color
       description
       ...PilotCardFragment
     }
     ... on BaseCard {
       id
+      color
       description
       ...BaseCardFragment
     }
     ... on CommandCard {
       id
+      color
       description
       ...CommandCardFragment
     }
@@ -54,6 +60,14 @@ export function Card({ cardRef, showDescription }: Props) {
       ? card.description
       : [];
 
+  const borderClass =
+    card.__typename === "UnitCard" ||
+    card.__typename === "PilotCard" ||
+    card.__typename === "BaseCard" ||
+    card.__typename === "CommandCard"
+      ? COLOR_BORDER50[card.color]
+      : undefined;
+
   const cardEl = (() => {
     switch (card.__typename) {
       case "UnitCard":
@@ -75,7 +89,12 @@ export function Card({ cardRef, showDescription }: Props) {
     <div className="flex flex-col">
       {cardEl}
       {showDescription && description.length > 0 && (
-        <div className="mt-2 rounded-xl bg-black px-3 py-3 text-white">
+        <div
+          className={cn(
+            "mt-2 rounded-xl bg-black px-3 py-3 text-white border",
+            borderClass,
+          )}
+        >
           <CardDescription lines={description} />
         </div>
       )}

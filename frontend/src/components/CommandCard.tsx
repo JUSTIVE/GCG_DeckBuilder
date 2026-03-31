@@ -9,7 +9,13 @@ import Marquee from "@/components/Marquee";
 import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
-import { COLOR_BG, COLOR_BG20, COLOR_TEXT20 } from "src/render/color";
+import {
+  COLOR_BG,
+  COLOR_BG20,
+  COLOR_TEXT20,
+  COLOR_BORDER,
+  COLOR_SHADOW,
+} from "src/render/color";
 import { renderRarity } from "src/render/rarity";
 
 export function CommandCardBody({
@@ -40,7 +46,7 @@ export function CommandCardBody({
   return (
     <>
       <img
-        className="absolute w-full h-full object-cover top-0"
+        className="absolute w-full h-full object-cover top-0 bg-gray-100"
         alt={commandCard.name}
       />
       <div className="flex flex-col gap-[5cqw]">
@@ -215,7 +221,9 @@ export function CommandCard({ commandCardRef }: Props) {
       <button
         type="button"
         className={cn(
-          "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline font-semibold",
+          "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline border-2 font-semibold",
+          COLOR_BORDER[commandCard.color],
+          COLOR_SHADOW[commandCard.color],
           open && "z-10",
         )}
         onClick={openDialog}

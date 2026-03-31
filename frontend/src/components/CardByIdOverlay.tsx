@@ -10,7 +10,8 @@ import { renderZone } from "@/render/zone";
 import { renderRarity } from "@/render/rarity";
 import { renderSeries } from "@/render/series";
 import { renderPackage } from "@/render/package";
-import { COLOR_BG, COLOR_HEX } from "src/render/color";
+import { COLOR_BG, COLOR_HEX, COLOR_BORDER, COLOR_BORDER50, COLOR_SHADOW } from "src/render/color";
+import { cn } from "@/lib/utils";
 import { CardDescription } from "./CardDescription";
 import { Dialog } from "@base-ui/react/dialog";
 import { useRouter } from "@tanstack/react-router";
@@ -245,7 +246,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
                 효과
               </span>
-              <CardDescription lines={node.description} />
+              <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
         </div>
@@ -302,7 +303,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
                 효과
               </span>
-              <CardDescription lines={node.description} />
+              <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
         </div>
@@ -375,7 +376,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
                 효과
               </span>
-              <CardDescription lines={node.description} />
+              <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
         </div>
@@ -441,7 +442,7 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
                 효과
               </span>
-              <CardDescription lines={node.description} />
+              <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
         </div>
@@ -471,7 +472,11 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
         />
         <Dialog.Popup className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 p-6 pointer-events-none outline-none transition duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0">
-          <div className="@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl shadow-2xl">
+          <div className={cn(
+            "@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl border-2",
+            node && "color" in node ? COLOR_BORDER[node.color as string] : undefined,
+            node && "color" in node ? COLOR_SHADOW[node.color as string] : undefined,
+          )}>
             {renderThumbnail()}
           </div>
           {renderDetails()}

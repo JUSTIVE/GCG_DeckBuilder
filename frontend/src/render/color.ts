@@ -18,6 +18,26 @@ export const COLOR_BG50: Record<string, string> = {
   BLACK: "bg-[#808080]",
 };
 
+export const COLOR_BORDER: Record<string, string> = {
+  BLUE: "border-[#0272B6]",
+  GREEN: "border-[#62A43E]",
+  RED: "border-[#BD0152]",
+  PURPLE: "border-[#764A92]",
+  YELLOW: "border-[#D3B078]",
+  WHITE: "border-[#FFFFFF]",
+  BLACK: "border-[#000000]",
+};
+
+export const COLOR_BORDER50: Record<string, string> = {
+  BLUE: "border-[#7FB8DA]",
+  GREEN: "border-[#B0D19E]",
+  RED: "border-[#DE80A8]",
+  PURPLE: "border-[#BAA4C8]",
+  YELLOW: "border-[#E9D7BB]",
+  WHITE: "border-[#FFFFFF]",
+  BLACK: "border-[#808080]",
+};
+
 export const COLOR_BG20: Record<string, string> = {
   BLUE: "bg-[#D1E8F4]",
   GREEN: "bg-[#DCE9D4]",
@@ -46,6 +66,16 @@ export const COLOR_TEXT: Record<string, string> = {
   YELLOW: "text-[#D3B078]",
   WHITE: "text-[#FFFFFF]",
   BLACK: "text-[#000000]",
+};
+
+export const COLOR_SHADOW: Record<string, string> = {
+  BLUE: "shadow-[0_4px_24px_rgba(2,114,182,0.35)]",
+  GREEN: "shadow-[0_4px_24px_rgba(98,164,62,0.35)]",
+  RED: "shadow-[0_4px_24px_rgba(189,1,82,0.35)]",
+  PURPLE: "shadow-[0_4px_24px_rgba(118,74,146,0.35)]",
+  YELLOW: "shadow-[0_4px_24px_rgba(211,176,120,0.35)]",
+  WHITE: "shadow-[0_4px_24px_rgba(255,255,255,0.25)]",
+  BLACK: "shadow-[0_4px_24px_rgba(0,0,0,0.35)]",
 };
 
 export const COLOR_TEXT20: Record<string, string> = {

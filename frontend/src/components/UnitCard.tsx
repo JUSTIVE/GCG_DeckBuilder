@@ -9,7 +9,12 @@ import { ZoneChip } from "./ZoneChip";
 import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
-import { COLOR_BG, COLOR_BG20 } from "src/render/color";
+import {
+  COLOR_BG,
+  COLOR_BG20,
+  COLOR_BORDER,
+  COLOR_SHADOW,
+} from "src/render/color";
 import { renderRarity } from "src/render/rarity";
 
 // Shared card body used in both thumbnail and dialog.
@@ -54,7 +59,7 @@ export function UnitCardBody({
   return (
     <>
       <img
-        className="absolute w-full h-full object-cover top-0 bg-gray-200"
+        className="absolute w-full h-full object-cover top-0 bg-gray-100"
         alt={""}
       />
       <div className="flex flex-col gap-[11cqw]">
@@ -236,7 +241,9 @@ export function UnitCard({ unitCardRef }: Props) {
       <button
         type="button"
         className={cn(
-          "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline",
+          "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline border-2",
+          COLOR_BORDER[unitCard.color],
+          COLOR_SHADOW[unitCard.color],
           open && "z-10",
         )}
         onClick={openDialog}
