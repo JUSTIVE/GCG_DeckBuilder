@@ -3,7 +3,6 @@ import type { BaseCardFragment$key } from "@/__generated__/BaseCardFragment.grap
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
-import tempimg from "./basetemp.webp";
 import { ZoneChip } from "./ZoneChip";
 import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
@@ -42,7 +41,6 @@ export function BaseCardBody({
     <>
       <img
         className="absolute w-full h-full object-cover top-0"
-        src={tempimg}
         alt={baseCard.name}
       />
       <div className="flex flex-col gap-[5cqw]">

@@ -4,7 +4,7 @@ import type { UnitCard_UnitCardBody$key } from "@/__generated__/UnitCard_UnitCar
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
-import unitCardTemp from "./unitcardtemp.webp";
+
 import { ZoneChip } from "./ZoneChip";
 import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
@@ -55,7 +55,6 @@ export function UnitCardBody({
     <>
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-200"
-        src={unitCardTemp}
         alt={""}
       />
       <div className="flex flex-col gap-[11cqw]">

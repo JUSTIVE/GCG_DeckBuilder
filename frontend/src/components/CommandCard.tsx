@@ -5,7 +5,7 @@ import type { CommandCard_CommandCardBody$key } from "@/__generated__/CommandCar
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
-import tempimg from "./commandTemp.webp";
+
 import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
@@ -41,7 +41,6 @@ export function CommandCardBody({
     <>
       <img
         className="absolute w-full h-full object-cover top-0"
-        src={tempimg}
         alt={commandCard.name}
       />
       <div className="flex flex-col gap-[5cqw]">

@@ -3,7 +3,7 @@ import type { PilotCardFragment$key } from "@/__generated__/PilotCardFragment.gr
 import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
-import tempimg from "./pilotTemp.webp";
+
 import { renderTrait } from "@/render/trait";
 import { Route } from "@/routes/cardlist";
 import { useRouter } from "@tanstack/react-router";
@@ -39,7 +39,6 @@ export function PilotCardBody({
     <>
       <img
         className="absolute w-full h-full object-cover top-0"
-        src={tempimg}
         alt={pilotCard.pilot.name}
       />
       <div className="flex flex-col gap-[5cqw]">
