@@ -6623,7 +6623,7 @@
     ],
     "description": [
       "【메인】Choose 2 of your active Units. Rest them. If you do, choose 1 enemy Unit. Deal 3 damage to it.",
-      "【파일럿】[Loni Garvey]"
+      "【파일럿】[로니 가베이]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-112",
@@ -6651,7 +6651,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 friendly (ZAFT) Unit. It gets AP+3 during this turn.",
-      "【파일럿】[Andrew Waldfeld]"
+      "【파일럿】[앤드류 발트펠트]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-113",
@@ -6677,7 +6677,7 @@
     ],
     "description": [
       "【액션】Choose 2 friendly Units. They get AP+1 during this turn.",
-      "【파일럿】[Yonem Kirks]"
+      "【파일럿】[욤 커크스]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-114",
@@ -6797,7 +6797,7 @@
     ],
     "description": [
       "【메인】Choose 1 enemy Unit with 2 or less HP. Return it to its owner's hand. If you have a Link Unit in play, choose 1 enemy Unit with 4 or less HP instead.",
-      "【파일럿】[Shaddiq Zenelli]"
+      "【파일럿】[샤디크 제네리]"
     ],
     "__typename": "CommandCard",
     "id": "GD01-122",
@@ -12721,7 +12721,7 @@
     "HP": 1,
     "link": {
       "__typename": "LinkPilot",
-      "pilotName": "세르게이 스밀노프"
+      "pilotName": "세르게이 스미르노프"
     },
     "zone": [
       "SPACE",
@@ -13500,7 +13500,7 @@
     ],
     "description": [
       "【메인】/【액션】Choose 1 friendly (Mafty) Unit. It gets AP+3 during this turn.",
-      "【파일럿】[Emeralda Zubin]"
+      "【파일럿】[에메랄다 주빈]"
     ],
     "__typename": "CommandCard",
     "id": "GD03-111",
@@ -13686,7 +13686,7 @@
     ],
     "description": [
       "【메인】During this turn, if a friendly (Superpower Bloc)/(UN) Unit destroys an enemy Unit with battle damage, choose 1 rested friendly (Superpower Bloc)/(UN) Unit. Set it as active. It can't attack during this turn.",
-      "【파일럿】[Patrick Colasour]"
+      "【파일럿】[패트릭 콜라사워]"
     ],
     "__typename": "CommandCard",
     "id": "GD03-120",
@@ -13713,7 +13713,7 @@
     ],
     "description": [
       "【액션】Choose 1 friendly Base and 1 enemy Unit with 3 or less HP. Rest them.",
-      "【파일럿】[Katz Kobayashi]"
+      "【파일럿】[카츠 코바야시]"
     ],
     "__typename": "CommandCard",
     "id": "GD03-121",
@@ -13740,7 +13740,7 @@
     ],
     "description": [
       "【액션】Choose 1 enemy Unit that is Lv.3 or lower. Return it to its owner's hand.",
-      "【파일럿】[세르게이 스밀노프]"
+      "【파일럿】[세르게이 스미르노프]"
     ],
     "__typename": "CommandCard",
     "id": "GD03-122",
