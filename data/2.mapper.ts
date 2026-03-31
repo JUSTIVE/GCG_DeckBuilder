@@ -4,6 +4,7 @@ import effects from "./effects.json";
 import pilotnames from "./pilotnames.json";
 import unitnames from "./unitnames.json";
 import basenames from "./basenames.json";
+import commandnames from "./commandnames.json";
 
 const pilotNameEntries = Object.entries(pilotnames);
 const effectEntries = Object.entries(effects);
@@ -62,8 +63,18 @@ const baseNameMapper = (raw: unknown[]) => {
   });
 };
 
+const commandNameMapper = (raw: unknown[]) => {
+  return raw.map((x) => {
+    if (x.name == null && x.__typename !== "CommandCard") return x;
+    return {
+      ...x,
+      name: commandnames[x.name] ?? x.name,
+    };
+  });
+};
+
 await writeFile(
   "../data/mapped.json",
-  JSON.stringify(pilotAndEffectNameMapper(baseNameMapper(unitNameMapper(raw))), null, 2),
+  JSON.stringify(pilotAndEffectNameMapper(commandNameMapper(baseNameMapper(unitNameMapper(raw)))), null, 2),
   "utf-8",
 );

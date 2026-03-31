@@ -181,7 +181,7 @@
     "HP": 2
   },
   {
-    "name": "Thoroughly Damaged",
+    "name": "만신창이",
     "level": 2,
     "cost": 1,
     "color": "BLUE",
@@ -208,7 +208,7 @@
     }
   },
   {
-    "name": "Kai's Resolve",
+    "name": "카이의 결의",
     "level": 3,
     "cost": 1,
     "color": "BLUE",
@@ -399,7 +399,7 @@
     "HP": 1
   },
   {
-    "name": "Simultaneous Fire",
+    "name": "일제발사",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -427,7 +427,7 @@
     }
   },
   {
-    "name": "Peaceful Timbre",
+    "name": "은화한 음색",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -684,7 +684,7 @@
     "HP": 1
   },
   {
-    "name": "Hawk of Endymion",
+    "name": "엔듀미온의 매",
     "level": 2,
     "cost": 1,
     "color": "WHITE",
@@ -1460,7 +1460,7 @@
     "HP": 1
   },
   {
-    "name": "Intercept Orders",
+    "name": "요격편형",
     "level": 4,
     "cost": 2,
     "color": "BLUE",
@@ -1480,7 +1480,7 @@
     "id": "GD01-099"
   },
   {
-    "name": "A Show of Resolve",
+    "name": "각오의 표현",
     "level": 4,
     "cost": 3,
     "color": "BLUE",
@@ -1497,7 +1497,7 @@
     "id": "GD01-100"
   },
   {
-    "name": "Citizens, Take a Stand!",
+    "name": "일어나라 극민!",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -1516,7 +1516,7 @@
     "id": "GD01-105"
   },
   {
-    "name": "First Contact",
+    "name": "퍼스트 컨텍트",
     "level": 3,
     "cost": 3,
     "color": "GREEN",
@@ -1535,7 +1535,7 @@
     "id": "GD01-107"
   },
   {
-    "name": "The Witch and the Bride",
+    "name": "마녀와 신부",
     "level": 5,
     "cost": 2,
     "color": "WHITE",
@@ -1556,7 +1556,7 @@
     "id": "GD01-117"
   },
   {
-    "name": "Overflowing Affection",
+    "name": "넘치는 자애",
     "level": 2,
     "cost": 1,
     "color": "WHITE",
@@ -1573,7 +1573,7 @@
     "id": "GD01-118"
   },
   {
-    "name": "Naval Bombardment",
+    "name": "함포사격",
     "level": 2,
     "cost": 1,
     "color": "WHITE",
@@ -1768,7 +1768,7 @@
     ]
   },
   {
-    "name": "Unforeseen Incident",
+    "name": "예상치 못한 사건",
     "level": 3,
     "cost": 1,
     "color": "WHITE",
@@ -1967,7 +1967,7 @@
     "HP": 1
   },
   {
-    "name": "Siege Ploy",
+    "name": "포위 전술",
     "level": 3,
     "cost": 1,
     "color": "BLUE",
@@ -2239,7 +2239,7 @@
     "HP": 2
   },
   {
-    "name": "Indignation",
+    "name": "격앙",
     "level": 2,
     "cost": 1,
     "color": "RED",
@@ -2266,7 +2266,7 @@
     }
   },
   {
-    "name": "Close Combat",
+    "name": "격투전",
     "level": 2,
     "cost": 2,
     "color": "RED",
@@ -2287,7 +2287,7 @@
     "id": "ST03-013"
   },
   {
-    "name": "The Blue Giant",
+    "name": "푸른 거성",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -2526,7 +2526,7 @@
     "HP": 2
   },
   {
-    "name": "Striker Pack",
+    "name": "스트라이크 팩",
     "level": 4,
     "cost": 2,
     "color": "WHITE",
@@ -2548,7 +2548,7 @@
     "id": "ST04-012"
   },
   {
-    "name": "The Magic Bullet of Dusk",
+    "name": "황혼의 마탄",
     "level": 3,
     "cost": 1,
     "color": "RED",
@@ -2931,7 +2931,7 @@
     "HP": 1
   },
   {
-    "name": "With Iron and Blood",
+    "name": "철과 피와",
     "level": 2,
     "cost": 1,
     "color": "PURPLE",
@@ -2949,7 +2949,7 @@
     "id": "ST05-013"
   },
   {
-    "name": "Fatal Strike",
+    "name": "치명의 일격",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -3265,7 +3265,7 @@
     "HP": 2
   },
   {
-    "name": "Ruthless Tactics",
+    "name": "냉철한 전술",
     "level": 3,
     "cost": 1,
     "color": "RED",
@@ -3292,7 +3292,7 @@
     }
   },
   {
-    "name": "Schoolgirl and Smuggler",
+    "name": "여고생과 운반책",
     "level": 1,
     "cost": 1,
     "color": "GREEN",
@@ -3309,7 +3309,7 @@
     "id": "ST06-012"
   },
   {
-    "name": "Fierce Unity",
+    "name": "맹자의 연대",
     "level": 3,
     "cost": 1,
     "color": "GREEN",
@@ -3713,7 +3713,7 @@
     "HP": 1
   },
   {
-    "name": "Armed Intervention",
+    "name": "무력 개입",
     "level": 4,
     "cost": 1,
     "color": "PURPLE",
@@ -3732,7 +3732,7 @@
     "id": "ST07-013"
   },
   {
-    "name": "Tactical Visionary",
+    "name": "전술 예보가",
     "level": 1,
     "cost": 1,
     "color": "GREEN",
@@ -4065,7 +4065,7 @@
     "HP": 1
   },
   {
-    "name": "Words for Hathaway",
+    "name": "하사웨이를 향한 고무",
     "level": 3,
     "cost": 1,
     "color": "RED",
@@ -4093,7 +4093,7 @@
     }
   },
   {
-    "name": "Lady Luck",
+    "name": "행운의 여신",
     "level": 5,
     "cost": 1,
     "color": "RED",
@@ -4399,7 +4399,7 @@
     "HP": 0
   },
   {
-    "name": "Giant Killing",
+    "name": "자이언트 킬링",
     "level": 4,
     "cost": 3,
     "color": "PURPLE",
@@ -4507,7 +4507,7 @@
     ]
   },
   {
-    "name": "Battle of Aces",
+    "name": "에이스의 전투",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -4557,7 +4557,7 @@
     ]
   },
   {
-    "name": "Awakened Power",
+    "name": "깨어나는 힘",
     "level": 6,
     "cost": 2,
     "color": "PURPLE",
@@ -6430,7 +6430,7 @@
     "HP": 1
   },
   {
-    "name": "Deep Devotion",
+    "name": "깊은 애정",
     "level": 2,
     "cost": 1,
     "color": "BLUE",
@@ -6457,7 +6457,7 @@
     }
   },
   {
-    "name": "Securing the Supply Line",
+    "name": "물자 수송",
     "level": 4,
     "cost": 2,
     "color": "BLUE",
@@ -6474,7 +6474,7 @@
     "id": "GD01-102"
   },
   {
-    "name": "The Stubborn Cog",
+    "name": "뚝심바퀴의 고집",
     "level": 1,
     "cost": 1,
     "color": "BLUE",
@@ -6500,7 +6500,7 @@
     }
   },
   {
-    "name": "Signs of a Revolution",
+    "name": "혁명의 기색",
     "level": 3,
     "cost": 2,
     "color": "BLUE",
@@ -6519,7 +6519,7 @@
     "id": "GD01-104"
   },
   {
-    "name": "Fortress Defense",
+    "name": "요새방위전",
     "level": 5,
     "cost": 2,
     "color": "GREEN",
@@ -6545,7 +6545,7 @@
     }
   },
   {
-    "name": "Strategic Arms",
+    "name": "전략급병기",
     "level": 6,
     "cost": 6,
     "color": "GREEN",
@@ -6563,7 +6563,7 @@
     "id": "GD01-108"
   },
   {
-    "name": "The Path to Victory or Defeat",
+    "name": "승리와 패배의 궤적",
     "level": 5,
     "cost": 1,
     "color": "GREEN",
@@ -6580,7 +6580,7 @@
     "id": "GD01-109"
   },
   {
-    "name": "Rasid's Orders",
+    "name": "라시드의 지시",
     "level": 3,
     "cost": 1,
     "color": "GREEN",
@@ -6607,7 +6607,7 @@
     }
   },
   {
-    "name": "Extreme Hatred",
+    "name": "원한의 끝",
     "level": 6,
     "cost": 1,
     "color": "RED",
@@ -6634,7 +6634,7 @@
     }
   },
   {
-    "name": "The Desert Tiger",
+    "name": "사막의 호랑이",
     "level": 3,
     "cost": 1,
     "color": "RED",
@@ -6662,7 +6662,7 @@
     }
   },
   {
-    "name": "Assault on Torrington Base",
+    "name": "토링턴 기지 습격",
     "level": 1,
     "cost": 1,
     "color": "RED",
@@ -6688,7 +6688,7 @@
     }
   },
   {
-    "name": "Zeon Remnant Forces",
+    "name": "지온 잔당군",
     "level": 2,
     "cost": 1,
     "color": "RED",
@@ -6706,7 +6706,7 @@
     "id": "GD01-115"
   },
   {
-    "name": "Stealth Stratagem",
+    "name": "은밀작전",
     "level": 2,
     "cost": 1,
     "color": "RED",
@@ -6734,7 +6734,7 @@
     }
   },
   {
-    "name": "Iron-Fisted Discipline",
+    "name": "철건제재",
     "level": 2,
     "cost": 1,
     "color": "WHITE",
@@ -6761,7 +6761,7 @@
     }
   },
   {
-    "name": "Midair Modifications",
+    "name": "공중환장",
     "level": 3,
     "cost": 2,
     "color": "WHITE",
@@ -6782,7 +6782,7 @@
     "id": "GD01-121"
   },
   {
-    "name": "Covert Operative",
+    "name": "은밀작전",
     "level": 3,
     "cost": 1,
     "color": "WHITE",
@@ -9688,7 +9688,7 @@
     "HP": 1
   },
   {
-    "name": "Dramatic Turnabout",
+    "name": "역전의 한 수",
     "level": 5,
     "cost": 2,
     "color": "BLUE",
@@ -9707,7 +9707,7 @@
     "id": "GD02-100"
   },
   {
-    "name": "Beneath the Mask",
+    "name": "가면의 아래",
     "level": 1,
     "cost": 1,
     "color": "BLUE",
@@ -9752,7 +9752,7 @@
     }
   },
   {
-    "name": "AGE Device",
+    "name": "AGE 디바이스",
     "level": 4,
     "cost": 2,
     "color": "GREEN",
@@ -9771,7 +9771,7 @@
     "id": "GD02-103"
   },
   {
-    "name": "Turning Point of History",
+    "name": "역사의 분기점",
     "level": 1,
     "cost": 1,
     "color": "GREEN",
@@ -9788,7 +9788,7 @@
     "id": "GD02-104"
   },
   {
-    "name": "Valedictorian",
+    "name": "수석 졸업생",
     "level": 2,
     "cost": 1,
     "color": "GREEN",
@@ -9815,7 +9815,7 @@
     }
   },
   {
-    "name": "White Wolf",
+    "name": "하얀 늑대",
     "level": 3,
     "cost": 1,
     "color": "GREEN",
@@ -9841,7 +9841,7 @@
     }
   },
   {
-    "name": "All-Range Attack",
+    "name": "올 레인지 공격",
     "level": 4,
     "cost": 2,
     "color": "RED",
@@ -9860,7 +9860,7 @@
     "id": "GD02-107"
   },
   {
-    "name": "That One Looks A Lot Stronger?",
+    "name": "저쪽이 더 센 것 같지 않아?",
     "level": 3,
     "cost": 1,
     "color": "RED",
@@ -9877,7 +9877,7 @@
     "id": "GD02-108"
   },
   {
-    "name": "Undying Persistence",
+    "name": "사라지지 않는 집념",
     "level": 4,
     "cost": 1,
     "color": "RED",
@@ -9905,7 +9905,7 @@
     }
   },
   {
-    "name": "Decisive Last Resort",
+    "name": "결전의 비장의 카드",
     "level": 5,
     "cost": 4,
     "color": "PURPLE",
@@ -9924,7 +9924,7 @@
     "id": "GD02-111"
   },
   {
-    "name": "Momentary Respite",
+    "name": "휴식의 한 때",
     "level": 4,
     "cost": 3,
     "color": "PURPLE",
@@ -9943,7 +9943,7 @@
     "id": "GD02-112"
   },
   {
-    "name": "Sisterly Care",
+    "name": "여장부 기질",
     "level": 4,
     "cost": 2,
     "color": "PURPLE",
@@ -9970,7 +9970,7 @@
     }
   },
   {
-    "name": "It's Name is Ryusei-Go",
+    "name": "그 이름은 류세이고",
     "level": 2,
     "cost": 1,
     "color": "PURPLE",
@@ -9998,7 +9998,7 @@
     }
   },
   {
-    "name": "Familial Devotion",
+    "name": "가족에 대한 마음",
     "level": 2,
     "cost": 1,
     "color": "PURPLE",
@@ -10025,7 +10025,7 @@
     }
   },
   {
-    "name": "Comrades Come First",
+    "name": "동료 의식",
     "level": 3,
     "cost": 1,
     "color": "PURPLE",
@@ -10051,7 +10051,7 @@
     }
   },
   {
-    "name": "A New Sign",
+    "name": "새로운 고동",
     "level": 4,
     "cost": 3,
     "color": "WHITE",
@@ -10070,7 +10070,7 @@
     "id": "GD02-117"
   },
   {
-    "name": "Heart Set on Revenge",
+    "name": "복수의 결의",
     "level": 3,
     "cost": 1,
     "color": "WHITE",
@@ -10097,7 +10097,7 @@
     }
   },
   {
-    "name": "Persistent and Fortudinous",
+    "name": "면벽구년 견뢰견고",
     "level": 2,
     "cost": 1,
     "color": "WHITE",
@@ -10123,7 +10123,7 @@
     }
   },
   {
-    "name": "Aspiring Pilot",
+    "name": "조종사에 대한 지원",
     "level": 3,
     "cost": 1,
     "color": "WHITE",
@@ -13272,7 +13272,7 @@
     "HP": 1
   },
   {
-    "name": "A Healthy Curiosity",
+    "name": "왕성한 호기심",
     "level": 3,
     "cost": 1,
     "color": "BLUE",
@@ -13289,7 +13289,7 @@
     "id": "GD03-101"
   },
   {
-    "name": "Privileged Position",
+    "name": "특권 계급",
     "level": 6,
     "cost": 2,
     "color": "BLUE",
@@ -13308,7 +13308,7 @@
     "id": "GD03-102"
   },
   {
-    "name": "Field Directive",
+    "name": "부대 지령",
     "level": 4,
     "cost": 1,
     "color": "BLUE",
@@ -13327,7 +13327,7 @@
     "id": "GD03-103"
   },
   {
-    "name": "Reccoa's Shadow",
+    "name": "레코아의 기척",
     "level": 3,
     "cost": 1,
     "color": "BLUE",
@@ -13355,7 +13355,7 @@
     }
   },
   {
-    "name": "Bridge Crew",
+    "name": "브리지 크루",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -13374,7 +13374,7 @@
     "id": "GD03-105"
   },
   {
-    "name": "M.A.V. Tactics",
+    "name": "M.A.V. 전술",
     "level": 6,
     "cost": 4,
     "color": "GREEN",
@@ -13391,7 +13391,7 @@
     "id": "GD03-106"
   },
   {
-    "name": "Over the River and Through the Woods",
+    "name": "강을 건너 숲을 지나",
     "level": 4,
     "cost": 1,
     "color": "GREEN",
@@ -13418,7 +13418,7 @@
     }
   },
   {
-    "name": "How Many Miles to the Battlefield?",
+    "name": "전장까지는 몇 마일?",
     "level": 3,
     "cost": 1,
     "color": "GREEN",
@@ -13445,7 +13445,7 @@
     }
   },
   {
-    "name": "Improved Technique",
+    "name": "전투 기술의 향상",
     "level": 3,
     "cost": 3,
     "color": "RED",
@@ -13466,7 +13466,7 @@
     "id": "GD03-109"
   },
   {
-    "name": "Eliminate Target",
+    "name": "표적 제거",
     "level": 6,
     "cost": 1,
     "color": "RED",
@@ -13484,7 +13484,7 @@
     "id": "GD03-110"
   },
   {
-    "name": "Infiltrator Present",
+    "name": "현지 잠입원",
     "level": 3,
     "cost": 1,
     "color": "RED",
@@ -13511,7 +13511,7 @@
     }
   },
   {
-    "name": "Warped Intent",
+    "name": "뒤틀린 마음",
     "level": 4,
     "cost": 1,
     "color": "RED",
@@ -13531,7 +13531,7 @@
     "id": "GD03-112"
   },
   {
-    "name": "Human Karma",
+    "name": "인간의 업",
     "level": 3,
     "cost": 2,
     "color": "RED",
@@ -13549,7 +13549,7 @@
     "id": "GD03-113"
   },
   {
-    "name": "Look of Determination",
+    "name": "결의에 찬 눈빛",
     "level": 2,
     "cost": 2,
     "color": "PURPLE",
@@ -13569,7 +13569,7 @@
     "id": "GD03-114"
   },
   {
-    "name": "Distant Reunion",
+    "name": "먼 재회",
     "level": 3,
     "cost": 1,
     "color": "PURPLE",
@@ -13597,7 +13597,7 @@
     }
   },
   {
-    "name": "Towards Destiny",
+    "name": "운명의 너머로",
     "level": 3,
     "cost": 1,
     "color": "PURPLE",
@@ -13615,7 +13615,7 @@
     "id": "GD03-116"
   },
   {
-    "name": "Orga's Order",
+    "name": "올가의 호령",
     "level": 3,
     "cost": 1,
     "color": "PURPLE",
@@ -13632,7 +13632,7 @@
     "id": "GD03-117"
   },
   {
-    "name": "Awakened Potential",
+    "name": "능력의 각성",
     "level": 4,
     "cost": 1,
     "color": "WHITE",
@@ -13653,7 +13653,7 @@
     "id": "GD03-118"
   },
   {
-    "name": "Awkward Approach",
+    "name": "서투른 접근",
     "level": 3,
     "cost": 1,
     "color": "WHITE",
@@ -13670,7 +13670,7 @@
     "id": "GD03-119"
   },
   {
-    "name": "Immortal Colasour",
+    "name": "불사신의 콜라사워",
     "level": 2,
     "cost": 1,
     "color": "WHITE",
@@ -13697,7 +13697,7 @@
     }
   },
   {
-    "name": "Unheralded Attack",
+    "name": "무단 출격",
     "level": 1,
     "cost": 1,
     "color": "WHITE",
@@ -13724,7 +13724,7 @@
     }
   },
   {
-    "name": "Veteran Tactics",
+    "name": "노련한 전법",
     "level": 2,
     "cost": 1,
     "color": "WHITE",

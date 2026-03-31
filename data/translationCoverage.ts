@@ -1,5 +1,5 @@
 import { styleText } from "node:util";
-import { readdirSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 // ── types ────────────────────────────────────────────────────────────────────
@@ -8,22 +8,14 @@ type LinkPilot = { __typename: "LinkPilot"; pilotName: string };
 type LinkTrait = { __typename: "LinkTrait"; trait: string };
 type UnitLink = LinkPilot | LinkTrait;
 
-type UnitCard = {
-  __typename: "UnitCard";
+type Card = {
+  __typename: string;
   id: string;
-  name: string;
-  description: string[];
+  name?: string;
+  description?: string[];
   link?: UnitLink;
   [key: string]: unknown;
 };
-
-type OtherCard = {
-  __typename: string;
-  id: string;
-  [key: string]: unknown;
-};
-
-type Card = UnitCard | OtherCard;
 
 // ── translation detection ─────────────────────────────────────────────────────
 
@@ -34,12 +26,8 @@ const exceptions = ["OZ", "UN", "세츠나 F. 세이에이"];
 const isTranslated = (value: string): boolean =>
   (value !== "" && !EN_REGEX.test(value)) || exceptions.includes(value);
 
-const isNameTranslated = (name: string) => isTranslated(name);
-
 const isDescriptionTranslated = (description: string[]): boolean =>
   description.length > 0 && description.every((line) => isTranslated(line));
-
-const isPilotNameTranslated = (pilotName: string) => isTranslated(pilotName);
 
 // ── field result ──────────────────────────────────────────────────────────────
 
@@ -49,39 +37,37 @@ type FieldResult = {
   detail?: string;
 };
 
-function checkUnitCard(card: UnitCard): FieldResult[] {
+function checkCard(card: Card): FieldResult[] {
   const results: FieldResult[] = [];
 
-  // name
-  results.push({
-    field: "name",
-    translated: isNameTranslated(card.name),
-    detail: card.name,
-  });
+  if (card.name != null) {
+    results.push({
+      field: "name",
+      translated: isTranslated(card.name),
+      detail: card.name,
+    });
+  }
 
-  // description (모든 줄이 번역되어야 함)
-  const descTranslated = isDescriptionTranslated(card.description);
-  const notTranslatedLines = card.description.filter((line) => !isTranslated(line));
-  results.push({
-    field: "description",
-    translated: descTranslated,
-    detail:
-      notTranslatedLines.length > 0
-        ? `${notTranslatedLines.length}줄 미번역`
-        : `${card.description.length}줄 완료`,
-  });
+  if (card.description != null) {
+    const descTranslated = isDescriptionTranslated(card.description);
+    const notTranslatedLines = card.description.filter((line) => !isTranslated(line));
+    results.push({
+      field: "description",
+      translated: descTranslated,
+      detail:
+        notTranslatedLines.length > 0
+          ? `${notTranslatedLines.length}줄 미번역`
+          : `${card.description.length}줄 완료`,
+    });
+  }
 
-  // link (LinkPilot 일 때만 pilotName 검사)
-  if (card.link) {
-    if (card.link.__typename === "LinkPilot") {
-      const pilotName = (card.link as LinkPilot).pilotName;
-      results.push({
-        field: "link.pilotName",
-        translated: isPilotNameTranslated(pilotName),
-        detail: pilotName,
-      });
-    }
-    // LinkTrait 는 enum 값이라 번역 불필요 — 표시 생략
+  if (card.link?.__typename === "LinkPilot") {
+    const pilotName = (card.link as LinkPilot).pilotName;
+    results.push({
+      field: "link.pilotName",
+      translated: isTranslated(pilotName),
+      detail: pilotName,
+    });
   }
 
   return results;
@@ -155,18 +141,18 @@ function renderCardLine(
 
 // ── main ──────────────────────────────────────────────────────────────────────
 
+const CARD_TYPES = ["UnitCard", "BaseCard", "PilotCard", "CommandCard"];
+
 const MAPPED_FILE = join(import.meta.dir, "mapped.json");
 
 console.log(styleText("bold", "\n📋 Translation Coverage Report\n"));
 
-const cards: Card[] = JSON.parse(readFileSync(MAPPED_FILE, "utf-8"));
-
-// UnitCard만 필터링
-const unitCards = cards.filter((c) => c.__typename === "UnitCard") as UnitCard[];
+const allCards: Card[] = JSON.parse(readFileSync(MAPPED_FILE, "utf-8"));
+const cards = allCards.filter((c) => CARD_TYPES.includes(c.__typename));
 
 // 패키지별로 그룹화
-const cardsByPackage = new Map<string, UnitCard[]>();
-for (const card of unitCards) {
+const cardsByPackage = new Map<string, Card[]>();
+for (const card of cards) {
   const packageName = (card as any).package || "UNKNOWN";
   if (!cardsByPackage.has(packageName)) {
     cardsByPackage.set(packageName, []);
@@ -188,7 +174,7 @@ sortedPackages.forEach((packageName, pkgIdx) => {
   // 패키지 summary 미리 계산
   let previewSummary: Summary = { total: 0, translated: 0 };
   for (const card of packageCards) {
-    const fields = checkUnitCard(card);
+    const fields = checkCard(card);
     previewSummary = addSummary(previewSummary, {
       total: fields.length,
       translated: fields.filter((f) => f.translated).length,
@@ -198,7 +184,7 @@ sortedPackages.forEach((packageName, pkgIdx) => {
   // 패키지 헤더 출력
   const packageConnector = isLastPackage ? TREE_LAST : TREE_BRANCH;
   const packageLabel = styleText("bold", packageName);
-  const cardCountLabel = styleText("gray", ` (UnitCard × ${packageCards.length})`);
+  const cardCountLabel = styleText("gray", ` (${packageCards.length}장)`);
   console.log(
     `${packageConnector}${packageLabel}${cardCountLabel} ${renderPercent(previewSummary)}`,
   );
@@ -208,7 +194,7 @@ sortedPackages.forEach((packageName, pkgIdx) => {
   // 각 카드 처리
   packageCards.forEach((card, cardIdx) => {
     const isLastCard = cardIdx === packageCards.length - 1;
-    const fields = checkUnitCard(card);
+    const fields = checkCard(card);
     const cardSummary = renderCardLine(card, fields, packagePrefix, isLastCard);
     packageSummary = addSummary(packageSummary, cardSummary);
   });
