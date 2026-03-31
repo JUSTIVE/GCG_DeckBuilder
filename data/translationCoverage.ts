@@ -70,6 +70,21 @@ function checkCard(card: Card): FieldResult[] {
     });
   }
 
+  if (card.__typename === "CommandCard" && (card as any).pilot != null && card.description != null) {
+    let pilotName: string | null = null;
+    for (const line of card.description) {
+      const match = /【파일럿】\[([^\]]+)\]/.exec(line);
+      if (match?.[1]) { pilotName = match[1]; break; }
+    }
+    if (pilotName != null) {
+      results.push({
+        field: "pilot.name",
+        translated: isTranslated(pilotName),
+        detail: pilotName,
+      });
+    }
+  }
+
   return results;
 }
 
