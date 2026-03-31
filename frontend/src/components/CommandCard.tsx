@@ -125,10 +125,10 @@ export function CommandCardBody({
                 </div>
               </div>
 
-              <div className="flex flex-row -translate-y-px">
+              <div className="flex flex-row">
                 <div
                   className={cn(
-                    "w-12 bg-black -mr-5 text-[3cqw] px-2 items-center flex",
+                    "w-12 bg-black -mr-5 text-[3cqw] px-2 items-center flex ",
                     COLOR_BG[commandCard.color],
                     commandCard.color !== "WHITE" ? "text-white" : "text-black",
                   )}

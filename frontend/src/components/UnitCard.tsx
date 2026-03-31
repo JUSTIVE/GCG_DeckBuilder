@@ -152,10 +152,10 @@ export function UnitCardBody({
                 </div>
               </div>
               <div className="flex flex-row items-center">
-                <div className="w-6 bg-black -mr-4 py-px z-1 text-[3cqw] pl-1.5 min-h-3 leading-[6cqw]">
+                <div className="w-6 h-5 bg-black -mr-4 py-px z-1 text-[3cqw] pl-1.5 min-h-3 leading-[6cqw]">
                   링크
                 </div>
-                <div className="bg-black overflow-hidden w-full pl-7 parallelogram parallelogram-sm px-2 pt-px pb-0.5 min-h-3">
+                <div className="bg-black overflow-hidden w-full pl-7 parallelogram parallelogram-sm px-2 pt-px pb-0.5 min-h-3 h-5 items-center flex">
                   <div className="flex text-end text-white text-[4cqw] items-center min-h-[6cqw]">
                     <Marquee speed={6}>
                       {unitCard.links.map((x) =>
