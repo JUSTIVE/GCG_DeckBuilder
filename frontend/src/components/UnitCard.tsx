@@ -102,7 +102,7 @@ export function UnitCardBody({
           </div>
           <div
             className={cn(
-              "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[5cqw]",
+              "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[1cqh]",
               COLOR_BG[unitCard.color],
             )}
           />

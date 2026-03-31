@@ -90,7 +90,7 @@ export function CommandCardBody({
           </div>
           <div
             className={cn(
-              "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[8cqw]",
+              "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[2cqh]",
               COLOR_BG[commandCard.color],
             )}
           />
