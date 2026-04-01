@@ -133,9 +133,6 @@ enum Zone {
   EARTH # 지구
 }
 
-type Deck {
-  cards: [Card!]! # 카드뭉치
-}
 
 enum CardPackage {
   GD01 # 부스트팩 1
@@ -244,6 +241,7 @@ type CommandCard implements Node {
 }
 
 union Card = Resource | BaseCard | UnitCard | PilotCard | CommandCard
+union PlayableCard = BaseCard | UnitCard | PilotCard | CommandCard
 
 type CardConnection {
   totalCount: Int!
@@ -325,11 +323,67 @@ type SearchHistoryList implements Node {
   items: [SearchHistory!]!
 }
 
+type DeckCard {
+  card: PlayableCard!
+  count: Int!
+}
+
+type Deck implements Node {
+  id: ID!
+  name: String!
+  cards: [DeckCard!]!
+  createdAt: String!
+}
+
+type DeckList implements Node {
+  id: ID!
+  decks: [Deck!]!
+}
+
+# ─── addCardToDeck result union ───────────────────────────────────────────────
+
+type AddCardToDeckSuccess {
+  deck: Deck!
+}
+
+type DeckNotFoundError {
+  deckId: ID!
+}
+
+type CardBannedError {
+  cardId: ID!
+}
+
+type CardCopyLimitExceededError {
+  cardId: ID!
+  limit: Int!
+  current: Int!
+}
+
+type DeckFullError {
+  current: Int!
+  max: Int!
+}
+
+type DeckColorLimitExceededError {
+  currentColors: [CardColor!]!
+  max: Int!
+}
+
+union AddCardToDeckResult =
+  AddCardToDeckSuccess
+  | DeckNotFoundError
+  | CardBannedError
+  | CardCopyLimitExceededError
+  | DeckFullError
+  | DeckColorLimitExceededError
+
 type Query {
   node(id: ID!): Node
   cards(first: Int, after: String, filter: CardFilterInput, sort: CardSort): CardConnection!
   quicksearch(query: String!, first: Int): [Card!]!
   searchHistory: SearchHistoryList!
+  deckList: DeckList!
 }
 
 type Mutation {
@@ -337,4 +391,9 @@ type Mutation {
   addCardView(cardId: ID!): SearchHistoryList!
   removeSearchHistory(id: ID!): Boolean!
   clearSearchHistory: Boolean!
+  createDeck(name: String!): DeckList!
+  deleteDeck(id: ID!): DeckList!
+  renameDeck(id: ID!, name: String!): Deck!
+  addCardToDeck(deckId: ID!, cardId: ID!): AddCardToDeckResult!
+  removeCardFromDeck(deckId: ID!, cardId: ID!): Deck!
 }

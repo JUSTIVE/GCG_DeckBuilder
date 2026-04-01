@@ -45,7 +45,7 @@ import type {
   GraphQLResolveInfo,
 } from "graphql";
 import schemaSDL from "../schema.graphql?raw";
-import allCardsRaw from "../../data/mapped.json";
+import allCardsRaw from "../../data/processed.json";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -72,12 +72,21 @@ const resolveNodeType = (obj: { __typename: string }): string =>
   __typename: string;
 }) => obj.__typename;
 
+(schema.getType("PlayableCard") as GraphQLUnionType).resolveType = resolveNodeType;
+
+(schema.getType("AddCardToDeckResult") as GraphQLUnionType).resolveType = (obj: {
+  __typename: string;
+}) => obj.__typename;
+
 (schema.getType("Node") as GraphQLInterfaceType).resolveType = (obj: {
   __typename: string;
 }) => {
   if (
     obj.__typename === "FilterSearchHistory" ||
-    obj.__typename === "CardViewHistory"
+    obj.__typename === "CardViewHistory" ||
+    obj.__typename === "SearchHistoryList" ||
+    obj.__typename === "Deck" ||
+    obj.__typename === "DeckList"
   )
     return obj.__typename;
   return resolveNodeType(obj);
@@ -425,6 +434,72 @@ function writeSearchHistory(entries: SearchHistoryEntry[]): void {
   localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(entries));
 }
 
+// ─── Deck (localStorage) ─────────────────────────────────────────────────────
+
+const DECK_KEY = "gcg_decks";
+const DECK_MAX_CARDS = 50;   // non-Resource cards only
+const DECK_MAX_COLORS = 2;
+const DECK_MAX_COPIES = 4;
+const DECK_LIST_ID = "DeckList:singleton";
+
+interface DeckCard {
+  cardId: string;
+  count: number;
+}
+
+interface Deck {
+  __typename: "Deck";
+  id: string;
+  name: string;
+  cards: DeckCard[];
+  createdAt: string;
+}
+
+interface DeckListShape {
+  __typename: "DeckList";
+  id: string;
+  decks: Deck[];
+}
+
+function readDecks(): Deck[] {
+  try {
+    const raw = localStorage.getItem(DECK_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as Deck[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeDecks(decks: Deck[]): void {
+  localStorage.setItem(DECK_KEY, JSON.stringify(decks));
+}
+
+function makeDeckList(decks: Deck[]): DeckListShape {
+  return { __typename: "DeckList", id: DECK_LIST_ID, decks };
+}
+
+/** Count of non-Resource cards in a deck (toward the 50-card limit). */
+function deckCardCount(deck: Deck): number {
+  return deck.cards.reduce((sum, dc) => {
+    const card = cardById.get(dc.cardId) as AnyRecord | undefined;
+    if (card?.__typename === "ResourceCard") return sum;
+    return sum + dc.count;
+  }, 0);
+}
+
+/** Distinct colors of non-Resource cards in a deck. */
+function deckColors(deck: Deck): Set<string> {
+  const colors = new Set<string>();
+  for (const dc of deck.cards) {
+    const card = cardById.get(dc.cardId) as AnyRecord | undefined;
+    if (!card || card.__typename === "ResourceCard") continue;
+    if (typeof card["color"] === "string") colors.add(card["color"] as string);
+  }
+  return colors;
+}
+
 // ─── Root resolvers ───────────────────────────────────────────────────────────
 
 interface CardsArgs {
@@ -436,10 +511,13 @@ interface CardsArgs {
 
 const rootValue = {
   /** Query.node — look up any Node by its global ID */
-  node({ id }: { id: string }): RawCard | SearchHistoryEntry | SearchHistoryList | null {
+  node({ id }: { id: string }): RawCard | SearchHistoryEntry | SearchHistoryList | Deck | DeckListShape | null {
     if (id === SEARCH_HISTORY_LIST_ID) return makeSearchHistoryList(readSearchHistory());
+    if (id === DECK_LIST_ID) return makeDeckList(readDecks());
     const historyEntry = readSearchHistory().find((e) => e.id === id);
     if (historyEntry) return historyEntry;
+    const deck = readDecks().find((d) => d.id === id);
+    if (deck) return deck;
     return cardById.get(id) ?? null;
   },
 
@@ -593,6 +671,123 @@ const rootValue = {
     localStorage.removeItem(SEARCH_HISTORY_KEY);
     return true;
   },
+
+  /** Query.deckList — singleton DeckList node */
+  deckList(): DeckListShape {
+    return makeDeckList(readDecks());
+  },
+
+  /** Mutation.createDeck */
+  createDeck({ name }: { name: string }): DeckListShape {
+    const decks = readDecks();
+    const createdAt = new Date().toISOString();
+    const deck: Deck = {
+      __typename: "Deck",
+      id: btoa(`Deck:${createdAt}`),
+      name,
+      cards: [],
+      createdAt,
+    };
+    const updated = [...decks, deck];
+    writeDecks(updated);
+    return makeDeckList(updated);
+  },
+
+  /** Mutation.deleteDeck */
+  deleteDeck({ id }: { id: string }): DeckListShape {
+    const updated = readDecks().filter((d) => d.id !== id);
+    writeDecks(updated);
+    return makeDeckList(updated);
+  },
+
+  /** Mutation.renameDeck */
+  renameDeck({ id, name }: { id: string; name: string }): Deck {
+    const decks = readDecks();
+    const idx = decks.findIndex((d) => d.id === id);
+    if (idx === -1) throw new Error(`Deck not found: ${id}`);
+    const updated = { ...decks[idx], name };
+    decks[idx] = updated;
+    writeDecks(decks);
+    return updated;
+  },
+
+  /** Mutation.addCardToDeck */
+  addCardToDeck({ deckId, cardId }: { deckId: string; cardId: string }): AnyRecord {
+    const decks = readDecks();
+    const idx = decks.findIndex((d) => d.id === deckId);
+    if (idx === -1) {
+      return { __typename: "DeckNotFoundError", deckId };
+    }
+
+    const deck = { ...decks[idx], cards: [...decks[idx].cards] };
+    const card = cardById.get(cardId) as AnyRecord | undefined;
+    const isResource = card?.__typename === "ResourceCard";
+
+    const cardLimit =
+      typeof card?.["limit"] === "number" ? (card["limit"] as number) : DECK_MAX_COPIES;
+    if (cardLimit === 0) {
+      return { __typename: "CardBannedError", cardId };
+    }
+
+    const existing = deck.cards.find((dc) => dc.cardId === cardId);
+    const currentCount = existing?.count ?? 0;
+    if (currentCount >= cardLimit) {
+      return { __typename: "CardCopyLimitExceededError", cardId, limit: cardLimit, current: currentCount };
+    }
+
+    if (!isResource) {
+      const current = deckCardCount(deck);
+      if (current >= DECK_MAX_CARDS) {
+        return { __typename: "DeckFullError", current, max: DECK_MAX_CARDS };
+      }
+
+      if (card && typeof card["color"] === "string") {
+        const colors = deckColors(deck);
+        if (!colors.has(card["color"] as string) && colors.size >= DECK_MAX_COLORS) {
+          return {
+            __typename: "DeckColorLimitExceededError",
+            currentColors: [...colors],
+            max: DECK_MAX_COLORS,
+          };
+        }
+      }
+    }
+
+    if (existing) {
+      deck.cards = deck.cards.map((dc) =>
+        dc.cardId === cardId ? { ...dc, count: dc.count + 1 } : dc,
+      );
+    } else {
+      deck.cards = [...deck.cards, { cardId, count: 1 }];
+    }
+
+    decks[idx] = deck;
+    writeDecks(decks);
+    return { __typename: "AddCardToDeckSuccess", deck };
+  },
+
+  /** Mutation.removeCardFromDeck */
+  removeCardFromDeck({ deckId, cardId }: { deckId: string; cardId: string }): Deck {
+    const decks = readDecks();
+    const idx = decks.findIndex((d) => d.id === deckId);
+    if (idx === -1) throw new Error(`Deck not found: ${deckId}`);
+
+    const deck = { ...decks[idx] };
+    const existing = deck.cards.find((dc) => dc.cardId === cardId);
+    if (!existing) return deck;
+
+    if (existing.count <= 1) {
+      deck.cards = deck.cards.filter((dc) => dc.cardId !== cardId);
+    } else {
+      deck.cards = deck.cards.map((dc) =>
+        dc.cardId === cardId ? { ...dc, count: dc.count - 1 } : dc,
+      );
+    }
+
+    decks[idx] = deck;
+    writeDecks(decks);
+    return deck;
+  },
 };
 
 // ─── Field resolver ───────────────────────────────────────────────────────────
@@ -689,6 +884,12 @@ function fieldResolver(
     (fieldName === "AP" || fieldName === "HP")
   ) {
     return (source[fieldName] as number | null | undefined) ?? 0;
+  }
+
+  // ── DeckCard.card → look up PlayableCard by stored cardId ────────────────
+  if (typeName === "DeckCard" && fieldName === "card") {
+    const id = source["cardId"] as string | undefined;
+    return id ? (cardById.get(id) ?? null) : null;
   }
 
   // ── rarity → default to "COMMON" when absent ──────────────────────────────
