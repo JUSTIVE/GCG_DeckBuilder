@@ -5,6 +5,7 @@ import pilotnames from "./pilotnames.json";
 import unitnames from "./unitnames.json";
 import basenames from "./basenames.json";
 import commandnames from "./commandnames.json";
+import descriptions from "./descriptionmap.json";
 
 const pilotNameEntries = Object.entries(pilotnames);
 const effectEntries = Object.entries(effects);
@@ -73,8 +74,21 @@ const commandNameMapper = (raw: unknown[]) => {
   });
 };
 
+const descriptionLineMapper = (raw: unknown[]) =>
+  raw.map((x) => {
+    if (x.description == null) return x;
+    return {
+      ...x,
+      description: x.description.map((line: string) => descriptions[line] ?? line),
+    };
+  });
+
 await writeFile(
   "../data/mapped.json",
-  JSON.stringify(pilotAndEffectNameMapper(commandNameMapper(baseNameMapper(unitNameMapper(raw)))), null, 2),
+  JSON.stringify(
+    descriptionLineMapper(pilotAndEffectNameMapper(commandNameMapper(baseNameMapper(unitNameMapper(raw))))),
+    null,
+    2,
+  ),
   "utf-8",
 );

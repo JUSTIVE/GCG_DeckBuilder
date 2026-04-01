@@ -1019,7 +1019,7 @@
     "limit": 4
   },
   {
-    "name": "Zaku Ⅱ 샤아 전용기",
+    "name": "자쿠 Ⅱ 샤아 전용기",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -1705,7 +1705,7 @@
   {
     "__typename": "ResourceCard",
     "id": "T-006",
-    "name": "Zaku Ⅱ 샤아 전용기",
+    "name": "자쿠 Ⅱ 샤아 전용기",
     "limit": 4
   },
   {
@@ -2249,7 +2249,7 @@
     "limit": 4
   },
   {
-    "name": "Zaku Ⅱ 샤아 전용기",
+    "name": "자쿠 Ⅱ 샤아 전용기",
     "level": 3,
     "cost": 2,
     "color": "GREEN",
@@ -8097,7 +8097,7 @@
     "limit": 4
   },
   {
-    "name": "Gundam AGE-1 타이터스",
+    "name": "건담 AGE-1 타이터스",
     "level": 7,
     "cost": 4,
     "color": "GREEN",
@@ -8203,7 +8203,7 @@
     "limit": 4
   },
   {
-    "name": "Gundam AGE-1 타이터스",
+    "name": "건담 AGE-1 타이터스",
     "level": 4,
     "cost": 2,
     "color": "GREEN",
@@ -11459,7 +11459,7 @@
     "limit": 4
   },
   {
-    "name": "Gundam AGE-2 노멀",
+    "name": "건담 AGE-2 노멀",
     "level": 5,
     "cost": 4,
     "color": "GREEN",

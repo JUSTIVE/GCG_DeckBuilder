@@ -21,7 +21,67 @@ type Card = {
 
 const EN_REGEX = /[a-zA-Z]/;
 
-const exceptions = ["OZ", "UN", "세츠나 F. 세이에이"];
+const exceptions = [
+  "OZ",
+  "UN",
+  "세츠나 F. 세이에이",
+  "M1 아스트레이",
+  "G-스카이 Ez",
+  "자쿠 I 스나이퍼 타입",
+  "G-파이터",
+  "갈루스 K",
+  "건담 Mk-II (티탄즈)",
+  "사이코 건담 (MA 모드)",
+  "레이더 건담 (MA 모드)",
+  "건담 AGE-1 노멀",
+  "G-에그제스",
+  "건담 AGE-1 스말로",
+  "건담 AGE-1 타이터스",
+  "키케로가 (MA 모드) (GQ)",
+  "오르테가 (GQ)",
+  "가이아 (GQ)",
+  "겔구그 스가이 기 (GQ)",
+  "릭 돔 오르테가 기 (GQ)",
+  "가자 D (소데츠키)",
+  "M.A.V. 전술",
+  "제다스 M",
+  "건담 NT-1",
+  "건담 NT-1 풀 아머",
+  "짐 스나이퍼 II",
+  "멧사라 (MA 모드)",
+  "건담 AGE-2 노멀",
+  "자쿠 Ⅱ FZ",
+  "G-바운서",
+  "가자 C 하만 칸 기",
+  "건담 아슈타론 (MA 형태)",
+  "가자 C",
+  "건캐논 (GQ)",
+  "건담 X",
+  "건담 Mk-II (에우고)",
+  "AGE 디바이스",
+  "즈고크 E",
+  "건담 AGE-1 플랫",
+  "자쿠 (포 스네이크 아이즈 사양) [YETI] (GQ)",
+  "GFreD",
+  "육전용 제간 A형 (맨 헌터 사양)",
+  "구스타프 칼 Type-00",
+  "멧사 Type-F02 마인레이어",
+  "멧사 Type-F01",
+  "멧사 (Type-F 네이키드) (지휘관 기)",
+  "겔구그 (GQ)",
+  "릭 돔 가이아 기 (GQ)",
+  "이지스 건담 (MA 모드)",
+  "건담 (MA 형태)",
+  "AEU 헬리온",
+  "AEU 이넥트 (데모 컬러)",
+  "G-디펜서",
+  "GX 비트",
+  "제다스 R",
+  "GN 아머 (Type-E)",
+  "건담 X 디바이더",
+  "멧사 Type-F02",
+  "샤리아 불 (GQ)",
+];
 
 const isTranslated = (value: string): boolean =>
   (value !== "" && !EN_REGEX.test(value)) || exceptions.includes(value);
@@ -70,11 +130,18 @@ function checkCard(card: Card): FieldResult[] {
     });
   }
 
-  if (card.__typename === "CommandCard" && (card as any).pilot != null && card.description != null) {
+  if (
+    card.__typename === "CommandCard" &&
+    (card as any).pilot != null &&
+    card.description != null
+  ) {
     let pilotName: string | null = null;
     for (const line of card.description) {
       const match = /【파일럿】\[([^\]]+)\]/.exec(line);
-      if (match?.[1]) { pilotName = match[1]; break; }
+      if (match?.[1]) {
+        pilotName = match[1];
+        break;
+      }
     }
     if (pilotName != null) {
       results.push({
@@ -158,7 +225,7 @@ function renderCardLine(
 
 const CARD_TYPES = ["UnitCard", "BaseCard", "PilotCard", "CommandCard"];
 
-const MAPPED_FILE = join(import.meta.dir, "mapped.json");
+const MAPPED_FILE = join(import.meta.dir, "processed.json");
 
 console.log(styleText("bold", "\n📋 Translation Coverage Report\n"));
 
