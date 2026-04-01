@@ -360,7 +360,7 @@
   "【세트 시】If you have 2 or more other (Gjallarhorn)/(Tekkadan) Units in play, choose 1 enemy Unit with 3 or less HP. Rest it.": "【세트 시】If you have 2 or more other (Gjallarhorn)/(Tekkadan) Units in play, choose 1 enemy Unit with 3 or less HP. Rest it.",
   "【세트 시】If you have 2 or more other Units in play, draw 1.": "【세트 시】If you have 2 or more other Units in play, draw 1.",
   "【세트 시】Look at the top 3 cards of your deck. You may deploy 1 (ZAFT) Unit card that is Lv.4 or lower among them. Return the remaining cards randomly to the bottom of your deck.": "【세트 시】Look at the top 3 cards of your deck. You may deploy 1 (ZAFT) Unit card that is Lv.4 or lower among them. Return the remaining cards randomly to the bottom of your deck.",
-  "【세트 시】Place the top 2 cards of your deck into your trash. If you place a (CB) card with this effect, draw 1.": "【세트 시】Place the top 2 cards of your deck into your trash. If you place a (CB) card with this effect, draw 1.",
+  "【세트 시】Place the top 2 cards of your deck into your trash. If you place a (CB) card with this effect, draw 1.": "【세트 시】 자신의 덱을 위에서 2장, 자신의 트래시에 놓는다. 이 효과로 (CB)의 카드가 놓였다면, 자신은 1장 드로우한다.",
   "【세트 시】Place the top 2 cards of your deck into your trash. If you placed a (Vagan) card with this effect, choose 1 enemy Unit. It gets AP-2 during this turn.": "【세트 시】Place the top 2 cards of your deck into your trash. If you placed a (Vagan) card with this effect, choose 1 enemy Unit. It gets AP-2 during this turn.",
   "【세트 시】This Unit gains <고기동>.": "【세트 시】This Unit gains <고기동>.",
   "【세트 시】This Unit gains <돌파 3>.": "【세트 시】This Unit gains <돌파 3>.",
@@ -437,5 +437,5 @@
   "【파괴 시】Look at the top 3 cards of your deck. You may reveal 1 (Zeon)/(Neo Zeon) Unit card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck.": "【파괴 시】Look at the top 3 cards of your deck. You may reveal 1 (Zeon)/(Neo Zeon) Unit card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck.",
   "【파괴 시】Place the top 2 cards of your deck into your trash.": "【파괴 시】Place the top 2 cards of your deck into your trash.",
 
-  "자신의 턴 종료 시, if there are 7 or more (CB) cards in your trash, choose 1 of your Resources. Set it as active.": "자신의 턴 종료 시, if there are 7 or more (CB) cards in your trash, choose 1 of your Resources. Set it as active."
+  "자신의 턴 종료 시, if there are 7 or more (CB) cards in your trash, choose 1 of your Resources. Set it as active.": "자신의 턴 종료 시, 자신의 트래시에 (CB)의 카드가 7장 이상 있다면, 자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다."
 }

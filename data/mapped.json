@@ -3409,8 +3409,8 @@
       "GN_DRIVE"
     ],
     "description": [
-      "자신의 턴 종료 시, if there are 7 or more (CB) cards in your trash, choose 1 of your Resources. Set it as active.",
-      "【세트 시】Place the top 2 cards of your deck into your trash. If you place a (CB) card with this effect, draw 1."
+      "자신의 턴 종료 시, 자신의 트래시에 (CB)의 카드가 7장 이상 있다면, 자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다.",
+      "【세트 시】 자신의 덱을 위에서 2장, 자신의 트래시에 놓는다. 이 효과로 (CB)의 카드가 놓였다면, 자신은 1장 드로우한다."
     ],
     "__typename": "UnitCard",
     "id": "ST07-001",
