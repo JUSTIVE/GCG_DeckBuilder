@@ -4057,7 +4057,7 @@
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "When you draw with an effect, if this is a blue Unit, it gains <고기동> during this turn.",
-      "(This Unit can' t be blocked.)"
+      "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "PilotCard",
     "id": "ST08-011",
@@ -4081,7 +4081,7 @@
     ],
     "description": [
       "【메인】Choose 1 friendly Link Unit. It gains <돌파 1> during this turn.",
-      "(When this Unit' s attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent' s shield area.)",
+      "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【파일럿】[가우만 노빌]"
     ],
     "__typename": "CommandCard",
