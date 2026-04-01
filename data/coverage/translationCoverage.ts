@@ -28,7 +28,11 @@ const removeShortEnglishInParens = (str: string) => {
 
 const isTranslated = (value: string): boolean =>
   (value !== "" &&
-    !EN_REGEX.test(removeShortEnglishInParens(value).replace(/\b(AP|HP)\b/gi, ""))) ||
+    !EN_REGEX.test(
+      removeShortEnglishInParens(value)
+        .replace(/\b(AP|HP)/gi, "")
+        .replace(/\bLv\./gi, ""),
+    )) ||
   exacts.includes(value);
 
 const isDescriptionTranslated = (description: string[]): boolean =>
@@ -159,9 +163,11 @@ function renderCardLine(
 
   console.log(`${prefix}${connector}${idText}${typename} ${pct}`);
 
-  fields.forEach((field, i) => {
-    renderFieldLine(field, childPrefix, i === fields.length - 1);
-  });
+  if (!allDone) {
+    fields.forEach((field, i) => {
+      renderFieldLine(field, childPrefix, i === fields.length - 1);
+    });
+  }
 
   return cardSummary;
 }

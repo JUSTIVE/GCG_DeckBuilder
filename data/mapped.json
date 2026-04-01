@@ -46,7 +46,7 @@
       "WHITE_BASE_TEAM"
     ],
     "description": [
-      "【세트 시･(White Base Team) Pilot】Draw 1."
+      "【세트 시･(White Base Team) Pilot】자신은 1장 드로우 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST01-002",
@@ -623,7 +623,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "【배치 시】Draw 1. Then, discard 1."
+      "【배치 시】자신은 1장 드로우 한다. Then, discard 1."
     ],
     "__typename": "UnitCard",
     "id": "ST04-002",
@@ -1382,7 +1382,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】Draw 1."
+      "【링크 시】자신은 1장 드로우 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD01-088",
@@ -3410,7 +3410,7 @@
     ],
     "description": [
       "자신의 턴 종료 시, 자신의 트래시에 (CB)의 카드가 7장 이상 있다면, 자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다.",
-      "【세트 시】 자신의 덱을 위에서 2장, 자신의 트래시에 놓는다. 이 효과로 (CB)의 카드가 놓였다면, 자신은 1장 드로우한다."
+      "【세트 시】Place the top 2 cards of your deck into your trash. If you place a (CB) card with this effect, draw 1."
     ],
     "__typename": "UnitCard",
     "id": "ST07-001",
@@ -3578,7 +3578,7 @@
       "GN_DRIVE"
     ],
     "description": [
-      "자신의 턴 동안, while you have a (CB) Pilot in play, this Unit gets AP+2."
+      "자신의 턴 동안, (CB)의 자신의 파일럿이 있는 동안, 이 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST07-007",
@@ -3635,7 +3635,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【공격 시】This Unit gets AP+1 during this turn. If there are 7 or more (CB) cards in your trash, all your (CB) Units get AP+1 instead."
+      "【공격 시】 이 유닛을 AP+1 한다. 자신의 트래시에 (CB)의 카드가 7장 이상이라면, 대신에 (CB)의 자신의 유닛 전부를 AP+1 한다."
     ],
     "__typename": "PilotCard",
     "id": "ST07-009",
@@ -3682,7 +3682,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】If this is a (CB) Unit, it may choose an active enemy Unit whose Lv. is equal to or lower than this Unit as its attack target during this turn."
+      "【세트 시】 이 유닛이 (CB)라면, 이 턴 동안, 이 유닛은 액티브의, 이 유닛의 Lv. 이하의 상대의 유닛을 어택 대상으로 선택할 수 있다."
     ],
     "__typename": "PilotCard",
     "id": "ST07-011",
@@ -3705,7 +3705,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "자신의 턴 동안, while you have a (CB) Link Unit in play, this Unit can't receive battle damage from enemy Units with 3 or less AP."
+      "자신의 턴 동안, (CB)의 자신의 링크 유닛이 있는 동안, 이 유닛은 AP3 이하의 상대의 유닛으로부터 배틀 대미지를 받지 않는다."
     ],
     "__typename": "PilotCard",
     "id": "ST07-012",
@@ -3725,7 +3725,7 @@
     "package": "ST07",
     "trait": [],
     "description": [
-      "【버스트】Draw 1.",
+      "【버스트】자신은 1장 드로우 한다.",
       "【액션】Choose 1 rested friendly (CB) Unit. Change the attack target of the battling enemy Unit to it."
     ],
     "__typename": "CommandCard",
@@ -6021,7 +6021,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【공격 시】Draw 1. Then, discard 1."
+      "【공격 시】자신은 1장 드로우 한다. Then, discard 1."
     ],
     "__typename": "UnitCard",
     "id": "GD01-074",
@@ -6512,7 +6512,7 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【버스트】Draw 1.",
+      "【버스트】자신은 1장 드로우 한다.",
       "【메인】Choose 1 rested enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "CommandCard",
@@ -9700,7 +9700,7 @@
     "package": "GD02",
     "trait": [],
     "description": [
-      "【버스트】Draw 1.",
+      "【버스트】자신은 1장 드로우 한다.",
       "【메인】Choose 1 friendly damaged Unit. It recovers 2 HP. Then, draw 1."
     ],
     "__typename": "CommandCard",
@@ -9936,7 +9936,7 @@
     "package": "GD02",
     "trait": [],
     "description": [
-      "【버스트】Draw 1.",
+      "【버스트】자신은 1장 드로우 한다.",
       "【메인】Choose 1 purple Pilot card from your trash. Add it to your hand."
     ],
     "__typename": "CommandCard",
@@ -10624,7 +10624,7 @@
     ],
     "description": [
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
-      "【배치 시】Draw 1."
+      "【배치 시】자신은 1장 드로우 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-005",
@@ -13283,7 +13283,7 @@
     "package": "GD03",
     "trait": [],
     "description": [
-      "【메인】Draw 1. Then, if there are 2 or more cards with \"A Healthy Curiosity\" in their card name in your trash, choose 1 enemy Unit with 4 or less HP. Rest it."
+      "【메인】자신은 1장 드로우 한다. Then, if there are 2 or more cards with \"A Healthy Curiosity\" in their card name in your trash, choose 1 enemy Unit with 4 or less HP. Rest it."
     ],
     "__typename": "CommandCard",
     "id": "GD03-101"
@@ -13301,7 +13301,7 @@
     "package": "GD03",
     "trait": [],
     "description": [
-      "【버스트】Draw 1.",
+      "【버스트】자신은 1장 드로우 한다.",
       "【액션】Choose 1 of your (Titans) Link Units battling an enemy Unit. Set it as active."
     ],
     "__typename": "CommandCard",
