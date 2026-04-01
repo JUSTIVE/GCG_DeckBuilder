@@ -1,5 +1,15 @@
-import { graphql, useLazyLoadQuery } from "react-relay";
+import { graphql, useLazyLoadQuery, useMutation } from "react-relay";
 import type { CardByIdOverlayQuery } from "@/__generated__/CardByIdOverlayQuery.graphql";
+import type { CardByIdOverlayAddCardViewMutation } from "@/__generated__/CardByIdOverlayAddCardViewMutation.graphql";
+import { useEffect } from "react";
+
+const ADD_CARD_VIEW_MUTATION = graphql`
+  mutation CardByIdOverlayAddCardViewMutation($cardId: ID!) {
+    addCardView(cardId: $cardId) {
+      ...SearchHistoryPanel_list
+    }
+  }
+`;
 import { UnitCardBody } from "./UnitCard";
 import { PilotCardBody } from "./PilotCard";
 import { BaseCardBody } from "./BaseCard";
@@ -114,6 +124,13 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
   const router = useRouter();
 
   const node = data.node;
+
+  const [commitAddCardView] = useMutation<CardByIdOverlayAddCardViewMutation>(ADD_CARD_VIEW_MUTATION);
+
+  useEffect(() => {
+    if (!node || node.__typename === "%other") return;
+    commitAddCardView({ variables: { cardId } });
+  }, [cardId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!node || node.__typename === "%other") return null;
 

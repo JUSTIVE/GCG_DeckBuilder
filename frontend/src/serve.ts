@@ -68,7 +68,20 @@ const resolveNodeType = (obj: { __typename: string }): string =>
   __typename: string;
 }) => obj.__typename;
 
-(schema.getType("Node") as GraphQLInterfaceType).resolveType = resolveNodeType;
+(schema.getType("SearchHistory") as GraphQLUnionType).resolveType = (obj: {
+  __typename: string;
+}) => obj.__typename;
+
+(schema.getType("Node") as GraphQLInterfaceType).resolveType = (obj: {
+  __typename: string;
+}) => {
+  if (
+    obj.__typename === "FilterSearchHistory" ||
+    obj.__typename === "CardViewHistory"
+  )
+    return obj.__typename;
+  return resolveNodeType(obj);
+};
 
 // ─── Data indexes ─────────────────────────────────────────────────────────────
 
@@ -352,29 +365,62 @@ function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[] {
 // ─── Search history (localStorage) ───────────────────────────────────────────
 
 const SEARCH_HISTORY_KEY = "gcg_search_history";
-const SEARCH_HISTORY_MAX = 50;
+const SEARCH_HISTORY_MAX = 15;
+
+function filterKey(f: SearchHistoryFilter): string {
+  const normalized: Record<string, unknown> = {};
+  for (const k of Object.keys(f).sort()) {
+    const v = (f as unknown as Record<string, unknown>)[k];
+    normalized[k] = Array.isArray(v) ? [...v].sort() : v ?? null;
+  }
+  return JSON.stringify(normalized);
+}
 
 interface SearchHistoryFilter extends CardFilterInput {
   sort: string | null;
 }
 
-interface SearchHistory {
+interface FilterSearchHistory {
+  __typename: "FilterSearchHistory";
+  id: string;
   filter: SearchHistoryFilter;
   searchedAt: string;
 }
 
-function readSearchHistory(): SearchHistory[] {
+interface CardViewHistory {
+  __typename: "CardViewHistory";
+  id: string;
+  cardId: string;
+  cardName: string;
+  searchedAt: string;
+}
+
+type SearchHistoryEntry = FilterSearchHistory | CardViewHistory;
+
+const SEARCH_HISTORY_LIST_ID = "SearchHistoryList:singleton";
+
+interface SearchHistoryList {
+  __typename: "SearchHistoryList";
+  id: string;
+  items: SearchHistoryEntry[];
+}
+
+function makeSearchHistoryList(items: SearchHistoryEntry[]): SearchHistoryList {
+  return { __typename: "SearchHistoryList", id: SEARCH_HISTORY_LIST_ID, items };
+}
+
+function readSearchHistory(): SearchHistoryEntry[] {
   try {
     const raw = localStorage.getItem(SEARCH_HISTORY_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as SearchHistory[]) : [];
+    return Array.isArray(parsed) ? (parsed as SearchHistoryEntry[]) : [];
   } catch {
     return [];
   }
 }
 
-function writeSearchHistory(entries: SearchHistory[]): void {
+function writeSearchHistory(entries: SearchHistoryEntry[]): void {
   localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(entries));
 }
 
@@ -389,7 +435,10 @@ interface CardsArgs {
 
 const rootValue = {
   /** Query.node — look up any Node by its global ID */
-  node({ id }: { id: string }): RawCard | null {
+  node({ id }: { id: string }): RawCard | SearchHistoryEntry | SearchHistoryList | null {
+    if (id === SEARCH_HISTORY_LIST_ID) return makeSearchHistoryList(readSearchHistory());
+    const historyEntry = readSearchHistory().find((e) => e.id === id);
+    if (historyEntry) return historyEntry;
     return cardById.get(id) ?? null;
   },
 
@@ -424,9 +473,9 @@ const rootValue = {
     };
   },
 
-  /** Query.searchHistory — recent searches from localStorage */
-  searchHistory({ first = 20 }: { first?: number }): SearchHistory[] {
-    return readSearchHistory().slice(0, first);
+  /** Query.searchHistory — returns the singleton SearchHistoryList node */
+  searchHistory(): SearchHistoryList {
+    return makeSearchHistoryList(readSearchHistory());
   },
 
   /** Query.quicksearch — fzf-style search across name, description, trait, link */
@@ -476,24 +525,63 @@ const rootValue = {
   },
 
   /** Mutation.addSearchHistory — prepend filter+sort, deduplicate by serialized key, cap at max */
-  addSearchHistory({
+  /** Mutation.addFilterSearch — save a filter+sort search to history */
+  addFilterSearch({
     filter,
     sort,
   }: {
     filter: CardFilterInput;
     sort?: string;
-  }): SearchHistory {
+  }): SearchHistoryList {
     const historyFilter: SearchHistoryFilter = { ...filter, sort: sort ?? null };
-    const entry: SearchHistory = {
+    const searchedAt = new Date().toISOString();
+    const entry: FilterSearchHistory = {
+      __typename: "FilterSearchHistory",
+      id: btoa(`FilterSearchHistory:${searchedAt}`),
       filter: historyFilter,
-      searchedAt: new Date().toISOString(),
+      searchedAt,
     };
-    const key = JSON.stringify(historyFilter);
+    const key = filterKey(historyFilter);
     const existing = readSearchHistory().filter(
-      (e) => JSON.stringify(e.filter) !== key,
+      (e) =>
+        !(
+          e.__typename === "FilterSearchHistory" &&
+          filterKey(e.filter) === key
+        ),
     );
-    writeSearchHistory([entry, ...existing].slice(0, SEARCH_HISTORY_MAX));
-    return entry;
+    const updated = [entry, ...existing].slice(0, SEARCH_HISTORY_MAX);
+    writeSearchHistory(updated);
+    return makeSearchHistoryList(updated);
+  },
+
+  /** Mutation.addCardView — save a card detail view to history */
+  addCardView({ cardId }: { cardId: string }): SearchHistoryList {
+    const card = cardById.get(cardId) as AnyRecord | undefined;
+    let cardName = cardId;
+    if (card) {
+      if (typeof card["name"] === "string") cardName = card["name"];
+    }
+    const searchedAt = new Date().toISOString();
+    const entry: CardViewHistory = {
+      __typename: "CardViewHistory",
+      id: btoa(`CardViewHistory:${searchedAt}`),
+      cardId,
+      cardName,
+      searchedAt,
+    };
+    const existing = readSearchHistory().filter(
+      (e) => !(e.__typename === "CardViewHistory" && e.cardId === cardId),
+    );
+    const updated = [entry, ...existing].slice(0, SEARCH_HISTORY_MAX);
+    writeSearchHistory(updated);
+    return makeSearchHistoryList(updated);
+  },
+
+  /** Mutation.removeSearchHistory — remove a single entry by its Node id */
+  removeSearchHistory({ id }: { id: string }): boolean {
+    const updated = readSearchHistory().filter((e) => e.id !== id);
+    writeSearchHistory(updated);
+    return true;
   },
 
   /** Mutation.clearSearchHistory — wipe all entries */

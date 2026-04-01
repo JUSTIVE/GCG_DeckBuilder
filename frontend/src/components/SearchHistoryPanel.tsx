@@ -1,0 +1,361 @@
+import { useTransition, useRef, useEffect } from "react";
+import { graphql, useRefetchableFragment, useFragment } from "react-relay";
+import { serveGraphQL } from "@/serve";
+import { cn } from "@/lib/utils";
+import { COLOR_BG } from "src/render/color";
+import { renderTrait } from "@/render/trait";
+import { ClockIcon, EyeIcon, SearchIcon, Trash2Icon, XIcon } from "lucide-react";
+import type { SearchHistoryPanel_query$key } from "@/__generated__/SearchHistoryPanel_query.graphql";
+import type { SearchHistoryPanel_list$key } from "@/__generated__/SearchHistoryPanel_list.graphql";
+import type { SearchHistoryPanel_filterSearch$key } from "@/__generated__/SearchHistoryPanel_filterSearch.graphql";
+import type { SearchHistoryPanel_cardView$key } from "@/__generated__/SearchHistoryPanel_cardView.graphql";
+import type { CardFilterInput } from "@/__generated__/CardListFragmentRefetchQuery.graphql";
+import type { CardSort } from "@/__generated__/CardListPageQuery.graphql";
+
+// ─── Fragments ────────────────────────────────────────────────────────────────
+
+export const SearchHistoryListFragment = graphql`
+  fragment SearchHistoryPanel_list on SearchHistoryList {
+    items {
+      __typename
+      ... on FilterSearchHistory {
+        id
+        ...SearchHistoryPanel_filterSearch
+      }
+      ... on CardViewHistory {
+        id
+        ...SearchHistoryPanel_cardView
+      }
+    }
+  }
+`;
+
+export const SearchHistoryPanelFragment = graphql`
+  fragment SearchHistoryPanel_query on Query
+  @refetchable(queryName: "SearchHistoryPanelRefetchQuery") {
+    searchHistory {
+      ...SearchHistoryPanel_list
+    }
+  }
+`;
+
+const FilterSearchFragment = graphql`
+  fragment SearchHistoryPanel_filterSearch on FilterSearchHistory {
+    id
+    filter {
+      kind
+      sort
+      color
+      trait
+      query
+      cost
+      level
+      package
+      zone
+      keyword
+      rarity
+    }
+    searchedAt
+  }
+`;
+
+const CardViewFragment = graphql`
+  fragment SearchHistoryPanel_cardView on CardViewHistory {
+    id
+    cardId
+    cardName
+    searchedAt
+  }
+`;
+
+// ─── Mutations ────────────────────────────────────────────────────────────────
+
+const REMOVE_MUTATION = `
+  mutation RemoveSearchHistory($id: ID!) { removeSearchHistory(id: $id) }
+`;
+const CLEAR_MUTATION = `mutation { clearSearchHistory }`;
+
+// ─── Label maps ───────────────────────────────────────────────────────────────
+
+const KIND_LABELS: Record<string, string> = {
+  UNIT: "유닛", PILOT: "파일럿", BASE: "베이스", COMMAND: "커맨드", RESOURCE: "리소스",
+};
+const COLOR_LABELS: Record<string, string> = {
+  BLUE: "파랑", GREEN: "초록", RED: "빨강", YELLOW: "노랑", PURPLE: "보라", WHITE: "하양",
+};
+const SORT_LABELS: Record<string, string> = {
+  NAME_ASC: "이름 ↑", NAME_DESC: "이름 ↓",
+  COST_ASC: "코스트 ↑", COST_DESC: "코스트 ↓",
+  LEVEL_ASC: "레벨 ↑", LEVEL_DESC: "레벨 ↓",
+  AP_ASC: "공격력 ↑", AP_DESC: "공격력 ↓",
+  HP_ASC: "체력 ↑", HP_DESC: "체력 ↓",
+};
+
+function formatRelativeTime(iso: string): string {
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return "방금";
+  if (m < 60) return `${m}분 전`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}시간 전`;
+  return `${Math.floor(h / 24)}일 전`;
+}
+
+// ─── Filter summary chips ─────────────────────────────────────────────────────
+
+type HistoryFilter = {
+  kind: readonly string[];
+  sort?: string | null;
+  color?: readonly string[] | null;
+  trait?: readonly string[] | null;
+  query?: string | null;
+};
+
+function FilterSummary({ f }: { f: HistoryFilter }) {
+  const parts: React.ReactNode[] = [];
+
+  const kinds = [...(f.kind ?? [])];
+  if (kinds.length > 0 && kinds.length < 5) {
+    kinds.forEach((k) =>
+      parts.push(
+        <span key={`k-${k}`} className="rounded px-1.5 py-0.5 bg-muted text-xs font-medium">
+          {KIND_LABELS[k] ?? k}
+        </span>,
+      ),
+    );
+  }
+
+  [...(f.color ?? [])].forEach((c) =>
+    parts.push(
+      <span
+        key={`c-${c}`}
+        className={cn(
+          "rounded px-1.5 py-0.5 text-xs font-medium",
+          COLOR_BG[c],
+          c === "WHITE" ? "text-gray-500 border border-border" : "text-white",
+        )}
+      >
+        {COLOR_LABELS[c] ?? c}
+      </span>,
+    ),
+  );
+
+  const traits = [...(f.trait ?? [])].slice(0, 3);
+  traits.forEach((t) =>
+    parts.push(
+      <span key={`t-${t}`} className="rounded px-1.5 py-0.5 bg-muted text-xs">
+        {renderTrait(t)}
+      </span>,
+    ),
+  );
+  const traitCount = f.trait?.length ?? 0;
+  if (traitCount > 3) {
+    parts.push(
+      <span key="t-more" className="text-xs text-muted-foreground">+{traitCount - 3}</span>,
+    );
+  }
+
+  if (f.query) {
+    parts.push(
+      <span key="q" className="rounded px-1.5 py-0.5 bg-muted text-xs">
+        &ldquo;{f.query}&rdquo;
+      </span>,
+    );
+  }
+
+  if (f.sort) {
+    parts.push(
+      <span key="s" className="rounded px-1.5 py-0.5 bg-muted/50 text-xs text-muted-foreground">
+        {SORT_LABELS[f.sort] ?? f.sort}
+      </span>,
+    );
+  }
+
+  if (parts.length === 0) {
+    parts.push(<span key="all" className="text-xs text-muted-foreground">전체 카드</span>);
+  }
+
+  return <div className="flex flex-wrap gap-1">{parts}</div>;
+}
+
+// ─── Entry rows ───────────────────────────────────────────────────────────────
+
+function FilterSearchRow({
+  entryRef,
+  onRestore,
+  onRemove,
+}: {
+  entryRef: SearchHistoryPanel_filterSearch$key;
+  onRestore: (filter: CardFilterInput, sort: CardSort | null) => void;
+  onRemove: (id: string, e: React.MouseEvent) => void;
+}) {
+  const entry = useFragment(FilterSearchFragment, entryRef);
+  const { sort, ...filterFields } = entry.filter;
+
+  return (
+    <div className="group flex items-start gap-1 rounded-md border border-border hover:bg-accent transition-colors">
+      <button
+        type="button"
+        onClick={() =>
+          onRestore(filterFields as unknown as CardFilterInput, (sort as CardSort) ?? null)
+        }
+        className="flex flex-col gap-1.5 p-2 text-left cursor-pointer flex-1 min-w-0"
+      >
+        <div className="flex items-center gap-1 text-muted-foreground mb-0.5">
+          <SearchIcon className="h-3 w-3 shrink-0" />
+          <span className="text-[10px]">필터 검색</span>
+        </div>
+        <FilterSummary f={entry.filter} />
+        <span className="text-[10px] text-muted-foreground">
+          {formatRelativeTime(entry.searchedAt)}
+        </span>
+      </button>
+      <button
+        type="button"
+        onClick={(e) => onRemove(entry.id, e)}
+        className="p-2 text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-destructive cursor-pointer transition-all shrink-0"
+        aria-label="삭제"
+      >
+        <XIcon className="h-3.5 w-3.5" />
+      </button>
+    </div>
+  );
+}
+
+function CardViewRow({
+  entryRef,
+  onRestore,
+  onRemove,
+}: {
+  entryRef: SearchHistoryPanel_cardView$key;
+  onRestore: (cardId: string) => void;
+  onRemove: (id: string, e: React.MouseEvent) => void;
+}) {
+  const entry = useFragment(CardViewFragment, entryRef);
+
+  return (
+    <div className="group flex items-start gap-1 rounded-md border border-border hover:bg-accent transition-colors">
+      <button
+        type="button"
+        onClick={() => onRestore(entry.cardId)}
+        className="flex p-2 text-left cursor-pointer flex-1 min-w-0"
+      >
+        <div className="flex flex-col gap-1.5 min-w-0">
+          <div className="flex items-center gap-1 text-muted-foreground">
+            <EyeIcon className="h-3 w-3 shrink-0" />
+            <span className="text-[10px]">카드 조회</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <img
+              className="h-10 w-10 shrink-0 rounded object-cover bg-muted"
+              alt={entry.cardName}
+            />
+            <div className="flex flex-col gap-0.5 min-w-0">
+              <span className="text-xs font-medium truncate">{entry.cardName}</span>
+              <span className="text-[10px] text-muted-foreground">{entry.cardId}</span>
+              <span className="text-[10px] text-muted-foreground">
+                {formatRelativeTime(entry.searchedAt)}
+              </span>
+            </div>
+          </div>
+        </div>
+      </button>
+      <button
+        type="button"
+        onClick={(e) => onRemove(entry.id, e)}
+        className="p-2 text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-destructive cursor-pointer transition-all shrink-0"
+        aria-label="삭제"
+      >
+        <XIcon className="h-3.5 w-3.5" />
+      </button>
+    </div>
+  );
+}
+
+// ─── Public component ─────────────────────────────────────────────────────────
+
+type Props = {
+  queryRef: SearchHistoryPanel_query$key;
+  onRestore: (filter: CardFilterInput, sort: CardSort | null) => void;
+  onRestoreCardView?: (cardId: string) => void;
+  fetchKey?: string;
+};
+
+export function SearchHistoryPanel({ queryRef, onRestore, onRestoreCardView, fetchKey }: Props) {
+  const [, startTransition] = useTransition();
+  const [data, refetch] = useRefetchableFragment(SearchHistoryPanelFragment, queryRef);
+
+  const prevFetchKeyRef = useRef(fetchKey);
+  useEffect(() => {
+    if (fetchKey === undefined || fetchKey === prevFetchKeyRef.current) return;
+    prevFetchKeyRef.current = fetchKey;
+    startTransition(() => {
+      refetch({}, { fetchPolicy: "network-only" });
+    });
+  }, [fetchKey, refetch]);
+
+  const historyList = useFragment(SearchHistoryListFragment, data.searchHistory as SearchHistoryPanel_list$key);
+  const entries = historyList?.items ?? [];
+  if (entries.length === 0) return null;
+
+  function refetchHistory() {
+    startTransition(() => {
+      refetch({}, { fetchPolicy: "network-only" });
+    });
+  }
+
+  async function handleRemove(id: string, e: React.MouseEvent) {
+    e.stopPropagation();
+    await serveGraphQL(REMOVE_MUTATION, { id });
+    refetchHistory();
+  }
+
+  async function handleClear() {
+    await serveGraphQL(CLEAR_MUTATION);
+    refetchHistory();
+  }
+
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center justify-between">
+        <span className="flex items-center gap-1 text-xs font-medium text-muted-foreground">
+          <ClockIcon className="h-3 w-3" />
+          검색 기록
+        </span>
+        <button
+          type="button"
+          onClick={handleClear}
+          className="flex items-center gap-1 text-xs text-muted-foreground hover:text-destructive cursor-pointer transition-colors"
+        >
+          <Trash2Icon className="h-3 w-3" />
+          전체 삭제
+        </button>
+      </div>
+      <div className="flex flex-col gap-1">
+        {entries.map((entry) => {
+          if (entry.__typename === "FilterSearchHistory") {
+            return (
+              <FilterSearchRow
+                key={entry.id}
+                entryRef={entry}
+                onRestore={onRestore}
+                onRemove={handleRemove}
+              />
+            );
+          }
+          if (entry.__typename === "CardViewHistory") {
+            return (
+              <CardViewRow
+                key={entry.id}
+                entryRef={entry}
+                onRestore={(cardId) => onRestoreCardView?.(cardId)}
+                onRemove={handleRemove}
+              />
+            );
+          }
+          return null;
+        })}
+      </div>
+    </div>
+  );
+}

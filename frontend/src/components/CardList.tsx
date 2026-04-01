@@ -3,10 +3,19 @@ import type {
   CardFilterInput,
   CardSort,
 } from "@/__generated__/CardListFragmentRefetchQuery.graphql";
-import { usePaginationFragment } from "react-relay";
+import { usePaginationFragment, useMutation } from "react-relay";
 import { graphql } from "relay-runtime";
 import { Card } from "./Card";
 import { useRef, useState, useEffect, useTransition } from "react";
+import type { CardListAddFilterSearchMutation } from "@/__generated__/CardListAddFilterSearchMutation.graphql";
+
+const ADD_FILTER_SEARCH_MUTATION = graphql`
+  mutation CardListAddFilterSearchMutation($filter: CardFilterInput!, $sort: CardSort) {
+    addFilterSearch(filter: $filter, sort: $sort) {
+      ...SearchHistoryPanel_list
+    }
+  }
+`;
 import { useVirtualizer } from "@tanstack/react-virtual";
 
 const Fragment = graphql`
@@ -45,6 +54,7 @@ export function CardList({
   showDescription = false,
 }: Props) {
   const [, startTransition] = useTransition();
+  const [commitAddFilterSearch] = useMutation<CardListAddFilterSearchMutation>(ADD_FILTER_SEARCH_MUTATION);
   const { data, refetch, loadNext, hasNext, isLoadingNext } =
     usePaginationFragment(Fragment, queryRef);
 
@@ -58,6 +68,21 @@ export function CardList({
     startTransition(() => {
       refetch({ filter, sort: sort ?? null }, { fetchPolicy: "network-only" });
     });
+    const hasActiveFilter =
+      (filter.kind?.length ?? 0) > 0 ||
+      !!filter.query ||
+      (filter.color?.length ?? 0) > 0 ||
+      (filter.trait?.length ?? 0) > 0 ||
+      (filter.zone?.length ?? 0) > 0 ||
+      (filter.keyword?.length ?? 0) > 0 ||
+      (filter.level?.length ?? 0) > 0 ||
+      (filter.cost?.length ?? 0) > 0 ||
+      !!filter.package ||
+      !!filter.rarity ||
+      !!sort;
+    if (hasActiveFilter) {
+      commitAddFilterSearch({ variables: { filter, sort: sort ?? null } });
+    }
   }, [filter, sort, refetch]);
   const parentRef = useRef<HTMLDivElement>(null);
   const [columns, setColumns] = useState(1);

@@ -16,11 +16,14 @@ import { cn } from "@/lib/utils";
 import { renderKeyword } from "@/render/keyword";
 import {
   ChevronDownIcon,
+  ClockIcon,
   FileTextIcon,
   SlidersHorizontalIcon,
   XIcon,
 } from "lucide-react";
-import { useRef, useState, useEffect, Suspense } from "react";
+import { useRef, useState, useEffect, Suspense, useMemo } from "react";
+import { SearchHistoryPanel } from "@/components/SearchHistoryPanel";
+import type { SearchHistoryPanel_query$key } from "@/__generated__/SearchHistoryPanel_query.graphql";
 import {
   Sheet,
   SheetContent,
@@ -32,8 +35,11 @@ import { COLOR_BG } from "src/render/color";
 const Query = graphql`
   query CardListPageQuery($filter: CardFilterInput!, $sort: CardSort) {
     ...CardListFragment @arguments(first: 20, filter: $filter, sort: $sort)
+    ...SearchHistoryPanel_query
   }
 `;
+
+
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -732,7 +738,16 @@ function FilterBar({
   sort,
   onChange,
   onSortChange,
-}: FilterControlsProps) {
+  onRestore,
+  onRestoreCardView,
+  historyQueryRef,
+  historyFetchKey,
+}: FilterControlsProps & {
+  onRestore: (f: CardFilterInput, s: CardSort | null) => void;
+  onRestoreCardView: (cardId: string) => void;
+  historyQueryRef: SearchHistoryPanel_query$key;
+  historyFetchKey: string;
+}) {
   const hasFilters = activeFilterCount(filter) > 0;
 
   return (
@@ -752,6 +767,14 @@ function FilterBar({
           초기화
         </button>
       )}
+      <div className="border-t border-border pt-3">
+        <SearchHistoryPanel
+          queryRef={historyQueryRef}
+          fetchKey={historyFetchKey}
+          onRestore={onRestore}
+          onRestoreCardView={onRestoreCardView}
+        />
+      </div>
     </aside>
   );
 }
@@ -765,11 +788,20 @@ function FilterBottomSheet({
   onSortChange,
   showDescription,
   onToggleDescription,
+  onRestore,
+  onRestoreCardView,
+  historyQueryRef,
+  historyFetchKey,
 }: FilterControlsProps & {
   showDescription: boolean;
   onToggleDescription: () => void;
+  onRestore: (f: CardFilterInput, s: CardSort | null) => void;
+  onRestoreCardView: (cardId: string) => void;
+  historyQueryRef: SearchHistoryPanel_query$key;
+  historyFetchKey: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
   const [dragY, setDragY] = useState(0);
   const dragStartY = useRef<number | null>(null);
   const count = activeFilterCount(filter);
@@ -826,6 +858,15 @@ function FilterBottomSheet({
         )}
       </button>
 
+      <button
+        type="button"
+        onClick={() => setHistoryOpen(true)}
+        className="flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer"
+      >
+        <ClockIcon className="h-3.5 w-3.5" />
+        기록
+      </button>
+
       {count > 0 && (
         <button
           type="button"
@@ -835,6 +876,27 @@ function FilterBottomSheet({
           초기화
         </button>
       )}
+
+      <Sheet open={historyOpen} onOpenChange={setHistoryOpen}>
+        <SheetContent
+          side="bottom"
+          showCloseButton={false}
+          className="px-4 pb-0 pt-0 rounded-t-xl max-h-[80dvh] flex flex-col"
+        >
+          <div className="mx-auto mb-4 mt-3 h-1 w-10 rounded-full bg-muted-foreground/30 shrink-0" />
+          <SheetHeader className="p-0 mb-4 shrink-0">
+            <SheetTitle>검색 기록</SheetTitle>
+          </SheetHeader>
+          <div className="overflow-y-auto pb-8">
+            <SearchHistoryPanel
+              queryRef={historyQueryRef}
+              fetchKey={historyFetchKey}
+              onRestore={(f, s) => { onRestore(f, s); setHistoryOpen(false); }}
+              onRestoreCardView={(id) => { onRestoreCardView(id); setHistoryOpen(false); }}
+            />
+          </div>
+        </SheetContent>
+      </Sheet>
 
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent
@@ -870,26 +932,22 @@ function FilterBottomSheet({
   );
 }
 
-// ─── Content (suspends on initial load only) ─────────────────────────────────
+// ─── Content ─────────────────────────────────────────────────────────────────
 
 function CardListContent({
+  queryRef,
   filter,
   sort,
   showDescription,
 }: {
+  queryRef: CardListPageQuery["response"];
   filter: CardFilterInput;
   sort: CardSort | null;
   showDescription: boolean;
 }) {
-  const initialFilterRef = useRef(filter);
-  const initialSortRef = useRef(sort);
-  const data = useLazyLoadQuery<CardListPageQuery>(Query, {
-    filter: initialFilterRef.current,
-    sort: initialSortRef.current,
-  });
   return (
     <CardList
-      queryRef={data}
+      queryRef={queryRef}
       filter={filter}
       sort={sort}
       showDescription={showDescription}
@@ -905,6 +963,13 @@ export function CardListPage() {
   const filter = buildFilter(search);
   const sort = buildSort(search);
   const [showDescription, setShowDescription] = useState(false);
+
+  const initialFilterRef = useRef(filter);
+  const initialSortRef = useRef(sort);
+  const data = useLazyLoadQuery<CardListPageQuery>(Query, {
+    filter: initialFilterRef.current,
+    sort: initialSortRef.current,
+  });
 
   function handleFilterChange(newFilter: CardFilterInput) {
     router.navigate({
@@ -928,6 +993,30 @@ export function CardListPage() {
     });
   }
 
+  function handleRestore(newFilter: CardFilterInput, newSort: CardSort | null) {
+    router.navigate({
+      to: "/cardlist",
+      search: (prev) => ({
+        ...filterToSearch(newFilter, newSort),
+        cardId: prev.cardId,
+      }),
+      replace: true,
+    });
+  }
+
+  function handleRestoreCardView(cardId: string) {
+    router.navigate({
+      to: "/cardlist",
+      search: (prev) => ({ ...prev, cardId }),
+      replace: true,
+    });
+  }
+
+  const historyFetchKey = useMemo(
+    () => JSON.stringify({ filter, sort }),
+    [filter, sort],
+  );
+
   return (
     <div className="flex flex-col md:flex-row">
       <FilterBar
@@ -935,6 +1024,10 @@ export function CardListPage() {
         sort={sort}
         onChange={handleFilterChange}
         onSortChange={handleSortChange}
+        onRestore={handleRestore}
+        onRestoreCardView={handleRestoreCardView}
+        historyQueryRef={data}
+        historyFetchKey={historyFetchKey}
       />
       <div className="flex flex-col flex-1 min-w-0">
         <FilterBottomSheet
@@ -944,6 +1037,10 @@ export function CardListPage() {
           onSortChange={handleSortChange}
           showDescription={showDescription}
           onToggleDescription={() => setShowDescription((v) => !v)}
+          onRestore={handleRestore}
+          onRestoreCardView={handleRestoreCardView}
+          historyQueryRef={data}
+          historyFetchKey={historyFetchKey}
         />
         <div className="hidden md:flex items-center gap-2 border-b border-border px-4 py-2">
           <button
@@ -960,13 +1057,12 @@ export function CardListPage() {
             효과
           </button>
         </div>
-        <Suspense>
-          <CardListContent
-            filter={filter}
-            sort={sort}
-            showDescription={showDescription}
-          />
-        </Suspense>
+        <CardListContent
+          queryRef={data}
+          filter={filter}
+          sort={sort}
+          showDescription={showDescription}
+        />
         {search.cardId && (
           <Suspense>
             <CardByIdOverlay cardId={search.cardId} />

@@ -304,19 +304,36 @@ type SearchHistoryFilter {
   sort: CardSort
 }
 
-type SearchHistory {
+type FilterSearchHistory implements Node {
+  id: ID!
   filter: SearchHistoryFilter!
   searchedAt: String!
+}
+
+type CardViewHistory implements Node {
+  id: ID!
+  cardId: ID!
+  cardName: String!
+  searchedAt: String!
+}
+
+union SearchHistory = FilterSearchHistory | CardViewHistory
+
+type SearchHistoryList implements Node {
+  id: ID!
+  items: [SearchHistory!]!
 }
 
 type Query {
   node(id: ID!): Node
   cards(first: Int, after: String, filter: CardFilterInput, sort: CardSort): CardConnection!
   quicksearch(query: String!, first: Int): [Card!]!
-  searchHistory(first: Int): [SearchHistory!]!
+  searchHistory: SearchHistoryList!
 }
 
 type Mutation {
-  addSearchHistory(filter: CardFilterInput!, sort: CardSort): SearchHistory!
+  addFilterSearch(filter: CardFilterInput!, sort: CardSort): SearchHistoryList!
+  addCardView(cardId: ID!): SearchHistoryList!
+  removeSearchHistory(id: ID!): Boolean!
   clearSearchHistory: Boolean!
 }
