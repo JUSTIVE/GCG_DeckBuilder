@@ -225,12 +225,16 @@ sortedPackages.forEach((packageName, pkgIdx) => {
   const packagePrefix = isLastPackage ? TREE_INDENT : TREE_PIPE;
 
   // 각 카드 처리
-  packageCards.forEach((card, cardIdx) => {
-    const isLastCard = cardIdx === packageCards.length - 1;
-    const fields = checkCard(card);
-    const cardSummary = renderCardLine(card, fields, packagePrefix, isLastCard);
-    packageSummary = addSummary(packageSummary, cardSummary);
-  });
+  if (previewSummary.translated < previewSummary.total) {
+    packageCards.forEach((card, cardIdx) => {
+      const isLastCard = cardIdx === packageCards.length - 1;
+      const fields = checkCard(card);
+      const cardSummary = renderCardLine(card, fields, packagePrefix, isLastCard);
+      packageSummary = addSummary(packageSummary, cardSummary);
+    });
+  } else {
+    packageSummary = previewSummary;
+  }
 
   packageSummaries.push({ name: packageName, summary: packageSummary });
 });
