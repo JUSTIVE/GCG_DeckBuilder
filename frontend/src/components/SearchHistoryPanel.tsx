@@ -2,7 +2,7 @@ import { useTransition, useRef, useEffect } from "react";
 import { graphql, useRefetchableFragment, useFragment } from "react-relay";
 import { serveGraphQL } from "@/serve";
 import { cn } from "@/lib/utils";
-import { COLOR_BG } from "src/render/color";
+import { COLOR_BG, COLOR_HEX } from "src/render/color";
 import { renderTrait } from "@/render/trait";
 import { ClockIcon, EyeIcon, SearchIcon, Trash2Icon, XIcon } from "lucide-react";
 import type { SearchHistoryPanel_query$key } from "@/__generated__/SearchHistoryPanel_query.graphql";
@@ -64,6 +64,7 @@ const CardViewFragment = graphql`
     id
     cardId
     cardName
+    color
     searchedAt
   }
 `;
@@ -233,41 +234,49 @@ function CardViewRow({
 }) {
   const entry = useFragment(CardViewFragment, entryRef);
 
+  const borderColor = entry.color ? entry.color === "WHITE" ? "var(--border)" : COLOR_HEX[entry.color] : "var(--border)";
+
   return (
-    <div className="group flex items-start gap-1 rounded-md border border-border hover:bg-accent transition-colors">
-      <button
-        type="button"
-        onClick={() => onRestore(entry.cardId)}
-        className="flex p-2 text-left cursor-pointer flex-1 min-w-0"
-      >
-        <div className="flex flex-col gap-1.5 min-w-0">
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <EyeIcon className="h-3 w-3 shrink-0" />
-            <span className="text-[10px]">카드 조회</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <img
-              className="h-10 w-10 shrink-0 rounded object-cover bg-muted"
-              alt={entry.cardName}
-            />
-            <div className="flex flex-col gap-0.5 min-w-0">
-              <span className="text-xs font-medium truncate">{entry.cardName}</span>
-              <span className="text-[10px] text-muted-foreground">{entry.cardId}</span>
-              <span className="text-[10px] text-muted-foreground">
-                {formatRelativeTime(entry.searchedAt)}
-              </span>
+    <div
+      className="group cutout cutout-tl-md p-px rounded-md  "
+      style={{ backgroundColor: borderColor }}
+    >
+      <div className="flex items-start gap-1 cutout cutout-tl-md bg-card group-hover:bg-accent transition-colors rounded-md">
+        <button
+          type="button"
+          onClick={() => onRestore(entry.cardId)}
+          className="flex p-2 pr-0 text-left cursor-pointer flex-1 min-w-0"
+        >
+          <div className="flex flex-col gap-1.5 min-w-0 w-full">
+            <div className="flex items-center text-muted-foreground w-full">
+              <EyeIcon className="h-3 w-3 shrink-0" />
+              <span className="text-[10px]">카드 조회</span>
             </div>
+            <div className="flex items-start gap-2">
+              <img
+                className="h-10 w-10 shrink-0 rounded object-cover cutout cutout-br-md"
+                style={entry.color ? { backgroundColor: COLOR_HEX[entry.color] + "33" } : { backgroundColor: "var(--muted)" }}
+                alt={entry.cardName}
+              />
+              <div className="flex flex-col gap-0.5 min-w-0">
+                <span className="text-xs font-medium truncate">{entry.cardName}</span>
+                <span className="text-[10px] text-muted-foreground">{entry.cardId}</span>
+              </div>
+            </div>
+            <span className="text-[10px] text-muted-foreground">
+              {formatRelativeTime(entry.searchedAt)}
+            </span>
           </div>
-        </div>
-      </button>
-      <button
-        type="button"
-        onClick={(e) => onRemove(entry.id, e)}
-        className="p-2 text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-destructive cursor-pointer transition-all shrink-0"
-        aria-label="삭제"
-      >
-        <XIcon className="h-3.5 w-3.5" />
-      </button>
+        </button>
+        <button
+          type="button"
+          onClick={(e) => onRemove(entry.id, e)}
+          className="p-2 text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-destructive cursor-pointer transition-all shrink-0"
+          aria-label="삭제"
+        >
+          <XIcon className="h-3.5 w-3.5" />
+        </button>
+      </div>
     </div>
   );
 }

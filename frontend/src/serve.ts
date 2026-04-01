@@ -392,6 +392,7 @@ interface CardViewHistory {
   id: string;
   cardId: string;
   cardName: string;
+  color: string | null;
   searchedAt: string;
 }
 
@@ -558,8 +559,10 @@ const rootValue = {
   addCardView({ cardId }: { cardId: string }): SearchHistoryList {
     const card = cardById.get(cardId) as AnyRecord | undefined;
     let cardName = cardId;
+    let color: string | null = null;
     if (card) {
       if (typeof card["name"] === "string") cardName = card["name"];
+      if (typeof card["color"] === "string") color = card["color"];
     }
     const searchedAt = new Date().toISOString();
     const entry: CardViewHistory = {
@@ -567,6 +570,7 @@ const rootValue = {
       id: btoa(`CardViewHistory:${searchedAt}`),
       cardId,
       cardName,
+      color,
       searchedAt,
     };
     const existing = readSearchHistory().filter(

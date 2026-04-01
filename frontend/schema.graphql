@@ -314,6 +314,7 @@ type CardViewHistory implements Node {
   id: ID!
   cardId: ID!
   cardName: String!
+  color: CardColor
   searchedAt: String!
 }
 
