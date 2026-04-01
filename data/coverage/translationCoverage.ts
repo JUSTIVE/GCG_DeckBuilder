@@ -27,7 +27,9 @@ const removeShortEnglishInParens = (str: string) => {
 };
 
 const isTranslated = (value: string): boolean =>
-  (value !== "" && !EN_REGEX.test(removeShortEnglishInParens(value))) || exacts.includes(value);
+  (value !== "" &&
+    !EN_REGEX.test(removeShortEnglishInParens(value).replace(/\b(AP|HP)\b/gi, ""))) ||
+  exacts.includes(value);
 
 const isDescriptionTranslated = (description: string[]): boolean =>
   description.length > 0 && description.every((line) => isTranslated(line));
