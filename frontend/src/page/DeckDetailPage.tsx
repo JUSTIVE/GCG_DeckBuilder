@@ -28,6 +28,7 @@ import {
   MinusIcon,
   LayersIcon,
   SlidersHorizontalIcon,
+  FileTextIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COLOR_BG, COLOR_HEX } from "src/render/color";
@@ -402,6 +403,7 @@ export function DeckDetailPage() {
   const [filter, setFilter] = useState<CardFilterInput>(INITIAL_FILTER);
   const [sort, setSort] = useState<CardSort | null>(null);
   const [filterSheetOpen, setFilterSheetOpen] = useState(false);
+  const [showDescription, setShowDescription] = useState(false);
   const [commitAdd] =
     useMutation<DeckDetailPageAddCardMutation>(ADD_CARD_MUTATION);
   const [commitRemove] =
@@ -423,6 +425,12 @@ export function DeckDetailPage() {
 
   const deck = node;
   const totalCards = deck.cards.reduce((s, c) => s + c.count, 0);
+
+  const deckCardCounts: Record<string, number> = {};
+  for (const { card, count } of deck.cards) {
+    const id = (card as any)?.id;
+    if (id) deckCardCounts[id] = count;
+  }
 
   function handleAdd(cardId: string) {
     commitAdd({
@@ -508,6 +516,19 @@ export function DeckDetailPage() {
           <div className="flex md:hidden items-center gap-2 px-3 py-2 border-b border-border shrink-0">
             <button
               type="button"
+              onClick={() => setShowDescription((v) => !v)}
+              className={cn(
+                "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
+                showDescription
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+              )}
+            >
+              <FileTextIcon className="h-3.5 w-3.5" />
+              효과
+            </button>
+            <button
+              type="button"
               onClick={() => setFilterSheetOpen(true)}
               className={cn(
                 "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
@@ -534,14 +555,31 @@ export function DeckDetailPage() {
               </button>
             )}
           </div>
+          <div className="hidden md:flex items-center gap-2 border-b border-border px-3 py-2 shrink-0">
+            <button
+              type="button"
+              onClick={() => setShowDescription((v) => !v)}
+              className={cn(
+                "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
+                showDescription
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+              )}
+            >
+              <FileTextIcon className="h-3.5 w-3.5" />
+              효과
+            </button>
+          </div>
           <div className="flex-1 min-h-0">
             <CardList
               queryRef={data}
               filter={filter}
               sort={sort}
+              showDescription={showDescription}
               onCardAdd={handleAdd}
               onCardOpen={setOverlayCardId}
               scrollClassName="overflow-y-auto h-full py-5"
+              deckCardCounts={deckCardCounts}
             />
           </div>
         </div>

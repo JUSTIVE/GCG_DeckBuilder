@@ -50,9 +50,10 @@ type Props = {
   showDescription: boolean;
   onAdd?: (cardId: string) => void;
   onOpen?: (cardId: string) => void;
+  deckCardCount?: number;
 };
 
-export function Card({ cardRef, showDescription, onAdd, onOpen }: Props) {
+export function Card({ cardRef, showDescription, onAdd, onOpen, deckCardCount = 0 }: Props) {
   const card = useFragment(Fragment, cardRef);
 
   const description: readonly string[] =
@@ -96,18 +97,22 @@ export function Card({ cardRef, showDescription, onAdd, onOpen }: Props) {
       ? card.id
       : undefined;
 
+  const atLimit = deckCardCount >= 4;
+
   return (
-    <div className="flex flex-col relative">
-      {onAdd && cardId && (
-        <button
-          type="button"
-          className="absolute bottom-1.5 right-1.5 z-10 size-7 rounded-full bg-primary/90 text-primary-foreground flex items-center justify-center shadow-md hover:bg-primary transition-colors"
-          onClick={() => onAdd(cardId)}
-        >
-          <PlusIcon className="size-4" />
-        </button>
-      )}
-      {cardEl}
+    <div className="flex flex-col">
+      <div className={cn("relative group", atLimit && onAdd && "opacity-50")}>
+        {onAdd && cardId && !atLimit && (
+          <button
+            type="button"
+            className="absolute bottom-0 left-0 right-0 h-1/2 z-10 flex items-center justify-center rounded-b-xl bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+            onClick={() => onAdd(cardId)}
+          >
+            <PlusIcon className="size-8 text-white drop-shadow" />
+          </button>
+        )}
+        {cardEl}
+      </div>
       {showDescription && description.length > 0 && (
         <div
           className={cn(

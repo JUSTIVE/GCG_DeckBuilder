@@ -33,6 +33,10 @@ const Fragment = graphql`
       edges {
         cursor
         node {
+          ... on UnitCard { id }
+          ... on PilotCard { id }
+          ... on BaseCard { id }
+          ... on CommandCard { id }
           ...CardFragment
         }
       }
@@ -48,6 +52,7 @@ type Props = {
   onCardAdd?: (cardId: string) => void;
   onCardOpen?: (cardId: string) => void;
   scrollClassName?: string;
+  deckCardCounts?: Record<string, number>;
 };
 
 export function CardList({
@@ -58,6 +63,7 @@ export function CardList({
   onCardAdd,
   onCardOpen,
   scrollClassName = "overflow-y-auto h-[calc(100dvh-65px-48px)] py-5",
+  deckCardCounts,
 }: Props) {
   const [, startTransition] = useTransition();
   const [commitAddFilterSearch] = useMutation<CardListAddFilterSearchMutation>(ADD_FILTER_SEARCH_MUTATION);
@@ -183,6 +189,7 @@ export function CardList({
                     showDescription={showDescription}
                     onAdd={onCardAdd}
                     onOpen={onCardOpen}
+                    deckCardCount={deckCardCounts ? (deckCardCounts[(edge.node as any).id] ?? 0) : 0}
                   />
                 ))}
               </div>
