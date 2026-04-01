@@ -16,7 +16,7 @@
     ],
     "description": [
       "<리페어 2> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
-      "【세트 시】During your turn, all your Units get AP+1."
+      "【세트 시】자신의 턴 동안, all your Units get AP+1."
     ],
     "__typename": "UnitCard",
     "id": "ST01-001",
@@ -1481,7 +1481,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "During your turn, while this Unit has <돌파>, it can't receive battle damage from enemy Units with 3 or less AP."
+      "자신의 턴 동안, while this Unit has <돌파>, it can't receive battle damage from enemy Units with 3 or less AP."
     ],
     "__typename": "PilotCard",
     "id": "GD01-091",
@@ -1877,7 +1877,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【세트 시】During your turn, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
+      "【세트 시】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
     ],
     "__typename": "UnitCard",
     "id": "ST02-003",
@@ -2040,7 +2040,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】During your turn, when this Unit destroys an enemy Unit with battle damage, draw 1."
+      "【링크 시】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, draw 1."
     ],
     "__typename": "PilotCard",
     "id": "ST02-011",
@@ -2127,7 +2127,7 @@
     "description": [
       "【세트 시】This Unit gains <고기동>.",
       "(이 유닛은 블록당하지 않는다.)",
-      "During your turn, when this Unit destroys an enemy shield area card with battle damage, choose 1 enemy Unit. Deal 2 damage to it."
+      "자신의 턴 동안, when this Unit destroys an enemy shield area card with battle damage, choose 1 enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "ST03-001",
@@ -3022,7 +3022,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】During your turn, when this Unit destroys an enemy Unit with battle damage, choose 1 (Tekkadan) Unit card that is Lv.2 or lower from your trash. Add it to your hand."
+      "【링크 시】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, choose 1 (Tekkadan) Unit card that is Lv.2 or lower from your trash. Add it to your hand."
     ],
     "__typename": "PilotCard",
     "id": "ST05-011",
@@ -3669,7 +3669,7 @@
       "GN_DRIVE"
     ],
     "description": [
-      "During your turn, when this Unit destroys an enemy Unit with battle damage, this Unit recovers 2 HP.",
+      "자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, this Unit recovers 2 HP.",
       "【링크 시】This Unit gets AP+2."
     ],
     "__typename": "UnitCard",
@@ -3726,7 +3726,7 @@
       "GN_DRIVE"
     ],
     "description": [
-      "During your turn, while you have a (CB) Pilot in play, this Unit gets AP+2."
+      "자신의 턴 동안, while you have a (CB) Pilot in play, this Unit gets AP+2."
     ],
     "__typename": "UnitCard",
     "id": "ST07-007",
@@ -3858,7 +3858,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "During your turn, while you have a (CB) Link Unit in play, this Unit can't receive battle damage from enemy Units with 3 or less AP."
+      "자신의 턴 동안, while you have a (CB) Link Unit in play, this Unit can't receive battle damage from enemy Units with 3 or less AP."
     ],
     "__typename": "PilotCard",
     "id": "ST07-012",
@@ -6021,7 +6021,7 @@
       "ZAFT"
     ],
     "description": [
-      "During your turn, while this Unit is battling an enemy Unit that is Lv.2 or lower, it gains <선제 공격>.",
+      "자신의 턴 동안, while this Unit is battling an enemy Unit that is Lv.2 or lower, it gains <선제 공격>.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -7387,7 +7387,7 @@
       "WHITE_FANG"
     ],
     "description": [
-      "【링크 시】【턴 1회】During your turn, when one of your Units destroys an enemy Unit with battle damage, set this Unit as active."
+      "【링크 시】【턴 1회】자신의 턴 동안, when one of your Units destroys an enemy Unit with battle damage, set this Unit as active."
     ],
     "__typename": "UnitCard",
     "id": "GD02-002",
@@ -7510,7 +7510,7 @@
     ],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "During your turn, this Unit can't receive battle damage from enemy Units that are Lv.2 or lower."
+      "자신의 턴 동안, this Unit can't receive battle damage from enemy Units that are Lv.2 or lower."
     ],
     "__typename": "UnitCard",
     "id": "GD02-006",
@@ -8827,7 +8827,7 @@
     ],
     "description": [
       "[Suppression] (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
-      "【링크 시】During your turn, while there are 7 or more cards in your trash, all your other (Vulture) Units get AP+2."
+      "【링크 시】자신의 턴 동안, while there are 7 or more cards in your trash, all your other (Vulture) Units get AP+2."
     ],
     "__typename": "UnitCard",
     "id": "GD02-053",
@@ -9153,7 +9153,7 @@
       "VULTURE"
     ],
     "description": [
-      "During your turn, while there are 7 or more cards in your trash, this Unit can't receive effect damage from enemy Commands."
+      "자신의 턴 동안, while there are 7 or more cards in your trash, this Unit can't receive effect damage from enemy Commands."
     ],
     "__typename": "UnitCard",
     "id": "GD02-064",
@@ -9718,7 +9718,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】【턴 1회】During your turn, when this Unit recovers HP, if you have 4 or less cards in your hand, draw 1."
+      "【링크 시】【턴 1회】자신의 턴 동안, when this Unit recovers HP, if you have 4 or less cards in your hand, draw 1."
     ],
     "__typename": "PilotCard",
     "id": "GD02-085",
@@ -9918,7 +9918,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "During your turn, when this Unit destroys an enemy Unit paired with a (Newtype) Pilot with battle damage, draw 1."
+      "자신의 턴 동안, when this Unit destroys an enemy Unit paired with a (Newtype) Pilot with battle damage, draw 1."
     ],
     "__typename": "PilotCard",
     "id": "GD02-093",
@@ -10661,7 +10661,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "During your turn, while you are Lv.7 or higher, all friendly green (Earth Federation) Units get AP+1."
+      "자신의 턴 동안, while you are Lv.7 or higher, all friendly green (Earth Federation) Units get AP+1."
     ],
     "__typename": "BaseCard",
     "id": "GD02-124",
@@ -11568,7 +11568,7 @@
       "GN_DRIVE"
     ],
     "description": [
-      "【링크 시】During your turn, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
+      "【링크 시】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
     ],
     "__typename": "UnitCard",
     "id": "GD03-022",
@@ -11774,7 +11774,7 @@
       "G_TEAM"
     ],
     "description": [
-      "During your turn, when this Unit destroys an enemy Unit with battle damage, deal 2 damage to all enemy Units with <블로커>."
+      "자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, deal 2 damage to all enemy Units with <블로커>."
     ],
     "__typename": "UnitCard",
     "id": "GD03-029",
@@ -11883,7 +11883,7 @@
       "ZAFT"
     ],
     "description": [
-      "【세트 시･(ZAFT) Pilot】During your turn, all your (ZAFT) Units get AP+2.",
+      "【세트 시･(ZAFT) Pilot】자신의 턴 동안, all your (ZAFT) Units get AP+2.",
       "【공격 시】Choose 1 enemy Unit. Deal 1 damage to it for each 4 AP this Unit has."
     ],
     "__typename": "UnitCard",
@@ -12011,7 +12011,7 @@
       "SRA"
     ],
     "description": [
-      "【링크 시】During your turn, while this Unit is battling an enemy Unit with a 【파괴 시】 effect, it gains <선제 공격>.",
+      "【링크 시】자신의 턴 동안, while this Unit is battling an enemy Unit with a 【파괴 시】 effect, it gains <선제 공격>.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -12044,7 +12044,7 @@
     ],
     "description": [
       "【기동･메인】<원호 1> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
-      "During your turn, when this Unit is rested by an effect, choose 1 of your (ZAFT) Units. It gets AP+2 during this turn."
+      "자신의 턴 동안, when this Unit is rested by an effect, choose 1 of your (ZAFT) Units. It gets AP+2 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD03-038",
@@ -12482,7 +12482,7 @@
     ],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【세트 시】【턴 1회】During your turn, when one of your (Tekkadan)/(Teiwaz) Units receives effect damage, choose 1 enemy Unit that is Lv.4 or lower. Rest it."
+      "【세트 시】【턴 1회】자신의 턴 동안, when one of your (Tekkadan)/(Teiwaz) Units receives effect damage, choose 1 enemy Unit that is Lv.4 or lower. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD03-053",
@@ -12696,7 +12696,7 @@
       "TEKKADAN"
     ],
     "description": [
-      "【턴 1회】During your turn, when this Unit receives effect damage, deploy 1 rested [CGS Mobile Worker]((Tekkadan)･AP1･HP1) Unit token."
+      "【턴 1회】자신의 턴 동안, when this Unit receives effect damage, deploy 1 rested [CGS Mobile Worker]((Tekkadan)･AP1･HP1) Unit token."
     ],
     "__typename": "UnitCard",
     "id": "GD03-060",
@@ -13161,7 +13161,7 @@
       "TRIPLE_SHIP_ALLIANCE"
     ],
     "description": [
-      "【턴 1회】During your turn, when your (Triple Ship Alliance) Unit deals battle damage to an enemy Unit, you may return the enemy Unit to its owner's hand."
+      "【턴 1회】자신의 턴 동안, when your (Triple Ship Alliance) Unit deals battle damage to an enemy Unit, you may return the enemy Unit to its owner's hand."
     ],
     "__typename": "UnitCard",
     "id": "GD03-076",
@@ -13717,7 +13717,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】【턴 1회】During your turn, when this Unit destroys an enemy Unit with battle damage, look at the top 2 cards of your deck and return 1 to the top. Place the remaining card into your trash."
+      "【링크 시】【턴 1회】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, look at the top 2 cards of your deck and return 1 to the top. Place the remaining card into your trash."
     ],
     "__typename": "PilotCard",
     "id": "GD03-097",
@@ -14380,7 +14380,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【턴 1회】During your turn, when a friendly (Operation Meteor)/(G Team) Unit that is Lv.6 or higher destroys an enemy Unit with battle damage, that friendly Unit may recover 2 HP."
+      "【턴 1회】자신의 턴 동안, when a friendly (Operation Meteor)/(G Team) Unit that is Lv.6 or higher destroys an enemy Unit with battle damage, that friendly Unit may recover 2 HP."
     ],
     "__typename": "BaseCard",
     "id": "GD03-125",
@@ -14496,7 +14496,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "During your turn, when one of your friendly (Tekkadan)/(Teiwaz) Units receives effect damage, you may rest this Base. If you do, place the top card of your deck into your trash."
+      "자신의 턴 동안, when one of your friendly (Tekkadan)/(Teiwaz) Units receives effect damage, you may rest this Base. If you do, place the top card of your deck into your trash."
     ],
     "__typename": "BaseCard",
     "id": "GD03-129",
