@@ -51,7 +51,7 @@ function checkCard(card: Card): FieldResult[] {
     });
   }
 
-  if (card.description != null) {
+  if (card.description != null && card.description.length > 0) {
     const descTranslated = isDescriptionTranslated(card.description);
     const notTranslatedLines = card.description.filter((line) => !isTranslated(line));
     results.push({
