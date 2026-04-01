@@ -29,6 +29,7 @@ import {
   LayersIcon,
   SlidersHorizontalIcon,
   FileTextIcon,
+  ClipboardCopyIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COLOR_BG, COLOR_HEX } from "src/render/color";
@@ -232,6 +233,51 @@ function extractCardInfo(card: any): CardInfo | null {
   return { id, name, cost: cost ?? null, typename: __typename, color };
 }
 
+// ─── CostHistogram ────────────────────────────────────────────────────────────
+
+const CHART_H = 36; // px, bar area height
+
+function CostHistogram({ cards }: { cards: readonly { count: number; card: any }[] }) {
+  const costMap: Record<number, number> = {};
+  for (const { card, count } of cards) {
+    const cost = card?.cost;
+    if (cost == null) continue;
+    const bucket = Math.min(cost as number, 7);
+    costMap[bucket] = (costMap[bucket] ?? 0) + count;
+  }
+
+  const maxCount = Math.max(...Array.from({ length: 8 }, (_, i) => costMap[i] ?? 0), 1);
+
+  return (
+    <div className="px-3 pb-3 shrink-0">
+      <div className="flex items-end gap-1">
+        {Array.from({ length: 8 }, (_, i) => {
+          const count = costMap[i] ?? 0;
+          const barH = count > 0 ? Math.max(Math.round((count / maxCount) * CHART_H), 4) : 0;
+          return (
+            <div key={i} className="flex flex-col items-center flex-1" style={{ height: CHART_H + 24 }}>
+              <div className="flex flex-col justify-end flex-1 w-full">
+                {count > 0 && (
+                  <span className="text-[9px] text-muted-foreground text-center leading-none mb-0.5">
+                    {count}
+                  </span>
+                )}
+                <div
+                  className="w-full rounded-sm bg-primary/60"
+                  style={{ height: barH }}
+                />
+              </div>
+              <span className="text-[9px] text-muted-foreground mt-1 leading-none">
+                {i === 7 ? "7+" : i}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ─── DeckPanel ────────────────────────────────────────────────────────────────
 
 type DeckPanelProps = {
@@ -302,6 +348,11 @@ function DeckPanel({
       ) : (
         <div className="flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0">
           <h2 className="font-bold text-sm flex-1 truncate">{deckName}</h2>
+          <div className="flex gap-1 shrink-0">
+            {Array.from(new Set(cards.map((dc) => dc.card?.color).filter(Boolean))).map((color) => (
+              <span key={color} className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color])} />
+            ))}
+          </div>
           <Button size="icon-sm" variant="ghost" onClick={startEditing}>
             <PencilIcon />
           </Button>
@@ -311,6 +362,8 @@ function DeckPanel({
       <div className="px-3 pb-2 text-xs text-muted-foreground shrink-0">
         {totalCards} / 50장
       </div>
+
+      <CostHistogram cards={cards} />
 
       {errorMessage && (
         <div className="mx-3 mb-2 rounded-md bg-destructive/10 px-2 py-1.5 text-xs text-destructive shrink-0">
@@ -382,6 +435,28 @@ function DeckPanel({
             </div>
           );
         })}
+      </div>
+
+      <div className="px-3 pb-3 shrink-0 border-t border-border pt-3">
+        <Button
+          className="w-full"
+          size="sm"
+          disabled={totalCards !== 50}
+          onClick={() => {
+            const text = cards
+              .map((dc) => {
+                const id = (dc.card as any)?.id;
+                if (!id) return null;
+                return `${dc.count}X ${id}`;
+              })
+              .filter(Boolean)
+              .join("\n");
+            navigator.clipboard.writeText(text);
+          }}
+        >
+          <ClipboardCopyIcon className="size-3.5" />
+          MSA 코드 복사
+        </Button>
       </div>
     </div>
   );
