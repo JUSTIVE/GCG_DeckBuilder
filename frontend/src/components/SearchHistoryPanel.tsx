@@ -304,14 +304,14 @@ export function SearchHistoryPanel({ queryRef, onRestore, onRestoreCardView, fet
     });
   }
 
-  async function handleRemove(id: string, e: React.MouseEvent) {
+  function handleRemove(id: string, e: React.MouseEvent) {
     e.stopPropagation();
-    await serveGraphQL(REMOVE_MUTATION, { id });
+    serveGraphQL(REMOVE_MUTATION, { id });
     refetchHistory();
   }
 
-  async function handleClear() {
-    await serveGraphQL(CLEAR_MUTATION);
+  function handleClear() {
+    serveGraphQL(CLEAR_MUTATION);
     refetchHistory();
   }
 

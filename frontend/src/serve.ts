@@ -38,7 +38,7 @@
  *    Raw data uses "__typename": "ResourceCard"; schema type is "Resource".
  */
 
-import { buildSchema, execute, parse, defaultFieldResolver } from "graphql";
+import { buildSchema, executeSync, parse, defaultFieldResolver } from "graphql";
 import type {
   GraphQLUnionType,
   GraphQLInterfaceType,
@@ -716,11 +716,11 @@ function fieldResolver(
  *   { f: { kind: "UNIT", package: "GD01" } },
  * );
  */
-export async function serveGraphQL(
+export function serveGraphQL(
   query: string,
   variables?: Record<string, unknown>,
 ) {
-  return execute({
+  return executeSync({
     schema,
     document: parse(query),
     variableValues: variables,
