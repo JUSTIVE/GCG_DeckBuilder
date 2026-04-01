@@ -3410,7 +3410,7 @@
     ],
     "description": [
       "자신의 턴 종료 시, 자신의 트래시에 (CB)의 카드가 7장 이상 있다면, 자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다.",
-      "【세트 시】Place the top 2 cards of your deck into your trash. If you place a (CB) card with this effect, draw 1."
+      "【세트 시】 자신의 덱을 위에서 2장, 자신의 트래시에 놓는다. 이 효과로 (CB)의 카드가 놓였다면, 자신은 1장 드로우한다."
     ],
     "__typename": "UnitCard",
     "id": "ST07-001",
@@ -3659,7 +3659,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【파괴 시】If it is your opponent's turn and this is a (CB) Unit, draw 1."
+      "【파괴 시】 상대의 턴 이고, 이 유닛이 (CB)라면, 자신은 1장 드로우 한다."
     ],
     "__typename": "PilotCard",
     "id": "ST07-010",
@@ -3726,7 +3726,7 @@
     "trait": [],
     "description": [
       "【버스트】자신은 1장 드로우 한다.",
-      "【액션】Choose 1 rested friendly (CB) Unit. Change the attack target of the battling enemy Unit to it."
+      "【액션】 레스트의 (CB)의 아군의 유닛 1개를 선택한다. 배틀하고 있는 상대의 유닛의 어택 대상을 그 유닛으로 한다."
     ],
     "__typename": "CommandCard",
     "id": "ST07-013"
@@ -3743,7 +3743,7 @@
     "package": "ST07",
     "trait": [],
     "description": [
-      "【메인】Look at the top 3 cards of your deck. You may reveal 1 (CB) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
+      "【메인】 자신의 덱을 위에서 3장 보고, 그 중 (CB)의, 유닛 카드 1장/파일럿 카드 1장을 공개하고 패에 추가할 수 있다. 남은 카드는 무작위로 아래로 되돌린다."
     ],
     "__typename": "CommandCard",
     "id": "ST07-014"
@@ -3766,7 +3766,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "While a rested friendly (CB) Unit is in play, this Base can't receive damage from enemy Units that are Lv.3 or lower, other than Unit tokens."
+      "레스트의 (CB)의 아군이 있는 동안, 이 베이스는, 유닛 토큰 이외의, Lv.3 이하의 상대의 유닛으로부터 대미지를 받지 않는다."
     ],
     "__typename": "BaseCard",
     "id": "ST07-015",
