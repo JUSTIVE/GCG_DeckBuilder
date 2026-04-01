@@ -683,7 +683,7 @@ const rootValue = {
     const createdAt = new Date().toISOString();
     const deck: Deck = {
       __typename: "Deck",
-      id: btoa(`Deck:${createdAt}`),
+      id: `@${btoa(`Deck:${createdAt}`)}`,
       name,
       cards: [],
       createdAt,

@@ -7,8 +7,7 @@ import Marquee from "@/components/Marquee";
 
 import { ZoneChip } from "./ZoneChip";
 import { renderTrait } from "@/render/trait";
-import { Route } from "@/routes/cardlist";
-import { useRouter } from "@tanstack/react-router";
+import { useRouter, useSearch } from "@tanstack/react-router";
 import {
   COLOR_BG,
   COLOR_BG20,
@@ -215,11 +214,12 @@ const Fragment = graphql`
 
 type Props = {
   unitCardRef: UnitCardFragment$key;
+  onOpen?: (cardId: string) => void;
 };
 
-export function UnitCard({ unitCardRef }: Props) {
+export function UnitCard({ unitCardRef, onOpen }: Props) {
   const unitCard = useFragment(Fragment, unitCardRef);
-  const search = Route.useSearch();
+  const search = useSearch({ strict: false }) as { cardId?: string };
   const router = useRouter();
 
   const open = search.cardId === unitCard.id;
@@ -228,6 +228,7 @@ export function UnitCard({ unitCardRef }: Props) {
   const isWhite = unitCard.color === "WHITE";
 
   function openDialog() {
+    if (onOpen) { onOpen(unitCard.id); return; }
     router.navigate({
       to: "/cardlist",
       search: (prev) => ({ ...prev, cardId: unitCard.id }),

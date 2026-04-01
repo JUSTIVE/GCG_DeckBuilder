@@ -115,7 +115,13 @@ const Query = graphql`
   }
 `;
 
-export function CardByIdOverlay({ cardId }: { cardId: string }) {
+export function CardByIdOverlay({
+  cardId,
+  onClose,
+}: {
+  cardId: string;
+  onClose?: () => void;
+}) {
   const data = useLazyLoadQuery<CardByIdOverlayQuery>(
     Query,
     { id: cardId },
@@ -135,6 +141,10 @@ export function CardByIdOverlay({ cardId }: { cardId: string }) {
   if (!node || node.__typename === "%other") return null;
 
   function closeDialog() {
+    if (onClose) {
+      onClose();
+      return;
+    }
     router.navigate({
       to: "/cardlist",
       search: (prev) => ({ ...prev, cardId: undefined }),

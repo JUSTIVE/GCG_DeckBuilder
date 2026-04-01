@@ -4,8 +4,7 @@ import { useFragment } from "react-relay";
 import { cn } from "@/lib/utils";
 import resourceImg from "./resource.webp";
 import { renderRarity } from "@/render/rarity";
-import { Route } from "@/routes/cardlist";
-import { useRouter } from "@tanstack/react-router";
+import { useRouter, useSearch } from "@tanstack/react-router";
 import type { ResourceCard_ResourceCardBody_Fragment$key } from "src/__generated__/ResourceCard_ResourceCardBody_Fragment.graphql";
 
 export function ResourceCardBody({
@@ -54,16 +53,18 @@ const Fragment = graphql`
 
 type Props = {
   resourceCardRef: ResourceCardFragment$key;
+  onOpen?: (cardId: string) => void;
 };
 
-export function ResourceCard({ resourceCardRef }: Props) {
+export function ResourceCard({ resourceCardRef, onOpen }: Props) {
   const resourceCard = useFragment(Fragment, resourceCardRef);
-  const search = Route.useSearch();
+  const search = useSearch({ strict: false }) as { cardId?: string };
   const router = useRouter();
 
   const open = search.cardId === resourceCard.id;
 
   function openDialog() {
+    if (onOpen) { onOpen(resourceCard.id); return; }
     router.navigate({
       to: "/cardlist",
       search: (prev) => ({ ...prev, cardId: resourceCard.id }),

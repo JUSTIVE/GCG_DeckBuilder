@@ -45,6 +45,9 @@ type Props = {
   filter?: CardFilterInput;
   sort?: CardSort | null;
   showDescription?: boolean;
+  onCardAdd?: (cardId: string) => void;
+  onCardOpen?: (cardId: string) => void;
+  scrollClassName?: string;
 };
 
 export function CardList({
@@ -52,6 +55,9 @@ export function CardList({
   filter,
   sort,
   showDescription = false,
+  onCardAdd,
+  onCardOpen,
+  scrollClassName = "overflow-y-auto h-[calc(100dvh-65px-48px)] py-5",
 }: Props) {
   const [, startTransition] = useTransition();
   const [commitAddFilterSearch] = useMutation<CardListAddFilterSearchMutation>(ADD_FILTER_SEARCH_MUTATION);
@@ -135,7 +141,7 @@ export function CardList({
   return (
     <div
       ref={parentRef}
-      className="overflow-y-auto h-[calc(100dvh-65px-48px)] py-5"
+      className={scrollClassName}
     >
       <div
         style={{
@@ -175,6 +181,8 @@ export function CardList({
                     key={edge.cursor}
                     cardRef={edge.node}
                     showDescription={showDescription}
+                    onAdd={onCardAdd}
+                    onOpen={onCardOpen}
                   />
                 ))}
               </div>

@@ -5,8 +5,7 @@ import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
 
 import { renderTrait } from "@/render/trait";
-import { Route } from "@/routes/cardlist";
-import { useRouter } from "@tanstack/react-router";
+import { useRouter, useSearch } from "@tanstack/react-router";
 import {
   COLOR_BG,
   COLOR_BG20,
@@ -178,16 +177,18 @@ const Fragment = graphql`
 
 type Props = {
   pilotCardRef: PilotCardFragment$key;
+  onOpen?: (cardId: string) => void;
 };
 
-export function PilotCard({ pilotCardRef }: Props) {
+export function PilotCard({ pilotCardRef, onOpen }: Props) {
   const pilotCard = useFragment(Fragment, pilotCardRef);
-  const search = Route.useSearch();
+  const search = useSearch({ strict: false }) as { cardId?: string };
   const router = useRouter();
 
   const open = search.cardId === pilotCard.id;
 
   function openDialog() {
+    if (onOpen) { onOpen(pilotCard.id); return; }
     router.navigate({
       to: "/cardlist",
       search: (prev) => ({ ...prev, cardId: pilotCard.id }),

@@ -10,12 +10,19 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ResourceCounterRouteImport } from './routes/resource-counter'
+import { Route as DecklistRouteImport } from './routes/decklist'
 import { Route as CardlistRouteImport } from './routes/cardlist'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DeckDeckIdRouteImport } from './routes/deck/$deckId'
 
 const ResourceCounterRoute = ResourceCounterRouteImport.update({
   id: '/resource-counter',
   path: '/resource-counter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DecklistRoute = DecklistRouteImport.update({
+  id: '/decklist',
+  path: '/decklist',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CardlistRoute = CardlistRouteImport.update({
@@ -28,35 +35,59 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DeckDeckIdRoute = DeckDeckIdRouteImport.update({
+  id: '/deck/$deckId',
+  path: '/deck/$deckId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cardlist': typeof CardlistRoute
+  '/decklist': typeof DecklistRoute
   '/resource-counter': typeof ResourceCounterRoute
+  '/deck/$deckId': typeof DeckDeckIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cardlist': typeof CardlistRoute
+  '/decklist': typeof DecklistRoute
   '/resource-counter': typeof ResourceCounterRoute
+  '/deck/$deckId': typeof DeckDeckIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cardlist': typeof CardlistRoute
+  '/decklist': typeof DecklistRoute
   '/resource-counter': typeof ResourceCounterRoute
+  '/deck/$deckId': typeof DeckDeckIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cardlist' | '/resource-counter'
+  fullPaths:
+    | '/'
+    | '/cardlist'
+    | '/decklist'
+    | '/resource-counter'
+    | '/deck/$deckId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cardlist' | '/resource-counter'
-  id: '__root__' | '/' | '/cardlist' | '/resource-counter'
+  to: '/' | '/cardlist' | '/decklist' | '/resource-counter' | '/deck/$deckId'
+  id:
+    | '__root__'
+    | '/'
+    | '/cardlist'
+    | '/decklist'
+    | '/resource-counter'
+    | '/deck/$deckId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CardlistRoute: typeof CardlistRoute
+  DecklistRoute: typeof DecklistRoute
   ResourceCounterRoute: typeof ResourceCounterRoute
+  DeckDeckIdRoute: typeof DeckDeckIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +97,13 @@ declare module '@tanstack/react-router' {
       path: '/resource-counter'
       fullPath: '/resource-counter'
       preLoaderRoute: typeof ResourceCounterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/decklist': {
+      id: '/decklist'
+      path: '/decklist'
+      fullPath: '/decklist'
+      preLoaderRoute: typeof DecklistRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cardlist': {
@@ -82,13 +120,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/deck/$deckId': {
+      id: '/deck/$deckId'
+      path: '/deck/$deckId'
+      fullPath: '/deck/$deckId'
+      preLoaderRoute: typeof DeckDeckIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CardlistRoute: CardlistRoute,
+  DecklistRoute: DecklistRoute,
   ResourceCounterRoute: ResourceCounterRoute,
+  DeckDeckIdRoute: DeckDeckIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

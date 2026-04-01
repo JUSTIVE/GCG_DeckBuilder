@@ -9,6 +9,7 @@ import { ResourceCard } from "./ResourceCard";
 import { CardDescription } from "./CardDescription";
 import { COLOR_BORDER50 } from "src/render/color";
 import { cn } from "src/lib/utils";
+import { PlusIcon } from "lucide-react";
 
 const Fragment = graphql`
   fragment CardFragment on Card {
@@ -47,9 +48,11 @@ const Fragment = graphql`
 type Props = {
   cardRef: CardFragment$key;
   showDescription: boolean;
+  onAdd?: (cardId: string) => void;
+  onOpen?: (cardId: string) => void;
 };
 
-export function Card({ cardRef, showDescription }: Props) {
+export function Card({ cardRef, showDescription, onAdd, onOpen }: Props) {
   const card = useFragment(Fragment, cardRef);
 
   const description: readonly string[] =
@@ -71,22 +74,39 @@ export function Card({ cardRef, showDescription }: Props) {
   const cardEl = (() => {
     switch (card.__typename) {
       case "UnitCard":
-        return <UnitCard unitCardRef={card} />;
+        return <UnitCard unitCardRef={card} onOpen={onOpen} />;
       case "PilotCard":
-        return <PilotCard pilotCardRef={card} />;
+        return <PilotCard pilotCardRef={card} onOpen={onOpen} />;
       case "BaseCard":
-        return <BaseCard baseCardRef={card} />;
+        return <BaseCard baseCardRef={card} onOpen={onOpen} />;
       case "CommandCard":
-        return <CommandCard commandCardRef={card} />;
+        return <CommandCard commandCardRef={card} onOpen={onOpen} />;
       case "Resource":
-        return <ResourceCard resourceCardRef={card} />;
+        return <ResourceCard resourceCardRef={card} onOpen={onOpen} />;
       default:
         return null;
     }
   })();
 
+  const cardId =
+    card.__typename === "UnitCard" ||
+    card.__typename === "PilotCard" ||
+    card.__typename === "BaseCard" ||
+    card.__typename === "CommandCard"
+      ? card.id
+      : undefined;
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col relative">
+      {onAdd && cardId && (
+        <button
+          type="button"
+          className="absolute bottom-1.5 right-1.5 z-10 size-7 rounded-full bg-primary/90 text-primary-foreground flex items-center justify-center shadow-md hover:bg-primary transition-colors"
+          onClick={() => onAdd(cardId)}
+        >
+          <PlusIcon className="size-4" />
+        </button>
+      )}
       {cardEl}
       {showDescription && description.length > 0 && (
         <div

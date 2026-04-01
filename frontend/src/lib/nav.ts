@@ -11,6 +11,12 @@ export const navMain: NavItem[] = [
     url: "",
     items: [{ title: "전체 카드", url: "/cardlist" }],
   },
+
+  {
+    title: "덱 관리",
+    url: "",
+    items: [{ title: "덱 목록", url: "/decklist" }],
+  },
   {
     title: "도구",
     url: "",
