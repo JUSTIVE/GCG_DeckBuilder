@@ -349,6 +349,35 @@ function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[] {
   });
 }
 
+// ─── Search history (localStorage) ───────────────────────────────────────────
+
+const SEARCH_HISTORY_KEY = "gcg_search_history";
+const SEARCH_HISTORY_MAX = 50;
+
+interface SearchHistoryFilter extends CardFilterInput {
+  sort: string | null;
+}
+
+interface SearchHistory {
+  filter: SearchHistoryFilter;
+  searchedAt: string;
+}
+
+function readSearchHistory(): SearchHistory[] {
+  try {
+    const raw = localStorage.getItem(SEARCH_HISTORY_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as SearchHistory[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeSearchHistory(entries: SearchHistory[]): void {
+  localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(entries));
+}
+
 // ─── Root resolvers ───────────────────────────────────────────────────────────
 
 interface CardsArgs {
@@ -395,6 +424,11 @@ const rootValue = {
     };
   },
 
+  /** Query.searchHistory — recent searches from localStorage */
+  searchHistory({ first = 20 }: { first?: number }): SearchHistory[] {
+    return readSearchHistory().slice(0, first);
+  },
+
   /** Query.quicksearch — fzf-style search across name, description, trait, link */
   quicksearch({ query, first = 20 }: { query: string; first?: number }) {
     if (!query.trim()) return [];
@@ -439,6 +473,33 @@ const rootValue = {
 
     scored.sort((a, b) => b.score - a.score);
     return scored.slice(0, first).map((s) => s.card);
+  },
+
+  /** Mutation.addSearchHistory — prepend filter+sort, deduplicate by serialized key, cap at max */
+  addSearchHistory({
+    filter,
+    sort,
+  }: {
+    filter: CardFilterInput;
+    sort?: string;
+  }): SearchHistory {
+    const historyFilter: SearchHistoryFilter = { ...filter, sort: sort ?? null };
+    const entry: SearchHistory = {
+      filter: historyFilter,
+      searchedAt: new Date().toISOString(),
+    };
+    const key = JSON.stringify(historyFilter);
+    const existing = readSearchHistory().filter(
+      (e) => JSON.stringify(e.filter) !== key,
+    );
+    writeSearchHistory([entry, ...existing].slice(0, SEARCH_HISTORY_MAX));
+    return entry;
+  },
+
+  /** Mutation.clearSearchHistory — wipe all entries */
+  clearSearchHistory(): boolean {
+    localStorage.removeItem(SEARCH_HISTORY_KEY);
+    return true;
   },
 };
 

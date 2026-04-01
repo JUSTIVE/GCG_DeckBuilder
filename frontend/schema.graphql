@@ -290,8 +290,33 @@ enum CardSort {
   HP_DESC
 }
 
+type SearchHistoryFilter {
+  kind: [CardKind!]!
+  level: [Int!]
+  cost: [Int!]
+  package: CardPackage
+  rarity: CardRarity
+  keyword: [CardKeyword!]
+  trait: [CardTrait!]
+  zone: [Zone!]
+  color: [CardColor!]
+  query: String
+  sort: CardSort
+}
+
+type SearchHistory {
+  filter: SearchHistoryFilter!
+  searchedAt: String!
+}
+
 type Query {
   node(id: ID!): Node
   cards(first: Int, after: String, filter: CardFilterInput, sort: CardSort): CardConnection!
   quicksearch(query: String!, first: Int): [Card!]!
+  searchHistory(first: Int): [SearchHistory!]!
+}
+
+type Mutation {
+  addSearchHistory(filter: CardFilterInput!, sort: CardSort): SearchHistory!
+  clearSearchHistory: Boolean!
 }
