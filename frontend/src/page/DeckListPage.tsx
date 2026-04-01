@@ -7,6 +7,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PlusIcon, Trash2Icon, LayersIcon } from "lucide-react";
+import { COLOR_BG } from "src/render/color";
+import { cn } from "@/lib/utils";
 
 const Query = graphql`
   query DeckListPageQuery {
@@ -18,6 +20,12 @@ const Query = graphql`
         createdAt
         cards {
           count
+          card {
+            ... on UnitCard { color }
+            ... on PilotCard { color }
+            ... on BaseCard { color }
+            ... on CommandCard { color }
+          }
         }
       }
     }
@@ -34,6 +42,12 @@ const CREATE_DECK_MUTATION = graphql`
         createdAt
         cards {
           count
+          card {
+            ... on UnitCard { color }
+            ... on PilotCard { color }
+            ... on BaseCard { color }
+            ... on CommandCard { color }
+          }
         }
       }
     }
@@ -50,6 +64,12 @@ const DELETE_DECK_MUTATION = graphql`
         createdAt
         cards {
           count
+          card {
+            ... on UnitCard { color }
+            ... on PilotCard { color }
+            ... on BaseCard { color }
+            ... on CommandCard { color }
+          }
         }
       }
     }
@@ -84,6 +104,15 @@ export function DeckListPage() {
     return cards.reduce((s, c) => s + c.count, 0);
   }
 
+  function deckColors(cards: readonly { count: number; card: any }[]): string[] {
+    const seen = new Set<string>();
+    for (const { card } of cards) {
+      const color = card?.color;
+      if (color) seen.add(color);
+    }
+    return Array.from(seen);
+  }
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-8 flex flex-col gap-6">
       <div className="flex items-center gap-2">
@@ -115,12 +144,20 @@ export function DeckListPage() {
             >
               <button
                 type="button"
-                className="flex-1 text-left"
+                className="flex-1 text-left min-w-0"
                 onClick={() => router.navigate({ to: "/deck/$deckId", params: { deckId: deck.id } })}
               >
-                <div className="font-semibold">{deck.name}</div>
-                <div className="text-xs text-muted-foreground mt-0.5">
-                  {totalCards(deck.cards)}장
+                <div className="font-semibold truncate">{deck.name}</div>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-xs text-muted-foreground">{totalCards(deck.cards)}장</span>
+                  <div className="flex gap-1">
+                    {deckColors(deck.cards).map((color) => (
+                      <span
+                        key={color}
+                        className={cn("inline-block w-3 h-3 rounded-full", COLOR_BG[color])}
+                      />
+                    ))}
+                  </div>
                 </div>
               </button>
               <Button
