@@ -104,31 +104,33 @@ export function CommandCardBody({
       </div>
       <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
-          <div className="p-2 bg-black whitespace-pre-wrap cutout-tl-sm cutout text-[6cqw] font-bold text-center">
+          <div className="p-2 bg-black break-words cutout-tl-sm cutout text-[6cqw] font-bold text-center line-clamp-2">
             {commandCard.name}
           </div>
         </div>
         {commandCard.commandPilot != null ? (
           <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
-            <div className="flex flex-col justify-end flex-1 overflow-hidden">
-              <div className="flex flex-row">
-                <div className={cn("w-4 bg-black -mr-4 py-px pb-1")} />
-                <div className="bg-black overflow-hidden w-full pl-7 cutout cutout-tr-sm px-2 pt-px pb-0.5 min-h-3">
+            <div className="flex flex-col flex-1">
+              <div className="flex flex-row h-[8cqw] overflow-hidden">
+                <div className={cn("w-4 bg-black -mr-4 shrink-0")} />
+                <div className="bg-black overflow-hidden w-full pl-7 cutout cutout-tr-sm px-2 flex items-center">
                   <div
                     className={cn(
-                      "flex text-center text-white text-[6cqw] items-center min-h-[6cqw] justify-center",
+                      "flex text-white text-[5cqw] w-full overflow-hidden",
                       COLOR_TEXT20[commandCard.color],
                     )}
                   >
-                    <span>{commandCard.commandPilot.name}</span>
+                    <Marquee speed={6} gap={16}>
+                      <span>{commandCard.commandPilot.name}</span>
+                    </Marquee>
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-row">
+              <div className="flex flex-row h-[6cqw] overflow-hidden">
                 <div
                   className={cn(
-                    "w-12 bg-black -mr-5 text-[3cqw] px-2 items-center flex ",
+                    "w-12 bg-black -mr-5 text-[3cqw] px-2 items-center flex shrink-0",
                     COLOR_BG[commandCard.color],
                     commandCard.color !== "WHITE" ? "text-white" : "text-black",
                   )}
@@ -137,11 +139,11 @@ export function CommandCardBody({
                 </div>
                 <div
                   className={cn(
-                    "w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 px-2 py-px",
+                    "w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 px-2 flex items-center",
                     COLOR_BG20[commandCard.color],
                   )}
                 >
-                  <div className="flex text-end text-gray-900 text-[4cqw] justify-end ">
+                  <div className="flex text-gray-900 text-[4cqw] justify-end w-full">
                     <Marquee speed={8} gap={0}>
                       {commandCard.traits.map((x) => (
                         <span key={x} className="px-1">
@@ -153,10 +155,10 @@ export function CommandCardBody({
                 </div>
               </div>
             </div>
-            <div className="flex flex-row gap-0.5 min-w-8">
+            <div className="flex flex-row gap-0.5 min-w-8 self-stretch">
               <div
                 className={cn(
-                  "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
+                  "bg-black flex-1 h-full flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_TEXT20[commandCard.color],
                 )}
               >
@@ -164,7 +166,7 @@ export function CommandCardBody({
               </div>
               <div
                 className={cn(
-                  "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
+                  "bg-black flex-1 h-full flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_TEXT20[commandCard.color],
                 )}
               >

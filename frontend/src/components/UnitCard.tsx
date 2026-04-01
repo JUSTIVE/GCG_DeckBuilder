@@ -115,7 +115,7 @@ export function UnitCardBody({
       </div>
       <div className="flex flex-col gap-2 ">
         <div className="px-2">
-          <div className="p-2 bg-black whitespace-pre-wrap cutout-tl-sm cutout text-[6cqw] font-bold text-center">
+          <div className="p-2 bg-black whitespace-pre-wrap break-words cutout-tl-sm cutout text-[6cqw] font-bold text-center">
             {unitCard.name}
           </div>
         </div>
