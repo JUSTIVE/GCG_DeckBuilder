@@ -234,23 +234,30 @@ function extractCardInfo(card: any): CardInfo | null {
 // ─── CostHistogram ────────────────────────────────────────────────────────────
 
 const CHART_H = 36; // px, bar area height
+const COLOR_ORDER = ["BLUE", "GREEN", "RED", "PURPLE", "YELLOW", "WHITE"] as const;
 
 function CostHistogram({ cards }: { cards: readonly { count: number; card: any }[] }) {
-  const costMap: Record<number, number> = {};
+  // costColorMap[bucket][color] = count
+  const costColorMap: Record<number, Record<string, number>> = {};
   for (const { card, count } of cards) {
     const cost = card?.cost;
-    if (cost == null) continue;
+    const color = card?.color;
+    if (cost == null || !color) continue;
     const bucket = Math.min(cost as number, 7);
-    costMap[bucket] = (costMap[bucket] ?? 0) + count;
+    if (!costColorMap[bucket]) costColorMap[bucket] = {};
+    costColorMap[bucket][color] = (costColorMap[bucket][color] ?? 0) + count;
   }
 
-  const maxCount = Math.max(...Array.from({ length: 8 }, (_, i) => costMap[i] ?? 0), 1);
+  const totalPerBucket = Array.from({ length: 8 }, (_, i) =>
+    Object.values(costColorMap[i] ?? {}).reduce((s, n) => s + n, 0),
+  );
+  const maxCount = Math.max(...totalPerBucket, 1);
 
   return (
     <div className="px-3 pb-3 shrink-0">
       <div className="flex items-end gap-1">
         {Array.from({ length: 8 }, (_, i) => {
-          const count = costMap[i] ?? 0;
+          const count = totalPerBucket[i];
           const barH = count > 0 ? Math.max(Math.round((count / maxCount) * CHART_H), 4) : 0;
           return (
             <div key={i} className="flex flex-col items-center flex-1" style={{ height: CHART_H + 24 }}>
@@ -260,10 +267,18 @@ function CostHistogram({ cards }: { cards: readonly { count: number; card: any }
                     {count}
                   </span>
                 )}
-                <div
-                  className="w-full rounded-sm bg-primary/60"
-                  style={{ height: barH }}
-                />
+                <div className="w-full rounded-sm overflow-hidden flex flex-col-reverse border border-border/70" style={{ height: barH }}>
+                  {COLOR_ORDER.map((color) => {
+                    const colorCount = costColorMap[i]?.[color] ?? 0;
+                    if (!colorCount) return null;
+                    return (
+                      <div
+                        key={color}
+                        style={{ flex: colorCount, backgroundColor: COLOR_HEX[color] }}
+                      />
+                    );
+                  })}
+                </div>
               </div>
               <span className="text-[9px] text-muted-foreground mt-1 leading-none">
                 {i === 7 ? "7+" : i}
