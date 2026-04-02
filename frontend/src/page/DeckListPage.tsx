@@ -154,7 +154,7 @@ export function DeckListPage() {
                     {deckColors(deck.cards).map((color) => (
                       <span
                         key={color}
-                        className={cn("inline-block w-3 h-3 rounded-full", COLOR_BG[color])}
+                        className={cn("inline-block w-3 h-3 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")}
                       />
                     ))}
                   </div>

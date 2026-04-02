@@ -8,7 +8,6 @@ import type {
   CardSort,
 } from "@/__generated__/CardListFragmentRefetchQuery.graphql";
 import { Route } from "@/routes/deck/$deckId";
-import { useRouter } from "@tanstack/react-router";
 import { useState, useRef, Suspense } from "react";
 import { CardList } from "@/components/CardList";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
@@ -21,7 +20,6 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import {
-  ArrowLeftIcon,
   PencilIcon,
   CheckIcon,
   XIcon,
@@ -350,7 +348,7 @@ function DeckPanel({
           <h2 className="font-bold text-sm flex-1 truncate">{deckName}</h2>
           <div className="flex gap-1 shrink-0">
             {Array.from(new Set(cards.map((dc) => dc.card?.color).filter(Boolean))).map((color) => (
-              <span key={color} className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color])} />
+              <span key={color} className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")} />
             ))}
           </div>
           <Button size="icon-sm" variant="ghost" onClick={startEditing}>
@@ -466,7 +464,6 @@ function DeckPanel({
 
 export function DeckDetailPage() {
   const { deckId } = Route.useParams();
-  const router = useRouter();
 
   const initialFilterRef = useRef<CardFilterInput>(INITIAL_FILTER);
   const data = useLazyLoadQuery<DeckDetailPageQuery>(Query, {
@@ -551,19 +548,6 @@ export function DeckDetailPage() {
 
   return (
     <div className="flex flex-col h-[calc(100dvh-65px)]">
-      {/* Header */}
-      <div className="flex items-center gap-2 border-b border-border px-3 py-2 shrink-0">
-        <Button
-          variant="ghost"
-          size="icon-sm"
-          onClick={() => router.navigate({ to: "/decklist" })}
-        >
-          <ArrowLeftIcon />
-        </Button>
-        <LayersIcon className="size-4 text-muted-foreground shrink-0" />
-        <span className="text-sm font-semibold truncate">{deck.name}</span>
-      </div>
-
       {/* Body */}
       <div className="flex flex-1 min-h-0">
         {/* Desktop: filter panel (left column) */}
