@@ -46,6 +46,7 @@ export function BaseCardBody({
     <>
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
+        src={`/cards/${baseCard.id}.webp`}
         alt={baseCard.name}
       />
       <div className="flex flex-col gap-[5cqw]">

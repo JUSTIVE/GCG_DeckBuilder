@@ -46,6 +46,7 @@ export function CommandCardBody({
     <>
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
+        src={`/cards/${commandCard.id}.webp`}
         alt={commandCard.name}
       />
       <div className="flex flex-col gap-[5cqw]">
