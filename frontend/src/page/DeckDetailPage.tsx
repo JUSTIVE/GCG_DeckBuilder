@@ -924,7 +924,7 @@ export function DeckDetailPage() {
           <SheetHeader className="px-3 pb-0 pt-0 shrink-0">
             <SheetTitle className="sr-only">{deck.name}</SheetTitle>
           </SheetHeader>
-          <div className="flex-1 min-h-0 overflow-hidden">
+          <div className="flex-1 min-h-0 flex flex-col">
             <DeckPanel {...panelProps} />
           </div>
         </SheetContent>
