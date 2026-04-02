@@ -211,7 +211,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】Choose 1 rested enemy Unit. Deal 1 damage to it.",
+      "【메인】 레스트의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다.",
       "【파일럿】[하야토 코바야시]"
     ],
     "__typename": "CommandCard",
@@ -611,7 +611,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, deploy 1 rested [Char's Zaku Ⅱ]((Zeon)･AP3･HP1) Unit token."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, [자쿠 Ⅱ 샤아 전용기]((지온)･AP3･HP1)의 유닛 토큰 1개를 레스트로 배치한다."
     ],
     "__typename": "BaseCard",
     "id": "ST03-016",
@@ -816,7 +816,7 @@
     "relatedTrait": [],
     "description": [
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
-      "【세트 시】Choose 1 enemy Unit with 2 or less HP. Rest it."
+      "【세트 시】  HP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-004",
@@ -848,7 +848,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】【파괴 시】Return this Unit's paired Pilot to its owner's hand. Then, discard 1."
+      "【링크 시】【파괴 시】 이 유닛에 세트되어있는 파일럿을 주인의 패로 되돌린다. 그 후, 자신은 패 1장을 버린다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-005",
@@ -880,7 +880,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 rested enemy Unit. Deal 1 damage to it."
+      "【배치 시】 레스트의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-008",
@@ -909,7 +909,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 of your (White Base Team) Units. It gains <고기동> during this turn.",
+      "【배치 시】 (화이트베이스 부대)의 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 <고기동>을 얻는다.",
       "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "UnitCard",
@@ -996,7 +996,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【공격 시】Choose 1 of your Units. It recovers 1 HP."
+      "【공격 시】 자신의 유닛 1개를 선택한다. 그 유닛을 1 회복한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-015",
@@ -1020,7 +1020,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While you have 2 or more (Earth Federation) Units in play, this card in your hand gets cost -1."
+      "(지구 연방)의 자신의 유닛이 2개 이상 있는 경우, 패의 이 카드를 코스트-1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-016",
@@ -1071,7 +1071,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】【파괴 시】Deploy 1 rested [Char's Zaku Ⅱ]((Zeon)･AP3･HP1) Unit token."
+      "【세트 시】【파괴 시】 [자쿠 Ⅱ 샤아 전용기]((지온)･AP3･HP1)의 유닛 토큰 1개를 레스트로 배치한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-026",
@@ -1104,7 +1104,7 @@
       "MAGANAC_CORPS"
     ],
     "description": [
-      "【배치 시】You may deploy 1 (Maganac Corps) Unit card from your hand."
+      "【배치 시】 자신의 패의, (마그아낙 부대)의 유닛 카드 1장을 배치할 수 있다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-028",
@@ -1188,7 +1188,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】This Unit gains <돌파 3>.",
+      "【세트 시】 이 유닛은 <돌파 3>을 얻는다.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -1278,7 +1278,7 @@
     "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【배치 시】Choose 1 enemy Unit with 1 HP. Return it to its owner's hand."
+      "【배치 시】 HP1의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-068",
@@ -1307,7 +1307,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While there are 4 or more Command cards in your trash, this card in your hand gets cost -2."
+      "자신의 트래쉬에 커맨드 카드가 4장 이상 있는 경우, 패의 이 카드를 코스트-2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-070",
@@ -1369,7 +1369,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 enemy Unit with 1 HP. Return it to its owner's hand."
+      "【배치 시】 HP1의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-075",
@@ -1398,7 +1398,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While there are 4 or more Command cards in your trash, this Unit gets AP+1 and HP+1."
+      "자신의 트래쉬에 커맨드 카드가 4장 이상 있는 경우, 이 유닛을 AP+1, HP+1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-076",
@@ -1456,7 +1456,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While you have another (Triple Ship Alliance) Unit in play, this Unit gets AP+1 and <블로커>.",
+      "이 유닛 이외의, (삼척동맹)의 자신의 유닛이 있는 경우, 이 유닛은 AP+1 하고, <블로커>를 얻는다.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
@@ -2205,7 +2205,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】This Unit gains <고기동>.",
+      "【세트 시】 이 유닛은 <고기동>을 얻는다.",
       "(이 유닛은 블록당하지 않는다.)",
       "자신의 턴 동안, when this Unit destroys an enemy shield area card with battle damage, choose 1 enemy Unit. Deal 2 damage to it."
     ],
@@ -4830,7 +4830,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 of your (ZAFT) Units with 5 or more AP. It gains <선제 공격> during this turn.",
+      "【배치 시】 AP5 이상의 (자프트)의 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 <선제 공격>을 얻는다.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -5304,7 +5304,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 rested enemy Unit. Deal 1 damage to it."
+      "【배치 시】 레스트의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-020",
@@ -7785,7 +7785,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】【공격 시】Choose 1 enemy Unit with 2 or less HP. Rest it."
+      "【링크 시】【공격 시】  HP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-005",
@@ -7879,7 +7879,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】Choose 1 rested enemy Unit. Deal 1 damage to it."
+      "【링크 시】 레스트의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-008",
@@ -9822,7 +9822,7 @@
     "relatedTrait": [],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
-      "【세트 시】While there are 4 or more Command cards in your trash, this Unit gains <블로커>.",
+      "【세트 시】 자신의 트래쉬에 커맨드 카드가 4장 이상 있는 경우, this Unit gains <블로커>.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
@@ -11604,7 +11604,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】This Unit gains <리페어 2>.",
+      "【세트 시】 이 유닛은 <리페어 2>를 얻는다.",
       "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
     "__typename": "UnitCard",
@@ -14425,7 +14425,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【버스트】Choose 1 enemy Unit with 2 or less HP. Rest it.",
+      "【버스트】 HP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트한다.",
       "【메인】If 3 or more enemy Units are in play, choose 1 rested enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "CommandCard",
