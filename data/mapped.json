@@ -2745,8 +2745,8 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 of your other Units. Deal 1 damage to it. It gets AP+1 during this turn.",
-      "While this is damaged, it gains <제압>.",
+      "【배치 시】 이 유닛 이외의, 자신의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 주고, 이 턴 동안, 그 유닛을 AP+1 한다",
+      "이 유닛이 대미지를 받은 경우, 이 유닛은 <제압>을 얻는다.",
       "(공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)"
     ],
     "__typename": "UnitCard",
@@ -2776,7 +2776,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While this Unit is damaged, it gets AP+2."
+      "이 유닛이 대미지를 받은 경우, 이 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST05-002",
@@ -2806,7 +2806,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【기동･메인】Rest this Unit：Choose 1 of your Units. Deal 1 damage to it. It gets AP+1 during this turn."
+      "【기동･메인】 이 유닛을 레스트로 한다：자신의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 주고, 이 턴 동안, 그 유닛을 AP+1 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST05-003",
@@ -2854,7 +2854,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【파괴 시】Choose 1 enemy Unit with 4 or less AP. Rest it."
+      "【파괴 시】 AP4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST05-005",
@@ -2908,7 +2908,7 @@
     "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【세트 시】Choose 1 enemy Unit that is Lv.3 or lower. It gets AP-2 during this turn."
+      "【세트 시】 Lv.3 이하의 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST05-007",
@@ -2993,7 +2993,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】Choose 1 of your Units and 1 enemy Unit. Deal 1 damage to them."
+      "【세트 시】 자신의 유닛 1개와, 상대의 유닛 1개를 선택한다. 그 유닛들에 1 대미지를 준다."
     ],
     "__typename": "PilotCard",
     "id": "ST05-010",
@@ -3018,7 +3018,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, choose 1 (Tekkadan) Unit card that is Lv.2 or lower from your trash. Add it to your hand."
+      "【링크 시】자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, 자신의 트래쉬의 Lv.2 이하의 (철화단)의 유닛 카드 1장을 선택한다. 그 카드를 패에 추가한다."
     ],
     "__typename": "PilotCard",
     "id": "ST05-011",
@@ -3044,7 +3044,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】If you have 2 or more other (Gjallarhorn)/(Tekkadan) Units in play, choose 1 enemy Unit with 3 or less HP. Rest it."
+      "【세트 시】 이 유닛 이외의, (걀라르호른)/(철화단)의 자신의 유닛이 2개 이상 있다면, HP3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "PilotCard",
     "id": "ST05-012",
@@ -3065,7 +3065,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】/【액션】Choose 1 of your Units. Deal 1 damage to it. It gets AP+3 during this turn."
+      "【메인】/【액션】 자신의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 주고, 이 턴 동안, 그 유닛을 AP+3 한다."
     ],
     "__typename": "CommandCard",
     "id": "ST05-013"
@@ -3084,8 +3084,8 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【버스트】Choose 1 enemy Unit. Deal 1 damage to it.",
-      "【메인】Choose 1 enemy Unit that is Lv.3 or lower. Destroy it."
+      "【버스트】 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다.",
+      "【메인】 Lv.3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "CommandCard",
     "id": "ST05-014"
@@ -3110,7 +3110,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【기동･메인】Rest this Base：Choose 1 of your damaged Units. It gets AP+2 during this turn."
+      "【기동･메인】 이 베이스를 레스트로 한다:대미지를 받고 있는 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP+2 한다."
     ],
     "__typename": "BaseCard",
     "id": "ST05-015",
@@ -3167,7 +3167,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】If another friendly (Clan) Unit is in play, choose 1 enemy Unit. Deal 1 damage to it."
+      "【배치 시】If another friendly (Clan) Unit is in play, 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "ST06-002",
@@ -3982,7 +3982,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 enemy Unit. Deal 1 damage to it."
+      "【배치 시】 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "ST08-002",
@@ -4511,7 +4511,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】If you deploy this Unit from your trash, choose 1 enemy Unit that is Lv.3 or lower. Destroy it."
+      "【배치 시】If you deploy this Unit from your trash, Lv.3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "UnitCard",
     "id": "ST09-006",
@@ -5789,7 +5789,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 enemy Unit. Deal 1 damage to it."
+      "【배치 시】 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-052",
@@ -10273,7 +10273,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【버스트】Choose 1 enemy Unit. Deal 1 damage to it.",
+      "【버스트】 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다.",
       "【메인】Deal 1 damage to all enemy Units other than Link Units."
     ],
     "__typename": "CommandCard",
@@ -12217,7 +12217,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】Choose 1 enemy Unit. Deal 1 damage to it."
+      "【세트 시】 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-043",
@@ -14512,7 +14512,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【턴 1회】During your opponent's turn, when one of your Units is rested by one of your opponent's effects, choose 1 enemy Unit. Deal 1 damage to it."
+      "【턴 1회】During your opponent's turn, when one of your Units is rested by one of your opponent's effects, 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "BaseCard",
     "id": "GD03-128",
