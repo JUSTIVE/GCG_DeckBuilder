@@ -2374,7 +2374,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】Activate this card's 【메인】.",
-      "【메인】/【액션】 상대의 유닛 1개를 선택한다. Deal 2 damage to it."
+      "【메인】/【액션】 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "CommandCard",
     "id": "ST03-013"
@@ -3952,7 +3952,7 @@
     "relatedTrait": [],
     "description": [
       "While you have no Units that are Lv.6 or higher in play, this card in your hand gets Lv. -1 and cost -1 for each enemy Unit in play.",
-      "【세트 시】Choose 1 enemy Unit with the highest Lv. Deal 3 damage to it."
+      "【세트 시】Choose 1 enemy Unit with the highest Lv. 그 유닛에 3 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "ST08-001",
@@ -4710,8 +4710,8 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【버스트】 상대의 유닛 1개를 선택한다. Deal 2 damage to it.",
-      "【메인】/【액션】Choose 1 damaged enemy Unit. Deal 3 damage to it."
+      "【버스트】 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다.",
+      "【메인】/【액션】Choose 1 damaged enemy Unit. 그 유닛에 3 대미지를 준다."
     ],
     "__typename": "CommandCard",
     "id": "GD01-111"
@@ -5670,7 +5670,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【공격 시】If 2 or more other rested friendly Units are in play, 상대의 유닛 1개를 선택한다. Deal 3 damage to it."
+      "【공격 시】If 2 or more other rested friendly Units are in play, 상대의 유닛 1개를 선택한다. 그 유닛에 3 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-047",
@@ -5734,7 +5734,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【공격 시】 이 유닛이 AP5 이상이고, 상대의 유닛에 공격하고 있다면, 상대의 유닛 1개를 선택한다. Deal 2 damage to it."
+      "【공격 시】 이 유닛이 AP5 이상이고, 상대의 유닛에 공격하고 있다면, 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-050",
@@ -6790,7 +6790,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】자신은 1장 드로우 한다.",
-      "【메인】Choose 1 rested enemy Unit. Deal 2 damage to it."
+      "【메인】Choose 1 rested enemy Unit. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "CommandCard",
     "id": "GD01-104"
@@ -6907,7 +6907,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】Choose 2 of your active Units. Rest them. If you do, 상대의 유닛 1개를 선택한다. Deal 3 damage to it.",
+      "【메인】Choose 2 of your active Units. Rest them. If you do, 상대의 유닛 1개를 선택한다. 그 유닛에 3 대미지를 준다.",
       "【파일럿】[로니 가베이]"
     ],
     "__typename": "CommandCard",
@@ -7011,7 +7011,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】/【액션】Choose 1 enemy Unit with 2 or less AP. Deal 2 damage to it.",
+      "【메인】/【액션】Choose 1 enemy Unit with 2 or less AP. 그 유닛에 2 대미지를 준다.",
       "【파일럿】[니콜 아말피]"
     ],
     "__typename": "CommandCard",
@@ -7611,7 +7611,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【턴 1회】When this Unit's AP is reduced by an enemy effect, choose 1 rested enemy Unit. Deal 2 damage to it."
+      "【턴 1회】When this Unit's AP is reduced by an enemy effect, choose 1 rested enemy Unit. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-009",
@@ -8371,7 +8371,7 @@
     "description": [
       "【링크 시】This Unit gains <제압> during this turn.",
       "(공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
-      "【세트 시･(Neo Zeon) Pilot】【공격 시】Choose 1 damaged enemy Unit. Deal 2 damage to it."
+      "【세트 시･(Neo Zeon) Pilot】【공격 시】Choose 1 damaged enemy Unit. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-036",
@@ -8403,7 +8403,7 @@
     "relatedTrait": [],
     "description": [
       "<돌파 1> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【배치 시】If there are 3 or less enemy Shields, choose 1 enemy Unit with 5 or less AP. Deal 2 damage to it."
+      "【배치 시】If there are 3 or less enemy Shields, choose 1 enemy Unit with 5 or less AP. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-037",
@@ -8526,7 +8526,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 enemy Unit that is Lv.5 or higher. Deal 2 damage to it."
+      "【배치 시】Choose 1 enemy Unit that is Lv.5 or higher. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-041",
@@ -8666,7 +8666,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 enemy Unit token. Deal 2 damage to it."
+      "【배치 시】Choose 1 enemy Unit token. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-046",
@@ -8969,7 +8969,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】【공격 시】You may choose 1 of your other Units. 그 유닛을 파괴한다. If you do, choose 1 enemy Unit that is Lv.4 or lower. Deal 2 damage to it."
+      "【세트 시】【공격 시】You may choose 1 of your other Units. 그 유닛을 파괴한다. If you do, choose 1 enemy Unit that is Lv.4 or lower. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-057",
@@ -10342,7 +10342,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【버스트】Choose 1 enemy Unit that is Lv.3 or lower. Deal 2 damage to it.",
+      "【버스트】Choose 1 enemy Unit that is Lv.3 or lower. 그 유닛에 2 대미지를 준다.",
       "【메인】Choose 6 purple Unit cards from your trash. Exile them from the game. If you do, 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "CommandCard",
@@ -11939,7 +11939,7 @@
     "relatedTrait": [],
     "description": [
       "<제압> (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
-      "【배치 시】 상대의 유닛 1개를 선택한다. Deal 3 damage to it."
+      "【배치 시】 상대의 유닛 1개를 선택한다. 그 유닛에 3 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-034",
@@ -12097,7 +12097,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 other active friendly (Clan) Unit. Rest it. If you do, choose 1 enemy Unit with 2 or less AP. Deal 2 damage to it."
+      "【배치 시】Choose 1 other active friendly (Clan) Unit. Rest it. If you do, choose 1 enemy Unit with 2 or less AP. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-039",
@@ -12410,7 +12410,7 @@
       "TEIWAZ"
     ],
     "description": [
-      "【기동･메인】Choose 3 (Tekkadan)/(Teiwaz) Unit cards from your trash. Exile them from the game. If you do, 상대의 유닛 1개를 선택한다. Deal 2 damage to it."
+      "【기동･메인】Choose 3 (Tekkadan)/(Teiwaz) Unit cards from your trash. Exile them from the game. If you do, 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-050",
@@ -12783,7 +12783,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】If you deploy this Unit from your trash, choose 1 enemy Unit with 4 or less AP. Deal 2 damage to it."
+      "【배치 시】If you deploy this Unit from your trash, choose 1 enemy Unit with 4 or less AP. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-062",
@@ -13894,7 +13894,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 HP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트한다.",
-      "【메인】If 3 or more enemy Units are in play, choose 1 rested enemy Unit. Deal 2 damage to it."
+      "【메인】If 3 or more enemy Units are in play, choose 1 rested enemy Unit. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "CommandCard",
     "id": "GD03-103"
@@ -14039,7 +14039,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】Activate this card's 【메인】.",
-      "【메인】/【액션】Choose 1 enemy Unit that is Lv.4 or lower. Deal 3 damage to it. If there are 2 or more cards with \"Improved Technique\" in their card name in your trash, choose 1 enemy Unit instead."
+      "【메인】/【액션】Choose 1 enemy Unit that is Lv.4 or lower. 그 유닛에 3 대미지를 준다. If there are 2 or more cards with \"Improved Technique\" in their card name in your trash, choose 1 enemy Unit instead."
     ],
     "__typename": "CommandCard",
     "id": "GD03-109"
@@ -14126,7 +14126,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】/【액션】Choose 1 active friendly Unit. Rest it. If you do, choose 1 enemy Unit whose Lv. is equal to or lower than the Unit rested with this ability. Deal 3 damage to it."
+      "【메인】/【액션】Choose 1 active friendly Unit. Rest it. If you do, choose 1 enemy Unit whose Lv. is equal to or lower than the Unit rested with this ability. 그 유닛에 3 대미지를 준다."
     ],
     "__typename": "CommandCard",
     "id": "GD03-113"
