@@ -910,6 +910,18 @@ function fieldResolver(
     return Array.isArray(raw) ? raw : [];
   }
 
+  // ── *.relatedTraits → raw field is "relatedTrait" ─────────────────────────
+  if (
+    (typeName === "UnitCard" ||
+      typeName === "BaseCard" ||
+      typeName === "PilotCard" ||
+      typeName === "CommandCard") &&
+    fieldName === "relatedTraits"
+  ) {
+    const raw = source["relatedTrait"];
+    return Array.isArray(raw) ? raw : [];
+  }
+
   // ── UnitCard.links → raw field is "link" (single object or absent) ───
   //    Schema: links: [UnitLink!]!  — always an array, never null.
   if (typeName === "UnitCard" && fieldName === "links") {

@@ -152,6 +152,7 @@ export const PlayableCardSchema = z.object({
   package: CardPackageSchema,
   keywords: z.array(CardKeywordSchema),
   trait: z.array(CardTraitSchema),
+  relatedTrait: z.array(CardTraitSchema).default([]),
   description: z.array(z.string()),
   rarity: CardRaritySchema.optional(),
 });

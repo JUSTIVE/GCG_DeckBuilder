@@ -14,6 +14,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 2> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
       "【세트 시】자신의 턴 동안, all your Units get AP+1."
@@ -45,6 +46,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시･(White Base Team) Pilot】자신은 1장 드로우 한다."
     ],
@@ -71,6 +73,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST01-005",
@@ -92,6 +95,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST01-007",
@@ -119,6 +123,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -147,6 +152,7 @@
       "WHITE_BASE_TEAM",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】Choose 1 enemy Unit with 5 or less HP. Rest it."
@@ -171,6 +177,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【공격 시】【턴 1회】Choose 1 of your Resources. Set it as active."
@@ -195,6 +202,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】Choose 1 rested enemy Unit. Deal 1 damage to it.",
       "【파일럿】[하야토 코바야시]"
@@ -222,6 +230,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】Choose 1 friendly Unit. It recovers 3 HP.",
       "【파일럿】[카이 시덴]"
@@ -252,6 +261,7 @@
       "WHITE_BASE_TEAM",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -282,6 +292,7 @@
       "ACADEMY",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -308,6 +319,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "<돌파 5> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "This Unit may choose an active enemy Unit that is Lv.4 or lower as its attack target."
@@ -338,6 +350,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Place 1 EX Resource."
     ],
@@ -365,6 +378,7 @@
     "trait": [
       "MAGANAC_CORPS"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST02-005",
@@ -389,6 +403,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】This Unit gets AP+1 and HP+1."
@@ -413,6 +428,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】Choose 1 of your Units. It gains <돌파 3> during this turn.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
@@ -440,6 +456,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】During this battle, your shield area cards can't receive damage from enemy Units that are Lv.4 or lower.",
       "【파일럿】[카토르 라바바 위너]"
@@ -467,6 +484,7 @@
       "ACADEMY",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, look at the top 2 cards of your deck and return 1 to the top and 1 to the bottom."
@@ -490,6 +508,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST03-007",
@@ -513,6 +532,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】This Unit gets AP+2 during this turn."
     ],
@@ -541,6 +561,7 @@
       "ZEON",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【공격 시】During this turn, this Unit gets AP+1 and, if it is a Link Unit, it gains <고기동>.",
@@ -566,6 +587,7 @@
       "ZEON",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, deploy 1 rested [Char's Zaku Ⅱ]((Zeon)･AP3･HP1) Unit token."
@@ -592,6 +614,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【세트 시･Lv.4 이상의 파일럿】 HP4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다."
@@ -622,6 +645,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】 자신은 1장 드로우 한다. 그 후, 자신의 패 1장을 버린다."
     ],
@@ -649,6 +673,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST04-005",
@@ -674,6 +699,7 @@
       "EARTH_ALLIANCE",
       "COORDINATOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【공격 시】 상대의 유닛 1개를 선택한다. 이 배틀 동안, 그 유닛을 AP-2 한다."
@@ -698,6 +724,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】 HP3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다.",
       "【파일럿】[무우 라 프라가]"
@@ -728,6 +755,7 @@
       "EARTH_ALLIANCE",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -757,6 +785,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
       "【세트 시】Choose 1 enemy Unit with 2 or less HP. Rest it."
@@ -788,6 +817,7 @@
     "trait": [
       "CIVILIAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】【파괴 시】Return this Unit's paired Pilot to its owner's hand. Then, discard 1."
     ],
@@ -818,6 +848,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 rested enemy Unit. Deal 1 damage to it."
     ],
@@ -845,6 +876,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 of your (White Base Team) Units. It gains <고기동> during this turn.",
       "(이 유닛은 블록당하지 않는다.)"
@@ -873,6 +905,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-011",
@@ -899,6 +932,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-013",
@@ -926,6 +960,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】Choose 1 of your Units. It recovers 1 HP."
     ],
@@ -948,6 +983,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "While you have 2 or more (Earth Federation) Units in play, this card in your hand gets cost -1."
     ],
@@ -971,6 +1007,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-018",
@@ -995,6 +1032,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】【파괴 시】Deploy 1 rested [Char's Zaku Ⅱ]((Zeon)･AP3･HP1) Unit token."
     ],
@@ -1024,6 +1062,9 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [
+      "MAGANAC_CORPS"
+    ],
     "description": [
       "【배치 시】You may deploy 1 (Maganac Corps) Unit card from your hand."
     ],
@@ -1052,6 +1093,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "<돌파 2> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
@@ -1074,6 +1116,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-031",
@@ -1102,6 +1145,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】This Unit gains <돌파 3>.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
@@ -1129,6 +1173,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-040",
@@ -1156,6 +1201,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
@@ -1185,6 +1231,7 @@
     "trait": [
       "TRIPLE_SHIP_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【배치 시】Choose 1 enemy Unit with 1 HP. Return it to its owner's hand."
@@ -1213,6 +1260,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "While there are 4 or more Command cards in your trash, this card in your hand gets cost -2."
     ],
@@ -1242,6 +1290,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -1271,6 +1320,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 enemy Unit with 1 HP. Return it to its owner's hand."
     ],
@@ -1298,6 +1348,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "While there are 4 or more Command cards in your trash, this Unit gets AP+1 and HP+1."
     ],
@@ -1325,6 +1376,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-077",
@@ -1352,6 +1404,7 @@
     "trait": [
       "TRIPLE_SHIP_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "While you have another (Triple Ship Alliance) Unit in play, this Unit gets AP+1 and <블로커>.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
@@ -1380,6 +1433,7 @@
       "CIVILIAN",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】자신은 1장 드로우 한다."
@@ -1403,6 +1457,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "While this Unit has <리페어>, it gets AP+1."
@@ -1426,6 +1481,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "자신의 턴 동안, while this Unit has <돌파>, it can't receive battle damage from enemy Units with 3 or less AP."
@@ -1450,6 +1506,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【기동･메인】【턴 1회】If your opponent has 8 or more cards in their hand, set this Unit as active. It can't attack during this turn."
@@ -1472,6 +1529,7 @@
     "series": "MOBILE_SUIT_GUNDAM",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Choose 1 enemy Unit with 5 or less HP. Rest it.",
       "【메인】/【액션】Choose 1 to 2 enemy Units with 3 or less HP. Rest them."
@@ -1490,6 +1548,7 @@
     "series": "MOBILE_SUIT_GUNDAM_UNICORN",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】Draw 2."
     ],
@@ -1508,6 +1567,7 @@
     "series": "MOBILE_SUIT_GUNDAM",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【메인】All your Units get AP+2 during this turn."
@@ -1527,6 +1587,7 @@
     "series": "MOBILE_SUIT_GUNDAM_WING",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Place 1 EX Resource.",
       "【메인】Place 1 rested Resource."
@@ -1548,6 +1609,7 @@
     "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Activate this card's 【메인】.",
       "【메인】/【액션】Choose 1 enemy Unit with 5 or less HP. Return it to its owner's hand."
@@ -1566,6 +1628,7 @@
     "series": "MOBILE_SUIT_GUNDAM_SEED",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】 자신은 2장 드로우 한다. 그 후, 자신의 패 1장을 버린다."
     ],
@@ -1585,6 +1648,7 @@
     "series": "MOBILE_SUIT_GUNDAM_SEED",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Choose 1 enemy Unit. It gets AP-3 during this turn.",
       "【액션】Choose 1 friendly Unit with <블로커>. It gets AP+3 during this turn."
@@ -1608,6 +1672,7 @@
       "EARTH_FEDERATION",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -1668,6 +1733,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST01-003",
@@ -1696,6 +1762,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 enemy Unit with 2 or less HP. Rest it."
     ],
@@ -1725,6 +1792,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】Choose 1 enemy Unit that is Lv.5 or lower. It gets AP-3 during this turn."
     ],
@@ -1754,6 +1822,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "This Unit can't choose the enemy player as its attack target."
@@ -1781,6 +1850,7 @@
     "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
     "package": "ST01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Activate this card's 【메인】.",
       "【메인】/【액션】Choose 1 enemy Unit. It gets AP-3 during this turn."
@@ -1801,6 +1871,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
     ],
@@ -1827,6 +1898,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST02-004",
@@ -1854,6 +1926,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】【턴 1회】④：Set this Unit as active."
     ],
@@ -1881,6 +1954,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST02-007",
@@ -1908,6 +1982,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -1932,6 +2007,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -1957,6 +2033,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, draw 1."
@@ -1980,6 +2057,7 @@
     "series": "MOBILE_SUIT_GUNDAM_WING",
     "package": "ST02",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Activate this card's 【메인】.",
       "【메인】/【액션】Choose 1 enemy Unit with 5 or less HP. Rest it."
@@ -2002,6 +2080,7 @@
       "OZ",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, deploy 1 [Tallgeese]((OZ)･AP4･HP2) Unit token. If it is your turn and a card with \"Corsica Base\" in its card name is in your trash, deploy 2 [Leo]((OZ)･AP1･HP1) Unit tokens instead."
@@ -2038,6 +2117,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】This Unit gains <고기동>.",
       "(이 유닛은 블록당하지 않는다.)",
@@ -2070,6 +2150,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】<원호 2> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)"
     ],
@@ -2097,6 +2178,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST03-003",
@@ -2125,6 +2207,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】<원호 2> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)"
     ],
@@ -2148,6 +2231,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST03-005",
@@ -2169,6 +2253,9 @@
     "package": "ST03",
     "trait": [
       "ZEON"
+    ],
+    "relatedTrait": [
+      "NEO_ZEON"
     ],
     "description": [
       "【파괴 시】Look at the top 3 cards of your deck. You may reveal 1 (Zeon)/(Neo Zeon) Unit card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
@@ -2199,6 +2286,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Deploy 1 rested [Zaku Ⅱ]((Zeon)･AP1･HP1) Unit token."
     ],
@@ -2229,6 +2317,9 @@
       "NEO_ZEON",
       "CYBER_NEWTYPE"
     ],
+    "relatedTrait": [
+      "ZEON"
+    ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】You may deploy 1 (Neo Zeon)/(Zeon) Unit card that is Lv.4 or lower from your hand."
@@ -2253,6 +2344,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 friendly Unit. It gets AP+2 during this turn.",
       "【파일럿】[안젤로 자우퍼]"
@@ -2279,6 +2371,7 @@
     "series": "MOBILE_SUIT_GUNDAM_UNICORN",
     "package": "ST03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Activate this card's 【메인】.",
       "【메인】/【액션】Choose 1 enemy Unit. Deal 2 damage to it."
@@ -2300,6 +2393,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】Choose 1 friendly Unit. It can't receive battle damage from enemy Units with 2 or less AP during this battle.",
       "【파일럿】[람바 랄]"
@@ -2327,6 +2421,7 @@
       "NEO_ZEON",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 enemy Unit with 5 or less AP. Deal 1 damage to it."
@@ -2355,6 +2450,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST04-003",
@@ -2381,6 +2477,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -2405,6 +2502,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】 이 유닛이 AP5 이상이라면, Lv.5 이상의 상대의 유닛 1개를 선택한다. 그 유닛에 3 대미지를 준다."
     ],
@@ -2434,6 +2532,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
@@ -2461,6 +2560,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST04-008",
@@ -2485,6 +2585,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】【파괴 시】 이 유닛 이외의, 자신의 링크 유닛이 있다면, 자신은 1장 드로우 한다."
     ],
@@ -2516,6 +2617,7 @@
       "ZAFT",
       "COORDINATOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】 이 턴 동안, 이 유닛은 액티브인 Lv.5 이하의 상대의 유닛을 공격 대상으로 선택할 수 있다."
@@ -2540,6 +2642,9 @@
     "series": "MOBILE_SUIT_GUNDAM_SEED",
     "package": "ST04",
     "trait": [],
+    "relatedTrait": [
+      "EARTH_ALLIANCE"
+    ],
     "description": [
       "【버스트】 (지구 연합)의 자신의 유닛 토큰이 없다면, [에일 스트라이크 건담]((지구 연방)･AP3･HP3･<블로커>)의 유닛 토큰 1개를 배치한다.",
       "【메인】 (지구 연합)의 자신의 유닛 토큰이 없다면, [소드 스트라이크 건담]((지구 연합)･AP4･HP2･<블로커>) 이나 1 [런처 스트라이크 건담]((지구 연합)･AP2･HP4･<블로커>)의 유닛 토큰 1개를 배치한다."
@@ -2564,6 +2669,7 @@
       "ZAFT",
       "COORDINATOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】 Lv.2 이하의 아군의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 <선제 공격> 을 얻는다.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)",
@@ -2593,6 +2699,7 @@
       "ZAFT",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -2636,6 +2743,7 @@
       "TEKKADAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 of your other Units. Deal 1 damage to it. It gets AP+1 during this turn.",
       "While this is damaged, it gains <제압>.",
@@ -2666,6 +2774,7 @@
       "TEKKADAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "While this Unit is damaged, it gets AP+2."
     ],
@@ -2695,6 +2804,7 @@
     "trait": [
       "TEKKADAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】Rest this Unit：Choose 1 of your Units. Deal 1 damage to it. It gets AP+1 during this turn."
     ],
@@ -2717,6 +2827,7 @@
     "trait": [
       "TEKKADAN"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST05-004",
@@ -2741,6 +2852,7 @@
       "TEKKADAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "【파괴 시】Choose 1 enemy Unit with 4 or less AP. Rest it."
     ],
@@ -2768,6 +2880,7 @@
     "trait": [
       "TEIWAZ"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST05-006",
@@ -2792,6 +2905,7 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【세트 시】Choose 1 enemy Unit that is Lv.3 or lower. It gets AP-2 during this turn."
@@ -2822,6 +2936,7 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -2849,6 +2964,7 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST05-009",
@@ -2874,6 +2990,7 @@
       "TEKKADAN",
       "ALAYA_VIJNANA"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】Choose 1 of your Units and 1 enemy Unit. Deal 1 damage to them."
@@ -2898,6 +3015,7 @@
       "TEKKADAN",
       "ALAYA_VIJNANA"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, choose 1 (Tekkadan) Unit card that is Lv.2 or lower from your trash. Add it to your hand."
@@ -2921,6 +3039,9 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [
+      "TEKKADAN"
+    ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】If you have 2 or more other (Gjallarhorn)/(Tekkadan) Units in play, choose 1 enemy Unit with 3 or less HP. Rest it."
@@ -2942,6 +3063,7 @@
     "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
     "package": "ST05",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 of your Units. Deal 1 damage to it. It gets AP+3 during this turn."
     ],
@@ -2960,6 +3082,7 @@
     "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
     "package": "ST05",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Choose 1 enemy Unit. Deal 1 damage to it.",
       "【메인】Choose 1 enemy Unit that is Lv.3 or lower. Destroy it."
@@ -2983,6 +3106,7 @@
       "TEKKADAN",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -3010,6 +3134,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】If another friendly (Clan) Unit is in play, this gains <선제 공격> during this turn.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
@@ -3040,6 +3165,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】If another friendly (Clan) Unit is in play, choose 1 enemy Unit. Deal 1 damage to it."
     ],
@@ -3070,6 +3196,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】<원호 1> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)"
     ],
@@ -3096,6 +3223,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST06-004",
@@ -3120,6 +3248,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "<돌파 1> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【공격 시】Choose 1 to 2 friendly (Clan) Units. They get AP+2 during this turn."
@@ -3148,6 +3277,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST06-006",
@@ -3175,6 +3305,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 of your other (Clan) Units. During this turn, it may choose an active enemy Unit with 3 or less AP as its attack target."
     ],
@@ -3201,6 +3332,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST06-008",
@@ -3230,6 +3362,7 @@
       "CLAN",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】Look at the top card of your deck. If it is a (Clan) card, you may reveal it and add it to your hand. Return any remaining card to the bottom of your deck."
@@ -3255,6 +3388,7 @@
       "CLAN",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】【공격 시】If you have a (Clan) Unit in play, look at the top card of your deck. Return it to the top or bottom of your deck."
@@ -3279,6 +3413,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 to 2 friendly (Clan) Units. They get AP+2 during this turn.",
       "【파일럿】[가이아 (GQ)]"
@@ -3302,6 +3437,9 @@
     "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
     "package": "ST06",
     "trait": [],
+    "relatedTrait": [
+      "CLAN"
+    ],
     "description": [
       "【메인】Look at the top 3 cards of your deck. You may reveal 1 (Clan) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
     ],
@@ -3322,6 +3460,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】Choose 1 to 2 friendly (Clan) Units. They can't receive battle damage from enemy Units that are Lv.2 or lower during this turn.",
       "【파일럿】[오르테가 (GQ)]"
@@ -3350,6 +3489,7 @@
       "CLAN",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -3380,6 +3520,7 @@
       "CLAN",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -3408,6 +3549,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [
       "자신의 턴 종료 시, 자신의 트래시에 (CB)의 카드가 7장 이상 있다면, 자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다.",
       "【세트 시】 자신의 덱을 위에서 2장, 자신의 트래시에 놓는다. 이 효과로 (CB)의 카드가 놓였다면, 자신은 1장 드로우한다."
@@ -3437,6 +3579,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST07-002",
@@ -3463,6 +3606,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST07-003",
@@ -3491,6 +3635,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [
       "(CB)의 자신의 파일럿이 있는 동안, 이 유닛은 <블로커>를 얻는다.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
@@ -3522,6 +3667,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [
       "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, 이 유닛을 2 회복한다.",
       "【링크 시】 이 유닛을 AP+2 한다."
@@ -3551,6 +3697,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST07-006",
@@ -3577,6 +3724,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [
       "자신의 턴 동안, (CB)의 자신의 파일럿이 있는 동안, 이 유닛을 AP+2 한다."
     ],
@@ -3605,6 +3753,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST07-008",
@@ -3633,6 +3782,7 @@
     "trait": [
       "CB"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【공격 시】 이 유닛을 AP+1 한다. 자신의 트래시에 (CB)의 카드가 7장 이상이라면, 대신에 (CB)의 자신의 유닛 전부를 AP+1 한다."
@@ -3657,6 +3807,7 @@
       "CB",
       "INNOVADE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【파괴 시】 상대의 턴 이고, 이 유닛이 (CB)라면, 자신은 1장 드로우 한다."
@@ -3680,6 +3831,7 @@
     "trait": [
       "CB"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】 이 유닛이 (CB)라면, 이 턴 동안, 이 유닛은 액티브의, 이 유닛의 Lv. 이하의 상대의 유닛을 공격 대상으로 선택할 수 있다."
@@ -3703,6 +3855,7 @@
       "CB",
       "SUPER_SOLDIER"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "자신의 턴 동안, (CB)의 자신의 링크 유닛이 있는 동안, 이 유닛은 AP3 이하의 상대의 유닛으로부터 배틀 대미지를 받지 않는다."
@@ -3724,6 +3877,9 @@
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
     "trait": [],
+    "relatedTrait": [
+      "CB"
+    ],
     "description": [
       "【버스트】자신은 1장 드로우 한다.",
       "【액션】 레스트의 (CB)의 아군의 유닛 1개를 선택한다. 배틀하고 있는 상대의 유닛의 공격 대상을 그 유닛으로 한다."
@@ -3742,6 +3898,9 @@
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "ST07",
     "trait": [],
+    "relatedTrait": [
+      "CB"
+    ],
     "description": [
       "【메인】 자신의 덱을 위에서 3장 보고, 그 중 (CB)의, 유닛 카드 1장/파일럿 카드 1장을 공개하고 패에 추가할 수 있다. 남은 카드는 무작위로 아래로 되돌린다."
     ],
@@ -3763,6 +3922,7 @@
       "CB",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -3789,6 +3949,7 @@
     "trait": [
       "MAFTY"
     ],
+    "relatedTrait": [],
     "description": [
       "While you have no Units that are Lv.6 or higher in play, this card in your hand gets Lv. -1 and cost -1 for each enemy Unit in play.",
       "【세트 시】Choose 1 enemy Unit with the highest Lv. Deal 3 damage to it."
@@ -3819,6 +3980,7 @@
     "trait": [
       "MAFTY"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 enemy Unit. Deal 1 damage to it."
     ],
@@ -3846,6 +4008,7 @@
     "trait": [
       "MAFTY"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST08-003",
@@ -3873,6 +4036,7 @@
     "trait": [
       "MAFTY"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】If this Unit is attacking an enemy Unit, choose 1 enemy Unit. Deal 1 damage to it."
     ],
@@ -3900,6 +4064,7 @@
     "trait": [
       "MAFTY"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST08-005",
@@ -3925,6 +4090,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】【공격 시】【턴 1회】If this Unit is attacking the enemy player, reveal 1 (Earth Federation) Unit card from your hand. Return it to the bottom of your deck. If you do, draw 2."
     ],
@@ -3952,6 +4118,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST08-007",
@@ -3979,6 +4146,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "While 3 or more enemy Units are in play, this Unit gains <블로커>.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
@@ -4005,6 +4173,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 rested enemy Unit that is Lv.2 or lower. It won' t be set as active during the start phase of your opponent' s next turn."
     ],
@@ -4031,6 +4200,7 @@
       "MAFTY",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】If this is a (Mafty) Unit, choose 1 of your (Mafty) Units. During this turn, it may choose a damaged active enemy Unit as its attack target."
@@ -4054,6 +4224,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "When you draw with an effect, if this is a blue Unit, it gains <고기동> during this turn.",
@@ -4079,6 +4250,7 @@
     "trait": [
       "MAFTY"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】Choose 1 friendly Link Unit. It gains <돌파 1> during this turn.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
@@ -4104,6 +4276,9 @@
     "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
     "package": "ST08",
     "trait": [],
+    "relatedTrait": [
+      "MAFTY"
+    ],
     "description": [
       "【메인】/【액션】Choose 1 enemy Unit. Deal 1 damage to it. If a friendly (Mafty) Link Unit is in play, deal 2 damage instead."
     ],
@@ -4125,6 +4300,7 @@
       "MAFTY",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 of your Units. It gets AP+2 during this turn."
@@ -4154,6 +4330,7 @@
       "EARTH_FEDERATION",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -4181,6 +4358,7 @@
       "ZAFT",
       "MINERVA_SQUAD"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】②, return this Unit to the bottom of its owner's deck：Choose 1 Unit card with \"Impulse Gundam\" in its card name that is Lv.4 or higher from your trash. Deploy it."
     ],
@@ -4211,6 +4389,7 @@
       "ZAFT",
       "MINERVA_SQUAD"
     ],
+    "relatedTrait": [],
     "description": [
       "【파괴 시】Choose 1 (Minerva Squad) Unit card without \"Force Impulse Gundam\" in its card name from your trash. Add it to your hand."
     ],
@@ -4242,6 +4421,7 @@
       "ZAFT",
       "MINERVA_SQUAD"
     ],
+    "relatedTrait": [],
     "description": [
       "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【링크 시】If there are 5 or more purple cards in your trash, deal 2 damage to all Units with 5 or less AP."
@@ -4273,6 +4453,7 @@
     "trait": [
       "ORB"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "While a friendly Base in play, this Unit gains <제압>.",
@@ -4303,6 +4484,7 @@
       "ZAFT",
       "MINERVA_SQUAD"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "ST09-005",
@@ -4327,6 +4509,7 @@
       "ZAFT",
       "MINERVA_SQUAD"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】If you deploy this Unit from your trash, choose 1 enemy Unit that is Lv.3 or lower. Destroy it."
     ],
@@ -4357,6 +4540,7 @@
       "ZAFT",
       "MINERVA_SQUAD"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -4389,6 +4573,7 @@
       "MINERVA_SQUAD",
       "COORDINATOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【공격 시】If this is a (Minerva Squad) Unit, choose 1 of your Resources. Set it as active."
@@ -4410,6 +4595,7 @@
     "series": "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
     "package": "ST09",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 active enemy Unit with 4 or less AP. Destroy it."
     ],
@@ -4432,6 +4618,7 @@
       "MINERVA_SQUAD",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, look at the top 2 cards of your deck and return 1 to the top. Place the remaining card into your trash."
@@ -4459,6 +4646,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 of your (ZAFT) Units with 5 or more AP. It gains <선제 공격> during this turn.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
@@ -4489,6 +4677,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "While this Unit has 5 or more AP, it gains <돌파 3>.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
@@ -4519,6 +4708,7 @@
     "series": "MOBILE_SUIT_GUNDAM_SEED",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Choose 1 enemy Unit. Deal 2 damage to it.",
       "【메인】/【액션】Choose 1 damaged enemy Unit. Deal 3 damage to it."
@@ -4539,6 +4729,7 @@
     "trait": [
       "TRIPLE_SHIP_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "While this Unit has 5 or more AP, it gains <블로커>.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
@@ -4567,6 +4758,7 @@
     "series": "AFTER_WAR_GUNDAM_X",
     "package": "GD02",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】Choose 1 Unit card that is Lv.5 or lower from your trash. Pay its cost to deploy it."
     ],
@@ -4603,6 +4795,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "All your (White Base Team) Units gain <리페어 1>.",
       "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
@@ -4634,6 +4827,7 @@
     "trait": [
       "CIVILIAN"
     ],
+    "relatedTrait": [],
     "description": [
       "When playing this card from your hand, you may destroy 1 of your Link Units with \"Unicorn Mode\" in its card name that is Lv.5. If you do, play this card as if it has 0 Lv. and cost.",
       "【공격 시】Choose 1 enemy Unit. Rest it."
@@ -4666,6 +4860,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】【공격 시】Choose 12 cards from your trash. Return them to their owner's deck and shuffle it. If you do, set this Unit as active. It gains <선제 공격> during this turn.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
@@ -4697,6 +4892,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
       "【링크 시】This Unit gets HP+1."
@@ -4727,6 +4923,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [
       "【파괴 시】If you have another (OZ) Unit in play, draw 1."
     ],
@@ -4755,6 +4952,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】Choose 1 enemy Unit with 3 or less HP. Rest it."
     ],
@@ -4784,6 +4982,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】Choose 1 enemy Unit with 3 or less HP. Rest it."
     ],
@@ -4816,6 +5015,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】【기동･액션】【턴 1회】Choose 1 Unit. It recovers 1 HP."
     ],
@@ -4845,6 +5045,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
@@ -4874,6 +5075,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "While 4 or more enemy Units are in play, this Unit gains <블로커>.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
@@ -4900,6 +5102,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 rested enemy Unit. Deal 1 damage to it."
     ],
@@ -4922,6 +5125,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-021",
@@ -4942,6 +5146,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-022",
@@ -4963,6 +5168,10 @@
     "package": "GD01",
     "trait": [
       "ZEON"
+    ],
+    "relatedTrait": [
+      "NEO_ZEON",
+      "NEWTYPE"
     ],
     "description": [
       "【기동･메인】Discard 1 (Zeon)/(Neo Zeon) Unit card：If a Pilot is not paired with this Unit, choose 1 (Newtype) Pilot card that is Lv.3 or lower from your trash. Pair it with this Unit."
@@ -4994,6 +5203,7 @@
     "trait": [
       "G_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
       "【배치 시】Deal 3 damage to all Units that are Lv.5 or lower."
@@ -5025,6 +5235,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시･(Operation Meteor) Pilot】Place 1 rested Resource. Then, this Unit gains <선제 공격> during this turn.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
@@ -5055,6 +5266,9 @@
     "package": "GD01",
     "trait": [
       "ZEON"
+    ],
+    "relatedTrait": [
+      "NEO_ZEON"
     ],
     "description": [
       "<돌파 4> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
@@ -5088,6 +5302,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "<돌파 4> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【공격 시】Choose 1 enemy Unit with <블로커> that is Lv.3 or lower. Destroy it."
@@ -5118,6 +5333,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시･(Zeon) Pilot】Choose 1 enemy Unit with <블로커> that is Lv.2 or lower. Destroy it."
     ],
@@ -5147,6 +5363,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
@@ -5173,6 +5390,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-035",
@@ -5194,6 +5412,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-036",
@@ -5214,6 +5433,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-037",
@@ -5236,6 +5456,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】If 5 or more enemy Units are in play, deal 1 damage to all enemy Units."
     ],
@@ -5264,6 +5485,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Look at the top card of your deck. Return it to the top or bottom of your deck."
     ],
@@ -5286,6 +5508,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "This Unit may choose an active enemy Unit that is Lv.2 or lower as its attack target."
     ],
@@ -5315,6 +5538,7 @@
     "trait": [
       "MAGANAC_CORPS"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 of your green Units. During this turn, it may choose an active enemy Unit with 4 or less AP as its attack target."
     ],
@@ -5343,6 +5567,10 @@
     "package": "GD01",
     "trait": [
       "NEO_ZEON"
+    ],
+    "relatedTrait": [
+      "CYBER_NEWTYPE",
+      "NEWTYPE"
     ],
     "description": [
       "【세트 시･(Cyber-Newtype)/(Newtype) Pilot】Choose 1 to 2 enemy Units. Deal 1 damage to them."
@@ -5373,6 +5601,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】Look at the top 3 cards of your deck. You may deploy 1 (ZAFT) Unit card that is Lv.4 or lower among them. Return the remaining cards randomly to the bottom of your deck."
     ],
@@ -5406,6 +5635,9 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [
+      "COORDINATOR"
+    ],
     "description": [
       "【기동･메인】<원호 3> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
       "【세트 시･(Coordinator) Pilot】【턴 1회】When you use this Unit's <원호> to increase a (ZAFT) Unit's AP, set this Unit as active."
@@ -5436,6 +5668,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】If 2 or more other rested friendly Units are in play, choose 1 enemy Unit. Deal 3 damage to it."
     ],
@@ -5465,6 +5698,9 @@
     "package": "GD01",
     "trait": [
       "ZEON"
+    ],
+    "relatedTrait": [
+      "NEO_ZEON"
     ],
     "description": [
       "【기동･메인】<원호 1> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
@@ -5496,6 +5732,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】If this Unit has 5 or more AP and it is attacking an enemy Unit, choose 1 enemy Unit. Deal 2 damage to it."
     ],
@@ -5522,6 +5759,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-051",
@@ -5549,6 +5787,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 enemy Unit. Deal 1 damage to it."
     ],
@@ -5575,6 +5814,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】【턴 1회】①：Choose 1 enemy Unit with 2 or less AP. Deal 1 damage to it."
     ],
@@ -5601,6 +5841,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】<원호 2> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)"
     ],
@@ -5625,6 +5866,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【파괴 시】Choose 1 enemy Unit with 5 or less AP. Deal 1 damage to it."
     ],
@@ -5648,6 +5890,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-057",
@@ -5672,6 +5915,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･액션】【턴 1회】①：Choose 1 Unit that is Lv.4 or higher. It gets AP+1 during this battle."
     ],
@@ -5697,6 +5941,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】If you are attacking the enemy player, this Unit gets AP+2 during this battle."
     ],
@@ -5719,6 +5964,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-060",
@@ -5742,6 +5988,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】<원호 1> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)"
     ],
@@ -5764,6 +6011,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-062",
@@ -5786,6 +6034,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "자신의 턴 동안, while this Unit is battling an enemy Unit that is Lv.2 or lower, it gains <선제 공격>.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
@@ -5813,6 +6062,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-064",
@@ -5837,6 +6087,7 @@
     "trait": [
       "TRIPLE_SHIP_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【세트 시】【턴 1회】When you pair a Pilot with this Unit or one of your white Units, choose 1 enemy Unit. It gets AP-2 during this turn."
@@ -5870,6 +6121,7 @@
     "trait": [
       "TRIPLE_SHIP_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Deploy 1 [Fatum-00]((Triple Ship Alliance)･AP2･HP2･<블로커>) Unit token.",
       "【세트 시】【공격 시】Choose 1 of your (Triple Ship Alliance) Unit tokens. It may attack on the turn it is deployed."
@@ -5900,6 +6152,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】Choose 1 Command card that is Lv.5 or lower from your trash. Add it to your hand."
     ],
@@ -5931,6 +6184,7 @@
     "trait": [
       "TRIPLE_SHIP_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】【턴 1회】①：Choose 1 of your rested white Units with <블로커>. Set it as active. It can't attack during this turn."
     ],
@@ -5961,6 +6215,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】【공격 시】 상대의 유닛 1개를 선택한다. 이 배틀 동안, 그 유닛을 AP-2 한다."
     ],
@@ -5991,6 +6246,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】【공격 시】Choose 1 enemy Unit with 2 or less HP. Return it to its owner's hand."
     ],
@@ -6020,6 +6276,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】 자신은 1장 드로우 한다. 그 후, 자신의 패 1장을 버린다."
     ],
@@ -6049,6 +6306,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 enemy Unit. It gets AP-1 during this turn."
     ],
@@ -6071,6 +6329,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-079",
@@ -6097,6 +6356,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【파괴 시】Choose 1 enemy Unit that is Lv.2 or lower. Return it to its owner's hand."
     ],
@@ -6127,6 +6387,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】【기동･액션】【턴 1회】②：Choose 1 enemy Unit. It gets AP-1 during this battle."
     ],
@@ -6154,6 +6415,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-083",
@@ -6179,6 +6441,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-084",
@@ -6200,6 +6463,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD01-085",
@@ -6223,6 +6487,7 @@
     "trait": [
       "VANADIS_INSTITUTE"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -6251,6 +6516,7 @@
       "WHITE_BASE_TEAM",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "While this Unit is blue, it gains <리페어 1>.",
@@ -6275,6 +6541,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】This Unit's AP can't be reduced by enemy effects."
@@ -6298,6 +6565,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "While this Unit is (Zeon), it gains <돌파 1>.",
@@ -6324,6 +6592,7 @@
       "NEO_ZEON",
       "CYBER_NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】【공격 시】Choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. Deal 1 damage to it."
@@ -6348,6 +6617,7 @@
       "ZAFT",
       "COORDINATOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【턴 1회】 When an enemy Link Unit is destroyed with damage while this Unit is attacking, draw 1."
@@ -6372,6 +6642,7 @@
       "ZAFT",
       "COORDINATOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】Discard 1. If you do, draw 1."
@@ -6395,6 +6666,7 @@
     "trait": [
       "ORB"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "While this Unit is white, it gains <블로커>.",
@@ -6420,6 +6692,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【기동･액션】【턴 1회】If an enemy Unit with 1 or less AP is in play, this Unit recovers 1 HP."
@@ -6444,6 +6717,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 friendly Link Unit. It recovers 3 HP.",
       "【파일럿】[루크레치아 노인]"
@@ -6467,6 +6741,7 @@
     "series": "MOBILE_SUIT_GUNDAM",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】All friendly Units that are Lv.4 or lower recover 2 HP."
     ],
@@ -6487,6 +6762,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】Choose 1 active friendly (Earth Federation) Unit and 1 active enemy Unit. Rest them.",
       "【파일럿】[다구자 맥클]"
@@ -6511,6 +6787,7 @@
     "series": "MOBILE_SUIT_GUNDAM_WING",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】자신은 1장 드로우 한다.",
       "【메인】Choose 1 rested enemy Unit. Deal 2 damage to it."
@@ -6532,6 +6809,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】Deploy 2 [Zaku Ⅱ]((Zeon)･AP1･HP1) Unit tokens.",
       "【파일럿】[도즐 자비]"
@@ -6556,6 +6834,7 @@
     "series": "MOBILE_SUIT_GUNDAM",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】Deal 2 damage to all Units with <블로커>."
     ],
@@ -6573,6 +6852,10 @@
     "series": "MOBILE_SUIT_GUNDAM_WING",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [
+      "OPERATION_METEOR",
+      "G_TEAM"
+    ],
     "description": [
       "【메인】Look at the top 5 cards of your deck. You may reveal 1 (Operation Meteor)/(G Team) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
     ],
@@ -6594,6 +6877,7 @@
     "trait": [
       "MAGANAC_CORPS"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 Unit that is Lv.4 or higher. During this turn, it may choose an active enemy Unit with 6 or less AP as its attack target.",
       "【파일럿】[라시드 쿠라마]"
@@ -6621,6 +6905,7 @@
       "ZEON",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】Choose 2 of your active Units. Rest them. If you do, choose 1 enemy Unit. Deal 3 damage to it.",
       "【파일럿】[로니 가베이]"
@@ -6649,6 +6934,7 @@
       "ZAFT",
       "COORDINATOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 friendly (ZAFT) Unit. It gets AP+3 during this turn.",
       "【파일럿】[앤드류 발트펠트]"
@@ -6675,6 +6961,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】Choose 2 friendly Units. They get AP+1 during this turn.",
       "【파일럿】[욤 커크스]"
@@ -6699,6 +6986,7 @@
     "series": "MOBILE_SUIT_GUNDAM_UNICORN",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 enemy Unit. Deal 1 damage to it."
     ],
@@ -6721,6 +7009,7 @@
       "ZAFT",
       "COORDINATOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 enemy Unit with 2 or less AP. Deal 2 damage to it.",
       "【파일럿】[니콜 아말피]"
@@ -6748,6 +7037,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 enemy Unit that is Lv.4 or lower. It gets AP-2 during this turn.",
       "【파일럿】[추아츄리 판런치]"
@@ -6774,6 +7064,7 @@
     "series": "MOBILE_SUIT_GUNDAM_SEED",
     "package": "GD01",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Activate this card's 【메인】.",
       "【메인】Choose 1 rested Unit with <블로커>. Set it as active. It can't attack during this turn."
@@ -6795,6 +7086,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】Choose 1 enemy Unit with 2 or less HP. Return it to its owner's hand. If you have a Link Unit in play, choose 1 enemy Unit with 4 or less HP instead.",
       "【파일럿】[샤디크 제네리]"
@@ -6822,6 +7114,7 @@
       "EARTH_FEDERATION",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 enemy Unit with 3 or less HP. Rest it."
@@ -6850,6 +7143,7 @@
       "ZEON",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, you may deploy 1 (Zeon) Unit card that is Lv.4 or lower from your hand."
@@ -6878,6 +7172,7 @@
       "MAGANAC_CORPS",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다."
@@ -6907,6 +7202,7 @@
       "ZAFT",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -6936,6 +7232,7 @@
       "NEO_ZEON",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다."
@@ -6963,6 +7260,7 @@
       "TRIPLE_SHIP_ALLIANCE",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand."
@@ -6991,6 +7289,7 @@
       "ACADEMY",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -7063,6 +7362,9 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [
+      "CYBER_NEWTYPE"
+    ],
     "description": [
       "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【세트 시･(Cyber-Newtype) Pilot】When one of your (Titans) Units destroys an enemy shield area card with damage, this Unit recovers 2 HP."
@@ -7094,6 +7396,7 @@
     "trait": [
       "WHITE_FANG"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】【턴 1회】자신의 턴 동안, when one of your Units destroys an enemy Unit with battle damage, set this Unit as active."
     ],
@@ -7124,6 +7427,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시･Lv.3 or Lower Pilot】【파괴 시】You may discard 1 Unit card. If you do, return the card paired with this Unit to your hand."
     ],
@@ -7153,6 +7457,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】Choose 1 rested enemy Unit with 3 or less HP. It won't be set as active during the start phase of your opponent's next turn."
     ],
@@ -7183,6 +7488,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】【공격 시】Choose 1 enemy Unit with 2 or less HP. Rest it."
     ],
@@ -7212,6 +7518,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "자신의 턴 동안, this Unit can't receive battle damage from enemy Units that are Lv.2 or lower."
@@ -7242,6 +7549,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 2> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
@@ -7271,6 +7579,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】Choose 1 rested enemy Unit. Deal 1 damage to it."
     ],
@@ -7300,6 +7609,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【턴 1회】When this Unit's AP is reduced by an enemy effect, choose 1 rested enemy Unit. Deal 2 damage to it."
     ],
@@ -7329,6 +7639,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【턴 1회】When this Unit receives enemy effect damage, draw 1."
     ],
@@ -7358,6 +7669,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･액션】Destroy this Unit：Choose 1 enemy Base/enemy Shield this Unit is battling. Deal 6 damage to it."
     ],
@@ -7381,6 +7693,7 @@
       "EARTH_FEDERATION",
       "WHITE_BASE_TEAM"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-012",
@@ -7406,6 +7719,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-013",
@@ -7429,6 +7743,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 of your (Titans) Units. It gets AP+1 during this turn."
     ],
@@ -7452,6 +7767,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-015",
@@ -7479,6 +7795,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 of your (Titans) Units. It gets AP+1 during this turn."
     ],
@@ -7504,6 +7821,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 2> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
@@ -7531,6 +7849,7 @@
     "trait": [
       "OZ"
     ],
+    "relatedTrait": [],
     "description": [
       "This Unit can't choose the enemy player as its attack target."
     ],
@@ -7554,6 +7873,7 @@
     "trait": [
       "EARTH_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-019",
@@ -7582,6 +7902,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Look at the top 5 cards of your deck. You may reveal 1 green (Zeon) Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck.",
       "【링크 시】 이 유닛을 AP+2 한다."
@@ -7612,6 +7933,7 @@
       "EARTH_FEDERATION",
       "AGE_SYSTEM"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】You may discard 1 green (Earth Federation) Unit card. If you do, place 1 EX Resource. Then, if you are Lv.7 or higher, draw 1."
     ],
@@ -7641,6 +7963,9 @@
     "package": "GD02",
     "trait": [
       "EARTH_FEDERATION"
+    ],
+    "relatedTrait": [
+      "AGE_SYSTEM"
     ],
     "description": [
       "【턴 1회】When you place an EX Resource, choose 1 of your (AGE System) Units. It gains <돌파 2> during this turn.",
@@ -7674,6 +7999,7 @@
       "EARTH_FEDERATION",
       "AGE_SYSTEM"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】While you are Lv.7 or higher, this Unit gains <선제 공격>.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
@@ -7705,6 +8031,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】This Unit gains <고기동>.",
       "(이 유닛은 블록당하지 않는다.)"
@@ -7735,6 +8062,7 @@
     "trait": [
       "OPERATION_METEOR"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Look at the top card of your deck. Return it to the top or bottom of your deck."
     ],
@@ -7762,6 +8090,9 @@
     "package": "GD02",
     "trait": [
       "EARTH_FEDERATION"
+    ],
+    "relatedTrait": [
+      "AGE_SYSTEM"
     ],
     "description": [
       "【배치 시】If you are Lv.7 or higher, choose 1 of your (AGE System) Units. It gets AP+2 during this turn."
@@ -7793,6 +8124,7 @@
       "EARTH_FEDERATION",
       "AGE_SYSTEM"
     ],
+    "relatedTrait": [],
     "description": [
       "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
@@ -7820,6 +8152,7 @@
     "trait": [
       "MAGANAC_CORPS"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-028",
@@ -7846,6 +8179,7 @@
       "EARTH_FEDERATION",
       "AGE_SYSTEM"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-029",
@@ -7871,6 +8205,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-030",
@@ -7893,6 +8228,7 @@
       "EARTH_FEDERATION",
       "AGE_SYSTEM"
     ],
+    "relatedTrait": [],
     "description": [
       "While you are Lv.7 or higher, this Unit gets AP+2."
     ],
@@ -7920,6 +8256,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-032",
@@ -7947,6 +8284,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "While another friendly (Zeon) Link Unit is in play, this Unit gains <돌파 5>.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
@@ -7976,6 +8314,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시･Red Pilot】This Unit gets AP+2."
     ],
@@ -7999,6 +8338,7 @@
     "trait": [
       "SIDE_6"
     ],
+    "relatedTrait": [],
     "description": [
       "This Unit can't choose the enemy player as its attack target."
     ],
@@ -8027,6 +8367,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】This Unit gains <제압> during this turn.",
       "(공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
@@ -8059,6 +8400,7 @@
     "trait": [
       "NEW_UNE"
     ],
+    "relatedTrait": [],
     "description": [
       "<돌파 1> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【배치 시】If there are 3 or less enemy Shields, choose 1 enemy Unit with 5 or less AP. Deal 2 damage to it."
@@ -8089,6 +8431,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Look at the top 3 cards of your deck. You may deploy 1 (Clan) Unit card that is Lv.4 or lower among them. Return the remaining cards randomly to the bottom of your deck."
     ],
@@ -8118,6 +8461,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】Choose 1 enemy Unit that is Lv.3 or lower. Deal 1 damage to it."
     ],
@@ -8149,6 +8493,7 @@
     "trait": [
       "NEW_UNE"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】<원호 2> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
       "【배치 시】Choose 1 of your other (New UNE) Units. It can't receive battle damage from enemy Units with 2 or less HP during this turn."
@@ -8179,6 +8524,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 enemy Unit that is Lv.5 or higher. Deal 2 damage to it."
     ],
@@ -8209,6 +8555,7 @@
     "trait": [
       "NEW_UNE"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 of your (New UNE) Units. It gains <고기동> during this turn.",
       "(이 유닛은 블록당하지 않는다.)"
@@ -8239,6 +8586,7 @@
     "trait": [
       "NEW_UNE"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】If you have another (New UNE) Unit in play, deploy 1 rested [Daughtress]((New UNE)･AP0･HP1) Unit token."
     ],
@@ -8264,6 +8612,7 @@
     "trait": [
       "NEW_UNE"
     ],
+    "relatedTrait": [],
     "description": [
       "【파괴 시】If you have another (New UNE) Unit in play, deploy 1 rested [Daughtress]((New UNE)･AP0･HP1) Unit token."
     ],
@@ -8289,6 +8638,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】If this Unit has 5 or more AP and it is attacking an enemy Unit, draw 1."
     ],
@@ -8314,6 +8664,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 enemy Unit token. Deal 2 damage to it."
     ],
@@ -8343,6 +8694,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】Rest this Unit：Destroy this and choose 1 enemy Unit that is Lv.5 or lower. Deal 1 damage to it."
     ],
@@ -8366,6 +8718,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-048",
@@ -8394,6 +8747,7 @@
     "trait": [
       "NEW_UNE"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】<원호 1> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)"
     ],
@@ -8417,6 +8771,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-050",
@@ -8438,6 +8793,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-051",
@@ -8459,6 +8815,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-052",
@@ -8482,6 +8839,7 @@
     "trait": [
       "VULTURE"
     ],
+    "relatedTrait": [],
     "description": [
       "[Suppression] (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
       "【링크 시】자신의 턴 동안, while there are 7 or more cards in your trash, all your other (Vulture) Units get AP+2."
@@ -8513,6 +8871,7 @@
       "TEKKADAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】If this Unit is damaged, draw 1."
     ],
@@ -8544,6 +8903,7 @@
       "TEKKADAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【배치 시】Choose 1 of your Units and 1 enemy Unit. Deal 1 damage to them."
@@ -8575,6 +8935,7 @@
     "trait": [
       "VULTURE"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시･(Vulture) Pilot】【파괴 시】Choose 1 (Vulture) Unit card that is Lv.5 or higher from your trash. Add it to your hand."
     ],
@@ -8606,6 +8967,7 @@
       "UE",
       "VAGAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】【공격 시】You may choose 1 of your other Units. Destroy it. If you do, choose 1 enemy Unit that is Lv.4 or lower. Deal 2 damage to it."
     ],
@@ -8635,6 +8997,7 @@
     "trait": [
       "TEKKADAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 of your Units. Deal 1 damage to it. If you do, draw 1. Then, discard 1."
     ],
@@ -8664,6 +9027,7 @@
     "trait": [
       "VULTURE"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -8693,6 +9057,7 @@
     "trait": [
       "VULTURE"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】If there are 7 or more cards in your trash, choose 1 enemy Unit that is Lv.4 or lower. Rest it."
     ],
@@ -8722,6 +9087,9 @@
     "trait": [
       "TEIWAZ"
     ],
+    "relatedTrait": [
+      "TEKKADAN"
+    ],
     "description": [
       "【세트 시･Purple Pilot】If there are 3 or more (Teiwaz)/(Tekkadan) cards in your trash, choose 1 enemy Unit with 3 or less AP. Rest it."
     ],
@@ -8748,6 +9116,7 @@
     "trait": [
       "TEIWAZ"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-062",
@@ -8773,6 +9142,7 @@
     "trait": [
       "VULTURE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-063",
@@ -8798,6 +9168,7 @@
     "trait": [
       "VULTURE"
     ],
+    "relatedTrait": [],
     "description": [
       "자신의 턴 동안, while there are 7 or more cards in your trash, this Unit can't receive effect damage from enemy Commands."
     ],
@@ -8824,6 +9195,7 @@
     "trait": [
       "VULTURE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-065",
@@ -8845,6 +9217,7 @@
       "UE",
       "VAGAN"
     ],
+    "relatedTrait": [],
     "description": [
       "This Unit can't choose the enemy player as its attack target."
     ],
@@ -8869,6 +9242,7 @@
       "UE",
       "VAGAN"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-067",
@@ -8893,6 +9267,7 @@
       "TEKKADAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Deal 2 damage to this Unit."
     ],
@@ -8924,6 +9299,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】【기동･메인】【턴 1회】Choose 1 active friendly Base. Rest it. If you do, set this Unit as active. It can't choose the enemy player as its attack target during this turn."
     ],
@@ -8954,6 +9330,7 @@
       "GJALLARHORN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】If there are 4 or more (Gjallarhorn) cards in your trash, draw 2. If you do, discard 2."
     ],
@@ -8983,6 +9360,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】If a friendly white Base is in play, you may pair 1 (AEUG) Pilot card from your hand with this Unit."
     ],
@@ -9013,6 +9391,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "While a friendly white Base is in play, this Unit gains <리페어 1>.",
@@ -9044,6 +9423,7 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [],
     "description": [
       "During your opponent's turn, the enemy Unit battling this Unit gains <선제 공격>.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
@@ -9075,6 +9455,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
       "【세트 시】While there are 4 or more Command cards in your trash, this Unit gains <블로커>.",
@@ -9106,6 +9487,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】Choose 1 active friendly Base. Rest it. If you do, choose 1 enemy Unit that is Lv.4 or lower. It gets AP-2 during this battle."
     ],
@@ -9133,6 +9515,7 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-077",
@@ -9158,6 +9541,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-078",
@@ -9185,6 +9569,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -9208,6 +9593,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-080",
@@ -9231,6 +9617,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】If a friendly white Base is in play, choose 1 enemy Unit. It gets AP-2 during this turn."
     ],
@@ -9260,6 +9647,7 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [],
     "description": [
       "While you have another (Gjallarhorn) Unit in play, this Unit gains <블로커>.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
@@ -9290,6 +9678,7 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [],
     "description": [
       "【파괴 시】If it is your opponent's turn, choose 1 of your (Gjallarhorn) Units. Set it as active."
     ],
@@ -9312,6 +9701,7 @@
     "trait": [
       "ACADEMY"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD02-084",
@@ -9342,6 +9732,7 @@
       "TITANS",
       "CYBER_NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】【턴 1회】자신의 턴 동안, when this Unit recovers HP, if you have 4 or less cards in your hand, draw 1."
@@ -9364,6 +9755,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "While you have another (Titans) Unit in play, this gets AP+1."
@@ -9389,6 +9781,7 @@
       "EARTH_ALLIANCE",
       "BIOLOGICAL_CPU"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】If this is a blue Unit, choose 1 enemy Unit with <블로커>. Rest it."
@@ -9414,6 +9807,7 @@
       "ASUNO_FAMILY",
       "X_ROUNDER"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】Look at the top 3 cards of your deck. You may reveal 1 green (Earth Federation) Unit card/1 card with \"AGE Device\" in its card name among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
@@ -9439,6 +9833,7 @@
       "ZEON",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】Choose 1 of your other (Zeon) Link Units. It gains <돌파 1> during this turn.",
@@ -9464,6 +9859,7 @@
       "ZEON",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "While you have another Unit with <고기동> in play, this Unit gets AP+1."
@@ -9488,6 +9884,7 @@
       "NEO_ZEON",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】If this Unit is red, choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. Deal 1 damage to it."
@@ -9512,6 +9909,7 @@
     "trait": [
       "NEW_UNE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】【공격 시】Choose 1 of your (New UNE) Units. It gets AP+2 during this turn."
@@ -9533,6 +9931,9 @@
     "package": "GD02",
     "trait": [
       "NEW_UNE"
+    ],
+    "relatedTrait": [
+      "NEWTYPE"
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
@@ -9558,6 +9959,7 @@
       "VULTURE",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】You may discard 1. If you do, look at the top 3 cards of your deck. You may reveal 1 (Vulture) Unit card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
@@ -9582,6 +9984,7 @@
     "trait": [
       "TEIWAZ"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【공격 시】If this Unit is damaged and Lv.5 or lower, it gains <고기동> during this battle.",
@@ -9607,6 +10010,7 @@
       "VAGAN",
       "X_ROUNDER"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】You may choose 1 (Vagan) Unit card that is Lv.2 or lower from your trash. Pay its cost to deploy it."
@@ -9630,6 +10034,7 @@
       "AEUG",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "While there is a friendly white Base in play, this Unit gets AP+2."
@@ -9654,6 +10059,7 @@
       "AEUG",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "This card's name is also treated as [샤아 아즈나블].",
       "【버스트】 이 카드를 패에 추가한다.",
@@ -9678,6 +10084,7 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】If there are 4 or more (Gjallarhorn) cards in your trash, choose 1 enemy Unit. It gets AP-2 during this turn."
@@ -9699,6 +10106,7 @@
     "series": "MOBILE_SUIT_GUNDAM_SEED",
     "package": "GD02",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】자신은 1장 드로우 한다.",
       "【메인】Choose 1 friendly damaged Unit. It recovers 2 HP. Then, draw 1."
@@ -9718,6 +10126,7 @@
     "series": "MOBILE_SUIT_GUNDAM_WING",
     "package": "GD02",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 to 2 enemy Units that are Lv.2 or lower. Rest them."
     ],
@@ -9739,6 +10148,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 friendly (Titans) Unit. It gets AP+2 during this turn.",
       "【파일럿】[마우아 파라오]"
@@ -9763,6 +10173,10 @@
     "series": "MOBILE_SUIT_GUNDAM_AGE",
     "package": "GD02",
     "trait": [],
+    "relatedTrait": [
+      "ASUNO_FAMILY",
+      "AGE_SYSTEM"
+    ],
     "description": [
       "【버스트】Choose 1 (Asuno Family) Pilot card from your trash. Add it to your hand.",
       "【메인】If you have an (AGE System) Unit in play, place 1 EX Resource."
@@ -9781,6 +10195,9 @@
     "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
     "package": "GD02",
     "trait": [],
+    "relatedTrait": [
+      "NEWTYPE"
+    ],
     "description": [
       "【메인】Look at the top 3 cards of your deck and return 1 to the top. Return the remaining cards to the bottom of your deck. Then, if you have a (Newtype) Pilot in play, draw 1."
     ],
@@ -9802,6 +10219,7 @@
       "ZEON",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】Choose 1 of your Unit tokens. It can't receive battle damage from enemy Units during this battle.",
       "【파일럿】[이그자베 올리베]"
@@ -9828,6 +10246,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】During this battle, your shield area cards can't receive damage from enemy Units that are Lv.3 or lower.",
       "【파일럿】[울프 에니아클]"
@@ -9852,6 +10271,7 @@
     "series": "MOBILE_SUIT_Z_GUNDAM",
     "package": "GD02",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Choose 1 enemy Unit. Deal 1 damage to it.",
       "【메인】Deal 1 damage to all enemy Units other than Link Units."
@@ -9870,6 +10290,9 @@
     "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
     "package": "GD02",
     "trait": [],
+    "relatedTrait": [
+      "CLAN"
+    ],
     "description": [
       "【메인】Choose 1 friendly (Clan) Unit. During this turn, it may choose an active enemy Unit that is Lv.4 or lower as its attack target."
     ],
@@ -9892,6 +10315,7 @@
       "CLAN",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 enemy Unit. Deal 1 damage to it.",
       "【파일럿】[시이코 스가이]"
@@ -9916,6 +10340,7 @@
     "series": "AFTER_WAR_GUNDAM_X",
     "package": "GD02",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Choose 1 enemy Unit that is Lv.3 or lower. Deal 2 damage to it.",
       "【메인】Choose 6 purple Unit cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit. Destroy it."
@@ -9935,6 +10360,7 @@
     "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
     "package": "GD02",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】자신은 1장 드로우 한다.",
       "【메인】Choose 1 purple Pilot card from your trash. Add it to your hand."
@@ -9957,6 +10383,7 @@
     "trait": [
       "TEIWAZ"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】If a friendly (Teiwaz) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. Destroy it.",
       "【파일럿】[아미다 아르카]"
@@ -9985,6 +10412,7 @@
       "TEKKADAN",
       "ALAYA_VIJNANA"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 damaged friendly Unit. It gets AP+2 during this turn.",
       "【파일럿】[노르바 시노]"
@@ -10012,6 +10440,7 @@
     "trait": [
       "VULTURE"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 friendly  (Vulture) Unit. It gets AP+2 during this turn.",
       "【파일럿】[위츠 수]"
@@ -10038,6 +10467,7 @@
     "trait": [
       "VULTURE"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】If there are 7 or more cards in your trash, choose 1 friendly (Vulture) Unit. During this turn, it may choose an active enemy Unit that is Lv.4 or lower as its attack target.",
       "【파일럿】[로아비 로이]"
@@ -10062,6 +10492,9 @@
     "series": "MOBILE_SUIT_Z_GUNDAM",
     "package": "GD02",
     "trait": [],
+    "relatedTrait": [
+      "AEUG"
+    ],
     "description": [
       "【버스트】Choose 1 (AEUG) Base card from your trash. Add it to your hand.",
       "【메인】 자신은 3장 드로우 한다. 그 후, 자신의 패 2장을 버린다."
@@ -10084,6 +10517,7 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】Choose 1 enemy Unit with 4 or less HP battling a friendly Unit with <블로커>. Return it to its owner's hand.",
       "【파일럿】[아인 달튼]"
@@ -10110,6 +10544,7 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】If you have a (Gjallarhorn) Link Unit in play, choose 1 enemy Unit. It gets AP-3 during this battle.",
       "【파일럿】[카르타 이슈]"
@@ -10136,6 +10571,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】Choose 1 of your (AEUG) Units/Bases. It recovers 2 HP.",
       "【파일럿】[화 유이리]"
@@ -10163,6 +10599,7 @@
       "EARTH_ALLIANCE",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 friendly blue Unit. It recovers 2 HP."
@@ -10191,6 +10628,7 @@
       "TITANS",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 rested enemy Unit that is Lv.4 or lower. Deal 1 damage to it."
@@ -10218,6 +10656,7 @@
       "ZEON",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 friendly Unit token. During this turn, it may choose an active enemy Unit with 5 or less AP as its attack target."
@@ -10246,6 +10685,7 @@
       "EARTH_FEDERATION",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -10275,6 +10715,7 @@
       "NEO_ZEON",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, you may discard 1 red card. If you do, draw 1."
@@ -10303,6 +10744,7 @@
       "CLAN",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -10332,6 +10774,7 @@
       "VULTURE",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -10360,6 +10803,7 @@
       "TEIWAZ",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn and a friendly (Teiwaz) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. Destroy it."
@@ -10387,6 +10831,7 @@
       "AEUG",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -10416,6 +10861,7 @@
       "GJALLARHORN",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if a friendly (Gjallarhorn) Unit is in play, choose 1 enemy Unit. It gets AP-2 during this turn."
@@ -10497,6 +10943,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 2> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
       "【세트 시】Choose 1 rested enemy Unit. Deal 1 damage to it. When this effect destroys an enemy Unit, draw 1."
@@ -10530,6 +10977,7 @@
       "TITANS",
       "JUPITRIS"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 3> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
       "【세트 시】When one of your other Units with <리페어> attacks, choose 1 enemy Unit whose Lv. is equal to or lower than that Unit. Rest it."
@@ -10562,6 +11010,7 @@
       "TITANS",
       "JUPITRIS"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
@@ -10592,6 +11041,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】If you have 2 or more other (Titans) Units in play, choose 1 enemy Unit with 5 or less HP. Rest it."
     ],
@@ -10622,6 +11072,7 @@
     "trait": [
       "NEO_ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
       "【배치 시】자신은 1장 드로우 한다."
@@ -10652,6 +11103,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 to 2 enemy Units with 3 or less HP. Rest them."
     ],
@@ -10681,6 +11133,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【파괴 시】Choose 1 enemy Unit with 3 or less HP. Rest it."
     ],
@@ -10712,6 +11165,7 @@
       "TITANS",
       "JUPITRIS"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】This Unit gains <리페어 2>.",
       "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
@@ -10743,6 +11197,7 @@
       "TITANS",
       "JUPITRIS"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】You may choose 2 (Titans) cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit that is Lv.4 or lower. Rest it."
     ],
@@ -10772,6 +11227,7 @@
     "trait": [
       "CIVILIAN"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 3> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
@@ -10799,6 +11255,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD03-011",
@@ -10823,6 +11280,7 @@
       "TITANS",
       "JUPITRIS"
     ],
+    "relatedTrait": [],
     "description": [
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
@@ -10853,6 +11311,7 @@
       "TITANS",
       "JUPITRIS"
     ],
+    "relatedTrait": [],
     "description": [
       "While you have another (Jupitris) Unit in play, this Unit gets AP+1 and <리페어 1>.",
       "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
@@ -10877,6 +11336,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "While you have 2 or more (Titans) Units in play, this card in your hand gets cost -1."
     ],
@@ -10904,6 +11364,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】【턴 1회】Exile 3 (Titans) cards from your trash: This Unit gains <돌파 4> during this turn.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
@@ -10932,6 +11393,7 @@
     "trait": [
       "CIVILIAN"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD03-016",
@@ -10961,6 +11423,7 @@
       "ZEON",
       "CYCLOPS_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】Choose 1 (Cyclops Team) Pilot card from your trash. Add it to your hand.",
       "【세트 시･(Cyclops Team) Pilot】All your (Cyclops Team) Units may choose an active enemy Unit with 5 or less AP as their attack target during this turn."
@@ -10993,6 +11456,7 @@
     "trait": [
       "G_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "<돌파 5> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【공격 시】Choose 1 enemy Unit with <블로커>. Deal 5 damage to it."
@@ -11025,6 +11489,7 @@
       "EARTH_FEDERATION",
       "AGE_SYSTEM"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】Enemy Units choose this rested Unit as their attack target if possible when attacking.",
       "【링크 시】Place 1 EX Resource."
@@ -11056,6 +11521,7 @@
       "ZEON",
       "CYCLOPS_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】If there are 4 or more (Cyclops Team) cards in your trash, deploy 2 rested [Ad Balloon]((Civilian)･AP0･HP1･This Unit can't be set as active or paired with a Pilot) Unit tokens.",
       "While you have a Unit with \"Ad Balloon\" in its card name in play, this Unit can't receive enemy battle damage."
@@ -11085,6 +11551,9 @@
     "package": "GD03",
     "trait": [
       "G_TEAM"
+    ],
+    "relatedTrait": [
+      "OPERATION_METEOR"
     ],
     "description": [
       "【배치 시】Choose 1 of your (Operation Meteor)/(G Team) Units. During this turn, it may choose an active enemy Unit as its attack target."
@@ -11116,6 +11585,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
     ],
@@ -11144,6 +11614,9 @@
     "package": "GD03",
     "trait": [
       "EARTH_FEDERATION"
+    ],
+    "relatedTrait": [
+      "AGE_SYSTEM"
     ],
     "description": [
       "When you place an EX Resource, choose 1 of your (AGE System) Units. It gains <고기동> during this turn.",
@@ -11176,6 +11649,7 @@
       "ZEON",
       "CYCLOPS_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】If you have another (Cyclops Team) Unit in play, deploy 1 rested [Hy-Gogg]((Cyclops Team)･AP2･HP1) Unit token."
     ],
@@ -11201,6 +11675,9 @@
     "package": "GD03",
     "trait": [
       "G_TEAM"
+    ],
+    "relatedTrait": [
+      "MAGANAC_CORPS"
     ],
     "description": [
       "Enemy Units choose one of your rested (Maganac Corps) Units as their attack target if possible when attacking."
@@ -11232,6 +11709,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [
       "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
@@ -11260,6 +11738,7 @@
       "ZEON",
       "CYCLOPS_TEAM"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD03-027",
@@ -11286,6 +11765,7 @@
     "trait": [
       "MAGANAC_CORPS"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】If you are attacking an enemy Unit, this Unit gets AP+2 during this battle."
     ],
@@ -11315,6 +11795,7 @@
     "trait": [
       "G_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, deal 2 damage to all enemy Units with <블로커>."
     ],
@@ -11343,6 +11824,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [
       "While you have a (CB) Link Unit in play, this card in your hand gets cost -1."
     ],
@@ -11371,6 +11853,7 @@
       "EARTH_FEDERATION",
       "AGE_SYSTEM"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD03-031",
@@ -11396,6 +11879,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD03-032",
@@ -11420,6 +11904,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시･(ZAFT) Pilot】자신의 턴 동안, all your (ZAFT) Units get AP+2.",
       "【공격 시】Choose 1 enemy Unit. Deal 1 damage to it for each 4 AP this Unit has."
@@ -11451,6 +11936,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "<제압> (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
       "【배치 시】Choose 1 enemy Unit. Deal 3 damage to it."
@@ -11483,6 +11969,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】【턴 1회】①, exile 1 Pilot card from your trash: Deal 1 damage to all enemy Units.",
       "【링크 시】During this turn, this Unit may choose an active enemy Unit with AP equal to or less than this Unit as its attack target."
@@ -11513,6 +12000,7 @@
     "trait": [
       "MAFTY"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】Deal 1 damage to all enemy Units."
     ],
@@ -11544,6 +12032,7 @@
     "trait": [
       "SRA"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】자신의 턴 동안, while this Unit is battling an enemy Unit with a 【파괴 시】 effect, it gains <선제 공격>.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
@@ -11575,6 +12064,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】<원호 1> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
       "자신의 턴 동안, when this Unit is rested by an effect, choose 1 of your (ZAFT) Units. It gets AP+2 during this turn."
@@ -11605,6 +12095,7 @@
     "trait": [
       "CLAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 other active friendly (Clan) Unit. Rest it. If you do, choose 1 enemy Unit with 2 or less AP. Deal 2 damage to it."
     ],
@@ -11635,6 +12126,7 @@
     "trait": [
       "NEW_UNE"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】This Unit gains <고기동>.",
       "(이 유닛은 블록당하지 않는다.)"
@@ -11665,6 +12157,7 @@
     "trait": [
       "SRA"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Deal 3 damage to all Bases."
     ],
@@ -11692,6 +12185,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "While this Unit has 5 or more AP, it may choose an active enemy Unit that is Lv.5 or lower as its attack target."
     ],
@@ -11721,6 +12215,7 @@
     "trait": [
       "MAFTY"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】Choose 1 enemy Unit. Deal 1 damage to it."
     ],
@@ -11750,6 +12245,7 @@
     "trait": [
       "NEW_UNE"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Deploy 1 rested [Daughtress]((New UNE)･AP0･HP1) Unit token."
     ],
@@ -11773,6 +12269,7 @@
     "trait": [
       "NEW_UNE"
     ],
+    "relatedTrait": [],
     "description": [
       "While you have a Unit token in play, this Unit gets AP+1."
     ],
@@ -11796,6 +12293,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD03-046",
@@ -11817,6 +12315,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD03-047",
@@ -11844,6 +12343,7 @@
     "trait": [
       "ZEON"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】If there are 3 or less enemy Shields, deploy 1 rested [GFreD]((Zeon)･AP4･HP3) Unit token."
     ],
@@ -11874,6 +12374,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [
       "<제압> (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
       "When this Unit destroys an enemy shield area card with battle damage, if there are 10 or more (CB) cards in your trash, choose 1 enemy Unit with the lowest HP. Destroy it."
@@ -11905,6 +12406,9 @@
       "TEKKADAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [
+      "TEIWAZ"
+    ],
     "description": [
       "【기동･메인】Choose 3 (Tekkadan)/(Teiwaz) Unit cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit. Deal 2 damage to it."
     ],
@@ -11934,6 +12438,7 @@
     "trait": [
       "VULTURE"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】You may choose 1 Unit card that is Lv.4 or lower from your trash. Pay its cost to deploy it."
     ],
@@ -11965,6 +12470,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [
       "【기동･메인】<원호 2> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
       "When this Unit deals battle damage to an enemy Unit that is Lv.5 or lower, if you have a (CB) Pilot in play, destroy that enemy Unit."
@@ -11998,6 +12504,9 @@
       "TEKKADAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [
+      "TEIWAZ"
+    ],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【세트 시】【턴 1회】자신의 턴 동안, when one of your (Tekkadan)/(Teiwaz) Units receives effect damage, choose 1 enemy Unit that is Lv.4 or lower. Rest it."
@@ -12028,6 +12537,9 @@
     "package": "GD03",
     "trait": [
       "VAGAN"
+    ],
+    "relatedTrait": [
+      "X_ROUNDER"
     ],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
@@ -12060,6 +12572,7 @@
       "CIVILIAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시･Purple Pilot】Choose 1 enemy Unit that is Lv.2 or lower. Destroy it."
     ],
@@ -12090,6 +12603,7 @@
       "TEKKADAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 of your Units and 1 enemy Unit. Deal 1 damage to them."
     ],
@@ -12120,6 +12634,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -12148,6 +12663,7 @@
       "UE",
       "VAGAN"
     ],
+    "relatedTrait": [],
     "description": [
       "This card in your trash gets cost -1."
     ],
@@ -12177,6 +12693,7 @@
     "trait": [
       "VAGAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【공격 시】You may choose 1 (Vagan) card from your trash. Exile it from the game. If you do, choose 1 of your (Vagan) Units. It gets AP+2 during this turn."
     ],
@@ -12206,6 +12723,7 @@
     "trait": [
       "TEKKADAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【턴 1회】자신의 턴 동안, when this Unit receives effect damage, deploy 1 rested [CGS Mobile Worker]((Tekkadan)･AP1･HP1) Unit token."
     ],
@@ -12231,6 +12749,7 @@
       "TEKKADAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "While this Unit has 1 HP, it gains <리페어 3>.",
       "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
@@ -12262,6 +12781,7 @@
       "OLD_UNE",
       "VULTURE"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】If you deploy this Unit from your trash, choose 1 enemy Unit with 4 or less AP. Deal 2 damage to it."
     ],
@@ -12286,6 +12806,7 @@
       "CB",
       "GN_DRIVE"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD03-063",
@@ -12310,6 +12831,9 @@
       "UE",
       "VAGAN"
     ],
+    "relatedTrait": [
+      "X_ROUNDER"
+    ],
     "description": [
       "【배치 시】You may choose 1 (X-Rounder) card from your trash and add it to your hand. If you do, discard 1."
     ],
@@ -12333,6 +12857,7 @@
     "trait": [
       "VAGAN"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD03-065",
@@ -12359,6 +12884,7 @@
       "TEKKADAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [],
     "__typename": "UnitCard",
     "id": "GD03-066",
@@ -12386,6 +12912,7 @@
       "TEIWAZ",
       "TEKKADAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】You may choose 1 of your Units. Deal 1 damage to it. It gets AP+1 during this turn."
     ],
@@ -12415,6 +12942,7 @@
       "CIVILIAN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "While a friendly Base is in play, this Unit gains <블로커>.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
@@ -12446,6 +12974,7 @@
     "trait": [
       "SUPERPOWER_BLOC"
     ],
+    "relatedTrait": [],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
       "【링크 시】At the end of the turn when this Unit is paired with a Pilot, set it as active."
@@ -12474,6 +13003,7 @@
     "trait": [
       "TRIPLE_SHIP_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "While this Unit is rested, friendly Shields can't receive battle damage from enemy Units."
     ],
@@ -12503,6 +13033,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [
       "【배치 시】Choose 1 enemy Unit. For each (AEUG) Unit card in your trash, it gets AP-1 during this turn."
     ],
@@ -12533,6 +13064,7 @@
     "trait": [
       "TRIPLE_SHIP_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【배치 시】If you have another (Triple Ship Alliance) Unit in play, draw 1. Then, discard 1."
@@ -12566,6 +13098,7 @@
     "trait": [
       "GJALLARHORN"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
       "【링크 시】【기동･액션】【턴 1회】If there are 6 or more (Gjallarhorn) cards in your trash, choose 1 enemy Unit battling this Unit. It gets AP-3 during this battle."
@@ -12596,6 +13129,7 @@
     "trait": [
       "SUPERPOWER_BLOC"
     ],
+    "relatedTrait": [],
     "description": [
       "【세트 시】While you have another (Superpower Bloc) Unit in play, enemy Units choose this rested Unit as their attack target if possible when attacking."
     ],
@@ -12626,6 +13160,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】【공격 시】Choose 1 enemy Unit with no paired Pilot. It gets AP-2 during this turn."
     ],
@@ -12655,6 +13190,7 @@
     "trait": [
       "TRIPLE_SHIP_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【턴 1회】자신의 턴 동안, when your (Triple Ship Alliance) Unit deals battle damage to an enemy Unit, you may return the enemy Unit to its owner's hand."
     ],
@@ -12683,6 +13219,7 @@
     "trait": [
       "TRIPLE_SHIP_ALLIANCE"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】Choose 1 to 3 enemy Units with 3 or less HP. Return them to their owners' hands."
     ],
@@ -12712,6 +13249,7 @@
     "trait": [
       "SUPERPOWER_BLOC"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】【파괴 시】Return the card paired with this Unit to your hand."
     ],
@@ -12739,6 +13277,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [
       "When you rest your Base with one of your Units' effects, you may rest this Unit instead."
     ],
@@ -12769,6 +13308,7 @@
       "GJALLARHORN",
       "GUNDAM_FRAME"
     ],
+    "relatedTrait": [],
     "description": [
       "【링크 시】Choose 1 (Gjallarhorn) Command card from your trash. Add it to your hand."
     ],
@@ -12795,6 +13335,9 @@
     "package": "GD03",
     "trait": [
       "SUPERPOWER_BLOC"
+    ],
+    "relatedTrait": [
+      "UN"
     ],
     "description": [
       "This Unit can only attack during a turn when one of your (Superpower Bloc)/(UN) Units is deployed."
@@ -12823,6 +13366,9 @@
     "trait": [
       "SUPERPOWER_BLOC"
     ],
+    "relatedTrait": [
+      "UN"
+    ],
     "description": [
       "While you have 2 or more (Superpower Bloc)/(UN) Units in play, this card in your hand gets cost -1."
     ],
@@ -12848,6 +13394,7 @@
     "trait": [
       "SUPERPOWER_BLOC"
     ],
+    "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
@@ -12877,6 +13424,7 @@
       "JUPITRIS",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】Choose 1 of your other Units. It gains <리페어 2> during this turn. Then, if it is a (Jupitris) Unit, draw 1.",
@@ -12900,6 +13448,7 @@
     "trait": [
       "EARTH_FEDERATION"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "When playing this card from your hand and pairing it with a Unit with \"Gundam NT-1\" in its card name, play this card as if it has 0 cost."
@@ -12923,6 +13472,7 @@
     "trait": [
       "TITANS"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【공격 시】Choose 1 of your (Titans) Units whose Lv. is equal to or lower than this Unit. It gets AP+1 during this turn."
@@ -12948,6 +13498,7 @@
       "JUPITRIS",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】Choose 1 enemy Unit that is Lv.3 or lower. Rest it."
@@ -12973,6 +13524,9 @@
       "EARTH_FEDERATION",
       "ASUNO_FAMILY"
     ],
+    "relatedTrait": [
+      "AGE_SYSTEM"
+    ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】If this is an (AGE System) Unit, it gets AP+1 and <돌파 1>.",
@@ -12997,6 +13551,7 @@
       "ZEON",
       "CYCLOPS_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "Increase this Unit's AP by an amount equal to the number of (Cyclops Team) Pilot cards/Command cards with unique names in your trash."
@@ -13022,6 +13577,7 @@
       "ZEON",
       "CYCLOPS_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【공격 시】Choose 1 of your (Cyclops Team) Units. It gains <돌파 1> during this turn.",
@@ -13046,6 +13602,7 @@
     "trait": [
       "ZAFT"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】Choose 1 (ZAFT) Base card from your trash. Add it to your hand."
@@ -13070,6 +13627,9 @@
       "ZEON",
       "NEWTYPE"
     ],
+    "relatedTrait": [
+      "CLAN"
+    ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】Place the top card of your deck into your trash. If you placed a (Zeon)/(Clan) card with this effect, choose 1 enemy Unit. Deal 1 damage to it."
@@ -13093,6 +13653,7 @@
       "SRA",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "While no enemy Base is in play, this Unit gets AP+1."
@@ -13117,6 +13678,7 @@
       "VAGAN",
       "X_ROUNDER"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【세트 시】Place the top 2 cards of your deck into your trash. If you placed a (Vagan) card with this effect, choose 1 enemy Unit. It gets AP-2 during this turn."
@@ -13140,6 +13702,7 @@
     "trait": [
       "TEIWAZ"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【턴 1회】When this Unit receives effect damage, choose 1 enemy Unit. It gets AP-1 during this turn."
@@ -13165,6 +13728,7 @@
       "VULTURE",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】【공격 시】You may discard 1. If you do, draw 1."
@@ -13189,6 +13753,7 @@
     "trait": [
       "CIVILIAN"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】【턴 1회】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, look at the top 2 cards of your deck and return 1 to the top. Place the remaining card into your trash."
@@ -13213,6 +13778,7 @@
       "SUPERPOWER_BLOC",
       "UN"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】When this rested Unit is set as active by an effect, choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand."
@@ -13237,6 +13803,7 @@
     "trait": [
       "AEUG"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【링크 시】【파괴 시】If a friendly white Base is in play, choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. Return it to its owner's hand."
@@ -13262,6 +13829,7 @@
       "UN",
       "SUPER_SOLDIER"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【파괴 시】Choose 1 enemy Unit. It gets AP-3 during this turn."
@@ -13282,6 +13850,7 @@
     "series": "MOBILE_SUIT_GUNDAM_0080_WAR_IN_THE_POCKET",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】자신은 1장 드로우 한다. Then, if there are 2 or more cards with \"A Healthy Curiosity\" in their card name in your trash, choose 1 enemy Unit with 4 or less HP. Rest it."
     ],
@@ -13300,6 +13869,9 @@
     "series": "MOBILE_SUIT_Z_GUNDAM",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [
+      "TITANS"
+    ],
     "description": [
       "【버스트】자신은 1장 드로우 한다.",
       "【액션】Choose 1 of your (Titans) Link Units battling an enemy Unit. Set it as active."
@@ -13319,6 +13891,7 @@
     "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Choose 1 enemy Unit with 2 or less HP. Rest it.",
       "【메인】If 3 or more enemy Units are in play, choose 1 rested enemy Unit. Deal 2 damage to it."
@@ -13342,6 +13915,7 @@
       "TITANS",
       "JUPITRIS"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 enemy Unit with 3 or less HP. Rest it. If a friendly (Jupitris) Link Unit is in play, choose 1 to 2 enemy Units with 3 or less HP instead.",
       "【파일럿】[레코아 론도]"
@@ -13366,6 +13940,7 @@
     "series": "MOBILE_SUIT_GUNDAM_00",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【메인】Choose 1 friendly Unit. During this turn, it may choose an active enemy Unit that has no Pilot paired with it as its attack target."
@@ -13384,6 +13959,7 @@
     "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】Deploy 1 rested [GQuuuuuuX (Omega Psycommu)]((Clan)･AP3･HP2) Unit token and 1 rested [Red Gundam]((Clan)･AP2･HP3) Unit token."
     ],
@@ -13405,6 +13981,7 @@
       "ZEON",
       "CYCLOPS_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】Choose 1 enemy Unit that is Lv.5 or lower. Deal damage to it equal to the number of friendly Unit tokens in play.",
       "【파일럿】[하디 슈타이너]"
@@ -13432,6 +14009,7 @@
       "ZEON",
       "CYCLOPS_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】Deploy 1 [Hy-Gogg]((Cyclops Team)･AP2･HP1) Unit token.",
       "【파일럿】[가브리엘 라미레스 가르시아]"
@@ -13458,6 +14036,7 @@
     "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Activate this card's 【메인】.",
       "【메인】/【액션】Choose 1 enemy Unit that is Lv.4 or lower. Deal 3 damage to it. If there are 2 or more cards with \"Improved Technique\" in their card name in your trash, choose 1 enemy Unit instead."
@@ -13477,6 +14056,7 @@
     "series": "AFTER_WAR_GUNDAM_X",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 Pilot paired with an enemy Unit that is Lv.5 or lower. Destroy it."
     ],
@@ -13498,6 +14078,7 @@
     "trait": [
       "MAFTY"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 friendly (Mafty) Unit. It gets AP+3 during this turn.",
       "【파일럿】[에메랄다 주빈]"
@@ -13523,6 +14104,7 @@
     "series": "MOBILE_SUIT_GUNDAM_SEED",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【메인】/【액션】During this turn, all Units paired with a Pilot get AP+2."
@@ -13542,6 +14124,7 @@
     "series": "MOBILE_SUIT_GUNDAM_SEED",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】/【액션】Choose 1 active friendly Unit. Rest it. If you do, choose 1 enemy Unit whose Lv. is equal to or lower than the Unit rested with this ability. Deal 3 damage to it."
     ],
@@ -13561,6 +14144,7 @@
     "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】Activate this card's 【액션】.",
       "【액션】Choose 1 active enemy Unit that is Lv.2 or lower. Destroy it. If there are 10 or more cards in your trash, choose 1 active enemy Unit that is Lv.4 or lower instead."
@@ -13584,6 +14168,7 @@
       "VAGAN",
       "X_ROUNDER"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】Choose 1 friendly Unit paired with an (X-Rounder) Pilot. It can't receive battle damage from enemy Units with 2 or less AP during this battle. If you are Lv.7 or higher, it can't receive battle damage from enemy Units with 5 or less AP instead.",
       "【파일럿】[유린 루셸]"
@@ -13608,6 +14193,9 @@
     "series": "MOBILE_SUIT_GUNDAM_AGE",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [
+      "VAGAN"
+    ],
     "description": [
       "【메인】/【액션】Choose 1 friendly (Vagan) Unit and 1 enemy Unit. Deal 2 damage to them."
     ],
@@ -13625,6 +14213,7 @@
     "series": "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】If 1 to 4 enemy Units are in play, deploy 1 [Graze Custom]((Tekkadan)･AP2･HP2) Unit token. If 5 or more are in play, deploy 1 [Gundam Barbatos 4th Form]((Tekkadan)･AP4･HP4) Unit token."
     ],
@@ -13644,6 +14233,7 @@
     "series": "MOBILE_SUIT_GUNDAM_SEED",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
       "【액션】Choose 1 rested enemy Unit that is Lv.4 or lower. Return it to its owner's hand. Then, if there are 2 or more cards with \"Awakened Potential\" in their card name in your trash, you may choose 1 friendly Unit. It gains <블로커> during this turn.",
@@ -13663,6 +14253,7 @@
     "series": "MOBILE_SUIT_Z_GUNDAM",
     "package": "GD03",
     "trait": [],
+    "relatedTrait": [],
     "description": [
       "【메인】Choose 1 rested friendly Base. Set it as active. If you do, all enemy Units get AP-1 during this turn."
     ],
@@ -13684,6 +14275,7 @@
       "SUPERPOWER_BLOC",
       "UN"
     ],
+    "relatedTrait": [],
     "description": [
       "【메인】During this turn, if a friendly (Superpower Bloc)/(UN) Unit destroys an enemy Unit with battle damage, choose 1 rested friendly (Superpower Bloc)/(UN) Unit. Set it as active. It can't attack during this turn.",
       "【파일럿】[패트릭 콜라사워]"
@@ -13711,6 +14303,7 @@
       "AEUG",
       "NEWTYPE"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】Choose 1 friendly Base and 1 enemy Unit with 3 or less HP. Rest them.",
       "【파일럿】[카츠 코바야시]"
@@ -13738,6 +14331,7 @@
       "SUPERPOWER_BLOC",
       "UN"
     ],
+    "relatedTrait": [],
     "description": [
       "【액션】Choose 1 enemy Unit that is Lv.3 or lower. Return it to its owner's hand.",
       "【파일럿】[세르게이 스미르노프]"
@@ -13766,6 +14360,7 @@
       "JUPITRIS",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if a friendly (Jupitris) Unit is in play, choose 1 enemy Unit that is Lv.3 or lower. Rest it."
@@ -13794,6 +14389,7 @@
       "EARTH_FEDERATION",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -13823,6 +14419,9 @@
       "G_TEAM",
       "WARSHIP"
     ],
+    "relatedTrait": [
+      "OPERATION_METEOR"
+    ],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -13851,6 +14450,7 @@
       "ZEON",
       "CYCLOPS_TEAM"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -13879,6 +14479,7 @@
       "ZAFT",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, Choose 1 friendly (ZAFT) Unit. It gets AP+3 during this turn."
@@ -13907,6 +14508,7 @@
       "NEW_UNE",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
@@ -13934,6 +14536,9 @@
     "trait": [
       "TEKKADAN",
       "WARSHIP"
+    ],
+    "relatedTrait": [
+      "TEIWAZ"
     ],
     "description": [
       "【버스트】 이 카드를 배치한다.",
@@ -13963,6 +14568,7 @@
       "VAGAN",
       "STRONGHOLD"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, you may choose 1 (Vagan) Unit card that is Lv.4 or lower from your trash. Pay its cost to deploy it."
@@ -13990,6 +14596,7 @@
       "TRIPLE_SHIP_ALLIANCE",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if you have 2 or more (Triple Ship Alliance) Units in play, choose 1 enemy Unit that is Lv.4 or lower. Return it to its owner's hand."
@@ -14018,6 +14625,7 @@
       "AEUG",
       "WARSHIP"
     ],
+    "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",

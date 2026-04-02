@@ -174,6 +174,7 @@ type PilotCard implements Node {
   package: CardPackage! # 패키지
   keywords: [CardKeyword!]! #키워드
   traits: [CardTrait!]!
+  relatedTraits: [CardTrait!]!
   description: [String!]! # 효과 정보
   limit: Int! # 덱에 넣을 수 있는 최대 장 수
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
@@ -197,6 +198,7 @@ type UnitCard implements Node {
   package: CardPackage! # 패키지
   keywords: [CardKeyword!]! #키워드
   traits: [CardTrait!]!
+  relatedTraits: [CardTrait!]!
   zone: [Zone!]! # 지형
   AP: Int! # 공격력
   HP: Int! # 체력
@@ -220,6 +222,7 @@ type BaseCard implements Node {
   HP: Int!
   zone: [Zone!]!
   traits: [CardTrait!]!
+  relatedTraits: [CardTrait!]!
   level: Int!
   cost: Int!
   series: GundamSeries!
@@ -242,6 +245,7 @@ type CommandCard implements Node {
   package: CardPackage!
   keywords: [CardKeyword!]!
   traits: [CardTrait!]!
+  relatedTraits: [CardTrait!]!
   cost: Int!
   series: GundamSeries!
   pilot: Pilot

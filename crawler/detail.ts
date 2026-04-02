@@ -22,6 +22,23 @@ import { writeFile } from "node:fs/promises";
 import type z from "zod";
 
 const BASE = "https://www.gundam-gcg.com/en/cards/";
+
+const VALID_TRAITS = new Set<string>([
+  "ACADEMY", "OZ", "NEO_ZEON", "ZEON", "EARTH_ALLIANCE", "EARTH_FEDERATION",
+  "MAGANAC_CORPS", "ZAFT", "OPERATION_METEOR", "NEWTYPE", "COORDINATOR",
+  "CYBER_NEWTYPE", "STRONGHOLD", "WARSHIP", "TRIPLE_SHIP_ALLIANCE", "CIVILIAN",
+  "WHITE_BASE_TEAM", "G_TEAM", "VANADIS_INSTITUTE", "ORB", "TEKKADAN",
+  "TEIWAZ", "GJALLARHORN", "GUNDAM_FRAME", "ALAYA_VIJNANA", "TITANS",
+  "VULTURE", "AEUG", "CLAN", "AGE_SYSTEM", "WHITE_FANG", "SIDE_6",
+  "NEW_UNE", "UE", "VAGAN", "BIOLOGICAL_CPU", "ASUNO_FAMILY", "X_ROUNDER",
+  "SUPERPOWER_BLOC", "CB", "INNOVADE", "GN_DRIVE", "SUPER_SOLDIER", "MAFTY",
+  "SRA", "OLD_UNE", "JUPITRIS", "CYCLOPS_TEAM", "UN", "MINERVA_SQUAD",
+]);
+
+function toTraitKey(s: string): string {
+  return s.replaceAll(" ", "_").replaceAll("-", "_").toUpperCase()
+    .replaceAll("ENHANCED_HUMAN", "CYBER_NEWTYPE");
+}
 function field($: cheerio.CheerioAPI, label: string) {
   return $(`dt.dataTit:contains("${label}")`).next("dd").text().trim();
 }
@@ -61,13 +78,15 @@ function parsePlayableCardSchema(html: string): PlayableCard {
     .replaceAll(":", "")
     .replaceAll("'", "")
     .toUpperCase() as GundamSeries;
-  const trait = [...field($, "Trait").matchAll(/\((.*?)\)/g)].map((m) =>
-    m[1]
-      ?.replaceAll(" ", "_")
-      ?.replaceAll("-", "_")
-      ?.toUpperCase()
-      .replaceAll("ENHANCED_HUMAN", "CYBER_NEWTYPE"),
+  const trait = [...field($, "Trait").matchAll(/\((.*?)\)/g)].map(
+    (m) => toTraitKey(m[1] ?? ""),
   ) as CardTrait[];
+
+  const relatedTrait = [...new Set(
+    [...description.join(" ").matchAll(/\((.*?)\)/g)]
+      .map((m) => toTraitKey(m[1] ?? ""))
+      .filter((t) => VALID_TRAITS.has(t) && !trait.includes(t as CardTrait)),
+  )] as CardTrait[];
 
   return {
     name,
@@ -78,6 +97,7 @@ function parsePlayableCardSchema(html: string): PlayableCard {
     series,
     package: id.slice(0, 4) as CardPackage,
     trait,
+    relatedTrait,
     description,
   };
 }

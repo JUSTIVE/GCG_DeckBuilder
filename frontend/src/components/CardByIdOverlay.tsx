@@ -43,6 +43,7 @@ const Query = graphql`
         description
         zone
         traits
+        relatedTraits
         series
         package
         links {
@@ -64,6 +65,7 @@ const Query = graphql`
         cost
         color
         traits
+        relatedTraits
         description
         series
         package
@@ -85,6 +87,7 @@ const Query = graphql`
         description
         zone
         traits
+        relatedTraits
         series
         package
       }
@@ -96,6 +99,7 @@ const Query = graphql`
         cost
         color
         traits
+        relatedTraits
         description
         series
         package
@@ -264,6 +268,23 @@ export function CardByIdOverlay({
               </div>
             </div>
           )}
+          {node.relatedTraits.length > 0 && (
+            <div className="flex flex-col gap-1.5">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">관련 특성</span>
+              <div className="flex flex-wrap gap-1">
+                {node.relatedTraits.map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => navigateWithFilter({ trait: [t as CardTrait] })}
+                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
+                  >
+                    {renderTrait(t)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {linkItems.length > 0 && (
             <div className="flex flex-col gap-1.5">
@@ -327,6 +348,23 @@ export function CardByIdOverlay({
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">특성</span>
               <div className="flex flex-wrap gap-1">
                 {node.traits.map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => navigateWithFilter({ trait: [t as CardTrait] })}
+                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
+                  >
+                    {renderTrait(t)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          {node.relatedTraits.length > 0 && (
+            <div className="flex flex-col gap-1.5">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">관련 특성</span>
+              <div className="flex flex-wrap gap-1">
+                {node.relatedTraits.map((t) => (
                   <button
                     key={t}
                     type="button"
@@ -414,6 +452,23 @@ export function CardByIdOverlay({
               </div>
             </div>
           )}
+          {node.relatedTraits.length > 0 && (
+            <div className="flex flex-col gap-1.5">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">관련 특성</span>
+              <div className="flex flex-wrap gap-1">
+                {node.relatedTraits.map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => navigateWithFilter({ trait: [t as CardTrait] })}
+                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
+                  >
+                    {renderTrait(t)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {node.description.length > 0 && (
             <div className="flex flex-col gap-1.5">
@@ -470,6 +525,23 @@ export function CardByIdOverlay({
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">특성</span>
               <div className="flex flex-wrap gap-1">
                 {node.traits.map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => navigateWithFilter({ trait: [t as CardTrait] })}
+                    className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
+                  >
+                    {renderTrait(t)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          {node.relatedTraits.length > 0 && (
+            <div className="flex flex-col gap-1.5">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">관련 특성</span>
+              <div className="flex flex-wrap gap-1">
+                {node.relatedTraits.map((t) => (
                   <button
                     key={t}
                     type="button"
