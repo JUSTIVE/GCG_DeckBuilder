@@ -106,7 +106,7 @@ export function CardList({
     const updateColumns = () => {
       if (!parentRef.current) return;
       const width = parentRef.current.offsetWidth;
-      const minCardWidth = width < 768 ? 150 : 250;
+      const minCardWidth = width < 768 ? 150 : 200;
       const cols = Math.floor((width - 32) / (minCardWidth + 16)); // padding & gap 고려
       setColumns(Math.max(1, cols));
     };

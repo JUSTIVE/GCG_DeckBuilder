@@ -21,6 +21,7 @@ const Query = graphql`
         cards {
           count
           card {
+            __typename
             ... on UnitCard { color }
             ... on PilotCard { color }
             ... on BaseCard { color }
@@ -43,6 +44,7 @@ const CREATE_DECK_MUTATION = graphql`
         cards {
           count
           card {
+            __typename
             ... on UnitCard { color }
             ... on PilotCard { color }
             ... on BaseCard { color }
@@ -65,6 +67,7 @@ const DELETE_DECK_MUTATION = graphql`
         cards {
           count
           card {
+            __typename
             ... on UnitCard { color }
             ... on PilotCard { color }
             ... on BaseCard { color }
@@ -102,6 +105,23 @@ export function DeckListPage() {
 
   function totalCards(cards: readonly { count: number }[]): number {
     return cards.reduce((s, c) => s + c.count, 0);
+  }
+
+  const KIND_LABELS: Record<string, string> = {
+    UnitCard: "유닛",
+    PilotCard: "파일럿",
+    BaseCard: "베이스",
+    CommandCard: "커맨드",
+  };
+  const KIND_ORDER = ["UnitCard", "PilotCard", "BaseCard", "CommandCard"] as const;
+
+  function deckKindCounts(cards: readonly { count: number; card: any }[]) {
+    const counts: Record<string, number> = {};
+    for (const { card, count } of cards) {
+      const t = card?.__typename;
+      if (t && t in KIND_LABELS) counts[t] = (counts[t] ?? 0) + count;
+    }
+    return counts;
   }
 
   function deckColors(cards: readonly { count: number; card: any }[]): string[] {
@@ -159,6 +179,21 @@ export function DeckListPage() {
                     ))}
                   </div>
                 </div>
+                {(() => {
+                  const counts = deckKindCounts(deck.cards);
+                  const parts = KIND_ORDER.filter((k) => counts[k]);
+                  if (parts.length === 0) return null;
+                  return (
+                    <div className="flex gap-2 mt-1">
+                      {parts.map((k) => (
+                        <span key={k} className="text-[11px] text-muted-foreground">
+                          <span className="font-medium text-foreground/70">{KIND_LABELS[k]}</span>
+                          {" "}{counts[k]}
+                        </span>
+                      ))}
+                    </div>
+                  );
+                })()}
               </button>
               <Button
                 variant="ghost"

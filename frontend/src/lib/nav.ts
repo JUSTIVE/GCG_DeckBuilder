@@ -17,11 +17,11 @@ export const navMain: NavItem[] = [
     url: "",
     items: [{ title: "덱 목록", url: "/decklist" }],
   },
-  // {
-  //   title: "도구",
-  //   url: "",
-  //   items: [{ title: "리소스 카운터", url: "/resource-counter" }],
-  // },
+  {
+    title: "도구",
+    url: "",
+    items: [{ title: "멀리건 시뮬레이터", url: "/tools/mulligan" }],
+  },
 ];
 
 /** Returns [parentItem, childItem?] matching the given pathname. */

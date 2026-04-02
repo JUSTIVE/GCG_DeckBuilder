@@ -59,6 +59,7 @@ const Query = graphql`
               id
               name
               cost
+              level
               color
             }
             ... on PilotCard {
@@ -67,18 +68,21 @@ const Query = graphql`
                 name
               }
               cost
+              level
               color
             }
             ... on BaseCard {
               id
               name
               cost
+              level
               color
             }
             ... on CommandCard {
               id
               name
               cost
+              level
               color
             }
           }
@@ -203,10 +207,10 @@ const SET_DECK_CARDS_MUTATION = graphql`
         count
         card {
           __typename
-          ... on UnitCard { id name cost color }
-          ... on PilotCard { id pilot { name } cost color }
-          ... on BaseCard { id name cost color }
-          ... on CommandCard { id name cost color }
+          ... on UnitCard { id name cost level color }
+          ... on PilotCard { id pilot { name } cost level color }
+          ... on BaseCard { id name cost level color }
+          ... on CommandCard { id name cost level color }
         }
       }
     }
@@ -263,44 +267,57 @@ type CardInfo = {
   id: string;
   name: string;
   cost: number | null;
+  level: number | null;
   color: string;
   typename: string;
 };
 
 function extractCardInfo(card: any): CardInfo | null {
   if (!card) return null;
-  const { __typename, id, cost, color } = card;
+  const { __typename, id, cost, level, color } = card;
   const name = card.name ?? card.pilot?.name;
   if (!id || !name || !color) return null;
-  return { id, name, cost: cost ?? null, typename: __typename, color };
+  return { id, name, cost: cost ?? null, level: level ?? null, typename: __typename, color };
 }
 
-// ─── CostHistogram ────────────────────────────────────────────────────────────
+// ─── Histograms ───────────────────────────────────────────────────────────────
 
 const CHART_H = 36; // px, bar area height
 const COLOR_ORDER = ["BLUE", "GREEN", "RED", "PURPLE", "YELLOW", "WHITE"] as const;
 
-function CostHistogram({ cards }: { cards: readonly { count: number; card: any }[] }) {
-  // costColorMap[bucket][color] = count
-  const costColorMap: Record<number, Record<string, number>> = {};
+function Histogram({
+  cards,
+  getValue,
+  maxBucket,
+  label,
+  title,
+}: {
+  cards: readonly { count: number; card: any }[];
+  getValue: (card: any) => number | null | undefined;
+  maxBucket: number;
+  label: (i: number) => string;
+  title: string;
+}) {
+  const colorMap: Record<number, Record<string, number>> = {};
   for (const { card, count } of cards) {
-    const cost = card?.cost;
+    const val = getValue(card);
     const color = card?.color;
-    if (cost == null || !color) continue;
-    const bucket = Math.min(cost as number, 7);
-    if (!costColorMap[bucket]) costColorMap[bucket] = {};
-    costColorMap[bucket][color] = (costColorMap[bucket][color] ?? 0) + count;
+    if (val == null || !color) continue;
+    const bucket = Math.min(val, maxBucket);
+    if (!colorMap[bucket]) colorMap[bucket] = {};
+    colorMap[bucket][color] = (colorMap[bucket][color] ?? 0) + count;
   }
 
-  const totalPerBucket = Array.from({ length: 8 }, (_, i) =>
-    Object.values(costColorMap[i] ?? {}).reduce((s, n) => s + n, 0),
+  const totalPerBucket = Array.from({ length: maxBucket + 1 }, (_, i) =>
+    Object.values(colorMap[i] ?? {}).reduce((s, n) => s + n, 0),
   );
   const maxCount = Math.max(...totalPerBucket, 1);
 
   return (
     <div className="px-3 pb-3 shrink-0">
+      <p className="text-[10px] text-muted-foreground mb-1">{title}</p>
       <div className="flex items-end gap-1">
-        {Array.from({ length: 8 }, (_, i) => {
+        {Array.from({ length: maxBucket + 1 }, (_, i) => {
           const count = totalPerBucket[i];
           const barH = count > 0 ? Math.max(Math.round((count / maxCount) * CHART_H), 4) : 0;
           return (
@@ -313,7 +330,7 @@ function CostHistogram({ cards }: { cards: readonly { count: number; card: any }
                 )}
                 <div className="w-full rounded-sm overflow-hidden flex flex-col-reverse border border-border/70" style={{ height: barH }}>
                   {COLOR_ORDER.map((color) => {
-                    const colorCount = costColorMap[i]?.[color] ?? 0;
+                    const colorCount = colorMap[i]?.[color] ?? 0;
                     if (!colorCount) return null;
                     return (
                       <div
@@ -325,13 +342,37 @@ function CostHistogram({ cards }: { cards: readonly { count: number; card: any }
                 </div>
               </div>
               <span className="text-[9px] text-muted-foreground mt-1 leading-none">
-                {i === 7 ? "7+" : i}
+                {label(i)}
               </span>
             </div>
           );
         })}
       </div>
     </div>
+  );
+}
+
+function CostHistogram({ cards }: { cards: readonly { count: number; card: any }[] }) {
+  return (
+    <Histogram
+      cards={cards}
+      getValue={(card) => card?.cost}
+      maxBucket={7}
+      label={(i) => (i === 7 ? "7+" : String(i))}
+      title="코스트"
+    />
+  );
+}
+
+function LevelHistogram({ cards }: { cards: readonly { count: number; card: any }[] }) {
+  return (
+    <Histogram
+      cards={cards}
+      getValue={(card) => card?.level}
+      maxBucket={7}
+      label={(i) => (i === 7 ? "7+" : String(i))}
+      title="레벨"
+    />
   );
 }
 
@@ -425,6 +466,7 @@ function DeckPanel({
         {totalCards} / 50장
       </div>
 
+      <LevelHistogram cards={cards} />
       <CostHistogram cards={cards} />
 
       {errorMessage && (
@@ -467,10 +509,16 @@ function DeckPanel({
                           }}
                           alt={info.name}
                         />
+                        {info.level != null && (
+                          <div className="absolute top-0 left-0 w-4 h-4 rounded-br bg-black/70 text-[9px] font-bold flex items-center justify-center text-white/80 leading-none">
+                            {info.level}
+                          </div>
+                        )}
                         <div
                           className={cn(
-                            "absolute bottom-0 right-0 w-4 h-4 rounded-tl text-[9px] font-bold flex items-center justify-center text-white leading-none",
+                            "absolute bottom-0 right-0 w-4 h-4 rounded-tl text-[9px] font-bold flex items-center justify-center leading-none",
                             COLOR_BG[info.color] ?? "bg-gray-500",
+                            info.color === "WHITE" ? "text-gray-700 border-t border-l border-gray-200" : "text-white",
                           )}
                         >
                           {info.cost ?? "-"}

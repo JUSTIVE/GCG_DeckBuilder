@@ -127,6 +127,12 @@ export function Card({ cardRef, showDescription, onAdd, onOpen, deckCardCount = 
             <PlusIcon className="size-8 text-white drop-shadow" />
           </button>
         )}
+        {onAdd && atLimit && (
+          <div
+            className="absolute bottom-0 left-0 right-0 h-1/2 z-10"
+            onClick={(e) => e.stopPropagation()}
+          />
+        )}
         {onAdd && deckCardCount > 0 && (
           <div className="absolute top-1.5 right-1.5 z-10 min-w-7 h-7 rounded-full bg-white text-black text-sm font-black flex items-center justify-center px-1 leading-none pointer-events-none shadow-lg ring-2 ring-black/20">
             ×{deckCardCount}
