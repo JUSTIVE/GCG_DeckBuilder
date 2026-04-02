@@ -53,6 +53,7 @@ type Props = {
   onCardOpen?: (cardId: string) => void;
   scrollClassName?: string;
   deckCardCounts?: Record<string, number>;
+  deckColors?: string[];
 };
 
 export function CardList({
@@ -64,6 +65,7 @@ export function CardList({
   onCardOpen,
   scrollClassName = "overflow-y-auto h-[calc(100dvh-65px-48px)] py-5",
   deckCardCounts,
+  deckColors,
 }: Props) {
   const [, startTransition] = useTransition();
   const [commitAddFilterSearch] = useMutation<CardListAddFilterSearchMutation>(ADD_FILTER_SEARCH_MUTATION);
@@ -190,6 +192,7 @@ export function CardList({
                     onAdd={onCardAdd}
                     onOpen={onCardOpen}
                     deckCardCount={deckCardCounts ? (deckCardCounts[(edge.node as any).id] ?? 0) : 0}
+                    deckColors={deckColors}
                   />
                 ))}
               </div>

@@ -186,6 +186,7 @@ export type FilterControlsProps = {
   sort: CardSort | null;
   onChange: (filter: CardFilterInput) => void;
   onSortChange: (sort: CardSort | null) => void;
+  deckColors?: string[];
 };
 
 export function FilterControls({
@@ -193,7 +194,9 @@ export function FilterControls({
   sort,
   onChange,
   onSortChange,
+  deckColors,
 }: FilterControlsProps) {
+  const restrictedColors = deckColors && deckColors.length >= 2 ? deckColors : null;
   const [queryText, setQueryText] = useState(filter.query ?? "");
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -379,11 +382,11 @@ export function FilterControls({
       <div className="flex flex-wrap items-center gap-1.5">
         <span className="text-xs text-muted-foreground w-10 shrink-0">색상</span>
         <div className="flex flex-wrap gap-1">
-          {ALL_COLORS.map((c) => (
+          {(restrictedColors ?? ALL_COLORS).map((c) => (
             <button
               type="button"
               key={c}
-              onClick={() => toggleColor(c)}
+              onClick={() => toggleColor(c as (typeof ALL_COLORS)[number])}
               className={cn(
                 "rounded-md border px-2.5 py-0.5 text-xs font-medium transition-colors cursor-pointer",
                 activeColor.includes(c)

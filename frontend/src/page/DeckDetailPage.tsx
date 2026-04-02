@@ -621,10 +621,26 @@ export function DeckDetailPage() {
   const totalCards = deck.cards.reduce((s, c) => s + c.count, 0);
 
   const deckCardCounts: Record<string, number> = {};
+  const deckColorSet = new Set<string>();
   for (const { card, count } of deck.cards) {
     const id = (card as any)?.id;
+    const color = (card as any)?.color;
     if (id) deckCardCounts[id] = count;
+    if (color) deckColorSet.add(color);
   }
+  const deckColors = [...deckColorSet];
+
+  const effectiveFilter: CardFilterInput =
+    deckColors.length >= 2
+      ? {
+          ...filter,
+          color: (() => {
+            const active = (filter.color as string[] | undefined) ?? [];
+            const constrained = active.filter((c) => deckColors.includes(c));
+            return (constrained.length > 0 ? constrained : deckColors) as CardFilterInput["color"];
+          })(),
+        }
+      : filter;
 
   function handleAdd(cardId: string) {
     commitAdd({
@@ -684,6 +700,7 @@ export function DeckDetailPage() {
             sort={sort}
             onChange={setFilter}
             onSortChange={setSort}
+            deckColors={deckColors}
           />
           {activeFilterCount(filter) > 0 && (
             <button
@@ -759,13 +776,14 @@ export function DeckDetailPage() {
           <div className="flex-1 min-h-0">
             <CardList
               queryRef={data}
-              filter={filter}
+              filter={effectiveFilter}
               sort={sort}
               showDescription={showDescription}
               onCardAdd={handleAdd}
               onCardOpen={setOverlayCardId}
               scrollClassName="overflow-y-auto h-full py-5"
               deckCardCounts={deckCardCounts}
+              deckColors={deckColors}
             />
           </div>
         </div>
@@ -793,6 +811,7 @@ export function DeckDetailPage() {
               sort={sort}
               onChange={setFilter}
               onSortChange={setSort}
+              deckColors={deckColors}
             />
           </div>
         </SheetContent>

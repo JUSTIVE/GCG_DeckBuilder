@@ -59,9 +59,10 @@ type Props = {
   onAdd?: (cardId: string) => void;
   onOpen?: (cardId: string) => void;
   deckCardCount?: number;
+  deckColors?: string[];
 };
 
-export function Card({ cardRef, showDescription, onAdd, onOpen, deckCardCount = 0 }: Props) {
+export function Card({ cardRef, showDescription, onAdd, onOpen, deckCardCount = 0, deckColors }: Props) {
   const card = useFragment(Fragment, cardRef);
 
   const description: readonly string[] =
@@ -106,7 +107,13 @@ export function Card({ cardRef, showDescription, onAdd, onOpen, deckCardCount = 
   const cardId = isPlayable ? card.id : undefined;
   const cardLimit = isPlayable ? card.limit : Infinity;
   const blocked = isPlayable ? card.blocked : false;
-  const atLimit = blocked || deckCardCount >= cardLimit;
+  const colorBlocked =
+    onAdd &&
+    isPlayable &&
+    deckColors !== undefined &&
+    deckColors.length >= 2 &&
+    !deckColors.includes(card.color);
+  const atLimit = blocked || colorBlocked || deckCardCount >= cardLimit;
 
   return (
     <div className="flex flex-col">
