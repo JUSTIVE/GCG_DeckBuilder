@@ -616,7 +616,7 @@
     ],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【세트 시･Lv.4 or Higher Pilot】Choose 1 enemy Unit with 4 or less HP. Return it to its owner's hand."
+      "【세트 시･Lv.4 이상의 파일럿】 HP4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다."
     ],
     "__typename": "UnitCard",
     "id": "ST04-001",
@@ -646,7 +646,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "【배치 시】자신은 1장 드로우 한다. Then, discard 1."
+      "【배치 시】 자신은 1장 드로우 한다. 그 후, 자신의 패 1장을 버린다."
     ],
     "__typename": "UnitCard",
     "id": "ST04-002",
@@ -701,7 +701,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【공격 시】Choose 1 enemy Unit. It gets AP-2 during this battle."
+      "【공격 시】 상대의 유닛 1개를 선택한다. 이 배틀 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "PilotCard",
     "id": "ST04-010",
@@ -725,7 +725,7 @@
       "EARTH_ALLIANCE"
     ],
     "description": [
-      "【메인】/【액션】Choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand.",
+      "【메인】/【액션】 HP3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다.",
       "【파일럿】[무우 라 프라가]"
     ],
     "__typename": "CommandCard",
@@ -758,7 +758,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【기동･메인】【턴 1회】②：Choose 1 friendly Unit with <블로커>. Set it as active. It can't attack during this turn."
+      "【기동･메인】【턴 1회】②：<블로커>를 가진 아군의 유닛 1개를 선택한다. 그 유닛을 액티브 한다. 이 턴 동안, 그 유닛은 공격할 수 없다."
     ],
     "__typename": "BaseCard",
     "id": "ST04-015",
@@ -1627,7 +1627,7 @@
     "package": "GD01",
     "trait": [],
     "description": [
-      "【메인】Draw 2. Then, discard 1."
+      "【메인】 자신은 2장 드로우 한다. 그 후, 자신의 패 1장을 버린다."
     ],
     "__typename": "CommandCard",
     "id": "GD01-118",
@@ -2507,7 +2507,7 @@
       "ZAFT"
     ],
     "description": [
-      "【공격 시】If this Unit has 5 or more AP, choose 1 enemy Unit that is Lv.5 or higher. Deal 3 damage to it."
+      "【공격 시】 이 유닛이 AP5 이상이라면, Lv.5 이상의 상대의 유닛 1개를 선택한다. 그 유닛에 3 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "ST04-006",
@@ -2590,7 +2590,7 @@
       "ZAFT"
     ],
     "description": [
-      "【세트 시】【파괴 시】If you have another Link Unit in play, draw 1."
+      "【세트 시】【파괴 시】 이 유닛 이외의, 자신의 링크 유닛이 있다면, 자신은 1장 드로우 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST04-009",
@@ -2623,7 +2623,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】During this turn, this Unit may choose an active enemy Unit that is Lv.5 or lower as its attack target."
+      "【링크 시】 이 턴 동안, 이 유닛은 액티브인 Lv.5 이하의 상대의 유닛을 공격 대상으로 선택할 수 있다."
     ],
     "__typename": "PilotCard",
     "id": "ST04-011",
@@ -2647,8 +2647,8 @@
     "package": "ST04",
     "trait": [],
     "description": [
-      "【버스트】If you have no (Earth Alliance) Unit tokens in play, deploy 1 [Aile Strike Gundam]((Earth Alliance)･AP3･HP3･<블로커>) Unit token.",
-      "【메인】If you have no (Earth Alliance) Unit tokens in play, deploy 1 [Sword Strike Gundam]((Earth Alliance)･AP4･HP2･<블로커>) or 1 [Launcher Strike Gundam]((Earth Alliance)･AP2･HP4･<블로커>) Unit token."
+      "【버스트】 (지구 연합)의 자신의 유닛 토큰이 없다면, [에일 스트라이크 건담]((지구 연방)･AP3･HP3･<블로커>)의 유닛 토큰 1개를 배치한다.",
+      "【메인】 (지구 연합)의 자신의 유닛 토큰이 없다면, [소드 스트라이크 건담]((지구 연합)･AP4･HP2･<블로커>) 이나 1 [런처 스트라이크 건담]((지구 연합)･AP2･HP4･<블로커>)의 유닛 토큰 1개를 배치한다."
     ],
     "__typename": "CommandCard",
     "id": "ST04-012",
@@ -2672,7 +2672,7 @@
       "COORDINATOR"
     ],
     "description": [
-      "【메인】/【액션】Choose 1 friendly Unit that is Lv.2 or lower. It gains <선제 공격> during this turn.",
+      "【메인】/【액션】 Lv.2 이하의 아군의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 <선제 공격> 을 얻는다.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)",
       "【파일럿】[미겔 아이만]"
     ],
@@ -2704,7 +2704,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【기동･메인】Rest this Base：Choose 1 friendly Unit. It gets AP+1 during this turn."
+      "【기동･메인】 이 베이스를 레스트로 한다: 아군의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP+1 한다."
     ],
     "__typename": "BaseCard",
     "id": "ST04-016",
@@ -3834,7 +3834,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】 이 유닛이 (CB)라면, 이 턴 동안, 이 유닛은 액티브의, 이 유닛의 Lv. 이하의 상대의 유닛을 어택 대상으로 선택할 수 있다."
+      "【세트 시】 이 유닛이 (CB)라면, 이 턴 동안, 이 유닛은 액티브의, 이 유닛의 Lv. 이하의 상대의 유닛을 공격 대상으로 선택할 수 있다."
     ],
     "__typename": "PilotCard",
     "id": "ST07-011",
@@ -3880,7 +3880,7 @@
     "trait": [],
     "description": [
       "【버스트】자신은 1장 드로우 한다.",
-      "【액션】 레스트의 (CB)의 아군의 유닛 1개를 선택한다. 배틀하고 있는 상대의 유닛의 어택 대상을 그 유닛으로 한다."
+      "【액션】 레스트의 (CB)의 아군의 유닛 1개를 선택한다. 배틀하고 있는 상대의 유닛의 공격 대상을 그 유닛으로 한다."
     ],
     "__typename": "CommandCard",
     "id": "ST07-013",
@@ -6202,7 +6202,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【링크 시】【공격 시】Choose 1 enemy Unit. It gets AP-2 during this battle."
+      "【링크 시】【공격 시】 상대의 유닛 1개를 선택한다. 이 배틀 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-071",
@@ -6263,7 +6263,7 @@
       "ACADEMY"
     ],
     "description": [
-      "【공격 시】자신은 1장 드로우 한다. Then, discard 1."
+      "【공격 시】 자신은 1장 드로우 한다. 그 후, 자신의 패 1장을 버린다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-074",
@@ -10469,7 +10469,7 @@
     "trait": [],
     "description": [
       "【버스트】Choose 1 (AEUG) Base card from your trash. Add it to your hand.",
-      "【메인】Draw 3. Then, discard 2."
+      "【메인】 자신은 3장 드로우 한다. 그 후, 자신의 패 2장을 버린다."
     ],
     "__typename": "CommandCard",
     "id": "GD02-117",
