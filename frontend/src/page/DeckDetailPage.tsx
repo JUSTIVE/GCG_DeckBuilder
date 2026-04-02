@@ -30,6 +30,7 @@ import {
   FileTextIcon,
   ClipboardCopyIcon,
   ClipboardPasteIcon,
+  Trash2Icon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COLOR_BG, COLOR_HEX } from "src/render/color";
@@ -459,6 +460,17 @@ function DeckPanel({
           <Button size="icon-sm" variant="ghost" onClick={startEditing}>
             <PencilIcon />
           </Button>
+          {cards.length > 0 && (
+            <Button
+              size="icon-sm"
+              variant="ghost"
+              onClick={() => {
+                if (confirm("덱의 모든 카드를 삭제하시겠습니까?")) onSetCards([]);
+              }}
+            >
+              <Trash2Icon className="text-destructive" />
+            </Button>
+          )}
         </div>
       )}
 
