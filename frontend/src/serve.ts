@@ -788,6 +788,17 @@ const rootValue = {
     writeDecks(decks);
     return deck;
   },
+
+  /** Mutation.setDeckCards — bulk-replace a deck's card list (used for deck code import) */
+  setDeckCards({ deckId, cards }: { deckId: string; cards: { cardId: string; count: number }[] }): Deck {
+    const decks = readDecks();
+    const idx = decks.findIndex((d) => d.id === deckId);
+    if (idx === -1) throw new Error(`Deck not found: ${deckId}`);
+    const updated = { ...decks[idx], cards: cards.filter((c) => c.count > 0) };
+    decks[idx] = updated;
+    writeDecks(decks);
+    return updated;
+  },
 };
 
 // ─── Field resolver ───────────────────────────────────────────────────────────

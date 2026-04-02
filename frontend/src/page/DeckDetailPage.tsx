@@ -3,6 +3,7 @@ import type { DeckDetailPageQuery } from "@/__generated__/DeckDetailPageQuery.gr
 import type { DeckDetailPageAddCardMutation } from "@/__generated__/DeckDetailPageAddCardMutation.graphql";
 import type { DeckDetailPageRemoveCardMutation } from "@/__generated__/DeckDetailPageRemoveCardMutation.graphql";
 import type { DeckDetailPageRenameDeckMutation } from "@/__generated__/DeckDetailPageRenameDeckMutation.graphql";
+import type { DeckDetailPageSetDeckCardsMutation } from "@/__generated__/DeckDetailPageSetDeckCardsMutation.graphql";
 import type {
   CardFilterInput,
   CardSort,
@@ -28,6 +29,7 @@ import {
   SlidersHorizontalIcon,
   FileTextIcon,
   ClipboardCopyIcon,
+  ClipboardPasteIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COLOR_BG, COLOR_HEX } from "src/render/color";
@@ -193,6 +195,48 @@ const RENAME_MUTATION = graphql`
   }
 `;
 
+const SET_DECK_CARDS_MUTATION = graphql`
+  mutation DeckDetailPageSetDeckCardsMutation($deckId: ID!, $cards: [DeckCardInput!]!) {
+    setDeckCards(deckId: $deckId, cards: $cards) {
+      id
+      cards {
+        count
+        card {
+          __typename
+          ... on UnitCard { id name cost color }
+          ... on PilotCard { id pilot { name } cost color }
+          ... on BaseCard { id name cost color }
+          ... on CommandCard { id name cost color }
+        }
+      }
+    }
+  }
+`;
+
+// ─── Deck code encode / decode ────────────────────────────────────────────────
+
+type DeckCodePayload = { v: 1; cards: { id: string; n: number }[] };
+
+function encodeDeckCode(cards: readonly { count: number; card: any }[]): string {
+  const payload: DeckCodePayload = {
+    v: 1,
+    cards: cards
+      .map((dc) => ({ id: (dc.card as any)?.id as string | undefined, n: dc.count }))
+      .filter((c): c is { id: string; n: number } => !!c.id),
+  };
+  return btoa(JSON.stringify(payload));
+}
+
+function decodeDeckCode(code: string): { cardId: string; count: number }[] | null {
+  try {
+    const payload = JSON.parse(atob(code.trim())) as DeckCodePayload;
+    if (payload.v !== 1 || !Array.isArray(payload.cards)) return null;
+    return payload.cards.map((c) => ({ cardId: c.id, count: c.n }));
+  } catch {
+    return null;
+  }
+}
+
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const KIND_ORDER = [
@@ -300,6 +344,7 @@ type DeckPanelProps = {
   errorMessage: string | null;
   onRemove: (cardId: string) => void;
   onRename: (name: string) => void;
+  onSetCards: (cards: { cardId: string; count: number }[]) => void;
 };
 
 function DeckPanel({
@@ -309,9 +354,13 @@ function DeckPanel({
   errorMessage,
   onRemove,
   onRename,
+  onSetCards,
 }: DeckPanelProps) {
   const [editing, setEditing] = useState(false);
   const [editName, setEditName] = useState("");
+  const [pasteOpen, setPasteOpen] = useState(false);
+  const [pasteValue, setPasteValue] = useState("");
+  const [pasteError, setPasteError] = useState(false);
 
   function startEditing() {
     setEditName(deckName);
@@ -450,7 +499,7 @@ function DeckPanel({
         })}
       </div>
 
-      <div className="px-3 pb-3 shrink-0 border-t border-border pt-3">
+      <div className="px-3 pb-3 shrink-0 border-t border-border pt-3 flex flex-col gap-2">
         <Button
           className="w-full"
           size="sm"
@@ -470,6 +519,62 @@ function DeckPanel({
           <ClipboardCopyIcon className="size-3.5" />
           MSA 코드 복사
         </Button>
+        <div className="flex gap-1.5">
+          <Button
+            className="flex-1"
+            size="sm"
+            variant="outline"
+            onClick={() => navigator.clipboard.writeText(encodeDeckCode(cards))}
+          >
+            <ClipboardCopyIcon className="size-3.5" />
+            덱 코드 복사
+          </Button>
+          <Button
+            className="flex-1"
+            size="sm"
+            variant="outline"
+            onClick={() => { setPasteOpen((v) => !v); setPasteValue(""); setPasteError(false); }}
+          >
+            <ClipboardPasteIcon className="size-3.5" />
+            덱 코드 불러오기
+          </Button>
+        </div>
+        {pasteOpen && (
+          <div className="flex flex-col gap-1.5">
+            <textarea
+              className={cn(
+                "w-full rounded-md border bg-background px-2 py-1.5 text-xs font-mono resize-none focus:outline-none focus:ring-1 focus:ring-ring",
+                pasteError && "border-destructive focus:ring-destructive",
+              )}
+              rows={3}
+              placeholder="덱 코드를 붙여넣으세요"
+              value={pasteValue}
+              onChange={(e) => { setPasteValue(e.target.value); setPasteError(false); }}
+            />
+            {pasteError && (
+              <p className="text-[10px] text-destructive">유효하지 않은 덱 코드입니다.</p>
+            )}
+            <div className="flex gap-1.5">
+              <Button
+                size="sm"
+                className="flex-1"
+                onClick={() => {
+                  const cards = decodeDeckCode(pasteValue);
+                  if (!cards) { setPasteError(true); return; }
+                  onSetCards(cards);
+                  setPasteOpen(false);
+                  setPasteValue("");
+                }}
+              >
+                <CheckIcon className="size-3.5" />
+                불러오기
+              </Button>
+              <Button size="sm" variant="ghost" onClick={() => setPasteOpen(false)}>
+                <XIcon className="size-3.5" />
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -497,6 +602,8 @@ export function DeckDetailPage() {
     useMutation<DeckDetailPageRemoveCardMutation>(REMOVE_CARD_MUTATION);
   const [commitRename] =
     useMutation<DeckDetailPageRenameDeckMutation>(RENAME_MUTATION);
+  const [commitSetCards] =
+    useMutation<DeckDetailPageSetDeckCardsMutation>(SET_DECK_CARDS_MUTATION);
   const [deckSheetOpen, setDeckSheetOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
@@ -552,6 +659,10 @@ export function DeckDetailPage() {
     commitRename({ variables: { id: deckId, name } });
   }
 
+  function handleSetCards(cards: { cardId: string; count: number }[]) {
+    commitSetCards({ variables: { deckId, cards } });
+  }
+
   const panelProps: DeckPanelProps = {
     deckName: deck.name,
     cards: deck.cards,
@@ -559,6 +670,7 @@ export function DeckDetailPage() {
     errorMessage,
     onRemove: handleRemove,
     onRename: handleRename,
+    onSetCards: handleSetCards,
   };
 
   return (
