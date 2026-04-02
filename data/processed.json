@@ -2521,7 +2521,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 enemy Unit with 5 or less AP. 그 유닛에 1 대미지를 준다."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, AP5 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "BaseCard",
     "id": "ST03-015",
@@ -5442,7 +5442,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･(Operation Meteor) Pilot】 자신은 리소스 1개를 레스트로 얻는다. 그 후, 이 턴 동안, 이 유닛은 <선제 공격>을 얻는다.",
+      "【세트 시･(오퍼레이션 메테오) 파일럿】 자신은 리소스 1개를 레스트로 얻는다. 그 후, 이 턴 동안, 이 유닛은 <선제 공격>을 얻는다.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -5890,7 +5890,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【공격 시】If 2 or more other rested friendly Units are in play, 상대의 유닛 1개를 선택한다. 그 유닛에 3 대미지를 준다."
+      "【공격 시】 이 유닛 이외의 레스트의 아군의 유닛이 2개 이상이라면, 상대의 유닛 1개를 선택한다. 그 유닛에 3 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-047",
@@ -6041,7 +6041,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【기동･메인】【턴 1회】①：Choose 1 enemy Unit with 2 or less AP. 그 유닛에 1 대미지를 준다."
+      "【기동･메인】【턴 1회】①：AP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-053",
@@ -6095,7 +6095,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【파괴 시】Choose 1 enemy Unit with 5 or less AP. 그 유닛에 1 대미지를 준다."
+      "【파괴 시】 AP5 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-056",
@@ -6146,7 +6146,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【기동･액션】【턴 1회】①：Choose 1 Unit that is Lv.4 or higher. It gets AP+1 during this battle."
+      "【기동･액션】【턴 1회】①：Lv.4 이상의 유닛 1개를 선택한다. 이 배틀 동안, 그 유닛을 AP+1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-058",
@@ -7122,7 +7122,7 @@
       "G_TEAM"
     ],
     "description": [
-      "【메인】Look at the top 5 cards of your deck. You may reveal 1 (Operation Meteor)/(G Team) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
+      "【메인】Look at the top 5 cards of your deck. You may reveal 1 (오퍼레이션 메테오)/(G Team) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
     ],
     "__typename": "CommandCard",
     "id": "GD01-109",
@@ -7145,7 +7145,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】/【액션】Choose 1 Unit that is Lv.4 or higher. During this turn, it may choose an active enemy Unit with 6 or less AP as its attack target.",
+      "【메인】/【액션】 Lv.4 이상의 유닛 1개를 선택한다. During this turn, it may choose an active enemy Unit with 6 or less AP as its attack target.",
       "【파일럿】[라시드 쿠라마]"
     ],
     "__typename": "CommandCard",
@@ -8730,7 +8730,7 @@
     "relatedTrait": [],
     "description": [
       "<돌파 1> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【배치 시】If there are 3 or less enemy Shields, choose 1 enemy Unit with 5 or less AP. 그 유닛에 2 대미지를 준다."
+      "【배치 시】If there are 3 or less enemy Shields, AP5 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-037",
@@ -12006,7 +12006,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【배치 시】Choose 1 of your (Operation Meteor)/(G Team) Units. During this turn, it may choose an active enemy Unit as its attack target."
+      "【배치 시】Choose 1 of your (오퍼레이션 메테오)/(G Team) Units. During this turn, it may choose an active enemy Unit as its attack target."
     ],
     "__typename": "UnitCard",
     "id": "GD03-021",
