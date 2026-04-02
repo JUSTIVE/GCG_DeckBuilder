@@ -22,10 +22,10 @@ const Query = graphql`
           count
           card {
             __typename
-            ... on UnitCard { color }
-            ... on PilotCard { color }
-            ... on BaseCard { color }
-            ... on CommandCard { color }
+            ... on UnitCard { color imageUrl }
+            ... on PilotCard { color imageUrl }
+            ... on BaseCard { color imageUrl }
+            ... on CommandCard { color imageUrl }
           }
         }
       }
@@ -45,10 +45,10 @@ const CREATE_DECK_MUTATION = graphql`
           count
           card {
             __typename
-            ... on UnitCard { color }
-            ... on PilotCard { color }
-            ... on BaseCard { color }
-            ... on CommandCard { color }
+            ... on UnitCard { color imageUrl }
+            ... on PilotCard { color imageUrl }
+            ... on BaseCard { color imageUrl }
+            ... on CommandCard { color imageUrl }
           }
         }
       }
@@ -68,10 +68,10 @@ const DELETE_DECK_MUTATION = graphql`
           count
           card {
             __typename
-            ... on UnitCard { color }
-            ... on PilotCard { color }
-            ... on BaseCard { color }
-            ... on CommandCard { color }
+            ... on UnitCard { color imageUrl }
+            ... on PilotCard { color imageUrl }
+            ... on BaseCard { color imageUrl }
+            ... on CommandCard { color imageUrl }
           }
         }
       }
@@ -133,6 +133,20 @@ export function DeckListPage() {
     return Array.from(seen);
   }
 
+  function deckPreviewImages(cards: readonly { count: number; card: any }[]): string[] {
+    const seen = new Set<string>();
+    const urls: string[] = [];
+    for (const { card } of cards) {
+      const url = card?.imageUrl;
+      if (url && !seen.has(url)) {
+        seen.add(url);
+        urls.push(url);
+        if (urls.length >= 5) break;
+      }
+    }
+    return urls;
+  }
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-8 flex flex-col gap-6">
       <div className="flex items-center gap-2">
@@ -167,7 +181,17 @@ export function DeckListPage() {
                 className="flex-1 text-left min-w-0"
                 onClick={() => router.navigate({ to: "/deck/$deckId", params: { deckId: deck.id } })}
               >
-                <div className="font-semibold truncate">{deck.name}</div>
+                <div className="flex gap-2">
+                  {deckPreviewImages(deck.cards).map((url, i) => (
+                    <img
+                      key={i}
+                      src={url}
+                      className="h-14 w-10 rounded object-cover shrink-0"
+                      alt=""
+                    />
+                  ))}
+                </div>
+                <div className="font-semibold truncate mt-2">{deck.name}</div>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-xs text-muted-foreground">{totalCards(deck.cards)}장</span>
                   <div className="flex gap-1">

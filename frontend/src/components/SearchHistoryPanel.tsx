@@ -65,6 +65,7 @@ const CardViewFragment = graphql`
     cardId
     cardName
     color
+    imageUrl
     searchedAt
   }
 `;
@@ -255,6 +256,7 @@ function CardViewRow({
             <div className="flex items-start gap-2">
               <img
                 className="h-10 w-10 shrink-0 rounded object-cover cutout cutout-br-md"
+                src={entry.imageUrl}
                 style={entry.color ? { backgroundColor: COLOR_HEX[entry.color] + "33" } : { backgroundColor: "var(--muted)" }}
                 alt={entry.cardName}
               />

@@ -33,6 +33,7 @@ export function BaseCardBody({
         rarity
         name
         color
+        imageUrl
         AP
         HP
         zone
@@ -46,7 +47,7 @@ export function BaseCardBody({
     <>
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
-        src={`/cards/${baseCard.id}.webp`}
+        src={baseCard.imageUrl}
         alt={baseCard.name}
       />
       <div className="flex flex-col gap-[5cqw]">

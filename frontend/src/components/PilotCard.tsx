@@ -29,6 +29,7 @@ export function PilotCardBody({
         cost
         rarity
         color
+        imageUrl
         traits
         pilot {
           name
@@ -44,7 +45,7 @@ export function PilotCardBody({
     <>
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
-        src={`/cards/${pilotCard.id}.webp`}
+        src={pilotCard.imageUrl}
         alt={pilotCard.pilot.name}
       />
       <div className="flex flex-col gap-[5cqw]">

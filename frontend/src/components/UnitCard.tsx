@@ -35,6 +35,7 @@ export function UnitCardBody({
         rarity
         cost
         color
+        imageUrl
         AP
         HP
         zone
@@ -59,7 +60,7 @@ export function UnitCardBody({
     <>
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
-        src={`/cards/${unitCard.id}.webp`}
+        src={unitCard.imageUrl}
         alt={""}
       />
       <div className="flex flex-col gap-[11cqw]">

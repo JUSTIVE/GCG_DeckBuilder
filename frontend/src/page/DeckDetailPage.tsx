@@ -62,6 +62,7 @@ const Query = graphql`
               cost
               level
               color
+              imageUrl
             }
             ... on PilotCard {
               id
@@ -71,6 +72,7 @@ const Query = graphql`
               cost
               level
               color
+              imageUrl
             }
             ... on BaseCard {
               id
@@ -78,6 +80,7 @@ const Query = graphql`
               cost
               level
               color
+              imageUrl
             }
             ... on CommandCard {
               id
@@ -85,6 +88,7 @@ const Query = graphql`
               cost
               level
               color
+              imageUrl
             }
           }
         }
@@ -271,14 +275,15 @@ type CardInfo = {
   level: number | null;
   color: string;
   typename: string;
+  imageUrl: string | null;
 };
 
 function extractCardInfo(card: any): CardInfo | null {
   if (!card) return null;
-  const { __typename, id, cost, level, color } = card;
+  const { __typename, id, cost, level, color, imageUrl } = card;
   const name = card.name ?? card.pilot?.name;
   if (!id || !name || !color) return null;
-  return { id, name, cost: cost ?? null, level: level ?? null, typename: __typename, color };
+  return { id, name, cost: cost ?? null, level: level ?? null, typename: __typename, color, imageUrl: imageUrl ?? null };
 }
 
 // ─── Histograms ───────────────────────────────────────────────────────────────
@@ -387,6 +392,7 @@ type DeckPanelProps = {
   onRemove: (cardId: string) => void;
   onRename: (name: string) => void;
   onSetCards: (cards: { cardId: string; count: number }[]) => void;
+  onOpenCard: (cardId: string) => void;
 };
 
 function DeckPanel({
@@ -397,6 +403,7 @@ function DeckPanel({
   onRemove,
   onRename,
   onSetCards,
+  onOpenCard,
 }: DeckPanelProps) {
   const [editing, setEditing] = useState(false);
   const [editName, setEditName] = useState("");
@@ -512,15 +519,22 @@ function DeckPanel({
                       className="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-muted/50"
                     >
                       <div className="relative shrink-0">
-                        <img
-                          className="h-10 w-8 rounded object-cover cutout cutout-br-md"
-                          style={{
-                            backgroundColor: COLOR_HEX[info.color]
-                              ? `${COLOR_HEX[info.color]}33`
-                              : "var(--muted)",
-                          }}
-                          alt={info.name}
-                        />
+                        <button
+                          type="button"
+                          className="block"
+                          onClick={() => onOpenCard(info.id)}
+                        >
+                          <img
+                            className="h-10 w-8 rounded object-cover cutout cutout-br-md"
+                            src={info.imageUrl ?? undefined}
+                            style={{
+                              backgroundColor: COLOR_HEX[info.color]
+                                ? `${COLOR_HEX[info.color]}33`
+                                : "var(--muted)",
+                            }}
+                            alt={info.name}
+                          />
+                        </button>
                         {info.level != null && (
                           <div className="absolute top-0 left-0 w-4 h-4 rounded-br bg-black/70 text-[9px] font-bold flex items-center justify-center text-white/80 leading-none">
                             {info.level}
@@ -747,6 +761,7 @@ export function DeckDetailPage() {
     onRemove: handleRemove,
     onRename: handleRename,
     onSetCards: handleSetCards,
+    onOpenCard: setOverlayCardId,
   };
 
   return (

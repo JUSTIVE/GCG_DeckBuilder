@@ -869,6 +869,22 @@ function fieldResolver(
     return (source[fieldName] as number | null | undefined) ?? 0;
   }
 
+  // ── Card imageUrl ─────────────────────────────────────────────────────────────
+  if (
+    (typeName === "UnitCard" ||
+      typeName === "PilotCard" ||
+      typeName === "BaseCard" ||
+      typeName === "CommandCard") &&
+    fieldName === "imageUrl"
+  ) {
+    return `/cards/${source["id"]}.webp`;
+  }
+
+  // ── CardViewHistory.imageUrl ──────────────────────────────────────────────────
+  if (typeName === "CardViewHistory" && fieldName === "imageUrl") {
+    return `/cards/${source["cardId"]}.webp`;
+  }
+
   // ── Card limit / blocked → derived from processed.json "limit" field ────────
   if (
     (typeName === "UnitCard" ||
