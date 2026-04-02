@@ -4777,7 +4777,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】/【액션】Choose 1 active enemy Unit with 4 or less AP. Destroy it."
+      "【메인】/【액션】Choose 1 active enemy Unit with 4 or less AP. 그 유닛을 파괴한다."
     ],
     "__typename": "CommandCard",
     "id": "ST09-009",
@@ -9316,7 +9316,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】【공격 시】You may choose 1 of your other Units. Destroy it. If you do, choose 1 enemy Unit that is Lv.4 or lower. Deal 2 damage to it."
+      "【세트 시】【공격 시】You may choose 1 of your other Units. 그 유닛을 파괴한다. If you do, choose 1 enemy Unit that is Lv.4 or lower. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-057",
@@ -10742,7 +10742,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】Choose 1 enemy Unit that is Lv.3 or lower. Deal 2 damage to it.",
-      "【메인】Choose 6 purple Unit cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit. Destroy it."
+      "【메인】Choose 6 purple Unit cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit. 그 유닛을 파괴한다."
     ],
     "__typename": "CommandCard",
     "id": "GD02-111",
@@ -10786,7 +10786,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】/【액션】If a friendly (Teiwaz) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. Destroy it.",
+      "【메인】/【액션】If a friendly (Teiwaz) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. 그 유닛을 파괴한다.",
       "【파일럿】[아미다 아르카]"
     ],
     "__typename": "CommandCard",
@@ -11222,7 +11222,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn and a friendly (Teiwaz) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. Destroy it."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn and a friendly (Teiwaz) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. 그 유닛을 파괴한다."
     ],
     "__typename": "BaseCard",
     "id": "GD02-128",
@@ -12855,7 +12855,7 @@
     "relatedTrait": [],
     "description": [
       "<제압> (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
-      "When this Unit destroys an enemy shield area card with battle damage, if there are 10 or more (CB) cards in your trash, choose 1 enemy Unit with the lowest HP. Destroy it."
+      "When this Unit destroys an enemy shield area card with battle damage, if there are 10 or more (CB) cards in your trash, choose 1 enemy Unit with the lowest HP. 그 유닛을 파괴한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-049",
@@ -13026,7 +13026,7 @@
     ],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
-      "【세트 시･(X-Rounder) Pilot】You may choose 4 (Vagan) cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit that is Lv.4 or lower. Destroy it."
+      "【세트 시･(X-Rounder) Pilot】You may choose 4 (Vagan) cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit that is Lv.4 or lower. 그 유닛을 파괴한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-054",
@@ -13058,7 +13058,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･Purple Pilot】Choose 1 enemy Unit that is Lv.2 or lower. Destroy it."
+      "【세트 시･Purple Pilot】Choose 1 enemy Unit that is Lv.2 or lower. 그 유닛을 파괴한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-055",
@@ -14597,7 +14597,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】/【액션】Choose 1 Pilot paired with an enemy Unit that is Lv.5 or lower. Destroy it."
+      "【메인】/【액션】Choose 1 Pilot paired with an enemy Unit that is Lv.5 or lower. 그 유닛을 파괴한다."
     ],
     "__typename": "CommandCard",
     "id": "GD03-110",
@@ -14690,7 +14690,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】Activate this card's 【액션】.",
-      "【액션】Choose 1 active enemy Unit that is Lv.2 or lower. Destroy it. If there are 10 or more cards in your trash, choose 1 active enemy Unit that is Lv.4 or lower instead."
+      "【액션】Choose 1 active enemy Unit that is Lv.2 or lower. 그 유닛을 파괴한다. If there are 10 or more cards in your trash, choose 1 active enemy Unit that is Lv.4 or lower instead."
     ],
     "__typename": "CommandCard",
     "id": "GD03-114",
