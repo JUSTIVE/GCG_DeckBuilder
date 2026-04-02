@@ -393,6 +393,7 @@ type DeckPanelProps = {
   onRename: (name: string) => void;
   onSetCards: (cards: { cardId: string; count: number }[]) => void;
   onOpenCard: (cardId: string) => void;
+  scrollAll?: boolean;
 };
 
 function DeckPanel({
@@ -404,6 +405,7 @@ function DeckPanel({
   onRename,
   onSetCards,
   onOpenCard,
+  scrollAll = false,
 }: DeckPanelProps) {
   const [editing, setEditing] = useState(false);
   const [editName, setEditName] = useState("");
@@ -431,10 +433,10 @@ function DeckPanel({
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className={scrollAll ? "flex flex-col" : "flex flex-col h-full"}>
       {/* Name row */}
       {editing ? (
-        <div className="flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0">
+        <div className={cn("flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0", scrollAll && "sticky top-0 z-10 bg-background")}>
           <Input
             value={editName}
             onChange={(e) => setEditName(e.target.value)}
@@ -457,7 +459,7 @@ function DeckPanel({
           </Button>
         </div>
       ) : (
-        <div className="flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0">
+        <div className={cn("flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0", scrollAll && "sticky top-0 z-10 bg-background")}>
           <h2 className="font-bold text-sm flex-1 truncate">{deckName}</h2>
           <div className="flex gap-1 shrink-0">
             {Array.from(new Set(cards.map((dc) => dc.card?.color).filter(Boolean))).map((color) => (
@@ -494,7 +496,7 @@ function DeckPanel({
         </div>
       )}
 
-      <div className="flex-1 min-h-0 overflow-y-auto px-2 pb-4">
+      <div className={scrollAll ? "px-2 pb-4" : "flex-1 min-h-0 overflow-y-auto px-2 pb-4"}>
         {cards.length === 0 && (
           <p className="text-xs text-muted-foreground text-center py-4">
             카드가 없습니다.
@@ -573,7 +575,7 @@ function DeckPanel({
         })}
       </div>
 
-      <div className="px-3 pb-3 shrink-0 border-t border-border pt-3 flex flex-col gap-2">
+      <div className={cn("px-3 pb-3 shrink-0 border-t border-border pt-3 flex flex-col gap-2", scrollAll && "sticky bottom-0 bg-background")}>
         <Button
           className="w-full"
           size="sm"
@@ -924,8 +926,8 @@ export function DeckDetailPage() {
           <SheetHeader className="px-3 pb-0 pt-0 shrink-0">
             <SheetTitle className="sr-only">{deck.name}</SheetTitle>
           </SheetHeader>
-          <div className="flex-1 min-h-0 flex flex-col">
-            <DeckPanel {...panelProps} />
+          <div className="flex-1 min-h-0 overflow-y-auto">
+            <DeckPanel {...panelProps} scrollAll />
           </div>
         </SheetContent>
       </Sheet>
