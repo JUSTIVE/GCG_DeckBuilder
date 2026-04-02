@@ -858,6 +858,19 @@ function fieldResolver(
     return (source[fieldName] as number | null | undefined) ?? 0;
   }
 
+  // ── Card limit / blocked → derived from processed.json "limit" field ────────
+  if (
+    (typeName === "UnitCard" ||
+      typeName === "PilotCard" ||
+      typeName === "BaseCard" ||
+      typeName === "CommandCard") &&
+    (fieldName === "limit" || fieldName === "blocked")
+  ) {
+    const limit =
+      typeof source["limit"] === "number" ? (source["limit"] as number) : DECK_MAX_COPIES;
+    return fieldName === "limit" ? limit : limit === 0;
+  }
+
   // ── UnitCard.traits / BaseCard.traits / PilotCard.traits / CommandCard.traits → raw field is "trait" (singular) ─────
   if (
     (typeName === "UnitCard" ||

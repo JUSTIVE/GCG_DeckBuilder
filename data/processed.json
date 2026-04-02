@@ -2068,7 +2068,7 @@
     ],
     "__typename": "CommandCard",
     "id": "ST02-014",
-    "limit": 2
+    "limit": 4
   },
   {
     "name": "코르시카 기지",
@@ -2096,7 +2096,7 @@
     "zone": [
       "EARTH"
     ],
-    "limit": 4
+    "limit": 2
   },
   {
     "__typename": "ResourceCard",

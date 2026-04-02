@@ -18,24 +18,32 @@ const Fragment = graphql`
       id
       color
       description
+      limit
+      blocked
       ...UnitCardFragment
     }
     ... on PilotCard {
       id
       color
       description
+      limit
+      blocked
       ...PilotCardFragment
     }
     ... on BaseCard {
       id
       color
       description
+      limit
+      blocked
       ...BaseCardFragment
     }
     ... on CommandCard {
       id
       color
       description
+      limit
+      blocked
       ...CommandCardFragment
     }
     ... on Resource {
@@ -89,15 +97,16 @@ export function Card({ cardRef, showDescription, onAdd, onOpen, deckCardCount = 
     }
   })();
 
-  const cardId =
+  const isPlayable =
     card.__typename === "UnitCard" ||
     card.__typename === "PilotCard" ||
     card.__typename === "BaseCard" ||
-    card.__typename === "CommandCard"
-      ? card.id
-      : undefined;
+    card.__typename === "CommandCard";
 
-  const atLimit = deckCardCount >= 4;
+  const cardId = isPlayable ? card.id : undefined;
+  const cardLimit = isPlayable ? card.limit : Infinity;
+  const blocked = isPlayable ? card.blocked : false;
+  const atLimit = blocked || deckCardCount >= cardLimit;
 
   return (
     <div className="flex flex-col">

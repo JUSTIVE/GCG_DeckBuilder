@@ -34,10 +34,15 @@ function DeckNameCrumb({ deckId }: { deckId: string }) {
 }
 
 function AppBreadcrumb() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { pathname, deckId } = useRouterState({
+    select: (s) => ({
+      pathname: s.location.pathname,
+      deckId: (s.matches.find((m) => (m.params as any)?.deckId)?.params as any)
+        ?.deckId as string | undefined,
+    }),
+  });
 
-  const deckDetailMatch = pathname.match(/^\/deck\/(.+)$/);
-  if (deckDetailMatch) {
+  if (deckId) {
     return (
       <Breadcrumb>
         <BreadcrumbList>
@@ -47,7 +52,7 @@ function AppBreadcrumb() {
           <BreadcrumbSeparator className="hidden md:block" />
           <BreadcrumbItem>
             <React.Suspense fallback={<BreadcrumbPage>…</BreadcrumbPage>}>
-              <DeckNameCrumb deckId={deckDetailMatch[1]} />
+              <DeckNameCrumb deckId={deckId} />
             </React.Suspense>
           </BreadcrumbItem>
         </BreadcrumbList>

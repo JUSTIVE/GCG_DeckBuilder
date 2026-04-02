@@ -5,7 +5,6 @@ import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -41,42 +40,37 @@ const DeckListQuery = graphql`
   }
 `;
 
-function DeckListSection() {
+function DeckSubItems() {
   const data = useLazyLoadQuery<AppSideBarDeckListQuery>(DeckListQuery, {});
   const decks = data.deckList.decks;
 
-  if (decks.length === 0) return null;
-
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>내 덱</SidebarGroupLabel>
-      <SidebarMenu>
-        {decks.map((deck) => {
-          const colors = Array.from(
-            new Set(deck.cards.map((c) => c.card?.color).filter(Boolean) as string[])
-          );
-          return (
-            <SidebarMenuItem key={deck.id}>
-              <SidebarMenuButton
-                render={
-                  <Link to="/deck/$deckId" params={{ deckId: deck.id }}>
-                    <span className="truncate flex-1">{deck.name}</span>
-                    <span className="flex gap-0.5 shrink-0">
-                      {colors.map((color) => (
-                        <span
-                          key={color}
-                          className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")}
-                        />
-                      ))}
-                    </span>
-                  </Link>
-                }
-              />
-            </SidebarMenuItem>
-          );
-        })}
-      </SidebarMenu>
-    </SidebarGroup>
+    <>
+      {decks.map((deck) => {
+        const colors = Array.from(
+          new Set(deck.cards.map((c) => c.card?.color).filter(Boolean) as string[])
+        );
+        return (
+          <SidebarMenuSubItem key={deck.id}>
+            <SidebarMenuSubButton
+              render={
+                <Link to="/deck/$deckId" params={{ deckId: deck.id }}>
+                  <span className="truncate flex-1">{deck.name}</span>
+                  <span className="flex gap-0.5 shrink-0">
+                    {colors.map((color) => (
+                      <span
+                        key={color}
+                        className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")}
+                      />
+                    ))}
+                  </span>
+                </Link>
+              }
+            />
+          </SidebarMenuSubItem>
+        );
+      })}
+    </>
   );
 }
 
@@ -116,23 +110,25 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 />
                 {item.items?.length ? (
                   <SidebarMenuSub>
-                    {item.items.map((item) => (
-                      <SidebarMenuSubItem key={item.title}>
+                    {item.items.map((subItem) => (
+                      <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton
-                          render={<Link to={item.url}>{item.title}</Link>}
-                          isActive={item.isActive}
+                          render={<Link to={subItem.url}>{subItem.title}</Link>}
+                          isActive={subItem.isActive}
                         />
                       </SidebarMenuSubItem>
                     ))}
+                    {item.items.some((subItem) => subItem.url === "/decklist") && (
+                      <React.Suspense fallback={null}>
+                        <DeckSubItems />
+                      </React.Suspense>
+                    )}
                   </SidebarMenuSub>
                 ) : null}
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
         </SidebarGroup>
-        <React.Suspense fallback={null}>
-          <DeckListSection />
-        </React.Suspense>
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

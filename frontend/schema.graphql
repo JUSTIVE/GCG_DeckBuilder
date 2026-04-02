@@ -175,6 +175,8 @@ type PilotCard implements Node {
   keywords: [CardKeyword!]! #키워드
   traits: [CardTrait!]!
   description: [String!]! # 효과 정보
+  limit: Int! # 덱에 넣을 수 있는 최대 장 수
+  blocked: Boolean! # limit이 0인 카드 (금지 카드)
 }
 
 type Pilot {
@@ -199,6 +201,8 @@ type UnitCard implements Node {
   HP: Int! # 체력
   links: [UnitLink!]! # 링크 정보
   description: [String!]! # 효과 정보
+  limit: Int! # 덱에 넣을 수 있는 최대 장 수
+  blocked: Boolean! # limit이 0인 카드 (금지 카드)
 }
 
 type Resource implements Node {
@@ -221,8 +225,9 @@ type BaseCard implements Node {
   rarity: CardRarity!
   package: CardPackage!
   keywords: [CardKeyword!]!
-
   description: [String!]!
+  limit: Int! # 덱에 넣을 수 있는 최대 장 수
+  blocked: Boolean! # limit이 0인 카드 (금지 카드)
 }
 
 type CommandCard implements Node {
@@ -238,6 +243,8 @@ type CommandCard implements Node {
   series: GundamSeries!
   pilot: Pilot
   description: [String!]!
+  limit: Int! # 덱에 넣을 수 있는 최대 장 수
+  blocked: Boolean! # limit이 0인 카드 (금지 카드)
 }
 
 union Card = Resource | BaseCard | UnitCard | PilotCard | CommandCard
