@@ -10,6 +10,7 @@ const replaceList = {
   "(Neo Zeon)": "(네오 지온)",
   "(Zeon)": "(지온)",
   "(Coordinator)": "(코디네이터)",
+  "(White Base Team)": "(화이트베이스 부대)",
   "(ZAFT)": "(자프트)",
   "(Triple Ship Alliance)": "(삼척동맹)",
   "this Unit gets AP+2 during this battle.": "이 배틀 동안, 이 유닛을 AP+2 한다.",
@@ -44,12 +45,16 @@ const replaceList = {
   "If you deploy this Unit from your trash,": "이 유닛을 트래시로부터 배치했다면,",
   "choose 1 of your Resources. Set it as active.":
     "자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다.",
+  "Choose 1 of your Resources. Set it as active.":
+    "자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다.",
   "Choose 1 friendly Link Unit.": "아군의 링크 유닛 1개를 선택한다.",
   "It gains <돌파 1> during this turn.": "이 턴 동안, 그 유닛은 <돌파 1>을 얻는다.",
   "This Unit gets AP+1 and HP+1.": "이 유닛을 AP+1, HP+1 한다.",
   "Set this Unit as active.": "이 유닛을 액티브로 한다.",
   "when this Unit destroys an enemy Unit with battle damage,":
     "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때,",
+  "It recovers 3 HP.": "그 유닛을 3 회복한다.",
+  "Choose 1 enemy Unit that is Lv.5 or lower.": "Lv.5 이하의 상대의 유닛 1개를 선택한다.",
 };
 
 function applyReplacements(v: string): string {

@@ -17,7 +17,7 @@
     "relatedTrait": [],
     "description": [
       "<리페어 2> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
-      "【세트 시】 자신의 턴 동안, all your Units get AP+1."
+      "【세트 시】 자신의 턴 동안, 자신의 유닛 전부를 AP+1 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST01-001",
@@ -48,7 +48,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･(White Base Team) Pilot】 자신은 1장 드로우 한다."
+      "【세트 시･(화이트베이스 부대) 파일럿】 자신은 1장 드로우 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST01-002",
@@ -180,7 +180,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【공격 시】 【턴 1회】 Choose 1 of your Resources. Set it as active."
+      "【공격 시】 【턴 1회】 자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다."
     ],
     "__typename": "PilotCard",
     "id": "ST01-011",
@@ -232,7 +232,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 아군의 유닛 1개를 선택한다. It recovers 3 HP.",
+      "【메인】 아군의 유닛 1개를 선택한다. 그 유닛을 3 회복한다.",
       "【파일럿】[카이 시덴]"
     ],
     "__typename": "CommandCard",
@@ -265,7 +265,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【기동･메인】 【턴 1회】 ②：Deploy 1 [Gundam]((White Base Team)･AP3･HP3) Unit token if you have no Units in play, deploy 1 [Guncannon]((White Base Team)･AP2･HP2) Unit token if you have only 1 Unit in play, or deploy 1 [Guntank]((White Base Team)･AP1･HP1) Unit token if you have 2 or more Units in play."
+      "【기동･메인】 【턴 1회】 ②： 자신의 유닛이 없다면, [건담]((화이트베이스 부대)･AP3･HP3), 1개만 있다면, [건캐논]((화이트베이스 부대)･AP2･HP2), 2개 이상 있다면, [건탱크]((화이트베이스 부대)･AP1･HP1)의 유닛 토큰 1개를 배치한다."
     ],
     "__typename": "BaseCard",
     "id": "ST01-015",
@@ -296,7 +296,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【기동･메인】 이 베이스를 레스트로 한다: All friendly Link Units get AP+1 during this turn."
+      "【기동･메인】 이 베이스를 레스트로 한다: 이 턴 동안, 아군의 링크 유닛 전부를 AP+1 한다."
     ],
     "__typename": "BaseCard",
     "id": "ST01-016",
@@ -1794,7 +1794,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 Choose 1 enemy Unit that is Lv.5 or lower. 이 턴 동안, 그 유닛을 AP-3 한다."
+      "【세트 시】 Lv.5 이하의 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-3 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST01-006",
@@ -1825,7 +1825,7 @@
     "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "This Unit can't choose the enemy player as its attack target."
+      "이 유닛은, 상대 플레이어를 공격 대상으로 선택할 수 없다."
     ],
     "__typename": "UnitCard",
     "id": "ST01-009",
@@ -6719,7 +6719,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 아군의 링크 유닛 1개를 선택한다. It recovers 3 HP.",
+      "【메인】 /【액션】 아군의 링크 유닛 1개를 선택한다. 그 유닛을 3 회복한다.",
       "【파일럿】[루크레치아 노인]"
     ],
     "__typename": "CommandCard",
@@ -7851,7 +7851,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "This Unit can't choose the enemy player as its attack target."
+      "이 유닛은, 상대 플레이어를 공격 대상으로 선택할 수 없다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-018",
@@ -8340,7 +8340,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "This Unit can't choose the enemy player as its attack target."
+      "이 유닛은, 상대 플레이어를 공격 대상으로 선택할 수 없다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-035",
@@ -9219,7 +9219,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "This Unit can't choose the enemy player as its attack target."
+      "이 유닛은, 상대 플레이어를 공격 대상으로 선택할 수 없다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-066",
@@ -13983,7 +13983,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 Choose 1 enemy Unit that is Lv.5 or lower. Deal damage to it equal to the number of friendly Unit tokens in play.",
+      "【메인】 Lv.5 이하의 상대의 유닛 1개를 선택한다. Deal damage to it equal to the number of friendly Unit tokens in play.",
       "【파일럿】[하디 슈타이너]"
     ],
     "__typename": "CommandCard",
