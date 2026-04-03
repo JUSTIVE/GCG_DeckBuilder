@@ -420,7 +420,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 This Unit gets AP+1 and HP+1."
+      "【링크 시】 이 유닛을 AP+1, HP+1 한다."
     ],
     "__typename": "PilotCard",
     "id": "ST02-010",
@@ -445,7 +445,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 Choose 1 of your Units. It gains <돌파 3> during this turn.",
+      "【메인】 자신의 유닛 1개를 선택한다. 그 유닛은 <돌파 3>을 얻는다.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【파일럿】[트로와 바톤]"
     ],
@@ -474,7 +474,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【액션】 During this battle, your shield area cards can't receive damage from enemy Units that are Lv.4 or lower.",
+      "【액션】 이 배틀 동안, 자신의 실드 에리어의 카드는, Lv.4 이하의 상대의 유닛으로부터 대미지를 받지 않는다.",
       "【파일럿】[카토르 라바바 위너]"
     ],
     "__typename": "CommandCard",
@@ -504,7 +504,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, look at the top 2 cards of your deck and return 1 to the top and 1 to the bottom."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, 자신의 덱을 위에서 2장 보고, 위와 아래로 1장씩 되돌린다."
     ],
     "__typename": "BaseCard",
     "id": "ST02-015",
@@ -1948,7 +1948,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
+      "【세트 시】 자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, Lv.3 이하의 상대의 유닛 전부에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "ST02-003",

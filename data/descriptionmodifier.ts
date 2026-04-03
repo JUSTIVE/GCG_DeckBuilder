@@ -46,6 +46,7 @@ const replaceList = {
     "자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다.",
   "Choose 1 friendly Link Unit.": "아군의 링크 유닛 1개를 선택한다.",
   "It gains <돌파 1> during this turn.": "이 턴 동안, 그 유닛은 <돌파 1>을 얻는다.",
+  "This Unit gets AP+1 and HP+1.": "이 유닛을 AP+1, HP+1 한다.",
 };
 
 function applyReplacements(v: string): string {
