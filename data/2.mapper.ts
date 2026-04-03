@@ -84,9 +84,11 @@ const descriptionLineMapper = (raw: unknown[]) =>
   });
 
 await writeFile(
-  "../data/mapped.json",
+  "../data/2.mapped.json",
   JSON.stringify(
-    descriptionLineMapper(pilotAndEffectNameMapper(commandNameMapper(baseNameMapper(unitNameMapper(raw))))),
+    descriptionLineMapper(
+      pilotAndEffectNameMapper(commandNameMapper(baseNameMapper(unitNameMapper(raw)))),
+    ),
     null,
     2,
   ),

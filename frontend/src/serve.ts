@@ -45,7 +45,7 @@ import type {
   GraphQLResolveInfo,
 } from "graphql";
 import schemaSDL from "../schema.graphql?raw";
-import allCardsRaw from "../../data/processed.json";
+import allCardsRaw from "../../data/3.processed.json";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -72,11 +72,11 @@ const resolveNodeType = (obj: { __typename: string }): string =>
   __typename: string;
 }) => obj.__typename;
 
-(schema.getType("PlayableCard") as GraphQLUnionType).resolveType = resolveNodeType;
+(schema.getType("PlayableCard") as GraphQLUnionType).resolveType =
+  resolveNodeType;
 
-(schema.getType("AddCardToDeckResult") as GraphQLUnionType).resolveType = (obj: {
-  __typename: string;
-}) => obj.__typename;
+(schema.getType("AddCardToDeckResult") as GraphQLUnionType).resolveType =
+  (obj: { __typename: string }) => obj.__typename;
 
 (schema.getType("Node") as GraphQLInterfaceType).resolveType = (obj: {
   __typename: string;
@@ -380,7 +380,7 @@ function filterKey(f: SearchHistoryFilter): string {
   const normalized: Record<string, unknown> = {};
   for (const k of Object.keys(f).sort()) {
     const v = (f as unknown as Record<string, unknown>)[k];
-    normalized[k] = Array.isArray(v) ? [...v].sort() : v ?? null;
+    normalized[k] = Array.isArray(v) ? [...v].sort() : (v ?? null);
   }
   return JSON.stringify(normalized);
 }
@@ -437,7 +437,7 @@ function writeSearchHistory(entries: SearchHistoryEntry[]): void {
 // ─── Deck (localStorage) ─────────────────────────────────────────────────────
 
 const DECK_KEY = "gcg_decks";
-const DECK_MAX_CARDS = 50;   // non-Resource cards only
+const DECK_MAX_CARDS = 50; // non-Resource cards only
 const DECK_MAX_COLORS = 2;
 const DECK_MAX_COPIES = 4;
 const DECK_LIST_ID = "DeckList:singleton";
@@ -511,8 +511,19 @@ interface CardsArgs {
 
 const rootValue = {
   /** Query.node — look up any Node by its global ID */
-  node({ id }: { id: string }): RawCard | SearchHistoryEntry | SearchHistoryList | Deck | DeckListShape | null {
-    if (id === SEARCH_HISTORY_LIST_ID) return makeSearchHistoryList(readSearchHistory());
+  node({
+    id,
+  }: {
+    id: string;
+  }):
+    | RawCard
+    | SearchHistoryEntry
+    | SearchHistoryList
+    | Deck
+    | DeckListShape
+    | null {
+    if (id === SEARCH_HISTORY_LIST_ID)
+      return makeSearchHistoryList(readSearchHistory());
     if (id === DECK_LIST_ID) return makeDeckList(readDecks());
     const historyEntry = readSearchHistory().find((e) => e.id === id);
     if (historyEntry) return historyEntry;
@@ -612,7 +623,10 @@ const rootValue = {
     filter: CardFilterInput;
     sort?: string;
   }): SearchHistoryList {
-    const historyFilter: SearchHistoryFilter = { ...filter, sort: sort ?? null };
+    const historyFilter: SearchHistoryFilter = {
+      ...filter,
+      sort: sort ?? null,
+    };
     const searchedAt = new Date().toISOString();
     const entry: FilterSearchHistory = {
       __typename: "FilterSearchHistory",
@@ -624,8 +638,7 @@ const rootValue = {
     const existing = readSearchHistory().filter(
       (e) =>
         !(
-          e.__typename === "FilterSearchHistory" &&
-          filterKey(e.filter) === key
+          e.__typename === "FilterSearchHistory" && filterKey(e.filter) === key
         ),
     );
     const updated = [entry, ...existing].slice(0, SEARCH_HISTORY_MAX);
@@ -712,7 +725,13 @@ const rootValue = {
   },
 
   /** Mutation.addCardToDeck */
-  addCardToDeck({ deckId, cardId }: { deckId: string; cardId: string }): AnyRecord {
+  addCardToDeck({
+    deckId,
+    cardId,
+  }: {
+    deckId: string;
+    cardId: string;
+  }): AnyRecord {
     const decks = readDecks();
     const idx = decks.findIndex((d) => d.id === deckId);
     if (idx === -1) {
@@ -724,7 +743,9 @@ const rootValue = {
     const isResource = card?.__typename === "ResourceCard";
 
     const cardLimit =
-      typeof card?.["limit"] === "number" ? (card["limit"] as number) : DECK_MAX_COPIES;
+      typeof card?.["limit"] === "number"
+        ? (card["limit"] as number)
+        : DECK_MAX_COPIES;
     if (cardLimit === 0) {
       return { __typename: "CardBannedError", cardId };
     }
@@ -732,7 +753,12 @@ const rootValue = {
     const existing = deck.cards.find((dc) => dc.cardId === cardId);
     const currentCount = existing?.count ?? 0;
     if (currentCount >= cardLimit) {
-      return { __typename: "CardCopyLimitExceededError", cardId, limit: cardLimit, current: currentCount };
+      return {
+        __typename: "CardCopyLimitExceededError",
+        cardId,
+        limit: cardLimit,
+        current: currentCount,
+      };
     }
 
     if (!isResource) {
@@ -743,7 +769,10 @@ const rootValue = {
 
       if (card && typeof card["color"] === "string") {
         const colors = deckColors(deck);
-        if (!colors.has(card["color"] as string) && colors.size >= DECK_MAX_COLORS) {
+        if (
+          !colors.has(card["color"] as string) &&
+          colors.size >= DECK_MAX_COLORS
+        ) {
           return {
             __typename: "DeckColorLimitExceededError",
             currentColors: [...colors],
@@ -767,7 +796,13 @@ const rootValue = {
   },
 
   /** Mutation.removeCardFromDeck */
-  removeCardFromDeck({ deckId, cardId }: { deckId: string; cardId: string }): Deck {
+  removeCardFromDeck({
+    deckId,
+    cardId,
+  }: {
+    deckId: string;
+    cardId: string;
+  }): Deck {
     const decks = readDecks();
     const idx = decks.findIndex((d) => d.id === deckId);
     if (idx === -1) throw new Error(`Deck not found: ${deckId}`);
@@ -790,7 +825,13 @@ const rootValue = {
   },
 
   /** Mutation.setDeckCards — bulk-replace a deck's card list (used for deck code import) */
-  setDeckCards({ deckId, cards }: { deckId: string; cards: { cardId: string; count: number }[] }): Deck {
+  setDeckCards({
+    deckId,
+    cards,
+  }: {
+    deckId: string;
+    cards: { cardId: string; count: number }[];
+  }): Deck {
     const decks = readDecks();
     const idx = decks.findIndex((d) => d.id === deckId);
     if (idx === -1) throw new Error(`Deck not found: ${deckId}`);
@@ -894,7 +935,9 @@ function fieldResolver(
     (fieldName === "limit" || fieldName === "blocked")
   ) {
     const limit =
-      typeof source["limit"] === "number" ? (source["limit"] as number) : DECK_MAX_COPIES;
+      typeof source["limit"] === "number"
+        ? (source["limit"] as number)
+        : DECK_MAX_COPIES;
     return fieldName === "limit" ? limit : limit === 0;
   }
 

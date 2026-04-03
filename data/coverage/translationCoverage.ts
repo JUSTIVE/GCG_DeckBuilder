@@ -176,7 +176,7 @@ function renderCardLine(
 
 const CARD_TYPES = ["UnitCard", "BaseCard", "PilotCard", "CommandCard"];
 
-const MAPPED_FILE = join(import.meta.dir, "../processed.json");
+const MAPPED_FILE = join(import.meta.dir, "../3.processed.json");
 
 console.log(styleText("bold", "\n📋 Translation Coverage Report\n"));
 

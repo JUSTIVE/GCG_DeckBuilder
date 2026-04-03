@@ -1,7 +1,7 @@
 import { writeFile, access } from "node:fs/promises";
 import { join } from "node:path";
 import pLimit from "p-limit";
-import processed from "../data/processed.json";
+import processed from "../data/3.processed.json";
 
 const BASE = "https://www.gundam-gcg.com/en/images/cards/card";
 const OUT_DIR = join(import.meta.dir, "../frontend/public/cards");
@@ -30,7 +30,9 @@ async function downloadImage(id: string) {
 
   if (!res.ok) {
     failed++;
-    process.stdout.write(`\r[${completed + skipped + failed}/${total}] FAIL: ${id} (${res.status})    `);
+    process.stdout.write(
+      `\r[${completed + skipped + failed}/${total}] FAIL: ${id} (${res.status})    `,
+    );
     return;
   }
 
@@ -45,7 +47,9 @@ await Promise.all(
       await downloadImage(id);
       const done = completed + skipped + failed;
       const pct = ((done / total) * 100).toFixed(1);
-      process.stdout.write(`\r[${done}/${total}] ${pct}%  new:${completed}  skip:${skipped}  fail:${failed}   `);
+      process.stdout.write(
+        `\r[${done}/${total}] ${pct}%  new:${completed}  skip:${skipped}  fail:${failed}   `,
+      );
     }),
   ),
 );
