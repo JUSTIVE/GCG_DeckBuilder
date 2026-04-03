@@ -4564,7 +4564,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【파괴 시】 Choose 1 (Minerva Squad) Unit card without \"Force Impulse Gundam\" in its card name from your trash. Add it to your hand."
+      "【파괴 시】 Choose 1 (Minerva Squad) Unit card without \"Force Impulse Gundam\" in its card name from your trash. 그 카드를 패에 추가한다."
     ],
     "__typename": "UnitCard",
     "id": "ST09-002",
@@ -6360,8 +6360,8 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 Deploy 1 [Fatum-00]((Triple Ship Alliance)･AP2･HP2･<블로커>) Unit token.",
-      "【세트 시】 【공격 시】 Choose 1 of your (Triple Ship Alliance) Unit tokens. It may attack on the turn it is deployed."
+      "【배치 시】 Deploy 1 [Fatum-00]((삼척동맹)･AP2･HP2･<블로커>) Unit token.",
+      "【세트 시】 【공격 시】 Choose 1 of your (삼척동맹) Unit tokens. It may attack on the turn it is deployed."
     ],
     "__typename": "UnitCard",
     "id": "GD01-066",
@@ -6392,7 +6392,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 Choose 1 Command card that is Lv.5 or lower from your trash. Add it to your hand."
+      "【세트 시】 자신의 트래쉬의 Lv.5 이하의 커맨드 카드 1장을 선택한다. 그 카드를 패에 추가한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-067",
@@ -6551,7 +6551,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 상대의 유닛 1개를 선택한다. It gets AP-1 during this turn."
+      "【배치 시】 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-078",
@@ -6603,7 +6603,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【파괴 시】 Choose 1 enemy Unit that is Lv.2 or lower. 그 유닛을 주인의 패로 되돌린다."
+      "【파괴 시】 Lv.2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-080",
@@ -7574,7 +7574,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【기동･메인】 이 베이스를 레스트로 한다: If a friendly (Academy) Unit is in play, 상대의 유닛 1개를 선택한다. It gets AP-1 during this turn."
+      "【기동･메인】 이 베이스를 레스트로 한다: If a friendly (Academy) Unit is in play, 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-1 한다."
     ],
     "__typename": "BaseCard",
     "id": "GD01-130",
@@ -9283,7 +9283,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･(Vulture) Pilot】 【파괴 시】 Choose 1 (Vulture) Unit card that is Lv.5 or higher from your trash. Add it to your hand."
+      "【세트 시･(Vulture) Pilot】 【파괴 시】 Choose 1 (Vulture) Unit card that is Lv.5 or higher from your trash. 그 카드를 패에 추가한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-056",
@@ -10570,7 +10570,7 @@
       "AGE_SYSTEM"
     ],
     "description": [
-      "【버스트】 Choose 1 (Asuno Family) Pilot card from your trash. Add it to your hand.",
+      "【버스트】 Choose 1 (Asuno Family) Pilot card from your trash. 그 카드를 패에 추가한다.",
       "【메인】 If you have an (AGE System) Unit in play, place 1 EX Resource."
     ],
     "__typename": "CommandCard",
@@ -10763,7 +10763,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 자신은 1장 드로우 한다.",
-      "【메인】 Choose 1 purple Pilot card from your trash. Add it to your hand."
+      "【메인】 Choose 1 purple Pilot card from your trash. 그 카드를 패에 추가한다."
     ],
     "__typename": "CommandCard",
     "id": "GD02-112",
@@ -10901,7 +10901,7 @@
       "AEUG"
     ],
     "description": [
-      "【버스트】 Choose 1 (AEUG) Base card from your trash. Add it to your hand.",
+      "【버스트】 Choose 1 (AEUG) Base card from your trash. 그 카드를 패에 추가한다.",
       "【메인】 자신은 3장 드로우 한다. 그 후, 자신의 패 2장을 버린다."
     ],
     "__typename": "CommandCard",
@@ -11871,7 +11871,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【버스트】 Choose 1 (Cyclops Team) Pilot card from your trash. Add it to your hand.",
+      "【버스트】 Choose 1 (Cyclops Team) Pilot card from your trash. 그 카드를 패에 추가한다.",
       "【세트 시･(Cyclops Team) Pilot】 All your (Cyclops Team) Units may choose an active enemy Unit with 5 or less AP as their attack target during this turn."
     ],
     "__typename": "UnitCard",
@@ -13058,7 +13058,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･Purple Pilot】 Choose 1 enemy Unit that is Lv.2 or lower. 그 유닛을 파괴한다."
+      "【세트 시･Purple Pilot】 Lv.2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-055",
@@ -13697,7 +13697,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【턴 1회】 자신의 턴 동안, when your (Triple Ship Alliance) Unit deals battle damage to an enemy Unit, you may return the enemy Unit to its owner's hand."
+      "【턴 1회】 자신의 턴 동안, when your (삼척동맹) Unit deals battle damage to an enemy Unit, you may return the enemy Unit to its owner's hand."
     ],
     "__typename": "UnitCard",
     "id": "GD03-076",
@@ -13819,7 +13819,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 Choose 1 (Gjallarhorn) Command card from your trash. Add it to your hand."
+      "【링크 시】 Choose 1 (Gjallarhorn) Command card from your trash. 그 카드를 패에 추가한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-080",
@@ -14125,7 +14125,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 Choose 1 (자프트) Base card from your trash. Add it to your hand."
+      "【링크 시】 Choose 1 (자프트) Base card from your trash. 그 카드를 패에 추가한다."
     ],
     "__typename": "PilotCard",
     "id": "GD03-091",
@@ -14229,7 +14229,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【턴 1회】 When this Unit receives effect damage, 상대의 유닛 1개를 선택한다. It gets AP-1 during this turn."
+      "【턴 1회】 When this Unit receives effect damage, 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-1 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD03-095",
@@ -15159,7 +15159,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if you have 2 or more (Triple Ship Alliance) Units in play, choose 1 enemy Unit that is Lv.4 or lower. 그 유닛을 주인의 패로 되돌린다."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if you have 2 or more (삼척동맹) Units in play, choose 1 enemy Unit that is Lv.4 or lower. 그 유닛을 주인의 패로 되돌린다."
     ],
     "__typename": "BaseCard",
     "id": "GD03-131",
