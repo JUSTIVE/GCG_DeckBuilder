@@ -1460,7 +1460,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "While this Unit has <리페어>, it gets AP+1."
+      "이 유닛이 <리페어>를 가진 경우, 이 유닛을 AP+1 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD01-089",
@@ -1484,7 +1484,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "자신의 턴 동안, while this Unit has <돌파>, it can't receive battle damage from enemy Units with 3 or less AP."
+      "자신의 턴 동안, 이 유닛이 <돌파>를 가진 경우, 이 유닛은 AP3 이하의 상대의 유닛으로부터 배틀 대미지를 받지 않는다."
     ],
     "__typename": "PilotCard",
     "id": "GD01-091",
@@ -1509,7 +1509,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【기동･메인】【턴 1회】If your opponent has 8 or more cards in their hand, set this Unit as active. It can't attack during this turn."
+      "【기동･메인】【턴 1회】 상대의 패가 8장 이상이라면, 이 유닛을 액티브로 한다. 이 턴 동안, 이 유닛은 공격할 수 없다."
     ],
     "__typename": "PilotCard",
     "id": "GD01-097",
@@ -2258,7 +2258,7 @@
       "NEO_ZEON"
     ],
     "description": [
-      "【파괴 시】Look at the top 3 cards of your deck. You may reveal 1 (Zeon)/(Neo Zeon) Unit card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
+      "【파괴 시】Look at the top 3 cards of your deck. You may reveal 1 (지온)/(Neo Zeon) Unit card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
     ],
     "__typename": "UnitCard",
     "id": "ST03-006",
@@ -2288,7 +2288,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Deploy 1 rested [Zaku Ⅱ]((Zeon)･AP1･HP1) Unit token."
+      "【배치 시】Deploy 1 rested [Zaku Ⅱ]((지온)･AP1･HP1) Unit token."
     ],
     "__typename": "UnitCard",
     "id": "ST03-009",
@@ -2322,7 +2322,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】You may deploy 1 (Neo Zeon)/(Zeon) Unit card that is Lv.4 or lower from your hand."
+      "【세트 시】You may deploy 1 (Neo Zeon)/(지온) Unit card that is Lv.4 or lower from your hand."
     ],
     "__typename": "PilotCard",
     "id": "ST03-010",
@@ -4829,7 +4829,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "패의 이 카드를 플레이 할 때, Lv.5의 카드명에 \"유니콘 모드\" 를 포함하는 자신의 링크 유닛 1개를 파괴할 수 있다. 그랬다면, 이 카드를 Lv과 코스트를 0으로 플레이한다.",
+      "패의 이 카드를 플레이 할 때, Lv.5의 카드명에 \"유니콘 모드\" 를 포함하는 자신의 링크 유닛 1개를 파괴할 수 있다. 그랬다면, 이 카드를 Lv.과 코스트를 0으로 플레이한다.",
       "【공격 시】 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "UnitCard",
@@ -5335,7 +5335,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･(Zeon) Pilot】  <블로커>를 가진 Lv.2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
+      "【세트 시･(지온) 파일럿】  <블로커>를 가진 Lv.2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-032",
@@ -5603,7 +5603,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】Look at the top 3 cards of your deck. You may deploy 1 (ZAFT) Unit card that is Lv.4 or lower among them. Return the remaining cards randomly to the bottom of your deck."
+      "【세트 시】Look at the top 3 cards of your deck. You may deploy 1 (자프트) Unit card that is Lv.4 or lower among them. Return the remaining cards randomly to the bottom of your deck."
     ],
     "__typename": "UnitCard",
     "id": "GD01-045",
@@ -5640,7 +5640,7 @@
     ],
     "description": [
       "【기동･메인】<원호 3> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
-      "【세트 시･(Coordinator) Pilot】【턴 1회】When you use this Unit's <원호> to increase a (ZAFT) Unit's AP, set this Unit as active."
+      "【세트 시･(코디네이터) 파일럿】【턴 1회】 이 유닛의 <원호> 로 (자프트)의 유닛을 AP+ 했을 때, 이 유닛을 액티브로 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-046",
@@ -5943,7 +5943,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【공격 시】If you are attacking the enemy player, this Unit gets AP+2 during this battle."
+      "【공격 시】상대 플레이어를 공격하고 있다면, 이 배틀 동안, 이 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-059",
@@ -6568,7 +6568,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "While this Unit is (Zeon), it gains <돌파 1>.",
+      "While this Unit is (지온), it gains <돌파 1>.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
@@ -6811,7 +6811,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】Deploy 2 [Zaku Ⅱ]((Zeon)･AP1･HP1) Unit tokens.",
+      "【메인】Deploy 2 [Zaku Ⅱ]((지온)･AP1･HP1) Unit tokens.",
       "【파일럿】[도즐 자비]"
     ],
     "__typename": "CommandCard",
@@ -6936,7 +6936,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】/【액션】Choose 1 friendly (ZAFT) Unit. It gets AP+3 during this turn.",
+      "【메인】/【액션】Choose 1 friendly (자프트) Unit. It gets AP+3 during this turn.",
       "【파일럿】[앤드류 발트펠트]"
     ],
     "__typename": "CommandCard",
@@ -7146,7 +7146,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, you may deploy 1 (Zeon) Unit card that is Lv.4 or lower from your hand."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn, you may deploy 1 (지온) Unit card that is Lv.4 or lower from your hand."
     ],
     "__typename": "BaseCard",
     "id": "GD01-125",
@@ -7206,7 +7206,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【기동･액션】Rest this Base：Choose 1 friendly (ZAFT) Unit with 5 or more AP. It gains <돌파 3> during this battle.",
+      "【기동･액션】Rest this Base：Choose 1 friendly (자프트) Unit with 5 or more AP. It gains <돌파 3> during this battle.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "BaseCard",
@@ -7904,7 +7904,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Look at the top 5 cards of your deck. You may reveal 1 green (Zeon) Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck.",
+      "【배치 시】Look at the top 5 cards of your deck. You may reveal 1 green (지온) Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck.",
       "【링크 시】 이 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
@@ -8286,7 +8286,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While another friendly (Zeon) Link Unit is in play, this Unit gains <돌파 5>.",
+      "While another friendly (지온) Link Unit is in play, this Unit gains <돌파 5>.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -9836,7 +9836,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】Choose 1 of your other (Zeon) Link Units. It gains <돌파 1> during this turn.",
+      "【세트 시】Choose 1 of your other (지온) Link Units. It gains <돌파 1> during this turn.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
@@ -11767,7 +11767,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【공격 시】If you are attacking an enemy Unit, this Unit gets AP+2 during this battle."
+      "【공격 시】If you are attacking an enemy Unit, 이 배틀 동안, 이 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-028",
@@ -11906,7 +11906,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･(ZAFT) Pilot】자신의 턴 동안, all your (ZAFT) Units get AP+2.",
+      "【세트 시･(자프트) Pilot】자신의 턴 동안, all your (자프트) Units get AP+2.",
       "【공격 시】 상대의 유닛 1개를 선택한다. Deal 1 damage to it for each 4 AP this Unit has."
     ],
     "__typename": "UnitCard",
@@ -12067,7 +12067,7 @@
     "relatedTrait": [],
     "description": [
       "【기동･메인】<원호 1> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
-      "자신의 턴 동안, when this Unit is rested by an effect, choose 1 of your (ZAFT) Units. It gets AP+2 during this turn."
+      "자신의 턴 동안, when this Unit is rested by an effect, choose 1 of your (자프트) Units. It gets AP+2 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD03-038",
@@ -12345,7 +12345,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【버스트】If there are 3 or less enemy Shields, deploy 1 rested [GFreD]((Zeon)･AP4･HP3) Unit token."
+      "【버스트】If there are 3 or less enemy Shields, deploy 1 rested [GFreD]((지온)･AP4･HP3) Unit token."
     ],
     "__typename": "UnitCard",
     "id": "GD03-048",
@@ -13605,7 +13605,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】Choose 1 (ZAFT) Base card from your trash. Add it to your hand."
+      "【링크 시】Choose 1 (자프트) Base card from your trash. Add it to your hand."
     ],
     "__typename": "PilotCard",
     "id": "GD03-091",
@@ -13632,7 +13632,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】Place the top card of your deck into your trash. If you placed a (Zeon)/(Clan) card with this effect, 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
+      "【링크 시】Place the top card of your deck into your trash. If you placed a (지온)/(Clan) card with this effect, 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "PilotCard",
     "id": "GD03-092",
@@ -14482,7 +14482,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, Choose 1 friendly (ZAFT) Unit. It gets AP+3 during this turn."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, Choose 1 friendly (자프트) Unit. It gets AP+3 during this turn."
     ],
     "__typename": "BaseCard",
     "id": "GD03-127",
