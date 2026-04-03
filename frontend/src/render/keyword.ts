@@ -19,7 +19,7 @@ export const renderKeyword = (keyword: string) => {
     case "DESTROYED":
       return "파괴 시";
     case "DURING_LINK":
-      return "링크 시";
+      return "링크 중";
     case "DURING_PAIR":
       return "페어 중";
     case "FIRST_STRIKE":
