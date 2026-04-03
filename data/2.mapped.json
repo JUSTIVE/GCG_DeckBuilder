@@ -3136,7 +3136,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 If another friendly (Clan) Unit is in play, this gains <선제 공격> during this turn.",
+      "【링크 시】 이 유닛 이외의, (클랜)의 아군의 유닛이 있다면, 이 턴 동안, 이 유닛은 <선제 공격>을 얻는다.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -3167,7 +3167,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 If another friendly (Clan) Unit is in play, 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
+      "【배치 시】 이 유닛 이외의, (클랜)의 아군의 유닛이 있다면, 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "ST06-002",
@@ -3251,7 +3251,7 @@
     "relatedTrait": [],
     "description": [
       "<돌파 1> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【공격 시】 Choose 1 to 2 friendly (Clan) Units. They get AP+2 during this turn."
+      "【공격 시】 (클랜)의 아군의 유닛 1~2개를 선택한다. 이 턴 동안, 그 유닛들을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST06-005",
@@ -3307,7 +3307,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 Choose 1 of your other (Clan) Units. During this turn, it may choose an active enemy Unit with 3 or less AP as its attack target."
+      "【배치 시】 이 유닛 이외의, (클랜)의 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 액티브의 AP3 이하의 상대의 유닛을 공격 대상으로 선택할 수 있다."
     ],
     "__typename": "UnitCard",
     "id": "ST06-007",
@@ -3365,7 +3365,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 자신의 덱을 위에서 1장 보고, If it is a (Clan) card, you may reveal it and add it to your hand. Return any remaining card to the bottom of your deck."
+      "【링크 시】 자신의 덱을 위에서 1장 보고, 그 카드가 (클랜)의 카드라면 공개하고 패에 추가할 수 있다. 남은 카드는 밑으로 되돌린다."
     ],
     "__typename": "PilotCard",
     "id": "ST06-009",
@@ -3391,7 +3391,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 【공격 시】 If you have a (Clan) Unit in play, 자신의 덱을 위에서 1장 보고, 덱의 위나 아래에 둔다."
+      "【링크 시】 【공격 시】 (클랜)의 자신의 유닛이 있다면, 자신의 덱을 위에서 1장 보고, 덱의 위나 아래에 둔다."
     ],
     "__typename": "PilotCard",
     "id": "ST06-010",
@@ -3415,7 +3415,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 Choose 1 to 2 friendly (Clan) Units. They get AP+2 during this turn.",
+      "【메인】 /【액션】 (클랜)의 아군의 유닛 1~2개를 선택한다. 이 턴 동안, 그 유닛들을 AP+2 한다.",
       "【파일럿】[가이아 (GQ)]"
     ],
     "__typename": "CommandCard",
@@ -3441,7 +3441,7 @@
       "CLAN"
     ],
     "description": [
-      "【메인】 Look at the top 3 cards of your deck. You may reveal 1 (Clan) Unit card/Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck."
+      "【메인】 자신의 덱을 위에서 3장 보고, 그 중에 (클랜)의, 유닛 카드 1장/파일럿 카드 1장 을 공개하고 패에 추가할 수 있다. 남은 카드는 무작위로 되돌린다."
     ],
     "__typename": "CommandCard",
     "id": "ST06-012"
@@ -3462,7 +3462,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【액션】 Choose 1 to 2 friendly (Clan) Units. They can't receive battle damage from enemy Units that are Lv.2 or lower during this turn.",
+      "【액션】 (클랜)의 아군의 유닛 1~2개를 선택한다. 이 턴 동안, 그 유닛들은 Lv.2 이하의 상대의 유닛으로부터 배틀 대미지를 받지 않는다.",
       "【파일럿】[오르테가 (GQ)]"
     ],
     "__typename": "CommandCard",
@@ -3493,7 +3493,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【기동･메인】 이 베이스를 레스트로 한다: If a friendly (Clan) Link Unit is in play, choose 1 friendly Unit. 이 턴 동안, 그 유닛을 AP+2 한다."
+      "【기동･메인】 이 베이스를 레스트로 한다: (클랜)의 아군의 링크 유닛이 있다면, 아군의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP+2 한다."
     ],
     "__typename": "BaseCard",
     "id": "ST06-014",
@@ -3524,7 +3524,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【턴 1회】 When a friendly (Clan) Unit links, it gains <돌파 3> during this turn.",
+      "【턴 1회】 (클랜)의 아군의 유닛이 링크했을 때, 이 턴 동안, 그 유닛은 <돌파 3>을 얻는다.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "BaseCard",

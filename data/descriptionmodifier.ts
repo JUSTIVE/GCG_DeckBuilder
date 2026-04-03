@@ -29,6 +29,10 @@ const replaceList = {
   "It gets AP-1 during this turn.": "이 턴 동안, 그 유닛을 AP-1 한다.",
   "Add it to your hand.": "그 카드를 패에 추가한다.",
   "Choose 1 enemy Unit that is Lv.2 or lower.": "Lv.2 이하의 상대의 유닛 1개를 선택한다.",
+  "If another friendly (Clan) Unit is in play,": "이 유닛 이외의, (클랜)의 아군의 유닛이 있다면,",
+  "Choose 1 to 2 friendly (Clan) Units.": "(클랜)의 아군의 유닛 1~2개를 선택한다.",
+  "They get AP+2 during this turn.": "이 턴 동안, 그 유닛들을 AP+2 한다.",
+  "If you have a (Clan) Unit in play,": "(클랜)의 자신의 유닛이 있다면,",
 };
 
 function applyReplacements(v: string): string {
