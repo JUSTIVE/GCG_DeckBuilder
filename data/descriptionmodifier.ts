@@ -47,6 +47,9 @@ const replaceList = {
   "Choose 1 friendly Link Unit.": "아군의 링크 유닛 1개를 선택한다.",
   "It gains <돌파 1> during this turn.": "이 턴 동안, 그 유닛은 <돌파 1>을 얻는다.",
   "This Unit gets AP+1 and HP+1.": "이 유닛을 AP+1, HP+1 한다.",
+  "Set this Unit as active.": "이 유닛을 액티브로 한다.",
+  "when this Unit destroys an enemy Unit with battle damage,":
+    "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때,",
 };
 
 function applyReplacements(v: string): string {
