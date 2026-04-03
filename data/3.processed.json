@@ -4532,7 +4532,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【기동･메인】 ②, return this Unit to the bottom of its owner's deck：Choose 1 Unit card with \"Impulse Gundam\" in its card name that is Lv.4 or higher from your trash. Deploy it."
+      "【기동･메인】 ②, 이 유닛을 주인의 덱 밑으로 되돌린다：자신의 트래시의 Lv.4 이상의 카드명에 \"임펄스 건담\"을 포함하는 유닛 카드 1개를 선택한다. 그 유닛을 배치한다."
     ],
     "__typename": "UnitCard",
     "id": "ST09-001",
@@ -4564,7 +4564,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【파괴 시】 Choose 1 (Minerva Squad) Unit card without \"Force Impulse Gundam\" in its card name from your trash. 그 카드를 패에 추가한다."
+      "【파괴 시】 자신의 트래시의 카드명에 \"포스 임펄스 건담\"을 포함하지 않는, (미네르바 부대)의 유닛 카드 1장을 선택한다. 그 카드를 패에 추가한다."
     ],
     "__typename": "UnitCard",
     "id": "ST09-002",
@@ -4598,7 +4598,7 @@
     "relatedTrait": [],
     "description": [
       "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【링크 시】 If there are 5 or more purple cards in your trash, deal 2 damage to all Units with 5 or less AP."
+      "【링크 시】 자신의 트래시에 자색의 카드가 5장 이상 있다면, AP5 이하의 유닛 전부에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "ST09-003",
@@ -4631,7 +4631,7 @@
     "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "While a friendly Base in play, this Unit gains <제압>.",
+      "아군의 베이스가 있는 동안, 이 유닛은 <제압>을 얻는다.",
       "(공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)"
     ],
     "__typename": "UnitCard",
@@ -4688,7 +4688,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 If you deploy this Unit from your trash, Lv.3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
+      "【배치 시】 이 유닛을 트래시로부터 배치했다면, Lv.3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "UnitCard",
     "id": "ST09-006",
@@ -4755,7 +4755,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【공격 시】 If this is a (Minerva Squad) Unit, choose 1 of your Resources. Set it as active."
+      "【공격 시】 이 유닛이 (미네르바 부대)라면, 자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다."
     ],
     "__typename": "PilotCard",
     "id": "ST09-008",
@@ -4777,7 +4777,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 Choose 1 active enemy Unit with 4 or less AP. 그 유닛을 파괴한다."
+      "【메인】 /【액션】 액티브의 AP4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "CommandCard",
     "id": "ST09-009",
@@ -4802,7 +4802,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, 자신의 턴 이라면, look at the top 2 cards of your deck and return 1 to the top. Place the remaining card into your trash."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, 자신의 턴 이라면, 자신의 덱을 위에서 2장 보고, 그 중 카드 1장을 위로 되돌린다. 남은 카드는 자신의 트래시에 둔다."
     ],
     "__typename": "BaseCard",
     "id": "ST09-010",
@@ -13274,7 +13274,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 If you deploy this Unit from your trash, choose 1 enemy Unit with 4 or less AP. 그 유닛에 2 대미지를 준다."
+      "【배치 시】 이 유닛을 트래시로부터 배치했다면, choose 1 enemy Unit with 4 or less AP. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-062",

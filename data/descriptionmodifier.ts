@@ -40,6 +40,9 @@ const replaceList = {
     "이 배틀 동안, 그 유닛은 AP2 이하의 상대의 유닛으로부터 배틀 대미지를 받지 않는다.",
   "Return the remaining cards randomly to the bottom of your deck.":
     "남은 카드는 무작위로 덱의 밑으로 되돌린다.",
+  "If you deploy this Unit from your trash,": "이 유닛을 트래시로부터 배치했다면,",
+  "choose 1 of your Resources. Set it as active.":
+    "자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다.",
 };
 
 function applyReplacements(v: string): string {
