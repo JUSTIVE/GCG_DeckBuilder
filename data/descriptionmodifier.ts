@@ -64,6 +64,7 @@ const replaceList = {
   "Choose 1 enemy Unit whose Lv. is equal to or lower than this Unit.":
     "이 유닛의 Lv. 이하의 상대의 유닛 1개를 선택한다.",
   "Choose 1 friendly (자프트) Unit.": "(자프트)의 아군의 유닛 1개를 선택한다.",
+  "Choose 1 rested enemy Unit.": "레스트의 상대의 유닛 1개를 선택한다.",
 };
 
 function applyReplacements(v: string): string {

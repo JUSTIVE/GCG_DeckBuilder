@@ -37,7 +37,9 @@ const isTranslated = (value: string): boolean =>
 
 const isDescriptionTranslated = (description: string[]): boolean =>
   description.length > 0 &&
-  description.every((line) => isTranslated(line.replaceAll("EX리소스", "")));
+  description.every((line) =>
+    isTranslated(line.replaceAll("EX리소스", "").replaceAll("(G-팀)", "")),
+  );
 
 // ── field result ──────────────────────────────────────────────────────────────
 

@@ -6770,7 +6770,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "While this Unit is blue, it gains <리페어 1>.",
+      "이 유닛이 청색인 경우, 이 유닛은 <리페어 1>을 얻는다.",
       "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
     "__typename": "PilotCard",
@@ -6796,7 +6796,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 This Unit's AP can't be reduced by enemy effects."
+      "【링크 시】 이 유닛의 AP는 상대의 효과로 줄어들지 않는다."
     ],
     "__typename": "PilotCard",
     "id": "GD01-090",
@@ -6821,7 +6821,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "While this Unit is (지온), it gains <돌파 1>.",
+      "이 유닛이 (지온)일 경우, 이 유닛은 <돌파 1>을 얻는다.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
@@ -6953,7 +6953,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【기동･액션】 【턴 1회】 If an enemy Unit with 1 or less AP is in play, this Unit recovers 1 HP."
+      "【기동･액션】 【턴 1회】 AP1 이하의 상대의 유닛이 있다면, 이 유닛을 1 회복한다."
     ],
     "__typename": "PilotCard",
     "id": "GD01-098",
@@ -7003,7 +7003,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】 All friendly Units that are Lv.4 or lower recover 2 HP."
+      "【메인】 Lv.4 이하의 아군의 유닛 전부를 2 회복한다."
     ],
     "__typename": "CommandCard",
     "id": "GD01-102",
@@ -7025,7 +7025,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 Choose 1 active friendly (지구 연방) Unit and 1 active enemy Unit. 그 카드들을 레스트로 한다.",
+      "【메인】 액티브의 (지구 연방)의 아군의 유닛 1개와, 상대의 유닛 1개를 선택한다. 그 카드들을 레스트로 한다.",
       "【파일럿】[다구자 맥클]"
     ],
     "__typename": "CommandCard",
@@ -7052,7 +7052,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 자신은 1장 드로우 한다.",
-      "【메인】 Choose 1 rested enemy Unit. 그 유닛에 2 대미지를 준다."
+      "【메인】 레스트의 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "CommandCard",
     "id": "GD01-104",
@@ -7074,7 +7074,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 Deploy 2 [Zaku Ⅱ]((지온)･AP1･HP1) Unit tokens.",
+      "【메인】 [자쿠 Ⅱ]((지온)･AP1･HP1)의 유닛 토큰 2개를 배치한다.",
       "【파일럿】[도즐 자비]"
     ],
     "__typename": "CommandCard",
@@ -7100,7 +7100,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】 Deal 2 damage to all Units with <블로커>."
+      "【메인】 <블로커>를 가진 유닛 전부에 2 대미지를 준다."
     ],
     "__typename": "CommandCard",
     "id": "GD01-108",
@@ -7122,7 +7122,7 @@
       "G_TEAM"
     ],
     "description": [
-      "【메인】 Look at the top 5 cards of your deck. You may reveal 1 (오퍼레이션 메테오)/(G Team) Unit card/Pilot card among them and add it to your hand. 남은 카드는 무작위로 덱의 밑으로 되돌린다."
+      "【메인】 자신의 덱을 위에서 5장 보고, 그 중, (오퍼레이션 메테오)/(G-팀)의, 유닛 카드 1장/파일럿 카드 1장을 공개하고 패에 추가할 수 있다. 남은 카드는 무작위로 덱의 밑으로 되돌린다."
     ],
     "__typename": "CommandCard",
     "id": "GD01-109",
@@ -7145,7 +7145,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 Lv.4 이상의 유닛 1개를 선택한다. During this turn, it may choose an active enemy Unit with 6 or less AP as its attack target.",
+      "【메인】 /【액션】 Lv.4 이상의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 액티브의 AP6 이하의 상대의 유닛을 공격 대상으로 선택할 수 있다.",
       "【파일럿】[라시드 쿠라마]"
     ],
     "__typename": "CommandCard",
@@ -7392,7 +7392,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, HP3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, HP3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "BaseCard",
     "id": "GD01-123",
@@ -7422,7 +7422,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, 자신의 턴 이라면, you may deploy 1 (지온) Unit card that is Lv.4 or lower from your hand."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, 자신의 턴 이라면, 자신의 패의 Lv.4 이하의 (지온)의 유닛 카드 1장을 배치할 수 있다."
     ],
     "__typename": "BaseCard",
     "id": "GD01-125",
@@ -15038,7 +15038,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, (자프트)의 아군의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP+3 한다."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, (자프트)의 아군의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP+3 한다."
     ],
     "__typename": "BaseCard",
     "id": "GD03-127",
