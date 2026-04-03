@@ -55,6 +55,9 @@ const replaceList = {
     "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때,",
   "It recovers 3 HP.": "그 유닛을 3 회복한다.",
   "Choose 1 enemy Unit that is Lv.5 or lower.": "Lv.5 이하의 상대의 유닛 1개를 선택한다.",
+  "It gets AP-2 during this turn.": "이 턴 동안, 그 유닛을 AP-2 한다.",
+  "It can't attack during this turn.": "이 턴 동안, 그 유닛은 공격할 수 없다.",
+  "Choose 1 enemy Unit that is Lv.4 or lower.": "Lv.4 이하의 상대의 유닛 1개를 선택한다.",
 };
 
 function applyReplacements(v: string): string {

@@ -5603,7 +5603,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 Look at the top 3 cards of your deck. You may deploy 1 (자프트) Unit card that is Lv.4 or lower among them. 남은 카드는 무작위로 덱의 밑으로 되돌린다."
+      "【세트 시】 자신의 덱을 위에서 3장 보고, 그 중에, Lv.4 이하의 (자프트)의 유닛 카드 1장을 배치할 수 있다. 남은 카드는 무작위로 덱의 밑으로 되돌린다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-045",
@@ -6090,7 +6090,7 @@
     "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【세트 시】 【턴 1회】 When you pair a Pilot with this Unit or one of your white Units, 상대의 유닛 1개를 선택한다. It gets AP-2 during this turn."
+      "【세트 시】 【턴 1회】 이 유닛이나, 백색의 자신의 유닛에 파일럿을 세트했을 때, 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-065",
@@ -6123,8 +6123,8 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 Deploy 1 [Fatum-00]((삼척동맹)･AP2･HP2･<블로커>) Unit token.",
-      "【세트 시】 【공격 시】 Choose 1 of your (삼척동맹) Unit tokens. It may attack on the turn it is deployed."
+      "【배치 시】 [파툼-00]((삼척동맹)･AP2･HP2･<블로커>)의 유닛 토큰 1개를 배치한다.",
+      "【세트 시】 【공격 시】 자신의 (삼척동맹)의 유닛 토큰 1개를 선택한다. 그 토큰은 배치한 턴에 공격할 수 있다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-066",
@@ -6186,7 +6186,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【기동･메인】 【턴 1회】 ①：Choose 1 of your rested white Units with <블로커>. Set it as active. It can't attack during this turn."
+      "【기동･메인】 【턴 1회】 ①： <블로커>를 가진 레스트의 백색의 자신의 유닛 1개를 선택한다. 그 유닛을 액티브로 한다. 이 턴 동안, 그 유닛은 공격할 수 없다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-069",
@@ -6389,7 +6389,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 【기동･액션】 【턴 1회】 ②： 상대의 유닛 1개를 선택한다. It gets AP-1 during this battle."
+      "【세트 시】 【기동･액션】 【턴 1회】 ②： 상대의 유닛 1개를 선택한다. 이 배틀 동안, 그 유닛을 AP-1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-082",
@@ -6669,7 +6669,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "While this Unit is white, it gains <블로커>.",
+      "이 유닛이 백색인 경우, 이 유닛은 <블로커>를 얻는다.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "PilotCard",
@@ -7039,7 +7039,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 Choose 1 enemy Unit that is Lv.4 or lower. It gets AP-2 during this turn.",
+      "【메인】 /【액션】 Lv.4 이하의 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다.",
       "【파일럿】[추아츄리 판런치]"
     ],
     "__typename": "CommandCard",
@@ -7067,7 +7067,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드의 【메인】 을 발동한다.",
-      "【메인】 Choose 1 rested Unit with <블로커>. Set it as active. It can't attack during this turn."
+      "【메인】 Choose 1 rested Unit with <블로커>. Set it as active. 이 턴 동안, 그 유닛은 공격할 수 없다."
     ],
     "__typename": "CommandCard",
     "id": "GD01-121"
@@ -9619,7 +9619,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 If a friendly white Base is in play, 상대의 유닛 1개를 선택한다. It gets AP-2 during this turn."
+      "【배치 시】 If a friendly white Base is in play, 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-081",
@@ -10087,7 +10087,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】 If there are 4 or more (Gjallarhorn) cards in your trash, 상대의 유닛 1개를 선택한다. It gets AP-2 during this turn."
+      "【세트 시】 If there are 4 or more (Gjallarhorn) cards in your trash, 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD02-099",
@@ -10748,7 +10748,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【파괴 시】 Choose 1 enemy Unit that is Lv.4 or lower. 그 유닛에 1 대미지를 준다."
+      "【파괴 시】 Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "BaseCard",
     "id": "GD02-126",
@@ -10864,7 +10864,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if a friendly (Gjallarhorn) Unit is in play, 상대의 유닛 1개를 선택한다. It gets AP-2 during this turn."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if a friendly (Gjallarhorn) Unit is in play, 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "BaseCard",
     "id": "GD02-130",
@@ -13162,7 +13162,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 【공격 시】 Choose 1 enemy Unit with no paired Pilot. It gets AP-2 during this turn."
+      "【링크 시】 【공격 시】 Choose 1 enemy Unit with no paired Pilot. 이 턴 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-075",
@@ -13681,7 +13681,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】 Place the top 2 cards of your deck into your trash. If you placed a (Vagan) card with this effect, 상대의 유닛 1개를 선택한다. It gets AP-2 during this turn."
+      "【세트 시】 Place the top 2 cards of your deck into your trash. If you placed a (Vagan) card with this effect, 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD03-094",
@@ -14039,7 +14039,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드의 【메인】 을 발동한다.",
-      "【메인】 /【액션】 Choose 1 enemy Unit that is Lv.4 or lower. 그 유닛에 3 대미지를 준다. If there are 2 or more cards with \"Improved Technique\" in their card name in your trash, choose 1 enemy Unit instead."
+      "【메인】 /【액션】 Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 3 대미지를 준다. If there are 2 or more cards with \"Improved Technique\" in their card name in your trash, choose 1 enemy Unit instead."
     ],
     "__typename": "CommandCard",
     "id": "GD03-109"
@@ -14277,7 +14277,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 During this turn, if a friendly (Superpower Bloc)/(UN) Unit destroys an enemy Unit with battle damage, choose 1 rested friendly (Superpower Bloc)/(UN) Unit. Set it as active. It can't attack during this turn.",
+      "【메인】 During this turn, if a friendly (Superpower Bloc)/(UN) Unit destroys an enemy Unit with battle damage, choose 1 rested friendly (Superpower Bloc)/(UN) Unit. Set it as active. 이 턴 동안, 그 유닛은 공격할 수 없다.",
       "【파일럿】[패트릭 콜라사워]"
     ],
     "__typename": "CommandCard",
