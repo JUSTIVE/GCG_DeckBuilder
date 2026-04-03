@@ -5,6 +5,7 @@ import descriptionModifier from "./descriptionmap.json";
 const replaceList = {
   "】": "】 ",
   "  ": " ",
+  "(Mafty)": "(마프티)",
   "(Earth Federation)": "(지구 연방)",
   "(Neo Zeon)": "(네오 지온)",
   "(Zeon)": "(지온)",
@@ -43,6 +44,8 @@ const replaceList = {
   "If you deploy this Unit from your trash,": "이 유닛을 트래시로부터 배치했다면,",
   "choose 1 of your Resources. Set it as active.":
     "자신의 리소스 1개를 선택한다. 그 리소스를 액티브로 한다.",
+  "Choose 1 friendly Link Unit.": "아군의 링크 유닛 1개를 선택한다.",
+  "It gains <돌파 1> during this turn.": "이 턴 동안, 그 유닛은 <돌파 1>을 얻는다.",
 };
 
 function applyReplacements(v: string): string {

@@ -3951,8 +3951,8 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While you have no Units that are Lv.6 or higher in play, this card in your hand gets Lv. -1 and cost -1 for each enemy Unit in play.",
-      "【세트 시】 Choose 1 enemy Unit with the highest Lv. 그 유닛에 3 대미지를 준다."
+      "Lv.6 이상의 자신의 유닛이 없는 동안, 상대의 유닛 1개당, 패의 이 카드를 Lv.-1, 코스트-1 한다.",
+      "【세트 시】 가장 Lv.이 높은 상대의 유닛 1개를 선택한다. 그 유닛에 3 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "ST08-001",
@@ -4038,7 +4038,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【공격 시】 If this Unit is attacking an enemy Unit, 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
+      "【공격 시】 상대의 유닛에 공격하고 있다면, 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "ST08-004",
@@ -4092,7 +4092,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 【공격 시】 【턴 1회】 상대 플레이어에게 공격하고 있다면, reveal 1 (지구 연방) Unit card from your hand. Return it to the bottom of your deck. If you do, draw 2."
+      "【세트 시】 【공격 시】 【턴 1회】 상대 플레이어에게 공격하고 있다면, 자신의 패의 (지구 연방)의 유닛 카드 1장을 공개하고 덱의 아래로 되돌린다. 그랬다면, 자신은 2장 드로우 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST08-006",
@@ -4148,7 +4148,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While 3 or more enemy Units are in play, this Unit gains <블로커>.",
+      "상대의 유닛이 3개 이상 있는 동안, 이 유닛은 <블로커>를 얻는다.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
@@ -4175,7 +4175,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 Choose 1 rested enemy Unit that is Lv.2 or lower. It won' t be set as active during the start phase of your opponent' s next turn."
+      "【배치 시】 레스트의 Lv.2 이하의 상대의 유닛 1개를 선택한다. 그 유닛은 다음 상대의 턴 스타트 페이즈에 액티브되지 않는다."
     ],
     "__typename": "UnitCard",
     "id": "ST08-009",
@@ -4203,7 +4203,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】 If this is a (Mafty) Unit, choose 1 of your (Mafty) Units. During this turn, it may choose a damaged active enemy Unit as its attack target."
+      "【세트 시】 이 유닛이 (마프티)라면, (마프티)의 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 대미지를 받고 있는 액티브의 상대의 유닛을 공격 대상으로 선택할 수 없다."
     ],
     "__typename": "PilotCard",
     "id": "ST08-010",
@@ -4227,7 +4227,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "When you draw with an effect, if this is a blue Unit, it gains <고기동> during this turn.",
+      "자신이 효과로 드로우 했을 때, 이 유닛이 청색이라면, 이 턴 동안, 이 유닛은 <고기동>을 얻는다.",
       "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "PilotCard",
@@ -4252,7 +4252,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 Choose 1 friendly Link Unit. It gains <돌파 1> during this turn.",
+      "【메인】 아군의 링크 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 <돌파 1>을 얻는다.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
       "【파일럿】[가우만 노빌]"
     ],
@@ -4280,7 +4280,7 @@
       "MAFTY"
     ],
     "description": [
-      "【메인】 /【액션】 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다. If a friendly (Mafty) Link Unit is in play, deal 2 damage instead."
+      "【메인】 /【액션】 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다. (마프티)의 아군의 링크 유닛이 있다면, 대신에 2 대미지를 준다."
     ],
     "__typename": "CommandCard",
     "id": "ST08-013"
@@ -4303,7 +4303,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 of your Units. 이 턴 동안, 그 유닛을 AP+2 한다."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP+2 한다."
     ],
     "__typename": "BaseCard",
     "id": "ST08-014",
@@ -4334,7 +4334,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【기동･메인】 【턴 1회】 ②：Choose 1 of your Units. It recovers 2 HP."
+      "【기동･메인】 【턴 1회】 ②：자신의 유닛 1개를 선택한다. 그 유닛을 2 회복한다."
     ],
     "__typename": "BaseCard",
     "id": "ST08-015",
@@ -6719,7 +6719,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 Choose 1 friendly Link Unit. It recovers 3 HP.",
+      "【메인】 /【액션】 아군의 링크 유닛 1개를 선택한다. It recovers 3 HP.",
       "【파일럿】[루크레치아 노인]"
     ],
     "__typename": "CommandCard",
@@ -9836,7 +9836,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】 Choose 1 of your other (지온) Link Units. It gains <돌파 1> during this turn.",
+      "【세트 시】 Choose 1 of your other (지온) Link Units. 이 턴 동안, 그 유닛은 <돌파 1>을 얻는다.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
@@ -13580,7 +13580,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【공격 시】 Choose 1 of your (Cyclops Team) Units. It gains <돌파 1> during this turn.",
+      "【공격 시】 Choose 1 of your (Cyclops Team) Units. 이 턴 동안, 그 유닛은 <돌파 1>을 얻는다.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
@@ -14080,7 +14080,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 Choose 1 friendly (Mafty) Unit. 이 턴 동안, 그 유닛을 AP+3 한다.",
+      "【메인】 /【액션】 Choose 1 friendly (마프티) Unit. 이 턴 동안, 그 유닛을 AP+3 한다.",
       "【파일럿】[에메랄다 주빈]"
     ],
     "__typename": "CommandCard",
