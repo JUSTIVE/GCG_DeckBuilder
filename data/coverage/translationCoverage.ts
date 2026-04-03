@@ -36,7 +36,8 @@ const isTranslated = (value: string): boolean =>
   exacts.includes(value);
 
 const isDescriptionTranslated = (description: string[]): boolean =>
-  description.length > 0 && description.every((line) => isTranslated(line));
+  description.length > 0 &&
+  description.every((line) => isTranslated(line.replaceAll("EX리소스", "")));
 
 // ── field result ──────────────────────────────────────────────────────────────
 

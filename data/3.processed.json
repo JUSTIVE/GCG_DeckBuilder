@@ -333,7 +333,7 @@
     "relatedTrait": [],
     "description": [
       "<돌파 5> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "This Unit may choose an active enemy Unit that is Lv.4 or lower as its attack target."
+      "이 유닛은, 액티브인 Lv.4 이하의 상대의 유닛을 공격 대상으로 선택할 수 있다."
     ],
     "__typename": "UnitCard",
     "id": "ST02-001",
