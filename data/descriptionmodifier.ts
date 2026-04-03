@@ -13,6 +13,7 @@ const replaceList = {
   "(White Base Team)": "(화이트베이스 부대)",
   "(ZAFT)": "(자프트)",
   "(Triple Ship Alliance)": "(삼척동맹)",
+  "(Academy)": "(학원)",
   "this Unit gets AP+2 during this battle.": "이 배틀 동안, 이 유닛을 AP+2 한다.",
   "If you are attacking the enemy player,": "상대 플레이어를 공격하고 있다면,",
   "Choose 1 enemy Unit with 5 or less HP.": "HP5 이하의 상대의 유닛 1개를 선택한다.",
@@ -58,6 +59,11 @@ const replaceList = {
   "It gets AP-2 during this turn.": "이 턴 동안, 그 유닛을 AP-2 한다.",
   "It can't attack during this turn.": "이 턴 동안, 그 유닛은 공격할 수 없다.",
   "Choose 1 enemy Unit that is Lv.4 or lower.": "Lv.4 이하의 상대의 유닛 1개를 선택한다.",
+  "Then, choose 1 enemy Unit with 3 or less HP.": "그 후, HP3 이하의 상대의 유닛 1개를 선택한다.",
+  "Choose 1 enemy Unit with 2 or less AP.": "AP2 이하의 상대의 유닛 1개를 선택한다.",
+  "Choose 1 enemy Unit whose Lv. is equal to or lower than this Unit.":
+    "이 유닛의 Lv. 이하의 상대의 유닛 1개를 선택한다.",
+  "Choose 1 friendly (자프트) Unit.": "(자프트)의 아군의 유닛 1개를 선택한다.",
 };
 
 function applyReplacements(v: string): string {
