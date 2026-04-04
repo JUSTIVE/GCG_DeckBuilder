@@ -4,6 +4,9 @@ import { serveGraphQL } from "@/serve";
 import { cn } from "@/lib/utils";
 import { COLOR_BG, COLOR_HEX } from "src/render/color";
 import { renderTrait } from "@/render/trait";
+import { renderPackage } from "@/render/package";
+import { renderZone } from "@/render/zone";
+import { renderKeyword } from "@/render/keyword";
 import { ClockIcon, EyeIcon, SearchIcon, Trash2Icon, XIcon } from "lucide-react";
 import type { SearchHistoryPanel_query$key } from "@/__generated__/SearchHistoryPanel_query.graphql";
 import type { SearchHistoryPanel_list$key } from "@/__generated__/SearchHistoryPanel_list.graphql";
@@ -111,6 +114,12 @@ type HistoryFilter = {
   color?: readonly string[] | null;
   trait?: readonly string[] | null;
   query?: string | null;
+  package?: string | null;
+  zone?: readonly string[] | null;
+  keyword?: readonly string[] | null;
+  cost?: readonly number[] | null;
+  level?: readonly number[] | null;
+  rarity?: string | null;
 };
 
 function FilterSummary({ f }: { f: HistoryFilter }) {
@@ -154,6 +163,46 @@ function FilterSummary({ f }: { f: HistoryFilter }) {
   if (traitCount > 3) {
     parts.push(
       <span key="t-more" className="text-xs text-muted-foreground">+{traitCount - 3}</span>,
+    );
+  }
+
+  if (f.package) {
+    parts.push(
+      <span key="pkg" className="rounded px-1.5 py-0.5 bg-muted text-xs">
+        {renderPackage(f.package)}
+      </span>,
+    );
+  }
+
+  [...(f.zone ?? [])].forEach((z) =>
+    parts.push(
+      <span key={`z-${z}`} className="rounded px-1.5 py-0.5 bg-muted text-xs">
+        {renderZone(z)}
+      </span>,
+    ),
+  );
+
+  [...(f.keyword ?? [])].forEach((k) =>
+    parts.push(
+      <span key={`kw-${k}`} className="rounded px-1.5 py-0.5 bg-muted text-xs">
+        {renderKeyword(k)}
+      </span>,
+    ),
+  );
+
+  if ((f.cost?.length ?? 0) > 0) {
+    parts.push(
+      <span key="cost" className="rounded px-1.5 py-0.5 bg-muted text-xs">
+        코스트 {[...(f.cost ?? [])].join("·")}
+      </span>,
+    );
+  }
+
+  if ((f.level?.length ?? 0) > 0) {
+    parts.push(
+      <span key="level" className="rounded px-1.5 py-0.5 bg-muted text-xs">
+        Lv {[...(f.level ?? [])].join("·")}
+      </span>,
     );
   }
 
