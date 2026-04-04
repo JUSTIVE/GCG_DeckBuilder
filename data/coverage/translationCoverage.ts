@@ -178,8 +178,10 @@ function renderCardLine(
   const typename = styleText("gray", ` [${card.__typename}]`);
   const pct = renderPercent(cardSummary);
   const dot = renderColorDot(card);
+  const cardName = (card as any).name ?? (card as any).pilot?.name;
+  const nameText = allDone && cardName ? styleText("gray", ` ${cardName}`) : "";
 
-  console.log(`${prefix}${connector}${dot}${idText}${typename} ${pct}`);
+  console.log(`${prefix}${connector}${dot}${idText}${typename} ${pct}${nameText}`);
 
   if (!allDone) {
     fields.forEach((field, i) => {

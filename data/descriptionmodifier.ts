@@ -55,6 +55,7 @@ const replaceList = {
   "It gains <돌파 1> during this turn.": "이 턴 동안, 그 유닛은 <돌파 1>을 얻는다.",
   "This Unit gets AP+1 and HP+1.": "이 유닛을 AP+1, HP+1 한다.",
   "Set this Unit as active.": "이 유닛을 액티브로 한다.",
+  "set this Unit as active.": "이 유닛을 액티브로 한다.",
   "when this Unit destroys an enemy Unit with battle damage,":
     "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때,",
   "It recovers 3 HP.": "그 유닛을 3 회복한다.",
@@ -69,6 +70,7 @@ const replaceList = {
     "이 유닛의 Lv. 이하의 상대의 유닛 1개를 선택한다.",
   "Choose 1 friendly (자프트) Unit.": "(자프트)의 아군의 유닛 1개를 선택한다.",
   "Choose 1 rested enemy Unit.": "레스트의 상대의 유닛 1개를 선택한다.",
+  "choose 1 rested enemy Unit.": "레스트의 상대의 유닛 1개를 선택한다.",
   "Choose 1 of your Units and 1 enemy Unit.": "자신의 유닛 1개와, 상대의 유닛 1개를 선택한다.",
   "Choose 1 of your Units.": "자신의 유닛 1개를 선택한다.",
   "If you do,": "그랬다면,",
@@ -84,6 +86,15 @@ const replaceList = {
   "Place the top 2 cards of your deck into your trash.":
     "자신의 덱을 위에서 2장, 자신의 트래쉬에 둔다.",
   "choose 1 enemy Unit with 2 or less AP.": "AP2 이하의 상대의 유닛 1개를 선택한다.",
+  "Choose 1 friendly (벌쳐) Unit.": "(벌쳐)의 아군의 유닛 1개를 선택한다.",
+  "choose 1 friendly (벌쳐) Unit.": "(벌쳐)의 아군의 유닛 1개를 선택한다.",
+  "During this turn, it may choose an active enemy Unit that is Lv.4 or lower as its attack target.":
+    "이 턴 동안, 그 유닛은 액티브의 Lv.4 이하의 상대의 유닛을 공격 대상으로 선택할 수 있다.",
+  "You may discard 1 Unit card.": "자신의 패의 유닛 카드 1장을 버릴 수 있다.",
+  "return the card paired with this Unit to your hand.":
+    "이 유닛에 세트되어 있는 카드를 패로 되돌린다.",
+  "When this Unit receives enemy effect damage,": "이 유닛이 상대의 효과 대미지를 받았을 때,",
+  "It gets AP+1 during this turn.": "이 턴 동안, 그 유닛을 AP+1 한다.",
 };
 
 function applyReplacements(v: string): string {
