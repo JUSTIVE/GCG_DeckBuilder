@@ -73,7 +73,7 @@ function findKeyword(
   return null;
 }
 
-function triggerClass(text: string): string {
+export function triggerClass(text: string): string {
   if (text in TRIGGER_STYLES) return TRIGGER_STYLES[text] || TRIGGER_FALLBACK;
   for (const key of Object.keys(TRIGGER_STYLES)) {
     if (text.startsWith(key)) return TRIGGER_STYLES[key] || TRIGGER_FALLBACK;
@@ -81,7 +81,7 @@ function triggerClass(text: string): string {
   return TRIGGER_FALLBACK;
 }
 
-function abilityClass(text: string): string {
+export function abilityClass(text: string): string {
   if (text in ABILITY_STYLES) return ABILITY_STYLES[text] || ABILITY_FALLBACK;
   for (const key of Object.keys(ABILITY_STYLES)) {
     if (text.startsWith(key)) return ABILITY_STYLES[key] || ABILITY_FALLBACK;

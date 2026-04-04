@@ -9,7 +9,9 @@ import { Input } from "@/components/ui/input";
 import { PlusIcon, Trash2Icon, LayersIcon } from "lucide-react";
 import { COLOR_BG } from "src/render/color";
 import { cn } from "@/lib/utils";
-import { renderKeyword } from "@/render/keyword";
+import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
+import { renderTrait } from "@/render/trait";
+import { triggerClass, abilityClass } from "@/components/CardDescription";
 
 const Query = graphql`
   query DeckListPageQuery {
@@ -23,10 +25,30 @@ const Query = graphql`
           count
           card {
             __typename
-            ... on UnitCard { color imageUrl keywords }
-            ... on PilotCard { color imageUrl keywords }
-            ... on BaseCard { color imageUrl keywords }
-            ... on CommandCard { color imageUrl keywords }
+            ... on UnitCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
+            ... on PilotCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
+            ... on BaseCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
+            ... on CommandCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
           }
         }
       }
@@ -46,10 +68,30 @@ const CREATE_DECK_MUTATION = graphql`
           count
           card {
             __typename
-            ... on UnitCard { color imageUrl keywords }
-            ... on PilotCard { color imageUrl keywords }
-            ... on BaseCard { color imageUrl keywords }
-            ... on CommandCard { color imageUrl keywords }
+            ... on UnitCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
+            ... on PilotCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
+            ... on BaseCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
+            ... on CommandCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
           }
         }
       }
@@ -69,10 +111,30 @@ const DELETE_DECK_MUTATION = graphql`
           count
           card {
             __typename
-            ... on UnitCard { color imageUrl keywords }
-            ... on PilotCard { color imageUrl keywords }
-            ... on BaseCard { color imageUrl keywords }
-            ... on CommandCard { color imageUrl keywords }
+            ... on UnitCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
+            ... on PilotCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
+            ... on BaseCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
+            ... on CommandCard {
+              color
+              imageUrl
+              keywords
+              traits
+            }
           }
         }
       }
@@ -82,8 +144,10 @@ const DELETE_DECK_MUTATION = graphql`
 
 export function DeckListPage() {
   const data = useLazyLoadQuery<DeckListPageQuery>(Query, {});
-  const [commitCreate, isCreating] = useMutation<DeckListPageCreateDeckMutation>(CREATE_DECK_MUTATION);
-  const [commitDelete] = useMutation<DeckListPageDeleteDeckMutation>(DELETE_DECK_MUTATION);
+  const [commitCreate, isCreating] =
+    useMutation<DeckListPageCreateDeckMutation>(CREATE_DECK_MUTATION);
+  const [commitDelete] =
+    useMutation<DeckListPageDeleteDeckMutation>(DELETE_DECK_MUTATION);
   const router = useRouter();
   const [newName, setNewName] = useState("");
 
@@ -114,7 +178,12 @@ export function DeckListPage() {
     BaseCard: "베이스",
     CommandCard: "커맨드",
   };
-  const KIND_ORDER = ["UnitCard", "PilotCard", "BaseCard", "CommandCard"] as const;
+  const KIND_ORDER = [
+    "UnitCard",
+    "PilotCard",
+    "BaseCard",
+    "CommandCard",
+  ] as const;
 
   function deckKindCounts(cards: readonly { count: number; card: any }[]) {
     const counts: Record<string, number> = {};
@@ -125,7 +194,10 @@ export function DeckListPage() {
     return counts;
   }
 
-  function topKeywords(cards: readonly { count: number; card: any }[], limit = 3): string[] {
+  function topKeywords(
+    cards: readonly { count: number; card: any }[],
+    limit = 3,
+  ): string[] {
     const counts = new Map<string, number>();
     for (const { card, count } of cards) {
       for (const kw of card?.keywords ?? []) {
@@ -138,7 +210,25 @@ export function DeckListPage() {
       .map(([kw]) => kw);
   }
 
-  function deckColors(cards: readonly { count: number; card: any }[]): string[] {
+  function topTraits(
+    cards: readonly { count: number; card: any }[],
+    limit = 3,
+  ): string[] {
+    const counts = new Map<string, number>();
+    for (const { card, count } of cards) {
+      for (const tr of card?.traits ?? []) {
+        counts.set(tr, (counts.get(tr) ?? 0) + count);
+      }
+    }
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, limit)
+      .map(([tr]) => tr);
+  }
+
+  function deckColors(
+    cards: readonly { count: number; card: any }[],
+  ): string[] {
     const seen = new Set<string>();
     for (const { card } of cards) {
       const color = card?.color;
@@ -147,7 +237,9 @@ export function DeckListPage() {
     return Array.from(seen);
   }
 
-  function deckPreviewImages(cards: readonly { count: number; card: any }[]): string[] {
+  function deckPreviewImages(
+    cards: readonly { count: number; card: any }[],
+  ): string[] {
     const seen = new Set<string>();
     const urls: string[] = [];
     for (const { card } of cards) {
@@ -182,19 +274,44 @@ export function DeckListPage() {
       </form>
 
       {decks.length === 0 ? (
-        <p className="text-muted-foreground text-sm text-center py-8">덱이 없습니다.</p>
+        <p className="text-muted-foreground text-sm text-center py-8">
+          덱이 없습니다.
+        </p>
       ) : (
         <ul className="flex flex-col gap-2">
           {decks.map((deck) => (
             <li
               key={deck.id}
-              className="flex items-center gap-3 rounded-lg border border-border bg-muted/30 px-4 py-3 hover:bg-muted/60 transition-colors"
+              className="flex items-start gap-3 rounded-lg border border-border bg-muted/30 px-4 py-3 hover:bg-muted/60 transition-colors"
             >
               <button
                 type="button"
-                className="flex-1 text-left min-w-0"
-                onClick={() => router.navigate({ to: "/deck/$deckId", params: { deckId: deck.id } })}
+                className="flex-1 text-left min-w-0 flex flex-col gap-1"
+                onClick={() =>
+                  router.navigate({
+                    to: "/deck/$deckId",
+                    params: { deckId: deck.id },
+                  })
+                }
               >
+                <div className="font-semibold truncate mt-2">{deck.name}</div>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-xs text-muted-foreground">
+                    {totalCards(deck.cards)}장
+                  </span>
+                  <div className="flex gap-1 p-1">
+                    {deckColors(deck.cards).map((color) => (
+                      <span
+                        key={color}
+                        className={cn(
+                          "inline-block w-3 h-3 rounded-full",
+                          COLOR_BG[color],
+                          color === "WHITE" && "border border-gray-200",
+                        )}
+                      />
+                    ))}
+                  </div>
+                </div>
                 <div className="flex gap-2">
                   {deckPreviewImages(deck.cards).map((url, i) => (
                     <img
@@ -205,18 +322,7 @@ export function DeckListPage() {
                     />
                   ))}
                 </div>
-                <div className="font-semibold truncate mt-2">{deck.name}</div>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-xs text-muted-foreground">{totalCards(deck.cards)}장</span>
-                  <div className="flex gap-1">
-                    {deckColors(deck.cards).map((color) => (
-                      <span
-                        key={color}
-                        className={cn("inline-block w-3 h-3 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")}
-                      />
-                    ))}
-                  </div>
-                </div>
+
                 {(() => {
                   const counts = deckKindCounts(deck.cards);
                   const parts = KIND_ORDER.filter((k) => counts[k]);
@@ -224,9 +330,14 @@ export function DeckListPage() {
                   return (
                     <div className="flex gap-2 mt-1">
                       {parts.map((k) => (
-                        <span key={k} className="text-[11px] text-muted-foreground">
-                          <span className="font-medium text-foreground/70">{KIND_LABELS[k]}</span>
-                          {" "}{counts[k]}
+                        <span
+                          key={k}
+                          className="text-[11px] text-muted-foreground"
+                        >
+                          <span className="font-medium text-foreground/70">
+                            {KIND_LABELS[k]}
+                          </span>{" "}
+                          {counts[k]}
                         </span>
                       ))}
                     </div>
@@ -237,9 +348,49 @@ export function DeckListPage() {
                   if (kws.length === 0) return null;
                   return (
                     <div className="flex flex-wrap gap-1 mt-1.5">
-                      {kws.map((kw) => (
-                        <span key={kw} className="text-[10px] bg-muted rounded px-1.5 py-0.5 text-muted-foreground">
-                          {renderKeyword(kw)}
+                      {kws.map((kw) => {
+                        const name = KEYWORD_DESCRIPTIONS[kw]?.name ?? kw;
+                        const isTrigger = name.startsWith("【");
+                        const label = name.slice(1, -1);
+                        if (isTrigger) {
+                          return (
+                            <span
+                              key={kw}
+                              className={cn(
+                                "inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold leading-none",
+                                triggerClass(label),
+                              )}
+                            >
+                              {label}
+                            </span>
+                          );
+                        }
+                        return (
+                          <span
+                            key={kw}
+                            className={cn(
+                              "inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] leading-none",
+                              abilityClass(label),
+                            )}
+                          >
+                            {label}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
+                {(() => {
+                  const traits = topTraits(deck.cards);
+                  if (traits.length === 0) return null;
+                  return (
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {traits.map((tr) => (
+                        <span
+                          key={tr}
+                          className="text-[10px] bg-muted rounded px-1.5 py-0.5 text-muted-foreground"
+                        >
+                          {renderTrait(tr)}
                         </span>
                       ))}
                     </div>
