@@ -5088,7 +5088,7 @@
     "relatedTrait": [],
     "description": [
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
-      "【링크 중】This Unit gets HP+1."
+      "【링크 중】 이 유닛을 HP+1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-006",
@@ -5859,7 +5859,7 @@
     ],
     "description": [
       "【기동･메인】<원호 3> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
-      "【세트 중･(Coordinator) Pilot】【턴 1회】When you use this Unit's <원호> to increase a (ZAFT) Unit's AP, set this Unit as active."
+      "【세트 중･(코디네이터) 파일럿】 【턴 1회】 이 유닛의 <원호> 로 (자프트)의 유닛을 AP+ 했을 때, 이 유닛을 액티브로 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-046",
@@ -6326,7 +6326,7 @@
     "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【세트 중】【턴 1회】When you pair a Pilot with this Unit or one of your white Units, choose 1 enemy Unit. It gets AP-2 during this turn."
+      "【세트 중】 【턴 1회】 이 유닛이나, 백색의 자신의 유닛에 파일럿을 세트했을 때, 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-065",
@@ -6457,7 +6457,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 중】【공격 시】Choose 1 enemy Unit. It gets AP-2 during this battle."
+      "【링크 중】 【공격 시】 상대의 유닛 1개를 선택한다. 이 배틀 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-071",
@@ -6489,7 +6489,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 중】【공격 시】Choose 1 enemy Unit with 2 or less HP. Return it to its owner's hand."
+      "【링크 중】 【공격 시】 HP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-073",
@@ -6635,7 +6635,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중】【기동･액션】【턴 1회】②：Choose 1 enemy Unit. It gets AP-1 during this battle."
+      "【세트 중】 【기동･액션】 【턴 1회】 ②： 상대의 유닛 1개를 선택한다. 이 배틀 동안, 그 유닛을 AP-1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-082",
@@ -6796,7 +6796,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 중】This Unit's AP can't be reduced by enemy effects."
+      "【링크 중】 이 유닛의 AP는 상대의 효과로 줄어들지 않는다."
     ],
     "__typename": "PilotCard",
     "id": "GD01-090",
@@ -6849,7 +6849,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 중】【공격 시】Choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. Deal 1 damage to it."
+      "【링크 중】 【공격 시】 이 유닛의 Lv. 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "PilotCard",
     "id": "GD01-093",
@@ -6936,7 +6936,7 @@
     "limit": 4
   },
   {
-    "name": "엘란 케레스 (강화인간 4호)",
+    "name": "엘란 케레스 (강화인사 4호)",
     "level": 4,
     "cost": 1,
     "color": "WHITE",
