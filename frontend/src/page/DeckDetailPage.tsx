@@ -10,8 +10,10 @@ import type {
 } from "@/__generated__/CardListFragmentRefetchQuery.graphql";
 import { Route } from "@/routes/deck/$deckId";
 import { useState, useRef, Suspense } from "react";
+import { useRouter } from "@tanstack/react-router";
 import { CardList } from "@/components/CardList";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
+import { CardDescription } from "@/components/CardDescription";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -31,6 +33,7 @@ import {
   ClipboardCopyIcon,
   ClipboardPasteIcon,
   Trash2Icon,
+  LayoutGridIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COLOR_BG, COLOR_HEX } from "src/render/color";
@@ -63,6 +66,7 @@ const Query = graphql`
               level
               color
               imageUrl
+              description
             }
             ... on PilotCard {
               id
@@ -73,6 +77,7 @@ const Query = graphql`
               level
               color
               imageUrl
+              description
             }
             ... on BaseCard {
               id
@@ -81,6 +86,7 @@ const Query = graphql`
               level
               color
               imageUrl
+              description
             }
             ... on CommandCard {
               id
@@ -89,6 +95,7 @@ const Query = graphql`
               level
               color
               imageUrl
+              description
             }
           }
         }
@@ -205,17 +212,46 @@ const RENAME_MUTATION = graphql`
 `;
 
 const SET_DECK_CARDS_MUTATION = graphql`
-  mutation DeckDetailPageSetDeckCardsMutation($deckId: ID!, $cards: [DeckCardInput!]!) {
+  mutation DeckDetailPageSetDeckCardsMutation(
+    $deckId: ID!
+    $cards: [DeckCardInput!]!
+  ) {
     setDeckCards(deckId: $deckId, cards: $cards) {
       id
       cards {
         count
         card {
           __typename
-          ... on UnitCard { id name cost level color }
-          ... on PilotCard { id pilot { name } cost level color }
-          ... on BaseCard { id name cost level color }
-          ... on CommandCard { id name cost level color }
+          ... on UnitCard {
+            id
+            name
+            cost
+            level
+            color
+          }
+          ... on PilotCard {
+            id
+            pilot {
+              name
+            }
+            cost
+            level
+            color
+          }
+          ... on BaseCard {
+            id
+            name
+            cost
+            level
+            color
+          }
+          ... on CommandCard {
+            id
+            name
+            cost
+            level
+            color
+          }
         }
       }
     }
@@ -226,17 +262,24 @@ const SET_DECK_CARDS_MUTATION = graphql`
 
 type DeckCodePayload = { v: 1; cards: { id: string; n: number }[] };
 
-function encodeDeckCode(cards: readonly { count: number; card: any }[]): string {
+function encodeDeckCode(
+  cards: readonly { count: number; card: any }[],
+): string {
   const payload: DeckCodePayload = {
     v: 1,
     cards: cards
-      .map((dc) => ({ id: (dc.card as any)?.id as string | undefined, n: dc.count }))
+      .map((dc) => ({
+        id: (dc.card as any)?.id as string | undefined,
+        n: dc.count,
+      }))
       .filter((c): c is { id: string; n: number } => !!c.id),
   };
   return btoa(JSON.stringify(payload));
 }
 
-function decodeDeckCode(code: string): { cardId: string; count: number }[] | null {
+function decodeDeckCode(
+  code: string,
+): { cardId: string; count: number }[] | null {
   try {
     const payload = JSON.parse(atob(code.trim())) as DeckCodePayload;
     if (payload.v !== 1 || !Array.isArray(payload.cards)) return null;
@@ -283,13 +326,28 @@ function extractCardInfo(card: any): CardInfo | null {
   const { __typename, id, cost, level, color, imageUrl } = card;
   const name = card.name ?? card.pilot?.name;
   if (!id || !name || !color) return null;
-  return { id, name, cost: cost ?? null, level: level ?? null, typename: __typename, color, imageUrl: imageUrl ?? null };
+  return {
+    id,
+    name,
+    cost: cost ?? null,
+    level: level ?? null,
+    typename: __typename,
+    color,
+    imageUrl: imageUrl ?? null,
+  };
 }
 
 // ─── Histograms ───────────────────────────────────────────────────────────────
 
 const CHART_H = 36; // px, bar area height
-const COLOR_ORDER = ["BLUE", "GREEN", "RED", "PURPLE", "YELLOW", "WHITE"] as const;
+const COLOR_ORDER = [
+  "BLUE",
+  "GREEN",
+  "RED",
+  "PURPLE",
+  "YELLOW",
+  "WHITE",
+] as const;
 
 function Histogram({
   cards,
@@ -325,23 +383,36 @@ function Histogram({
       <div className="flex items-end gap-1">
         {Array.from({ length: maxBucket + 1 }, (_, i) => {
           const count = totalPerBucket[i];
-          const barH = count > 0 ? Math.max(Math.round((count / maxCount) * CHART_H), 4) : 0;
+          const barH =
+            count > 0
+              ? Math.max(Math.round((count / maxCount) * CHART_H), 4)
+              : 0;
           return (
-            <div key={i} className="flex flex-col items-center flex-1" style={{ height: CHART_H + 24 }}>
+            <div
+              key={i}
+              className="flex flex-col items-center flex-1"
+              style={{ height: CHART_H + 24 }}
+            >
               <div className="flex flex-col justify-end flex-1 w-full">
                 {count > 0 && (
                   <span className="text-[9px] text-muted-foreground text-center leading-none mb-0.5">
                     {count}
                   </span>
                 )}
-                <div className="w-full rounded-sm overflow-hidden flex flex-col-reverse border border-border/70" style={{ height: barH }}>
+                <div
+                  className="w-full rounded-sm overflow-hidden flex flex-col-reverse border border-border/70"
+                  style={{ height: barH }}
+                >
                   {COLOR_ORDER.map((color) => {
                     const colorCount = colorMap[i]?.[color] ?? 0;
                     if (!colorCount) return null;
                     return (
                       <div
                         key={color}
-                        style={{ flex: colorCount, backgroundColor: COLOR_HEX[color] }}
+                        style={{
+                          flex: colorCount,
+                          backgroundColor: COLOR_HEX[color],
+                        }}
                       />
                     );
                   })}
@@ -358,7 +429,11 @@ function Histogram({
   );
 }
 
-function CostHistogram({ cards }: { cards: readonly { count: number; card: any }[] }) {
+function CostHistogram({
+  cards,
+}: {
+  cards: readonly { count: number; card: any }[];
+}) {
   return (
     <Histogram
       cards={cards}
@@ -370,7 +445,11 @@ function CostHistogram({ cards }: { cards: readonly { count: number; card: any }
   );
 }
 
-function LevelHistogram({ cards }: { cards: readonly { count: number; card: any }[] }) {
+function LevelHistogram({
+  cards,
+}: {
+  cards: readonly { count: number; card: any }[];
+}) {
   return (
     <Histogram
       cards={cards}
@@ -379,6 +458,123 @@ function LevelHistogram({ cards }: { cards: readonly { count: number; card: any 
       label={(i) => (i === 7 ? "7+" : String(i))}
       title="레벨"
     />
+  );
+}
+
+// ─── DeckViewGrid ─────────────────────────────────────────────────────────────
+
+function DeckViewGrid({
+  cards,
+  onRemove,
+  onOpenCard,
+  showDescription,
+}: {
+  cards: readonly { count: number; card: any }[];
+  onRemove: (cardId: string) => void;
+  onOpenCard: (cardId: string) => void;
+  showDescription: boolean;
+}) {
+  const items = cards
+    .map(({ card, count }) => {
+      const info = extractCardInfo(card);
+      if (!info) return null;
+      return {
+        ...info,
+        count,
+        description: (card?.description ?? []) as string[],
+      };
+    })
+    .filter((x): x is NonNullable<typeof x> => x !== null);
+
+  if (items.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-full text-sm text-muted-foreground">
+        카드가 없습니다.
+      </div>
+    );
+  }
+
+  const ROTATION_STEP = 3;
+
+  return (
+    <div className="overflow-y-auto h-full py-4 px-3">
+      <div
+        className="grid gap-8"
+        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))" }}
+      >
+        {items.map((info) => {
+          const stackLayers = Math.min(info.count - 1, 2);
+          return (
+            <div key={info.id} className="flex flex-col gap-1 group">
+              <div className="relative">
+                {/* Back stack layers — rotated clockwise from bottom-left */}
+                {Array.from({ length: stackLayers }, (_, i) => {
+                  const rotation = (stackLayers - i) * ROTATION_STEP;
+                  return (
+                    <div
+                      key={i}
+                      className="absolute inset-0 rounded-lg overflow-hidden"
+                      style={{
+                        transform: `rotate(${rotation}deg)`,
+                        transformOrigin: "bottom right",
+                        opacity: 0.55 + i * 0.15,
+                      }}
+                    >
+                      <img
+                        src={info.imageUrl ?? undefined}
+                        alt=""
+                        className="w-full h-full object-cover"
+                        style={{
+                          backgroundColor: COLOR_HEX[info.color]
+                            ? `${COLOR_HEX[info.color]}33`
+                            : "var(--muted)",
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+                {/* Main card */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    className="w-full block"
+                    onClick={() => onOpenCard(info.id)}
+                  >
+                    <img
+                      src={info.imageUrl ?? undefined}
+                      alt={info.name}
+                      className="w-full rounded-lg object-cover aspect-800/1117"
+                      style={{
+                        backgroundColor: COLOR_HEX[info.color]
+                          ? `${COLOR_HEX[info.color]}`
+                          : "var(--muted)",
+                      }}
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onRemove(info.id)}
+                    className="absolute top-0.5 right-0.5 flex items-center justify-center w-5 h-5 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:bg-destructive"
+                  >
+                    <MinusIcon className="size-3" />
+                  </button>
+                  {info.count > 1 && (
+                    <div className="absolute bottom-1 left-1 bg-black/70 text-white font-bold rounded px-1 leading-tight text-2xl">
+                      ×{info.count}
+                    </div>
+                  )}
+                </div>
+              </div>
+              {showDescription && info.description.length > 0 && (
+                <div className="rounded-md bg-black/80 px-2 py-1.5">
+                  <CardDescription lines={info.description} />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -436,7 +632,12 @@ function DeckPanel({
     <div className={scrollAll ? "flex flex-col" : "flex flex-col h-full"}>
       {/* Name row */}
       {editing ? (
-        <div className={cn("flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0", scrollAll && "sticky top-0 z-10 bg-background")}>
+        <div
+          className={cn(
+            "flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0",
+            scrollAll && "sticky top-0 z-10 bg-background",
+          )}
+        >
           <Input
             value={editName}
             onChange={(e) => setEditName(e.target.value)}
@@ -459,11 +660,25 @@ function DeckPanel({
           </Button>
         </div>
       ) : (
-        <div className={cn("flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0", scrollAll && "sticky top-0 z-10 bg-background")}>
+        <div
+          className={cn(
+            "flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0",
+            scrollAll && "sticky top-0 z-10 bg-background",
+          )}
+        >
           <h2 className="font-bold text-sm flex-1 truncate">{deckName}</h2>
           <div className="flex gap-1 shrink-0">
-            {Array.from(new Set(cards.map((dc) => dc.card?.color).filter(Boolean))).map((color) => (
-              <span key={color} className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")} />
+            {Array.from(
+              new Set(cards.map((dc) => dc.card?.color).filter(Boolean)),
+            ).map((color) => (
+              <span
+                key={color}
+                className={cn(
+                  "inline-block w-2.5 h-2.5 rounded-full",
+                  COLOR_BG[color],
+                  color === "WHITE" && "border border-gray-200",
+                )}
+              />
             ))}
           </div>
           <Button size="icon-sm" variant="ghost" onClick={startEditing}>
@@ -474,7 +689,8 @@ function DeckPanel({
               size="icon-sm"
               variant="ghost"
               onClick={() => {
-                if (confirm("덱의 모든 카드를 삭제하시겠습니까?")) onSetCards([]);
+                if (confirm("덱의 모든 카드를 삭제하시겠습니까?"))
+                  onSetCards([]);
               }}
             >
               <Trash2Icon className="text-destructive" />
@@ -483,8 +699,24 @@ function DeckPanel({
         </div>
       )}
 
-      <div className="px-3 pb-2 text-xs text-muted-foreground shrink-0">
-        {totalCards} / 50장
+      <div className="px-3 pb-2 shrink-0">
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-xs text-muted-foreground">
+            {totalCards} / 50장
+          </span>
+          <span className="text-xs text-muted-foreground">
+            {Math.round((totalCards / 50) * 100)}%
+          </span>
+        </div>
+        <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+          <div
+            className={cn(
+              "h-full rounded-full transition-all duration-300",
+              totalCards >= 50 ? "bg-green-500" : "bg-primary",
+            )}
+            style={{ width: `${Math.min((totalCards / 50) * 100, 100)}%` }}
+          />
+        </div>
       </div>
 
       <LevelHistogram cards={cards} />
@@ -496,7 +728,11 @@ function DeckPanel({
         </div>
       )}
 
-      <div className={scrollAll ? "px-2 pb-4" : "flex-1 min-h-0 overflow-y-auto px-2 pb-4"}>
+      <div
+        className={
+          scrollAll ? "px-2 pb-4" : "flex-1 min-h-0 overflow-y-auto px-2 pb-4"
+        }
+      >
         {cards.length === 0 && (
           <p className="text-xs text-muted-foreground text-center py-4">
             카드가 없습니다.
@@ -546,7 +782,9 @@ function DeckPanel({
                           className={cn(
                             "absolute bottom-0 right-0 w-4 h-4 rounded-tl text-[9px] font-bold flex items-center justify-center leading-none",
                             COLOR_BG[info.color] ?? "bg-gray-500",
-                            info.color === "WHITE" ? "text-gray-700 border-t border-l border-gray-200" : "text-white",
+                            info.color === "WHITE"
+                              ? "text-gray-700 border-t border-l border-gray-200"
+                              : "text-white",
                           )}
                         >
                           {info.cost ?? "-"}
@@ -575,7 +813,12 @@ function DeckPanel({
         })}
       </div>
 
-      <div className={cn("px-3 pb-3 shrink-0 border-t border-border pt-3 flex flex-col gap-2", scrollAll && "sticky bottom-0 bg-background")}>
+      <div
+        className={cn(
+          "px-3 pb-3 shrink-0 border-t border-border pt-3 flex flex-col gap-2",
+          scrollAll && "sticky bottom-0 bg-background",
+        )}
+      >
         <Button
           className="w-full"
           size="sm"
@@ -602,17 +845,19 @@ function DeckPanel({
             variant="outline"
             onClick={() => navigator.clipboard.writeText(encodeDeckCode(cards))}
           >
-            <ClipboardCopyIcon className="size-3.5" />
-            덱 코드 복사
+            <ClipboardCopyIcon className="size-3.5" />덱 코드 복사
           </Button>
           <Button
             className="flex-1"
             size="sm"
             variant="outline"
-            onClick={() => { setPasteOpen((v) => !v); setPasteValue(""); setPasteError(false); }}
+            onClick={() => {
+              setPasteOpen((v) => !v);
+              setPasteValue("");
+              setPasteError(false);
+            }}
           >
-            <ClipboardPasteIcon className="size-3.5" />
-            덱 코드 불러오기
+            <ClipboardPasteIcon className="size-3.5" />덱 코드 불러오기
           </Button>
         </div>
         {pasteOpen && (
@@ -625,10 +870,15 @@ function DeckPanel({
               rows={3}
               placeholder="덱 코드를 붙여넣으세요"
               value={pasteValue}
-              onChange={(e) => { setPasteValue(e.target.value); setPasteError(false); }}
+              onChange={(e) => {
+                setPasteValue(e.target.value);
+                setPasteError(false);
+              }}
             />
             {pasteError && (
-              <p className="text-[10px] text-destructive">유효하지 않은 덱 코드입니다.</p>
+              <p className="text-[10px] text-destructive">
+                유효하지 않은 덱 코드입니다.
+              </p>
             )}
             <div className="flex gap-1.5">
               <Button
@@ -636,7 +886,10 @@ function DeckPanel({
                 className="flex-1"
                 onClick={() => {
                   const cards = decodeDeckCode(pasteValue);
-                  if (!cards) { setPasteError(true); return; }
+                  if (!cards) {
+                    setPasteError(true);
+                    return;
+                  }
                   onSetCards(cards);
                   setPasteOpen(false);
                   setPasteValue("");
@@ -645,7 +898,11 @@ function DeckPanel({
                 <CheckIcon className="size-3.5" />
                 불러오기
               </Button>
-              <Button size="sm" variant="ghost" onClick={() => setPasteOpen(false)}>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => setPasteOpen(false)}
+              >
                 <XIcon className="size-3.5" />
               </Button>
             </div>
@@ -660,6 +917,18 @@ function DeckPanel({
 
 export function DeckDetailPage() {
   const { deckId } = Route.useParams();
+  const { view } = Route.useSearch();
+  const router = useRouter();
+  const isDeckView = view === "deck";
+
+  function toggleView() {
+    router.navigate({
+      to: "/deck/$deckId",
+      params: { deckId },
+      search: isDeckView ? {} : { view: "deck" },
+      replace: true,
+    });
+  }
 
   const initialFilterRef = useRef<CardFilterInput>(INITIAL_FILTER);
   const data = useLazyLoadQuery<DeckDetailPageQuery>(Query, {
@@ -678,8 +947,9 @@ export function DeckDetailPage() {
     useMutation<DeckDetailPageRemoveCardMutation>(REMOVE_CARD_MUTATION);
   const [commitRename] =
     useMutation<DeckDetailPageRenameDeckMutation>(RENAME_MUTATION);
-  const [commitSetCards] =
-    useMutation<DeckDetailPageSetDeckCardsMutation>(SET_DECK_CARDS_MUTATION);
+  const [commitSetCards] = useMutation<DeckDetailPageSetDeckCardsMutation>(
+    SET_DECK_CARDS_MUTATION,
+  );
   const [deckSheetOpen, setDeckSheetOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
@@ -713,7 +983,9 @@ export function DeckDetailPage() {
           color: (() => {
             const active = (filter.color as string[] | undefined) ?? [];
             const constrained = active.filter((c) => deckColors.includes(c));
-            return (constrained.length > 0 ? constrained : deckColors) as CardFilterInput["color"];
+            return (
+              constrained.length > 0 ? constrained : deckColors
+            ) as CardFilterInput["color"];
           })(),
         }
       : filter;
@@ -770,30 +1042,44 @@ export function DeckDetailPage() {
     <div className="flex flex-col h-[calc(100dvh-65px)]">
       {/* Body */}
       <div className="flex flex-1 min-h-0">
-        {/* Desktop: filter panel (left column) */}
-        <aside className="hidden md:flex flex-col w-72 shrink-0 border-r border-border overflow-y-auto px-4 py-4 gap-4">
-          <FilterControls
-            filter={filter}
-            sort={sort}
-            onChange={setFilter}
-            onSortChange={setSort}
-            deckColors={deckColors}
-          />
-          {activeFilterCount(filter) > 0 && (
-            <button
-              type="button"
-              onClick={() => setFilter(INITIAL_FILTER)}
-              className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer self-start"
-            >
-              초기화
-            </button>
-          )}
-        </aside>
+        {/* Desktop: filter panel (left column) — hidden in deck view */}
+        {!isDeckView && (
+          <aside className="hidden md:flex flex-col w-72 shrink-0 border-r border-border overflow-y-auto px-4 py-4 gap-4">
+            <FilterControls
+              filter={filter}
+              sort={sort}
+              onChange={setFilter}
+              onSortChange={setSort}
+              deckColors={deckColors}
+            />
+            {activeFilterCount(filter) > 0 && (
+              <button
+                type="button"
+                onClick={() => setFilter(INITIAL_FILTER)}
+                className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer self-start"
+              >
+                초기화
+              </button>
+            )}
+          </aside>
+        )}
 
-        {/* Card list (center) */}
+        {/* Center */}
         <div className="flex flex-col flex-1 min-w-0 min-h-0">
           {/* Mobile top bar */}
           <div className="flex md:hidden items-center gap-2 px-3 py-2 border-b border-border shrink-0">
+            <button
+              type="button"
+              onClick={toggleView}
+              className={cn(
+                "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
+                isDeckView
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+              )}
+            >
+              <LayoutGridIcon className="h-3.5 w-3.5" />덱 보기
+            </button>
             <button
               type="button"
               onClick={() => setShowDescription((v) => !v)}
@@ -807,35 +1093,51 @@ export function DeckDetailPage() {
               <FileTextIcon className="h-3.5 w-3.5" />
               효과
             </button>
+            {!isDeckView && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setFilterSheetOpen(true)}
+                  className={cn(
+                    "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
+                    activeFilterCount(filter) > 0
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                  )}
+                >
+                  <SlidersHorizontalIcon className="h-3.5 w-3.5" />
+                  필터
+                  {activeFilterCount(filter) > 0 && (
+                    <span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary-foreground text-[10px] font-bold text-primary">
+                      {activeFilterCount(filter)}
+                    </span>
+                  )}
+                </button>
+                {activeFilterCount(filter) > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setFilter(INITIAL_FILTER)}
+                    className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer"
+                  >
+                    초기화
+                  </button>
+                )}
+              </>
+            )}
+          </div>
+          <div className="hidden md:flex items-center gap-2 border-b border-border px-3 py-2 shrink-0">
             <button
               type="button"
-              onClick={() => setFilterSheetOpen(true)}
+              onClick={toggleView}
               className={cn(
                 "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
-                activeFilterCount(filter) > 0
+                isDeckView
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
               )}
             >
-              <SlidersHorizontalIcon className="h-3.5 w-3.5" />
-              필터
-              {activeFilterCount(filter) > 0 && (
-                <span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary-foreground text-[10px] font-bold text-primary">
-                  {activeFilterCount(filter)}
-                </span>
-              )}
+              <LayoutGridIcon className="h-3.5 w-3.5" />덱 보기
             </button>
-            {activeFilterCount(filter) > 0 && (
-              <button
-                type="button"
-                onClick={() => setFilter(INITIAL_FILTER)}
-                className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer"
-              >
-                초기화
-              </button>
-            )}
-          </div>
-          <div className="hidden md:flex items-center gap-2 border-b border-border px-3 py-2 shrink-0">
             <button
               type="button"
               onClick={() => setShowDescription((v) => !v)}
@@ -851,17 +1153,26 @@ export function DeckDetailPage() {
             </button>
           </div>
           <div className="flex-1 min-h-0">
-            <CardList
-              queryRef={data}
-              filter={effectiveFilter}
-              sort={sort}
-              showDescription={showDescription}
-              onCardAdd={handleAdd}
-              onCardOpen={setOverlayCardId}
-              scrollClassName="overflow-y-auto h-full py-5"
-              deckCardCounts={deckCardCounts}
-              deckColors={deckColors}
-            />
+            {isDeckView ? (
+              <DeckViewGrid
+                cards={deck.cards}
+                onRemove={handleRemove}
+                onOpenCard={setOverlayCardId}
+                showDescription={showDescription}
+              />
+            ) : (
+              <CardList
+                queryRef={data}
+                filter={effectiveFilter}
+                sort={sort}
+                showDescription={showDescription}
+                onCardAdd={handleAdd}
+                onCardOpen={setOverlayCardId}
+                scrollClassName="overflow-y-auto h-full py-5"
+                deckCardCounts={deckCardCounts}
+                deckColors={deckColors}
+              />
+            )}
           </div>
         </div>
 
