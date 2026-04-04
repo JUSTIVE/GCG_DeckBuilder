@@ -166,9 +166,11 @@ function KeywordPanel({ keywords, borderClass }: { keywords: string[]; borderCla
 export function CardByIdOverlay({
   cardId,
   onClose,
+  cardIds,
 }: {
   cardId: string;
   onClose?: () => void;
+  cardIds?: string[];
 }) {
   const data = useLazyLoadQuery<CardByIdOverlayQuery>(
     Query,
@@ -185,6 +187,25 @@ export function CardByIdOverlay({
     if (!node || node.__typename === "%other") return;
     commitAddCardView({ variables: { cardId } });
   }, [cardId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!cardIds?.length) return;
+    function handleKey(e: KeyboardEvent) {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      const idx = cardIds!.indexOf(cardId);
+      if (idx === -1) return;
+      const nextIdx = e.key === "ArrowRight" ? idx + 1 : idx - 1;
+      if (nextIdx < 0 || nextIdx >= cardIds!.length) return;
+      router.navigate({
+        to: "/cardlist",
+        search: (prev) => ({ ...prev, cardId: cardIds![nextIdx] }),
+        replace: true,
+        viewTransition: true,
+      });
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [cardIds, cardId, router]);
 
   if (!node || node.__typename === "%other") return null;
 

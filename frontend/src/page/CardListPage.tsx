@@ -297,11 +297,13 @@ function CardListContent({
   filter,
   sort,
   showDescription,
+  onCardIdsChange,
 }: {
   queryRef: CardListPageQuery["response"];
   filter: CardFilterInput;
   sort: CardSort | null;
   showDescription: boolean;
+  onCardIdsChange: (ids: string[]) => void;
 }) {
   return (
     <CardList
@@ -309,6 +311,7 @@ function CardListContent({
       filter={filter}
       sort={sort}
       showDescription={showDescription}
+      onCardIdsChange={onCardIdsChange}
     />
   );
 }
@@ -321,6 +324,7 @@ export function CardListPage() {
   const filter = buildFilter(search);
   const sort = buildSort(search);
   const [showDescription, setShowDescription] = useState(false);
+  const [cardIds, setCardIds] = useState<string[]>([]);
 
   const initialFilterRef = useRef(filter);
   const initialSortRef = useRef(sort);
@@ -420,10 +424,11 @@ export function CardListPage() {
           filter={filter}
           sort={sort}
           showDescription={showDescription}
+          onCardIdsChange={setCardIds}
         />
         {search.cardId && (
           <Suspense>
-            <CardByIdOverlay cardId={search.cardId} />
+            <CardByIdOverlay cardId={search.cardId} cardIds={cardIds} />
           </Suspense>
         )}
       </div>

@@ -280,9 +280,12 @@ interface CardFilterInput {
 
 function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[] {
   // Map kind array to __typename values
+  const NON_RESOURCE_TYPENAMES = Object.entries(KIND_TO_TYPENAME)
+    .filter(([k]) => k !== "RESOURCE")
+    .map(([, v]) => v);
   const targetTypenames =
     filter.kind.length === 0
-      ? Object.values(KIND_TO_TYPENAME)
+      ? NON_RESOURCE_TYPENAMES
       : filter.kind
           .map((k) => KIND_TO_TYPENAME[k])
           .filter((t): t is string => !!t);

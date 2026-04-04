@@ -51,6 +51,7 @@ type Props = {
   showDescription?: boolean;
   onCardAdd?: (cardId: string) => void;
   onCardOpen?: (cardId: string) => void;
+  onCardIdsChange?: (ids: string[]) => void;
   scrollClassName?: string;
   deckCardCounts?: Record<string, number>;
   deckColors?: string[];
@@ -63,6 +64,7 @@ export function CardList({
   showDescription = false,
   onCardAdd,
   onCardOpen,
+  onCardIdsChange,
   scrollClassName = "overflow-y-auto h-[calc(100dvh-65px-48px)] py-5",
   deckCardCounts,
   deckColors,
@@ -98,6 +100,12 @@ export function CardList({
       commitAddFilterSearch({ variables: { filter, sort: sort ?? null } });
     }
   }, [filter, sort, refetch]);
+  useEffect(() => {
+    if (!onCardIdsChange) return;
+    const ids = data.cards.edges.map((e) => (e.node as any).id).filter(Boolean) as string[];
+    onCardIdsChange(ids);
+  }, [data.cards.edges, onCardIdsChange]);
+
   const parentRef = useRef<HTMLDivElement>(null);
   const [columns, setColumns] = useState(1);
 

@@ -1,7 +1,7 @@
 import { CardListPage } from "@/page/CardListPage";
 import { createFileRoute } from "@tanstack/react-router";
 
-const VALID_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND", "RESOURCE"] as const;
+const VALID_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND"] as const;
 const VALID_ZONES = ["SPACE", "EARTH"] as const;
 const VALID_COLORS = ["BLUE", "GREEN", "RED", "YELLOW", "PURPLE", "WHITE"] as const;
 const VALID_KEYWORDS = [

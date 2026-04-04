@@ -21,7 +21,7 @@ export const SORT_OPTIONS: Array<{ value: string; label: string }> = [
   { value: "HP_DESC", label: "체력 ↓" },
 ];
 
-export const ALL_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND", "RESOURCE"] as const;
+export const ALL_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND"] as const;
 export const ALL_ZONES = ["SPACE", "EARTH"] as const;
 export const ZONE_LABELS: Record<string, string> = { SPACE: "우주", EARTH: "지구" };
 export const ALL_COLORS = ["BLUE", "GREEN", "RED", "YELLOW", "PURPLE", "WHITE"] as const;
