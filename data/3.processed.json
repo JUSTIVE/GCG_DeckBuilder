@@ -8214,8 +8214,8 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 Look at the top 5 cards of your deck. You may reveal 1 green (지온) Pilot card among them and add it to your hand. 남은 카드는 무작위로 덱의 밑으로 되돌린다.",
-      "【링크 중】 This Unit gets AP+2."
+      "【배치 시】 자신의 덱을 위에서 5장 보고, 그 중에 녹색의 (지온)의 파일럿 카드 1장을 공개하고 패에 추가할 수 있다. 남은 카드는 무작위로 덱의 밑으로 되돌린다.",
+      "【링크 중】 이 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-020",
@@ -8246,7 +8246,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】You may discard 1 green (Earth Federation) Unit card. If you do, place 1 EX Resource. Then, if you are Lv.7 or higher, draw 1."
+      "【배치 시】 자신의 패의 녹생의 (지구 연방)의 유닛 카드 1장을 버릴 수 있다. 그랬다면, 자신은 EX리소스 1개를 얻는다. Then, 자신이 Lv.7 이상이라면, 자신은 1장 드로우 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-021",
@@ -8347,7 +8347,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 중】This Unit gains <고기동>.",
+      "【링크 중】 이 유닛은 <고기동>을 얻는다.",
       "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "UnitCard",
@@ -8411,7 +8411,7 @@
       "AGE_SYSTEM"
     ],
     "description": [
-      "【배치 시】 If you are Lv.7 or higher, choose 1 of your (AGE System) Units. 이 턴 동안, 그 유닛을 AP+2 한다."
+      "【배치 시】 자신이 Lv.7 이상이라면, choose 1 of your (AGE System) Units. 이 턴 동안, 그 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-026",
@@ -8551,7 +8551,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While you are Lv.7 or higher, this Unit gets AP+2."
+      "자신의 레벨이 Lv.7 이상인 동안, 이 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-031",
@@ -8609,7 +8609,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While another friendly (지온) Link Unit is in play, this Unit gains <돌파 5>.",
+      "While another friendly (지온) Link Unit is in play, 이 유닛은 <돌파 5>를 얻는다..",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -8640,7 +8640,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중･Red Pilot】This Unit gets AP+2."
+      "【세트 중･적색의 파일럿】 이 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-034",
@@ -9789,7 +9789,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "During your opponent's turn, the enemy Unit battling this Unit gains <선제 공격>.",
+      "During your opponent's turn, the enemy Unit battling 이 유닛은 <선제 공격>을 얻는다.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -10134,7 +10134,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "While you have another (Titans) Unit in play, this gets AP+1."
+      "이 유닛 이외의, (티탄즈)의 자신의 유닛이 있는 동안, 이 유닛을 AP+1 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD02-086",
@@ -10161,7 +10161,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 If this is a blue Unit, choose 1 enemy Unit with <블로커>. 그 유닛을 레스트로 한다."
+      "【링크 시】 이 유닛이 청색이라면, <블로커>를 가진 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD02-087",
@@ -10242,7 +10242,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "While you have another Unit with <고기동> in play, this Unit gets AP+1."
+      "While you have another Unit with <고기동> in play, 이 유닛을 AP+1 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD02-090",
@@ -10424,7 +10424,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "While there is a friendly white Base in play, this Unit gets AP+2."
+      "While there is a friendly white Base in play, 이 유닛을 AP+2 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD02-097",
@@ -10499,7 +10499,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 자신은 1장 드로우 한다.",
-      "【메인】Choose 1 friendly damaged Unit. It recovers 2 HP. Then, draw 1."
+      "【메인】 대미지를 받고 있는 아군의 유닛 1개를 선택한다. 그 유닛을 2 회복한다. 그 후, 자신은 1장 드로우 한다."
     ],
     "__typename": "CommandCard",
     "id": "GD02-100",
@@ -10519,7 +10519,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 Choose 1 to 2 enemy Units that are Lv.2 or lower. 그 카드들을 레스트로 한다."
+      "【메인】 /【액션】 Lv.2 이하의 상대의 유닛 1~2개를 선택한다. 그 카드들을 레스트로 한다."
     ],
     "__typename": "CommandCard",
     "id": "GD02-101",
@@ -10542,7 +10542,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 Choose 1 friendly (Titans) Unit. 이 턴 동안, 그 유닛을 AP+2 한다.",
+      "【메인】 /【액션】 (티탄즈)의 아군의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP+2 한다.",
       "【파일럿】[마우아 파라오]"
     ],
     "__typename": "CommandCard",
@@ -10982,7 +10982,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【액션】 Choose 1 of your (AEUG) Units/Bases. It recovers 2 HP.",
+      "【액션】 Choose 1 of your (AEUG) Units/Bases. 그 유닛을 2 회복한다.",
       "【파일럿】[화 유이리]"
     ],
     "__typename": "CommandCard",
@@ -11012,7 +11012,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 friendly blue Unit. It recovers 2 HP."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, 청색의 아군의 유닛 1개를 선택한다. 그 유닛을 2 회복한다."
     ],
     "__typename": "BaseCard",
     "id": "GD02-121",
@@ -11042,7 +11042,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, choose 1 rested enemy Unit that is Lv.4 or lower. 그 유닛에 1 대미지를 준다."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. 레스트의 Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "BaseCard",
     "id": "GD02-122",
@@ -11907,7 +11907,7 @@
     "relatedTrait": [],
     "description": [
       "<돌파 5> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【공격 시】 Choose 1 enemy Unit with <블로커>. Deal 5 damage to it."
+      "【공격 시】 <블로커>를 가진 상대의 유닛 1개를 선택한다. Deal 5 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD03-018",
@@ -12598,7 +12598,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 중】This Unit gains <고기동>.",
+      "【링크 중】 이 유닛은 <고기동>을 얻는다.",
       "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "UnitCard",
@@ -12746,7 +12746,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While you have a Unit token in play, this Unit gets AP+1."
+      "While you have a Unit token in play, 이 유닛을 AP+1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-045",
@@ -13059,7 +13059,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･Purple Pilot】 Lv.2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
+      "【세트 시･자색의 파일럿】 Lv.2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-055",
@@ -14179,7 +14179,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "While no enemy Base is in play, this Unit gets AP+1."
+      "While no enemy Base is in play, 이 유닛을 AP+1 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD03-093",
@@ -14621,7 +14621,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 Choose 1 friendly (마프티) Unit. 이 턴 동안, 그 유닛을 AP+3 한다.",
+      "【메인】 /【액션】 (마프티)의 아군의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP+3 한다.",
       "【파일럿】[에메랄다 주빈]"
     ],
     "__typename": "CommandCard",
@@ -14715,7 +14715,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【액션】 Choose 1 friendly Unit paired with an (X-Rounder) Pilot. 이 배틀 동안, 그 유닛은 AP2 이하의 상대의 유닛으로부터 배틀 대미지를 받지 않는다. If you are Lv.7 or higher, it can't receive battle damage from enemy Units with 5 or less AP instead.",
+      "【액션】 Choose 1 friendly Unit paired with an (X-Rounder) Pilot. 이 배틀 동안, 그 유닛은 AP2 이하의 상대의 유닛으로부터 배틀 대미지를 받지 않는다. 자신이 Lv.7 이상이라면, it can't receive battle damage from enemy Units with 5 or less AP instead.",
       "【파일럿】[유린 루셸]"
     ],
     "__typename": "CommandCard",
