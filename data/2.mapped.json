@@ -8433,7 +8433,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 Look at the top 3 cards of your deck. You may deploy 1 (Clan) Unit card that is Lv.4 or lower among them. 남은 카드는 무작위로 덱의 밑으로 되돌린다."
+      "【배치 시】 자신의 덱을 위에서 3장 보고, You may deploy 1 (Clan) Unit card that is Lv.4 or lower among them. 남은 카드는 무작위로 덱의 밑으로 되돌린다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-038",
@@ -8463,7 +8463,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 Choose 1 enemy Unit that is Lv.3 or lower. 그 유닛에 1 대미지를 준다."
+      "【세트 시】 Lv.3 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-039",
@@ -8843,7 +8843,7 @@
     "relatedTrait": [],
     "description": [
       "<제압> (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
-      "【링크 중】자신의 턴 동안, while there are 7 or more cards in your trash, all your other (Vulture) Units get AP+2."
+      "【링크 중】 자신의 턴 동안, 자신의 트래쉬에 카드가 7장 이상 있는 동안, (벌쳐)의 자신의 모든 유닛 전부를 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-053",
@@ -8874,7 +8874,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【공격 시】If this Unit is damaged, draw 1."
+      "【공격 시】 이 유닛이 대미지를 받고 있다면, 자신은 1장 드로우 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-054",
@@ -8907,7 +8907,7 @@
     "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【배치 시】 Choose 1 of your Units and 1 enemy Unit. 그 유닛들에 1 대미지를 준다."
+      "【배치 시】 자신의 유닛 1개와, 상대의 유닛 1개를 선택한다. 그 유닛들에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-055",
@@ -8938,7 +8938,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중･(Vulture) Pilot】【파괴 시】Choose 1 (Vulture) Unit card that is Lv.5 or higher from your trash. Add it to your hand."
+      "【세트 중･(벌쳐) 파일럿】 【파괴 시】 자신의 트래쉬의 Lv.5 이상의 (벌쳐)의 유닛 카드 1장을 선택한다. 그 카드를 패에 추가한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-056",
@@ -8970,7 +8970,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중】【공격 시】You may choose 1 of your other Units. Destroy it. If you do, choose 1 enemy Unit that is Lv.4 or lower. Deal 2 damage to it."
+      "【세트 중】 【공격 시】 이 유닛 이외의, 자신의 유닛 1개를 선택할 수 있다. 그 유닛을 파괴한다. 그랬다면, Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-057",
@@ -9000,7 +9000,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】Choose 1 of your Units. Deal 1 damage to it. If you do, draw 1. Then, discard 1."
+      "【배치 시】 자신의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다. 그랬다면, 자신은 1장 드로우 한다. 그 후, 자신의 패 1장을 버린다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-058",
@@ -9060,7 +9060,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 If there are 7 or more cards in your trash, choose 1 enemy Unit that is Lv.4 or lower. 그 유닛을 레스트로 한다."
+      "【배치 시】 자신의 트래쉬에 카드가 7장 이상 있다면, Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-060",
@@ -9092,7 +9092,7 @@
       "TEKKADAN"
     ],
     "description": [
-      "【세트 시･Purple Pilot】 If there are 3 or more (테이와즈)/(철화단) cards in your trash, choose 1 enemy Unit with 3 or less AP. 그 유닛을 레스트로 한다."
+      "【세트 시･자색 파일럿】 자신의 트래쉬에 (테이와즈)/(철화단)의 카드가 3장 이상 있다면, AP3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-061",
@@ -9171,7 +9171,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "자신의 턴 동안, while there are 7 or more cards in your trash, this Unit can't receive effect damage from enemy Commands."
+      "자신의 턴 동안, 자신의 트래쉬에 카드가 7장 이상 있는 동안, 이 유닛은 상대의 커맨드로부터 효과 대미지를 받지 않는다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-064",
@@ -9270,7 +9270,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 Deal 2 damage to this Unit."
+      "【배치 시】 이 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-068",
@@ -9333,7 +9333,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 If there are 4 or more (Gjallarhorn) cards in your trash, draw 2. If you do, discard 2."
+      "【배치 시】 If there are 4 or more (Gjallarhorn) cards in your trash, draw 2. 그랬다면, discard 2."
     ],
     "__typename": "UnitCard",
     "id": "GD02-070",
@@ -9490,7 +9490,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【공격 시】 Choose 1 active friendly Base. Rest it. If you do, choose 1 enemy Unit that is Lv.4 or lower. It gets AP-2 during this battle."
+      "【공격 시】 Choose 1 active friendly Base. Rest it. 그랬다면, Lv.4 이하의 상대의 유닛 1개를 선택한다. It gets AP-2 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD02-075",
@@ -9811,7 +9811,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 Look at the top 3 cards of your deck. You may reveal 1 green (지구 연방) Unit card/1 card with \"AGE Device\" in its card name among them and add it to your hand. 남은 카드는 무작위로 덱의 밑으로 되돌린다."
+      "【링크 시】 자신의 덱을 위에서 3장 보고, You may reveal 1 green (지구 연방) Unit card/1 card with \"AGE Device\" in its card name among them and add it to your hand. 남은 카드는 무작위로 덱의 밑으로 되돌린다."
     ],
     "__typename": "PilotCard",
     "id": "GD02-088",
@@ -9963,7 +9963,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】 You may discard 1. If you do, look at the top 3 cards of your deck. You may reveal 1 (Vulture) Unit card among them and add it to your hand. 남은 카드는 무작위로 덱의 밑으로 되돌린다."
+      "【세트 시】 자신의 패 1장을 버릴 수 있다. 그랬다면, 자신의 덱을 위에서 3장 보고, 그 중에 (벌쳐)의 유닛 카드 1장을 공개하고 패에 추가할 수 있다. 남은 카드는 무작위로 덱의 밑으로 되돌린다."
     ],
     "__typename": "PilotCard",
     "id": "GD02-094",
@@ -9988,7 +9988,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【공격 시】 If this Unit is damaged and Lv.5 or lower, it gains <고기동> during this battle.",
+      "【공격 시】 이 유닛이 대미지를 받고 있고, Lv.5 이하라면, 이 배틀 동안, 이 유닛은 <고기동>을 얻는다.",
       "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "PilotCard",
@@ -10343,8 +10343,8 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【버스트】 Choose 1 enemy Unit that is Lv.3 or lower. 그 유닛에 2 대미지를 준다.",
-      "【메인】 Choose 6 purple Unit cards from your trash. Exile them from the game. If you do, 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
+      "【버스트】 Lv.3 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다.",
+      "【메인】 Choose 6 purple Unit cards from your trash. Exile them from the game. 그랬다면, 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "CommandCard",
     "id": "GD02-111"
@@ -10386,7 +10386,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 If a friendly (테이와즈) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. 그 유닛을 파괴한다.",
+      "【메인】 /【액션】 If a friendly (테이와즈) Link Unit is in play, AP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다.",
       "【파일럿】[아미다 아르카]"
     ],
     "__typename": "CommandCard",
@@ -10443,7 +10443,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 Choose 1 friendly (Vulture) Unit. 이 턴 동안, 그 유닛을 AP+2 한다.",
+      "【메인】 /【액션】 Choose 1 friendly (벌쳐) Unit. 이 턴 동안, 그 유닛을 AP+2 한다.",
       "【파일럿】[위츠 수]"
     ],
     "__typename": "CommandCard",
@@ -10470,7 +10470,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 If there are 7 or more cards in your trash, choose 1 friendly (Vulture) Unit. During this turn, it may choose an active enemy Unit that is Lv.4 or lower as its attack target.",
+      "【메인】 자신의 트래쉬에 카드가 7장 이상 있다면, choose 1 friendly (벌쳐) Unit. During this turn, it may choose an active enemy Unit that is Lv.4 or lower as its attack target.",
       "【파일럿】[로아비 로이]"
     ],
     "__typename": "CommandCard",
@@ -10779,7 +10779,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【파괴 시】 Place the top 2 cards of your deck into your trash."
+      "【파괴 시】 자신의 덱을 위에서 2장, 자신의 트래쉬에 둔다."
     ],
     "__typename": "BaseCard",
     "id": "GD02-127",
@@ -10807,7 +10807,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn and a friendly (테이와즈) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. 그 유닛을 파괴한다."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn and a friendly (테이와즈) Link Unit is in play, AP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "BaseCard",
     "id": "GD02-128",
@@ -11200,7 +11200,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 You may choose 2 (Titans) cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit that is Lv.4 or lower. 그 유닛을 레스트로 한다."
+      "【배치 시】 You may choose 2 (Titans) cards from your trash. Exile them from the game. 그랬다면, Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-009",
@@ -12098,7 +12098,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 Choose 1 other active friendly (Clan) Unit. Rest it. If you do, choose 1 enemy Unit with 2 or less AP. 그 유닛에 2 대미지를 준다."
+      "【배치 시】 Choose 1 other active friendly (Clan) Unit. Rest it. 그랬다면, AP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-039",
@@ -12411,7 +12411,7 @@
       "TEIWAZ"
     ],
     "description": [
-      "【기동･메인】 Choose 3 (철화단)/(테이와즈) Unit cards from your trash. Exile them from the game. If you do, 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
+      "【기동･메인】 Choose 3 (철화단)/(테이와즈) Unit cards from your trash. Exile them from the game. 그랬다면, 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-050",
@@ -12544,7 +12544,7 @@
     ],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
-      "【세트 시･(X-Rounder) Pilot】 You may choose 4 (Vagan) cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit that is Lv.4 or lower. 그 유닛을 파괴한다."
+      "【세트 시･(X-Rounder) Pilot】 You may choose 4 (Vagan) cards from your trash. Exile them from the game. 그랬다면, Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-054",
@@ -12606,7 +12606,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 Choose 1 of your Units and 1 enemy Unit. 그 유닛들에 1 대미지를 준다."
+      "【배치 시】 자신의 유닛 1개와, 상대의 유닛 1개를 선택한다. 그 유닛들에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-056",
@@ -12696,7 +12696,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【공격 시】 You may choose 1 (Vagan) card from your trash. Exile it from the game. If you do, choose 1 of your (Vagan) Units. 이 턴 동안, 그 유닛을 AP+2 한다."
+      "【공격 시】 You may choose 1 (Vagan) card from your trash. Exile it from the game. 그랬다면, choose 1 of your (Vagan) Units. 이 턴 동안, 그 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-059",
@@ -12836,7 +12836,7 @@
       "X_ROUNDER"
     ],
     "description": [
-      "【배치 시】 You may choose 1 (X-Rounder) card from your trash and add it to your hand. If you do, discard 1."
+      "【배치 시】 You may choose 1 (X-Rounder) card from your trash and add it to your hand. 그랬다면, discard 1."
     ],
     "__typename": "UnitCard",
     "id": "GD03-064",
@@ -13502,7 +13502,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 Choose 1 enemy Unit that is Lv.3 or lower. 그 유닛을 레스트로 한다."
+      "【링크 시】 Lv.3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD03-087",
@@ -13682,7 +13682,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【세트 시】 Place the top 2 cards of your deck into your trash. If you placed a (Vagan) card with this effect, 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다."
+      "【세트 시】 자신의 덱을 위에서 2장, 자신의 트래쉬에 둔다. If you placed a (Vagan) card with this effect, 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD03-094",
@@ -14127,7 +14127,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 Choose 1 active friendly Unit. Rest it. If you do, choose 1 enemy Unit whose Lv. is equal to or lower than the Unit rested with this ability. 그 유닛에 3 대미지를 준다."
+      "【메인】 /【액션】 Choose 1 active friendly Unit. Rest it. 그랬다면, choose 1 enemy Unit whose Lv. is equal to or lower than the Unit rested with this ability. 그 유닛에 3 대미지를 준다."
     ],
     "__typename": "CommandCard",
     "id": "GD03-113"
@@ -14256,7 +14256,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】 Choose 1 rested friendly Base. Set it as active. If you do, all enemy Units get AP-1 during this turn."
+      "【메인】 Choose 1 rested friendly Base. Set it as active. 그랬다면, all enemy Units get AP-1 during this turn."
     ],
     "__typename": "CommandCard",
     "id": "GD03-119"
@@ -14334,7 +14334,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【액션】 Choose 1 enemy Unit that is Lv.3 or lower. 그 유닛을 주인의 패로 되돌린다.",
+      "【액션】 Lv.3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다.",
       "【파일럿】[세르게이 스미르노프]"
     ],
     "__typename": "CommandCard",
@@ -14544,7 +14544,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "자신의 턴 동안, when one of your friendly (철화단)/(테이와즈) Units receives effect damage, you may rest this Base. If you do, place the top card of your deck into your trash."
+      "자신의 턴 동안, when one of your friendly (철화단)/(테이와즈) Units receives effect damage, you may rest this Base. 그랬다면, place the top card of your deck into your trash."
     ],
     "__typename": "BaseCard",
     "id": "GD03-129",
@@ -14600,7 +14600,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if you have 2 or more (삼척동맹) Units in play, choose 1 enemy Unit that is Lv.4 or lower. 그 유닛을 주인의 패로 되돌린다."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if you have 2 or more (삼척동맹) Units in play, Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다."
     ],
     "__typename": "BaseCard",
     "id": "GD03-131",

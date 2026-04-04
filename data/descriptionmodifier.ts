@@ -16,6 +16,7 @@ const replaceList = {
   "(Academy)": "(학원)",
   "(Tekkadan)": "(철화단)",
   "(Teiwaz)": "(테이와즈)",
+  "(Vulture)": "(벌쳐)",
   "this Unit gets AP+2 during this battle.": "이 배틀 동안, 이 유닛을 AP+2 한다.",
   "If you are attacking the enemy player,": "상대 플레이어를 공격하고 있다면,",
   "Choose 1 enemy Unit with 5 or less HP.": "HP5 이하의 상대의 유닛 1개를 선택한다.",
@@ -61,12 +62,28 @@ const replaceList = {
   "It gets AP-2 during this turn.": "이 턴 동안, 그 유닛을 AP-2 한다.",
   "It can't attack during this turn.": "이 턴 동안, 그 유닛은 공격할 수 없다.",
   "Choose 1 enemy Unit that is Lv.4 or lower.": "Lv.4 이하의 상대의 유닛 1개를 선택한다.",
+  "choose 1 enemy Unit that is Lv.4 or lower.": "Lv.4 이하의 상대의 유닛 1개를 선택한다.",
   "Then, choose 1 enemy Unit with 3 or less HP.": "그 후, HP3 이하의 상대의 유닛 1개를 선택한다.",
   "Choose 1 enemy Unit with 2 or less AP.": "AP2 이하의 상대의 유닛 1개를 선택한다.",
   "Choose 1 enemy Unit whose Lv. is equal to or lower than this Unit.":
     "이 유닛의 Lv. 이하의 상대의 유닛 1개를 선택한다.",
   "Choose 1 friendly (자프트) Unit.": "(자프트)의 아군의 유닛 1개를 선택한다.",
   "Choose 1 rested enemy Unit.": "레스트의 상대의 유닛 1개를 선택한다.",
+  "Choose 1 of your Units and 1 enemy Unit.": "자신의 유닛 1개와, 상대의 유닛 1개를 선택한다.",
+  "Choose 1 of your Units.": "자신의 유닛 1개를 선택한다.",
+  "If you do,": "그랬다면,",
+  "If there are 7 or more cards in your trash,": "자신의 트래쉬에 카드가 7장 이상 있다면,",
+  "You may discard 1.": "자신의 패 1장을 버릴 수 있다.",
+  "look at the top 3 cards of your deck.": "자신의 덱을 위에서 3장 보고,",
+  "Look at the top 3 cards of your deck.": "자신의 덱을 위에서 3장 보고,",
+  "You may reveal 1 (벌쳐) Unit card among them and add it to your hand.":
+    "그 중에 (벌쳐)의 유닛 카드 1장을 공개하고 패에 추가할 수 있다.",
+  "If this Unit is damaged and Lv.5 or lower,": "이 유닛이 대미지를 받고 있고, Lv.5 이하라면,",
+  "it gains <고기동> during this battle.": "이 배틀 동안, 이 유닛은 <고기동>을 얻는다.",
+  "Choose 1 enemy Unit that is Lv.3 or lower.": "Lv.3 이하의 상대의 유닛 1개를 선택한다.",
+  "Place the top 2 cards of your deck into your trash.":
+    "자신의 덱을 위에서 2장, 자신의 트래쉬에 둔다.",
+  "choose 1 enemy Unit with 2 or less AP.": "AP2 이하의 상대의 유닛 1개를 선택한다.",
 };
 
 function applyReplacements(v: string): string {
