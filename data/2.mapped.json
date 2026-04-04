@@ -17,7 +17,7 @@
     "relatedTrait": [],
     "description": [
       "<리페어 2> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
-      "【세트 중】자신의 턴 동안, all your Units get AP+1."
+      "【세트 중】 자신의 턴 동안, 자신의 유닛 전부를 AP+1 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST01-001",
@@ -819,7 +819,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 중】【파괴 시】Return this Unit's paired Pilot to its owner's hand. Then, discard 1."
+      "【링크 중】 【파괴 시】 이 유닛에 세트되어있는 파일럿을 주인의 패로 되돌린다. 그 후, 자신은 패 1장을 버린다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-005",
