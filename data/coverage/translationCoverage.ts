@@ -144,6 +144,20 @@ function renderFieldLine(result: FieldResult, prefix: string, isLast: boolean): 
   console.log(`${prefix}${connector}${icon} ${fieldName}${detail}`);
 }
 
+const COLOR_DOT: Record<string, string> = {
+  RED: styleText("red", "●"),
+  BLUE: styleText("blue", "●"),
+  GREEN: styleText("green", "●"),
+  YELLOW: styleText("yellow", "●"),
+  PURPLE: styleText("magenta", "●"),
+  WHITE: styleText("white", "●"),
+};
+
+function renderColorDot(card: Card): string {
+  const color = card.color as string | undefined;
+  return color && COLOR_DOT[color] ? COLOR_DOT[color] + " " : "";
+}
+
 function renderCardLine(
   card: Card,
   fields: FieldResult[],
@@ -163,8 +177,9 @@ function renderCardLine(
 
   const typename = styleText("gray", ` [${card.__typename}]`);
   const pct = renderPercent(cardSummary);
+  const dot = renderColorDot(card);
 
-  console.log(`${prefix}${connector}${idText}${typename} ${pct}`);
+  console.log(`${prefix}${connector}${dot}${idText}${typename} ${pct}`);
 
   if (!allDone) {
     fields.forEach((field, i) => {
