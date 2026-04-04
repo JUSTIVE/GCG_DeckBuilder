@@ -219,7 +219,7 @@ function decodeCursor(cursor: string): number {
  * AP/HP field resolver) so they sort stably at the bottom of ASC results.
  */
 function applySort(cards: RawCard[], sort: string | undefined): RawCard[] {
-  if (!sort) return cards;
+  if (!sort) return [...cards].sort((a, b) => String((a as AnyRecord).id ?? "").localeCompare(String((b as AnyRecord).id ?? "")));
 
   const sep = sort.lastIndexOf("_");
   const rawField = sort.slice(0, sep); // "NAME" | "COST" | "LEVEL" | "AP" | "HP"

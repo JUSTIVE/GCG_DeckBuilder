@@ -38,7 +38,13 @@ const isTranslated = (value: string): boolean =>
 const isDescriptionTranslated = (description: string[]): boolean =>
   description.length > 0 &&
   description.every((line) =>
-    isTranslated(line.replaceAll("EX리소스", "").replaceAll("(G-팀)", "")),
+    isTranslated(
+      line
+        .replaceAll("EX리소스", "")
+        .replaceAll("(G-팀)", "")
+        .replaceAll("AGE 디바이스", "")
+        .replaceAll("AGE 시스템", ""),
+    ),
   );
 
 // ── field result ──────────────────────────────────────────────────────────────
@@ -47,16 +53,19 @@ type FieldResult = {
   field: string;
   translated: boolean;
   detail?: string;
+  untranslatedValues?: string[];
 };
 
 function checkCard(card: Card): FieldResult[] {
   const results: FieldResult[] = [];
 
   if (card.name != null) {
+    const nameTranslated = isTranslated(card.name);
     results.push({
       field: "name",
-      translated: isTranslated(card.name),
+      translated: nameTranslated,
       detail: card.name,
+      untranslatedValues: nameTranslated ? undefined : [card.name],
     });
   }
 
@@ -70,15 +79,18 @@ function checkCard(card: Card): FieldResult[] {
         notTranslatedLines.length > 0
           ? `${notTranslatedLines.length}줄 미번역`
           : `${card.description.length}줄 완료`,
+      untranslatedValues: notTranslatedLines.length > 0 ? notTranslatedLines : undefined,
     });
   }
 
   if (card.link?.__typename === "LinkPilot") {
     const pilotName = (card.link as LinkPilot).pilotName;
+    const pilotTranslated = isTranslated(pilotName);
     results.push({
       field: "link.pilotName",
-      translated: isTranslated(pilotName),
+      translated: pilotTranslated,
       detail: pilotName,
+      untranslatedValues: pilotTranslated ? undefined : [pilotName],
     });
   }
 
@@ -96,10 +108,12 @@ function checkCard(card: Card): FieldResult[] {
       }
     }
     if (pilotName != null) {
+      const pilotTranslated = isTranslated(pilotName);
       results.push({
         field: "pilot.name",
-        translated: isTranslated(pilotName),
+        translated: pilotTranslated,
         detail: pilotName,
+        untranslatedValues: pilotTranslated ? undefined : [pilotName],
       });
     }
   }
@@ -142,6 +156,15 @@ function renderFieldLine(result: FieldResult, prefix: string, isLast: boolean): 
     : styleText("red", result.field);
   const detail = result.detail ? styleText("gray", ` — ${result.detail}`) : "";
   console.log(`${prefix}${connector}${icon} ${fieldName}${detail}`);
+
+  if (result.untranslatedValues && result.untranslatedValues.length > 0) {
+    const childPrefix = prefix + (isLast ? TREE_INDENT : TREE_PIPE);
+    result.untranslatedValues.forEach((val, i) => {
+      const isLastVal = i === result.untranslatedValues!.length - 1;
+      const valConnector = isLastVal ? TREE_LAST : TREE_BRANCH;
+      console.log(`${childPrefix}${valConnector}${styleText("red", val)}`);
+    });
+  }
 }
 
 const COLOR_DOT: Record<string, string> = {
@@ -246,8 +269,29 @@ sortedPackages.forEach((packageName, pkgIdx) => {
 
   // 각 카드 처리
   if (previewSummary.translated < previewSummary.total) {
-    packageCards.forEach((card, cardIdx) => {
-      const isLastCard = cardIdx === packageCards.length - 1;
+    // 색상별 그룹화 후 id 순 정렬
+    const COLOR_ORDER = ["RED", "BLUE", "GREEN", "YELLOW", "PURPLE", "WHITE"];
+    const cardsByColor = new Map<string, Card[]>();
+    for (const card of packageCards) {
+      const color = (card as any).color ?? "UNKNOWN";
+      if (!cardsByColor.has(color)) cardsByColor.set(color, []);
+      cardsByColor.get(color)!.push(card);
+    }
+    const orderedColors = [
+      ...COLOR_ORDER.filter((c) => cardsByColor.has(c)),
+      ...Array.from(cardsByColor.keys())
+        .filter((c) => !COLOR_ORDER.includes(c))
+        .sort(),
+    ];
+    const sortedCards = orderedColors.flatMap((color) =>
+      cardsByColor
+        .get(color)!
+        .slice()
+        .sort((a, b) => a.id.localeCompare(b.id)),
+    );
+
+    sortedCards.forEach((card, cardIdx) => {
+      const isLastCard = cardIdx === sortedCards.length - 1;
       const fields = checkCard(card);
       const cardSummary = renderCardLine(card, fields, packagePrefix, isLastCard);
       packageSummary = addSummary(packageSummary, cardSummary);

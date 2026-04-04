@@ -17,6 +17,10 @@ const replaceList = {
   "(Tekkadan)": "(철화단)",
   "(Teiwaz)": "(테이와즈)",
   "(Vulture)": "(벌쳐)",
+  "(AEUG)": "(에우고)",
+  "(New UNE)": "(신지구연방군)",
+  "(Vagan)": "(베이건)",
+  "(Gjallarhorn)": "(걀라르호른)",
   "this Unit gets AP+2 during this battle.": "이 배틀 동안, 이 유닛을 AP+2 한다.",
   "If you are attacking the enemy player,": "상대 플레이어를 공격하고 있다면,",
   "Choose 1 enemy Unit with 5 or less HP.": "HP5 이하의 상대의 유닛 1개를 선택한다.",
@@ -74,6 +78,7 @@ const replaceList = {
   "Choose 1 of your Units and 1 enemy Unit.": "자신의 유닛 1개와, 상대의 유닛 1개를 선택한다.",
   "Choose 1 of your Units.": "자신의 유닛 1개를 선택한다.",
   "If you do,": "그랬다면,",
+  "if you do,": "그랬다면,",
   "If there are 7 or more cards in your trash,": "자신의 트래쉬에 카드가 7장 이상 있다면,",
   "You may discard 1.": "자신의 패 1장을 버릴 수 있다.",
   "look at the top 3 cards of your deck.": "자신의 덱을 위에서 3장 보고,",
@@ -103,6 +108,13 @@ const replaceList = {
   "If this is a purple Unit,": "이 유닛이 자색이라면,",
   "If this is a red Unit,": "이 유닛이 적색이라면,",
   "If this is a green Unit,": "이 유닛이 녹색이라면,",
+
+  "If this Unit is blue,": "이 유닛이 청색이라면,",
+  "If this Unit is red,": "이 유닛이 적색이라면,",
+  "If this Unit is green,": "이 유닛이 녹색이라면,",
+  "If this Unit is purple,": "이 유닛이 자색이라면,",
+  "choose 1 enemy Unit whose Lv. is equal to or lower than this Unit.":
+    "이 유닛의 Lv. 이하의 상대의 유닛 1개를 선택한다.",
   "Choose 1 friendly damaged Unit.": "대미지를 받고 있는 아군의 유닛 1개를 선택한다.",
   "It recovers 2 HP.": "그 유닛을 2 회복한다.",
   "Choose 1 to 2 enemy Units that are Lv.2 or lower.": "Lv.2 이하의 상대의 유닛 1~2개를 선택한다.",
@@ -121,6 +133,7 @@ const replaceList = {
   "this Unit gains <선제 공격>.": "이 유닛은 <선제 공격>을 얻는다.",
   "This Unit gains <선제 공격>.": "이 유닛은 <선제 공격>을 얻는다.",
   "While you are Lv.7 or higher,": "자신의 레벨이 Lv.7 이상인 동안,",
+  "while you are Lv.7 or higher,": "자신의 레벨이 Lv.7 이상인 동안,",
   "this Unit gains <돌파 5>": "이 유닛은 <돌파 5>를 얻는다.",
   "This Unit gains <돌파 5>": "이 유닛은 <돌파 5>를 얻는다.",
   "this Unit gains <돌파 3>": "이 유닛은 <돌파 3>를 얻는다.",
@@ -128,6 +141,63 @@ const replaceList = {
   "if you are Lv.7 or higher,": "자신이 Lv.7 이상이라면,",
   "If you are Lv.7 or higher,": "자신이 Lv.7 이상이라면,",
   "It gains <돌파 2> during this turn.": "이 턴 동안, 그 유닛은 <돌파 2>를 얻는다.",
+  "This Unit gains <제압> during this turn.": "이 턴 동안, 이 유닛은 <제압>을 얻는다.",
+  "If there are 3 or less enemy Shields,": "상대의 실드가 3개 이하라면,",
+  "During your opponent's turn,": "상대의 턴 동안,",
+  "when one of your Units is rested by one of your opponent's effects,":
+    "자신의 유닛이 상대의 효과로 레스트가 되었을 때,",
+  "choose 1 enemy Unit with 4 or less HP.": "HP4 이하의 상대의 유닛 1개를 선택한다.",
+  "draw 1.": "자신은 1장 드로우 한다.",
+  "this Unit gains <블로커>.": "이 유닛은 <블로커>를 얻는다.",
+  "It gains <고기동> during this turn.": "이 턴 동안, 그 유닛은 <고기동>을 얻는다.",
+  "Choose 1 enemy Unit that is Lv.5 or higher.": "Lv.5 이상의 상대의 유닛 1개를 선택한다.",
+  "If you have another (신지구연방군) Unit in play,":
+    "이 유닛 이외의, (신지구연방군)의 자신의 유닛이 있다면,",
+  "Choose 1 of your other (신지구연방군) Units.":
+    "이 유닛 이외의, (신지구연방군)의 자신의 유닛 1개를 선택한다.",
+  "It can't receive battle damage from enemy Units with 2 or less HP during this turn.":
+    "이 턴 동안, 그 유닛은 HP2 이하의 상대의 유닛으로부터 배틀 대미지를 받지 않는다.",
+  "Choose 1 of your (신지구연방군) Units.": "(신지구연방군)의 자신의 유닛 1개를 선택한다.",
+  "deploy 1 rested [Daughtress]((신지구연방군)･AP0･HP1) Unit token.":
+    "[도트레스]((신지구연방군)･AP0･HP1)의 유닛 토큰 1개를 레스트로 배치한다.",
+  "If this Unit has 5 or more AP and it is attacking an enemy Unit,":
+    "이 유닛이 AP5 이상이고, 상대의 유닛에 공격하고 있다면,",
+  "Choose 1 enemy Unit token.": "상대의 유닛 토큰 1개를 선택한다.",
+  "Destroy this and choose 1 enemy Unit that is Lv.5 or lower.":
+    "이 유닛을 파괴하고 Lv.5 이하의 상대의 유닛 1개를 선택한다.",
+  "Rest this Unit：": "이 유닛을 레스트로 한다:",
+  "If there are 4 or more (걀라르호른) cards in your trash,":
+    "자신의 트래쉬에 (걀라르호른)의 카드가 4장 이상 있다면,",
+  "Then,": "그 후,",
+  "if a friendly (걀라르호른) Unit is in play,": "(걀라르호른)의 아군의 유닛이 있다면,",
+  "This Base can't receive enemy effect damage.":
+    "이 베이스는 상대로부터 효과 대미지를 받지 않는다.",
+  "Choose 1 of your (에우고) Units/Bases.": "(에우고)의 자신의, 유닛 1개/베이스 1개를 선택한다.",
+  "Choose 1 damaged friendly Unit.": "대미지를 받고 있는 아군의 유닛 1개를 선택한다.",
+  "Pay its cost to deploy it.": "그 유닛의 코스트를 지불하고 배치한다.",
+  "You may choose 1 (베이건) Unit card that is Lv.2 or lower from your trash.":
+    "자신의 트래쉬의 Lv.2 이하의 (베이건)의 유닛 카드 1장을 선택할 수 있다.",
+  "Choose 6 purple Unit cards from your trash.":
+    "자신의 트래쉬에서 자색의 유닛 카드 6장을 선택한다.",
+  "Exile them from the game.": "그 카드들을 게임에서 제외한다.",
+  "Choose 1 purple Pilot card from your trash.":
+    "자신의 트래쉬에서 자색의 파일럿 카드 1장을 선택한다.",
+  "If a friendly (테이와즈) Link Unit is in play,": "(테이와즈)의 아군의 링크 유닛이 있다면,",
+  "Choose 1 of your (New UNE) Units.": "(신지구연방군)의 자신의 유닛 1개를 선택한다.",
+  "when this Unit destroys an enemy Unit paired with a (Newtype) Pilot with battle damage,":
+    "이 유닛이 배틀 대미지로 (뉴타입)의 파일럿이 세트 되어있는 상대의 유닛을 파괴했을 때,",
+  "Deal 1 damage to all enemy Units other than Link Units.":
+    "링크 유닛 이외의, 상대의 유닛 전부에 1 대미지를 준다.",
+  "Choose 1 friendly (Clan) Unit.": "(클랜)의 아군의 유닛 1개를 선택한다.",
+  "you may discard 1 red card.": "자신의 패의 적색 카드 1장을 버릴 수 있다.",
+  "Choose 1 of your other (지온) Link Units.":
+    "이 유닛 이외의, (지온)의 자신의 링크 유닛 1개를 선택한다.",
+  "While you have another Unit with <고기동> in play,":
+    "이 유닛 이외의, <고기동>을 가진 자신의 유닛이 있는 동안,",
+  "Choose 1 (Asuno Family) Pilot card from your trash.":
+    "자신의 트래쉬에서 (아스노 일가)의 파일럿 카드 1장을 선택한다.",
+  "If you have an (AGE System) Unit in play,": "(AGE 시스템)의 자신의 유닛이 있다면,",
+  "place 1 EX Resource.": "자신은 EX리소스 1개를 얻는다.",
 };
 
 function applyReplacements(v: string): string {
