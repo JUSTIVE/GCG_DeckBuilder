@@ -1,8 +1,11 @@
-export const KEYWORD_DESCRIPTIONS: Record<string, { name: string; description: string }> = {
+export const KEYWORD_DESCRIPTIONS: Record<
+  string,
+  { name: string; description: string }
+> = {
   ACTIVATE_MAIN: {
     name: "【기동·메인】",
     description:
-      "자신의 메인 페이지에 발동할 수 있는 효과. 「:」이 있는 경우 「:」 앞의 조건과 행동을 만족하면 발동할 수 있다. ※ 어느 유닛이 어택하는 동안은 발동할 수 없다.",
+      "자신의 메인 페이지에 발동할 수 있는 효과. 「:」이 있는 경우 「:」 앞의 조건과 행동을 만족하면 발동할 수 있다. ※ 어느 유닛이 공격하는 동안은 발동할 수 없다.",
   },
   ACTIVATE_ACTION: {
     name: "【기동·액션】",
@@ -29,8 +32,8 @@ export const KEYWORD_DESCRIPTIONS: Record<string, { name: string; description: s
       "유닛 혹은 베이스가 새롭게 배틀 에어리어에 놓였을 때 발동하는 효과.",
   },
   ATTACK: {
-    name: "【어택 시】",
-    description: "유닛이 어택했을 때 발동하는 효과.",
+    name: "【공격 시】",
+    description: "유닛이 공격했을 때 발동하는 효과.",
   },
   DESTROYED: {
     name: "【파괴 시】",
@@ -61,7 +64,7 @@ export const KEYWORD_DESCRIPTIONS: Record<string, { name: string; description: s
       "유닛의 링크 조건에 맞는 파일럿이 세트되어 있는 동안 발동하는 효과.",
   },
   ONCE_PER_TURN: {
-    name: "【턴에 1회】",
+    name: "【턴 1회】",
     description: "그 턴 중 1번만 발동할 수 있음을 나타내는 키워드.",
   },
   END_OF_TURN: {
@@ -85,17 +88,17 @@ export const KEYWORD_DESCRIPTIONS: Record<string, { name: string; description: s
   BLOCKER: {
     name: "<블로커>",
     description:
-      "블록 스텝에 이 유닛을 레스트시키는 것으로, 어택 대상을 이 유닛으로 변경한다.",
+      "블록 스텝에 이 유닛을 레스트시키는 것으로, 공격 대상을 이 유닛으로 변경한다.",
   },
   FIRST_STRIKE: {
     name: "<선제공격>",
     description:
-      "이 유닛이 어택한 배틀 중, 상대 유닛 혹은 베이스보다 먼저 대미지를 준다.",
+      "이 유닛이 공격한 배틀 중, 상대 유닛 혹은 베이스보다 먼저 대미지를 준다.",
   },
   HIGH_MANEUVER: {
     name: "<고기동>",
     description:
-      "이 유닛이 어택한 배틀 중, 상대 유닛의<블로커> 효과를 받지 않는다.",
+      "이 유닛이 공격한 배틀 중, 상대 유닛의<블로커> 효과를 받지 않는다.",
   },
   SUPPRESSION: {
     name: "<제압>",
