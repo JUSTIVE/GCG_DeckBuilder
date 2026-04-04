@@ -197,9 +197,69 @@ const replaceList = {
   "Choose 1 (Asuno Family) Pilot card from your trash.":
     "자신의 트래쉬에서 (아스노 일가)의 파일럿 카드 1장을 선택한다.",
   "If you have an (AGE System) Unit in play,": "(AGE 시스템)의 자신의 유닛이 있다면,",
+  "If you have an (에우고) Link Unit in play,": "(에우고)의 자신의 링크 유닛이 있다면,",
   "place 1 EX Resource.": "자신은 EX리소스 1개를 얻는다.",
   "deal 1 damage to all enemy Units that are Lv.3 or lower.":
     "Lv.3 이하의 상대의 유닛 전부에 1 대미지를 준다.",
+  "if you have 2 or more (삼척동맹) Units in play,": "(삼척동맹)의 자신의 유닛 2장 이상이 있다면, ",
+  "Choose 1 friendly Base and 1 enemy Unit with 3 or less HP.":
+    "아군의 베이스 1개와, HP3이하의 상대의 유닛 1개를 선택한다.",
+  "Choose 1 rested friendly Base. Set it as active.":
+    "레스트의 아군의 베이스 1개를 선택한다. 그 베이스를 액티브로 한다.",
+  "all enemy Units get AP-1 during this turn.": "이 턴 동안, 상대의 유닛 전부를 AP-1 한다.",
+  "Choose 1 rested enemy Unit that is Lv.4 or lower.":
+    "레스트의 Lv.4 이하의 상대의 유닛 1개를 선택한다.",
+  "If a friendly white Base is in play,": "백색의 아군의 베이스가 있다면,",
+  "Return the card paired with this Unit to your hand.":
+    "이 유닛에 세트되어있는 카드를 패로 되돌린다.",
+  "Choose 1 enemy Unit with no paired Pilot.":
+    "파일럿이 세트되어 있지 않은 상대의 유닛 1개를 선택한다.",
+  "This card in your trash gets cost -1.": "트래쉬의 이 카드를 코스트-1 한다.",
+  "Choose 1 to 3 enemy Units with 3 or less HP.": "HP3 이하의 상대의 유닛 1~3개를 선택한다.",
+  "Return them to their owners' hands.": "그 유닛들을 주인의 패로 되돌린다.",
+  "Choose 1 (걀라르호른) Command card from your trash.":
+    "자신의 트래쉬의 (걀라르호른)의 커맨드 카드 1장을 선택한다.",
+  "Look at the top 3 cards of your deck and return 1 to the top.":
+    "자신의 덱을 위에서 3장 보고, 그 중에 카드 1장을 위에 둔다.",
+  "Return the remaining cards to the bottom of your deck.": "남은 카드는 무작위로 밑으로 되돌린다.",
+  "if you have a (뉴타입) Pilot in play,": "(뉴타입)의 자신의 파일럿이 있다면,",
+  "Choose 1 of your Unit tokens.": "자신의 유닛 토큰 1개를 선택한다.",
+  "It can't receive battle damage from enemy Units during this battle.":
+    "이 배틀 동안, 그 토큰은 상대의 유닛으로부터 배틀 대미지를 받지 않는다.",
+  "During this battle, your shield area cards can't receive damage from enemy Units that are Lv.3 or lower.":
+    "이 배틀 동안, 자신의 실드 에리어의 카드는, Lv.3 이하의 상대의 유닛으로부터 대미지를 받지 않는다.",
+  "choose 1 friendly Unit token.": "아군의 유닛 토큰 1개를 선택한다.",
+  "During this turn, it may choose an active enemy Unit with 5 or less AP as its attack target.":
+    "이 턴 동안, 그 토큰은 액티브의 Lv.5 이하의 상대의 유닛을 공격 대상으로 선택할 수 있다.",
+  "all friendly green (지구 연방) Units get AP+1.":
+    "녹색의 (지구 연방)의 자신의 유닛 전부를 AP+1 한다.",
+  "Choose 1 active friendly Base.": "액티브의 아군의 베이스 1개를 선택한다.",
+  "Rest it.": "그 카드를 레스트로 한다.",
+  "It can't choose the enemy player as its attack target during this turn.":
+    "이 턴 동안, 이 유닛은 상대 플레이어를 공격 대상으로 선택할 수 없다.",
+  "you may pair 1 (에우고) Pilot card from your hand with this Unit.":
+    "자신의 패의 (에우고)의 파일럿 카드 1장을 이 유닛에 세트할 수 있다.",
+  "While a friendly white Base is in play,": "백색의 아군의 베이스가 있는 동안,",
+  "this Unit gains <리페어 1>.": "이 유닛은 <리페어 1>을 얻는다.",
+  "While there are 4 or more Command cards in your trash,":
+    "자신의 트래쉬에 커맨드 카드가 4장 이상 있는 동안,",
+  "It gets AP-2 during this battle.": "그 유닛을 AP-2 한다.",
+  "While you have another (걀라르호른) Unit in play,":
+    "이 유닛 이외의, (걀라르호른)의 자신의 유닛이 있는 동안,",
+  "If it is your opponent's turn,": "상대의 턴 이라면,",
+  "choose 1 of your (걀라르호른) Units. Set it as active.":
+    "(걀라르호른)의 자신의 유닛 1개를 선택한다. 그 유닛을 액티브로 한다.",
+  "Choose 1 (에우고) Base card from your trash.":
+    "자신의 트래쉬의 (에우고)의 베이스 카드 1장을 선택한다.",
+  "While there is a friendly white Base in play,": "백색의 아군의 베이스가 있는 동안,",
+  "It gets AP-3 during this battle.": "이 배틀 동안, 그 유닛을 AP-3 한다.",
+  "If you have a (걀라르호른) Link Unit in play,": "(걀라르호른)의 자신의 링크 유닛이 있다면,",
+  "This card's name is also treated as [샤아 아즈나블]":
+    "이 카드의 카드명은 [샤아 아즈나블]이라고도 취급한다.",
+  "If this is an (에우고) Unit,": "이 유닛이 (에우고)라면,",
+  "discard 1.": "자신은 패 1장을 버린다.",
+  "Choose 1 enemy Unit with 4 or less HP battling a friendly Unit with <블로커>.":
+    "<블로커>를 가진 아군의 유닛과 배틀하고 있는, HP4 이하의 적 유닛 1개를 선택한다.",
 };
 
 function applyReplacements(v: string): string {
