@@ -3,12 +3,12 @@ export const KEYWORD_DESCRIPTIONS: Record<
   { name: string; description: string }
 > = {
   ACTIVATE_MAIN: {
-    name: "【기동·메인】",
+    name: "【기동･메인】",
     description:
       "자신의 메인 페이지에 발동할 수 있는 효과. 「:」이 있는 경우 「:」 앞의 조건과 행동을 만족하면 발동할 수 있다. ※ 어느 유닛이 공격하는 동안은 발동할 수 없다.",
   },
   ACTIVATE_ACTION: {
-    name: "【기동·액션】",
+    name: "【기동･액션】",
     description:
       "액션 스텝에 발동할 수 있는 효과. 「:」이 있는 경우 「:」 앞의 조건과 행동을 만족하면 발동할 수 있다.",
   },
@@ -103,6 +103,6 @@ export const KEYWORD_DESCRIPTIONS: Record<
   SUPPRESSION: {
     name: "<제압>",
     description:
-      "이 유닛이 배틀 에어리어에 있는 동안, 상대방은 유닛의<블로커> 효과를 발동할 수 없다.",
+      "공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.",
   },
 };

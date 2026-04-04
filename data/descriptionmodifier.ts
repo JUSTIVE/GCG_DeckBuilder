@@ -14,6 +14,8 @@ const replaceList = {
   "(ZAFT)": "(자프트)",
   "(Triple Ship Alliance)": "(삼척동맹)",
   "(Academy)": "(학원)",
+  "(Tekkadan)": "(철화단)",
+  "(Teiwaz)": "(테이와즈)",
   "this Unit gets AP+2 during this battle.": "이 배틀 동안, 이 유닛을 AP+2 한다.",
   "If you are attacking the enemy player,": "상대 플레이어를 공격하고 있다면,",
   "Choose 1 enemy Unit with 5 or less HP.": "HP5 이하의 상대의 유닛 1개를 선택한다.",

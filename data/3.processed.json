@@ -1071,7 +1071,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중】【파괴 시】Deploy 1 rested [Char's Zaku Ⅱ]((Zeon)･AP3･HP1) Unit token."
+      "【세트 중】 【파괴 시】 [자쿠 Ⅱ 샤아 전용기]((지온)･AP3･HP1)의 유닛 토큰 1개를 레스트로 배치한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-026",
@@ -4946,7 +4946,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】 Choose 1 Unit card that is Lv.5 or lower from your trash. Pay its cost to deploy it."
+      "【메인】 자신의 트래쉬의 Lv.5 이하의 유닛 카드 1장을 선택한다. 그 유닛을 코스트를 지불하고 배치한다."
     ],
     "__typename": "CommandCard",
     "id": "GD02-110",
@@ -5054,7 +5054,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 중】【공격 시】Choose 12 cards from your trash. Return them to their owner's deck and shuffle it. If you do, set this Unit as active. It gains <선제 공격> during this turn.",
+      "【링크 중】 【공격 시】 자신의 트래쉬의 카드 12장을 선택한다. 그 카드들을 주인의 덱으로 돌리고, 셔플한다. 그랬다면 이 유닛을 액티브하고, 이 턴 동안, 이 유닛은 <선제 공격>을 얻는다.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -5214,7 +5214,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 중】【기동･액션】【턴 1회】Choose 1 Unit. It recovers 1 HP."
+      "【링크 중】 【기동･액션】 【턴 1회】 유닛 1개를 선택한다. 그 유닛을 1 회복한다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-014",
@@ -6361,7 +6361,7 @@
     "relatedTrait": [],
     "description": [
       "【배치 시】 [파툼-00]((삼척동맹)･AP2･HP2･<블로커>)의 유닛 토큰 1개를 배치한다.",
-      "【세트 중】【공격 시】Choose 1 of your (Triple Ship Alliance) Unit tokens. It may attack on the turn it is deployed."
+      "【세트 중】 【공격 시】 자신의 (삼척동맹)의 유닛 토큰 1개를 선택한다. 그 토큰은 배치한 턴에 공격할 수 있다."
     ],
     "__typename": "UnitCard",
     "id": "GD01-066",
@@ -9175,7 +9175,8 @@
     "cost": 5,
     "color": "PURPLE",
     "keywords": [
-      "DURING_LINK"
+      "DURING_LINK",
+      "SUPPRESSION"
     ],
     "series": "AFTER_WAR_GUNDAM_X",
     "package": "GD02",
@@ -9184,7 +9185,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "[Suppression] (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
+      "<제압> (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
       "【링크 중】자신의 턴 동안, while there are 7 or more cards in your trash, all your other (Vulture) Units get AP+2."
     ],
     "__typename": "UnitCard",
@@ -9442,7 +9443,7 @@
       "TEKKADAN"
     ],
     "description": [
-      "【세트 시･Purple Pilot】 If there are 3 or more (Teiwaz)/(Tekkadan) cards in your trash, choose 1 enemy Unit with 3 or less AP. 그 유닛을 레스트로 한다."
+      "【세트 시･Purple Pilot】 If there are 3 or more (테이와즈)/(철화단) cards in your trash, choose 1 enemy Unit with 3 or less AP. 그 유닛을 레스트로 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-061",
@@ -10786,7 +10787,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 If a friendly (Teiwaz) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. 그 유닛을 파괴한다.",
+      "【메인】 /【액션】 If a friendly (테이와즈) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. 그 유닛을 파괴한다.",
       "【파일럿】[아미다 아르카]"
     ],
     "__typename": "CommandCard",
@@ -11222,7 +11223,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn and a friendly (Teiwaz) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. 그 유닛을 파괴한다."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. Then, if it is your turn and a friendly (테이와즈) Link Unit is in play, choose 1 enemy Unit with 2 or less AP. 그 유닛을 파괴한다."
     ],
     "__typename": "BaseCard",
     "id": "GD02-128",
@@ -12889,7 +12890,7 @@
       "TEIWAZ"
     ],
     "description": [
-      "【기동･메인】 Choose 3 (Tekkadan)/(Teiwaz) Unit cards from your trash. Exile them from the game. If you do, 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
+      "【기동･메인】 Choose 3 (철화단)/(테이와즈) Unit cards from your trash. Exile them from the game. If you do, 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-050",
@@ -13214,7 +13215,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【턴 1회】 자신의 턴 동안, when this Unit receives effect damage, deploy 1 rested [CGS Mobile Worker]((Tekkadan)･AP1･HP1) Unit token."
+      "【턴 1회】 자신의 턴 동안, when this Unit receives effect damage, deploy 1 rested [CGS Mobile Worker]((철화단)･AP1･HP1) Unit token."
     ],
     "__typename": "UnitCard",
     "id": "GD03-060",
@@ -14761,7 +14762,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】 If 1 to 4 enemy Units are in play, deploy 1 [Graze Custom]((Tekkadan)･AP2･HP2) Unit token. If 5 or more are in play, deploy 1 [Gundam Barbatos 4th Form]((Tekkadan)･AP4･HP4) Unit token."
+      "【메인】 If 1 to 4 enemy Units are in play, deploy 1 [Graze Custom]((철화단)･AP2･HP2) Unit token. If 5 or more are in play, deploy 1 [Gundam Barbatos 4th Form]((철화단)･AP4･HP4) Unit token."
     ],
     "__typename": "CommandCard",
     "id": "GD03-117",
@@ -15101,7 +15102,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "자신의 턴 동안, when one of your friendly (Tekkadan)/(Teiwaz) Units receives effect damage, you may rest this Base. If you do, place the top card of your deck into your trash."
+      "자신의 턴 동안, when one of your friendly (철화단)/(테이와즈) Units receives effect damage, you may rest this Base. If you do, place the top card of your deck into your trash."
     ],
     "__typename": "BaseCard",
     "id": "GD03-129",
