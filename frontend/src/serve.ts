@@ -984,6 +984,19 @@ function fieldResolver(
     return (source[fieldName] as number | null | undefined) ?? 0;
   }
 
+  // ── Deck.colors ───────────────────────────────────────────────────────────
+  if (typeName === "Deck" && fieldName === "colors") {
+    const deckCards = (source["cards"] as DeckCard[] | undefined) ?? [];
+    const seen = new Set<string>();
+    for (const dc of deckCards) {
+      const card = cardById.get(dc.cardId) as AnyRecord | undefined;
+      if (!card || card.__typename === "ResourceCard") continue;
+      const color = card["color"];
+      if (typeof color === "string") seen.add(color);
+    }
+    return Array.from(seen);
+  }
+
   // ── Deck.topKeywords / Deck.topTraits ────────────────────────────────────
   if (typeName === "Deck" && (fieldName === "topKeywords" || fieldName === "topTraits")) {
     const limit = typeof args["limit"] === "number" ? (args["limit"] as number) : 3;

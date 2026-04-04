@@ -21,6 +21,7 @@ const Query = graphql`
         id
         name
         createdAt
+        colors
         topKeywords
         topTraits
         cards {
@@ -28,19 +29,15 @@ const Query = graphql`
           card {
             __typename
             ... on UnitCard {
-              color
               imageUrl
             }
             ... on PilotCard {
-              color
               imageUrl
             }
             ... on BaseCard {
-              color
               imageUrl
             }
             ... on CommandCard {
-              color
               imageUrl
             }
           }
@@ -58,6 +55,7 @@ const CREATE_DECK_MUTATION = graphql`
         id
         name
         createdAt
+        colors
         topKeywords
         topTraits
         cards {
@@ -65,19 +63,15 @@ const CREATE_DECK_MUTATION = graphql`
           card {
             __typename
             ... on UnitCard {
-              color
               imageUrl
             }
             ... on PilotCard {
-              color
               imageUrl
             }
             ... on BaseCard {
-              color
               imageUrl
             }
             ... on CommandCard {
-              color
               imageUrl
             }
           }
@@ -95,6 +89,7 @@ const DELETE_DECK_MUTATION = graphql`
         id
         name
         createdAt
+        colors
         topKeywords
         topTraits
         cards {
@@ -102,19 +97,15 @@ const DELETE_DECK_MUTATION = graphql`
           card {
             __typename
             ... on UnitCard {
-              color
               imageUrl
             }
             ... on PilotCard {
-              color
               imageUrl
             }
             ... on BaseCard {
-              color
               imageUrl
             }
             ... on CommandCard {
-              color
               imageUrl
             }
           }
@@ -174,17 +165,6 @@ export function DeckListPage() {
       if (t && t in KIND_LABELS) counts[t] = (counts[t] ?? 0) + count;
     }
     return counts;
-  }
-
-  function deckColors(
-    cards: readonly { count: number; card: any }[],
-  ): string[] {
-    const seen = new Set<string>();
-    for (const { card } of cards) {
-      const color = card?.color;
-      if (color) seen.add(color);
-    }
-    return Array.from(seen);
   }
 
   function deckPreviewImages(
@@ -250,7 +230,7 @@ export function DeckListPage() {
                     {totalCards(deck.cards)}장
                   </span>
                   <div className="flex gap-1 p-1">
-                    {deckColors(deck.cards).map((color) => (
+                    {deck.colors.map((color) => (
                       <span
                         key={color}
                         className={cn(
