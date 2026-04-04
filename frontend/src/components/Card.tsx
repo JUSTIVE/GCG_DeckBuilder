@@ -121,7 +121,7 @@ export function Card({ cardRef, showDescription, onAdd, onOpen, deckCardCount = 
         {onAdd && cardId && !atLimit && (
           <button
             type="button"
-            className="absolute bottom-0 left-0 right-0 h-1/2 z-10 flex items-center justify-center rounded-b-xl bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+            className="absolute bottom-0 left-0 right-0 h-1/2 z-10 flex items-center justify-center rounded-b-xl bg-black/50 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity cursor-pointer"
             onClick={() => onAdd(cardId)}
           >
             <PlusIcon className="size-8 text-white drop-shadow" />

@@ -1188,7 +1188,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중】This Unit gains <돌파 3>.",
+      "【세트 중】 이 유닛은 <돌파 3>을 얻는다.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -1948,7 +1948,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
+      "【세트 중】 자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, Lv.3 이하의 상대의 유닛 전부에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "ST02-003",
@@ -2117,7 +2117,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 중】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, draw 1."
+      "【링크 중】 자신의 턴 동안, 자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, 자신은 1장 드로우 한다."
     ],
     "__typename": "PilotCard",
     "id": "ST02-011",
@@ -2205,7 +2205,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중】This Unit gains <고기동>.",
+      "【세트 중】 이 유닛은 <고기동>을 얻는다.",
       "(이 유닛은 블록당하지 않는다.)",
       "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 실드 에리어의 카드를 파괴했을 때, 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
@@ -2691,7 +2691,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중】【파괴 시】If you have another Link Unit in play, draw 1."
+      "【세트 중】 【파괴 시】 이 유닛 이외의, 자신의 링크 유닛이 있다면, 자신은 1장 드로우 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST04-009",
@@ -3140,7 +3140,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 중】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, choose 1 (Tekkadan) Unit card that is Lv.2 or lower from your trash. Add it to your hand."
+      "【링크 중】 자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, 자신의 트래쉬의 Lv.2 이하의 (철화단)의 유닛 카드 1장을 선택한다. 그 카드를 패에 추가한다."
     ],
     "__typename": "PilotCard",
     "id": "ST05-011",
@@ -3816,7 +3816,7 @@
     "relatedTrait": [],
     "description": [
       "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, 이 유닛을 2 회복한다.",
-      "【링크 중】This Unit gets AP+2."
+      "【링크 중】 이 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "ST07-005",
@@ -11604,7 +11604,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중】This Unit gains <리페어 2>.",
+      "【세트 시】 이 유닛은 <리페어 2>를 얻는다.",
       "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
     "__typename": "UnitCard",
