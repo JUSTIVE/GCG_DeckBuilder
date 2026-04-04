@@ -6,17 +6,19 @@ import type { CardKeyword } from "@/routes/cardlist";
 // 【트리거】 키워드별 클래스. 매칭되지 않으면 fallback 사용.
 
 const TRIGGER_STYLES: Record<string, string> = {
-  메인: "bg-blue-300 text-gray-800",
-  액션: "bg-blue-300 text-gray-800",
   "기동･메인": "bg-blue-300 text-gray-800",
   "기동･액션": "bg-blue-300 text-gray-800",
+  메인: "bg-blue-300 text-gray-800",
+  액션: "bg-blue-300 text-gray-800",
   버스트: "bg-orange-400 text-white",
-  "공격 시": "bg-blue-300 text-gray-800",
-  "배치 시": "bg-blue-300 text-gray-800",
-  "파괴 시": "bg-blue-300 text-gray-800",
-  "링크 시": "bg-yellow-300 text-gray-800",
+  "배치 시": "bg-teal-500 text-gray-800",
+  "공격 시": "bg-teal-500 text-gray-800",
+  "파괴 시": "bg-teal-500 text-gray-800",
   "세트 시": "bg-pink-400 text-gray-800 saturate-50", // startsWith 매칭
-  파일럿: "",
+  "세트 중": "bg-pink-400 text-gray-800 saturate-50", // startsWith 매칭
+  파일럿: "bg-pink-400 text-gray-800 saturate-50",
+  "링크 시": "bg-yellow-300 text-gray-800",
+  "링크 중": "bg-yellow-300 text-gray-800",
   "턴 1회": "bg-red-700 text-white",
 };
 
@@ -61,7 +63,10 @@ const ABILITY_KEYWORD_MAP: Array<[string, CardKeyword]> = [
   ["원호", "SUPPORT"],
 ];
 
-function findKeyword(text: string, map: Array<[string, CardKeyword]>): CardKeyword | null {
+function findKeyword(
+  text: string,
+  map: Array<[string, CardKeyword]>,
+): CardKeyword | null {
   for (const [k, v] of map) {
     if (text === k || text.startsWith(k)) return v;
   }

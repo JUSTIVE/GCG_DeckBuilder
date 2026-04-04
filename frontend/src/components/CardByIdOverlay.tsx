@@ -21,7 +21,7 @@ import { renderZone } from "@/render/zone";
 import { renderRarity } from "@/render/rarity";
 import { renderSeries } from "@/render/series";
 import { renderPackage } from "@/render/package";
-import { COLOR_BG, COLOR_HEX, COLOR_BORDER, COLOR_BORDER50, COLOR_SHADOW } from "src/render/color";
+import { COLOR_BG, COLOR_HEX, COLOR_BORDER, COLOR_SHADOW } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { CardDescription } from "./CardDescription";
 import { Dialog } from "@base-ui/react/dialog";
@@ -211,11 +211,9 @@ export function CardByIdOverlay({
   function renderKeywords() {
     if (!node || node.__typename === "%other" || node.__typename === "Resource") return null;
     if (!("keywords" in node) || !node.keywords.length) return null;
-    const color = "color" in node ? (node.color as string) : undefined;
     return (
       <KeywordPanel
         keywords={node.keywords as string[]}
-        borderClass={color ? COLOR_BORDER50[color] : undefined}
       />
     );
   }
@@ -363,13 +361,15 @@ export function CardByIdOverlay({
           {node.description.length > 0 && (
             <div className="flex flex-col gap-1.5">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">효과</span>
-              <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
+              <CardDescription lines={node.description} />
+
             </div>
           )}
 
           {node.keywords.length > 0 && (
             <div className="sm:hidden">
-              <KeywordContent keywords={node.keywords as string[]} borderClass={COLOR_BORDER50[node.color]} />
+              <KeywordContent keywords={node.keywords as string[]} />
+
             </div>
           )}
         </div>
@@ -443,13 +443,15 @@ export function CardByIdOverlay({
           {node.description.length > 0 && (
             <div className="flex flex-col gap-1.5">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">효과</span>
-              <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
+              <CardDescription lines={node.description} />
+
             </div>
           )}
 
           {node.keywords.length > 0 && (
             <div className="sm:hidden">
-              <KeywordContent keywords={node.keywords as string[]} borderClass={COLOR_BORDER50[node.color]} />
+              <KeywordContent keywords={node.keywords as string[]} />
+
             </div>
           )}
         </div>
@@ -541,13 +543,15 @@ export function CardByIdOverlay({
           {node.description.length > 0 && (
             <div className="flex flex-col gap-1.5">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">효과</span>
-              <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
+              <CardDescription lines={node.description} />
+
             </div>
           )}
 
           {node.keywords.length > 0 && (
             <div className="sm:hidden">
-              <KeywordContent keywords={node.keywords as string[]} borderClass={COLOR_BORDER50[node.color]} />
+              <KeywordContent keywords={node.keywords as string[]} />
+
             </div>
           )}
         </div>
@@ -632,13 +636,15 @@ export function CardByIdOverlay({
           {node.description.length > 0 && (
             <div className="flex flex-col gap-1.5">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">효과</span>
-              <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
+              <CardDescription lines={node.description} />
+
             </div>
           )}
 
           {node.keywords.length > 0 && (
             <div className="sm:hidden">
-              <KeywordContent keywords={node.keywords as string[]} borderClass={COLOR_BORDER50[node.color]} />
+              <KeywordContent keywords={node.keywords as string[]} />
+
             </div>
           )}
         </div>
