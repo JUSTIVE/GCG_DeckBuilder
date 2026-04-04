@@ -11044,7 +11044,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【공격 시】 If you have 2 or more other (Titans) Units in play, choose 1 enemy Unit with 5 or less HP. 그 유닛을 레스트로 한다."
+      "【공격 시】 If you have 2 or more other (티탄즈) Units in play, choose 1 enemy Unit with 5 or less HP. 그 유닛을 레스트로 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-004",
@@ -11200,7 +11200,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 You may choose 2 (Titans) cards from your trash. 그 카드들을 게임에서 제외한다. 그랬다면, Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
+      "【배치 시】 You may choose 2 (티탄즈) cards from your trash. 그 카드들을 게임에서 제외한다. 그랬다면, Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-009",
@@ -11314,7 +11314,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While you have another (Jupitris) Unit in play, this Unit gets AP+1 and <리페어 1>.",
+      "While you have another (주피트리스) Unit in play, this Unit gets AP+1 and <리페어 1>.",
       "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
     "__typename": "UnitCard",
@@ -11339,7 +11339,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While you have 2 or more (Titans) Units in play, this card in your hand gets cost -1."
+      "While you have 2 or more (티탄즈) Units in play, this card in your hand gets cost -1."
     ],
     "__typename": "UnitCard",
     "id": "GD03-014",
@@ -11367,7 +11367,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【기동･메인】 【턴 1회】 Exile 3 (Titans) cards from your trash: This Unit gains <돌파 4> during this turn.",
+      "【기동･메인】 【턴 1회】 Exile 3 (티탄즈) cards from your trash: This Unit gains <돌파 4> during this turn.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -11427,7 +11427,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 Choose 1 (Cyclops Team) Pilot card from your trash. 그 카드를 패에 추가한다.",
-      "【세트 시･(Cyclops Team) Pilot】 All your (Cyclops Team) Units may choose an active enemy Unit with 5 or less AP as their attack target during this turn."
+      "【세트 시･(Cyclops Team) 파일럿】 All your (Cyclops Team) Units may choose an active enemy Unit with 5 or less AP as their attack target during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD03-017",
@@ -11907,7 +11907,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중･(ZAFT) Pilot】자신의 턴 동안, all your (ZAFT) Units get AP+2.",
+      "【세트 중･(자프트) 파일럿】 자신의 턴 동안, all your (자프트) Units get AP+2.",
       "【공격 시】 상대의 유닛 1개를 선택한다. Deal 1 damage to it for each 4 AP this Unit has."
     ],
     "__typename": "UnitCard",
@@ -12098,7 +12098,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 Choose 1 other active friendly (Clan) Unit. 그 카드를 레스트로 한다. 그랬다면, AP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
+      "【배치 시】 Choose 1 other active friendly (클랜) Unit. 그 카드를 레스트로 한다. 그랬다면, AP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-039",
@@ -12544,7 +12544,7 @@
     ],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
-      "【세트 시･(X-Rounder) Pilot】 You may choose 4 (베이건) cards from your trash. 그 카드들을 게임에서 제외한다. 그랬다면, Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
+      "【세트 시･(X-Rounder) 파일럿】 You may choose 4 (베이건) cards from your trash. 그 카드들을 게임에서 제외한다. 그랬다면, Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 파괴한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-054",
@@ -13341,7 +13341,7 @@
       "UN"
     ],
     "description": [
-      "This Unit can only attack during a turn when one of your (Superpower Bloc)/(UN) Units is deployed."
+      "This Unit can only attack during a turn when one of your (초대국군)/(UN) Units is deployed."
     ],
     "__typename": "UnitCard",
     "id": "GD03-081",
@@ -13371,7 +13371,7 @@
       "UN"
     ],
     "description": [
-      "While you have 2 or more (Superpower Bloc)/(UN) Units in play, this card in your hand gets cost -1."
+      "While you have 2 or more (초대국군)/(UN) Units in play, this card in your hand gets cost -1."
     ],
     "__typename": "UnitCard",
     "id": "GD03-082",
@@ -13476,7 +13476,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【공격 시】 Choose 1 of your (Titans) Units whose Lv. is equal to or lower than this Unit. 이 턴 동안, 그 유닛을 AP+1 한다."
+      "【공격 시】 Choose 1 of your (티탄즈) Units whose Lv. is equal to or lower than this Unit. 이 턴 동안, 그 유닛을 AP+1 한다."
     ],
     "__typename": "PilotCard",
     "id": "GD03-086",
@@ -13633,7 +13633,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 Place the top card of your deck into your trash. If you placed a (지온)/(Clan) card with this effect, 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
+      "【링크 시】 Place the top card of your deck into your trash. If you placed a (지온)/(클랜) card with this effect, 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
     ],
     "__typename": "PilotCard",
     "id": "GD03-092",
@@ -13875,7 +13875,7 @@
     ],
     "description": [
       "【버스트】 자신은 1장 드로우 한다.",
-      "【액션】 Choose 1 of your (Titans) Link Units battling an enemy Unit. Set it as active."
+      "【액션】 Choose 1 of your (티탄즈) Link Units battling an enemy Unit. Set it as active."
     ],
     "__typename": "CommandCard",
     "id": "GD03-102"
@@ -13918,7 +13918,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 /【액션】 HP3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다. If a friendly (Jupitris) Link Unit is in play, choose 1 to 2 enemy Units with 3 or less HP instead.",
+      "【메인】 /【액션】 HP3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다. If a friendly (주피트리스) Link Unit is in play, choose 1 to 2 enemy Units with 3 or less HP instead.",
       "【파일럿】[레코아 론도]"
     ],
     "__typename": "CommandCard",
@@ -13962,7 +13962,7 @@
     "trait": [],
     "relatedTrait": [],
     "description": [
-      "【메인】 Deploy 1 rested [GQuuuuuuX (Omega Psycommu)]((Clan)･AP3･HP2) Unit token and 1 rested [Red Gundam]((Clan)･AP2･HP3) Unit token."
+      "【메인】 Deploy 1 rested [GQuuuuuuX (Omega Psycommu)]((클랜)･AP3･HP2) Unit token and 1 rested [Red Gundam]((클랜)･AP2･HP3) Unit token."
     ],
     "__typename": "CommandCard",
     "id": "GD03-106"
@@ -14278,7 +14278,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 During this turn, if a friendly (Superpower Bloc)/(UN) Unit destroys an enemy Unit with battle damage, choose 1 rested friendly (Superpower Bloc)/(UN) Unit. Set it as active. 이 턴 동안, 그 유닛은 공격할 수 없다.",
+      "【메인】 During this turn, if a friendly (초대국군)/(UN) Unit destroys an enemy Unit with battle damage, choose 1 rested friendly (초대국군)/(UN) Unit. Set it as active. 이 턴 동안, 그 유닛은 공격할 수 없다.",
       "【파일럿】[패트릭 콜라사워]"
     ],
     "__typename": "CommandCard",
@@ -14364,7 +14364,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, if a friendly (Jupitris) Unit is in play, choose 1 enemy Unit that is Lv.3 or lower. 그 유닛을 레스트로 한다."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, if a friendly (주피트리스) Unit is in play, choose 1 enemy Unit that is Lv.3 or lower. 그 유닛을 레스트로 한다."
     ],
     "__typename": "BaseCard",
     "id": "GD03-123",
@@ -14426,7 +14426,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【턴 1회】 자신의 턴 동안, when a friendly (Operation Meteor)/(G Team) Unit that is Lv.6 or higher destroys an enemy Unit with battle damage, that friendly Unit may recover 2 HP."
+      "【턴 1회】 자신의 턴 동안, when a friendly 오퍼레이션 메테오/(G Team) Unit that is Lv.6 or higher destroys an enemy Unit with battle damage, that friendly Unit may recover 2 HP."
     ],
     "__typename": "BaseCard",
     "id": "GD03-125",

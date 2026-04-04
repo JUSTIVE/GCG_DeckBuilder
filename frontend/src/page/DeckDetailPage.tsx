@@ -559,7 +559,7 @@ function DeckViewGrid({
                     <MinusIcon className="size-3" />
                   </button>
                   {info.count > 1 && (
-                    <div className="absolute bottom-1 left-1 bg-black/70 text-white font-bold rounded px-1 leading-tight text-2xl">
+                    <div className="absolute top-1.5 right-1.5 z-10 min-w-7 h-7 rounded-full bg-white text-black text-sm font-black flex items-center justify-center px-1 leading-none pointer-events-none shadow-lg ring-2 ring-black/20">
                       ×{info.count}
                     </div>
                   )}
