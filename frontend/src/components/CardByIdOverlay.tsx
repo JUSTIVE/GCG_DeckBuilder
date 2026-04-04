@@ -16,6 +16,7 @@ import { BaseCardBody } from "./BaseCard";
 import { CommandCardBody } from "./CommandCard";
 import { ResourceCardBody } from "./ResourceCard";
 import { renderTrait } from "@/render/trait";
+import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
 import { renderZone } from "@/render/zone";
 import { renderRarity } from "@/render/rarity";
 import { renderSeries } from "@/render/series";
@@ -44,6 +45,7 @@ const Query = graphql`
         zone
         traits
         relatedTraits
+        keywords
         series
         package
         links {
@@ -66,6 +68,7 @@ const Query = graphql`
         color
         traits
         relatedTraits
+        keywords
         description
         series
         package
@@ -88,6 +91,7 @@ const Query = graphql`
         zone
         traits
         relatedTraits
+        keywords
         series
         package
       }
@@ -100,6 +104,7 @@ const Query = graphql`
         color
         traits
         relatedTraits
+        keywords
         description
         series
         package
@@ -118,6 +123,45 @@ const Query = graphql`
     }
   }
 `;
+
+function KeywordContent({ keywords, borderClass }: { keywords: string[]; borderClass?: string }) {
+  const entries = keywords
+    .map((k) => KEYWORD_DESCRIPTIONS[k])
+    .filter((e): e is NonNullable<typeof e> => e != null);
+
+  if (entries.length === 0) return null;
+
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">키워드</span>
+      {entries.map((entry, i) => (
+        <div key={i} className={cn("flex flex-col gap-1.5 rounded-lg border px-3 py-2", borderClass ?? "border-white/20")}>
+          <CardDescription lines={[entry.name]} borderClass={borderClass} />
+          <CardDescription lines={[entry.description]} borderClass={borderClass} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function KeywordPanel({ keywords, borderClass }: { keywords: string[]; borderClass?: string }) {
+  const entries = keywords
+    .map((k) => KEYWORD_DESCRIPTIONS[k])
+    .filter((e): e is NonNullable<typeof e> => e != null);
+
+  if (entries.length === 0) return null;
+
+  return (
+    <div className="hidden sm:flex flex-col gap-3 max-h-[80dvh] overflow-y-auto">
+      {entries.map((entry, i) => (
+        <div key={i} className="pointer-events-auto w-72 rounded-xl bg-black/75 px-4 py-3 text-white backdrop-blur-md flex flex-col gap-1.5">
+          <CardDescription lines={[entry.name]} borderClass={borderClass} />
+          <CardDescription lines={[entry.description]} borderClass={borderClass} />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export function CardByIdOverlay({
   cardId,
@@ -162,6 +206,18 @@ export function CardByIdOverlay({
       search: filter,
       replace: true,
     });
+  }
+
+  function renderKeywords() {
+    if (!node || node.__typename === "%other" || node.__typename === "Resource") return null;
+    if (!("keywords" in node) || !node.keywords.length) return null;
+    const color = "color" in node ? (node.color as string) : undefined;
+    return (
+      <KeywordPanel
+        keywords={node.keywords as string[]}
+        borderClass={color ? COLOR_BORDER50[color] : undefined}
+      />
+    );
   }
 
   function renderThumbnail() {
@@ -310,6 +366,12 @@ export function CardByIdOverlay({
               <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
+
+          {node.keywords.length > 0 && (
+            <div className="sm:hidden">
+              <KeywordContent keywords={node.keywords as string[]} borderClass={COLOR_BORDER50[node.color]} />
+            </div>
+          )}
         </div>
       );
     }
@@ -382,6 +444,12 @@ export function CardByIdOverlay({
             <div className="flex flex-col gap-1.5">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">효과</span>
               <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
+            </div>
+          )}
+
+          {node.keywords.length > 0 && (
+            <div className="sm:hidden">
+              <KeywordContent keywords={node.keywords as string[]} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
         </div>
@@ -476,6 +544,12 @@ export function CardByIdOverlay({
               <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
+
+          {node.keywords.length > 0 && (
+            <div className="sm:hidden">
+              <KeywordContent keywords={node.keywords as string[]} borderClass={COLOR_BORDER50[node.color]} />
+            </div>
+          )}
         </div>
       );
     }
@@ -561,6 +635,12 @@ export function CardByIdOverlay({
               <CardDescription lines={node.description} borderClass={COLOR_BORDER50[node.color]} />
             </div>
           )}
+
+          {node.keywords.length > 0 && (
+            <div className="sm:hidden">
+              <KeywordContent keywords={node.keywords as string[]} borderClass={COLOR_BORDER50[node.color]} />
+            </div>
+          )}
         </div>
       );
     }
@@ -587,15 +667,18 @@ export function CardByIdOverlay({
           onClick={closeDialog}
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
         />
-        <Dialog.Popup className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 p-6 pointer-events-none outline-none transition duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0">
-          <div className={cn(
-            "@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl border-2",
-            node && "color" in node ? COLOR_BORDER[node.color as string] : undefined,
-            node && "color" in node ? COLOR_SHADOW[node.color as string] : undefined,
-          )}>
-            {renderThumbnail()}
+        <Dialog.Popup className="fixed inset-0 z-50 flex items-center justify-center gap-4 p-6 pointer-events-none outline-none transition duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0 overflow-y-auto">
+          <div className="flex flex-col gap-4 items-center shrink-0">
+            <div className={cn(
+              "@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl border-2",
+              node && "color" in node ? COLOR_BORDER[node.color as string] : undefined,
+              node && "color" in node ? COLOR_SHADOW[node.color as string] : undefined,
+            )}>
+              {renderThumbnail()}
+            </div>
+            {renderDetails()}
           </div>
-          {renderDetails()}
+          {renderKeywords()}
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>

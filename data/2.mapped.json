@@ -17,7 +17,7 @@
     "relatedTrait": [],
     "description": [
       "<리페어 2> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
-      "【세트 시】 자신의 턴 동안, 자신의 유닛 전부를 AP+1 한다."
+      "【세트 중】자신의 턴 동안, all your Units get AP+1."
     ],
     "__typename": "UnitCard",
     "id": "ST01-001",
@@ -406,7 +406,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 이 유닛을 AP+1, HP+1 한다."
+      "【링크 중】This Unit gets AP+1 and HP+1."
     ],
     "__typename": "PilotCard",
     "id": "ST02-010",
@@ -819,7 +819,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 【파괴 시】 이 유닛에 세트되어있는 파일럿을 주인의 패로 되돌린다. 그 후, 자신은 패 1장을 버린다."
+      "【링크 중】【파괴 시】Return this Unit's paired Pilot to its owner's hand. Then, discard 1."
     ],
     "__typename": "UnitCard",
     "id": "GD01-005",
@@ -1034,7 +1034,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 【파괴 시】 [자쿠 Ⅱ 샤아 전용기]((지온)･AP3･HP1)의 유닛 토큰 1개를 레스트로 배치한다."
+      "【세트 중】【파괴 시】Deploy 1 rested [Char's Zaku Ⅱ]((Zeon)･AP3･HP1) Unit token."
     ],
     "__typename": "UnitCard",
     "id": "GD01-026",
@@ -1147,7 +1147,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 이 유닛은 <돌파 3>을 얻는다.",
+      "【세트 중】This Unit gains <돌파 3>.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -1873,7 +1873,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, Lv.3 이하의 상대의 유닛 전부에 1 대미지를 준다."
+      "【세트 중】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
     ],
     "__typename": "UnitCard",
     "id": "ST02-003",
@@ -2036,7 +2036,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 자신의 턴 동안, 자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, 자신은 1장 드로우 한다."
+      "【링크 중】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, draw 1."
     ],
     "__typename": "PilotCard",
     "id": "ST02-011",
@@ -2119,7 +2119,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 이 유닛은 <고기동>을 얻는다.",
+      "【세트 중】This Unit gains <고기동>.",
       "(이 유닛은 블록당하지 않는다.)",
       "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 실드 에리어의 카드를 파괴했을 때, 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
     ],
@@ -2587,7 +2587,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 【파괴 시】 이 유닛 이외의, 자신의 링크 유닛이 있다면, 자신은 1장 드로우 한다."
+      "【세트 중】【파괴 시】If you have another Link Unit in play, draw 1."
     ],
     "__typename": "UnitCard",
     "id": "ST04-009",
@@ -3018,7 +3018,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, 자신의 트래쉬의 Lv.2 이하의 (철화단)의 유닛 카드 1장을 선택한다. 그 카드를 패에 추가한다."
+      "【링크 중】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, choose 1 (Tekkadan) Unit card that is Lv.2 or lower from your trash. Add it to your hand."
     ],
     "__typename": "PilotCard",
     "id": "ST05-011",
@@ -3391,7 +3391,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 【공격 시】 (클랜)의 자신의 유닛이 있다면, 자신의 덱을 위에서 1장 보고, 덱의 위나 아래에 둔다."
+      "【링크 중】【공격 시】If you have a (Clan) Unit in play, look at the top card of your deck. Return it to the top or bottom of your deck."
     ],
     "__typename": "PilotCard",
     "id": "ST06-010",
@@ -3670,7 +3670,7 @@
     "relatedTrait": [],
     "description": [
       "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, 이 유닛을 2 회복한다.",
-      "【링크 시】 이 유닛을 AP+2 한다."
+      "【링크 중】This Unit gets AP+2."
     ],
     "__typename": "UnitCard",
     "id": "ST07-005",
@@ -4092,7 +4092,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 【공격 시】 【턴 1회】 상대 플레이어에게 공격하고 있다면, 자신의 패의 (지구 연방)의 유닛 카드 1장을 공개하고 덱의 아래로 되돌린다. 그랬다면, 자신은 2장 드로우 한다."
+      "【세트 중】【공격 시】【턴 1회】If this Unit is attacking the enemy player, reveal 1 (Earth Federation) Unit card from your hand. Return it to the bottom of your deck. If you do, draw 2."
     ],
     "__typename": "UnitCard",
     "id": "ST08-006",
@@ -4862,7 +4862,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 【공격 시】 자신의 트래쉬의 카드 12장을 선택한다. 그 카드들을 주인의 덱으로 돌리고, 셔플한다. 그랬다면 이 유닛을 액티브하고, 이 턴 동안, 이 유닛은 <선제 공격>을 얻는다.",
+      "【링크 중】【공격 시】Choose 12 cards from your trash. Return them to their owner's deck and shuffle it. If you do, set this Unit as active. It gains <선제 공격> during this turn.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -4895,7 +4895,7 @@
     "relatedTrait": [],
     "description": [
       "<리페어 1> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
-      "【링크 시】 이 유닛을 HP+1 한다."
+      "【링크 중】This Unit gets HP+1."
     ],
     "__typename": "UnitCard",
     "id": "GD01-006",
@@ -5017,7 +5017,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 【기동･액션】 【턴 1회】 유닛 1개를 선택한다. 그 유닛을 1 회복한다."
+      "【링크 중】【기동･액션】【턴 1회】Choose 1 Unit. It recovers 1 HP."
     ],
     "__typename": "UnitCard",
     "id": "GD01-014",
@@ -5640,7 +5640,7 @@
     ],
     "description": [
       "【기동･메인】<원호 3> (레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)",
-      "【세트 시･(코디네이터) 파일럿】 【턴 1회】 이 유닛의 <원호> 로 (자프트)의 유닛을 AP+ 했을 때, 이 유닛을 액티브로 한다."
+      "【세트 중･(Coordinator) Pilot】【턴 1회】When you use this Unit's <원호> to increase a (ZAFT) Unit's AP, set this Unit as active."
     ],
     "__typename": "UnitCard",
     "id": "GD01-046",
@@ -6090,7 +6090,7 @@
     "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【세트 시】 【턴 1회】 이 유닛이나, 백색의 자신의 유닛에 파일럿을 세트했을 때, 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다."
+      "【세트 중】【턴 1회】When you pair a Pilot with this Unit or one of your white Units, choose 1 enemy Unit. It gets AP-2 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD01-065",
@@ -6124,7 +6124,7 @@
     "relatedTrait": [],
     "description": [
       "【배치 시】 [파툼-00]((삼척동맹)･AP2･HP2･<블로커>)의 유닛 토큰 1개를 배치한다.",
-      "【세트 시】 【공격 시】 자신의 (삼척동맹)의 유닛 토큰 1개를 선택한다. 그 토큰은 배치한 턴에 공격할 수 있다."
+      "【세트 중】【공격 시】Choose 1 of your (Triple Ship Alliance) Unit tokens. It may attack on the turn it is deployed."
     ],
     "__typename": "UnitCard",
     "id": "GD01-066",
@@ -6217,7 +6217,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 【공격 시】 상대의 유닛 1개를 선택한다. 이 배틀 동안, 그 유닛을 AP-2 한다."
+      "【링크 중】【공격 시】Choose 1 enemy Unit. It gets AP-2 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-071",
@@ -6248,7 +6248,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 【공격 시】 HP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다."
+      "【링크 중】【공격 시】Choose 1 enemy Unit with 2 or less HP. Return it to its owner's hand."
     ],
     "__typename": "UnitCard",
     "id": "GD01-073",
@@ -6389,7 +6389,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 【기동･액션】 【턴 1회】 ②： 상대의 유닛 1개를 선택한다. 이 배틀 동안, 그 유닛을 AP-1 한다."
+      "【세트 중】【기동･액션】【턴 1회】②：Choose 1 enemy Unit. It gets AP-1 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD01-082",
@@ -6544,7 +6544,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 이 유닛의 AP는 상대의 효과로 줄어들지 않는다."
+      "【링크 중】This Unit's AP can't be reduced by enemy effects."
     ],
     "__typename": "PilotCard",
     "id": "GD01-090",
@@ -6595,7 +6595,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 【공격 시】 이 유닛의 Lv. 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
+      "【링크 중】【공격 시】Choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. Deal 1 damage to it."
     ],
     "__typename": "PilotCard",
     "id": "GD01-093",
@@ -7367,7 +7367,7 @@
     ],
     "description": [
       "<돌파 3> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【세트 시･(강화인간) 파일럿】 When one of your (Titans) Units destroys an enemy shield area card with damage, this Unit recovers 2 HP."
+      "【세트 중･(Cyber-Newtype) Pilot】When one of your (Titans) Units destroys an enemy shield area card with damage, this Unit recovers 2 HP."
     ],
     "__typename": "UnitCard",
     "id": "GD02-001",
@@ -7398,7 +7398,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 【턴 1회】 자신의 턴 동안, when one of your Units destroys an enemy Unit with battle damage, set this Unit as active."
+      "【링크 중】【턴 1회】자신의 턴 동안, when one of your Units destroys an enemy Unit with battle damage, set this Unit as active."
     ],
     "__typename": "UnitCard",
     "id": "GD02-002",
@@ -7429,7 +7429,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･Lv.3 or Lower Pilot】 【파괴 시】 You may discard 1 Unit card. If you do, return the card paired with this Unit to your hand."
+      "【세트 중･Lv.3 or Lower Pilot】【파괴 시】You may discard 1 Unit card. If you do, return the card paired with this Unit to your hand."
     ],
     "__typename": "UnitCard",
     "id": "GD02-003",
@@ -7490,7 +7490,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 【공격 시】  HP2 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
+      "【링크 중】【공격 시】Choose 1 enemy Unit with 2 or less HP. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-005",
@@ -7905,7 +7905,7 @@
     "relatedTrait": [],
     "description": [
       "【배치 시】 Look at the top 5 cards of your deck. You may reveal 1 green (지온) Pilot card among them and add it to your hand. 남은 카드는 무작위로 덱의 밑으로 되돌린다.",
-      "【링크 시】 이 유닛을 AP+2 한다."
+      "【링크 중】 This Unit gets AP+2."
     ],
     "__typename": "UnitCard",
     "id": "GD02-020",
@@ -8001,7 +8001,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 While you are Lv.7 or higher, this Unit gains <선제 공격>.",
+      "【링크 중】While you are Lv.7 or higher, this Unit gains <선제 공격>.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -8033,7 +8033,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 This Unit gains <고기동>.",
+      "【링크 중】This Unit gains <고기동>.",
       "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "UnitCard",
@@ -8316,7 +8316,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･Red Pilot】 This Unit gets AP+2."
+      "【세트 중･Red Pilot】This Unit gets AP+2."
     ],
     "__typename": "UnitCard",
     "id": "GD02-034",
@@ -8371,7 +8371,7 @@
     "description": [
       "【링크 시】 This Unit gains <제압> during this turn.",
       "(공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
-      "【세트 시･(네오 지온) Pilot】 【공격 시】 대미지를 받은 상대의 유닛 1개를 선택한다. 그 유닛에 2 대미지를 준다."
+      "【세트 중･(Neo Zeon) Pilot】【공격 시】Choose 1 damaged enemy Unit. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-036",
@@ -8842,7 +8842,7 @@
     "relatedTrait": [],
     "description": [
       "[Suppression] (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
-      "【링크 시】 자신의 턴 동안, while there are 7 or more cards in your trash, all your other (Vulture) Units get AP+2."
+      "【링크 중】자신의 턴 동안, while there are 7 or more cards in your trash, all your other (Vulture) Units get AP+2."
     ],
     "__typename": "UnitCard",
     "id": "GD02-053",
@@ -8937,7 +8937,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･(Vulture) Pilot】 【파괴 시】 Choose 1 (Vulture) Unit card that is Lv.5 or higher from your trash. 그 카드를 패에 추가한다."
+      "【세트 중･(Vulture) Pilot】【파괴 시】Choose 1 (Vulture) Unit card that is Lv.5 or higher from your trash. Add it to your hand."
     ],
     "__typename": "UnitCard",
     "id": "GD02-056",
@@ -8969,7 +8969,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 【공격 시】 You may choose 1 of your other Units. 그 유닛을 파괴한다. If you do, choose 1 enemy Unit that is Lv.4 or lower. 그 유닛에 2 대미지를 준다."
+      "【세트 중】【공격 시】You may choose 1 of your other Units. Destroy it. If you do, choose 1 enemy Unit that is Lv.4 or lower. Deal 2 damage to it."
     ],
     "__typename": "UnitCard",
     "id": "GD02-057",
@@ -9301,7 +9301,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 【기동･메인】 【턴 1회】 Choose 1 active friendly Base. Rest it. If you do, set this Unit as active. It can't choose the enemy player as its attack target during this turn."
+      "【링크 중】【기동･메인】【턴 1회】Choose 1 active friendly Base. Rest it. If you do, set this Unit as active. It can't choose the enemy player as its attack target during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD02-069",
@@ -9458,7 +9458,7 @@
     "relatedTrait": [],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
-      "【세트 시】 자신의 트래쉬에 커맨드 카드가 4장 이상 있는 경우, this Unit gains <블로커>.",
+      "【세트 중】While there are 4 or more Command cards in your trash, this Unit gains <블로커>.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "UnitCard",
@@ -9735,7 +9735,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】【턴 1회】자신의 턴 동안, when this Unit recovers HP, if you have 4 or less cards in your hand, draw 1."
+      "【링크 중】【턴 1회】자신의 턴 동안, when this Unit recovers HP, if you have 4 or less cards in your hand, draw 1."
     ],
     "__typename": "PilotCard",
     "id": "GD02-085",
@@ -9912,7 +9912,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 【공격 시】 Choose 1 of your (New UNE) Units. 이 턴 동안, 그 유닛을 AP+2 한다."
+      "【링크 중】【공격 시】Choose 1 of your (New UNE) Units. It gets AP+2 during this turn."
     ],
     "__typename": "PilotCard",
     "id": "GD02-092",
@@ -10980,7 +10980,7 @@
     "relatedTrait": [],
     "description": [
       "<리페어 3> (자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)",
-      "【세트 시】 When one of your other Units with <리페어> attacks, choose 1 enemy Unit whose Lv. is equal to or lower than that Unit. 그 유닛을 레스트로 한다."
+      "【세트 중】When one of your other Units with <리페어> attacks, choose 1 enemy Unit whose Lv. is equal to or lower than that Unit. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD03-002",
@@ -11167,7 +11167,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 이 유닛은 <리페어 2>를 얻는다.",
+      "【세트 중】This Unit gains <리페어 2>.",
       "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
     "__typename": "UnitCard",
@@ -11491,7 +11491,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 Enemy Units choose this rested Unit as their attack target if possible when attacking.",
+      "【세트 중】Enemy Units choose this rested Unit as their attack target if possible when attacking.",
       "【링크 시】 자신은 EX리소스 1개를 얻는다."
     ],
     "__typename": "UnitCard",
@@ -11587,7 +11587,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 자신의 턴 동안, 자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, deal 1 damage to all enemy Units that are Lv.3 or lower."
+      "【링크 중】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
     ],
     "__typename": "UnitCard",
     "id": "GD03-022",
@@ -11906,7 +11906,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시･(자프트) Pilot】 자신의 턴 동안, all your (자프트) Units get AP+2.",
+      "【세트 중･(ZAFT) Pilot】자신의 턴 동안, all your (ZAFT) Units get AP+2.",
       "【공격 시】 상대의 유닛 1개를 선택한다. Deal 1 damage to it for each 4 AP this Unit has."
     ],
     "__typename": "UnitCard",
@@ -12034,7 +12034,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 자신의 턴 동안, while this Unit is battling an enemy Unit with a 【파괴 시】 effect, it gains <선제 공격>.",
+      "【링크 중】자신의 턴 동안, while this Unit is battling an enemy Unit with a 【파괴 시】 effect, it gains <선제 공격>.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -12128,7 +12128,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 This Unit gains <고기동>.",
+      "【링크 중】This Unit gains <고기동>.",
       "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "UnitCard",
@@ -12509,7 +12509,7 @@
     ],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【세트 시】 【턴 1회】 자신의 턴 동안, when one of your (Tekkadan)/(Teiwaz) Units receives effect damage, choose 1 enemy Unit that is Lv.4 or lower. 그 유닛을 레스트로 한다."
+      "【세트 중】【턴 1회】자신의 턴 동안, when one of your (Tekkadan)/(Teiwaz) Units receives effect damage, choose 1 enemy Unit that is Lv.4 or lower. Rest it."
     ],
     "__typename": "UnitCard",
     "id": "GD03-053",
@@ -12977,7 +12977,7 @@
     "relatedTrait": [],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
-      "【링크 시】 At the end of the turn when this Unit is paired with a Pilot, set it as active."
+      "【링크 중】At the end of the turn when this Unit is paired with a Pilot, set it as active."
     ],
     "__typename": "UnitCard",
     "id": "GD03-069",
@@ -13101,7 +13101,7 @@
     "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【링크 시】 【기동･액션】 【턴 1회】 If there are 6 or more (Gjallarhorn) cards in your trash, choose 1 enemy Unit battling this Unit. It gets AP-3 during this battle."
+      "【링크 중】【기동･액션】【턴 1회】If there are 6 or more (Gjallarhorn) cards in your trash, choose 1 enemy Unit battling this Unit. It gets AP-3 during this battle."
     ],
     "__typename": "UnitCard",
     "id": "GD03-073",
@@ -13131,7 +13131,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 While you have another (Superpower Bloc) Unit in play, enemy Units choose this rested Unit as their attack target if possible when attacking."
+      "【세트 중】While you have another (Superpower Bloc) Unit in play, enemy Units choose this rested Unit as their attack target if possible when attacking."
     ],
     "__typename": "UnitCard",
     "id": "GD03-074",
@@ -13162,7 +13162,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 【공격 시】 Choose 1 enemy Unit with no paired Pilot. 이 턴 동안, 그 유닛을 AP-2 한다."
+      "【링크 중】【공격 시】Choose 1 enemy Unit with no paired Pilot. It gets AP-2 during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD03-075",
@@ -13251,7 +13251,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 【파괴 시】 Return the card paired with this Unit to your hand."
+      "【링크 중】【파괴 시】Return the card paired with this Unit to your hand."
     ],
     "__typename": "UnitCard",
     "id": "GD03-078",
@@ -13529,7 +13529,7 @@
     ],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 If this is an (AGE System) Unit, it gets AP+1 and <돌파 1>.",
+      "【링크 중】If this is an (AGE System) Unit, it gets AP+1 and <돌파 1>.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
@@ -13731,7 +13731,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】【공격 시】You may discard 1. If you do, draw 1."
+      "【링크 중】【공격 시】You may discard 1. If you do, draw 1."
     ],
     "__typename": "PilotCard",
     "id": "GD03-096",
@@ -13756,7 +13756,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 【턴 1회】 자신의 턴 동안, 자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, look at the top 2 cards of your deck and return 1 to the top. Place the remaining card into your trash."
+      "【링크 중】【턴 1회】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, look at the top 2 cards of your deck and return 1 to the top. Place the remaining card into your trash."
     ],
     "__typename": "PilotCard",
     "id": "GD03-097",
@@ -13781,7 +13781,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 When this rested Unit is set as active by an effect, choose 1 enemy Unit with 3 or less HP. 그 유닛을 주인의 패로 되돌린다."
+      "【링크 중】When this rested Unit is set as active by an effect, choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand."
     ],
     "__typename": "PilotCard",
     "id": "GD03-098",
@@ -13806,7 +13806,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 시】 【파괴 시】 If a friendly white Base is in play, choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. 그 유닛을 주인의 패로 되돌린다."
+      "【링크 중】【파괴 시】If a friendly white Base is in play, choose 1 enemy Unit whose Lv. is equal to or lower than this Unit. Return it to its owner's hand."
     ],
     "__typename": "PilotCard",
     "id": "GD03-099",
