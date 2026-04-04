@@ -254,7 +254,7 @@ export function DeckListPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8 flex flex-col gap-6">
+    <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col gap-6">
       <div className="flex items-center gap-2">
         <LayersIcon className="size-5 text-muted-foreground" />
         <h1 className="text-xl font-bold">덱 목록</h1>
@@ -278,11 +278,11 @@ export function DeckListPage() {
           덱이 없습니다.
         </p>
       ) : (
-        <ul className="flex flex-col gap-2">
+        <ul className="grid gap-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min-content, 1fr))" }}>
           {decks.map((deck) => (
             <li
               key={deck.id}
-              className="flex items-start gap-3 rounded-lg border border-border bg-muted/30 px-4 py-3 hover:bg-muted/60 transition-colors"
+              className="flex items-start gap-3 rounded-lg border border-border bg-muted/30 px-4 py-3 hover:bg-muted/60 transition-colors min-w-max"
             >
               <button
                 type="button"
