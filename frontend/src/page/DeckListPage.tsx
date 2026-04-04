@@ -21,6 +21,8 @@ const Query = graphql`
         id
         name
         createdAt
+        topKeywords
+        topTraits
         cards {
           count
           card {
@@ -28,26 +30,18 @@ const Query = graphql`
             ... on UnitCard {
               color
               imageUrl
-              keywords
-              traits
             }
             ... on PilotCard {
               color
               imageUrl
-              keywords
-              traits
             }
             ... on BaseCard {
               color
               imageUrl
-              keywords
-              traits
             }
             ... on CommandCard {
               color
               imageUrl
-              keywords
-              traits
             }
           }
         }
@@ -64,6 +58,8 @@ const CREATE_DECK_MUTATION = graphql`
         id
         name
         createdAt
+        topKeywords
+        topTraits
         cards {
           count
           card {
@@ -71,26 +67,18 @@ const CREATE_DECK_MUTATION = graphql`
             ... on UnitCard {
               color
               imageUrl
-              keywords
-              traits
             }
             ... on PilotCard {
               color
               imageUrl
-              keywords
-              traits
             }
             ... on BaseCard {
               color
               imageUrl
-              keywords
-              traits
             }
             ... on CommandCard {
               color
               imageUrl
-              keywords
-              traits
             }
           }
         }
@@ -107,6 +95,8 @@ const DELETE_DECK_MUTATION = graphql`
         id
         name
         createdAt
+        topKeywords
+        topTraits
         cards {
           count
           card {
@@ -114,26 +104,18 @@ const DELETE_DECK_MUTATION = graphql`
             ... on UnitCard {
               color
               imageUrl
-              keywords
-              traits
             }
             ... on PilotCard {
               color
               imageUrl
-              keywords
-              traits
             }
             ... on BaseCard {
               color
               imageUrl
-              keywords
-              traits
             }
             ... on CommandCard {
               color
               imageUrl
-              keywords
-              traits
             }
           }
         }
@@ -192,38 +174,6 @@ export function DeckListPage() {
       if (t && t in KIND_LABELS) counts[t] = (counts[t] ?? 0) + count;
     }
     return counts;
-  }
-
-  function topKeywords(
-    cards: readonly { count: number; card: any }[],
-    limit = 3,
-  ): string[] {
-    const counts = new Map<string, number>();
-    for (const { card, count } of cards) {
-      for (const kw of card?.keywords ?? []) {
-        counts.set(kw, (counts.get(kw) ?? 0) + count);
-      }
-    }
-    return [...counts.entries()]
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, limit)
-      .map(([kw]) => kw);
-  }
-
-  function topTraits(
-    cards: readonly { count: number; card: any }[],
-    limit = 3,
-  ): string[] {
-    const counts = new Map<string, number>();
-    for (const { card, count } of cards) {
-      for (const tr of card?.traits ?? []) {
-        counts.set(tr, (counts.get(tr) ?? 0) + count);
-      }
-    }
-    return [...counts.entries()]
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, limit)
-      .map(([tr]) => tr);
   }
 
   function deckColors(
@@ -344,7 +294,7 @@ export function DeckListPage() {
                   );
                 })()}
                 {(() => {
-                  const kws = topKeywords(deck.cards);
+                  const kws = deck.topKeywords;
                   if (kws.length === 0) return null;
                   return (
                     <div className="flex flex-wrap gap-1 mt-1.5">
@@ -381,7 +331,7 @@ export function DeckListPage() {
                   );
                 })()}
                 {(() => {
-                  const traits = topTraits(deck.cards);
+                  const traits = deck.topTraits;
                   if (traits.length === 0) return null;
                   return (
                     <div className="flex flex-wrap gap-1 mt-1">

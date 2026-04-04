@@ -349,6 +349,8 @@ type Deck implements Node {
   name: String!
   cards: [DeckCard!]!
   createdAt: String!
+  topKeywords(limit: Int): [CardKeyword!]!
+  topTraits(limit: Int): [CardTrait!]!
 }
 
 type DeckList implements Node {

@@ -984,6 +984,26 @@ function fieldResolver(
     return (source[fieldName] as number | null | undefined) ?? 0;
   }
 
+  // ── Deck.topKeywords / Deck.topTraits ────────────────────────────────────
+  if (typeName === "Deck" && (fieldName === "topKeywords" || fieldName === "topTraits")) {
+    const limit = typeof args["limit"] === "number" ? (args["limit"] as number) : 3;
+    const deckCards = (source["cards"] as DeckCard[] | undefined) ?? [];
+    const counts = new Map<string, number>();
+    for (const dc of deckCards) {
+      const card = cardById.get(dc.cardId) as AnyRecord | undefined;
+      if (!card) continue;
+      const rawField = fieldName === "topKeywords" ? card["keywords"] : card["trait"];
+      const items = Array.isArray(rawField) ? (rawField as string[]) : [];
+      for (const item of items) {
+        counts.set(item, (counts.get(item) ?? 0) + dc.count);
+      }
+    }
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, limit)
+      .map(([kw]) => kw);
+  }
+
   // ── DeckCard.card → look up PlayableCard by stored cardId ────────────────
   if (typeName === "DeckCard" && fieldName === "card") {
     const id = source["cardId"] as string | undefined;
