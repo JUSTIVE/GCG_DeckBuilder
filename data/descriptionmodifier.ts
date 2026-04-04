@@ -127,6 +127,7 @@ const replaceList = {
   "This Unit gains <돌파 3>": "이 유닛은 <돌파 3>를 얻는다.",
   "if you are Lv.7 or higher,": "자신이 Lv.7 이상이라면,",
   "If you are Lv.7 or higher,": "자신이 Lv.7 이상이라면,",
+  "It gains <돌파 2> during this turn.": "이 턴 동안, 그 유닛은 <돌파 2>를 얻는다.",
 };
 
 function applyReplacements(v: string): string {

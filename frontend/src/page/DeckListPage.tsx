@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { PlusIcon, Trash2Icon, LayersIcon } from "lucide-react";
 import { COLOR_BG } from "src/render/color";
 import { cn } from "@/lib/utils";
+import { renderKeyword } from "@/render/keyword";
 
 const Query = graphql`
   query DeckListPageQuery {
@@ -22,10 +23,10 @@ const Query = graphql`
           count
           card {
             __typename
-            ... on UnitCard { color imageUrl }
-            ... on PilotCard { color imageUrl }
-            ... on BaseCard { color imageUrl }
-            ... on CommandCard { color imageUrl }
+            ... on UnitCard { color imageUrl keywords }
+            ... on PilotCard { color imageUrl keywords }
+            ... on BaseCard { color imageUrl keywords }
+            ... on CommandCard { color imageUrl keywords }
           }
         }
       }
@@ -45,10 +46,10 @@ const CREATE_DECK_MUTATION = graphql`
           count
           card {
             __typename
-            ... on UnitCard { color imageUrl }
-            ... on PilotCard { color imageUrl }
-            ... on BaseCard { color imageUrl }
-            ... on CommandCard { color imageUrl }
+            ... on UnitCard { color imageUrl keywords }
+            ... on PilotCard { color imageUrl keywords }
+            ... on BaseCard { color imageUrl keywords }
+            ... on CommandCard { color imageUrl keywords }
           }
         }
       }
@@ -68,10 +69,10 @@ const DELETE_DECK_MUTATION = graphql`
           count
           card {
             __typename
-            ... on UnitCard { color imageUrl }
-            ... on PilotCard { color imageUrl }
-            ... on BaseCard { color imageUrl }
-            ... on CommandCard { color imageUrl }
+            ... on UnitCard { color imageUrl keywords }
+            ... on PilotCard { color imageUrl keywords }
+            ... on BaseCard { color imageUrl keywords }
+            ... on CommandCard { color imageUrl keywords }
           }
         }
       }
@@ -122,6 +123,19 @@ export function DeckListPage() {
       if (t && t in KIND_LABELS) counts[t] = (counts[t] ?? 0) + count;
     }
     return counts;
+  }
+
+  function topKeywords(cards: readonly { count: number; card: any }[], limit = 3): string[] {
+    const counts = new Map<string, number>();
+    for (const { card, count } of cards) {
+      for (const kw of card?.keywords ?? []) {
+        counts.set(kw, (counts.get(kw) ?? 0) + count);
+      }
+    }
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, limit)
+      .map(([kw]) => kw);
   }
 
   function deckColors(cards: readonly { count: number; card: any }[]): string[] {
@@ -213,6 +227,19 @@ export function DeckListPage() {
                         <span key={k} className="text-[11px] text-muted-foreground">
                           <span className="font-medium text-foreground/70">{KIND_LABELS[k]}</span>
                           {" "}{counts[k]}
+                        </span>
+                      ))}
+                    </div>
+                  );
+                })()}
+                {(() => {
+                  const kws = topKeywords(deck.cards);
+                  if (kws.length === 0) return null;
+                  return (
+                    <div className="flex flex-wrap gap-1 mt-1.5">
+                      {kws.map((kw) => (
+                        <span key={kw} className="text-[10px] bg-muted rounded px-1.5 py-0.5 text-muted-foreground">
+                          {renderKeyword(kw)}
                         </span>
                       ))}
                     </div>

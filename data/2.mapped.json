@@ -7935,7 +7935,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 자신의 패의 녹생의 (지구 연방)의 유닛 카드 1장을 버릴 수 있다. 그랬다면, 자신은 EX리소스 1개를 얻는다. Then, 자신이 Lv.7 이상이라면, 자신은 1장 드로우 한다."
+      "【배치 시】 자신의 패의 녹색의 (지구 연방)의 유닛 카드 1장을 버릴 수 있다. 그랬다면, 자신은 EX리소스 1개를 얻는다. 그 후, 자신이 Lv.7 이상이라면, 자신은 1장 드로우 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-021",
@@ -7968,7 +7968,7 @@
       "AGE_SYSTEM"
     ],
     "description": [
-      "【턴 1회】 When you place an EX Resource, choose 1 of your (AGE System) Units. It gains <돌파 2> during this turn.",
+      "【턴 1회】 자신의 EX리소스가 추가되었을 때, (에이지 시스템)의 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 <돌파 2>를 얻는다.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -7985,7 +7985,7 @@
     ]
   },
   {
-    "name": "건담 AGE-1 스말로",
+    "name": "건담 AGE-1 스팔로",
     "level": 4,
     "cost": 3,
     "color": "GREEN",
@@ -8001,7 +8001,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 중】While you are Lv.7 or higher, this Unit gains <선제 공격>.",
+      "【링크 중】 자신의 레벨이 Lv.7 이상인 동안, 이 유닛은 <선제 공격>을 얻는다.",
       "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
