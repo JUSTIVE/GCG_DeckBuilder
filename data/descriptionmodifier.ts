@@ -198,6 +198,8 @@ const replaceList = {
     "자신의 트래쉬에서 (아스노 일가)의 파일럿 카드 1장을 선택한다.",
   "If you have an (AGE System) Unit in play,": "(AGE 시스템)의 자신의 유닛이 있다면,",
   "place 1 EX Resource.": "자신은 EX리소스 1개를 얻는다.",
+  "deal 1 damage to all enemy Units that are Lv.3 or lower.":
+    "Lv.3 이하의 상대의 유닛 전부에 1 대미지를 준다.",
 };
 
 function applyReplacements(v: string): string {

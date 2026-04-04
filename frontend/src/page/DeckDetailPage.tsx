@@ -500,7 +500,7 @@ function DeckViewGrid({
     <div className="overflow-y-auto h-full py-4 px-3">
       <div
         className="grid gap-8"
-        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))" }}
+        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))" }}
       >
         {items.map((info) => {
           const stackLayers = Math.min(info.count - 1, 2);

@@ -12039,7 +12039,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 중】자신의 턴 동안, when this Unit destroys an enemy Unit with battle damage, deal 1 damage to all enemy Units that are Lv.3 or lower."
+      "【링크 중】 자신의 턴 동안, 자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, Lv.3 이하의 상대의 유닛 전부에 1 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-022",
