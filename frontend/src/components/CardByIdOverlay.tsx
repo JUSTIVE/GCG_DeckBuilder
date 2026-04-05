@@ -78,6 +78,7 @@ export function CardByIdOverlay({
 
   const [commitAddCardView] = useMutation<CardByIdOverlayAddCardViewMutation>(ADD_CARD_VIEW_MUTATION);
   const [tilt, setTilt] = useState({ rotX: 0, rotY: 0 });
+  const [gyroEnabled, setGyroEnabled] = useState(() => localStorage.getItem("gyroEnabled") !== "false");
   const [gyroPermission, setGyroPermission] = useState<"unknown" | "granted" | "denied" | "na">(() => {
     if (typeof DeviceOrientationEvent === "undefined") return "na";
     if (typeof (DeviceOrientationEvent as any).requestPermission !== "function") return "granted";
@@ -87,17 +88,13 @@ export function CardByIdOverlay({
   const gyroBase = useRef<{ beta: number; gamma: number } | null>(null);
 
   useEffect(() => {
-    if (gyroPermission !== "granted") return;
+    if (!gyroEnabled || gyroPermission !== "granted") return;
 
     // Re-verify permission silently on session start (catches external revocation)
     const needsPermission = typeof (DeviceOrientationEvent as any).requestPermission === "function";
     if (needsPermission && !sessionStorage.getItem("gyroPermission")) {
       (DeviceOrientationEvent as any).requestPermission()
-        .then((result: string) => {
-          if (result !== "granted") {
-            setGyroPermission("unknown");
-          }
-        })
+        .then((result: string) => { if (result !== "granted") setGyroPermission("unknown"); })
         .catch(() => setGyroPermission("unknown"));
       return;
     }
@@ -121,7 +118,14 @@ export function CardByIdOverlay({
       gyroBase.current = null;
       setTilt({ rotX: 0, rotY: 0 });
     };
-  }, [gyroPermission, cardId]);
+  }, [gyroEnabled, gyroPermission, cardId]);
+
+  function toggleGyro() {
+    const next = !gyroEnabled;
+    setGyroEnabled(next);
+    localStorage.setItem("gyroEnabled", String(next));
+    if (!next) setTilt({ rotX: 0, rotY: 0 });
+  }
 
   async function requestGyroPermission() {
     try {
@@ -230,7 +234,7 @@ export function CardByIdOverlay({
                 onMouseLeave={() => setTilt({ rotX: 0, rotY: 0 })}
               >
                 {renderThumbnail()}
-                {gyroPermission === "unknown" && (
+                {gyroEnabled && gyroPermission === "unknown" && (
                   <button
                     type="button"
                     onClick={requestGyroPermission}
@@ -240,6 +244,21 @@ export function CardByIdOverlay({
                   </button>
                 )}
               </div>
+              {gyroPermission !== "na" && (
+                <button
+                  type="button"
+                  onClick={toggleGyro}
+                  className={cn(
+                    "pointer-events-auto flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium transition-colors",
+                    gyroEnabled
+                      ? "bg-white/20 text-white hover:bg-white/30"
+                      : "bg-white/10 text-white/40 hover:bg-white/15",
+                  )}
+                >
+                  <span className={cn("inline-block w-1.5 h-1.5 rounded-full", gyroEnabled ? "bg-white" : "bg-white/30")} />
+                  자이로
+                </button>
+              )}
               {renderDetail()}
             </div>
             <div onClick={(e) => e.stopPropagation()}>
