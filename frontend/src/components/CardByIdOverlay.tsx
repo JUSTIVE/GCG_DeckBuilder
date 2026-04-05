@@ -815,24 +815,26 @@ export function CardByIdOverlay({
           onClick={closeDialog}
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
         />
-        <Dialog.Popup className="fixed inset-0 z-50 flex items-center justify-center gap-4 p-6 pointer-events-none outline-none transition duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0 overflow-y-auto">
-          <div className="flex flex-col gap-4 items-center shrink-0">
-            <div
-              className={cn(
-                "@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl border-2",
-                node && "color" in node
-                  ? COLOR_BORDER[node.color as string]
-                  : undefined,
-                node && "color" in node
-                  ? COLOR_SHADOW[node.color as string]
-                  : undefined,
-              )}
-            >
-              {renderThumbnail()}
+        <Dialog.Popup className="fixed inset-0 z-50 overflow-y-auto [&::-webkit-scrollbar]:hidden outline-none transition duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0">
+          <div className="flex items-center justify-center gap-4 p-6 pointer-events-none min-h-full">
+            <div className="flex flex-col gap-4 items-center shrink-0">
+              <div
+                className={cn(
+                  "@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl border-2",
+                  node && "color" in node
+                    ? COLOR_BORDER[node.color as string]
+                    : undefined,
+                  node && "color" in node
+                    ? COLOR_SHADOW[node.color as string]
+                    : undefined,
+                )}
+              >
+                {renderThumbnail()}
+              </div>
+              {renderDetails()}
             </div>
-            {renderDetails()}
+            {renderKeywords()}
           </div>
-          {renderKeywords()}
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>

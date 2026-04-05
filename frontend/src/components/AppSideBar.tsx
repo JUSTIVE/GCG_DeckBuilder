@@ -27,14 +27,7 @@ const DeckListQuery = graphql`
       decks {
         id
         name
-        cards {
-          card {
-            ... on UnitCard { color }
-            ... on PilotCard { color }
-            ... on BaseCard { color }
-            ... on CommandCard { color }
-          }
-        }
+        colors
       }
     }
   }
@@ -46,30 +39,29 @@ function DeckSubItems() {
 
   return (
     <>
-      {decks.map((deck) => {
-        const colors = Array.from(
-          new Set(deck.cards.map((c) => c.card?.color).filter(Boolean) as string[])
-        );
-        return (
-          <SidebarMenuSubItem key={deck.id}>
-            <SidebarMenuSubButton
-              render={
-                <Link to="/deck/$deckId" params={{ deckId: deck.id }}>
-                  <span className="truncate flex-1">{deck.name}</span>
-                  <span className="flex gap-0.5 shrink-0">
-                    {colors.map((color) => (
-                      <span
-                        key={color}
-                        className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")}
-                      />
-                    ))}
-                  </span>
-                </Link>
-              }
-            />
-          </SidebarMenuSubItem>
-        );
-      })}
+      {decks.map((deck) => (
+        <SidebarMenuSubItem key={deck.id}>
+          <SidebarMenuSubButton
+            render={
+              <Link
+                to="/deck/$deckId"
+                params={{ deckId: deck.id }}
+                search={deck.colors.length >= 2 ? { color: deck.colors as any } : {}}
+              >
+                <span className="truncate flex-1">{deck.name}</span>
+                <span className="flex gap-0.5 shrink-0">
+                  {deck.colors.map((color) => (
+                    <span
+                      key={color}
+                      className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")}
+                    />
+                  ))}
+                </span>
+              </Link>
+            }
+          />
+        </SidebarMenuSubItem>
+      ))}
     </>
   );
 }

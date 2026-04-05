@@ -9,7 +9,8 @@ import type {
   CardSort,
 } from "@/__generated__/CardListFragmentRefetchQuery.graphql";
 import { Route } from "@/routes/deck/$deckId";
-import { useState, useRef, Suspense } from "react";
+import type { DeckDetailSearch } from "@/routes/deck/$deckId";
+import { useState, Suspense } from "react";
 import { useRouter } from "@tanstack/react-router";
 import { CardList } from "@/components/CardList";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
@@ -55,6 +56,7 @@ const Query = graphql`
       ... on Deck {
         id
         name
+        colors
         cards {
           count
           card {
@@ -111,6 +113,7 @@ const ADD_CARD_MUTATION = graphql`
       ... on AddCardToDeckSuccess {
         deck {
           id
+          colors
           cards {
             count
             card {
@@ -166,6 +169,7 @@ const REMOVE_CARD_MUTATION = graphql`
   mutation DeckDetailPageRemoveCardMutation($deckId: ID!, $cardId: ID!) {
     removeCardFromDeck(deckId: $deckId, cardId: $cardId) {
       id
+      colors
       cards {
         count
         card {
@@ -207,6 +211,7 @@ const RENAME_MUTATION = graphql`
     renameDeck(id: $id, name: $name) {
       id
       name
+      colors
     }
   }
 `;
@@ -218,6 +223,7 @@ const SET_DECK_CARDS_MUTATION = graphql`
   ) {
     setDeckCards(deckId: $deckId, cards: $cards) {
       id
+      colors
       cards {
         count
         card {
@@ -308,6 +314,34 @@ const KIND_LABELS: Record<string, string> = {
 const INITIAL_FILTER: CardFilterInput = {
   kind: ["UNIT", "PILOT", "BASE", "COMMAND"],
 };
+
+function searchToFilter(search: DeckDetailSearch): CardFilterInput {
+  return {
+    kind: (search.kind as CardFilterInput["kind"]) ?? INITIAL_FILTER.kind,
+    cost: search.cost ?? undefined,
+    level: search.level ?? undefined,
+    zone: search.zone as CardFilterInput["zone"],
+    color: search.color as CardFilterInput["color"],
+    keyword: search.keyword as CardFilterInput["keyword"],
+    trait: search.trait as CardFilterInput["trait"],
+    package: search.package as CardFilterInput["package"],
+    query: search.query,
+  };
+}
+
+function filterToSearch(f: CardFilterInput): Omit<DeckDetailSearch, "view" | "sort"> {
+  return {
+    kind: f.kind as DeckDetailSearch["kind"],
+    cost: f.cost ? [...f.cost] : undefined,
+    level: f.level ? [...f.level] : undefined,
+    zone: f.zone as DeckDetailSearch["zone"],
+    color: f.color as DeckDetailSearch["color"],
+    keyword: f.keyword as DeckDetailSearch["keyword"],
+    trait: f.trait as DeckDetailSearch["trait"],
+    package: f.package as DeckDetailSearch["package"],
+    query: f.query ?? undefined,
+  };
+}
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -582,6 +616,7 @@ function DeckViewGrid({
 
 type DeckPanelProps = {
   deckName: string;
+  colors: string[];
   cards: readonly { count: number; card: any }[];
   totalCards: number;
   errorMessage: string | null;
@@ -594,6 +629,7 @@ type DeckPanelProps = {
 
 function DeckPanel({
   deckName,
+  colors,
   cards,
   totalCards,
   errorMessage,
@@ -668,9 +704,7 @@ function DeckPanel({
         >
           <h2 className="font-bold text-sm flex-1 truncate">{deckName}</h2>
           <div className="flex gap-1 shrink-0">
-            {Array.from(
-              new Set(cards.map((dc) => dc.card?.color).filter(Boolean)),
-            ).map((color) => (
+            {colors.map((color) => (
               <span
                 key={color}
                 className={cn(
@@ -917,28 +951,45 @@ function DeckPanel({
 
 export function DeckDetailPage() {
   const { deckId } = Route.useParams();
-  const { view } = Route.useSearch();
+  const search = Route.useSearch();
   const router = useRouter();
-  const isDeckView = view === "deck";
+  const isDeckView = search.view === "deck";
+  const filter = searchToFilter(search);
+  const sort = (search.sort as CardSort | undefined) ?? null;
 
   function toggleView() {
     router.navigate({
       to: "/deck/$deckId",
       params: { deckId },
-      search: isDeckView ? {} : { view: "deck" },
+      search: (prev) => ({ ...prev, view: isDeckView ? undefined : "deck" }),
       replace: true,
     });
   }
 
-  const initialFilterRef = useRef<CardFilterInput>(INITIAL_FILTER);
+  function setFilter(f: CardFilterInput) {
+    router.navigate({
+      to: "/deck/$deckId",
+      params: { deckId },
+      search: (prev) => ({ ...prev, ...filterToSearch(f) }),
+      replace: true,
+    });
+  }
+
+  function setSort(s: CardSort | null) {
+    router.navigate({
+      to: "/deck/$deckId",
+      params: { deckId },
+      search: (prev) => ({ ...prev, sort: s as DeckDetailSearch["sort"] ?? undefined }),
+      replace: true,
+    });
+  }
+
   const data = useLazyLoadQuery<DeckDetailPageQuery>(Query, {
     deckId,
-    filter: initialFilterRef.current,
-    sort: null,
+    filter,
+    sort,
   });
 
-  const [filter, setFilter] = useState<CardFilterInput>(INITIAL_FILTER);
-  const [sort, setSort] = useState<CardSort | null>(null);
   const [filterSheetOpen, setFilterSheetOpen] = useState(false);
   const [showDescription, setShowDescription] = useState(false);
   const [commitAdd] =
@@ -965,30 +1016,25 @@ export function DeckDetailPage() {
 
   const deck = node;
   const totalCards = deck.cards.reduce((s, c) => s + c.count, 0);
+  const deckColors = deck.colors as readonly string[] as string[];
 
   const deckCardCounts: Record<string, number> = {};
-  const deckColorSet = new Set<string>();
   for (const { card, count } of deck.cards) {
     const id = (card as any)?.id;
-    const color = (card as any)?.color;
     if (id) deckCardCounts[id] = count;
-    if (color) deckColorSet.add(color);
   }
-  const deckColors = [...deckColorSet];
 
-  const effectiveFilter: CardFilterInput =
-    deckColors.length >= 2
-      ? {
-          ...filter,
-          color: (() => {
-            const active = (filter.color as string[] | undefined) ?? [];
-            const constrained = active.filter((c) => deckColors.includes(c));
-            return (
-              constrained.length > 0 ? constrained : deckColors
-            ) as CardFilterInput["color"];
-          })(),
-        }
-      : filter;
+  function resetFilter() {
+    router.navigate({
+      to: "/deck/$deckId",
+      params: { deckId },
+      search: (prev) => ({
+        view: prev.view,
+        color: deckColors.length >= 2 ? (prev.color ?? (deckColors as DeckDetailSearch["color"])) : undefined,
+      }),
+      replace: true,
+    });
+  }
 
   function handleAdd(cardId: string) {
     commitAdd({
@@ -1029,6 +1075,7 @@ export function DeckDetailPage() {
 
   const panelProps: DeckPanelProps = {
     deckName: deck.name,
+    colors: deckColors,
     cards: deck.cards,
     totalCards,
     errorMessage,
@@ -1055,7 +1102,7 @@ export function DeckDetailPage() {
             {activeFilterCount(filter) > 0 && (
               <button
                 type="button"
-                onClick={() => setFilter(INITIAL_FILTER)}
+                onClick={() => resetFilter()}
                 className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer self-start"
               >
                 초기화
@@ -1116,7 +1163,7 @@ export function DeckDetailPage() {
                 {activeFilterCount(filter) > 0 && (
                   <button
                     type="button"
-                    onClick={() => setFilter(INITIAL_FILTER)}
+                    onClick={() => resetFilter()}
                     className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer"
                   >
                     초기화
@@ -1163,7 +1210,7 @@ export function DeckDetailPage() {
             ) : (
               <CardList
                 queryRef={data}
-                filter={effectiveFilter}
+                filter={filter}
                 sort={sort}
                 showDescription={showDescription}
                 onCardAdd={handleAdd}

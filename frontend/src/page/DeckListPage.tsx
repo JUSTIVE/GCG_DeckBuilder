@@ -221,6 +221,7 @@ export function DeckListPage() {
                   router.navigate({
                     to: "/deck/$deckId",
                     params: { deckId: deck.id },
+                    search: deck.colors.length >= 2 ? { color: deck.colors as any } : {},
                   })
                 }
               >

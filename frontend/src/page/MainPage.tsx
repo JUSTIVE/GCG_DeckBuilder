@@ -18,14 +18,15 @@ const Query = graphql`
       decks {
         id
         name
+        colors
         cards {
           count
           card {
             __typename
-            ... on UnitCard { color imageUrl }
-            ... on PilotCard { color imageUrl }
-            ... on BaseCard { color imageUrl }
-            ... on CommandCard { color imageUrl }
+            ... on UnitCard { imageUrl }
+            ... on PilotCard { imageUrl }
+            ... on BaseCard { imageUrl }
+            ... on CommandCard { imageUrl }
           }
         }
       }
@@ -41,14 +42,6 @@ const NAV_ICONS: Record<string, React.ReactNode> = {
 
 function totalCards(cards: readonly { count: number }[]) {
   return cards.reduce((s, c) => s + c.count, 0);
-}
-
-function deckColors(cards: readonly { count: number; card: any }[]): string[] {
-  const seen = new Set<string>();
-  for (const { card } of cards) {
-    if (card?.color) seen.add(card.color);
-  }
-  return Array.from(seen);
 }
 
 function deckPreviewImages(cards: readonly { count: number; card: any }[]): string[] {
@@ -126,7 +119,7 @@ export function MainPage() {
               <li key={deck.id}>
                 <button
                   type="button"
-                  onClick={() => router.navigate({ to: "/deck/$deckId", params: { deckId: deck.id } })}
+                  onClick={() => router.navigate({ to: "/deck/$deckId", params: { deckId: deck.id }, search: deck.colors.length >= 2 ? { color: deck.colors as any } : {} })}
                   className="w-full flex items-center gap-3 rounded-xl border border-border bg-muted/30 px-4 py-3 hover:bg-muted/60 transition-colors text-left"
                 >
                   <div className="flex gap-1 shrink-0">
@@ -147,7 +140,7 @@ export function MainPage() {
                     <div className="flex items-center gap-2 mt-0.5">
                       <span className="text-xs text-muted-foreground">{totalCards(deck.cards)}장</span>
                       <div className="flex gap-1">
-                        {deckColors(deck.cards).map((color) => (
+                        {deck.colors.map((color) => (
                           <span
                             key={color}
                             className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")}
