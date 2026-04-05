@@ -816,8 +816,8 @@ export function CardByIdOverlay({
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
         />
         <Dialog.Popup className="fixed inset-0 z-50 overflow-y-auto [&::-webkit-scrollbar]:hidden outline-none transition duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0">
-          <div className="flex items-center justify-center gap-4 p-6 pointer-events-none min-h-full">
-            <div className="flex flex-col gap-4 items-center shrink-0">
+          <div className="flex items-center justify-center gap-4 p-6 min-h-full" onClick={closeDialog}>
+            <div className="flex flex-col gap-4 items-center shrink-0" onClick={(e) => e.stopPropagation()}>
               <div
                 className={cn(
                   "@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl border-2",
@@ -833,7 +833,9 @@ export function CardByIdOverlay({
               </div>
               {renderDetails()}
             </div>
-            {renderKeywords()}
+            <div onClick={(e) => e.stopPropagation()}>
+              {renderKeywords()}
+            </div>
           </div>
         </Dialog.Popup>
       </Dialog.Portal>

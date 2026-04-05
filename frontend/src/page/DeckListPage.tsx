@@ -1,5 +1,7 @@
-import { graphql, useLazyLoadQuery, useMutation } from "react-relay";
+import { graphql, usePreloadedQuery, useMutation } from "react-relay";
+import type { PreloadedQuery } from "react-relay";
 import type { DeckListPageQuery } from "@/__generated__/DeckListPageQuery.graphql";
+import { Route } from "@/routes/decklist";
 import type { DeckListPageCreateDeckMutation } from "@/__generated__/DeckListPageCreateDeckMutation.graphql";
 import type { DeckListPageDeleteDeckMutation } from "@/__generated__/DeckListPageDeleteDeckMutation.graphql";
 import { useRouter } from "@tanstack/react-router";
@@ -13,7 +15,7 @@ import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
 import { renderTrait } from "@/render/trait";
 import { triggerClass, abilityClass } from "@/components/CardDescription";
 
-const Query = graphql`
+export const Query = graphql`
   query DeckListPageQuery {
     deckList {
       id
@@ -116,7 +118,8 @@ const DELETE_DECK_MUTATION = graphql`
 `;
 
 export function DeckListPage() {
-  const data = useLazyLoadQuery<DeckListPageQuery>(Query, {});
+  const queryRef = Route.useLoaderData() as PreloadedQuery<DeckListPageQuery>;
+  const data = usePreloadedQuery<DeckListPageQuery>(Query, queryRef);
   const [commitCreate, isCreating] =
     useMutation<DeckListPageCreateDeckMutation>(CREATE_DECK_MUTATION);
   const [commitDelete] =

@@ -1,6 +1,8 @@
-import { useLazyLoadQuery } from "react-relay";
+import { usePreloadedQuery } from "react-relay";
 import { graphql } from "relay-runtime";
 import type { MainPageQuery } from "@/__generated__/MainPageQuery.graphql";
+import type { PreloadedQuery } from "react-relay";
+import { Route } from "@/routes/index";
 import { useRouter } from "@tanstack/react-router";
 import { navMain } from "@/lib/nav";
 import { COLOR_BG } from "src/render/color";
@@ -12,7 +14,7 @@ import {
   ChevronRightIcon,
 } from "lucide-react";
 
-const Query = graphql`
+export const Query = graphql`
   query MainPageQuery {
     deckList {
       decks {
@@ -59,7 +61,8 @@ function deckPreviewImages(cards: readonly { count: number; card: any }[]): stri
 }
 
 export function MainPage() {
-  const data = useLazyLoadQuery<MainPageQuery>(Query, {});
+  const queryRef = Route.useLoaderData() as PreloadedQuery<MainPageQuery>;
+  const data = usePreloadedQuery<MainPageQuery>(Query, queryRef);
   const router = useRouter();
   const decks = data.deckList.decks;
 

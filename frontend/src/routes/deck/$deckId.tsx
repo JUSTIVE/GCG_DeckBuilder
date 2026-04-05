@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DeckDetailPage } from "src/page/DeckDetailPage";
+import { loadQuery } from "react-relay";
+import { relayEnvironment } from "@/relay-environment";
+import { DeckDetailPage, Query } from "src/page/DeckDetailPage";
 
 const VALID_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND"] as const;
 const VALID_ZONES = ["SPACE", "EARTH"] as const;
@@ -52,6 +54,34 @@ function arr<T extends string>(raw: unknown, valid: readonly T[]): T[] | undefin
 }
 
 export const Route = createFileRoute("/deck/$deckId")({
+  loaderDeps: ({ search }) => ({
+    kind: search.kind,
+    cost: search.cost,
+    level: search.level,
+    zone: search.zone,
+    color: search.color,
+    keyword: search.keyword,
+    trait: search.trait,
+    package: search.package,
+    query: search.query,
+    sort: search.sort,
+  }),
+  loader: ({ params, deps }) =>
+    loadQuery(relayEnvironment, Query, {
+      deckId: params.deckId,
+      filter: {
+        kind: (deps.kind as any) ?? ["UNIT", "PILOT", "BASE", "COMMAND"],
+        cost: deps.cost ?? null,
+        level: deps.level ?? null,
+        zone: deps.zone ?? null,
+        color: deps.color ?? null,
+        keyword: deps.keyword ?? null,
+        trait: deps.trait ?? null,
+        package: deps.package ?? null,
+        query: deps.query ?? null,
+      },
+      sort: (deps.sort as any) ?? null,
+    }),
   validateSearch: (raw: Record<string, unknown>): DeckDetailSearch => ({
     view: raw.view === "deck" ? "deck" : undefined,
     kind: arr(raw.kind, VALID_KINDS),

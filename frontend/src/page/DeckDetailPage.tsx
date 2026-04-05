@@ -1,4 +1,5 @@
-import { graphql, useLazyLoadQuery, useMutation } from "react-relay";
+import { graphql, usePreloadedQuery, useMutation } from "react-relay";
+import type { PreloadedQuery } from "react-relay";
 import type { DeckDetailPageQuery } from "@/__generated__/DeckDetailPageQuery.graphql";
 import type { DeckDetailPageAddCardMutation } from "@/__generated__/DeckDetailPageAddCardMutation.graphql";
 import type { DeckDetailPageRemoveCardMutation } from "@/__generated__/DeckDetailPageRemoveCardMutation.graphql";
@@ -45,7 +46,7 @@ import {
 
 // ─── Queries & Mutations ──────────────────────────────────────────────────────
 
-const Query = graphql`
+export const Query = graphql`
   query DeckDetailPageQuery(
     $deckId: ID!
     $filter: CardFilterInput!
@@ -984,11 +985,8 @@ export function DeckDetailPage() {
     });
   }
 
-  const data = useLazyLoadQuery<DeckDetailPageQuery>(Query, {
-    deckId,
-    filter,
-    sort,
-  });
+  const queryRef = Route.useLoaderData() as PreloadedQuery<DeckDetailPageQuery>;
+  const data = usePreloadedQuery<DeckDetailPageQuery>(Query, queryRef);
 
   const [filterSheetOpen, setFilterSheetOpen] = useState(false);
   const [showDescription, setShowDescription] = useState(false);

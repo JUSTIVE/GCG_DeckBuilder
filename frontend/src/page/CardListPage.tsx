@@ -3,7 +3,7 @@ import type { CardFilterInput } from "@/__generated__/CardListFragmentRefetchQue
 import type { CardSort } from "@/__generated__/CardListPageQuery.graphql";
 import { CardList } from "@/components/CardList";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
-import { useLazyLoadQuery } from "react-relay";
+import { usePreloadedQuery, type PreloadedQuery } from "react-relay";
 import { graphql } from "relay-runtime";
 import {
   Route,
@@ -32,7 +32,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
-const Query = graphql`
+export const Query = graphql`
   query CardListPageQuery($filter: CardFilterInput!, $sort: CardSort) {
     ...CardListFragment @arguments(first: 20, filter: $filter, sort: $sort)
     ...SearchHistoryPanel_query
@@ -326,12 +326,8 @@ export function CardListPage() {
   const [showDescription, setShowDescription] = useState(false);
   const [cardIds, setCardIds] = useState<string[]>([]);
 
-  const initialFilterRef = useRef(filter);
-  const initialSortRef = useRef(sort);
-  const data = useLazyLoadQuery<CardListPageQuery>(Query, {
-    filter: initialFilterRef.current,
-    sort: initialSortRef.current,
-  });
+  const queryRef = Route.useLoaderData() as PreloadedQuery<CardListPageQuery>;
+  const data = usePreloadedQuery<CardListPageQuery>(Query, queryRef);
 
   function handleFilterChange(newFilter: CardFilterInput) {
     router.navigate({

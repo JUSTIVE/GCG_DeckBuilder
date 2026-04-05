@@ -1,5 +1,7 @@
-import { CardListPage } from "@/page/CardListPage";
+import { CardListPage, Query } from "@/page/CardListPage";
 import { createFileRoute } from "@tanstack/react-router";
+import { loadQuery } from "react-relay";
+import { relayEnvironment } from "@/relay-environment";
 
 const VALID_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND"] as const;
 const VALID_ZONES = ["SPACE", "EARTH"] as const;
@@ -173,5 +175,32 @@ export const Route = createFileRoute("/cardlist")({
         : undefined,
     cardId: typeof raw.cardId === "string" && raw.cardId ? raw.cardId : undefined,
   }),
+  loaderDeps: ({ search }) => ({
+    kind: search.kind,
+    cost: search.cost,
+    level: search.level,
+    zone: search.zone,
+    color: search.color,
+    keyword: search.keyword,
+    trait: search.trait,
+    package: search.package,
+    query: search.query,
+    sort: search.sort,
+  }),
+  loader: ({ deps }) =>
+    loadQuery(relayEnvironment, Query, {
+      filter: {
+        kind: deps.kind ?? [],
+        cost: deps.cost ?? null,
+        level: deps.level ?? null,
+        zone: deps.zone ?? null,
+        color: deps.color ?? null,
+        keyword: deps.keyword ?? null,
+        trait: deps.trait ?? null,
+        package: deps.package ?? null,
+        query: deps.query ?? null,
+      },
+      sort: (deps.sort as any) ?? null,
+    }),
   component: CardListPage,
 });
