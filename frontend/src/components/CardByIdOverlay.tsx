@@ -80,14 +80,28 @@ export function CardByIdOverlay({
   const [tilt, setTilt] = useState({ rotX: 0, rotY: 0 });
   const [gyroPermission, setGyroPermission] = useState<"unknown" | "granted" | "denied" | "na">(() => {
     if (typeof DeviceOrientationEvent === "undefined") return "na";
-    if (typeof (DeviceOrientationEvent as any).requestPermission === "function") return "unknown";
-    return "granted";
+    if (typeof (DeviceOrientationEvent as any).requestPermission !== "function") return "granted";
+    return sessionStorage.getItem("gyroPermission") === "granted" ? "granted" : "unknown";
   });
   const cardRef = useRef<HTMLDivElement>(null);
   const gyroBase = useRef<{ beta: number; gamma: number } | null>(null);
 
   useEffect(() => {
     if (gyroPermission !== "granted") return;
+
+    // Re-verify permission silently on session start (catches external revocation)
+    const needsPermission = typeof (DeviceOrientationEvent as any).requestPermission === "function";
+    if (needsPermission && !sessionStorage.getItem("gyroPermission")) {
+      (DeviceOrientationEvent as any).requestPermission()
+        .then((result: string) => {
+          if (result !== "granted") {
+            setGyroPermission("unknown");
+          }
+        })
+        .catch(() => setGyroPermission("unknown"));
+      return;
+    }
+
     gyroBase.current = null;
 
     function handleOrientation(e: DeviceOrientationEvent) {
@@ -112,7 +126,9 @@ export function CardByIdOverlay({
   async function requestGyroPermission() {
     try {
       const result = await (DeviceOrientationEvent as any).requestPermission();
-      setGyroPermission(result === "granted" ? "granted" : "denied");
+      const granted = result === "granted";
+      if (granted) sessionStorage.setItem("gyroPermission", "granted");
+      setGyroPermission(granted ? "granted" : "denied");
     } catch {
       setGyroPermission("denied");
     }
