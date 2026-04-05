@@ -11339,7 +11339,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While you have 2 or more (티탄즈) Units in play, this card in your hand gets cost -1."
+      "While you have 2 or more (티탄즈) Units in play, 패의 이 카드를 코스트-1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-014",
@@ -11827,7 +11827,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While you have a (CB) Link Unit in play, this card in your hand gets cost -1."
+      "While you have a (CB) Link Unit in play, 패의 이 카드를 코스트-1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-030",
@@ -12248,7 +12248,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 Deploy 1 rested [Daughtress]((신지구연방군)･AP0･HP1) Unit token."
+      "【배치 시】 [도트레스]((신지구연방군)･AP0･HP1)의 유닛 토큰 1개를 레스트로 배치한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-044",
@@ -12978,7 +12978,7 @@
     "relatedTrait": [],
     "description": [
       "<고기동> (이 유닛은 블록당하지 않는다.)",
-      "【링크 중】At the end of the turn when this Unit is paired with a Pilot, set it as active."
+      "【링크 중】 이 유닛에 파일럿이 세트된 턴의 종료 시, 이 카드를 액티브로 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-069",
@@ -13006,7 +13006,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While this Unit is rested, friendly Shields can't receive battle damage from enemy Units."
+      "이 유닛이 레스트인 동안, 아군의 실드는 상대의 유닛으로부터 배틀 대미지를 받지 않는다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-070",
@@ -13036,7 +13036,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【배치 시】 상대의 유닛 1개를 선택한다. For each (에우고) Unit card in your trash, it gets AP-1 during this turn."
+      "【배치 시】 상대의 유닛 1개를 선택한다. 자신의 트래쉬에 (에우고)의 카드 1장마다, 이 턴 동안, 그 유닛을 AP-1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-071",
@@ -13068,7 +13068,7 @@
     "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【배치 시】If you have another (Triple Ship Alliance) Unit in play, draw 1. Then, discard 1."
+      "【배치 시】 이 유닛 이외의 (삼척동맹)의 자신의 유닛이 있다면, 자신은 1장 드로우 한다. 그 후, 자신의 패 1장을 버린다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-072",
@@ -13102,7 +13102,7 @@
     "relatedTrait": [],
     "description": [
       "<블로커> (레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)",
-      "【링크 중】【기동･액션】【턴 1회】If there are 6 or more (Gjallarhorn) cards in your trash, choose 1 enemy Unit battling this Unit. It gets AP-3 during this battle."
+      "【링크 중】 【기동･액션】 【턴 1회】 자신의 트래쉬에 (걀라르호른)의 카드가 6장 이상 있다면, 이 유닛과 배틀하고 있는 상대의 유닛 1개를 선택한다. 이 배틀 동안, 그 유닛을 AP-3 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-073",
@@ -13132,7 +13132,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 중】While you have another (Superpower Bloc) Unit in play, enemy Units choose this rested Unit as their attack target if possible when attacking."
+      "【세트 중】 이 유닛 이외의, (초대국군)의 자신의 유닛이 있는 동안, 상대의 유닛은 공격할 때, 가능하면 레스트의 이 유닛을 공격해야 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-074",
@@ -13163,7 +13163,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 중】【공격 시】Choose 1 enemy Unit with no paired Pilot. It gets AP-2 during this turn."
+      "【링크 중】 【공격 시】 파일럿이 세트되어 있지 않은 상대의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP-2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-075",
@@ -13193,7 +13193,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【턴 1회】 자신의 턴 동안, when your (삼척동맹) Unit deals battle damage to an enemy Unit, you may return the enemy Unit to its owner's hand."
+      "【턴 1회】 자신의 턴 동안, (삼척동맹)의 자신의 유닛이 상대의 유닛에 배틀 대미지를 주었을 때, 그 상대의 유닛을 주인의 패로 되돌릴 수 있다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-076",
@@ -13280,7 +13280,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "When you rest your Base with one of your Units' effects, you may rest this Unit instead."
+      "자신의 유닛의 효과로 자신의 베이스가 레스트로 했을 때, 대신에 이 유닛을 레스트로 할 수 있다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-079",
@@ -13341,7 +13341,7 @@
       "UN"
     ],
     "description": [
-      "This Unit can only attack during a turn when one of your (초대국군)/(UN) Units is deployed."
+      "이 유닛은, (초대국군)/(UN)의 자신의 유닛이 배치된 턴에만 공격할 수 있다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-081",
@@ -13371,7 +13371,7 @@
       "UN"
     ],
     "description": [
-      "While you have 2 or more (초대국군)/(UN) Units in play, this card in your hand gets cost -1."
+      "(초대국군)/(UN)의 자신의 유닛이 2개 이상 있는 한, 패의 이 카드를 코스트-1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-082",
@@ -13782,7 +13782,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【링크 중】When this rested Unit is set as active by an effect, choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand."
+      "【링크 중】 레스트의 이 유닛이 효과로 액티브가 되었을 때, HP3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다."
     ],
     "__typename": "PilotCard",
     "id": "GD03-098",
@@ -14237,7 +14237,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【액션】 레스트의 Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다. 그 후, if there are 2 or more cards with \"Awakened Potential\" in their card name in your trash, you may choose 1 friendly Unit. It gains <블로커> during this turn.",
+      "【액션】 레스트의 Lv.4 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 주인의 패로 되돌린다. 그 후, 자신의 트래쉬에, 카드명에 \"능력의 각성\"을 포함하는 카드가 2장 이상 있다면, 아군의 유닛 1개를 선택할 수 있다. 이 턴 동안, 그 유닛은 <블로커>를 얻는다.",
       "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
     ],
     "__typename": "CommandCard",
@@ -14278,7 +14278,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 During this turn, if a friendly (초대국군)/(UN) Unit destroys an enemy Unit with battle damage, choose 1 rested friendly (초대국군)/(UN) Unit. Set it as active. 이 턴 동안, 그 유닛은 공격할 수 없다.",
+      "【메인】 이 턴 동안, (초대국군)/(UN)의 아군의 유닛이 배틀 대미지로 상대의 유닛을 파괴했다면, (초대국군)/(UN)의 레스트의 아군의 유닛 1개를 선택한다. 그 유닛을 액티브로 한다. 이 턴 동안, 그 유닛은 공격할 수 없다.",
       "【파일럿】[패트릭 콜라사워]"
     ],
     "__typename": "CommandCard",

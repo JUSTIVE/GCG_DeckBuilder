@@ -252,6 +252,10 @@ const replaceList = {
   "It gets AP-2 during this battle.": "그 유닛을 AP-2 한다.",
   "While you have another (걀라르호른) Unit in play,":
     "이 유닛 이외의, (걀라르호른)의 자신의 유닛이 있는 동안,",
+  "While you have another (초대국군) Unit in play,":
+    "이 유닛 이외의, (초대국군)의 자신의 유닛이 있는 동안,",
+  "If you have another (삼척동맹) Unit in play,":
+    "이 유닛 이외의 (삼척동맹)의 자신의 유닛이 있다면,",
   "If it is your opponent's turn,": "상대의 턴 이라면,",
   "choose 1 of your (걀라르호른) Units. Set it as active.":
     "(걀라르호른)의 자신의 유닛 1개를 선택한다. 그 유닛을 액티브로 한다.",
@@ -266,6 +270,41 @@ const replaceList = {
   "discard 1.": "자신은 패 1장을 버린다.",
   "Choose 1 enemy Unit with 4 or less HP battling a friendly Unit with <블로커>.":
     "<블로커>를 가진 아군의 유닛과 배틀하고 있는, HP4 이하의 적 유닛 1개를 선택한다.",
+  "During this turn, if a friendly (초대국군)/(UN) Unit destroys an enemy Unit with battle damage,":
+    "이 턴 동안, (초대국군)/(UN)의 아군의 유닛이 배틀 대미지로 상대의 유닛을 파괴했다면,",
+  "choose 1 rested friendly (초대국군)/(UN) Unit. Set it as active.":
+    "(초대국군)/(UN)의 레스트의 아군의 유닛 1개를 선택한다. 그 유닛을 액티브로 한다.",
+  'if there are 2 or more cards with "Awakened Potential" in their card name in your trash,':
+    '자신의 트래쉬에, 카드명에 "능력의 각성"을 포함하는 카드가 2장 이상 있다면,',
+  "you may choose 1 friendly Unit.": "아군의 유닛 1개를 선택할 수 있다.",
+  "It gains <블로커> during this turn.": "이 턴 동안, 그 유닛은 <블로커>를 얻는다.",
+  "While you have 2 or more (초대국군)/(UN) Units in play,":
+    "(초대국군)/(UN)의 자신의 유닛이 2개 이상 있는 한,",
+  "this card in your hand gets cost -1.": "패의 이 카드를 코스트-1 한다.",
+  "This Unit can only attack during a turn when one of your (초대국군)/(UN) Units is deployed.":
+    "이 유닛은, (초대국군)/(UN)의 자신의 유닛이 배치된 턴에만 공격할 수 있다.",
+  "When you rest your Base with one of your Units' effects, you may rest this Unit instead.":
+    "자신의 유닛의 효과로 자신의 베이스가 레스트로 했을 때, 대신에 이 유닛을 레스트로 할 수 있다.",
+  "When this rested Unit is set as active by an effect,":
+    "레스트의 이 유닛이 효과로 액티브가 되었을 때,",
+  "choose 1 enemy Unit with 3 or less HP.": "HP3 이하의 상대의 유닛 1개를 선택한다.",
+  "when your (삼척동맹) Unit deals battle damage to an enemy Unit,":
+    "(삼척동맹)의 자신의 유닛이 상대의 유닛에 배틀 대미지를 주었을 때,",
+  "you may return the enemy Unit to its owner's hand.":
+    "그 상대의 유닛을 주인의 패로 되돌릴 수 있다.",
+  "enemy Units choose this rested Unit as their attack target if possible when attacking.":
+    "상대의 유닛은 공격할 때, 가능하면 레스트의 이 유닛을 공격해야 한다.",
+  "If there are 6 or more (걀라르호른) cards in your trash,":
+    "자신의 트래쉬에 (걀라르호른)의 카드가 6장 이상 있다면,",
+  "choose 1 enemy Unit battling this Unit.": "이 유닛과 배틀하고 있는 상대의 유닛 1개를 선택한다.",
+  "At the end of the turn when this Unit is paired with a Pilot,":
+    "이 유닛에 파일럿이 세트된 턴의 종료 시,",
+  "set it as active.": "이 카드를 액티브로 한다.",
+  "While this Unit is rested,": "이 유닛이 레스트인 동안,",
+  "friendly Shields can't receive battle damage from enemy Units.":
+    "아군의 실드는 상대의 유닛으로부터 배틀 대미지를 받지 않는다.",
+  "For each (에우고) Unit card in your trash,": "자신의 트래쉬에 (에우고)의 카드 1장마다,",
+  "it gets AP-1 during this turn.": "이 턴 동안, 그 유닛을 AP-1 한다.",
 };
 
 function applyReplacements(v: string): string {
