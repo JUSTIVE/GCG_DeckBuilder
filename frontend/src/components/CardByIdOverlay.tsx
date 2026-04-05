@@ -78,7 +78,45 @@ export function CardByIdOverlay({
 
   const [commitAddCardView] = useMutation<CardByIdOverlayAddCardViewMutation>(ADD_CARD_VIEW_MUTATION);
   const [tilt, setTilt] = useState({ rotX: 0, rotY: 0 });
+  const [gyroPermission, setGyroPermission] = useState<"unknown" | "granted" | "denied" | "na">(() => {
+    if (typeof DeviceOrientationEvent === "undefined") return "na";
+    if (typeof (DeviceOrientationEvent as any).requestPermission === "function") return "unknown";
+    return "granted";
+  });
   const cardRef = useRef<HTMLDivElement>(null);
+  const gyroBase = useRef<{ beta: number; gamma: number } | null>(null);
+
+  useEffect(() => {
+    if (gyroPermission !== "granted") return;
+    gyroBase.current = null;
+
+    function handleOrientation(e: DeviceOrientationEvent) {
+      if (e.beta == null || e.gamma == null) return;
+      if (!gyroBase.current) {
+        gyroBase.current = { beta: e.beta, gamma: e.gamma };
+        return;
+      }
+      const rotX = Math.max(-15, Math.min(15, -(e.beta - gyroBase.current.beta) * 0.5));
+      const rotY = Math.max(-15, Math.min(15, (e.gamma - gyroBase.current.gamma) * 0.5));
+      setTilt({ rotX, rotY });
+    }
+
+    window.addEventListener("deviceorientation", handleOrientation);
+    return () => {
+      window.removeEventListener("deviceorientation", handleOrientation);
+      gyroBase.current = null;
+      setTilt({ rotX: 0, rotY: 0 });
+    };
+  }, [gyroPermission, cardId]);
+
+  async function requestGyroPermission() {
+    try {
+      const result = await (DeviceOrientationEvent as any).requestPermission();
+      setGyroPermission(result === "granted" ? "granted" : "denied");
+    } catch {
+      setGyroPermission("denied");
+    }
+  }
 
   useEffect(() => {
     if (!node || node.__typename === "%other") return;
@@ -176,6 +214,15 @@ export function CardByIdOverlay({
                 onMouseLeave={() => setTilt({ rotX: 0, rotY: 0 })}
               >
                 {renderThumbnail()}
+                {gyroPermission === "unknown" && (
+                  <button
+                    type="button"
+                    onClick={requestGyroPermission}
+                    className="absolute inset-0 flex items-end justify-center pb-4 bg-black/40 backdrop-blur-sm text-white text-xs font-semibold"
+                  >
+                    자이로 센서 허용
+                  </button>
+                )}
               </div>
               {renderDetail()}
             </div>
