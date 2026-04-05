@@ -3,13 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   PencilIcon, CheckIcon, XIcon, MinusIcon,
-  ClipboardCopyIcon, ClipboardPasteIcon, Trash2Icon,
+  ClipboardCopyIcon, ClipboardPasteIcon, Trash2Icon, FileSpreadsheetIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COLOR_BG, COLOR_HEX } from "src/render/color";
 import { CostHistogram, LevelHistogram } from "@/components/DeckHistograms";
 import { extractCardInfo } from "@/lib/cardInfo";
 import { encodeDeckCode, decodeDeckCode } from "@/lib/deckCode";
+import { downloadDeckExcel } from "@/lib/deckExcel";
 
 const KIND_ORDER = ["UnitCard", "PilotCard", "BaseCard", "CommandCard"] as const;
 const KIND_LABELS: Record<string, string> = {
@@ -179,6 +180,15 @@ export function DeckPanel({
           }}
         >
           <ClipboardCopyIcon className="size-3.5" />MSA 코드 복사
+        </Button>
+        <Button
+          className="w-full"
+          size="sm"
+          variant="outline"
+          disabled={totalCards !== 50}
+          onClick={() => downloadDeckExcel(deckName, cards)}
+        >
+          <FileSpreadsheetIcon className="size-3.5" />덱 레시피 엑셀 받기
         </Button>
         <div className="flex gap-1.5">
           <Button className="flex-1" size="sm" variant="outline" onClick={() => navigator.clipboard.writeText(encodeDeckCode(cards))}>
