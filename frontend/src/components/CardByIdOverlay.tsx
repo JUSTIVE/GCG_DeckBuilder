@@ -1,7 +1,7 @@
 import { graphql, useLazyLoadQuery, useMutation } from "react-relay";
 import type { CardByIdOverlayQuery } from "@/__generated__/CardByIdOverlayQuery.graphql";
 import type { CardByIdOverlayAddCardViewMutation } from "@/__generated__/CardByIdOverlayAddCardViewMutation.graphql";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { UnitCardBody } from "./UnitCard";
 import { PilotCardBody } from "./PilotCard";
 import { BaseCardBody } from "./BaseCard";
@@ -77,6 +77,8 @@ export function CardByIdOverlay({
   const node = data.node;
 
   const [commitAddCardView] = useMutation<CardByIdOverlayAddCardViewMutation>(ADD_CARD_VIEW_MUTATION);
+  const [tilt, setTilt] = useState({ rotX: 0, rotY: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!node || node.__typename === "%other") return;
@@ -154,11 +156,24 @@ export function CardByIdOverlay({
           <div className="flex items-center justify-center gap-4 p-6 min-h-full" onClick={closeDialog}>
             <div className="flex flex-col gap-4 items-center shrink-0" onClick={(e) => e.stopPropagation()}>
               <div
+                ref={cardRef}
                 className={cn(
                   "@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl border-2",
                   node && "color" in node ? COLOR_BORDER[node.color as string] : undefined,
                   node && "color" in node ? COLOR_SHADOW[node.color as string] : undefined,
                 )}
+                style={{
+                  transform: `perspective(800px) rotateX(${tilt.rotX}deg) rotateY(${tilt.rotY}deg)`,
+                  transition: "transform 0.15s ease-out",
+                }}
+                onMouseMove={(e) => {
+                  const rect = cardRef.current?.getBoundingClientRect();
+                  if (!rect) return;
+                  const x = (e.clientX - rect.left) / rect.width - 0.5;
+                  const y = (e.clientY - rect.top) / rect.height - 0.5;
+                  setTilt({ rotX: -y * 15, rotY: x * 15 });
+                }}
+                onMouseLeave={() => setTilt({ rotX: 0, rotY: 0 })}
               >
                 {renderThumbnail()}
               </div>
