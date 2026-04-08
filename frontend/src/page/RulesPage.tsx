@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import {
   triggerClass,
   abilityClass,
@@ -63,16 +63,23 @@ function Section({
         <span className="font-semibold text-sm flex-1">{title}</span>
         <ChevronRightIcon
           className={cn(
-            "size-4 text-muted-foreground shrink-0 transition-transform",
+            "size-4 text-muted-foreground shrink-0 transition-transform duration-200",
             open && "rotate-90",
           )}
         />
       </button>
-      {open && (
-        <div className="border-t border-border px-4 py-4 flex flex-col gap-4">
-          {children}
+      <div
+        className={cn(
+          "grid transition-[grid-template-rows] duration-300 ease-in-out",
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+        )}
+      >
+        <div className="overflow-hidden">
+          <div className="border-t border-border px-3 py-3 sm:px-4 sm:py-4 flex flex-col gap-3 sm:gap-4">
+            {children}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -85,13 +92,102 @@ function Note({ children }: { children: React.ReactNode }) {
   );
 }
 
+// ── mini playfield — matches actual play sheet layout ─────────────────────────
+// Layout (from image):
+//   LEFT column : 실드 에어리어 (베이스 존 top, 실드 존 below)  [⑥③]
+//   CENTER top  : 배틀 에어리어                                  [⑤]
+//   RIGHT top   : 덱 에어리어                                    [①]
+//   BOTTOM left : 리소스 덱 에어리어                             [②]
+//   BOTTOM center: 리소스 에어리어                               [④]
+//   BOTTOM right : 트래시                                        [⑦]
+
+type ZoneId =
+  | "base"
+  | "shield"
+  | "battle"
+  | "deck"
+  | "resourceDeck"
+  | "resource"
+  | "trash"
+  | "hand";
+
+// Correct layout (from play sheet image):
+//   FAR LEFT (spans both rows): 실드 에어리어 — 베이스 존(⑥) top, 실드 존(③) below
+//   TOP RIGHT of shield:        ⑤ 배틀 에어리어 (large) | ① 덱
+//   BOTTOM RIGHT of shield:     ② 리소스 덱 | ④ 리소스 에어리어 | ⑦ 트래시
+
+function MiniPlayfield({ highlights }: { highlights: ZoneId[] }) {
+  const hi = (id: ZoneId) => highlights.includes(id);
+  const zone = (id: ZoneId, label: string, cls?: string) => (
+    <div
+      className={cn(
+        "flex items-center justify-center text-center rounded border transition-all duration-300 text-[10px] font-medium leading-tight p-0.5",
+        hi(id)
+          ? "bg-primary/15 border-primary text-primary font-bold scale-[1.02]"
+          : "bg-background border-border text-muted-foreground",
+        cls,
+      )}
+    >
+      {label}
+    </div>
+  );
+
+  return (
+    <div className="flex gap-0.5 text-[10px] select-none">
+      {/* FAR LEFT: 실드 에어리어 (spans full height) */}
+      <div
+        className={cn(
+          "flex flex-col gap-0.5 rounded border p-0.5 transition-all duration-300 shrink-0",
+          hi("base") || hi("shield")
+            ? "border-primary/50 bg-primary/5"
+            : "border-border",
+        )}
+        style={{ width: 44 }}
+      >
+        <div className="text-[9px] text-center text-muted-foreground leading-none">
+          실드 에어리어
+        </div>
+        {zone("base", "⑥\n베이스존", "h-[32px] flex-none")}
+        {zone("shield", "③\n실드존", "flex-1")}
+      </div>
+
+      {/* RIGHT side: two rows */}
+      <div className="flex flex-col gap-0.5 flex-1 min-w-0">
+        {/* Top row: 배틀 에어리어 + 덱 */}
+        <div className="flex gap-0.5" style={{ height: 54 }}>
+          {zone("battle", "⑤ 배틀 에어리어", "flex-1")}
+          {zone("deck", "①덱", "w-[32px] flex-none")}
+        </div>
+        {/* Bottom row: 리소스덱 + 리소스 에어리어 + 트래시 */}
+        <div className="flex gap-0.5" style={{ height: 34 }}>
+          {zone("resourceDeck", "②리소스덱", "w-[44px] flex-none")}
+          {zone("resource", "④ 리소스 에어리어", "flex-1")}
+          {zone("trash", "⑦트래시", "w-[34px] flex-none")}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── data ──────────────────────────────────────────────────────────────────────
 
-const PHASES = [
+type Phase = {
+  label: string;
+  color: string;
+  headColor: string;
+  dotColor: string;
+  highlights: ZoneId[];
+  steps: { name: string; desc: string }[];
+  note?: string;
+};
+
+const PHASES: Phase[] = [
   {
     label: "스타트 페이즈",
     color: "bg-blue-50 border-blue-200",
     headColor: "text-blue-700",
+    dotColor: "bg-blue-500",
+    highlights: ["battle", "resource", "base", "shield"],
     steps: [
       {
         name: "액티브 스텝",
@@ -104,6 +200,8 @@ const PHASES = [
     label: "드로우 페이즈",
     color: "bg-green-50 border-green-200",
     headColor: "text-green-700",
+    dotColor: "bg-green-500",
+    highlights: ["deck", "hand"],
     steps: [
       {
         name: "드로우",
@@ -115,6 +213,8 @@ const PHASES = [
     label: "리소스 페이즈",
     color: "bg-yellow-50 border-yellow-200",
     headColor: "text-yellow-700",
+    dotColor: "bg-yellow-500",
+    highlights: ["resourceDeck", "resource"],
     steps: [
       {
         name: "리소스 추가",
@@ -126,6 +226,8 @@ const PHASES = [
     label: "메인 페이즈",
     color: "bg-orange-50 border-orange-200",
     headColor: "text-orange-700",
+    dotColor: "bg-orange-500",
+    highlights: ["battle", "resource", "hand"],
     steps: [
       {
         name: "패 플레이",
@@ -146,6 +248,8 @@ const PHASES = [
     label: "엔드 페이즈",
     color: "bg-purple-50 border-purple-200",
     headColor: "text-purple-700",
+    dotColor: "bg-purple-500",
+    highlights: ["hand", "trash"],
     steps: [
       {
         name: "액션 스텝",
@@ -186,6 +290,622 @@ const BATTLE_STEPS = [
     desc: "「이 배틀 중」 효과 전부 소멸. 메인 페이즈로 복귀.",
   },
 ];
+
+// ── interactive: turn phase walkthrough ──────────────────────────────────────
+
+function TurnPhaseWalkthrough() {
+  const [active, setActive] = useState(0);
+  const phase = PHASES[active];
+
+  return (
+    <div className="flex flex-col gap-3">
+      {/* Phase pill tabs */}
+      <div className="flex gap-1.5 flex-wrap">
+        {PHASES.map((p, i) => (
+          <button
+            key={p.label}
+            type="button"
+            onClick={() => setActive(i)}
+            className={cn(
+              "text-xs px-3 py-1.5 rounded-full border transition-all duration-200 font-medium",
+              i === active
+                ? cn(p.color, p.headColor, "shadow-sm scale-105")
+                : "border-border text-muted-foreground hover:bg-muted/30",
+            )}
+          >
+            {p.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Phase detail panel (full width) */}
+      <div
+        className={cn(
+          "rounded-lg border-2 p-3 transition-all duration-300",
+          phase.color,
+        )}
+      >
+        <div className="flex items-center justify-between mb-2">
+          <p className={cn("text-sm font-bold", phase.headColor)}>
+            {phase.label}
+          </p>
+          <span className={cn("text-xs font-medium opacity-60", phase.headColor)}>
+            {active + 1} / {PHASES.length}
+          </span>
+        </div>
+        <div className="flex flex-col gap-2">
+          {phase.steps.map((step, i) => (
+            <div
+              key={step.name}
+              className="flex gap-2 text-xs bg-white/60 rounded-md p-2"
+            >
+              <span
+                className={cn(
+                  "shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white",
+                  phase.dotColor,
+                )}
+              >
+                {i + 1}
+              </span>
+              <div className="flex flex-col gap-0.5 min-w-0">
+                <p className="font-semibold leading-none">{step.name}</p>
+                <p className="text-xs opacity-75 leading-relaxed">
+                  {step.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        {phase.note && (
+          <p className="text-xs mt-2 opacity-60 border-t border-current/20 pt-2">
+            {phase.note}
+          </p>
+        )}
+      </div>
+
+      {/* Mini playfield — full width below phase detail */}
+      <div className="flex flex-col gap-1.5">
+        <p className="text-xs text-muted-foreground font-medium">관련 영역</p>
+        <MiniPlayfield highlights={phase.highlights} />
+        {phase.highlights.includes("hand") && (
+          <div className="text-xs text-center rounded border border-primary/50 bg-primary/10 text-primary font-bold px-2 py-1 transition-all">
+            패 (손패) — 플레이 시트 밖, 자신만 열람
+          </div>
+        )}
+      </div>
+
+      {/* Prev / dot indicators / Next */}
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => setActive((v) => Math.max(0, v - 1))}
+          disabled={active === 0}
+          className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        >
+          <ChevronLeftIcon className="size-3" />
+          이전
+        </button>
+        <div className="flex-1 flex justify-center gap-1.5">
+          {PHASES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setActive(i)}
+              className={cn(
+                "rounded-full transition-all duration-200",
+                i === active
+                  ? "w-3 h-2 bg-foreground"
+                  : "w-2 h-2 bg-muted-foreground/30 hover:bg-muted-foreground/60",
+              )}
+            />
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={() => setActive((v) => Math.min(PHASES.length - 1, v + 1))}
+          disabled={active === PHASES.length - 1}
+          className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        >
+          다음
+          <ChevronRightIcon className="size-3" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── interactive: battle steps walkthrough ────────────────────────────────────
+
+function BattleStepsWalkthrough() {
+  const [active, setActive] = useState<number | null>(null);
+
+  return (
+    <div className="flex flex-col">
+      {BATTLE_STEPS.map((step, i) => {
+        const isActive = active === i;
+        return (
+          <button
+            key={step.name}
+            type="button"
+            onClick={() => setActive(isActive ? null : i)}
+            className={cn(
+              "flex gap-3 text-xs text-left rounded-md px-2 -mx-2 transition-all duration-200",
+              isActive ? "bg-primary/8" : "hover:bg-muted/30",
+            )}
+          >
+            <div className="shrink-0 flex flex-col items-center">
+              <span
+                className={cn(
+                  "w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-200 mt-2.5",
+                  isActive
+                    ? "bg-primary text-primary-foreground scale-110"
+                    : "bg-muted",
+                )}
+              >
+                {i + 1}
+              </span>
+              {i < BATTLE_STEPS.length - 1 && (
+                <div
+                  className={cn(
+                    "w-px flex-1 min-h-3 my-0.5 transition-colors duration-200",
+                    isActive ? "bg-primary/30" : "bg-border",
+                  )}
+                />
+              )}
+            </div>
+            <div className="flex-1 min-w-0 py-2.5">
+              <p
+                className={cn(
+                  "font-semibold transition-colors duration-200",
+                  isActive ? "text-primary" : "",
+                )}
+              >
+                {step.name}
+              </p>
+              <p
+                className={cn(
+                  "text-muted-foreground leading-relaxed transition-all duration-200 mt-0.5",
+                  isActive ? "opacity-100" : "opacity-60 line-clamp-1",
+                )}
+              >
+                {step.desc}
+              </p>
+            </div>
+            <ChevronRightIcon
+              className={cn(
+                "size-3 text-muted-foreground shrink-0 mt-3 transition-transform duration-200",
+                isActive && "rotate-90",
+              )}
+            />
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── interactive: shield damage simulator ─────────────────────────────────────
+// Layout matches actual play sheet:
+//   실드 에어리어 is on the LEFT (베이스 존 top, 실드 존 below with vertical shields)
+//   Attacker comes from the RIGHT (배틀 에어리어)
+//   Damage flows: 베이스 존 → 실드 존 (top shield first) → player
+
+function ShieldSimulator() {
+  const INIT_SHIELDS = 6;
+  const INIT_BASE_HP = 3;
+  const [shields, setShields] = useState(INIT_SHIELDS);
+  const [baseHp, setBaseHp] = useState(INIT_BASE_HP);
+  const [hasBase, setHasBase] = useState(true);
+  const [defeated, setDefeated] = useState(false);
+  const [log, setLog] = useState<string[]>([]);
+  const [hasBurst, setHasBurst] = useState(false);
+  // which zone flashed last
+  const [flash, setFlash] = useState<"base" | "shield" | "player" | null>(null);
+
+  function addLog(msg: string) {
+    setLog((l) => [msg, ...l.slice(0, 7)]);
+  }
+
+  function triggerFlash(zone: "base" | "shield" | "player") {
+    setFlash(zone);
+    setTimeout(() => setFlash(null), 600);
+  }
+
+  function attack() {
+    if (defeated) return;
+    if (hasBase) {
+      const newHp = baseHp - 1;
+      triggerFlash("base");
+      if (newHp <= 0) {
+        setBaseHp(0);
+        setHasBase(false);
+        addLog("베이스 HP 0 → 파괴!");
+      } else {
+        setBaseHp(newHp);
+        addLog(`베이스에 대미지 (남은 HP: ${newHp}/3)`);
+      }
+      return;
+    }
+    if (shields > 0) {
+      triggerFlash("shield");
+      const newShields = shields - 1;
+      setShields(newShields);
+      const burst = hasBurst ? " → 【버스트】 발동!" : " → 트래시";
+      addLog(`실드 1장 파괴${burst} (남은: ${newShields}장)`);
+    } else {
+      triggerFlash("player");
+      setDefeated(true);
+      addLog("배틀 대미지 직격 → 패배!");
+    }
+  }
+
+  function reset() {
+    setShields(INIT_SHIELDS);
+    setBaseHp(INIT_BASE_HP);
+    setHasBase(true);
+    setDefeated(false);
+    setLog([]);
+    setFlash(null);
+  }
+
+  return (
+    <div className="rounded-md border p-3 flex flex-col gap-3">
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <p className="text-xs font-semibold">플레이어 어택 시뮬레이터</p>
+        <label className="flex items-center gap-1.5 text-xs text-muted-foreground cursor-pointer select-none">
+          <input
+            type="checkbox"
+            checked={hasBurst}
+            onChange={(e) => setHasBurst(e.target.checked)}
+            className="w-3 h-3 accent-primary"
+          />
+          실드에 【버스트】 있음
+        </label>
+      </div>
+
+      {/* Main visual — left: 실드 에어리어, center: arrow, right: 배틀 에어리어 */}
+      <div className="flex gap-2 items-stretch min-h-[160px]">
+
+        {/* ① LEFT: 실드 에어리어 (베이스 존 + 실드 존) */}
+        <div className="flex flex-col gap-1 shrink-0" style={{ width: 72 }}>
+          <p className="text-[10px] font-semibold text-center text-muted-foreground leading-none">
+            실드 에어리어
+          </p>
+
+          {/* 베이스 존 */}
+          <div className="border rounded p-1 flex flex-col gap-0.5">
+            <p className="text-[9px] text-center text-muted-foreground leading-none">
+              ⑥ 베이스 존
+            </p>
+            <div
+              className={cn(
+                "rounded border-2 flex flex-col items-center justify-center transition-all duration-300 py-1",
+                hasBase
+                  ? flash === "base"
+                    ? "border-red-500 bg-red-200 scale-105"
+                    : "border-gray-400 bg-gray-100"
+                  : "border-dashed border-gray-200 bg-transparent opacity-30",
+              )}
+              style={{ minHeight: 40 }}
+            >
+              {hasBase ? (
+                <>
+                  <p className="text-[10px] font-bold text-gray-700 leading-none">
+                    EX 베이스
+                  </p>
+                  <p className="text-[10px] text-gray-500 mt-0.5">
+                    HP {baseHp}/{INIT_BASE_HP}
+                  </p>
+                  {/* HP bar */}
+                  <div className="w-full px-1 mt-0.5">
+                    <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gray-500 rounded-full transition-all duration-300"
+                        style={{ width: `${(baseHp / INIT_BASE_HP) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <p className="text-[10px] text-gray-400">없음</p>
+              )}
+            </div>
+          </div>
+
+          {/* 실드 존 */}
+          <div className="border rounded p-1 flex flex-col gap-0.5 flex-1">
+            <p className="text-[9px] text-center text-muted-foreground leading-none">
+              ③ 실드 존
+            </p>
+            <div className="flex flex-col gap-0.5 flex-1 justify-around">
+              {Array.from({ length: INIT_SHIELDS }, (_, i) => {
+                const filled = i < shields;
+                // top shield = index 0 = first to be destroyed
+                const isTop = filled && i === shields - 1;
+                return (
+                  <div
+                    key={i}
+                    className={cn(
+                      "rounded border flex items-center justify-center transition-all duration-300",
+                      filled
+                        ? flash === "shield" && isTop
+                          ? "border-red-500 bg-red-200 scale-105"
+                          : "border-blue-300 bg-blue-100 text-blue-700"
+                        : "border-dashed border-gray-100 bg-transparent",
+                    )}
+                    style={{ height: 18 }}
+                  >
+                    {filled ? (
+                      <span className="text-[9px] font-bold leading-none">
+                        {hasBurst && isTop ? "실드 B" : "실드"}
+                      </span>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* ② CENTER: player + attack arrow */}
+        <div className="flex flex-col items-center justify-between py-1 flex-1 min-w-0">
+          {/* Player status */}
+          <div
+            className={cn(
+              "px-2 py-1 rounded border-2 text-[11px] font-bold transition-all duration-300 w-full text-center",
+              defeated
+                ? "border-red-400 bg-red-100 text-red-700 animate-pulse"
+                : flash === "player"
+                  ? "border-red-500 bg-red-200 text-red-700 scale-105"
+                  : "border-green-300 bg-green-50 text-green-700",
+            )}
+          >
+            {defeated ? "패배!" : "플레이어"}
+          </div>
+
+          {/* Attack direction arrow */}
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex items-center gap-1 text-[11px] text-muted-foreground font-medium">
+              <span className="text-sm">←</span>
+              <span>어택</span>
+            </div>
+            <p className="text-[10px] text-muted-foreground text-center leading-tight">
+              {!hasBase && shields === 0
+                ? "방어 없음!"
+                : hasBase
+                  ? "베이스가 흡수"
+                  : `실드 ${shields}장 남음`}
+            </p>
+          </div>
+
+          {/* Controls */}
+          <div className="flex gap-1.5 w-full">
+            <button
+              type="button"
+              onClick={attack}
+              disabled={defeated}
+              className="flex-1 text-xs py-1.5 rounded bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-medium"
+            >
+              어택!
+            </button>
+            <button
+              type="button"
+              onClick={reset}
+              className="text-xs px-2 py-1.5 rounded border border-border hover:bg-muted/30 transition-all"
+            >
+              리셋
+            </button>
+          </div>
+        </div>
+
+        {/* ③ RIGHT: 배틀 에어리어 (attacker) */}
+        <div
+          className="shrink-0 flex flex-col gap-1"
+          style={{ width: 64 }}
+        >
+          <p className="text-[10px] font-semibold text-center text-muted-foreground leading-none">
+            배틀 에어리어
+          </p>
+          <div className="border rounded p-1 flex-1 flex flex-col items-center justify-center gap-1">
+            <p className="text-[9px] text-center text-muted-foreground leading-none">
+              ⑤
+            </p>
+            {/* Attacker unit card */}
+            <div
+              className={cn(
+                "rounded border-2 border-primary/60 bg-primary/10 flex flex-col items-center justify-center gap-0.5 transition-all duration-200",
+                !defeated && "hover:bg-primary/20",
+              )}
+              style={{ width: 44, height: 58 }}
+            >
+              <p className="text-[10px] font-bold text-primary leading-none">
+                공격
+              </p>
+              <p className="text-[10px] font-bold text-primary leading-none">
+                유닛
+              </p>
+              <div className="flex gap-0.5 mt-0.5">
+                <span className="text-[9px] bg-primary/20 rounded px-0.5 text-primary">
+                  AP
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Event log */}
+      {log.length > 0 && (
+        <div className="flex flex-col gap-0.5 max-h-24 overflow-y-auto">
+          {log.map((entry, i) => (
+            <p
+              key={i}
+              className={cn(
+                "text-xs px-2 py-0.5 rounded transition-all",
+                i === 0
+                  ? "bg-primary/10 text-primary font-medium"
+                  : "text-muted-foreground",
+              )}
+            >
+              {entry}
+            </p>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── zone section (interactive playfield highlight) ───────────────────────────
+
+const ZONES = [
+  {
+    name: "덱 에어리어",
+    num: "①",
+    type: "비공개" as const,
+    desc: "게임 덱을 두는 곳. 위에서 1장씩 드로우.",
+    ids: ["deck"] as ZoneId[],
+  },
+  {
+    name: "리소스 덱 에어리어",
+    num: "②",
+    type: "비공개" as const,
+    desc: "리소스 덱을 두는 곳.",
+    ids: ["resourceDeck"] as ZoneId[],
+  },
+  {
+    name: "실드 에어리어",
+    num: "③⑥",
+    type: "혼합" as const,
+    desc: "베이스 존(공개, ⑥) + 실드 존(비공개, ③).",
+    ids: ["base", "shield"] as ZoneId[],
+  },
+  {
+    name: "리소스 에어리어",
+    num: "④",
+    type: "공개" as const,
+    desc: "리소스를 두는 곳. 최대 15장.",
+    ids: ["resource"] as ZoneId[],
+  },
+  {
+    name: "배틀 에어리어",
+    num: "⑤",
+    type: "공개" as const,
+    desc: "유닛·파일럿을 두는 곳. 유닛 최대 6기.",
+    ids: ["battle"] as ZoneId[],
+  },
+  {
+    name: "패 (손패)",
+    num: "—",
+    type: "비공개" as const,
+    desc: "드로우한 카드. 상한 10장. 자신만 열람 가능.",
+    ids: ["hand"] as ZoneId[],
+  },
+  {
+    name: "트래시",
+    num: "⑦",
+    type: "공개" as const,
+    desc: "파괴·사용된 카드. 순서 변경 가능.",
+    ids: ["trash"] as ZoneId[],
+  },
+  {
+    name: "제외 에어리어",
+    num: "—",
+    type: "공개" as const,
+    desc: "제외된 카드. 파괴와는 다른 처리.",
+    ids: [] as ZoneId[],
+  },
+];
+
+function ZoneSection() {
+  const [selected, setSelected] = useState<string | null>(null);
+
+  const selectedZone = ZONES.find((z) => z.name === selected);
+  const highlights: ZoneId[] = selectedZone?.ids ?? [];
+
+  return (
+    <Section title="게임 영역 (존)">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+        {ZONES.map((z) => {
+          const isSelected = selected === z.name;
+          return (
+            <button
+              key={z.name}
+              type="button"
+              onClick={() => setSelected(isSelected ? null : z.name)}
+              className={cn(
+                "rounded border p-2 text-left transition-all duration-200",
+                isSelected
+                  ? "border-primary bg-primary/8 shadow-sm"
+                  : "border-border hover:bg-muted/40 hover:border-muted-foreground/30",
+              )}
+            >
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <span
+                  className={cn(
+                    "font-semibold transition-colors",
+                    isSelected && "text-primary",
+                  )}
+                >
+                  {z.name}
+                </span>
+                {z.num !== "—" && (
+                  <span className="text-[11px] text-muted-foreground font-mono">
+                    {z.num}
+                  </span>
+                )}
+                <span
+                  className={cn(
+                    "text-[11px] px-1 rounded ml-auto",
+                    z.type === "공개"
+                      ? "bg-green-100 text-green-700"
+                      : z.type === "비공개"
+                        ? "bg-gray-100 text-gray-600"
+                        : "bg-yellow-100 text-yellow-700",
+                  )}
+                >
+                  {z.type}
+                </span>
+              </div>
+              <p
+                className={cn(
+                  "text-muted-foreground leading-relaxed",
+                  isSelected && "text-foreground/70",
+                )}
+              >
+                {z.desc}
+              </p>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Interactive mini playfield */}
+      <div className="flex flex-col gap-1.5">
+        <p className="text-xs text-muted-foreground">
+          {selected
+            ? selectedZone?.ids.length === 0
+              ? `「${selected}」는 플레이 시트 밖에 위치합니다.`
+              : selected === "패 (손패)"
+                ? `「패」는 플레이 시트 밖 (손에 들고 있는 카드)입니다.`
+                : `「${selected}」의 위치`
+            : "영역 카드를 클릭하면 플레이 시트에서 위치를 확인할 수 있습니다."}
+        </p>
+        <MiniPlayfield highlights={highlights} />
+        {selected === "패 (손패)" && (
+          <div className="text-[11px] text-center rounded border border-primary/50 bg-primary/10 text-primary font-bold px-2 py-1">
+            패 (손패) — 플레이 시트 밖, 자신만 열람
+          </div>
+        )}
+      </div>
+
+      <Note>
+        카드가 영역 간 이동 시, 특별한 지시 없이는 새로운 카드로 취급 (이전 효과 소멸).
+        리소스 에어리어·배틀 에어리어·실드 에어리어를 합쳐 「필드」라고 부르기도 함.
+      </Note>
+    </Section>
+  );
+}
 
 // ── page ──────────────────────────────────────────────────────────────────────
 
@@ -338,7 +1058,7 @@ export function RulesPage() {
                   {ct.attrs.map((a) => (
                     <span
                       key={a}
-                      className="text-[10px] bg-white/70 border rounded px-1.5 py-0.5"
+                      className="text-xs bg-white/70 border rounded px-1.5 py-0.5"
                     >
                       {a}
                     </span>
@@ -347,7 +1067,7 @@ export function RulesPage() {
               )}
               <ul className="flex flex-col gap-0.5">
                 {ct.notes.map((n, i) => (
-                  <li key={i} className="text-[11px] text-muted-foreground">
+                  <li key={i} className="text-xs text-muted-foreground">
                     · {n}
                   </li>
                 ))}
@@ -376,7 +1096,7 @@ export function RulesPage() {
             "선공 플레이어 턴으로 게임 시작.",
           ].map((step, i) => (
             <li key={i} className="flex gap-3 text-xs">
-              <span className="shrink-0 w-5 h-5 rounded-full bg-muted flex items-center justify-center text-[10px] font-bold">
+              <span className="shrink-0 w-5 h-5 rounded-full bg-muted flex items-center justify-center text-xs font-bold">
                 {i + 1}
               </span>
               <span className="leading-relaxed pt-0.5">{step}</span>
@@ -391,33 +1111,7 @@ export function RulesPage() {
 
       {/* ── 턴 진행 ── */}
       <Section title="턴 진행 흐름">
-        <div className="flex flex-col gap-2">
-          {PHASES.map((phase) => (
-            <div
-              key={phase.label}
-              className={cn("rounded-md border p-3", phase.color)}
-            >
-              <p className={cn("text-xs font-bold mb-2", phase.headColor)}>
-                {phase.label}
-              </p>
-              <div className="flex flex-col gap-1.5">
-                {phase.steps.map((step) => (
-                  <div key={step.name} className="flex gap-2 text-xs">
-                    <span className="shrink-0 font-semibold">{step.name}</span>
-                    <span className="text-[11px] opacity-75 leading-relaxed">
-                      {step.desc}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              {"note" in phase && phase.note && (
-                <p className="text-[11px] mt-2 opacity-60 border-t border-current/20 pt-2">
-                  {phase.note}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
+        <TurnPhaseWalkthrough />
         <Note>
           각 페이즈/스텝에서 유발된 효과가 있으면 전부 해결 후 다음으로 진행.
           어택 중에는 패 플레이·기동메인 발동 불가.
@@ -432,44 +1126,12 @@ export function RulesPage() {
             상대 플레이어 또는 레스트 상태의 상대 유닛을 대상 선언.
           </Note>
 
-          <div className="flex flex-col">
-            {BATTLE_STEPS.map((step, i) => (
-              <div key={step.name} className="flex gap-3 text-xs">
-                <div className="shrink-0 flex flex-col items-center">
-                  <span className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-[10px] font-bold">
-                    {i + 1}
-                  </span>
-                  {i < BATTLE_STEPS.length - 1 && (
-                    <div className="w-px flex-1 min-h-2 bg-border my-0.5" />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0 pb-3">
-                  <p className="font-semibold">{step.name}</p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="text-xs text-muted-foreground">
+            스텝을 클릭하면 상세 내용을 확인할 수 있습니다.
+          </p>
+          <BattleStepsWalkthrough />
 
-          <div className="rounded-md border p-3">
-            <p className="text-xs font-semibold mb-2">
-              플레이어 어택 시 — 실드 에어리어 처리 순서
-            </p>
-            <ol className="flex flex-col gap-1 text-xs text-muted-foreground">
-              <li>
-                1. 베이스 있으면 → 베이스에 AP만큼 배틀 대미지. HP 0이면 파괴.
-              </li>
-              <li>
-                2. 베이스 없고 실드 있으면 → 맨 위 실드 1장 파괴. 앞면으로 한 뒤
-                【버스트】 확인 후 트래시.
-              </li>
-              <li>
-                3. 베이스도 실드도 없으면 → 플레이어에게 배틀 대미지 → 즉시 패배.
-              </li>
-            </ol>
-          </div>
+          <ShieldSimulator />
 
           <div className="rounded-md border p-3">
             <p className="text-xs font-semibold mb-2">유닛 어택 시</p>
@@ -489,77 +1151,7 @@ export function RulesPage() {
       </Section>
 
       {/* ── 게임 영역 ── */}
-      <Section title="게임 영역 (존)">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-          {(
-            [
-              {
-                name: "덱 에어리어",
-                type: "비공개",
-                desc: "게임 덱을 두는 곳. 위에서 1장씩 드로우.",
-              },
-              {
-                name: "리소스 덱 에어리어",
-                type: "비공개",
-                desc: "리소스 덱을 두는 곳.",
-              },
-              {
-                name: "리소스 에어리어",
-                type: "공개",
-                desc: "리소스를 두는 곳. 최대 15장.",
-              },
-              {
-                name: "배틀 에어리어",
-                type: "공개",
-                desc: "유닛·파일럿을 두는 곳. 유닛 최대 6기.",
-              },
-              {
-                name: "실드 에어리어",
-                type: "혼합",
-                desc: "베이스 존(공개) + 실드 존(비공개).",
-              },
-              {
-                name: "패",
-                type: "비공개",
-                desc: "드로우한 카드. 상한 10장. 자신만 열람 가능.",
-              },
-              {
-                name: "트래시",
-                type: "공개",
-                desc: "파괴·사용된 카드. 순서 변경 가능.",
-              },
-              {
-                name: "제외 에어리어",
-                type: "공개",
-                desc: "제외된 카드. 파괴와는 다른 처리.",
-              },
-            ] as const
-          ).map((z) => (
-            <div key={z.name} className="rounded border p-2">
-              <div className="flex items-center gap-1.5 mb-0.5">
-                <span className="font-semibold">{z.name}</span>
-                <span
-                  className={cn(
-                    "text-[9px] px-1 rounded",
-                    z.type === "공개"
-                      ? "bg-green-100 text-green-700"
-                      : z.type === "비공개"
-                        ? "bg-gray-100 text-gray-600"
-                        : "bg-yellow-100 text-yellow-700",
-                  )}
-                >
-                  {z.type}
-                </span>
-              </div>
-              <p className="text-muted-foreground">{z.desc}</p>
-            </div>
-          ))}
-        </div>
-        <Note>
-          카드가 영역 간 이동 시, 특별한 지시 없이는 새로운 카드로 취급 (이전 효과 소멸).
-          리소스 에어리어·배틀 에어리어·실드 에어리어를 합쳐 「필드」라고 부르기도 함.
-        </Note>
-      </Section>
+      <ZoneSection />
 
       {/* ── 키워드 효과 ── */}
       <Section title="키워드 효과 (어빌리티)">
@@ -604,7 +1196,7 @@ export function RulesPage() {
             <div key={i} className="flex flex-col gap-1.5">
               <div className="flex items-center gap-2 flex-wrap">
                 {kw.badge}
-                <span className="text-[11px] text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   {kw.timing}
                 </span>
               </div>
@@ -781,7 +1373,7 @@ export function RulesPage() {
         </div>
       </Section>
 
-      <p className="text-[10px] text-muted-foreground text-center">
+      <p className="text-xs text-muted-foreground text-center">
         건담 카드 게임 종합 규칙 Ver. 1.4.1 (2026년 1월 16일 원문 기준)
       </p>
     </div>
