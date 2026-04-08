@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ResourceCounterRouteImport } from './routes/resource-counter'
+import { Route as KeywordsRouteImport } from './routes/keywords'
 import { Route as InfoRouteImport } from './routes/info'
 import { Route as DecklistRouteImport } from './routes/decklist'
 import { Route as CardlistRouteImport } from './routes/cardlist'
@@ -20,6 +21,11 @@ import { Route as DeckDeckIdRouteImport } from './routes/deck/$deckId'
 const ResourceCounterRoute = ResourceCounterRouteImport.update({
   id: '/resource-counter',
   path: '/resource-counter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KeywordsRoute = KeywordsRouteImport.update({
+  id: '/keywords',
+  path: '/keywords',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InfoRoute = InfoRouteImport.update({
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/cardlist': typeof CardlistRoute
   '/decklist': typeof DecklistRoute
   '/info': typeof InfoRoute
+  '/keywords': typeof KeywordsRoute
   '/resource-counter': typeof ResourceCounterRoute
   '/deck/$deckId': typeof DeckDeckIdRoute
   '/tools/mulligan': typeof ToolsMulliganRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/cardlist': typeof CardlistRoute
   '/decklist': typeof DecklistRoute
   '/info': typeof InfoRoute
+  '/keywords': typeof KeywordsRoute
   '/resource-counter': typeof ResourceCounterRoute
   '/deck/$deckId': typeof DeckDeckIdRoute
   '/tools/mulligan': typeof ToolsMulliganRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/cardlist': typeof CardlistRoute
   '/decklist': typeof DecklistRoute
   '/info': typeof InfoRoute
+  '/keywords': typeof KeywordsRoute
   '/resource-counter': typeof ResourceCounterRoute
   '/deck/$deckId': typeof DeckDeckIdRoute
   '/tools/mulligan': typeof ToolsMulliganRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/cardlist'
     | '/decklist'
     | '/info'
+    | '/keywords'
     | '/resource-counter'
     | '/deck/$deckId'
     | '/tools/mulligan'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/cardlist'
     | '/decklist'
     | '/info'
+    | '/keywords'
     | '/resource-counter'
     | '/deck/$deckId'
     | '/tools/mulligan'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/cardlist'
     | '/decklist'
     | '/info'
+    | '/keywords'
     | '/resource-counter'
     | '/deck/$deckId'
     | '/tools/mulligan'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   CardlistRoute: typeof CardlistRoute
   DecklistRoute: typeof DecklistRoute
   InfoRoute: typeof InfoRoute
+  KeywordsRoute: typeof KeywordsRoute
   ResourceCounterRoute: typeof ResourceCounterRoute
   DeckDeckIdRoute: typeof DeckDeckIdRoute
   ToolsMulliganRoute: typeof ToolsMulliganRoute
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/resource-counter'
       fullPath: '/resource-counter'
       preLoaderRoute: typeof ResourceCounterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/keywords': {
+      id: '/keywords'
+      path: '/keywords'
+      fullPath: '/keywords'
+      preLoaderRoute: typeof KeywordsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/info': {
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   CardlistRoute: CardlistRoute,
   DecklistRoute: DecklistRoute,
   InfoRoute: InfoRoute,
+  KeywordsRoute: KeywordsRoute,
   ResourceCounterRoute: ResourceCounterRoute,
   DeckDeckIdRoute: DeckDeckIdRoute,
   ToolsMulliganRoute: ToolsMulliganRoute,

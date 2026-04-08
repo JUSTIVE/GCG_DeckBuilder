@@ -25,7 +25,10 @@ export const navMain: NavItem[] = [
   {
     title: "정보",
     url: "",
-    items: [{ title: "번역 커버리지", url: "/info" }],
+    items: [
+      { title: "키워드 사전", url: "/keywords" },
+      { title: "번역 커버리지", url: "/info" },
+    ],
   },
 ];
 

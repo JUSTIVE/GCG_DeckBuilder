@@ -20,6 +20,7 @@ const TRIGGER_STYLES: Record<string, string> = {
   "링크 시": "bg-yellow-300 text-gray-800",
   "링크 중": "bg-yellow-300 text-gray-800",
   "턴 1회": "bg-red-700 text-white",
+  "내 턴이 끝날 때": "bg-red-700 text-white",
 };
 
 // <어빌리티> 키워드별 클래스. 매칭되지 않으면 fallback 사용.
@@ -27,14 +28,15 @@ const ABILITY_STYLES: Record<string, string> = {
   블로커: "hex-chip hex-chip-md bg-white text-gray-800 font-bold",
   고기동: "hex-chip hex-chip-md bg-white text-gray-800 font-bold",
   "선제 공격": "hex-chip hex-chip-md bg-white text-gray-800 font-bold",
+  선제공격: "hex-chip hex-chip-md bg-white text-gray-800 font-bold",
   제압: "hex-chip hex-chip-md bg-white text-gray-800 font-bold",
   돌파: "hex-chip hex-chip-md bg-white text-gray-800 font-bold", // startsWith 매칭
   리페어: "hex-chip hex-chip-md bg-white text-gray-800 font-bold", // startsWith 매칭
   원호: "hex-chip hex-chip-md bg-white text-gray-800 font-bold", // startsWith 매칭
 };
 
-const TRIGGER_FALLBACK = "bg-white/20 text-white";
-const ABILITY_FALLBACK = "border-white/30 bg-white/5 text-white/80";
+export const TRIGGER_FALLBACK = "bg-white/20 text-white";
+export const ABILITY_FALLBACK = "border-white/30 bg-white/5 text-white/80";
 
 // ─── Keyword map ──────────────────────────────────────────────────────────────
 
