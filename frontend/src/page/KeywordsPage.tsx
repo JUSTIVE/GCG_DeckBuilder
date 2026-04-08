@@ -3,7 +3,12 @@ import { graphql, useLazyLoadQuery } from "react-relay";
 import type { KeywordsPageCardsQuery } from "@/__generated__/KeywordsPageCardsQuery.graphql";
 import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
 import { ALL_KEYWORDS } from "@/lib/filterConstants";
-import { triggerClass, abilityClass, TRIGGER_FALLBACK, ABILITY_FALLBACK } from "@/components/CardDescription";
+import {
+  triggerClass,
+  abilityClass,
+  TRIGGER_FALLBACK,
+  ABILITY_FALLBACK,
+} from "@/components/CardDescription";
 import { COLOR_HEX } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "lucide-react";
@@ -13,15 +18,36 @@ import { useRouter } from "@tanstack/react-router";
 
 const CardsQuery = graphql`
   query KeywordsPageCardsQuery($keyword: CardKeyword!) {
-    cards(first: 200, filter: { keyword: [$keyword], kind: [UNIT, PILOT, BASE, COMMAND] }) {
+    cards(
+      first: 200
+      filter: { keyword: [$keyword], kind: [UNIT, PILOT, BASE, COMMAND] }
+    ) {
       totalCount
       edges {
         node {
           __typename
-          ... on UnitCard    { id name color }
-          ... on PilotCard   { id pilot { name } color }
-          ... on BaseCard    { id name color }
-          ... on CommandCard { id name color }
+          ... on UnitCard {
+            id
+            name
+            color
+          }
+          ... on PilotCard {
+            id
+            pilot {
+              name
+            }
+            color
+          }
+          ... on BaseCard {
+            id
+            name
+            color
+          }
+          ... on CommandCard {
+            id
+            name
+            color
+          }
         }
       }
     }
@@ -39,7 +65,12 @@ function KeywordBadge({ name }: { name: string }) {
     const inner = name.replace(/^【/, "").replace(/】$/, "");
     const cls = triggerClass(inner);
     return (
-      <span className={cn("inline-flex items-center rounded px-2 py-0.5 text-sm font-semibold", cls === TRIGGER_FALLBACK ? TRIGGER_LIGHT_FALLBACK : cls)}>
+      <span
+        className={cn(
+          "inline-flex items-center rounded px-2 py-0.5 text-sm font-semibold w-fit",
+          cls === TRIGGER_FALLBACK ? TRIGGER_LIGHT_FALLBACK : cls,
+        )}
+      >
         {inner}
       </span>
     );
@@ -47,7 +78,12 @@ function KeywordBadge({ name }: { name: string }) {
   const inner = name.replace(/^</, "").replace(/>$/, "");
   const cls = abilityClass(inner);
   return (
-    <span className={cn("inline-flex items-center rounded border px-2 py-0.5 text-sm font-semibold", cls === ABILITY_FALLBACK ? ABILITY_LIGHT_FALLBACK : cls)}>
+    <span
+      className={cn(
+        "inline-flex items-center rounded border px-2 py-0.5 text-sm font-semibold w-fit",
+        cls === ABILITY_FALLBACK ? ABILITY_LIGHT_FALLBACK : cls,
+      )}
+    >
       {inner}
     </span>
   );
@@ -56,16 +92,23 @@ function KeywordBadge({ name }: { name: string }) {
 // ── card list ─────────────────────────────────────────────────────────────────
 
 const TYPENAME_KO: Record<string, string> = {
-  UnitCard: "유닛", PilotCard: "파일럿", BaseCard: "베이스", CommandCard: "커맨드",
+  UnitCard: "유닛",
+  PilotCard: "파일럿",
+  BaseCard: "베이스",
+  CommandCard: "커맨드",
 };
 
 function KeywordCardList({ keyword }: { keyword: string }) {
   const router = useRouter();
-  const data = useLazyLoadQuery<KeywordsPageCardsQuery>(CardsQuery, { keyword: keyword as any });
+  const data = useLazyLoadQuery<KeywordsPageCardsQuery>(CardsQuery, {
+    keyword: keyword as any,
+  });
   const edges = data.cards.edges;
 
   return (
-    <div className="border-t border-border px-3 py-2 flex flex-col gap-0.5">
+    <div
+      className={cn("border-t border-border px-3 py-2 flex flex-col gap-0.5")}
+    >
       {edges.map(({ node }) => {
         const n = node as any;
         const id: string = n.id ?? "";
@@ -75,16 +118,22 @@ function KeywordCardList({ keyword }: { keyword: string }) {
           <button
             key={id}
             type="button"
-            onClick={() => router.navigate({ to: "/cardlist", search: { cardId: id } })}
+            onClick={() =>
+              router.navigate({ to: "/cardlist", search: { cardId: id } })
+            }
             className="w-full flex items-center gap-2 px-2 py-1.5 text-left hover:bg-muted/50 rounded-md"
           >
             <span
               className="inline-block w-2 h-2 rounded-full shrink-0 border border-black/10"
               style={{ background: COLOR_HEX[color] ?? "#ccc" }}
             />
-            <span className="font-mono text-[10px] text-muted-foreground shrink-0 hidden sm:inline">{id}</span>
+            <span className="font-mono text-[10px] text-muted-foreground shrink-0 hidden sm:inline">
+              {id}
+            </span>
             <span className="text-xs flex-1 min-w-0 truncate">{name}</span>
-            <span className="text-[10px] text-muted-foreground shrink-0">{TYPENAME_KO[node.__typename] ?? ""}</span>
+            <span className="text-[10px] text-muted-foreground shrink-0">
+              {TYPENAME_KO[node.__typename] ?? ""}
+            </span>
           </button>
         );
       })}
@@ -94,13 +143,19 @@ function KeywordCardList({ keyword }: { keyword: string }) {
 
 // ── keyword entry ─────────────────────────────────────────────────────────────
 
-function KeywordEntry({ keyword }: { keyword: string }) {
+function KeywordEntry({
+  keyword,
+  className,
+}: {
+  keyword: string;
+  className?: string;
+}) {
   const [open, setOpen] = useState(false);
   const entry = KEYWORD_DESCRIPTIONS[keyword];
   if (!entry) return null;
 
   return (
-    <div className="rounded-lg border border-border">
+    <div className={cn("rounded-lg border border-border", className)}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -108,12 +163,25 @@ function KeywordEntry({ keyword }: { keyword: string }) {
       >
         <div className="flex-1 min-w-0 flex flex-col gap-1.5">
           <KeywordBadge name={entry.name} />
-          <p className="text-xs text-muted-foreground leading-relaxed">{entry.description}</p>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            {entry.description}
+          </p>
         </div>
-        <ChevronRightIcon className={cn("size-4 text-muted-foreground shrink-0 mt-0.5 transition-transform", open && "rotate-90")} />
+        <ChevronRightIcon
+          className={cn(
+            "size-4 text-muted-foreground shrink-0 mt-0.5 transition-transform",
+            open && "rotate-90",
+          )}
+        />
       </button>
       {open && (
-        <Suspense fallback={<div className="border-t border-border px-5 py-3 text-xs text-muted-foreground">불러오는 중…</div>}>
+        <Suspense
+          fallback={
+            <div className="border-t border-border px-5 py-3 text-xs text-muted-foreground">
+              불러오는 중…
+            </div>
+          }
+        >
           <KeywordCardList keyword={keyword} />
         </Suspense>
       )}
@@ -123,8 +191,12 @@ function KeywordEntry({ keyword }: { keyword: string }) {
 
 // ── page ──────────────────────────────────────────────────────────────────────
 
-const triggerKeywords = ALL_KEYWORDS.filter((k) => KEYWORD_DESCRIPTIONS[k]?.name.startsWith("【"));
-const abilityKeywords = ALL_KEYWORDS.filter((k) => KEYWORD_DESCRIPTIONS[k]?.name.startsWith("<"));
+const triggerKeywords = ALL_KEYWORDS.filter((k) =>
+  KEYWORD_DESCRIPTIONS[k]?.name.startsWith("【"),
+);
+const abilityKeywords = ALL_KEYWORDS.filter((k) =>
+  KEYWORD_DESCRIPTIONS[k]?.name.startsWith("<"),
+);
 
 export function KeywordsPage() {
   return (
@@ -132,16 +204,24 @@ export function KeywordsPage() {
       <h1 className="text-lg font-bold">키워드 사전</h1>
 
       <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">트리거</h2>
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+          트리거
+        </h2>
         <div className="flex flex-col gap-2">
-          {triggerKeywords.map((kw) => <KeywordEntry key={kw} keyword={kw} />)}
+          {triggerKeywords.map((kw) => (
+            <KeywordEntry key={kw} keyword={kw} />
+          ))}
         </div>
       </section>
 
       <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">어빌리티</h2>
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+          어빌리티
+        </h2>
         <div className="flex flex-col gap-2">
-          {abilityKeywords.map((kw) => <KeywordEntry key={kw} keyword={kw} />)}
+          {abilityKeywords.map((kw) => (
+            <KeywordEntry key={kw} keyword={kw} className={"bg-gray-800/10"} />
+          ))}
         </div>
       </section>
     </div>

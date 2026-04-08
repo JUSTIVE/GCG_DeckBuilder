@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RulesRouteImport } from './routes/rules'
 import { Route as ResourceCounterRouteImport } from './routes/resource-counter'
 import { Route as KeywordsRouteImport } from './routes/keywords'
 import { Route as InfoRouteImport } from './routes/info'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ToolsMulliganRouteImport } from './routes/tools/mulligan'
 import { Route as DeckDeckIdRouteImport } from './routes/deck/$deckId'
 
+const RulesRoute = RulesRouteImport.update({
+  id: '/rules',
+  path: '/rules',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResourceCounterRoute = ResourceCounterRouteImport.update({
   id: '/resource-counter',
   path: '/resource-counter',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/info': typeof InfoRoute
   '/keywords': typeof KeywordsRoute
   '/resource-counter': typeof ResourceCounterRoute
+  '/rules': typeof RulesRoute
   '/deck/$deckId': typeof DeckDeckIdRoute
   '/tools/mulligan': typeof ToolsMulliganRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/info': typeof InfoRoute
   '/keywords': typeof KeywordsRoute
   '/resource-counter': typeof ResourceCounterRoute
+  '/rules': typeof RulesRoute
   '/deck/$deckId': typeof DeckDeckIdRoute
   '/tools/mulligan': typeof ToolsMulliganRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/info': typeof InfoRoute
   '/keywords': typeof KeywordsRoute
   '/resource-counter': typeof ResourceCounterRoute
+  '/rules': typeof RulesRoute
   '/deck/$deckId': typeof DeckDeckIdRoute
   '/tools/mulligan': typeof ToolsMulliganRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/info'
     | '/keywords'
     | '/resource-counter'
+    | '/rules'
     | '/deck/$deckId'
     | '/tools/mulligan'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/info'
     | '/keywords'
     | '/resource-counter'
+    | '/rules'
     | '/deck/$deckId'
     | '/tools/mulligan'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/info'
     | '/keywords'
     | '/resource-counter'
+    | '/rules'
     | '/deck/$deckId'
     | '/tools/mulligan'
   fileRoutesById: FileRoutesById
@@ -130,12 +142,20 @@ export interface RootRouteChildren {
   InfoRoute: typeof InfoRoute
   KeywordsRoute: typeof KeywordsRoute
   ResourceCounterRoute: typeof ResourceCounterRoute
+  RulesRoute: typeof RulesRoute
   DeckDeckIdRoute: typeof DeckDeckIdRoute
   ToolsMulliganRoute: typeof ToolsMulliganRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/rules': {
+      id: '/rules'
+      path: '/rules'
+      fullPath: '/rules'
+      preLoaderRoute: typeof RulesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resource-counter': {
       id: '/resource-counter'
       path: '/resource-counter'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   InfoRoute: InfoRoute,
   KeywordsRoute: KeywordsRoute,
   ResourceCounterRoute: ResourceCounterRoute,
+  RulesRoute: RulesRoute,
   DeckDeckIdRoute: DeckDeckIdRoute,
   ToolsMulliganRoute: ToolsMulliganRoute,
 }
