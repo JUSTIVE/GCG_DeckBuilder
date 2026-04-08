@@ -272,7 +272,6 @@ sortedPackages.forEach((packageName, pkgIdx) => {
 
   // 각 카드 처리
   if (previewSummary.translated < previewSummary.total) {
-    // 색상별 그룹화 후 id 순 정렬
     const COLOR_ORDER = ["RED", "BLUE", "GREEN", "YELLOW", "PURPLE", "WHITE"];
     const cardsByColor = new Map<string, Card[]>();
     for (const card of packageCards) {
@@ -286,18 +285,34 @@ sortedPackages.forEach((packageName, pkgIdx) => {
         .filter((c) => !COLOR_ORDER.includes(c))
         .sort(),
     ];
-    const sortedCards = orderedColors.flatMap((color) =>
-      cardsByColor
-        .get(color)!
-        .slice()
-        .sort((a, b) => a.id.localeCompare(b.id)),
-    );
 
-    sortedCards.forEach((card, cardIdx) => {
-      const isLastCard = cardIdx === sortedCards.length - 1;
-      const fields = checkCard(card);
-      const cardSummary = renderCardLine(card, fields, packagePrefix, isLastCard);
-      packageSummary = addSummary(packageSummary, cardSummary);
+    orderedColors.forEach((color, colorIdx) => {
+      const isLastColor = colorIdx === orderedColors.length - 1;
+      const colorCards = cardsByColor.get(color)!.slice().sort((a, b) => a.id.localeCompare(b.id));
+
+      const colorSummary: Summary = { total: 0, translated: 0 };
+      for (const card of colorCards) {
+        const fields = checkCard(card);
+        colorSummary.total += fields.length;
+        colorSummary.translated += fields.filter((f) => f.translated).length;
+      }
+
+      const colorConnector = isLastColor ? TREE_LAST : TREE_BRANCH;
+      const dot = COLOR_DOT[color] ?? color;
+      console.log(`${packagePrefix}${colorConnector}${dot} ${styleText("bold", color)} ${renderPercent(colorSummary)}`);
+
+      if (colorSummary.translated === colorSummary.total) {
+        packageSummary = addSummary(packageSummary, colorSummary);
+      } else {
+        const colorPrefix = packagePrefix + (isLastColor ? TREE_INDENT : TREE_PIPE);
+
+        colorCards.forEach((card, cardIdx) => {
+          const isLastCard = cardIdx === colorCards.length - 1;
+          const fields = checkCard(card);
+          const cardSummary = renderCardLine(card, fields, colorPrefix, isLastCard);
+          packageSummary = addSummary(packageSummary, cardSummary);
+        });
+      }
     });
   } else {
     packageSummary = previewSummary;
