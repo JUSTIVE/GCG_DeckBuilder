@@ -24,10 +24,11 @@ const replaceList = {
   "(Clan)": "(클랜)",
   "(Titans)": "(티탄즈)",
   "(Jupitris)": "(주피트리스)",
-  "(Operation Meteor)": "오퍼레이션 메테오",
+  "(Operation Meteor)": "(오퍼레이션 메테오)",
   "(Superpower Bloc)": "(초대국군)",
   "(X-Rounder)": "(X-라운더)",
   "(CB)": "(솔레스탈 비잉)",
+  "(G Team)": "(G-팀)",
   "Pilot】": "파일럿】",
   "this Unit gets AP+2 during this battle.": "이 배틀 동안, 이 유닛을 AP+2 한다.",
   "If you are attacking the enemy player,": "상대 플레이어를 공격하고 있다면,",
@@ -371,6 +372,18 @@ const replaceList = {
     "자신의 트래시의 Lv.4 이하의 유닛 카드 1장을 선택할 수 있다.",
   "Choose 3 (철화단)/(테이와즈) Unit cards from your trash.":
     "자신의 트래시의, (철화단)/(테이와즈)의 유닛 카드 3장을 선택한다.",
+  "When this Unit destroys an enemy shield area card with battle damage,":
+    "이 유닛이 배틀 대미지로 상대의 실드 에리어의 카드를 파괴했을 때,",
+  "if there are 10 or more (솔레스탈 비잉) cards in your trash,":
+    "자신의 트래시에 (솔레스탈 비잉)의 카드가 10장 이상 있다면,",
+  "choose 1 enemy Unit with the lowest HP. ": "가장 HP가 낮은 상대의 유닛 1개를 선택한다.",
+  "All friendly Unit tokens get AP+1 during your opponent's turn.":
+    "상대의 턴 동안, 아군의 유닛 토큰 전부를 AP+1 한다.",
+  "when a friendly (오퍼레이션 메테오)/(G-팀) Unit that is Lv.6 or higher destroys an enemy Unit with battle damage,":
+    "Lv.6 이상의 (오퍼레이션 메테오)/(G-팀) 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때,",
+  "that friendly Unit may recover 2 HP.": "그 아군의 유닛을 2 회복할 수 있다.",
+  "Deploy 1 [Hy-Gogg]((Cyclops Team)･AP2･HP1) Unit token.":
+    "[하이-곡그]((사이클롭스 팀)･AP2･HP1)의 유닛 토큰 1개를 배치한다.",
 };
 
 function applyReplacements(v: string): string {

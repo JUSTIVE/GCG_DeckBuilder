@@ -11557,7 +11557,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【배치 시】 Choose 1 of your (오퍼레이션 메테오)/(G Team) Units. During this turn, it may choose an active enemy Unit as its attack target."
+      "【배치 시】 Choose 1 of your (오퍼레이션 메테오)/(G-팀) Units. During this turn, it may choose an active enemy Unit as its attack target."
     ],
     "__typename": "UnitCard",
     "id": "GD03-021",
@@ -12378,7 +12378,7 @@
     "relatedTrait": [],
     "description": [
       "<제압> (공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)",
-      "When this Unit destroys an enemy shield area card with battle damage, if there are 10 or more (솔레스탈 비잉) cards in your trash, choose 1 enemy Unit with the lowest HP. 그 유닛을 파괴한다."
+      "이 유닛이 배틀 대미지로 상대의 실드 에리어의 카드를 파괴했을 때, 자신의 트래시에 (솔레스탈 비잉)의 카드가 10장 이상 있다면, 가장 HP가 낮은 상대의 유닛 1개를 선택한다.그 유닛을 파괴한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-049",
@@ -14012,7 +14012,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 Deploy 1 [Hy-Gogg]((Cyclops Team)･AP2･HP1) Unit token.",
+      "【메인】 [하이 곡그]((사이클롭스 팀)･AP2･HP1)의 유닛 토큰 1개를 배치한다.",
       "【파일럿】[가브리엘 라미레스 가르시아]"
     ],
     "__typename": "CommandCard",
@@ -14426,7 +14426,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【턴 1회】 자신의 턴 동안, when a friendly 오퍼레이션 메테오/(G Team) Unit that is Lv.6 or higher destroys an enemy Unit with battle damage, that friendly Unit may recover 2 HP."
+      "【턴 1회】 자신의 턴 동안, Lv.6 이상의 (오퍼레이션 메테오)/(G-팀) 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, 그 아군의 유닛을 2 회복할 수 있다."
     ],
     "__typename": "BaseCard",
     "id": "GD03-125",
@@ -14455,7 +14455,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "All friendly Unit tokens get AP+1 during your opponent's turn."
+      "상대의 턴 동안, 아군의 유닛 토큰 전부를 AP+1 한다."
     ],
     "__typename": "BaseCard",
     "id": "GD03-126",
