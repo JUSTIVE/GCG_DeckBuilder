@@ -22,6 +22,11 @@ export const navMain: NavItem[] = [
     url: "",
     items: [{ title: "멀리건 시뮬레이터", url: "/tools/mulligan" }],
   },
+  {
+    title: "정보",
+    url: "",
+    items: [{ title: "번역 커버리지", url: "/info" }],
+  },
 ];
 
 /** Returns [parentItem, childItem?] matching the given pathname. */
