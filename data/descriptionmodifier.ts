@@ -29,6 +29,10 @@ const replaceList = {
   "(X-Rounder)": "(X-라운더)",
   "(CB)": "(솔레스탈 비잉)",
   "(G Team)": "(G-팀)",
+  "(Maganac Corps)": "(마그아낙 부대)",
+  "(Cyclops Team)": "(사이클롭스 부대)",
+  "AGE System": "AGE 시스템",
+  "[Hy-Gogg]": "[하이-곡그]",
   "Pilot】": "파일럿】",
   "this Unit gets AP+2 during this battle.": "이 배틀 동안, 이 유닛을 AP+2 한다.",
   "If you are attacking the enemy player,": "상대 플레이어를 공격하고 있다면,",
@@ -384,6 +388,11 @@ const replaceList = {
   "that friendly Unit may recover 2 HP.": "그 아군의 유닛을 2 회복할 수 있다.",
   "Deploy 1 [Hy-Gogg]((Cyclops Team)･AP2･HP1) Unit token.":
     "[하이-곡그]((사이클롭스 팀)･AP2･HP1)의 유닛 토큰 1개를 배치한다.",
+  "Deal damage to it equal to the number of friendly Unit tokens in play.":
+    "그 유닛에 아군의 유닛 토큰 수 만큼 대미지를 준다.",
+  "When you pair a Pilot that is Lv.3 or lower with one of your Units,":
+    "자신의 유닛에 Lv.3 이하의 파일럿이 세트되었을 때,",
+  "Choose 1 of your (사이클롭스 부대) Units.": "(사이클롭스 부대)의 자신의 유닛 1개를 선택한다.",
 };
 
 function applyReplacements(v: string): string {

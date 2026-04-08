@@ -59,7 +59,7 @@ export const renderTrait = (trait: string) => {
     case "CLAN":
       return "클랜";
     case "AGE_SYSTEM":
-      return "에이지 시스템";
+      return "AGE 시스템";
     case "WHITE_FANG":
       return "화이트 팽";
     case "SIDE_6":

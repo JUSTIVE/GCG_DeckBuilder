@@ -8280,7 +8280,7 @@
       "AGE_SYSTEM"
     ],
     "description": [
-      "【턴 1회】 자신의 EX리소스가 추가되었을 때, (에이지 시스템)의 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 <돌파 2>를 얻는다.",
+      "【턴 1회】 자신의 EX리소스가 추가되었을 때, (AGE 시스템)의 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 <돌파 2>를 얻는다.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "UnitCard",
@@ -8411,7 +8411,7 @@
       "AGE_SYSTEM"
     ],
     "description": [
-      "【배치 시】 자신이 Lv.7 이상이라면, (에이지 시스템)의 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP+2 한다."
+      "【배치 시】 자신이 Lv.7 이상이라면, (AGE 시스템)의 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛을 AP+2 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD02-026",
@@ -11872,8 +11872,8 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【버스트】 Choose 1 (Cyclops Team) Pilot card from your trash. 그 카드를 패에 추가한다.",
-      "【세트 시･(Cyclops Team) 파일럿】 All your (Cyclops Team) Units may choose an active enemy Unit with 5 or less AP as their attack target during this turn."
+      "【버스트】 Choose 1 (사이클롭스 부대) Pilot card from your trash. 그 카드를 패에 추가한다.",
+      "【세트 시･(사이클롭스 부대) 파일럿】 All your (사이클롭스 부대) Units may choose an active enemy Unit with 5 or less AP as their attack target during this turn."
     ],
     "__typename": "UnitCard",
     "id": "GD03-017",
@@ -11973,7 +11973,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【세트 시】 If there are 4 or more (Cyclops Team) cards in your trash, deploy 2 rested [Ad Balloon]((Civilian)･AP0･HP1･This Unit can't be set as active or paired with a Pilot) Unit tokens.",
+      "【세트 시】 If there are 4 or more (사이클롭스 부대) cards in your trash, deploy 2 rested [Ad Balloon]((Civilian)･AP0･HP1･This Unit can't be set as active or paired with a Pilot) Unit tokens.",
       "While you have a Unit with \"Ad Balloon\" in its card name in play, this Unit can't receive enemy battle damage."
     ],
     "__typename": "UnitCard",
@@ -12072,7 +12072,7 @@
       "AGE_SYSTEM"
     ],
     "description": [
-      "When you place an EX Resource, choose 1 of your (AGE System) Units. 이 턴 동안, 그 유닛은 <고기동>을 얻는다.",
+      "When you place an EX Resource, choose 1 of your (AGE 시스템) Units. 이 턴 동안, 그 유닛은 <고기동>을 얻는다.",
       "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "UnitCard",
@@ -12105,7 +12105,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 If you have another (Cyclops Team) Unit in play, deploy 1 rested [Hy-Gogg]((Cyclops Team)･AP2･HP1) Unit token."
+      "【링크 시】 If you have another (사이클롭스 부대) Unit in play, deploy 1 rested [하이-곡그]((사이클롭스 부대)･AP2･HP1) Unit token."
     ],
     "__typename": "UnitCard",
     "id": "GD03-024",
@@ -12135,7 +12135,7 @@
       "MAGANAC_CORPS"
     ],
     "description": [
-      "Enemy Units choose one of your rested (Maganac Corps) Units as their attack target if possible when attacking."
+      "Enemy Units choose one of your rested (마그아낙 부대) Units as their attack target if possible when attacking."
     ],
     "__typename": "UnitCard",
     "id": "GD03-025",
@@ -14073,7 +14073,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "Increase this Unit's AP by an amount equal to the number of (Cyclops Team) Pilot cards/Command cards with unique names in your trash."
+      "Increase this Unit's AP by an amount equal to the number of (사이클롭스 부대) Pilot cards/Command cards with unique names in your trash."
     ],
     "__typename": "PilotCard",
     "id": "GD03-089",
@@ -14100,7 +14100,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 패에 추가한다.",
-      "【공격 시】 Choose 1 of your (Cyclops Team) Units. 이 턴 동안, 그 유닛은 <돌파 1>을 얻는다.",
+      "【공격 시】 (사이클롭스 부대)의 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 <돌파 1>을 얻는다.",
       "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
     ],
     "__typename": "PilotCard",
@@ -14520,7 +14520,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 Lv.5 이하의 상대의 유닛 1개를 선택한다. Deal damage to it equal to the number of friendly Unit tokens in play.",
+      "【메인】 Lv.5 이하의 상대의 유닛 1개를 선택한다. 그 유닛에 아군의 유닛 토큰 수 만큼 대미지를 준다.",
       "【파일럿】[하디 슈타이너]"
     ],
     "__typename": "CommandCard",
@@ -14549,7 +14549,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【메인】 [하이 곡그]((사이클롭스 팀)･AP2･HP1)의 유닛 토큰 1개를 배치한다.",
+      "【메인】 [하이-곡그]((사이클롭스 팀)･AP2･HP1)의 유닛 토큰 1개를 배치한다.",
       "【파일럿】[가브리엘 라미레스 가르시아]"
     ],
     "__typename": "CommandCard",
@@ -14947,7 +14947,7 @@
     "description": [
       "【버스트】 이 카드를 배치한다.",
       "【배치 시】 자신의 실드 1장을 패에 추가한다.",
-      "【턴 1회】 When you pair a Pilot that is Lv.3 or lower with one of your Units, HP3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
+      "【턴 1회】 자신의 유닛에 Lv.3 이하의 파일럿이 세트되었을 때, HP3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "BaseCard",
     "id": "GD03-124",

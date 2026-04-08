@@ -39,7 +39,7 @@ enum CardTrait {
   VULTURE # 벌쳐
   AEUG # 에우고
   CLAN # 클랜
-  AGE_SYSTEM # 에이지 시스템
+  AGE_SYSTEM # AGE 시스템
   WHITE_FANG # 화이트 팽
   SIDE_6 # 사이드 6
   NEW_UNE # 신지구연방군
@@ -132,7 +132,6 @@ enum Zone {
   SPACE # 우주
   EARTH # 지구
 }
-
 
 enum CardPackage {
   GD01 # 부스트팩 1
@@ -390,7 +389,7 @@ type DeckColorLimitExceededError {
 }
 
 union AddCardToDeckResult =
-  AddCardToDeckSuccess
+  | AddCardToDeckSuccess
   | DeckNotFoundError
   | CardBannedError
   | CardCopyLimitExceededError
@@ -399,7 +398,12 @@ union AddCardToDeckResult =
 
 type Query {
   node(id: ID!): Node
-  cards(first: Int, after: String, filter: CardFilterInput, sort: CardSort): CardConnection!
+  cards(
+    first: Int
+    after: String
+    filter: CardFilterInput
+    sort: CardSort
+  ): CardConnection!
   quicksearch(query: String!, first: Int): [Card!]!
   searchHistory: SearchHistoryList!
   deckList: DeckList!
