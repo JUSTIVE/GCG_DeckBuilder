@@ -619,9 +619,11 @@ function ShieldSimulator() {
             </p>
             <div className="flex flex-col gap-0.5 flex-1 justify-around">
               {Array.from({ length: INIT_SHIELDS }, (_, i) => {
-                const filled = i < shields;
-                // top shield = index 0 = first to be destroyed
-                const isTop = filled && i === shields - 1;
+                // Empty slots accumulate at the top as shields are destroyed from outside inward.
+                // filled slots occupy the bottom INIT_SHIELDS - (INIT_SHIELDS - shields) rows.
+                const filled = i >= INIT_SHIELDS - shields;
+                // The topmost filled slot is next to be destroyed.
+                const isTop = filled && i === INIT_SHIELDS - shields;
                 return (
                   <div
                     key={i}
