@@ -48,11 +48,8 @@ function CardRow({ card }: { card: CoverageCard }) {
     <div>
       <button
         type="button"
-        onClick={() => !done && setOpen((v) => !v)}
-        className={cn(
-          "w-full flex items-center gap-2 px-2 py-1.5 text-left hover:bg-muted/50 rounded-md",
-          done && "cursor-default",
-        )}
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center gap-2 px-2 py-1.5 text-left hover:bg-muted/50 rounded-md"
       >
         <span
           className="inline-block w-2 h-2 rounded-full shrink-0 border border-black/10"
@@ -65,22 +62,36 @@ function CardRow({ card }: { card: CoverageCard }) {
         {done ? (
           <span className="text-xs text-green-600 shrink-0">완료</span>
         ) : (
-          <>
-            <span className="text-xs text-destructive shrink-0">{badFields.length}개</span>
-            <ChevronRightIcon className={cn("size-3 text-muted-foreground shrink-0 transition-transform", open && "rotate-90")} />
-          </>
+          <span className="text-xs text-destructive shrink-0">{badFields.length}개</span>
         )}
+        <ChevronRightIcon className={cn("size-3 text-muted-foreground shrink-0 transition-transform", open && "rotate-90")} />
       </button>
-      {open && badFields.length > 0 && (
-        <div className="ml-6 mb-1 flex flex-col gap-1 pr-2">
-          {badFields.map((f) => (
-            <div key={f.field} className="text-xs">
-              <span className="font-medium text-muted-foreground mr-1">{f.field}</span>
-              {f.untranslatedValues?.map((v: string, i: number) => (
-                <div key={i} className="ml-2 text-destructive font-mono break-all text-[10px]">{v}</div>
-              ))}
-            </div>
-          ))}
+      {open && (
+        <div className="ml-6 mb-1 flex flex-col gap-1.5 pr-2">
+          {card.fields.map((f) => {
+            const badSet = new Set(f.untranslatedValues ?? []);
+            return (
+              <div key={f.field} className="text-xs">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <span className={cn("font-medium", f.translated ? "text-green-600" : "text-muted-foreground")}>{f.field}</span>
+                  {!f.values && (
+                    <span className="text-muted-foreground">{f.detail}</span>
+                  )}
+                </div>
+                {f.values ? (
+                  <div className="flex flex-col gap-0.5 ml-2">
+                    {f.values.map((v: string, i: number) => (
+                      <div key={i} className={cn("break-all", badSet.has(v) ? "text-destructive" : "text-green-600")}>{v}</div>
+                    ))}
+                  </div>
+                ) : (
+                  f.untranslatedValues?.map((v: string, i: number) => (
+                    <div key={i} className="ml-2 text-destructive break-all">{v}</div>
+                  ))
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
@@ -91,17 +102,13 @@ function CardRow({ card }: { card: CoverageCard }) {
 
 function ColorSection({ color }: { color: CoverageColor }) {
   const [open, setOpen] = useState(false);
-  const done = color.translated === color.total;
 
   return (
     <div>
       <button
         type="button"
-        onClick={() => !done && setOpen((v) => !v)}
-        className={cn(
-          "w-full flex items-center gap-2 px-2 py-1.5 hover:bg-muted/50 rounded-md text-left",
-          done && "cursor-default",
-        )}
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center gap-2 px-2 py-1.5 hover:bg-muted/50 rounded-md text-left"
       >
         <span
           className="inline-block w-2.5 h-2.5 rounded-full shrink-0 border border-black/10"
@@ -112,9 +119,7 @@ function ColorSection({ color }: { color: CoverageColor }) {
         </span>
         <span className="hidden sm:inline text-xs text-muted-foreground shrink-0">{color.cards.length}장</span>
         <ProgressBar translated={color.translated} total={color.total} />
-        {!done && (
-          <ChevronRightIcon className={cn("size-3.5 text-muted-foreground shrink-0 transition-transform", open && "rotate-90")} />
-        )}
+        <ChevronRightIcon className={cn("size-3.5 text-muted-foreground shrink-0 transition-transform", open && "rotate-90")} />
       </button>
       {open && (
         <div className="ml-3 border-l border-border pl-2 py-1 flex flex-col gap-0.5">

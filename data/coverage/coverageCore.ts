@@ -18,6 +18,7 @@ export type FieldResult = {
   field: string;
   translated: boolean;
   detail?: string;
+  values?: string[];          // all values (used for multi-line fields like description)
   untranslatedValues?: string[];
 };
 
@@ -81,6 +82,7 @@ export function checkCard(card: Card): FieldResult[] {
       field: "description",
       translated: ok,
       detail: bad.length > 0 ? `${bad.length}줄 미번역` : `${card.description.length}줄 완료`,
+      values: card.description,
       untranslatedValues: bad.length > 0 ? bad : undefined,
     });
   }
