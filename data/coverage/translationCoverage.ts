@@ -44,7 +44,9 @@ const isDescriptionTranslated = (description: string[]): boolean =>
         .replaceAll("(G-팀)", "")
         .replaceAll("AGE 디바이스", "")
         .replaceAll("AGE 시스템", "")
-        .replaceAll("GFreD", ""),
+        .replaceAll("GFreD", "")
+        .replaceAll("X-라운더", "")
+        .replaceAll("CGS", ""),
     ),
   );
 

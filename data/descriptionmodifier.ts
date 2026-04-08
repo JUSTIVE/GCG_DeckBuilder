@@ -26,6 +26,8 @@ const replaceList = {
   "(Jupitris)": "(주피트리스)",
   "(Operation Meteor)": "오퍼레이션 메테오",
   "(Superpower Bloc)": "(초대국군)",
+  "(X-Rounder)": "(X-라운더)",
+  "(CB)": "(솔레스탈 비잉)",
   "Pilot】": "파일럿】",
   "this Unit gets AP+2 during this battle.": "이 배틀 동안, 이 유닛을 AP+2 한다.",
   "If you are attacking the enemy player,": "상대 플레이어를 공격하고 있다면,",
@@ -67,7 +69,7 @@ const replaceList = {
   "Set this Unit as active.": "이 유닛을 액티브로 한다.",
   "set this Unit as active.": "이 유닛을 액티브로 한다.",
   "when this Unit destroys an enemy Unit with battle damage,":
-    "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때,",
+    "이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때,",
   "It recovers 3 HP.": "그 유닛을 3 회복한다.",
   "Choose 1 enemy Unit that is Lv.5 or lower.": "Lv.5 이하의 상대의 유닛 1개를 선택한다.",
   "It gets AP-2 during this turn.": "이 턴 동안, 그 유닛을 AP-2 한다.",
@@ -156,6 +158,8 @@ const replaceList = {
   "draw 1.": "자신은 1장 드로우 한다.",
   "this Unit gains <블로커>.": "이 유닛은 <블로커>를 얻는다.",
   "It gains <고기동> during this turn.": "이 턴 동안, 그 유닛은 <고기동>을 얻는다.",
+  "It gains <블로커> during this turn.": "이 턴 동안, 그 유닛은 <블로커>를 얻는다.",
+  "it gains <리페어 3>.": "이 유닛은 <리페어 3>을 얻는다.",
   "Choose 1 enemy Unit that is Lv.5 or higher.": "Lv.5 이상의 상대의 유닛 1개를 선택한다.",
   "If you have another (신지구연방군) Unit in play,":
     "이 유닛 이외의, (신지구연방군)의 자신의 유닛이 있다면,",
@@ -277,7 +281,6 @@ const replaceList = {
   'if there are 2 or more cards with "Awakened Potential" in their card name in your trash,':
     '자신의 트래쉬에, 카드명에 "능력의 각성"을 포함하는 카드가 2장 이상 있다면,',
   "you may choose 1 friendly Unit.": "아군의 유닛 1개를 선택할 수 있다.",
-  "It gains <블로커> during this turn.": "이 턴 동안, 그 유닛은 <블로커>를 얻는다.",
   "While you have 2 or more (초대국군)/(UN) Units in play,":
     "(초대국군)/(UN)의 자신의 유닛이 2개 이상 있는 한,",
   "this card in your hand gets cost -1.": "패의 이 카드를 코스트-1 한다.",
@@ -305,6 +308,69 @@ const replaceList = {
     "아군의 실드는 상대의 유닛으로부터 배틀 대미지를 받지 않는다.",
   "For each (에우고) Unit card in your trash,": "자신의 트래쉬에 (에우고)의 카드 1장마다,",
   "it gets AP-1 during this turn.": "이 턴 동안, 그 유닛을 AP-1 한다.",
+  "you may choose 1 (베이건) Unit card that is Lv.4 or lower from your trash.":
+    "자신의 트래시의 Lv.4 이하의 (베이건)의 유닛 카드 1장을 선택할 수 있다.",
+  "when one of your friendly (철화단)/(테이와즈) Units receives effect damage,":
+    "(철화단)/(테이와즈)의 아군의 유닛이 효과 대미지를 받았을 때,",
+  "you may rest this Base.": "이 베이스를 레스트 할 수 있다.",
+  "place the top card of your deck into your trash.":
+    "자신의 덱을 위에서 1장, 자신의 트래시에 둔다.",
+  "If 1 to 4 enemy Units are in play,": "상대의 유닛이 1~4개 있다면,",
+  "If 5 or more are in play,": "5개 이상 있다면,",
+  "deploy 1 [Graze Custom]((철화단)･AP2･HP2) Unit token.":
+    "[그레이즈 커스텀]((철화단)･AP2･HP2)의 유닛 토큰 1개를 배치한다.",
+  "deploy 1 [Gundam Barbatos 4th Form]((철화단)･AP4･HP4) Unit token.":
+    "[건담 발바토스 제4 형태]((철화단)･AP4･HP4)의 유닛 토큰 1개를 배치한다.",
+  "Deal 2 damage to them.": "그 유닛들에 2 대미지를 준다.",
+  "Choose 1 friendly (베이건) Unit and 1 enemy Unit.":
+    "(베이건)의 아군의 유닛 1개와, 상대의 유닛 1개를 선택한다.",
+  "Choose 1 active enemy Unit that is Lv.2 or lower.":
+    "액티브의 Lv.2 이하의 상대의 유닛 1개를 선택한다.",
+  "If there are 10 or more cards in your trash,": "자신의 트래시에 카드가 10장 이상 있다면,",
+  "You may choose 1 of your Units.": "자신의 유닛 1개를 선택할 수 있다.",
+  "You may choose 1 (베이건) card from your trash.":
+    "자신의 트래시의 (베이건)의 카드 1장을 선택할 수 있다.",
+  "When this Unit deals battle damage to an enemy Unit that is Lv.5 or lower,":
+    "이 유닛이 Lv.5 이하의 상대의 유닛에 배틀 대미지를 주었을 때,",
+  "choose 1 enemy Unit with 4 or less AP.": "AP4 이하의 상대의 유닛 1개를 선택한다.",
+  "While this Unit has 1 HP,": "이 유닛이 HP1인 동안,",
+  "choose 1 active enemy Unit that is Lv.4 or lower instead.":
+    "대신에 액티브의 Lv.4 이하의 상대의 유닛 1개를 선택한다.",
+
+  "it can't receive battle damage from enemy Units with 5 or less AP instead.":
+    "대신에 AP5 이하의 상대의 유닛으로부터 배틀 대미지를 받지 않는다.",
+  "Choose 1 friendly Unit paired with an (X-라운더) Pilot.":
+    "(X-라운더)의 파일럿이 세트되어 있는 아군의 유닛 1개를 선택한다.",
+  "Place the remaining card into your trash.": "남은 카드는 자신의 트래시에 둔다.",
+  "look at the top 2 cards of your deck and return 1 to the top.":
+    "자신의 덱을 위에서 2장 보고, 그 중 카드 1장을 덱 위로 되돌린다.",
+  "When this Unit receives effect damage,": "이 유닛이 효과 대미지를 받았을 때,",
+  "If you placed a (베이건) card with this effect,": "이 효과로 (베이건)의 카드가 놓였다면,",
+  "While a friendly Base is in play,": "아군의 베이스가 있는 동안,",
+  "자신의 유닛 1개를 선택할 수 있다. Deal 1 damage to it.":
+    "자신의 유닛 1개를 선택할 수 있다. 그 유닛에 1 대미지를 준다.",
+  "all your (자프트) Units get AP+2.": "(자프트)의 자신의 유닛 전부를 AP+2 한다.",
+  "Deal 1 damage to it for each 4 AP this Unit has.":
+    "그 유닛에, 이 유닛의 AP4 마다 1 대미지를 준다.",
+  "exile 1 Pilot card from your trash:": "자신의 트래시의 파일럿 카드 1장을 게임에서 제외한다:",
+  "Deal 1 damage to all enemy Units.": "상대의 유닛 전부에 1 대미지를 준다.",
+  "You may choose 1 (X-라운더) card from your trash and add it to your hand.":
+    "자신의 트래시의 (X-라운더)의 카드 1장을 선택할 수 있다.",
+  "when this Unit receives effect damage,": "이 유닛이 효과 대미지를 받았을 때,",
+  "deploy 1 rested [CGS Mobile Worker]((철화단)･AP1･HP1) Unit token.":
+    "[CGS 모빌워커]((철화단)･AP1･HP1)의 유닛 토큰 1개를 레스트로 배치한다.",
+  "Exile it from the game.": "그 카드를 게임에서 제외한다.",
+  "choose 1 of your (베이건) Units.": "(베이건)의 자신의 유닛 1장을 선택한다.",
+  "You may choose 4 (베이건) cards from your trash.":
+    "자신의 트래시의 (베이건)의 카드 4장을 선택할 수 있다.",
+  "when one of your (철화단)/(테이와즈) Units receives effect damage,":
+    "(철화단)/(테이와즈)의 자신의 유닛이 효과 대미지를 받았을 때,",
+  "if you have a (솔레스탈 비잉) Pilot in play,": "(솔레스탈 비잉)의 자신의 파일럿이 있다면,",
+  "destroy that enemy Unit.": "상대의 그 유닛을 파괴한다.",
+  "You may choose 1 Unit card that is Lv.4 or lower from your trash.":
+    "자신의 트래시의 Lv.4 이하의 유닛 카드 1장을 선택할 수 있다.",
+  "Choose 3 (철화단)/(테이와즈) Unit cards from your trash.":
+    "자신의 트래시의, (철화단)/(테이와즈)의 유닛 카드 3장을 선택한다.",
 };
 
 function applyReplacements(v: string): string {
