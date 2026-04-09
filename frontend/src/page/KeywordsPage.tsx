@@ -13,6 +13,7 @@ import { COLOR_HEX } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "lucide-react";
 import { useRouter } from "@tanstack/react-router";
+import { AbilityDemo } from "@/components/AbilityDemo";
 
 // ── query ─────────────────────────────────────────────────────────────────────
 
@@ -174,6 +175,7 @@ function KeywordEntry({
           )}
         />
       </button>
+      <AbilityDemo keyword={keyword} />
       {open && (
         <Suspense
           fallback={
