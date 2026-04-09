@@ -18,7 +18,7 @@ export function MiniPlayfield({ highlights }: { highlights: ZoneId[] }) {
       className={cn(
         "relative flex flex-col items-center justify-center text-center rounded border transition-all duration-300 text-[10px] font-medium leading-tight p-0.5 h-full",
         hi(id)
-          ? "bg-primary/15 border-primary text-primary font-bold z-10 shadow-sm"
+          ? "bg-orange-500/15 border-orange-500 text-orange-600 font-bold z-10 shadow-sm"
           : "bg-background border-border text-muted-foreground",
         cls,
       )}
@@ -35,7 +35,7 @@ export function MiniPlayfield({ highlights }: { highlights: ZoneId[] }) {
       className={cn(
         "shrink-0 flex flex-col gap-0.5 rounded border p-0.5 transition-all duration-300",
         hi("base") || hi("shield")
-          ? "border-primary/50 bg-primary/5"
+          ? "border-orange-400/50 bg-orange-400/5"
           : "border-border bg-white",
       )}
       style={{ width: 76 }}
