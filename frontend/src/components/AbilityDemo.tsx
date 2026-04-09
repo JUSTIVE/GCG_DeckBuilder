@@ -672,8 +672,15 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
       />
     ),
     p2Battle: (step) =>
-      step <= 0 ? (
-        <MiniCard name="상대 유닛" ap={2} hp={2} maxHp={2} color="red" />
+      step <= 1 ? (
+        <MiniCard
+          name="상대 유닛"
+          ap={2}
+          hp={step >= 1 ? 0 : 2}
+          maxHp={2}
+          color="red"
+          destroyed={step >= 1}
+        />
       ) : null,
   },
 };
