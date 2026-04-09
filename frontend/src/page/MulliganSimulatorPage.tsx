@@ -4,6 +4,7 @@ import type { MulliganSimulatorPageDeckCardsQuery } from "@/__generated__/Mullig
 import type { CardFragment$key } from "@/__generated__/CardFragment.graphql";
 import type { FragmentRefs } from "relay-runtime";
 import { Suspense, useState } from "react";
+import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 import { Button } from "@/components/ui/button";
 import { ShuffleIcon, DicesIcon, ChevronsUpDownIcon, CheckIcon } from "lucide-react";
 import { Card } from "@/components/Card";
@@ -73,6 +74,7 @@ function DeckDrawer({ deckId }: { deckId: string }) {
     id: 1,
     cards: deck ? drawCards(deck.cards, 5) : [],
   }));
+  const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
 
   if (!deck) return <p className="text-muted-foreground text-sm">덱을 찾을 수 없습니다.</p>;
 
@@ -97,7 +99,7 @@ function DeckDrawer({ deckId }: { deckId: string }) {
         <div className="flex flex-row gap-3 overflow-x-auto pb-2">
           {drawn.cards.map((cardRef, i) => (
             <div key={i} className="w-40 shrink-0">
-              <Card cardRef={cardRef} showDescription={false} />
+              <Card cardRef={cardRef} showDescription={false} onOpen={setOverlayCardId} />
             </div>
           ))}
         </div>
@@ -112,13 +114,19 @@ function DeckDrawer({ deckId }: { deckId: string }) {
               <div className="flex flex-row gap-2 overflow-x-auto pb-1">
                 {entry.cards.map((cardRef, i) => (
                   <div key={i} className="w-32 shrink-0">
-                    <Card cardRef={cardRef} showDescription={false} />
+                    <Card cardRef={cardRef} showDescription={false} onOpen={setOverlayCardId} />
                   </div>
                 ))}
               </div>
             </div>
           ))}
         </div>
+      )}
+
+      {overlayCardId && (
+        <Suspense>
+          <CardByIdOverlay cardId={overlayCardId} onClose={() => setOverlayCardId(null)} />
+        </Suspense>
       )}
     </div>
   );

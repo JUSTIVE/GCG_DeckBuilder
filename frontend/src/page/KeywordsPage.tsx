@@ -12,8 +12,8 @@ import {
 import { COLOR_HEX } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "lucide-react";
-import { useRouter } from "@tanstack/react-router";
 import { AbilityDemo } from "@/components/AbilityDemo";
+import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 
 // ── query ─────────────────────────────────────────────────────────────────────
 
@@ -99,8 +99,7 @@ const TYPENAME_KO: Record<string, string> = {
   CommandCard: "커맨드",
 };
 
-function KeywordCardList({ keyword }: { keyword: string }) {
-  const router = useRouter();
+function KeywordCardList({ keyword, onOpen }: { keyword: string; onOpen: (id: string) => void }) {
   const data = useLazyLoadQuery<KeywordsPageCardsQuery>(CardsQuery, {
     keyword: keyword as any,
   });
@@ -119,9 +118,7 @@ function KeywordCardList({ keyword }: { keyword: string }) {
           <button
             key={id}
             type="button"
-            onClick={() =>
-              router.navigate({ to: "/cardlist", search: { cardId: id } })
-            }
+            onClick={() => onOpen(id)}
             className="w-full flex items-center gap-2 px-2 py-1.5 text-left hover:bg-muted/50 rounded-md"
           >
             <span
@@ -147,9 +144,11 @@ function KeywordCardList({ keyword }: { keyword: string }) {
 function KeywordEntry({
   keyword,
   className,
+  onOpen,
 }: {
   keyword: string;
   className?: string;
+  onOpen: (id: string) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -189,7 +188,7 @@ function KeywordEntry({
             </div>
           }
         >
-          <KeywordCardList keyword={keyword} />
+          <KeywordCardList keyword={keyword} onOpen={onOpen} />
         </Suspense>
       )}
     </div>
@@ -206,6 +205,8 @@ const abilityKeywords = ALL_KEYWORDS.filter((k) =>
 );
 
 export function KeywordsPage() {
+  const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-8 w-full">
       <h1 className="text-lg font-bold">키워드 사전</h1>
@@ -216,7 +217,7 @@ export function KeywordsPage() {
         </h2>
         <div className="flex flex-col gap-2">
           {triggerKeywords.map((kw) => (
-            <KeywordEntry key={kw} keyword={kw} />
+            <KeywordEntry key={kw} keyword={kw} onOpen={setOverlayCardId} />
           ))}
         </div>
       </section>
@@ -227,10 +228,16 @@ export function KeywordsPage() {
         </h2>
         <div className="flex flex-col gap-2">
           {abilityKeywords.map((kw) => (
-            <KeywordEntry key={kw} keyword={kw} className={"bg-gray-800/10"} />
+            <KeywordEntry key={kw} keyword={kw} className={"bg-gray-800/10"} onOpen={setOverlayCardId} />
           ))}
         </div>
       </section>
+
+      {overlayCardId && (
+        <Suspense>
+          <CardByIdOverlay cardId={overlayCardId} onClose={() => setOverlayCardId(null)} />
+        </Suspense>
+      )}
     </div>
   );
 }
