@@ -933,7 +933,7 @@ function CardTypeItem({
       `}</style>
       <div className={cn("relative rounded-md border overflow-visible isolate", ct.color)}>
         {/* content — right padding to leave room for the peeking card */}
-        <div className="p-3 pr-16">
+        <div className="p-3 pr-24">
           <p className={cn("text-xs font-bold mb-1", ct.head)}>{ct.name}</p>
           <p className="text-xs mb-2">{ct.desc}</p>
           {ct.attrs.length > 0 && (
@@ -962,7 +962,7 @@ function CardTypeItem({
           <div
             className="absolute top-1/2 right-0 z-10 drop-shadow-lg"
             style={{
-              width: 56,
+              width: 96,
               transform: `translateX(45%) translateY(-50%) rotate(${rotation}deg)`,
             }}
           >
@@ -987,7 +987,7 @@ function CardTypeItem({
             onClick={handleRefresh}
             title="다른 카드 보기"
             className={cn(
-              "absolute bottom-1.5 right-[60px] z-20",
+              "absolute bottom-4 right-0 z-20 translate-x-[45%]",
               "w-5 h-5 rounded-full flex items-center justify-center",
               "bg-white/80 border border-border/60 text-muted-foreground",
               "hover:bg-white hover:text-foreground transition-all text-[10px]",
