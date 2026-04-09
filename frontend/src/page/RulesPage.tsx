@@ -488,14 +488,14 @@ const SETUP_STEPS: SetupStep[] = [
 
 // highlight → accent color (border + bg)
 const HL: Record<SetupStep["highlight"], { bg: string; text: string; border: string }> = {
-  deck:     { bg: "bg-slate-500",  text: "text-white", border: "border-slate-400" },
-  order:    { bg: "bg-violet-500", text: "text-white", border: "border-violet-400" },
-  hand:     { bg: "bg-green-500",  text: "text-white", border: "border-green-400" },
-  mulligan: { bg: "bg-amber-400",  text: "text-white", border: "border-amber-300" },
-  shield:   { bg: "bg-blue-500",   text: "text-white", border: "border-blue-400" },
-  base:     { bg: "bg-neutral-500",text: "text-white", border: "border-neutral-400" },
-  exres:    { bg: "bg-teal-500",   text: "text-white", border: "border-teal-400" },
-  start:    { bg: "bg-red-500",    text: "text-white", border: "border-red-400" },
+  deck: { bg: "bg-slate-500", text: "text-white", border: "border-slate-400" },
+  order: { bg: "bg-violet-500", text: "text-white", border: "border-violet-400" },
+  hand: { bg: "bg-green-500", text: "text-white", border: "border-green-400" },
+  mulligan: { bg: "bg-amber-400", text: "text-white", border: "border-amber-300" },
+  shield: { bg: "bg-blue-500", text: "text-white", border: "border-blue-400" },
+  base: { bg: "bg-neutral-500", text: "text-white", border: "border-neutral-400" },
+  exres: { bg: "bg-teal-500", text: "text-white", border: "border-teal-400" },
+  start: { bg: "bg-red-500", text: "text-white", border: "border-red-400" },
 };
 
 // ── setup mini card ───────────────────────────────────────────────────────────
@@ -696,10 +696,11 @@ function HandStrip({
 // NOTE: These are top-level components (not nested inside SetupDualPlayfield)
 // so React can reconcile them across re-renders without remounting.
 
-function SetupShieldArea({ board, accentBase, accentShield }: {
+function SetupShieldArea({ board, accentBase, accentShield, flipped }: {
   board: SetupBoardState;
   accentBase: boolean;
   accentShield: boolean;
+  flipped: boolean;
 }) {
   return (
     <div
@@ -708,6 +709,7 @@ function SetupShieldArea({ board, accentBase, accentShield }: {
         (accentBase || accentShield)
           ? "border-primary/50 bg-primary/5"
           : "border-border bg-muted/20",
+        flipped ? "flex-col-reverse" : ""
       )}
       style={{ width: 76 }}
     >
@@ -770,7 +772,7 @@ function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, 
     <BoardHalfLayout
       flipped={flipped}
       slots={{
-        shieldArea: <SetupShieldArea board={board} accentBase={accentBase} accentShield={accentShield} />,
+        shieldArea: <SetupShieldArea board={board} accentBase={accentBase} accentShield={accentShield} flipped={flipped} />,
         battle: <ZoneBox label="배틀 에어리어" active={true} className="flex-[3] h-full" />,
         deck: (
           <ZoneBox
@@ -964,106 +966,106 @@ function GameSetupWalkthrough({
           100% { transform: translateY(0) rotate(0deg); }
         }
       `}</style>
-    <div className="flex flex-col gap-3">
-      {/* Step pills */}
-      <div className="flex gap-1 flex-wrap">
-        {SETUP_STEPS.map((_s, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => setStep(i)}
-            className={cn(
-              "w-6 h-6 rounded-full text-xs font-bold transition-all duration-200 border",
-              i === step
-                ? cn(hlColor.bg, hlColor.text, "border-transparent scale-110 shadow")
-                : i < step
-                  ? "bg-muted text-muted-foreground border-border"
-                  : "bg-background text-muted-foreground border-dashed border-muted-foreground/30",
-            )}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </div>
-
-      {/* Step detail */}
-      <div className={cn("rounded-lg border-2 p-3 transition-all duration-300", hlColor.border)}>
-        <div className="flex items-center gap-2 mb-2">
-          <span className={cn(
-            "w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0",
-            hlColor.bg, hlColor.text,
-          )}>
-            {step + 1}
-          </span>
-          <p className="text-sm font-bold">{cur.title}</p>
-          <span className="text-xs text-muted-foreground ml-auto">{step + 1} / {SETUP_STEPS.length}</span>
-        </div>
-        <p className="text-xs leading-relaxed">{cur.desc}</p>
-        {cur.note && (
-          <p className="text-xs text-muted-foreground bg-muted/50 rounded px-2 py-1 mt-1.5">{cur.note}</p>
-        )}
-      </div>
-
-      {/* Dual playfield — play-sheet proportions, players facing each other */}
-      <SetupDualPlayfield
-        p1={cur.p1}
-        p2={cur.p2}
-        hl={cur.highlight}
-        p1Label={cur.p1Label ?? "플레이어 1"}
-        p2Label={cur.p2Label ?? "플레이어 2"}
-        p1HandImages={activeP1Images}
-        p2HandImages={activeP2Images}
-        mulliganPhase={inMulligan ? mulliganPhase : undefined}
-        drawPhase={step === HAND_STEP_INDEX ? drawPhase : undefined}
-        orderPhase={step === ORDER_STEP_INDEX ? orderPhase : undefined}
-      />
-
-      {/* Mulligan replay button */}
-      {inMulligan && (
-        <button
-          type="button"
-          onClick={() => { setMulliganPhase("idle"); setReplayKey((k) => k + 1); }}
-          className="self-center text-[10px] px-2.5 py-1 rounded border border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100 transition-all"
-        >
-          ↺ 멀리건 애니메이션 다시 보기
-        </button>
-      )}
-
-      {/* Nav */}
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={() => setStep((v) => Math.max(0, v - 1))}
-          disabled={step === 0}
-          className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-        >
-          <ChevronLeftIcon className="size-3" />
-          이전
-        </button>
-        <div className="flex-1 flex justify-center gap-1">
-          {SETUP_STEPS.map((_, i) => (
+      <div className="flex flex-col gap-3">
+        {/* Step pills */}
+        <div className="flex gap-1 flex-wrap">
+          {SETUP_STEPS.map((_s, i) => (
             <button
               key={i}
               type="button"
               onClick={() => setStep(i)}
               className={cn(
-                "rounded-full transition-all duration-200",
-                i === step ? "w-3 h-2 bg-foreground" : "w-2 h-2 bg-muted-foreground/30 hover:bg-muted-foreground/60",
+                "w-6 h-6 rounded-full text-xs font-bold transition-all duration-200 border",
+                i === step
+                  ? cn(hlColor.bg, hlColor.text, "border-transparent scale-110 shadow")
+                  : i < step
+                    ? "bg-muted text-muted-foreground border-border"
+                    : "bg-background text-muted-foreground border-dashed border-muted-foreground/30",
               )}
-            />
+            >
+              {i + 1}
+            </button>
           ))}
         </div>
-        <button
-          type="button"
-          onClick={() => setStep((v) => Math.min(SETUP_STEPS.length - 1, v + 1))}
-          disabled={step === SETUP_STEPS.length - 1}
-          className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-        >
-          다음
-          <ChevronRightIcon className="size-3" />
-        </button>
+
+        {/* Step detail */}
+        <div className={cn("rounded-lg border-2 p-3 transition-all duration-300", hlColor.border)}>
+          <div className="flex items-center gap-2 mb-2">
+            <span className={cn(
+              "w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0",
+              hlColor.bg, hlColor.text,
+            )}>
+              {step + 1}
+            </span>
+            <p className="text-sm font-bold">{cur.title}</p>
+            <span className="text-xs text-muted-foreground ml-auto">{step + 1} / {SETUP_STEPS.length}</span>
+          </div>
+          <p className="text-xs leading-relaxed">{cur.desc}</p>
+          {cur.note && (
+            <p className="text-xs text-muted-foreground bg-muted/50 rounded px-2 py-1 mt-1.5">{cur.note}</p>
+          )}
+        </div>
+
+        {/* Dual playfield — play-sheet proportions, players facing each other */}
+        <SetupDualPlayfield
+          p1={cur.p1}
+          p2={cur.p2}
+          hl={cur.highlight}
+          p1Label={cur.p1Label ?? "플레이어 1"}
+          p2Label={cur.p2Label ?? "플레이어 2"}
+          p1HandImages={activeP1Images}
+          p2HandImages={activeP2Images}
+          mulliganPhase={inMulligan ? mulliganPhase : undefined}
+          drawPhase={step === HAND_STEP_INDEX ? drawPhase : undefined}
+          orderPhase={step === ORDER_STEP_INDEX ? orderPhase : undefined}
+        />
+
+        {/* Mulligan replay button */}
+        {inMulligan && (
+          <button
+            type="button"
+            onClick={() => { setMulliganPhase("idle"); setReplayKey((k) => k + 1); }}
+            className="self-center text-[10px] px-2.5 py-1 rounded border border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100 transition-all"
+          >
+            ↺ 멀리건 애니메이션 다시 보기
+          </button>
+        )}
+
+        {/* Nav */}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setStep((v) => Math.max(0, v - 1))}
+            disabled={step === 0}
+            className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+          >
+            <ChevronLeftIcon className="size-3" />
+            이전
+          </button>
+          <div className="flex-1 flex justify-center gap-1">
+            {SETUP_STEPS.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setStep(i)}
+                className={cn(
+                  "rounded-full transition-all duration-200",
+                  i === step ? "w-3 h-2 bg-foreground" : "w-2 h-2 bg-muted-foreground/30 hover:bg-muted-foreground/60",
+                )}
+              />
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => setStep((v) => Math.min(SETUP_STEPS.length - 1, v + 1))}
+            disabled={step === SETUP_STEPS.length - 1}
+            className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+          >
+            다음
+            <ChevronRightIcon className="size-3" />
+          </button>
+        </div>
       </div>
-    </div>
     </>
   );
 }
@@ -1278,6 +1280,7 @@ function ShieldSimulator() {
   const [hasBurst, setHasBurst] = useState(false);
   // which zone flashed last
   const [flash, setFlash] = useState<"base" | "shield" | "player" | null>(null);
+  const [isAttacking, setIsAttacking] = useState(false);
 
   function addLog(msg: string) {
     setLog((l) => [msg, ...l.slice(0, 7)]);
@@ -1289,31 +1292,41 @@ function ShieldSimulator() {
   }
 
   function attack() {
-    if (defeated) return;
-    if (hasBase) {
-      const newHp = baseHp - 1;
-      triggerFlash("base");
-      if (newHp <= 0) {
-        setBaseHp(0);
-        setHasBase(false);
-        addLog("베이스 HP 0 → 파괴!");
+    if (defeated || isAttacking) return;
+
+    // Capture current state for delayed damage (avoids stale closure inside timeout)
+    const snap = { hasBase, baseHp, shields, hasBurst };
+
+    setIsAttacking(true);
+
+    // Damage lands when unit reaches peak of lunge (~220ms into animation)
+    setTimeout(() => {
+      if (snap.hasBase) {
+        const newHp = snap.baseHp - 1;
+        triggerFlash("base");
+        if (newHp <= 0) {
+          setBaseHp(0);
+          setHasBase(false);
+          addLog("베이스 HP 0 → 파괴!");
+        } else {
+          setBaseHp(newHp);
+          addLog(`베이스에 대미지 (남은 HP: ${newHp}/3)`);
+        }
+      } else if (snap.shields > 0) {
+        triggerFlash("shield");
+        const newShields = snap.shields - 1;
+        setShields(newShields);
+        const burst = snap.hasBurst ? " → 【버스트】 발동!" : " → 트래시";
+        addLog(`실드 1장 파괴${burst} (남은: ${newShields}장)`);
       } else {
-        setBaseHp(newHp);
-        addLog(`베이스에 대미지 (남은 HP: ${newHp}/3)`);
+        triggerFlash("player");
+        setDefeated(true);
+        addLog("배틀 대미지 직격 → 패배!");
       }
-      return;
-    }
-    if (shields > 0) {
-      triggerFlash("shield");
-      const newShields = shields - 1;
-      setShields(newShields);
-      const burst = hasBurst ? " → 【버스트】 발동!" : " → 트래시";
-      addLog(`실드 1장 파괴${burst} (남은: ${newShields}장)`);
-    } else {
-      triggerFlash("player");
-      setDefeated(true);
-      addLog("배틀 대미지 직격 → 패배!");
-    }
+    }, 220);
+
+    // Unlock button after animation completes
+    setTimeout(() => setIsAttacking(false), 650);
   }
 
   function reset() {
@@ -1323,215 +1336,192 @@ function ShieldSimulator() {
     setDefeated(false);
     setLog([]);
     setFlash(null);
+    setIsAttacking(false);
   }
 
-  return (
-    <div className="rounded-md border p-3 flex flex-col gap-3">
-      <div className="flex items-center justify-between flex-wrap gap-2">
-        <p className="text-xs font-semibold">플레이어 어택 시뮬레이터</p>
-        <label className="flex items-center gap-1.5 text-xs text-muted-foreground cursor-pointer select-none">
-          <input
-            type="checkbox"
-            checked={hasBurst}
-            onChange={(e) => setHasBurst(e.target.checked)}
-            className="w-3 h-3 accent-primary"
-          />
-          실드에 【버스트】 있음
-        </label>
+  // ── Opponent's shield area (P2 top, flipped → shield on RIGHT) ──────────────
+  const opponentShieldArea = (
+    <div
+      className={cn(
+        "shrink-0 flex flex-col-reverse rounded border p-0.5 gap-0.5 transition-all duration-300",
+        (flash === "base" || flash === "shield")
+          ? "border-primary/50 bg-primary/5"
+          : flash === "player"
+            ? "border-red-300 bg-red-50/50"
+            : "border-border bg-muted/20",
+
+      )}
+      style={{ width: 76 }}
+    >
+      <span className="text-[8px] text-center text-muted-foreground leading-none font-medium">실드 에어리어</span>
+      {/* Base zone */}
+      <ZoneBox
+        label={hasBase ? "⑥ 베이스" : "⑥ 파괴"}
+        sub={hasBase ? `HP ${baseHp}/${INIT_BASE_HP}` : undefined}
+        active={true}
+        accent={flash === "base"}
+        dim={!hasBase}
+        className="flex-none py-1"
+        animation={flash === "base" ? "hit-shake 320ms ease-out" : undefined}
+      />
+      {/* Shield zone */}
+      <div
+        className={cn(
+          "flex-1 rounded border p-0.5 flex flex-row gap-0.5 transition-all duration-300",
+          flash === "shield" ? "border-primary/50 bg-primary/5" : "border-border/50",
+        )}
+        style={{ animation: flash === "shield" ? "hit-shake 320ms ease-out" : "none" }}
+      >
+        <span className="text-[8px] text-muted-foreground leading-none self-center">③ 실드</span>
+        <ShieldSlots count={shields} accent={flash === "shield"} />
       </div>
+    </div>
+  );
 
-      {/* Main visual — left: 실드 에어리어, center: arrow, right: 배틀 에어리어 */}
-      <div className="flex gap-2 items-stretch min-h-[160px]">
+  // ── My battle area (P1 bottom, not flipped → battle on LEFT of right col) ──
+  const myBattleZone = (
+    <div
+      className="flex-[3] h-full rounded border border-primary/40 bg-primary/5 flex items-center justify-center overflow-visible"
+    >
+      <div
+        className="rounded border-2 border-primary/50 bg-white shadow-sm flex flex-col items-center justify-center gap-0.5"
+        style={{
+          width: 34,
+          height: 48,
+          position: "relative",
+          zIndex: isAttacking ? 20 : undefined,
+          animation: isAttacking ? "unit-attack-diag 640ms ease-in-out forwards" : "none",
+        }}
+      >
+        <span className="text-[7px] text-primary/50 leading-none">공격</span>
+        <span className="text-[9px] font-bold text-primary leading-none">유닛</span>
+        <span className="text-[7px] bg-primary/15 rounded px-1 text-primary font-semibold leading-none">AP</span>
+      </div>
+    </div>
+  );
 
-        {/* ① LEFT: 실드 에어리어 (베이스 존 + 실드 존) */}
-        <div className="flex flex-col gap-1 shrink-0" style={{ width: 72 }}>
-          <p className="text-[10px] font-semibold text-center text-muted-foreground leading-none">
-            실드 에어리어
-          </p>
+  // ── Simple muted placeholder for zones we don't need to interact with ────────
+  const dim = (label: string, cls: string) => (
+    <ZoneBox label={label} active={true} className={cls} />
+  );
 
-          {/* 베이스 존 */}
-          <div className="border rounded p-1 flex flex-col gap-0.5">
-            <p className="text-[9px] text-center text-muted-foreground leading-none">
-              ⑥ 베이스 존
-            </p>
-            <div
-              className={cn(
-                "rounded border-2 flex flex-col items-center justify-center transition-all duration-300 py-1",
-                hasBase
-                  ? flash === "base"
-                    ? "border-red-500 bg-red-200 scale-105"
-                    : "border-gray-400 bg-gray-100"
-                  : "border-dashed border-gray-200 bg-transparent opacity-30",
-              )}
-              style={{ minHeight: 40 }}
-            >
-              {hasBase ? (
-                <>
-                  <p className="text-[10px] font-bold text-gray-700 leading-none">
-                    EX 베이스
-                  </p>
-                  <p className="text-[10px] text-gray-500 mt-0.5">
-                    HP {baseHp}/{INIT_BASE_HP}
-                  </p>
-                  {/* HP bar */}
-                  <div className="w-full px-1 mt-0.5">
-                    <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-gray-500 rounded-full transition-all duration-300"
-                        style={{ width: `${(baseHp / INIT_BASE_HP) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <p className="text-[10px] text-gray-400">없음</p>
-              )}
+  return (
+    <>
+      <style>{`
+        @keyframes unit-attack-diag {
+          0%   { transform: translateY(0)     translateX(0)     rotate(0deg);  }
+          30%  { transform: translateY(-94px) translateX(100px) rotate(14deg); }
+          46%  { transform: translateY(-82px) translateX(88px)  rotate(10deg); }
+          100% { transform: translateY(0)     translateX(0)     rotate(0deg);  }
+        }
+        @keyframes hit-shake {
+          0%   { transform: translateX(0);   }
+          20%  { transform: translateX(5px); }
+          45%  { transform: translateX(-4px);}
+          65%  { transform: translateX(3px); }
+          82%  { transform: translateX(-2px);}
+          100% { transform: translateX(0);   }
+        }
+      `}</style>
+      <div className="rounded-xl border border-border shadow-sm overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center justify-between px-3 py-2 bg-muted/30 border-b">
+          <span className="text-xs font-bold tracking-wide">어택 시뮬레이터</span>
+          <label className="flex items-center gap-1.5 text-[11px] text-muted-foreground cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={hasBurst}
+              onChange={(e) => setHasBurst(e.target.checked)}
+              className="accent-primary"
+            />
+            실드에 【버스트】
+          </label>
+        </div>
+
+        <div className="p-3 flex flex-col gap-0.5 text-[10px] select-none">
+          {/* ── P2 (top, flipped) — 상대 ── */}
+          <div className={cn(
+            "flex flex-col gap-0.5 rounded-md px-1.5 pt-1 pb-1.5 transition-all duration-300",
+            flash === "player" ? "bg-red-50/60" : "bg-blue-50/60",
+          )}>
+            <div className="flex items-center justify-between text-[9px] font-semibold pb-0.5">
+              <span className="text-slate-400">상대</span>
+              <span className={cn("transition-all", defeated ? "text-red-500 animate-pulse" : "text-slate-400")}>
+                {defeated ? "☠ 패배" : "★ 생존"}
+              </span>
             </div>
+            <BoardHalfLayout
+              flipped={true}
+              slots={{
+                shieldArea: opponentShieldArea,
+                battle: dim("⑤ 배틀", "flex-[3] h-full"),
+                deck: dim("① 덱", "flex-[1] h-full"),
+                resDeck: dim("② 리소스덱", "flex-[2] h-full"),
+                resource: dim("④ 리소스", "flex-[4] h-full"),
+                trash: dim("⑦ 트래시", "flex-[2] h-full"),
+              }}
+            />
           </div>
 
-          {/* 실드 존 */}
-          <div className="border rounded p-1 flex flex-col gap-0.5 flex-1">
-            <p className="text-[9px] text-center text-muted-foreground leading-none">
-              ③ 실드 존
-            </p>
-            <div className="flex flex-col gap-0.5 flex-1 justify-around">
-              {Array.from({ length: INIT_SHIELDS }, (_, i) => {
-                // Empty slots accumulate at the top as shields are destroyed from outside inward.
-                // filled slots occupy the bottom INIT_SHIELDS - (INIT_SHIELDS - shields) rows.
-                const filled = i >= INIT_SHIELDS - shields;
-                // The topmost filled slot is next to be destroyed.
-                const isTop = filled && i === INIT_SHIELDS - shields;
-                return (
-                  <div
-                    key={i}
-                    className={cn(
-                      "rounded border flex items-center justify-center transition-all duration-300",
-                      filled
-                        ? flash === "shield" && isTop
-                          ? "border-red-500 bg-red-200 scale-105"
-                          : "border-blue-300 bg-blue-100 text-blue-700"
-                        : "border-dashed border-gray-100 bg-transparent",
-                    )}
-                    style={{ height: 18 }}
-                  >
-                    {filled ? (
-                      <span className="text-[9px] font-bold leading-none">
-                        {hasBurst && isTop ? "실드 B" : "실드"}
-                      </span>
-                    ) : null}
-                  </div>
-                );
-              })}
-            </div>
+          {/* ── VS divider ── */}
+          <div className="flex items-center gap-2 py-0.5">
+            <div className="flex-1 h-px bg-border" />
+            <span className={cn("text-[9px] font-medium px-1 transition-colors", isAttacking ? "text-primary font-bold" : "text-muted-foreground")}>VS</span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          {/* ── P1 (bottom, not flipped) — 나 ── */}
+          <div className="flex flex-col gap-0.5 rounded-md bg-rose-50/60 px-1.5 pt-1.5 pb-1">
+            <BoardHalfLayout
+              flipped={false}
+              slots={{
+                shieldArea: <ZoneBox label="실드 에어리어" active={true} className="shrink-0" style={{ width: 76 }} />,
+                battle: myBattleZone,
+                deck: dim("① 덱", "flex-[1] h-full"),
+                resDeck: dim("② 리소스덱", "flex-[2] h-full"),
+                resource: dim("④ 리소스", "flex-[4] h-full"),
+                trash: dim("⑦ 트래시", "flex-[2] h-full"),
+              }}
+            />
+            <div className="text-center text-[9px] font-semibold text-rose-400 py-0.5">나</div>
           </div>
         </div>
 
-        {/* ② CENTER: player + attack arrow */}
-        <div className="flex flex-col items-center justify-between py-1 flex-1 min-w-0">
-          {/* Player status */}
-          <div
-            className={cn(
-              "px-2 py-1 rounded border-2 text-[11px] font-bold transition-all duration-300 w-full text-center",
-              defeated
-                ? "border-red-400 bg-red-100 text-red-700 animate-pulse"
-                : flash === "player"
-                  ? "border-red-500 bg-red-200 text-red-700 scale-105"
-                  : "border-green-300 bg-green-50 text-green-700",
-            )}
-          >
-            {defeated ? "패배!" : "플레이어"}
-          </div>
-
-          {/* Attack direction arrow */}
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex items-center gap-1 text-[11px] text-muted-foreground font-medium">
-              <span className="text-sm">←</span>
-              <span>어택</span>
-            </div>
-            <p className="text-[10px] text-muted-foreground text-center leading-tight">
-              {!hasBase && shields === 0
-                ? "방어 없음!"
-                : hasBase
-                  ? "베이스가 흡수"
-                  : `실드 ${shields}장 남음`}
-            </p>
-          </div>
-
-          {/* Controls */}
-          <div className="flex gap-1.5 w-full">
+        {/* Controls + log */}
+        <div className="px-3 pb-3 flex flex-col gap-2">
+          <div className="flex gap-1.5">
             <button
               type="button"
               onClick={attack}
-              disabled={defeated}
-              className="flex-1 text-xs py-1.5 rounded bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-medium"
+              disabled={defeated || isAttacking}
+              className="flex-1 text-xs py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
             >
               어택!
             </button>
             <button
               type="button"
               onClick={reset}
-              className="text-xs px-2 py-1.5 rounded border border-border hover:bg-muted/30 transition-all"
+              className="text-xs px-3 py-2 rounded-lg border border-border hover:bg-muted/40 active:scale-95 transition-all text-muted-foreground"
             >
-              리셋
+              ↺
             </button>
           </div>
-        </div>
-
-        {/* ③ RIGHT: 배틀 에어리어 (attacker) */}
-        <div
-          className="shrink-0 flex flex-col gap-1"
-          style={{ width: 64 }}
-        >
-          <p className="text-[10px] font-semibold text-center text-muted-foreground leading-none">
-            배틀 에어리어
-          </p>
-          <div className="border rounded p-1 flex-1 flex flex-col items-center justify-center gap-1">
-            <p className="text-[9px] text-center text-muted-foreground leading-none">
-              ⑤
-            </p>
-            {/* Attacker unit card */}
-            <div
-              className={cn(
-                "rounded border-2 border-primary/60 bg-primary/10 flex flex-col items-center justify-center gap-0.5 transition-all duration-200",
-                !defeated && "hover:bg-primary/20",
-              )}
-              style={{ width: 44, height: 58 }}
-            >
-              <p className="text-[10px] font-bold text-primary leading-none">
-                공격
-              </p>
-              <p className="text-[10px] font-bold text-primary leading-none">
-                유닛
-              </p>
-              <div className="flex gap-0.5 mt-0.5">
-                <span className="text-[9px] bg-primary/20 rounded px-0.5 text-primary">
-                  AP
-                </span>
-              </div>
+          {log.length > 0 && (
+            <div className="rounded-lg border border-border/60 bg-muted/20 px-2.5 py-2 flex flex-col gap-1 max-h-28 overflow-y-auto">
+              {log.map((entry, i) => (
+                <div key={i} className={cn(
+                  "flex items-start gap-2 text-[11px]",
+                  i === 0 ? "text-foreground font-semibold" : "text-muted-foreground",
+                )}>
+                  <span className={cn("shrink-0 w-1 h-1 rounded-full mt-1", i === 0 ? "bg-primary" : "bg-muted-foreground/40")} />
+                  {entry}
+                </div>
+              ))}
             </div>
-          </div>
+          )}
         </div>
       </div>
-
-      {/* Event log */}
-      {log.length > 0 && (
-        <div className="flex flex-col gap-0.5 max-h-24 overflow-y-auto">
-          {log.map((entry, i) => (
-            <p
-              key={i}
-              className={cn(
-                "text-xs px-2 py-0.5 rounded transition-all",
-                i === 0
-                  ? "bg-primary/10 text-primary font-medium"
-                  : "text-muted-foreground",
-              )}
-            >
-              {entry}
-            </p>
-          ))}
-        </div>
-      )}
-    </div>
+    </>
   );
 }
 
@@ -1744,73 +1734,73 @@ function CardTypeItem({
           100% { transform: translateX(0);    }
         }
       `}</style>
-    <div className={cn("relative rounded-md border overflow-visible isolate", ct.color)}>
-      {/* content — right padding to leave room for the peeking card */}
-      <div className="p-3 pr-16">
-        <p className={cn("text-xs font-bold mb-1", ct.head)}>{ct.name}</p>
-        <p className="text-xs mb-2">{ct.desc}</p>
-        {ct.attrs.length > 0 && (
-          <div className="flex flex-wrap gap-1 mb-2">
-            {ct.attrs.map((a) => (
-              <span
-                key={a}
-                className="text-xs bg-white/70 border rounded px-1.5 py-0.5"
-              >
-                {a}
-              </span>
+      <div className={cn("relative rounded-md border overflow-visible isolate", ct.color)}>
+        {/* content — right padding to leave room for the peeking card */}
+        <div className="p-3 pr-16">
+          <p className={cn("text-xs font-bold mb-1", ct.head)}>{ct.name}</p>
+          <p className="text-xs mb-2">{ct.desc}</p>
+          {ct.attrs.length > 0 && (
+            <div className="flex flex-wrap gap-1 mb-2">
+              {ct.attrs.map((a) => (
+                <span
+                  key={a}
+                  className="text-xs bg-white/70 border rounded px-1.5 py-0.5"
+                >
+                  {a}
+                </span>
+              ))}
+            </div>
+          )}
+          <ul className="flex flex-col gap-0.5">
+            {ct.notes.map((n, i) => (
+              <li key={i} className="text-xs text-muted-foreground">
+                · {n}
+              </li>
             ))}
-          </div>
-        )}
-        <ul className="flex flex-col gap-0.5">
-          {ct.notes.map((n, i) => (
-            <li key={i} className="text-xs text-muted-foreground">
-              · {n}
-            </li>
-          ))}
-        </ul>
-      </div>
+          </ul>
+        </div>
 
-      {/* peeking card — half-overlapping right edge, slightly tilted */}
-      {currentRef && (
-        <div
-          className="absolute top-1/2 right-0 z-10 drop-shadow-lg"
-          style={{
-            width: 56,
-            transform: `translateX(45%) translateY(-50%) rotate(${rotation}deg)`,
-          }}
-        >
+        {/* peeking card — half-overlapping right edge, slightly tilted */}
+        {currentRef && (
           <div
+            className="absolute top-1/2 right-0 z-10 drop-shadow-lg"
             style={{
-              animation: slide === "out"
-                ? "card-type-slide-out 220ms ease-in forwards"
-                : slide === "in"
-                ? "card-type-slide-in 460ms ease-out forwards"
-                : "none",
+              width: 56,
+              transform: `translateX(45%) translateY(-50%) rotate(${rotation}deg)`,
             }}
           >
-            <CardPreview cardRef={currentRef} onOpen={onOpen} />
+            <div
+              style={{
+                animation: slide === "out"
+                  ? "card-type-slide-out 220ms ease-in forwards"
+                  : slide === "in"
+                    ? "card-type-slide-in 460ms ease-out forwards"
+                    : "none",
+              }}
+            >
+              <CardPreview cardRef={currentRef} onOpen={onOpen} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* refresh button */}
-      {pool.length > 1 && (
-        <button
-          type="button"
-          onClick={handleRefresh}
-          title="다른 카드 보기"
-          className={cn(
-            "absolute bottom-1.5 right-[60px] z-20",
-            "w-5 h-5 rounded-full flex items-center justify-center",
-            "bg-white/80 border border-border/60 text-muted-foreground",
-            "hover:bg-white hover:text-foreground transition-all text-[10px]",
-            slide !== "idle" && "opacity-50 cursor-not-allowed",
-          )}
-        >
-          ↺
-        </button>
-      )}
-    </div>
+        {/* refresh button */}
+        {pool.length > 1 && (
+          <button
+            type="button"
+            onClick={handleRefresh}
+            title="다른 카드 보기"
+            className={cn(
+              "absolute bottom-1.5 right-[60px] z-20",
+              "w-5 h-5 rounded-full flex items-center justify-center",
+              "bg-white/80 border border-border/60 text-muted-foreground",
+              "hover:bg-white hover:text-foreground transition-all text-[10px]",
+              slide !== "idle" && "opacity-50 cursor-not-allowed",
+            )}
+          >
+            ↺
+          </button>
+        )}
+      </div>
     </>
   );
 }
