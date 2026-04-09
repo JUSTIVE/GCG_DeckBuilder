@@ -151,14 +151,65 @@ function VisibilityDot({ id }: { id: ZoneId }) {
   );
 }
 
+// ── shared board layout constants ────────────────────────────────────────────
+const BATTLE_H = 56;
+const RES_H = 38;
+
+// ── shared board half layout ─────────────────────────────────────────────────
+// Handles the flex structure (shield col + battle/deck + resource rows).
+// Zone content is passed as slots so both MiniPlayfield and SetupHalfBoard
+// can share identical proportions.
+
+type BoardHalfSlots = {
+  shieldArea: React.ReactNode;
+  battle: React.ReactNode;
+  deck: React.ReactNode;
+  resDeck: React.ReactNode;
+  resource: React.ReactNode;
+  trash: React.ReactNode;
+};
+
+function BoardHalfLayout({
+  flipped = false,
+  slots,
+}: {
+  flipped?: boolean;
+  slots: BoardHalfSlots;
+}) {
+  const battleRow = (
+    <div className="flex gap-0.5" style={{ height: BATTLE_H }}>
+      {flipped ? <>{slots.deck}{slots.battle}</> : <>{slots.battle}{slots.deck}</>}
+    </div>
+  );
+  const resourceRow = (
+    <div className="flex gap-0.5" style={{ height: RES_H }}>
+      {flipped
+        ? <>{slots.trash}{slots.resource}{slots.resDeck}</>
+        : <>{slots.resDeck}{slots.resource}{slots.trash}</>}
+    </div>
+  );
+  const rightCols = (
+    <div className="flex flex-col gap-0.5 flex-1 min-w-0">
+      {flipped ? <>{resourceRow}{battleRow}</> : <>{battleRow}{resourceRow}</>}
+    </div>
+  );
+  return (
+    <div className="flex gap-0.5">
+      {flipped ? <>{rightCols}{slots.shieldArea}</> : <>{slots.shieldArea}{rightCols}</>}
+    </div>
+  );
+}
+
+// ── mini playfield (turn phase overview) ─────────────────────────────────────
+
 function MiniPlayfield({ highlights }: { highlights: ZoneId[] }) {
   const hi = (id: ZoneId) => highlights.includes(id);
   const zone = (id: ZoneId, label: string, cls?: string) => (
     <div
       className={cn(
-        "relative flex flex-col items-center justify-center text-center rounded border transition-all duration-300 text-[10px] font-medium leading-tight p-0.5",
+        "relative flex flex-col items-center justify-center text-center rounded border transition-all duration-300 text-[10px] font-medium leading-tight p-0.5 h-full",
         hi(id)
-          ? "bg-primary/15 border-primary text-primary font-bold scale-[1.02]"
+          ? "bg-primary/15 border-primary text-primary font-bold z-10 shadow-sm"
           : "bg-background border-border text-muted-foreground",
         cls,
       )}
@@ -170,55 +221,42 @@ function MiniPlayfield({ highlights }: { highlights: ZoneId[] }) {
     </div>
   );
 
+  const shieldArea = (
+    <div
+      className={cn(
+        "shrink-0 flex flex-col gap-0.5 rounded border p-0.5 transition-all duration-300",
+        hi("base") || hi("shield")
+          ? "border-primary/50 bg-primary/5"
+          : "border-border bg-muted/20",
+      )}
+      style={{ width: 76 }}
+    >
+      <span className="text-[8px] text-center text-muted-foreground leading-none font-medium">실드 에어리어</span>
+      {zone("base", "⑥\n베이스존", "flex-none py-1 h-auto")}
+      {zone("shield", "③\n실드존", "flex-1")}
+    </div>
+  );
+
   return (
     <div className="flex flex-col gap-1.5 text-[10px] select-none">
-      {/* Legend */}
       <div className="flex gap-3 text-[10px] text-muted-foreground">
         <span className="flex items-center gap-1">
-          <span className="inline-block w-2 h-2 rounded-full bg-green-400" />
-          공개
+          <span className="inline-block w-2 h-2 rounded-full bg-green-400" />공개
         </span>
         <span className="flex items-center gap-1">
-          <span className="inline-block w-2 h-2 rounded-full bg-gray-400" />
-          비공개
+          <span className="inline-block w-2 h-2 rounded-full bg-gray-400" />비공개
         </span>
       </div>
-
-      <div className="flex gap-0.5">
-        {/* FAR LEFT: 실드 에어리어 (spans full height) — ~15% width */}
-        <div
-          className={cn(
-            "flex flex-col gap-0.5 rounded border p-0.5 transition-all duration-300 shrink-0",
-            hi("base") || hi("shield")
-              ? "border-primary/50 bg-primary/5"
-              : "border-border",
-          )}
-          style={{ width: 52 }}
-        >
-          <div className="text-[9px] text-center text-muted-foreground leading-none">
-            실드 에어리어
-          </div>
-          {/* 베이스 존: 공개 */}
-          {zone("base", "⑥\n베이스존", "h-[28px] flex-none")}
-          {/* 실드 존: 비공개 */}
-          {zone("shield", "③\n실드존", "flex-1")}
-        </div>
-
-        {/* RIGHT side: two rows */}
-        <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-          {/* Top row: 배틀 에어리어 (~75%) + 덱 (~25%) — 60% of total height */}
-          <div className="flex gap-0.5" style={{ height: 60 }}>
-            {zone("battle", "⑤ 배틀 에어리어", "flex-[3]")}
-            {zone("deck", "①\n덱", "flex-[1] min-w-0")}
-          </div>
-          {/* Bottom row: 리소스덱 (~22%) + 리소스 에어리어 (~55%) + 트래시 (~22%) — 40% of total height */}
-          <div className="flex gap-0.5" style={{ height: 40 }}>
-            {zone("resourceDeck", "②\n리소스덱", "flex-[2] min-w-0")}
-            {zone("resource", "④ 리소스 에어리어", "flex-[5]")}
-            {zone("trash", "⑦\n트래시", "flex-[2] min-w-0")}
-          </div>
-        </div>
-      </div>
+      <BoardHalfLayout
+        slots={{
+          shieldArea,
+          battle: zone("battle", "⑤ 배틀 에어리어", "flex-[3]"),
+          deck: zone("deck", "①\n덱", "flex-[1] min-w-0"),
+          resDeck: zone("resourceDeck", "②\n리소스덱", "flex-[2] min-w-0"),
+          resource: zone("resource", "④ 리소스 에어리어", "flex-[4]"),
+          trash: zone("trash", "⑦\n트래시", "flex-[2] min-w-0"),
+        }}
+      />
     </div>
   );
 }
@@ -510,17 +548,17 @@ function ZoneBox({
 // Six shield slots
 function ShieldSlots({ count, accent }: { count: number; accent: boolean }) {
   return (
-    <div className="flex gap-[2px] justify-center mt-0.5">
+    <div className="flex flex-col gap-[2px] self-stretch">
       {Array.from({ length: 6 }, (_, i) => (
         <div
           key={i}
           className={cn(
-            "rounded-[2px] border transition-all duration-300",
+            "flex-1 w-[13px] rounded-[2px] border transition-all duration-300",
             i < count
               ? accent
-                ? "bg-primary/60 border-primary w-[9px] h-[13px]"
-                : "bg-slate-700 border-slate-500 w-[9px] h-[13px]"
-              : "border-dashed border-border/30 w-[9px] h-[13px] opacity-20",
+                ? "bg-primary/60 border-primary"
+                : "bg-slate-700 border-slate-500"
+              : "border-dashed border-border/30 opacity-20",
           )}
           style={{ transitionDelay: `${i * 45}ms` }}
         />
@@ -658,9 +696,6 @@ function HandStrip({
 // NOTE: These are top-level components (not nested inside SetupDualPlayfield)
 // so React can reconcile them across re-renders without remounting.
 
-const BATTLE_H = 56;
-const RES_H = 38;
-
 function SetupShieldArea({ board, accentBase, accentShield }: {
   board: SetupBoardState;
   accentBase: boolean;
@@ -690,44 +725,17 @@ function SetupShieldArea({ board, accentBase, accentShield }: {
       />
       {/* Shield zone */}
       <div className={cn(
-        "flex-1 rounded border p-0.5 flex flex-col items-center justify-center transition-all duration-300",
+        "flex-1 rounded border p-0.5 flex flex-row gap-0.5 transition-all duration-300",
         accentShield ? "border-primary/50 bg-primary/5" : "border-border/50",
       )}>
-        <span className="text-[8px] text-muted-foreground leading-none">실드존</span>
+        <span className="text-[8px] text-muted-foreground leading-none self-center">실드존</span>
         <ShieldSlots count={board.shieldCount} accent={accentShield} />
       </div>
     </div>
   );
 }
 
-// Battle + deck row only (shield is handled separately as a tall column)
-function SetupBattleAndDeckRow({ board, flipped, accentDeck, deckShuffling }: {
-  board: SetupBoardState;
-  flipped: boolean;
-  accentDeck: boolean;
-  deckShuffling?: boolean;
-}) {
-  const battle = (
-    <ZoneBox label="배틀 에어리어" active={true} className="flex-[3] h-full" />
-  );
-  const deck = (
-    <ZoneBox
-      label={deckShuffling ? "셔플 중" : "덱"}
-      sub={board.hasDeck && !deckShuffling ? "50장" : undefined}
-      active={board.hasDeck}
-      accent={(accentDeck && board.hasDeck) || deckShuffling}
-      className="flex-[1] h-full"
-      animation={deckShuffling ? "deck-shuffle 0.42s ease-in-out 2" : undefined}
-    />
-  );
-  return (
-    <div className="flex gap-0.5" style={{ height: BATTLE_H }}>
-      {flipped ? <>{deck}{battle}</> : <>{battle}{deck}</>}
-    </div>
-  );
-}
-
-// Half-board: shield column (full height) + stacked battle/resource rows
+// Half-board: uses BoardHalfLayout with setup-specific zone content
 function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, accentExRes, deckShuffling }: {
   board: SetupBoardState;
   flipped: boolean;
@@ -737,41 +745,9 @@ function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, 
   accentExRes: boolean;
   deckShuffling?: boolean;
 }) {
-  const shieldCol = (
-    <SetupShieldArea board={board} accentBase={accentBase} accentShield={accentShield} />
-  );
-  const battleRow = <SetupBattleAndDeckRow board={board} flipped={flipped} accentDeck={accentDeck} deckShuffling={deckShuffling} />;
-  const resourceRow = <SetupResourceRow board={board} flipped={flipped} accentDeck={accentDeck} accentExRes={accentExRes} />;
-  const rightCols = (
-    <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-      {flipped ? <>{resourceRow}{battleRow}</> : <>{battleRow}{resourceRow}</>}
-    </div>
-  );
-  return (
-    <div className="flex gap-0.5">
-      {flipped ? <>{rightCols}{shieldCol}</> : <>{shieldCol}{rightCols}</>}
-    </div>
-  );
-}
-
-function SetupResourceRow({ board, flipped, accentDeck, accentExRes }: {
-  board: SetupBoardState;
-  flipped: boolean;
-  accentDeck: boolean;
-  accentExRes: boolean;
-}) {
-  const resDeck = (
-    <ZoneBox
-      label="리소스덱"
-      sub={board.hasResDeck ? "10장" : undefined}
-      active={board.hasResDeck}
-      accent={accentDeck && board.hasResDeck}
-      className="flex-[2] h-full"
-    />
-  );
   const resArea = (
     <div className={cn(
-      "flex-[5] h-full rounded border flex flex-col items-center justify-center transition-all duration-300",
+      "flex-[4] h-full rounded border flex flex-col items-center justify-center transition-all duration-300",
       board.hasExRes
         ? accentExRes
           ? "bg-primary/15 border-primary text-primary"
@@ -789,13 +765,36 @@ function SetupResourceRow({ board, flipped, accentDeck, accentExRes }: {
       )}
     </div>
   );
-  const trash = (
-    <ZoneBox label="트래시" active={true} className="flex-[2] h-full" />
-  );
+
   return (
-    <div className="flex gap-0.5" style={{ height: RES_H }}>
-      {flipped ? <>{trash}{resArea}{resDeck}</> : <>{resDeck}{resArea}{trash}</>}
-    </div>
+    <BoardHalfLayout
+      flipped={flipped}
+      slots={{
+        shieldArea: <SetupShieldArea board={board} accentBase={accentBase} accentShield={accentShield} />,
+        battle: <ZoneBox label="배틀 에어리어" active={true} className="flex-[3] h-full" />,
+        deck: (
+          <ZoneBox
+            label={deckShuffling ? "셔플 중" : "덱"}
+            sub={board.hasDeck && !deckShuffling ? "50장" : undefined}
+            active={board.hasDeck}
+            accent={(accentDeck && board.hasDeck) || deckShuffling}
+            className="flex-[1] h-full"
+            animation={deckShuffling ? "deck-shuffle 0.42s ease-in-out 2" : undefined}
+          />
+        ),
+        resDeck: (
+          <ZoneBox
+            label="리소스덱"
+            sub={board.hasResDeck ? "10장" : undefined}
+            active={board.hasResDeck}
+            accent={accentDeck && board.hasResDeck}
+            className="flex-[2] h-full"
+          />
+        ),
+        resource: resArea,
+        trash: <ZoneBox label="트래시" active={true} className="flex-[2] h-full" />,
+      }}
+    />
   );
 }
 
@@ -823,35 +822,32 @@ function SetupDualPlayfield({
 
   return (
     <div className="flex flex-col gap-0.5 text-[10px] select-none">
-      {/* ── P2 (top, rotated 180°) ── */}
-      {/* P2 hand — above the board */}
-      <HandStrip
-        count={p2.handCount}
-        accent={accent("hand") || accent("mulligan")}
-        mulligan={accent("mulligan")}
-        flipped={true}
-        cardImages={p2HandImages}
-        mulliganPhase={mulliganPhase}
-        drawPhase={drawPhase}
-      />
-
-      {/* P2 label */}
-      <div className={cn(
-        "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
-        (accent("order") ? orderPhase === "both" : false)
-          ? cn(HL[hl].bg, HL[hl].text)
-          : "text-muted-foreground",
-      )}>
-        {p2Label}
+      {/* ── P2 (top) ── */}
+      <div className="flex flex-col gap-0.5 rounded-md bg-blue-50/60 px-1.5 pt-1 pb-1.5">
+        <HandStrip
+          count={p2.handCount}
+          accent={accent("hand") || accent("mulligan")}
+          mulligan={accent("mulligan")}
+          flipped={true}
+          cardImages={p2HandImages}
+          mulliganPhase={mulliganPhase}
+          drawPhase={drawPhase}
+        />
+        <div className={cn(
+          "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
+          (accent("order") ? orderPhase === "both" : false)
+            ? cn(HL[hl].bg, HL[hl].text)
+            : "text-muted-foreground",
+        )}>
+          {p2Label}
+        </div>
+        <SetupHalfBoard
+          board={p2} flipped={true}
+          accentDeck={accent("deck")} accentBase={accent("base")}
+          accentShield={accent("shield")} accentExRes={accent("exres")}
+          deckShuffling={deckShuffling}
+        />
       </div>
-
-      {/* P2 half-board (flipped: resource row on top, shield column on right) */}
-      <SetupHalfBoard
-        board={p2} flipped={true}
-        accentDeck={accent("deck")} accentBase={accent("base")}
-        accentShield={accent("shield")} accentExRes={accent("exres")}
-        deckShuffling={deckShuffling}
-      />
 
       {/* ── CENTER DIVIDER ── */}
       <div className="flex items-center gap-2 py-0.5">
@@ -860,34 +856,32 @@ function SetupDualPlayfield({
         <div className="flex-1 h-px bg-border" />
       </div>
 
-      {/* P1 half-board (normal: shield column on left, battle row on top) */}
-      <SetupHalfBoard
-        board={p1} flipped={false}
-        accentDeck={accent("deck")} accentBase={accent("base")}
-        accentShield={accent("shield")} accentExRes={accent("exres")}
-        deckShuffling={deckShuffling}
-      />
-
-      {/* P1 label */}
-      <div className={cn(
-        "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
-        (accent("order") ? orderPhase === "p1" || orderPhase === "both" : false) || accent("start")
-          ? cn(HL[hl].bg, HL[hl].text)
-          : "text-muted-foreground",
-      )}>
-        {p1Label}
+      {/* ── P1 (bottom) ── */}
+      <div className="flex flex-col gap-0.5 rounded-md bg-rose-50/60 px-1.5 pt-1.5 pb-1">
+        <SetupHalfBoard
+          board={p1} flipped={false}
+          accentDeck={accent("deck")} accentBase={accent("base")}
+          accentShield={accent("shield")} accentExRes={accent("exres")}
+          deckShuffling={deckShuffling}
+        />
+        <div className={cn(
+          "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
+          (accent("order") ? orderPhase === "p1" || orderPhase === "both" : false) || accent("start")
+            ? cn(HL[hl].bg, HL[hl].text)
+            : "text-muted-foreground",
+        )}>
+          {p1Label}
+        </div>
+        <HandStrip
+          count={p1.handCount}
+          accent={accent("hand") || accent("mulligan")}
+          mulligan={accent("mulligan")}
+          flipped={false}
+          cardImages={p1HandImages}
+          drawPhase={drawPhase}
+          mulliganPhase={mulliganPhase}
+        />
       </div>
-
-      {/* P1 hand — below the board */}
-      <HandStrip
-        count={p1.handCount}
-        accent={accent("hand") || accent("mulligan")}
-        mulligan={accent("mulligan")}
-        flipped={false}
-        cardImages={p1HandImages}
-        drawPhase={drawPhase}
-        mulliganPhase={mulliganPhase}
-      />
     </div>
   );
 }
@@ -1750,7 +1744,7 @@ function CardTypeItem({
           100% { transform: translateX(0);    }
         }
       `}</style>
-    <div className={cn("relative rounded-md border overflow-visible", ct.color)}>
+    <div className={cn("relative rounded-md border overflow-visible isolate", ct.color)}>
       {/* content — right padding to leave room for the peeking card */}
       <div className="p-3 pr-16">
         <p className={cn("text-xs font-bold mb-1", ct.head)}>{ct.name}</p>
