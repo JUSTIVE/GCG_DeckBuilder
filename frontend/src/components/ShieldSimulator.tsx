@@ -4,6 +4,8 @@ import {
   BoardHalfLayout,
   ZoneBox,
   ShieldSlots,
+  PlayerSection,
+  VsDivider,
 } from "@/components/PlayfieldLayout";
 
 // ── ShieldSimulator ───────────────────────────────────────────────────────────
@@ -188,10 +190,11 @@ export function ShieldSimulator() {
 
         <div className="p-3 flex flex-col gap-0.5 text-[10px] select-none">
           {/* ── P2 (top, flipped) — 상대 ── */}
-          <div
+          <PlayerSection
+            player="p2"
             className={cn(
-              "flex flex-col gap-0.5 rounded-md border px-1.5 pt-1 pb-1.5 transition-all duration-300",
-              flash === "player" ? "border-red-400 bg-red-100/80" : "border-rose-300 bg-rose-100/80",
+              "transition-all duration-300",
+              flash === "player" && "border-red-400 bg-red-100/80",
             )}
           >
             <div className="flex items-center justify-between text-[9px] font-semibold pb-0.5">
@@ -216,26 +219,12 @@ export function ShieldSimulator() {
                 trash: dim("⑦ 트래시", "flex-[2] h-full"),
               }}
             />
-          </div>
+          </PlayerSection>
 
-          {/* ── VS divider ── */}
-          <div className="flex items-center gap-2 py-0.5">
-            <div className="flex-1 h-px bg-border" />
-            <span
-              className={cn(
-                "text-[9px] font-medium px-1 transition-colors",
-                isAttacking
-                  ? "text-primary font-bold"
-                  : "text-muted-foreground",
-              )}
-            >
-              VS
-            </span>
-            <div className="flex-1 h-px bg-border" />
-          </div>
+          <VsDivider active={isAttacking} />
 
           {/* ── P1 (bottom, not flipped) — 나 ── */}
-          <div className="flex flex-col gap-0.5 rounded-md border border-blue-300 bg-blue-100/80 px-1.5 pt-1.5 pb-1">
+          <PlayerSection player="p1">
             <BoardHalfLayout
               flipped={false}
               slots={{
@@ -255,10 +244,10 @@ export function ShieldSimulator() {
                 trash: dim("⑦ 트래시", "flex-[2] h-full"),
               }}
             />
-            <div className="text-center text-[9px] font-semibold text-rose-400 py-0.5">
+            <div className="text-center text-[9px] font-semibold text-blue-400 py-0.5">
               나
             </div>
-          </div>
+          </PlayerSection>
         </div>
 
         {/* Controls + log */}

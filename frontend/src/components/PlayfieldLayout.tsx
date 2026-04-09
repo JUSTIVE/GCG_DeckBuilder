@@ -1,5 +1,50 @@
 import { cn } from "@/lib/utils";
 
+// ── Shared playfield shell ────────────────────────────────────────────────────
+
+/** Colored section wrapper for each player — P1 = blue (아군), P2 = rose (상대). */
+export function PlayerSection({
+  player,
+  className,
+  children,
+}: {
+  player: "p1" | "p2";
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex flex-col gap-0.5 rounded-md border px-1.5",
+        player === "p1"
+          ? "border-blue-300 bg-blue-100/80 pt-1.5 pb-1"
+          : "border-rose-300 bg-rose-100/80 pt-1 pb-1.5",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** VS divider between the two player sections. */
+export function VsDivider({ active = false }: { active?: boolean }) {
+  return (
+    <div className="flex items-center gap-2 py-0.5">
+      <div className="flex-1 h-px bg-border" />
+      <span
+        className={cn(
+          "text-[9px] font-medium px-1 transition-colors",
+          active ? "text-primary font-bold" : "text-muted-foreground",
+        )}
+      >
+        VS
+      </span>
+      <div className="flex-1 h-px bg-border" />
+    </div>
+  );
+}
+
 // ── Zone identifiers ──────────────────────────────────────────────────────────
 
 export type ZoneId =
@@ -217,7 +262,11 @@ export function ShieldSlots({
   return (
     <div className="relative w-full" style={{ height: TOTAL_H }}>
       {renderOrder.map((idx, pos) => {
-        const filled = idx < count;
+        // Topmost card (highest z-index) breaks first as count decreases.
+        // reversed: topmost = pos 5; not reversed: topmost = pos 0.
+        const filled = reversed ? pos < count : pos >= 6 - count;
+        // Count label sits on the topmost filled card (idx === 6 - count).
+        const showCount = count > 0 && idx === 6 - count;
         return (
           <div
             key={idx}
@@ -236,7 +285,7 @@ export function ShieldSlots({
               zIndex: reversed ? pos + 1 : 6 - pos,
             }}
           >
-            {idx === 0 && filled && (
+            {showCount && (
               <span className={cn("absolute inset-0 flex items-center justify-center text-[9px] font-bold select-none", accent ? "text-white" : "text-slate-600")}>
                 {count}
               </span>

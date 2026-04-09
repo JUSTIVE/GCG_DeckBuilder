@@ -3,6 +3,8 @@ import {
   BoardHalfLayout,
   ZoneBox,
   ShieldSlots,
+  PlayerSection,
+  VsDivider,
 } from "@/components/PlayfieldLayout";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -393,7 +395,7 @@ export function SetupDualPlayfield({
   return (
     <div className="flex flex-col gap-0.5 text-[10px] select-none">
       {/* ── P2 (top) ── */}
-      <div className="flex flex-col gap-0.5 rounded-md border border-rose-300 bg-rose-100/80 px-1.5 pt-1 pb-1.5">
+      <PlayerSection player="p2">
         <HandStrip
           count={p2.handCount}
           accent={accent("hand") || accent("mulligan")}
@@ -423,19 +425,12 @@ export function SetupDualPlayfield({
           deckShuffling={deckShuffling}
           battleContent={p2BattleContent}
         />
-      </div>
+      </PlayerSection>
 
-      {/* ── CENTER DIVIDER ── */}
-      <div className="flex items-center gap-2 py-0.5">
-        <div className="flex-1 h-px bg-border" />
-        <span className="text-[9px] text-muted-foreground font-medium px-1">
-          VS
-        </span>
-        <div className="flex-1 h-px bg-border" />
-      </div>
+      <VsDivider />
 
       {/* ── P1 (bottom) ── */}
-      <div className="flex flex-col gap-0.5 rounded-md border border-blue-300 bg-blue-100/80 px-1.5 pt-1.5 pb-1">
+      <PlayerSection player="p1">
         <SetupHalfBoard
           board={p1}
           flipped={false}
@@ -467,7 +462,7 @@ export function SetupDualPlayfield({
           drawPhase={drawPhase}
           mulliganPhase={mulliganPhase}
         />
-      </div>
+      </PlayerSection>
     </div>
   );
 }

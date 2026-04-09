@@ -4,6 +4,8 @@ import {
   BoardHalfLayout,
   ZoneBox,
   ShieldSlots,
+  PlayerSection,
+  VsDivider,
 } from "@/components/PlayfieldLayout";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -149,8 +151,7 @@ export function DualPlayfield({
 }) {
   return (
     <div className="dual-playfield flex flex-col gap-0.5 text-[10px] select-none">
-      {/* P2 (top, flipped) */}
-      <div className="flex flex-col gap-0.5 rounded-md border border-rose-300 bg-rose-100/80 px-1.5 pt-1 pb-1.5">
+      <PlayerSection player="p2">
         <div className="text-center text-[10px] font-bold py-0.5 text-muted-foreground">
           {p2Label}
         </div>
@@ -160,19 +161,11 @@ export function DualPlayfield({
           accent={p2Accent !== undefined ? p2Accent : accent}
           battleContent={p2Battle}
         />
-      </div>
+      </PlayerSection>
 
-      {/* VS divider */}
-      <div className="flex items-center gap-2 py-0.5">
-        <div className="flex-1 h-px bg-border" />
-        <span className="text-[9px] text-muted-foreground font-medium px-1">
-          VS
-        </span>
-        <div className="flex-1 h-px bg-border" />
-      </div>
+      <VsDivider />
 
-      {/* P1 (bottom, normal) */}
-      <div className="flex flex-col gap-0.5 rounded-md border border-blue-300 bg-blue-100/80 px-1.5 pt-1.5 pb-1">
+      <PlayerSection player="p1">
         <DualHalfBoard
           board={p1}
           flipped={false}
@@ -182,7 +175,7 @@ export function DualPlayfield({
         <div className="text-center text-[10px] font-bold py-0.5 text-muted-foreground">
           {p1Label}
         </div>
-      </div>
+      </PlayerSection>
     </div>
   );
 }
