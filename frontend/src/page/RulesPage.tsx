@@ -2,10 +2,11 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import { graphql } from "relay-runtime";
-import { usePreloadedQuery } from "react-relay";
+import { usePreloadedQuery, readInlineData } from "react-relay";
 import type { PreloadedQuery } from "react-relay";
 import type { RulesPageQuery as RulesPageQueryType } from "@/__generated__/RulesPageQuery.graphql";
 import type { CardPreview_card$key } from "@/__generated__/CardPreview_card.graphql";
+import type { RulesPage_SetupMiniCard$key } from "@/__generated__/RulesPage_SetupMiniCard.graphql";
 import { CardPreview } from "@/components/CardPreview";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 import { Route } from "@/routes/rules";
@@ -343,6 +344,580 @@ const BATTLE_STEPS = [
     desc: "「이 배틀 중」 효과 전부 소멸. 메인 페이즈로 복귀.",
   },
 ];
+
+// ── interactive: game setup walkthrough ──────────────────────────────────────
+
+type SetupBoardState = {
+  hasDeck: boolean;
+  hasResDeck: boolean;
+  handCount: number;
+  shieldCount: number;
+  hasBase: boolean;
+  hasExRes: boolean;
+};
+
+const EMPTY_BOARD: SetupBoardState = {
+  hasDeck: false, hasResDeck: false, handCount: 0,
+  shieldCount: 0, hasBase: false, hasExRes: false,
+};
+
+type SetupStep = {
+  title: string;
+  desc: string;
+  note?: string;
+  highlight: "deck" | "order" | "hand" | "mulligan" | "shield" | "base" | "exres" | "start";
+  p1: SetupBoardState;
+  p2: SetupBoardState;
+  p1Label?: string;
+  p2Label?: string;
+};
+
+const SETUP_STEPS: SetupStep[] = [
+  {
+    title: "덱 준비",
+    desc: "덱(50장)과 리소스 덱(10장)을 각각 준비하고 충분히 셔플합니다.",
+    highlight: "deck",
+    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
+    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
+  },
+  {
+    title: "선공·후공 결정",
+    desc: "가위바위보 등으로 선공·후공을 결정합니다.",
+    highlight: "order",
+    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
+    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
+    p1Label: "선공 ①",
+    p2Label: "후공 ②",
+  },
+  {
+    title: "첫 패 드로우",
+    desc: "각 플레이어가 덱 위에서 5장을 드로우해 첫 패로 가져갑니다.",
+    highlight: "hand",
+    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
+    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
+    p1Label: "선공 ①",
+    p2Label: "후공 ②",
+  },
+  {
+    title: "멀리건 (선택)",
+    desc: "선공 플레이어부터 순서대로 1회 멀리건 가능. 패 전체를 덱 아래에 돌려놓고 5장 다시 드로우 후 셔플. 선택 사항.",
+    note: "멀리건은 선공 선언 후 후공이 진행.",
+    highlight: "mulligan",
+    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
+    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
+    p1Label: "선공 ①",
+    p2Label: "후공 ②",
+  },
+  {
+    title: "실드 배치",
+    desc: "각 플레이어가 덱 위에서 6장을 뒷면으로 실드 존에 배치합니다.",
+    note: "실드는 앞에서부터 바깥쪽으로 쌓음. 각각 HP 1로 취급.",
+    highlight: "shield",
+    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6 },
+    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6 },
+    p1Label: "선공 ①",
+    p2Label: "후공 ②",
+  },
+  {
+    title: "EX 베이스 배치",
+    desc: "각 플레이어 베이스 존에 EX 베이스 토큰(AP 0 / HP 3) 1장을 배치합니다.",
+    highlight: "base",
+    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
+    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
+    p1Label: "선공 ①",
+    p2Label: "후공 ②",
+  },
+  {
+    title: "EX 리소스 배치 (후공만)",
+    desc: "후공 플레이어만 리소스 에어리어에 EX 리소스 토큰 1장을 배치합니다.",
+    note: "선공의 드로우 이점을 보정하는 토큰. 사용 후 제거.",
+    highlight: "exres",
+    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: false },
+    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: true },
+    p1Label: "선공 ①",
+    p2Label: "후공 ②",
+  },
+  {
+    title: "게임 시작!",
+    desc: "선공 플레이어의 스타트 페이즈부터 게임을 시작합니다.",
+    highlight: "start",
+    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
+    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: true },
+    p1Label: "선공 ① ← 턴",
+    p2Label: "후공 ②",
+  },
+];
+
+// highlight → accent color (border + bg)
+const HL: Record<SetupStep["highlight"], { bg: string; text: string; border: string }> = {
+  deck:     { bg: "bg-slate-500",  text: "text-white", border: "border-slate-400" },
+  order:    { bg: "bg-violet-500", text: "text-white", border: "border-violet-400" },
+  hand:     { bg: "bg-green-500",  text: "text-white", border: "border-green-400" },
+  mulligan: { bg: "bg-amber-400",  text: "text-white", border: "border-amber-300" },
+  shield:   { bg: "bg-blue-500",   text: "text-white", border: "border-blue-400" },
+  base:     { bg: "bg-neutral-500",text: "text-white", border: "border-neutral-400" },
+  exres:    { bg: "bg-teal-500",   text: "text-white", border: "border-teal-400" },
+  start:    { bg: "bg-red-500",    text: "text-white", border: "border-red-400" },
+};
+
+// ── setup mini card ───────────────────────────────────────────────────────────
+
+const SetupMiniCardFragment = graphql`
+  fragment RulesPage_SetupMiniCard on Card @inline {
+    ... on UnitCard { imageUrl }
+    ... on PilotCard { imageUrl }
+    ... on BaseCard { imageUrl }
+    ... on CommandCard { imageUrl }
+  }
+`;
+
+function extractSetupCardUrl(ref: RulesPage_SetupMiniCard$key | null | undefined): string | null {
+  if (!ref) return null;
+  const data = readInlineData(SetupMiniCardFragment, ref);
+  return (data as { imageUrl?: string }).imageUrl ?? null;
+}
+
+// ── zone box primitives ───────────────────────────────────────────────────────
+
+function ZoneBox({
+  label, sub, active, accent, dim, children, className, delay = 0,
+}: {
+  label?: string; sub?: string; active: boolean; accent?: boolean;
+  dim?: boolean; children?: React.ReactNode; className?: string; delay?: number;
+}) {
+  return (
+    <div
+      className={cn(
+        "rounded border flex flex-col items-center justify-center text-center leading-none transition-all duration-300 overflow-hidden",
+        active
+          ? accent
+            ? "bg-primary/15 border-primary text-primary"
+            : "bg-background border-border text-foreground"
+          : "border-dashed border-border/40 bg-transparent opacity-25",
+        dim && "opacity-40",
+        className,
+      )}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {label && <span className="text-[9px] font-semibold px-0.5">{label}</span>}
+      {sub && <span className="text-[8px] opacity-60 mt-0.5">{sub}</span>}
+      {children}
+    </div>
+  );
+}
+
+// Six shield slots
+function ShieldSlots({ count, accent }: { count: number; accent: boolean }) {
+  return (
+    <div className="flex gap-[2px] justify-center mt-0.5">
+      {Array.from({ length: 6 }, (_, i) => (
+        <div
+          key={i}
+          className={cn(
+            "rounded-[2px] border transition-all duration-300",
+            i < count
+              ? accent
+                ? "bg-primary/60 border-primary w-[9px] h-[13px]"
+                : "bg-slate-700 border-slate-500 w-[9px] h-[13px]"
+              : "border-dashed border-border/30 w-[9px] h-[13px] opacity-20",
+          )}
+          style={{ transitionDelay: `${i * 45}ms` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// Hand cards strip
+function HandStrip({
+  count, accent, mulligan, flipped, cardImages,
+}: {
+  count: number; accent: boolean; mulligan: boolean; flipped: boolean;
+  cardImages?: readonly (string | null | undefined)[];
+}) {
+  const cards = Array.from({ length: 5 }, (_, i) => {
+    const url = cardImages?.[i];
+    return (
+      <div
+        key={i}
+        className={cn(
+          "rounded-[3px] border transition-all duration-300 overflow-hidden",
+          i < count
+            ? accent
+              ? "border-primary/80"
+              : "border-green-300"
+            : "border-dashed border-border/20 opacity-20",
+          "w-[18px] h-[26px]",
+        )}
+        style={{ transitionDelay: `${i * 35}ms` }}
+      >
+        {i < count && url
+          ? <img src={url} alt="" className="w-full h-full object-cover object-top" />
+          : i < count
+            ? <div className={cn("w-full h-full", accent ? "bg-primary/40" : "bg-green-100")} />
+            : null}
+      </div>
+    );
+  });
+
+  return (
+    <div
+      className={cn(
+        "flex items-center gap-1 px-2 py-1 rounded border transition-all duration-300",
+        count > 0
+          ? accent
+            ? "border-primary/60 bg-primary/8"
+            : "border-green-200 bg-green-50"
+          : "border-dashed border-border/30 opacity-30",
+        flipped && "flex-row-reverse",
+      )}
+    >
+      <span className={cn(
+        "text-[9px] font-semibold shrink-0",
+        accent ? "text-primary" : "text-green-700",
+      )}>
+        패 {count > 0 ? `${count}장` : ""}
+      </span>
+      <div className={cn("flex gap-0.5", flipped && "flex-row-reverse")}>
+        {cards}
+      </div>
+      {mulligan && count > 0 && (
+        <span className={cn(
+          "text-[8px] rounded px-1 py-0.5 font-bold shrink-0",
+          accent ? "bg-primary/20 text-primary" : "bg-amber-100 text-amber-700",
+        )}>
+          멀리건?
+        </span>
+      )}
+    </div>
+  );
+}
+
+// ── full dual-player playfield ────────────────────────────────────────────────
+// Layout (one player half, normal):
+//   row A (battle row): [실드 에어리어] | [배틀 flex-3] | [덱 flex-1]
+//   row B (res row):    [리소스덱 flex-2] | [리소스 flex-5] | [트래시 flex-2]
+//
+// P2 is rotated 180° → rows reversed, columns mirrored.
+
+// NOTE: These are top-level components (not nested inside SetupDualPlayfield)
+// so React can reconcile them across re-renders without remounting.
+
+const BATTLE_H = 56;
+const RES_H = 38;
+
+function SetupShieldArea({ board, accentBase, accentShield }: {
+  board: SetupBoardState;
+  accentBase: boolean;
+  accentShield: boolean;
+}) {
+  return (
+    <div
+      className={cn(
+        "shrink-0 flex flex-col rounded border p-0.5 gap-0.5 transition-all duration-300",
+        (accentBase || accentShield)
+          ? "border-primary/50 bg-primary/5"
+          : "border-border bg-muted/20",
+      )}
+      style={{ width: 76 }}
+    >
+      <span className="text-[8px] text-center text-muted-foreground leading-none font-medium">
+        실드 에어리어
+      </span>
+      {/* Base zone */}
+      <ZoneBox
+        label={board.hasBase ? "EX베이스" : "베이스존"}
+        sub={board.hasBase ? "HP 3" : undefined}
+        active={true}
+        accent={accentBase && board.hasBase}
+        dim={!board.hasBase}
+        className="flex-none py-1"
+      />
+      {/* Shield zone */}
+      <div className={cn(
+        "flex-1 rounded border p-0.5 flex flex-col items-center justify-center transition-all duration-300",
+        accentShield ? "border-primary/50 bg-primary/5" : "border-border/50",
+      )}>
+        <span className="text-[8px] text-muted-foreground leading-none">실드존</span>
+        <ShieldSlots count={board.shieldCount} accent={accentShield} />
+      </div>
+    </div>
+  );
+}
+
+// Battle + deck row only (shield is handled separately as a tall column)
+function SetupBattleAndDeckRow({ board, flipped, accentDeck }: {
+  board: SetupBoardState;
+  flipped: boolean;
+  accentDeck: boolean;
+}) {
+  const battle = (
+    <ZoneBox label="배틀 에어리어" active={true} className="flex-[3] h-full" />
+  );
+  const deck = (
+    <ZoneBox
+      label="덱"
+      sub={board.hasDeck ? "50장" : undefined}
+      active={board.hasDeck}
+      accent={accentDeck && board.hasDeck}
+      className="flex-[1] h-full"
+    />
+  );
+  return (
+    <div className="flex gap-0.5" style={{ height: BATTLE_H }}>
+      {flipped ? <>{deck}{battle}</> : <>{battle}{deck}</>}
+    </div>
+  );
+}
+
+// Half-board: shield column (full height) + stacked battle/resource rows
+function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, accentExRes }: {
+  board: SetupBoardState;
+  flipped: boolean;
+  accentDeck: boolean;
+  accentBase: boolean;
+  accentShield: boolean;
+  accentExRes: boolean;
+}) {
+  const shieldCol = (
+    <SetupShieldArea board={board} accentBase={accentBase} accentShield={accentShield} />
+  );
+  const battleRow = <SetupBattleAndDeckRow board={board} flipped={flipped} accentDeck={accentDeck} />;
+  const resourceRow = <SetupResourceRow board={board} flipped={flipped} accentDeck={accentDeck} accentExRes={accentExRes} />;
+  const rightCols = (
+    <div className="flex flex-col gap-0.5 flex-1 min-w-0">
+      {flipped ? <>{resourceRow}{battleRow}</> : <>{battleRow}{resourceRow}</>}
+    </div>
+  );
+  return (
+    <div className="flex gap-0.5">
+      {flipped ? <>{rightCols}{shieldCol}</> : <>{shieldCol}{rightCols}</>}
+    </div>
+  );
+}
+
+function SetupResourceRow({ board, flipped, accentDeck, accentExRes }: {
+  board: SetupBoardState;
+  flipped: boolean;
+  accentDeck: boolean;
+  accentExRes: boolean;
+}) {
+  const resDeck = (
+    <ZoneBox
+      label="리소스덱"
+      sub={board.hasResDeck ? "10장" : undefined}
+      active={board.hasResDeck}
+      accent={accentDeck && board.hasResDeck}
+      className="flex-[2] h-full"
+    />
+  );
+  const resArea = (
+    <div className={cn(
+      "flex-[5] h-full rounded border flex flex-col items-center justify-center transition-all duration-300",
+      board.hasExRes
+        ? accentExRes
+          ? "bg-primary/15 border-primary text-primary"
+          : "bg-teal-50 border-teal-200 text-teal-700"
+        : "border-border/50 bg-background",
+    )}>
+      <span className="text-[9px] font-semibold leading-none">리소스</span>
+      {board.hasExRes && (
+        <span className={cn(
+          "text-[8px] mt-0.5 rounded px-1 font-bold",
+          accentExRes ? "bg-primary/20" : "bg-teal-100",
+        )}>
+          EX×1
+        </span>
+      )}
+    </div>
+  );
+  const trash = (
+    <ZoneBox label="트래시" active={true} className="flex-[2] h-full" />
+  );
+  return (
+    <div className="flex gap-0.5" style={{ height: RES_H }}>
+      {flipped ? <>{trash}{resArea}{resDeck}</> : <>{resDeck}{resArea}{trash}</>}
+    </div>
+  );
+}
+
+type SetupHandImages = readonly (string | null | undefined)[];
+
+function SetupDualPlayfield({
+  p1, p2, hl, p1Label, p2Label, p1HandImages, p2HandImages,
+}: {
+  p1: SetupBoardState;
+  p2: SetupBoardState;
+  hl: SetupStep["highlight"];
+  p1Label: string;
+  p2Label: string;
+  p1HandImages?: SetupHandImages;
+  p2HandImages?: SetupHandImages;
+}) {
+  const accent = (zone: SetupStep["highlight"]) => hl === zone;
+
+  return (
+    <div className="flex flex-col gap-0.5 text-[10px] select-none">
+      {/* ── P2 (top, rotated 180°) ── */}
+      {/* P2 hand — above the board */}
+      <HandStrip
+        count={p2.handCount}
+        accent={accent("hand") || accent("mulligan")}
+        mulligan={accent("mulligan")}
+        flipped={true}
+        cardImages={p2HandImages}
+      />
+
+      {/* P2 label */}
+      <div className={cn(
+        "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
+        accent("order") || accent("start")
+          ? cn(HL[hl].bg, HL[hl].text)
+          : "text-muted-foreground",
+      )}>
+        {p2Label}
+      </div>
+
+      {/* P2 half-board (flipped: resource row on top, shield column on right) */}
+      <SetupHalfBoard
+        board={p2} flipped={true}
+        accentDeck={accent("deck")} accentBase={accent("base")}
+        accentShield={accent("shield")} accentExRes={accent("exres")}
+      />
+
+      {/* ── CENTER DIVIDER ── */}
+      <div className="flex items-center gap-2 py-0.5">
+        <div className="flex-1 h-px bg-border" />
+        <span className="text-[9px] text-muted-foreground font-medium px-1">VS</span>
+        <div className="flex-1 h-px bg-border" />
+      </div>
+
+      {/* P1 half-board (normal: shield column on left, battle row on top) */}
+      <SetupHalfBoard
+        board={p1} flipped={false}
+        accentDeck={accent("deck")} accentBase={accent("base")}
+        accentShield={accent("shield")} accentExRes={accent("exres")}
+      />
+
+      {/* P1 label */}
+      <div className={cn(
+        "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
+        accent("order") || accent("start")
+          ? cn(HL[hl].bg, HL[hl].text)
+          : "text-muted-foreground",
+      )}>
+        {p1Label}
+      </div>
+
+      {/* P1 hand — below the board */}
+      <HandStrip
+        count={p1.handCount}
+        accent={accent("hand") || accent("mulligan")}
+        mulligan={accent("mulligan")}
+        flipped={false}
+        cardImages={p1HandImages}
+      />
+    </div>
+  );
+}
+
+function GameSetupWalkthrough({ p1HandImages, p2HandImages }: {
+  p1HandImages?: SetupHandImages;
+  p2HandImages?: SetupHandImages;
+}) {
+  const [step, setStep] = useState(0);
+  const cur = SETUP_STEPS[step];
+  const hlColor = HL[cur.highlight];
+
+  return (
+    <div className="flex flex-col gap-3">
+      {/* Step pills */}
+      <div className="flex gap-1 flex-wrap">
+        {SETUP_STEPS.map((_s, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => setStep(i)}
+            className={cn(
+              "w-6 h-6 rounded-full text-xs font-bold transition-all duration-200 border",
+              i === step
+                ? cn(hlColor.bg, hlColor.text, "border-transparent scale-110 shadow")
+                : i < step
+                  ? "bg-muted text-muted-foreground border-border"
+                  : "bg-background text-muted-foreground border-dashed border-muted-foreground/30",
+            )}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
+
+      {/* Step detail */}
+      <div className={cn("rounded-lg border-2 p-3 transition-all duration-300", hlColor.border)}>
+        <div className="flex items-center gap-2 mb-2">
+          <span className={cn(
+            "w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0",
+            hlColor.bg, hlColor.text,
+          )}>
+            {step + 1}
+          </span>
+          <p className="text-sm font-bold">{cur.title}</p>
+          <span className="text-xs text-muted-foreground ml-auto">{step + 1} / {SETUP_STEPS.length}</span>
+        </div>
+        <p className="text-xs leading-relaxed">{cur.desc}</p>
+        {cur.note && (
+          <p className="text-xs text-muted-foreground bg-muted/50 rounded px-2 py-1 mt-1.5">{cur.note}</p>
+        )}
+      </div>
+
+      {/* Dual playfield — play-sheet proportions, players facing each other */}
+      <SetupDualPlayfield
+        p1={cur.p1}
+        p2={cur.p2}
+        hl={cur.highlight}
+        p1Label={cur.p1Label ?? "플레이어 1"}
+        p2Label={cur.p2Label ?? "플레이어 2"}
+        p1HandImages={p1HandImages}
+        p2HandImages={p2HandImages}
+      />
+
+      {/* Nav */}
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => setStep((v) => Math.max(0, v - 1))}
+          disabled={step === 0}
+          className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        >
+          <ChevronLeftIcon className="size-3" />
+          이전
+        </button>
+        <div className="flex-1 flex justify-center gap-1">
+          {SETUP_STEPS.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setStep(i)}
+              className={cn(
+                "rounded-full transition-all duration-200",
+                i === step ? "w-3 h-2 bg-foreground" : "w-2 h-2 bg-muted-foreground/30 hover:bg-muted-foreground/60",
+              )}
+            />
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={() => setStep((v) => Math.min(SETUP_STEPS.length - 1, v + 1))}
+          disabled={step === SETUP_STEPS.length - 1}
+          className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        >
+          다음
+          <ChevronRightIcon className="size-3" />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 // ── interactive: turn phase walkthrough ──────────────────────────────────────
 
@@ -1032,18 +1607,23 @@ export const Query = graphql`
   query RulesPageQuery {
     unitSample: randomCard(kind: UNIT) {
       ...CardPreview_card
+      ...RulesPage_SetupMiniCard
     }
     pilotSample: randomCard(kind: PILOT) {
       ...CardPreview_card
+      ...RulesPage_SetupMiniCard
     }
     commandSample: randomCard(kind: COMMAND) {
       ...CardPreview_card
+      ...RulesPage_SetupMiniCard
     }
     baseSample: randomCard(kind: BASE) {
       ...CardPreview_card
+      ...RulesPage_SetupMiniCard
     }
     resourceSample: randomCard(kind: RESOURCE) {
       ...CardPreview_card
+      ...RulesPage_SetupMiniCard
     }
   }
 `;
@@ -1054,6 +1634,21 @@ export function RulesPage() {
   const queryRef = Route.useLoaderData() as PreloadedQuery<RulesPageQueryType>;
   const data = usePreloadedQuery<RulesPageQueryType>(Query, queryRef);
   const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
+
+  const p1HandImages: SetupHandImages = [
+    extractSetupCardUrl(data.unitSample),
+    extractSetupCardUrl(data.pilotSample),
+    extractSetupCardUrl(data.commandSample),
+    extractSetupCardUrl(data.unitSample),
+    extractSetupCardUrl(data.pilotSample),
+  ];
+  const p2HandImages: SetupHandImages = [
+    extractSetupCardUrl(data.commandSample),
+    extractSetupCardUrl(data.unitSample),
+    extractSetupCardUrl(data.pilotSample),
+    extractSetupCardUrl(data.baseSample),
+    extractSetupCardUrl(data.commandSample),
+  ];
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-4 w-full">
@@ -1223,29 +1818,7 @@ export function RulesPage() {
 
       {/* ── 게임 준비 ── */}
       <Section title="게임 준비 순서">
-        <ol className="flex flex-col gap-2">
-          {[
-            "덱(50장)과 리소스 덱(10장)을 준비하고 충분히 셔플.",
-            "가위바위보 등으로 선공·후공 결정.",
-            "각 플레이어 덱에서 5장 드로우해 첫 패로.",
-            "선공 플레이어부터 순서대로 1회 멀리건 가능 (패 전체를 덱 아래에 돌려놓고 5장 다시 드로우 후 덱 셔플). 선택 사항.",
-            "각 플레이어 덱 위에서 6장을 뒷면으로 실드 존에 배치.",
-            "각 플레이어 베이스 존에 EX 베이스 토큰 1장 배치.",
-            "후공 플레이어만 리소스 에어리어에 EX 리소스 토큰 1장 배치.",
-            "선공 플레이어 턴으로 게임 시작.",
-          ].map((step, i) => (
-            <li key={i} className="flex gap-3 text-xs">
-              <span className="shrink-0 w-5 h-5 rounded-full bg-muted flex items-center justify-center text-xs font-bold">
-                {i + 1}
-              </span>
-              <span className="leading-relaxed pt-0.5">{step}</span>
-            </li>
-          ))}
-        </ol>
-        <Note>
-          실드는 앞에서부터 바깥쪽으로 쌓음 (앞이 아래). 실드 존 카드는 뒷면 비공개이며 각각 HP 1로 취급.
-          멀리건은 선공 플레이어 선언 후 후공 플레이어가 진행.
-        </Note>
+        <GameSetupWalkthrough p1HandImages={p1HandImages} p2HandImages={p2HandImages} />
       </Section>
 
       {/* ── 턴 진행 ── */}
