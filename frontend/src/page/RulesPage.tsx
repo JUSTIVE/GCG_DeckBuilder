@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
+import { graphql } from "relay-runtime";
+import { usePreloadedQuery } from "react-relay";
+import type { PreloadedQuery } from "react-relay";
+import type { RulesPageQuery as RulesPageQueryType } from "@/__generated__/RulesPageQuery.graphql";
+import type { CardPreview_card$key } from "@/__generated__/CardPreview_card.graphql";
+import { CardPreview } from "@/components/CardPreview";
+import { CardByIdOverlay } from "@/components/CardByIdOverlay";
+import { Route } from "@/routes/rules";
 import {
   triggerClass,
   abilityClass,
@@ -116,53 +124,98 @@ type ZoneId =
 //   TOP RIGHT of shield:        ⑤ 배틀 에어리어 (large) | ① 덱
 //   BOTTOM RIGHT of shield:     ② 리소스 덱 | ④ 리소스 에어리어 | ⑦ 트래시
 
+// 공개 여부: green dot = 공개, gray dot = 비공개
+const ZONE_VISIBILITY: Record<ZoneId, "공개" | "비공개"> = {
+  battle: "공개",
+  deck: "비공개",
+  resourceDeck: "비공개",
+  resource: "공개",
+  trash: "공개",
+  base: "공개",
+  shield: "비공개",
+  hand: "비공개",
+};
+
+function VisibilityDot({ id }: { id: ZoneId }) {
+  const v = ZONE_VISIBILITY[id];
+  return (
+    <span
+      title={v}
+      className={cn(
+        "inline-block rounded-full shrink-0",
+        v === "공개" ? "bg-green-400" : "bg-gray-400",
+      )}
+      style={{ width: 5, height: 5 }}
+    />
+  );
+}
+
 function MiniPlayfield({ highlights }: { highlights: ZoneId[] }) {
   const hi = (id: ZoneId) => highlights.includes(id);
   const zone = (id: ZoneId, label: string, cls?: string) => (
     <div
       className={cn(
-        "flex items-center justify-center text-center rounded border transition-all duration-300 text-[10px] font-medium leading-tight p-0.5",
+        "relative flex flex-col items-center justify-center text-center rounded border transition-all duration-300 text-[10px] font-medium leading-tight p-0.5",
         hi(id)
           ? "bg-primary/15 border-primary text-primary font-bold scale-[1.02]"
           : "bg-background border-border text-muted-foreground",
         cls,
       )}
     >
+      <span className="absolute top-0.5 right-0.5">
+        <VisibilityDot id={id} />
+      </span>
       {label}
     </div>
   );
 
   return (
-    <div className="flex gap-0.5 text-[10px] select-none">
-      {/* FAR LEFT: 실드 에어리어 (spans full height) */}
-      <div
-        className={cn(
-          "flex flex-col gap-0.5 rounded border p-0.5 transition-all duration-300 shrink-0",
-          hi("base") || hi("shield")
-            ? "border-primary/50 bg-primary/5"
-            : "border-border",
-        )}
-        style={{ width: 44 }}
-      >
-        <div className="text-[9px] text-center text-muted-foreground leading-none">
-          실드 에어리어
-        </div>
-        {zone("base", "⑥\n베이스존", "h-[32px] flex-none")}
-        {zone("shield", "③\n실드존", "flex-1")}
+    <div className="flex flex-col gap-1.5 text-[10px] select-none">
+      {/* Legend */}
+      <div className="flex gap-3 text-[10px] text-muted-foreground">
+        <span className="flex items-center gap-1">
+          <span className="inline-block w-2 h-2 rounded-full bg-green-400" />
+          공개
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="inline-block w-2 h-2 rounded-full bg-gray-400" />
+          비공개
+        </span>
       </div>
 
-      {/* RIGHT side: two rows */}
-      <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-        {/* Top row: 배틀 에어리어 + 덱 */}
-        <div className="flex gap-0.5" style={{ height: 54 }}>
-          {zone("battle", "⑤ 배틀 에어리어", "flex-1")}
-          {zone("deck", "①덱", "w-[32px] flex-none")}
+      <div className="flex gap-0.5">
+        {/* FAR LEFT: 실드 에어리어 (spans full height) — ~15% width */}
+        <div
+          className={cn(
+            "flex flex-col gap-0.5 rounded border p-0.5 transition-all duration-300 shrink-0",
+            hi("base") || hi("shield")
+              ? "border-primary/50 bg-primary/5"
+              : "border-border",
+          )}
+          style={{ width: 52 }}
+        >
+          <div className="text-[9px] text-center text-muted-foreground leading-none">
+            실드 에어리어
+          </div>
+          {/* 베이스 존: 공개 */}
+          {zone("base", "⑥\n베이스존", "h-[28px] flex-none")}
+          {/* 실드 존: 비공개 */}
+          {zone("shield", "③\n실드존", "flex-1")}
         </div>
-        {/* Bottom row: 리소스덱 + 리소스 에어리어 + 트래시 */}
-        <div className="flex gap-0.5" style={{ height: 34 }}>
-          {zone("resourceDeck", "②리소스덱", "w-[44px] flex-none")}
-          {zone("resource", "④ 리소스 에어리어", "flex-1")}
-          {zone("trash", "⑦트래시", "w-[34px] flex-none")}
+
+        {/* RIGHT side: two rows */}
+        <div className="flex flex-col gap-0.5 flex-1 min-w-0">
+          {/* Top row: 배틀 에어리어 (~75%) + 덱 (~25%) — 60% of total height */}
+          <div className="flex gap-0.5" style={{ height: 60 }}>
+            {zone("battle", "⑤ 배틀 에어리어", "flex-[3]")}
+            {zone("deck", "①\n덱", "flex-[1] min-w-0")}
+          </div>
+          {/* Bottom row: 리소스덱 (~22%) + 리소스 에어리어 (~55%) + 트래시 (~22%) — 40% of total height */}
+          <div className="flex gap-0.5" style={{ height: 40 }}>
+            {zone("resourceDeck", "②\n리소스덱", "flex-[2] min-w-0")}
+            {zone("resource", "④ 리소스 에어리어", "flex-[5]")}
+            {zone("trash", "⑦\n트래시", "flex-[2] min-w-0")}
+          </div>
         </div>
       </div>
     </div>
@@ -909,11 +962,107 @@ function ZoneSection() {
   );
 }
 
+// ── card type item ────────────────────────────────────────────────────────────
+
+type CardTypeEntry = {
+  name: string;
+  color: string;
+  head: string;
+  desc: string;
+  attrs: readonly string[];
+  notes: readonly string[];
+  rotate: number;
+};
+
+function CardTypeItem({
+  ct,
+  cardRef,
+  onOpen,
+}: {
+  ct: CardTypeEntry;
+  cardRef: CardPreview_card$key | null | undefined;
+  onOpen: (id: string) => void;
+}) {
+  return (
+    <div className={cn("relative rounded-md border overflow-visible", ct.color)}>
+      {/* content — right padding to leave room for the peeking card */}
+      <div className="p-3 pr-16">
+        <p className={cn("text-xs font-bold mb-1", ct.head)}>{ct.name}</p>
+        <p className="text-xs mb-2">{ct.desc}</p>
+        {ct.attrs.length > 0 && (
+          <div className="flex flex-wrap gap-1 mb-2">
+            {ct.attrs.map((a) => (
+              <span
+                key={a}
+                className="text-xs bg-white/70 border rounded px-1.5 py-0.5"
+              >
+                {a}
+              </span>
+            ))}
+          </div>
+        )}
+        <ul className="flex flex-col gap-0.5">
+          {ct.notes.map((n, i) => (
+            <li key={i} className="text-xs text-muted-foreground">
+              · {n}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* peeking card — half-overlapping right edge, slightly tilted */}
+      {cardRef && (
+        <div
+          className="absolute top-1/2 right-0 z-10 drop-shadow-lg"
+          style={{
+            width: 56,
+            transform: `translateX(45%) translateY(-50%) rotate(${ct.rotate}deg)`,
+          }}
+        >
+          <CardPreview cardRef={cardRef} onOpen={onOpen} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── query ─────────────────────────────────────────────────────────────────────
+
+export const Query = graphql`
+  query RulesPageQuery {
+    unitSample: randomCard(kind: UNIT) {
+      ...CardPreview_card
+    }
+    pilotSample: randomCard(kind: PILOT) {
+      ...CardPreview_card
+    }
+    commandSample: randomCard(kind: COMMAND) {
+      ...CardPreview_card
+    }
+    baseSample: randomCard(kind: BASE) {
+      ...CardPreview_card
+    }
+    resourceSample: randomCard(kind: RESOURCE) {
+      ...CardPreview_card
+    }
+  }
+`;
+
 // ── page ──────────────────────────────────────────────────────────────────────
 
 export function RulesPage() {
+  const queryRef = Route.useLoaderData() as PreloadedQuery<RulesPageQueryType>;
+  const data = usePreloadedQuery<RulesPageQueryType>(Query, queryRef);
+  const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-4 w-full">
+      {overlayCardId && (
+        <CardByIdOverlay
+          cardId={overlayCardId}
+          onClose={() => setOverlayCardId(null)}
+        />
+      )}
       <div>
         <h1 className="text-lg font-bold">게임 규칙</h1>
         <p className="text-xs text-muted-foreground mt-0.5">
@@ -1001,6 +1150,8 @@ export function RulesPage() {
                   "HP 0 → 파괴 → 트래시.",
                   "배틀 에어리어의 유닛 색은 세트된 파일럿 색 영향 없음.",
                 ],
+                rotate: 6,
+                cardRef: data.unitSample,
               },
               {
                 name: "파일럿",
@@ -1014,6 +1165,8 @@ export function RulesPage() {
                   "파일럿의 특징은 유닛에 추가되지 않음.",
                   "임의 교체/제거 불가. 유닛 이동 시 파일럿도 함께 이동.",
                 ],
+                rotate: -5,
+                cardRef: data.pilotSample,
               },
               {
                 name: "커맨드",
@@ -1027,6 +1180,8 @@ export function RulesPage() {
                   "【버스트】 보유 가능.",
                   "커맨드 효과 대상 선택 불가 시 플레이 불가.",
                 ],
+                rotate: 8,
+                cardRef: data.commandSample,
               },
               {
                 name: "베이스",
@@ -1038,6 +1193,8 @@ export function RulesPage() {
                   "베이스가 있는 동안 실드 에어리어에 가해지는 대미지는 베이스가 우선 흡수.",
                   "HP 0 → 파괴 → 트래시.",
                 ],
+                rotate: -7,
+                cardRef: data.baseSample,
               },
               {
                 name: "리소스",
@@ -1049,32 +1206,12 @@ export function RulesPage() {
                   "액티브 리소스를 레스트시켜 코스트 지불.",
                   "Lv. 판정은 액티브/레스트 불문 총 수 기준.",
                 ],
+                rotate: 5,
+                cardRef: data.resourceSample,
               },
             ] as const
           ).map((ct) => (
-            <div key={ct.name} className={cn("rounded-md border p-3", ct.color)}>
-              <p className={cn("text-xs font-bold mb-1", ct.head)}>{ct.name}</p>
-              <p className="text-xs mb-2">{ct.desc}</p>
-              {ct.attrs.length > 0 && (
-                <div className="flex flex-wrap gap-1 mb-2">
-                  {ct.attrs.map((a) => (
-                    <span
-                      key={a}
-                      className="text-xs bg-white/70 border rounded px-1.5 py-0.5"
-                    >
-                      {a}
-                    </span>
-                  ))}
-                </div>
-              )}
-              <ul className="flex flex-col gap-0.5">
-                {ct.notes.map((n, i) => (
-                  <li key={i} className="text-xs text-muted-foreground">
-                    · {n}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <CardTypeItem key={ct.name} ct={ct} cardRef={ct.cardRef} onOpen={setOverlayCardId} />
           ))}
         </div>
         <Note>

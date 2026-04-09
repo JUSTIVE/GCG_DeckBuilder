@@ -407,6 +407,7 @@ type Query {
   quicksearch(query: String!, first: Int): [Card!]!
   searchHistory: SearchHistoryList!
   deckList: DeckList!
+  randomCard(kind: CardKind!): Card
 }
 
 input DeckCardInput {

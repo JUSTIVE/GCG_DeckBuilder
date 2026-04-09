@@ -139,6 +139,21 @@ const rootValue = {
     return scored.slice(0, first).map((s) => s.card);
   },
 
+  randomCard({ kind }: { kind: string }) {
+    const typeName: Record<string, string> = {
+      UNIT: "UnitCard",
+      PILOT: "PilotCard",
+      COMMAND: "CommandCard",
+      BASE: "BaseCard",
+      RESOURCE: "ResourceCard",
+    };
+    const target = typeName[kind];
+    if (!target) return null;
+    const pool = allCards.filter((c) => c.__typename === target);
+    if (!pool.length) return null;
+    return pool[Math.floor(Math.random() * pool.length)];
+  },
+
   addFilterSearch,
   addCardView,
   removeSearchHistory,
