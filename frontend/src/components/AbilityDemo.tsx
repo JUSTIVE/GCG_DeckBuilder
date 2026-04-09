@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import {
   DualPlayfield,
@@ -21,7 +21,7 @@ type CardColor = keyof typeof CARD_THEME;
 function MiniCard({
   name, ap, hp, maxHp, color = "blue", rested = false,
   highlight = false, dim = false, tag, apBoost = 0, destroyed = false,
-  attacking = false, attackDir = -1,
+  attacking = false, attackDir = -1, hit = false,
 }: {
   name: string; ap?: number; hp?: number; maxHp?: number;
   color?: CardColor; rested?: boolean; highlight?: boolean; dim?: boolean;
@@ -30,22 +30,50 @@ function MiniCard({
   attacking?: boolean;
   /** -1 = 위(P1→P2), 1 = 아래(P2→P1) */
   attackDir?: 1 | -1;
+  /** true가 되는 순간 피격 흔들림 */
+  hit?: boolean;
 }) {
   const c = CARD_THEME[color];
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [flyTo, setFlyTo] = useState<{ x: number; y: number } | null>(null);
+  const [hitKey, setHitKey] = useState(0);
+  useEffect(() => { if (hit) setHitKey(k => k + 1); }, [hit]);
+
+  useLayoutEffect(() => {
+    if (!destroyed) { setFlyTo(null); return; }
+    const cardEl = cardRef.current;
+    if (!cardEl) return;
+    const board = cardEl.closest(".dual-playfield");
+    const trashEl = board?.querySelector(`[data-trash="${attackDir === 1 ? "p2" : "p1"}"]`);
+    if (!trashEl) return;
+    const cardRect = cardEl.getBoundingClientRect();
+    const trashRect = trashEl.getBoundingClientRect();
+    setFlyTo({
+      x: (trashRect.left + trashRect.right) / 2 - (cardRect.left + cardRect.right) / 2,
+      y: (trashRect.top + trashRect.bottom) / 2 - (cardRect.top + cardRect.bottom) / 2,
+    });
+  }, [destroyed]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <div style={{ animation: "card-appear 280ms cubic-bezier(0.22,1,0.36,1) both" }}>
-    <div style={{
+    <div ref={cardRef} style={{ animation: "card-appear 280ms cubic-bezier(0.22,1,0.36,1) both" }}>
+    <div style={flyTo ? {
+      transform: `translate(${flyTo.x}px, ${flyTo.y}px) scale(0.35) rotate(${attackDir * -25}deg)`,
+      opacity: 0,
+      transition: "transform 480ms cubic-bezier(0.4,0,0.8,1), opacity 360ms ease 160ms",
+      pointerEvents: "none",
+    } : {
       transform: `translateY(${attacking ? attackDir * 22 : 0}px)`,
       transition: attacking
         ? "transform 160ms cubic-bezier(0.4,0,0.2,1)"
         : "transform 280ms cubic-bezier(0.34,1.56,0.64,1)",
     }}>
+    <div key={hitKey} style={{ animation: hitKey > 0 ? `card-hit 320ms ease` : undefined }}>
     <div
       className={cn(
         "rounded border-2 flex flex-col overflow-hidden shrink-0 select-none",
         c.border, c.bg,
         highlight && "ring-2 ring-offset-1 ring-primary shadow-md",
-        (dim || destroyed) && "opacity-25",
+        dim && "opacity-25",
       )}
       style={{
         width: 48, height: 67,
@@ -89,6 +117,7 @@ function MiniCard({
     </div>
     </div>
     </div>
+    </div>
   );
 }
 
@@ -96,13 +125,6 @@ function MiniCard({
 
 const d = (o: Partial<DualBoardState> = {}): DualBoardState => ({ shieldCount: 6, ...o });
 
-// ── Log color map ─────────────────────────────────────────────────────────────
-
-const ACCENT_LOG: Record<string, string> = {
-  shield: "bg-blue-500 text-white",
-  base:   "bg-neutral-500 text-white",
-  battle: "bg-rose-500 text-white",
-};
 
 // ── Step type ─────────────────────────────────────────────────────────────────
 
@@ -132,7 +154,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
     steps: [
       { p1: d(), p2: d(), accent: null,
         p1Label: "나", p2Label: "상대", log: "" },
-      { p1: d(), p2: d(), accent: "battle",
+      { p1: d(), p2: d(), accent: null, p2Accent: "shield",
         p1Label: "→ 플레이어 어택 선언", p2Label: "블로커 준비 중",
         log: "공격 유닛이 상대 플레이어에게 어택" },
       { p1: d(), p2: d(), accent: "battle",
@@ -154,7 +176,9 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
           dim={step === 0}
           rested={step >= 2}
           highlight={step === 2}
+          hit={step === 3}
           destroyed={step >= 3}
+          attackDir={1}
         />
       </div>
     ),
@@ -187,7 +211,9 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
       <MiniCard name="P2 유닛" ap={2} hp={step >= 2 ? 0 : 2} maxHp={2} color="blue"
         rested={step >= 1}
         highlight={step === 2}
+        hit={step === 2}
         destroyed={step >= 2}
+        attackDir={1}
       />
     ),
   },
@@ -197,7 +223,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
     steps: [
       { p1: d(), p2: d(), accent: null,
         p1Label: "나", p2Label: "상대", log: "" },
-      { p1: d(), p2: d(), accent: "battle",
+      { p1: d(), p2: d(), accent: null, p2Accent: "shield",
         p1Label: "고기동 → 어택!", p2Label: "블로커 유닛 대기",
         log: "고기동 유닛이 상대 플레이어에게 어택 선언" },
       { p1: d(), p2: d(), accent: "battle",
@@ -220,7 +246,6 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         tag="블로커"
         dim={step === 0}
         highlight={step === 1}
-        destroyed={step >= 2}
       />
     ),
   },
@@ -236,9 +261,9 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
       { p1: d(), p2: d(), accent: "battle",
         p1Label: "배틀 대미지로 파괴!", p2Label: "유닛 파괴!",
         log: "배틀 대미지로 상대 유닛 파괴" },
-      { p1: d(), p2: d({ shieldCount: 4 }), accent: null, p2Accent: "shield",
-        p1Label: "돌파 2 발동!", p2Label: "실드 2장 추가 파괴!",
-        log: "돌파 2: 유닛 파괴 후 실드 에어리어에 2 대미지" },
+      { p1: d(), p2: d({ shieldCount: 5 }), accent: null, p2Accent: "shield",
+        p1Label: "돌파 2 발동!", p2Label: "선두 실드 1장 파괴!",
+        log: "돌파 2: 선두 실드에 2 대미지 → 실드는 대미지량 무관하게 파괴 → 1장만 파괴" },
     ],
     p1Battle: (step) => (
       <MiniCard name="돌파 유닛" ap={3} hp={3} color="red"
@@ -252,7 +277,9 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
       <MiniCard name="P2 유닛" ap={2} hp={step >= 2 ? 0 : 2} maxHp={2} color="blue"
         rested={step >= 1}
         highlight={step === 2}
+        hit={step === 2}
         destroyed={step >= 2}
+        attackDir={1}
       />
     ),
   },
@@ -263,14 +290,14 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
       { p1: d(), p2: d(), accent: null,
         p1Label: "나", p2Label: "상대", log: "" },
       { p1: d(), p2: d(), accent: "battle",
-        p1Label: "원호 유닛 레스트 →", p2Label: "상대",
+        p1Label: "원호 유닛 레스트 →", p2Label: "상대 유닛 대기",
         log: "원호 유닛을 레스트시켜 다른 유닛을 1기 고른다" },
       { p1: d(), p2: d(), accent: "battle",
         p1Label: "공격 유닛 AP +2!", p2Label: "강화 어택 대기",
-        log: "이 턴 동안 선택한 유닛을 AP +2" },
-      { p1: d(), p2: d({ shieldCount: 5 }), accent: null, p2Accent: "shield",
-        p1Label: "강화된 어택 성공!", p2Label: "실드 파괴!",
-        log: "AP 강화로 배틀 대미지 증가 → 실드 파괴" },
+        log: "이 턴 동안 선택한 유닛을 AP +2 (2 → 4)" },
+      { p1: d(), p2: d(), accent: "battle",
+        p1Label: "강화된 어택!", p2Label: "HP 3 → 파괴!",
+        log: "AP 4로 HP 3 상대 유닛 파괴 — 원호 없이는 AP 2라 불가능했을 상황" },
     ],
     p1Battle: (step) => (
       <div className="flex gap-1 items-center justify-center">
@@ -283,12 +310,20 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         <MiniCard name="공격 유닛" ap={2} hp={3} color="red"
           apBoost={step >= 2 ? 2 : 0}
           highlight={step >= 2}
+          rested={step >= 3}
           attacking={step === 3}
         />
       </div>
     ),
     p2Battle: (step) => (
-      <MiniCard name="P2 유닛" ap={2} hp={3} color="blue" dim={step === 0} />
+      <MiniCard name="P2 유닛" ap={2} hp={step >= 3 ? 0 : 3} maxHp={3} color="blue"
+        dim={step === 0}
+        rested={step >= 3}
+        highlight={step === 3}
+        hit={step === 3}
+        destroyed={step >= 3}
+        attackDir={1}
+      />
     ),
   },
 
@@ -391,7 +426,7 @@ function DemoPlayer({ config, onPlayingChange }: {
   const { steps } = config;
   const cur = steps[Math.min(step, steps.length - 1)];
   const done = step >= steps.length;
-  const logClass = cur.accent ? ACCENT_LOG[cur.accent] : "bg-muted text-muted-foreground";
+  const logClass = "bg-gray-900 text-white";
 
   useEffect(() => {
     if (step === 0) onPlayingChange?.(false);
@@ -403,6 +438,13 @@ function DemoPlayer({ config, onPlayingChange }: {
         @keyframes card-appear {
           from { transform: translateY(10px); opacity: 0; }
           to   { transform: translateY(0px);  opacity: 1; }
+        }
+        @keyframes card-hit {
+          0%   { transform: translateX(0); }
+          20%  { transform: translateX(-5px) rotate(-4deg); }
+          45%  { transform: translateX(5px) rotate(3deg); }
+          70%  { transform: translateX(-3px) rotate(-2deg); }
+          100% { transform: translateX(0); }
         }
       `}</style>
     <div ref={ref} className="flex flex-col gap-2">

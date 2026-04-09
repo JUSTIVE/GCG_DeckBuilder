@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import {
   BoardHalfLayout,
@@ -30,8 +31,16 @@ function DualShieldArea({
   const accentBase = accent === "base";
   const hasBase = board.hasBase !== false;
 
+  const [hitKey, setHitKey] = useState(0);
+  const prevShieldCount = useRef(board.shieldCount);
+  useEffect(() => {
+    if (board.shieldCount < prevShieldCount.current) setHitKey((k) => k + 1);
+    prevShieldCount.current = board.shieldCount;
+  }, [board.shieldCount]);
+
   return (
     <div
+      key={hitKey}
       className={cn(
         "shrink-0 flex flex-col rounded border p-0.5 gap-0.5 transition-all duration-300",
         accentShield || accentBase
@@ -39,7 +48,7 @@ function DualShieldArea({
           : "border-border bg-muted/20",
         flipped ? "flex-col-reverse" : "",
       )}
-      style={{ width: 76 }}
+      style={{ width: 56, animation: hitKey > 0 ? "card-hit 320ms ease" : undefined }}
     >
       <span className="text-[8px] text-center text-muted-foreground leading-none font-medium">
         실드 에어리어
@@ -53,11 +62,11 @@ function DualShieldArea({
       />
       <div
         className={cn(
-          "flex-1 rounded border p-0.5 flex flex-row gap-0.5 transition-all duration-300",
+          "flex-1 rounded border p-0.5 flex flex-col gap-0.5 transition-all duration-300",
           accentShield ? "border-primary/50 bg-primary/5" : "border-border/50",
         )}
       >
-        <span className="text-[8px] text-muted-foreground leading-none self-center">
+        <span className="text-[8px] text-center text-muted-foreground leading-none">
           실드존
         </span>
         <ShieldSlots
@@ -108,7 +117,7 @@ function DualHalfBoard({
           <ZoneBox label="리소스" active={true} className="flex-[4] h-full" />
         ),
         trash: (
-          <ZoneBox label="트래시" active={true} className="flex-[2] h-full" />
+          <ZoneBox label="트래시" active={true} className="flex-[2] h-full" data-trash={flipped ? "p2" : "p1"} />
         ),
       }}
     />
@@ -139,7 +148,7 @@ export function DualPlayfield({
   p2Accent?: DualAccent;
 }) {
   return (
-    <div className="flex flex-col gap-0.5 text-[10px] select-none">
+    <div className="dual-playfield flex flex-col gap-0.5 text-[10px] select-none">
       {/* P2 (top, flipped) */}
       <div className="flex flex-col gap-0.5 rounded-md bg-blue-50/60 px-1.5 pt-1 pb-1.5">
         <div className="text-center text-[10px] font-bold py-0.5 text-muted-foreground">

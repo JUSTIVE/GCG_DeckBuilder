@@ -229,7 +229,7 @@ function SetupShieldArea({
           : "border-border bg-muted/20",
         flipped ? "flex-col-reverse" : "",
       )}
-      style={{ width: 76 }}
+      style={{ width: 56 }}
     >
       <span className="text-[8px] text-center text-muted-foreground leading-none font-medium">
         실드 에어리어
@@ -244,11 +244,11 @@ function SetupShieldArea({
       />
       <div
         className={cn(
-          "flex-1 rounded border p-0.5 flex flex-row gap-0.5 transition-all duration-300",
+          "flex-1 rounded border p-0.5 flex flex-col gap-0.5 transition-all duration-300",
           accentShield ? "border-primary/50 bg-primary/5" : "border-border/50",
         )}
       >
-        <span className="text-[8px] text-muted-foreground leading-none self-center">
+        <span className="text-[8px] text-center text-muted-foreground leading-none">
           실드존
         </span>
         <ShieldSlots

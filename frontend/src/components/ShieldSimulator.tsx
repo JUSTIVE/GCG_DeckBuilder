@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { BoardHalfLayout, ZoneBox, ShieldSlots } from "@/components/PlayfieldLayout";
+import {
+  BoardHalfLayout,
+  ZoneBox,
+  ShieldSlots,
+} from "@/components/PlayfieldLayout";
 
 // ── ShieldSimulator ───────────────────────────────────────────────────────────
 // Interactive play-sheet-proportioned simulator showing how player attacks
@@ -84,7 +88,7 @@ export function ShieldSimulator() {
             ? "border-red-300 bg-red-50/50"
             : "border-border bg-muted/20",
       )}
-      style={{ width: 76 }}
+      style={{ width: 56 }}
     >
       <span className="text-[8px] text-center text-muted-foreground leading-none font-medium">
         실드 에어리어
@@ -100,13 +104,19 @@ export function ShieldSimulator() {
       />
       <div
         className={cn(
-          "flex-1 rounded border p-0.5 flex flex-row gap-0.5 transition-all duration-300",
-          flash === "shield" ? "border-primary/50 bg-primary/5" : "border-border/50",
+          "flex-1 rounded border p-0.5 flex flex-col gap-0.5 transition-all duration-300",
+          flash === "shield"
+            ? "border-primary/50 bg-primary/5"
+            : "border-border/50",
         )}
-        style={{ animation: flash === "shield" ? "hit-shake 320ms ease-out" : "none" }}
+        style={{
+          animation: flash === "shield" ? "hit-shake 320ms ease-out" : "none",
+        }}
       >
-        <span className="text-[8px] text-muted-foreground leading-none self-center">③ 실드</span>
-        <ShieldSlots count={shields} accent={flash === "shield"} />
+        <span className="text-[8px] text-center text-muted-foreground leading-none">
+          ③ 실드
+        </span>
+        <ShieldSlots count={shields} accent={flash === "shield"} reversed />
       </div>
     </div>
   );
@@ -121,12 +131,18 @@ export function ShieldSimulator() {
           height: 48,
           position: "relative",
           zIndex: isAttacking ? 20 : undefined,
-          animation: isAttacking ? "unit-attack-diag 640ms ease-in-out forwards" : "none",
+          animation: isAttacking
+            ? "unit-attack-diag 640ms ease-in-out forwards"
+            : "none",
         }}
       >
         <span className="text-[7px] text-primary/50 leading-none">공격</span>
-        <span className="text-[9px] font-bold text-primary leading-none">유닛</span>
-        <span className="text-[7px] bg-primary/15 rounded px-1 text-primary font-semibold leading-none">AP</span>
+        <span className="text-[9px] font-bold text-primary leading-none">
+          유닛
+        </span>
+        <span className="text-[7px] bg-primary/15 rounded px-1 text-primary font-semibold leading-none">
+          AP
+        </span>
       </div>
     </div>
   );
@@ -156,7 +172,9 @@ export function ShieldSimulator() {
       <div className="rounded-xl border border-border shadow-sm overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-3 py-2 bg-muted/30 border-b">
-          <span className="text-xs font-bold tracking-wide">어택 시뮬레이터</span>
+          <span className="text-xs font-bold tracking-wide">
+            어택 시뮬레이터
+          </span>
           <label className="flex items-center gap-1.5 text-[11px] text-muted-foreground cursor-pointer select-none">
             <input
               type="checkbox"
@@ -178,7 +196,12 @@ export function ShieldSimulator() {
           >
             <div className="flex items-center justify-between text-[9px] font-semibold pb-0.5">
               <span className="text-slate-400">상대</span>
-              <span className={cn("transition-all", defeated ? "text-red-500 animate-pulse" : "text-slate-400")}>
+              <span
+                className={cn(
+                  "transition-all",
+                  defeated ? "text-red-500 animate-pulse" : "text-slate-400",
+                )}
+              >
                 {defeated ? "☠ 패배" : "★ 생존"}
               </span>
             </div>
@@ -201,7 +224,9 @@ export function ShieldSimulator() {
             <span
               className={cn(
                 "text-[9px] font-medium px-1 transition-colors",
-                isAttacking ? "text-primary font-bold" : "text-muted-foreground",
+                isAttacking
+                  ? "text-primary font-bold"
+                  : "text-muted-foreground",
               )}
             >
               VS
@@ -220,7 +245,7 @@ export function ShieldSimulator() {
                     active={true}
                     className="shrink-0"
                     // @ts-expect-error ZoneBox forwards style via inline usage
-                    style={{ width: 76 }}
+                    style={{ width: 56 }}
                   />
                 ),
                 battle: myBattleZone,
@@ -230,7 +255,9 @@ export function ShieldSimulator() {
                 trash: dim("⑦ 트래시", "flex-[2] h-full"),
               }}
             />
-            <div className="text-center text-[9px] font-semibold text-rose-400 py-0.5">나</div>
+            <div className="text-center text-[9px] font-semibold text-rose-400 py-0.5">
+              나
+            </div>
           </div>
         </div>
 
@@ -260,7 +287,9 @@ export function ShieldSimulator() {
                   key={i}
                   className={cn(
                     "flex items-start gap-2 text-[11px]",
-                    i === 0 ? "text-foreground font-semibold" : "text-muted-foreground",
+                    i === 0
+                      ? "text-foreground font-semibold"
+                      : "text-muted-foreground",
                   )}
                 >
                   <span

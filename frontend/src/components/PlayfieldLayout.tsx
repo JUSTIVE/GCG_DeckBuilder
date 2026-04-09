@@ -140,6 +140,7 @@ export function ZoneBox({
   className,
   delay = 0,
   animation,
+  "data-trash": dataTrash,
 }: {
   label?: string;
   sub?: string;
@@ -150,9 +151,11 @@ export function ZoneBox({
   className?: string;
   delay?: number;
   animation?: string;
+  "data-trash"?: string;
 }) {
   return (
     <div
+      data-trash={dataTrash}
       className={cn(
         "relative rounded border flex flex-col items-center justify-center text-center leading-none transition-all duration-300",
         children ? "overflow-visible" : "overflow-hidden",
@@ -199,22 +202,41 @@ export function ShieldSlots({
   accent: boolean;
   reversed?: boolean;
 }) {
+  // The "front" shield (closest to battle area) is index 0 for P1, index 5 for P2 (reversed).
+  // It renders as a large card face; the rest appear as thin edge strips beneath it.
+  // Shields are horizontal cards (landscape ratio = MiniCard rotated 90°: 67:48).
+  // Rendered front-first so the front card has the highest z-index and appears on top.
+  // For P1 (not reversed): front = index 0. For P2 (reversed): front = index 5.
+  const renderOrder = reversed ? [5, 4, 3, 2, 1, 0] : [0, 1, 2, 3, 4, 5];
   return (
-    <div className="flex flex-col gap-[2px] self-stretch">
-      {Array.from({ length: 6 }, (_, i) => (
-        <div
-          key={i}
-          className={cn(
-            "flex-1 w-[13px] rounded-[2px] border transition-all duration-300",
-            i < count
-              ? accent
-                ? "bg-primary/60 border-primary"
-                : "bg-slate-700 border-slate-500"
-              : "border-dashed border-border/30 opacity-20",
-          )}
-          style={{ transitionDelay: `${(reversed ? 5 - i : i) * 45}ms` }}
-        />
-      ))}
+    <div className="flex flex-col relative">
+      {renderOrder.map((idx, pos) => {
+        const filled = idx < count;
+        return (
+          <div
+            key={idx}
+            className={cn(
+              "relative w-full aspect-[67/48] rounded border transition-all duration-300",
+              filled
+                ? accent
+                  ? "bg-slate-500 border-slate-700"
+                  : "bg-slate-200 border-slate-400"
+                : "border-dashed border-border/30 opacity-100",
+            )}
+            style={{
+              transitionDelay: `${idx * 45}ms`,
+              zIndex: reversed ? pos + 1 : 6 - pos,
+              marginTop: pos > 0 ? "-21px" : undefined,
+            }}
+          >
+            {idx === 0 && filled && (
+              <span className={cn("absolute inset-0 flex items-center justify-center text-[9px] font-bold select-none", accent ? "text-white" : "text-slate-600")}>
+                {count}
+              </span>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
