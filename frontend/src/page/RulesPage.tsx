@@ -531,15 +531,18 @@ function ShieldSlots({ count, accent }: { count: number; accent: boolean }) {
 
 // Hand cards strip
 function HandStrip({
-  count, accent, mulligan, flipped, cardImages, mulliganPhase,
+  count, accent, mulligan, flipped, cardImages, mulliganPhase, drawPhase,
 }: {
   count: number; accent: boolean; mulligan: boolean; flipped: boolean;
   cardImages?: readonly (string | null | undefined)[];
   mulliganPhase?: MulliganPhase;
+  drawPhase?: DrawPhase;
 }) {
   const isReturning = mulliganPhase === "returning";
   const isShuffling = mulliganPhase === "shuffling";
   const isDrawing = mulliganPhase === "drawing";
+  const isDrawInitial = drawPhase === "initial";
+  const isDrawAnimating = drawPhase === "drawing";
 
   const cards = Array.from({ length: 5 }, (_, i) => {
     const url = cardImages?.[i];
@@ -569,6 +572,18 @@ function HandStrip({
       opacity = 1;
       transition = `transform 380ms cubic-bezier(0.22,1,0.36,1), opacity 280ms ease`;
       transitionDelay = `${i * 65}ms`;
+    } else if (isDrawInitial) {
+      // Snap cards to off-screen position (deck side) without animating
+      transform = `translateY(${flyY}) scale(0.1)`;
+      opacity = 0;
+      transition = `none`;
+      transitionDelay = `0ms`;
+    } else if (isDrawAnimating) {
+      // Animate cards flying in from deck
+      transform = `translateY(0px) scale(1)`;
+      opacity = 1;
+      transition = `transform 400ms cubic-bezier(0.22,1,0.36,1), opacity 300ms ease`;
+      transitionDelay = `${i * 80}ms`;
     }
 
     return (
@@ -598,7 +613,7 @@ function HandStrip({
 
   const showMulliganBadge = mulligan && count > 0 && !mulliganPhase;
   const showShuffling = isShuffling;
-  const showDrawing = isDrawing;
+  const showDrawing = isDrawing || isDrawInitial || isDrawAnimating;
 
   return (
     <div
@@ -786,9 +801,11 @@ function SetupResourceRow({ board, flipped, accentDeck, accentExRes }: {
 
 type SetupHandImages = readonly (string | null | undefined)[];
 type MulliganPhase = "idle" | "returning" | "shuffling" | "drawing" | "done";
+type DrawPhase = "initial" | "drawing" | "done";
+type OrderPhase = "idle" | "p1" | "both";
 
 function SetupDualPlayfield({
-  p1, p2, hl, p1Label, p2Label, p1HandImages, p2HandImages, mulliganPhase,
+  p1, p2, hl, p1Label, p2Label, p1HandImages, p2HandImages, mulliganPhase, drawPhase, orderPhase,
 }: {
   p1: SetupBoardState;
   p2: SetupBoardState;
@@ -798,6 +815,8 @@ function SetupDualPlayfield({
   p1HandImages?: SetupHandImages;
   p2HandImages?: SetupHandImages;
   mulliganPhase?: MulliganPhase;
+  drawPhase?: DrawPhase;
+  orderPhase?: OrderPhase;
 }) {
   const accent = (zone: SetupStep["highlight"]) => hl === zone;
   const deckShuffling = mulliganPhase === "shuffling";
@@ -813,12 +832,13 @@ function SetupDualPlayfield({
         flipped={true}
         cardImages={p2HandImages}
         mulliganPhase={mulliganPhase}
+        drawPhase={drawPhase}
       />
 
       {/* P2 label */}
       <div className={cn(
         "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
-        accent("order") || accent("start")
+        (accent("order") ? orderPhase === "both" : false)
           ? cn(HL[hl].bg, HL[hl].text)
           : "text-muted-foreground",
       )}>
@@ -851,7 +871,7 @@ function SetupDualPlayfield({
       {/* P1 label */}
       <div className={cn(
         "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
-        accent("order") || accent("start")
+        (accent("order") ? orderPhase === "p1" || orderPhase === "both" : false) || accent("start")
           ? cn(HL[hl].bg, HL[hl].text)
           : "text-muted-foreground",
       )}>
@@ -865,6 +885,7 @@ function SetupDualPlayfield({
         mulligan={accent("mulligan")}
         flipped={false}
         cardImages={p1HandImages}
+        drawPhase={drawPhase}
         mulliganPhase={mulliganPhase}
       />
     </div>
@@ -872,6 +893,8 @@ function SetupDualPlayfield({
 }
 
 const MULLIGAN_STEP_INDEX = 3;
+const HAND_STEP_INDEX = 2;
+const ORDER_STEP_INDEX = 1;
 
 function GameSetupWalkthrough({
   p1HandImages, p2HandImages, newP1HandImages, newP2HandImages,
@@ -883,6 +906,8 @@ function GameSetupWalkthrough({
 }) {
   const [step, setStep] = useState(0);
   const [mulliganPhase, setMulliganPhase] = useState<MulliganPhase>("idle");
+  const [drawPhase, setDrawPhase] = useState<DrawPhase>("done");
+  const [orderPhase, setOrderPhase] = useState<OrderPhase>("idle");
   const [replayKey, setReplayKey] = useState(0);
   const cur = SETUP_STEPS[step];
   const hlColor = HL[cur.highlight];
@@ -901,6 +926,32 @@ function GameSetupWalkthrough({
     at(() => setMulliganPhase("done"), 2750);
     return () => timers.forEach(clearTimeout);
   }, [step, replayKey]);
+
+  useEffect(() => {
+    if (step !== HAND_STEP_INDEX) {
+      setDrawPhase("done");
+      return;
+    }
+    setDrawPhase("initial");
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const at = (fn: () => void, ms: number) => timers.push(setTimeout(fn, ms));
+    at(() => setDrawPhase("drawing"), 80);
+    at(() => setDrawPhase("done"), 700);
+    return () => timers.forEach(clearTimeout);
+  }, [step]);
+
+  useEffect(() => {
+    if (step !== ORDER_STEP_INDEX) {
+      setOrderPhase("idle");
+      return;
+    }
+    setOrderPhase("idle");
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const at = (fn: () => void, ms: number) => timers.push(setTimeout(fn, ms));
+    at(() => setOrderPhase("p1"), 400);
+    at(() => setOrderPhase("both"), 950);
+    return () => timers.forEach(clearTimeout);
+  }, [step]);
 
   const inMulligan = step === MULLIGAN_STEP_INDEX;
   const showNewImages = mulliganPhase === "drawing" || mulliganPhase === "done";
@@ -969,6 +1020,8 @@ function GameSetupWalkthrough({
         p1HandImages={activeP1Images}
         p2HandImages={activeP2Images}
         mulliganPhase={inMulligan ? mulliganPhase : undefined}
+        drawPhase={step === HAND_STEP_INDEX ? drawPhase : undefined}
+        orderPhase={step === ORDER_STEP_INDEX ? orderPhase : undefined}
       />
 
       {/* Mulligan replay button */}
