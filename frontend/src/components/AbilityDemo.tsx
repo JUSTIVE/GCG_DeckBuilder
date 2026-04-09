@@ -622,22 +622,30 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
   },
 
   REPAIR: {
-    delays: [800, 1900, 3200],
+    delays: [800, 1900, 3000, 4200],
     steps: [
       {
         p1: d(),
         p2: d(),
         accent: null,
-        p1Label: "나 (HP 피해 상태)",
-        p2Label: "상대",
+        p1Label: "나",
+        p2Label: "상대 (2/2 유닛)",
         log: "",
       },
       {
         p1: d(),
         p2: d(),
         accent: "battle",
+        p1Label: "전투 후 HP -2",
+        p2Label: "상대 유닛 파괴!",
+        log: "배틀 대미지 처리 — 리페어 유닛 HP 3→1, 상대 유닛 파괴",
+      },
+      {
+        p1: d(),
+        p2: d(),
+        accent: "battle",
         p1Label: "턴 종료 → 리페어 2 발동",
-        p2Label: "상대",
+        p2Label: "",
         log: "리페어 X: 자신의 턴 종료 시 X만큼 HP를 회복한다",
       },
       {
@@ -645,22 +653,26 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         p2: d(),
         accent: "battle",
         p1Label: "HP +2 회복 완료!",
-        p2Label: "상대",
-        log: "유닛 HP 회복",
+        p2Label: "",
+        log: "유닛 HP 1→3 회복",
       },
     ],
     p1Battle: (step) => (
       <MiniCard
         name="리페어 유닛"
         ap={2}
-        hp={step >= 2 ? 3 : 1}
+        hp={step >= 3 ? 3 : step >= 1 ? 1 : 3}
         maxHp={3}
         color="green"
         tag="리페어 2"
-        highlight={step >= 1}
+        highlight={step >= 2}
+        hit={step === 1}
       />
     ),
-    p2Battle: () => null,
+    p2Battle: (step) =>
+      step <= 0 ? (
+        <MiniCard name="상대 유닛" ap={2} hp={2} maxHp={2} color="red" />
+      ) : null,
   },
 };
 
