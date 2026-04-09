@@ -665,6 +665,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         maxHp={3}
         color="green"
         tag="리페어 2"
+        attacking={step === 1}
         highlight={step >= 2}
         hit={step === 1}
       />
