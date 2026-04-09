@@ -94,6 +94,7 @@ function searchToFilter(search: DeckDetailSearch): CardFilterInput {
     keyword: search.keyword as CardFilterInput["keyword"],
     trait: search.trait as CardFilterInput["trait"],
     package: search.package as CardFilterInput["package"],
+    series: search.series as any,
     query: search.query,
   };
 }
@@ -108,6 +109,7 @@ function filterToSearch(f: CardFilterInput): Omit<DeckDetailSearch, "view" | "so
     keyword: f.keyword as DeckDetailSearch["keyword"],
     trait: f.trait as DeckDetailSearch["trait"],
     package: f.package as DeckDetailSearch["package"],
+    series: (f as any).series as DeckDetailSearch["series"],
     query: f.query ?? undefined,
   };
 }

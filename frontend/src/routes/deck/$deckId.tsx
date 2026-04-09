@@ -28,6 +28,14 @@ const VALID_PACKAGES = [
   "ST07", "ST08", "ST09", "OTHER_PRODUCT_CARD", "EDITION_BETA", "BASIC_CARDS",
   "PROMOTION_CARD",
 ] as const;
+const VALID_SERIES = [
+  "MOBILE_SUIT_GUNDAM", "MOBILE_SUIT_Z_GUNDAM", "MOBILE_SUIT_GUNDAM_CHARS_COUNTERATTACK",
+  "MOBILE_SUIT_GUNDAM_0080_WAR_IN_THE_POCKET", "MOBILE_SUIT_GUNDAM_WING", "AFTER_WAR_GUNDAM_X",
+  "MOBILE_SUIT_GUNDAM_SEED", "MOBILE_SUIT_GUNDAM_SEED_DESTINY", "MOBILE_SUIT_GUNDAM_00",
+  "MOBILE_SUIT_GUNDAM_UNICORN", "MOBILE_SUIT_GUNDAM_AGE", "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+  "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH", "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+  "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+] as const;
 const VALID_SORTS = [
   "NAME_ASC", "NAME_DESC", "COST_ASC", "COST_DESC", "LEVEL_ASC", "LEVEL_DESC",
   "AP_ASC", "AP_DESC", "HP_ASC", "HP_DESC",
@@ -43,6 +51,7 @@ export type DeckDetailSearch = {
   keyword?: Array<(typeof VALID_KEYWORDS)[number]>;
   trait?: Array<(typeof VALID_TRAITS)[number]>;
   package?: (typeof VALID_PACKAGES)[number];
+  series?: Array<(typeof VALID_SERIES)[number]>;
   query?: string;
   sort?: (typeof VALID_SORTS)[number];
 };
@@ -63,6 +72,7 @@ export const Route = createFileRoute("/deck/$deckId")({
     keyword: search.keyword,
     trait: search.trait,
     package: search.package,
+    series: search.series,
     query: search.query,
     sort: search.sort,
   }),
@@ -78,6 +88,7 @@ export const Route = createFileRoute("/deck/$deckId")({
         keyword: deps.keyword ?? null,
         trait: deps.trait ?? null,
         package: deps.package ?? null,
+        series: deps.series ?? null,
         query: deps.query ?? null,
       },
       sort: (deps.sort as any) ?? null,
@@ -99,6 +110,7 @@ export const Route = createFileRoute("/deck/$deckId")({
       typeof raw.package === "string" && (VALID_PACKAGES as readonly string[]).includes(raw.package)
         ? (raw.package as DeckDetailSearch["package"])
         : undefined,
+    series: arr(raw.series, VALID_SERIES),
     query: typeof raw.query === "string" && raw.query.trim() ? raw.query : undefined,
     sort:
       typeof raw.sort === "string" && (VALID_SORTS as readonly string[]).includes(raw.sort)
