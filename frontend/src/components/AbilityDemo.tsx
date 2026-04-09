@@ -1,211 +1,11 @@
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import NumberFlow from "@number-flow/react";
+import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import {
   DualPlayfield,
   type DualBoardState,
   type DualAccent,
 } from "@/components/DualPlayfield";
-
-// ── MiniCard ──────────────────────────────────────────────────────────────────
-// 실제 카드 비율(800:1117 ≈ 36×50px) 모방. Relay 불필요.
-
-const CARD_THEME = {
-  red: {
-    border: "border-red-400",
-    bg: "bg-red-50",
-    head: "bg-red-400",
-    stat: "text-red-700",
-  },
-  blue: {
-    border: "border-blue-400",
-    bg: "bg-blue-50",
-    head: "bg-blue-400",
-    stat: "text-blue-700",
-  },
-  green: {
-    border: "border-green-500",
-    bg: "bg-green-50",
-    head: "bg-green-500",
-    stat: "text-green-700",
-  },
-  slate: {
-    border: "border-slate-400",
-    bg: "bg-slate-50",
-    head: "bg-slate-400",
-    stat: "text-slate-600",
-  },
-  purple: {
-    border: "border-purple-400",
-    bg: "bg-purple-50",
-    head: "bg-purple-400",
-    stat: "text-purple-700",
-  },
-} as const;
-type CardColor = keyof typeof CARD_THEME;
-
-function MiniCard({
-  name,
-  ap,
-  hp,
-  maxHp,
-  color = "blue",
-  rested = false,
-  highlight = false,
-  dim = false,
-  tag,
-  apBoost = 0,
-  destroyed = false,
-  attacking = false,
-  attackDir = -1,
-  hit = false,
-}: {
-  name: string;
-  ap?: number;
-  hp?: number;
-  maxHp?: number;
-  color?: CardColor;
-  rested?: boolean;
-  highlight?: boolean;
-  dim?: boolean;
-  tag?: string;
-  apBoost?: number;
-  destroyed?: boolean;
-  /** true이면 대상 방향으로 이동 */
-  attacking?: boolean;
-  /** -1 = 위(P1→P2), 1 = 아래(P2→P1) */
-  attackDir?: 1 | -1;
-  /** true가 되는 순간 피격 흔들림 */
-  hit?: boolean;
-}) {
-  const c = CARD_THEME[color];
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [flyTo, setFlyTo] = useState<{ x: number; y: number } | null>(null);
-  const [hitKey, setHitKey] = useState(0);
-  useEffect(() => {
-    if (hit) setHitKey((k) => k + 1);
-  }, [hit]);
-
-  useLayoutEffect(() => {
-    if (!destroyed) {
-      setFlyTo(null);
-      return;
-    }
-    const cardEl = cardRef.current;
-    if (!cardEl) return;
-    const board = cardEl.closest(".dual-playfield");
-    const trashEl = board?.querySelector(
-      `[data-trash="${attackDir === 1 ? "p2" : "p1"}"]`,
-    );
-    if (!trashEl) return;
-    const cardRect = cardEl.getBoundingClientRect();
-    const trashRect = trashEl.getBoundingClientRect();
-    setFlyTo({
-      x:
-        (trashRect.left + trashRect.right) / 2 -
-        (cardRect.left + cardRect.right) / 2,
-      y:
-        (trashRect.top + trashRect.bottom) / 2 -
-        (cardRect.top + cardRect.bottom) / 2,
-    });
-  }, [destroyed]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  return (
-    <div
-      ref={cardRef}
-      style={{
-        animation: "card-appear 280ms cubic-bezier(0.22,1,0.36,1) both",
-      }}
-    >
-      <div
-        style={
-          flyTo
-            ? {
-                transform: `translate(${flyTo.x}px, ${flyTo.y}px) scale(0.35) rotate(${attackDir * -25}deg)`,
-                opacity: 0,
-                transition:
-                  "transform 480ms cubic-bezier(0.4,0,0.8,1), opacity 360ms ease 160ms",
-                pointerEvents: "none",
-              }
-            : {
-                transform: `translateY(${attacking ? attackDir * 22 : 0}px)`,
-                transition: attacking
-                  ? "transform 160ms cubic-bezier(0.4,0,0.2,1)"
-                  : "transform 280ms cubic-bezier(0.34,1.56,0.64,1)",
-              }
-        }
-      >
-        <div
-          key={hitKey}
-          style={{ animation: hitKey > 0 ? `card-hit 320ms ease` : undefined }}
-        >
-          <div
-            className={cn(
-              "rounded border-2 flex flex-col overflow-hidden shrink-0 select-none",
-              c.border,
-              c.bg,
-              highlight && "ring-2 ring-offset-1 ring-orange-500 shadow-md",
-              dim && "opacity-25",
-            )}
-            style={{
-              width: 48,
-              height: 67,
-              transform: rested ? "rotate(90deg)" : "rotate(0deg)",
-              transition:
-                "transform 350ms cubic-bezier(0.34,1.56,0.64,1), opacity 400ms, box-shadow 300ms",
-            }}
-          >
-            <div className={cn("h-4 shrink-0", c.head)} />
-            <div className="flex-1 flex items-center justify-center px-0.5">
-              <span
-                className={cn(
-                  "text-[8px] font-bold text-center leading-tight break-keep",
-                  c.stat,
-                )}
-              >
-                {name}
-              </span>
-            </div>
-            {tag && (
-              <div className="text-center pb-0.5 px-0.5">
-                <span className="text-[7px] bg-black/10 rounded-sm px-0.5 font-bold leading-none text-inherit">
-                  {tag}
-                </span>
-              </div>
-            )}
-            {(ap !== undefined || hp !== undefined) && (
-              <div className="flex justify-between items-end px-1 pb-1 shrink-0">
-                {ap !== undefined && (
-                  <span
-                    className={cn(
-                      "font-black leading-none transition-all duration-300",
-                      apBoost > 0
-                        ? "text-[13px] text-red-700"
-                        : `text-[11px] ${c.stat}`,
-                    )}
-                  >
-                    <NumberFlow value={ap + apBoost} />
-                  </span>
-                )}
-                {hp !== undefined && (
-                  <span
-                    className={cn(
-                      "text-[11px] font-black leading-none transition-colors duration-300",
-                      hp <= 0 ? "text-red-500 line-through" : c.stat,
-                    )}
-                  >
-                    <NumberFlow value={hp} />
-                    {maxHp !== undefined && maxHp !== hp ? `/${maxHp}` : ""}
-                  </span>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { MiniCard } from "@/components/MiniCard";
 
 // ── Board state helpers ───────────────────────────────────────────────────────
 
@@ -281,7 +81,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         hp={step >= 3 ? 1 : 3}
         maxHp={3}
         color="red"
-        rested={step >= 1}
+        rested={step >= 3}
         highlight={step === 1}
         attacking={step === 1 || step === 2}
         hit={step === 3}
@@ -350,7 +150,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         hp={3}
         color="red"
         tag="선제공격"
-        rested={step >= 1}
+        rested={step >= 3}
         highlight={step >= 1 && step <= 2}
         attacking={step === 1 || step === 2}
       />
@@ -416,7 +216,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         hp={3}
         color="red"
         tag="고기동"
-        rested={step >= 1}
+        rested={step >= 3}
         highlight={step >= 2}
         attacking={step === 1 || step === 2}
       />
@@ -478,7 +278,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         hp={3}
         color="red"
         tag="돌파 2"
-        rested={step >= 1}
+        rested={step >= 3}
         highlight={step >= 2}
         attacking={step === 1 || step === 2}
       />
@@ -490,7 +290,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         hp={step >= 2 ? 0 : 2}
         maxHp={2}
         color="blue"
-        rested={step >= 1}
+        rested={true}
         highlight={step === 2}
         hit={step === 2}
         destroyed={step >= 2}
@@ -500,7 +300,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
   },
 
   SUPPORT: {
-    delays: [800, 1900, 3100, 4400],
+    delays: [800, 1900, 3100, 4400, 5500],
     steps: [
       {
         p1: d(),
@@ -534,6 +334,14 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         p2Label: "HP 3 → 파괴!",
         log: "AP 4로 HP 3 상대 유닛 파괴 — 원호 없이는 AP 2라 불가능했을 상황",
       },
+      {
+        p1: d(),
+        p2: d(),
+        accent: null,
+        p1Label: "공격 유닛 레스트",
+        p2Label: "",
+        log: "어택 후 공격 유닛 레스트",
+      },
     ],
     p1Battle: (step) => (
       <div className="flex gap-1 items-center justify-center">
@@ -553,9 +361,9 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
           hp={3}
           color="red"
           apBoost={step >= 2 ? 2 : 0}
-          highlight={step >= 2}
-          rested={step >= 3}
+          highlight={step >= 2 && step <= 3}
           attacking={step === 3}
+          rested={step >= 4}
         />
       </div>
     ),
@@ -613,7 +421,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         hp={3}
         color="purple"
         tag="제압"
-        rested={step >= 1}
+        rested={step >= 2}
         highlight={step >= 1}
         attacking={step === 1}
       />
@@ -665,21 +473,21 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         maxHp={3}
         color="green"
         tag="리페어 2"
-        rested={step >= 1}
+        rested={step >= 2}
         attacking={step === 1}
         highlight={step >= 2}
         hit={step === 1}
       />
     ),
     p2Battle: (step) =>
-      step <= 1 ? (
+      step <= 2 ? (
         <MiniCard
           name="상대 유닛"
           ap={2}
           hp={step >= 1 ? 0 : 2}
           maxHp={2}
           color="red"
-          destroyed={step >= 1}
+          destroyed={step >= 2}
           attackDir={1}
         />
       ) : null,

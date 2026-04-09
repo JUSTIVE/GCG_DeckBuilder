@@ -34,7 +34,7 @@ export function VsDivider({ active = false }: { active?: boolean }) {
       <div className="flex-1 h-px bg-border" />
       <span
         className={cn(
-          "text-[9px] font-medium px-1 transition-colors",
+          "text-[11px] font-medium px-1 transition-colors",
           active ? "text-primary font-bold" : "text-muted-foreground",
         )}
       >
@@ -218,7 +218,7 @@ export function ZoneBox({
         <>
           {children}
           {label && (
-            <span className="absolute bottom-0.5 inset-x-0 text-[7px] text-center opacity-30 leading-none pointer-events-none">
+            <span className="absolute bottom-0.5 inset-x-0 text-[9px] text-center opacity-30 leading-none pointer-events-none">
               {label}
             </span>
           )}
@@ -226,9 +226,9 @@ export function ZoneBox({
       ) : (
         <>
           {label && (
-            <span className="text-[9px] font-semibold px-0.5">{label}</span>
+            <span className="text-[11px] font-semibold px-0.5">{label}</span>
           )}
-          {sub && <span className="text-[8px] opacity-60 mt-0.5">{sub}</span>}
+          {sub && <span className="text-[10px] opacity-60 mt-0.5">{sub}</span>}
         </>
       )}
     </div>
@@ -286,7 +286,7 @@ export function ShieldSlots({
             }}
           >
             {showCount && (
-              <span className={cn("absolute inset-0 flex items-center justify-center text-[9px] font-bold select-none", accent ? "text-white" : "text-slate-600")}>
+              <span className={cn("absolute inset-0 flex items-center justify-center text-[11px] font-bold select-none", accent ? "text-white" : "text-slate-600")}>
                 {count}
               </span>
             )}
