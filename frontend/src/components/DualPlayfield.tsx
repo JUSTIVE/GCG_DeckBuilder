@@ -1,0 +1,179 @@
+import { cn } from "@/lib/utils";
+import {
+  BoardHalfLayout,
+  ZoneBox,
+  ShieldSlots,
+} from "@/components/PlayfieldLayout";
+
+// ── Types ─────────────────────────────────────────────────────────────────────
+
+export type DualBoardState = {
+  shieldCount: number; // 0–6
+  hasBase?: boolean; // default true
+};
+
+/** Which zone type to highlight on both halves. null = no highlight. */
+export type DualAccent = "shield" | "base" | "battle" | null;
+
+// ── DualShieldArea ────────────────────────────────────────────────────────────
+
+function DualShieldArea({
+  board,
+  accent,
+  flipped,
+}: {
+  board: DualBoardState;
+  accent: DualAccent;
+  flipped: boolean;
+}) {
+  const accentShield = accent === "shield";
+  const accentBase = accent === "base";
+  const hasBase = board.hasBase !== false;
+
+  return (
+    <div
+      className={cn(
+        "shrink-0 flex flex-col rounded border p-0.5 gap-0.5 transition-all duration-300",
+        accentShield || accentBase
+          ? "border-primary/50 bg-primary/5"
+          : "border-border bg-muted/20",
+        flipped ? "flex-col-reverse" : "",
+      )}
+      style={{ width: 76 }}
+    >
+      <span className="text-[8px] text-center text-muted-foreground leading-none font-medium">
+        실드 에어리어
+      </span>
+      <ZoneBox
+        label="베이스존"
+        active={hasBase}
+        accent={accentBase && hasBase}
+        dim={!hasBase}
+        className="flex-none py-1"
+      />
+      <div
+        className={cn(
+          "flex-1 rounded border p-0.5 flex flex-row gap-0.5 transition-all duration-300",
+          accentShield ? "border-primary/50 bg-primary/5" : "border-border/50",
+        )}
+      >
+        <span className="text-[8px] text-muted-foreground leading-none self-center">
+          실드존
+        </span>
+        <ShieldSlots
+          count={board.shieldCount}
+          accent={accentShield}
+          reversed={flipped}
+        />
+      </div>
+    </div>
+  );
+}
+
+// ── DualHalfBoard ─────────────────────────────────────────────────────────────
+
+function DualHalfBoard({
+  board,
+  flipped,
+  accent,
+  battleContent,
+}: {
+  board: DualBoardState;
+  flipped: boolean;
+  accent: DualAccent;
+  battleContent?: React.ReactNode;
+}) {
+  return (
+    <BoardHalfLayout
+      flipped={flipped}
+      slots={{
+        shieldArea: (
+          <DualShieldArea board={board} accent={accent} flipped={flipped} />
+        ),
+        battle: (
+          <ZoneBox
+            label="배틀 에어리어"
+            active={true}
+            accent={accent === "battle"}
+            className="flex-[3] h-full"
+          >
+            {battleContent}
+          </ZoneBox>
+        ),
+        deck: <ZoneBox label="덱" active={true} className="flex-[1] h-full" />,
+        resDeck: (
+          <ZoneBox label="리소스덱" active={true} className="flex-[2] h-full" />
+        ),
+        resource: (
+          <ZoneBox label="리소스" active={true} className="flex-[4] h-full" />
+        ),
+        trash: (
+          <ZoneBox label="트래시" active={true} className="flex-[2] h-full" />
+        ),
+      }}
+    />
+  );
+}
+
+// ── DualPlayfield ─────────────────────────────────────────────────────────────
+// 순수 보드 레이아웃. 셋업 전용 요소(핸드스트립, 멀리건 페이즈 등) 없음.
+
+export function DualPlayfield({
+  p1,
+  p2,
+  p1Battle,
+  p2Battle,
+  p1Label = "나",
+  p2Label = "상대",
+  accent = null,
+  p2Accent,
+}: {
+  p1: DualBoardState;
+  p2: DualBoardState;
+  p1Battle?: React.ReactNode;
+  p2Battle?: React.ReactNode;
+  p1Label?: string;
+  p2Label?: string;
+  accent?: DualAccent;
+  /** P2 전용 accent. 지정 시 accent를 오버라이드. */
+  p2Accent?: DualAccent;
+}) {
+  return (
+    <div className="flex flex-col gap-0.5 text-[10px] select-none">
+      {/* P2 (top, flipped) */}
+      <div className="flex flex-col gap-0.5 rounded-md bg-blue-50/60 px-1.5 pt-1 pb-1.5">
+        <div className="text-center text-[10px] font-bold py-0.5 text-muted-foreground">
+          {p2Label}
+        </div>
+        <DualHalfBoard
+          board={p2}
+          flipped={true}
+          accent={p2Accent !== undefined ? p2Accent : accent}
+          battleContent={p2Battle}
+        />
+      </div>
+
+      {/* VS divider */}
+      <div className="flex items-center gap-2 py-0.5">
+        <div className="flex-1 h-px bg-border" />
+        <span className="text-[9px] text-muted-foreground font-medium px-1">
+          VS
+        </span>
+        <div className="flex-1 h-px bg-border" />
+      </div>
+
+      {/* P1 (bottom, normal) */}
+      <div className="flex flex-col gap-0.5 rounded-md bg-rose-50/60 px-1.5 pt-1.5 pb-1">
+        <DualHalfBoard
+          board={p1}
+          flipped={false}
+          accent={accent}
+          battleContent={p1Battle}
+        />
+        <div className="text-center text-[10px] font-bold py-0.5 text-muted-foreground">
+          {p1Label}
+        </div>
+      </div>
+    </div>
+  );
+}

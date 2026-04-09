@@ -1,5 +1,9 @@
 import { cn } from "@/lib/utils";
-import { BoardHalfLayout, ZoneBox, ShieldSlots } from "@/components/PlayfieldLayout";
+import {
+  BoardHalfLayout,
+  ZoneBox,
+  ShieldSlots,
+} from "@/components/PlayfieldLayout";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -13,32 +17,67 @@ export type SetupBoardState = {
 };
 
 export type SetupHandImages = readonly (string | null | undefined)[];
-export type MulliganPhase = "idle" | "returning" | "shuffling" | "drawing" | "done";
+export type MulliganPhase =
+  | "idle"
+  | "returning"
+  | "shuffling"
+  | "drawing"
+  | "done";
 export type DrawPhase = "initial" | "drawing" | "done";
 export type OrderPhase = "idle" | "p1" | "both";
 export type SetupHighlight =
-  | "deck" | "order" | "hand" | "mulligan"
-  | "shield" | "base" | "exres" | "start";
+  | "deck"
+  | "order"
+  | "hand"
+  | "mulligan"
+  | "shield"
+  | "base"
+  | "exres"
+  | "start";
 
 // ── Highlight color map ───────────────────────────────────────────────────────
 
-export const HL: Record<SetupHighlight, { bg: string; text: string; border: string }> = {
-  deck:     { bg: "bg-slate-500",  text: "text-white", border: "border-slate-400"  },
-  order:    { bg: "bg-violet-500", text: "text-white", border: "border-violet-400" },
-  hand:     { bg: "bg-green-500",  text: "text-white", border: "border-green-400"  },
-  mulligan: { bg: "bg-amber-400",  text: "text-white", border: "border-amber-300"  },
-  shield:   { bg: "bg-blue-500",   text: "text-white", border: "border-blue-400"   },
-  base:     { bg: "bg-neutral-500",text: "text-white", border: "border-neutral-400"},
-  exres:    { bg: "bg-teal-500",   text: "text-white", border: "border-teal-400"   },
-  start:    { bg: "bg-red-500",    text: "text-white", border: "border-red-400"    },
+export const HL: Record<
+  SetupHighlight,
+  { bg: string; text: string; border: string }
+> = {
+  deck: { bg: "bg-slate-500", text: "text-white", border: "border-slate-400" },
+  order: {
+    bg: "bg-violet-500",
+    text: "text-white",
+    border: "border-violet-400",
+  },
+  hand: { bg: "bg-green-500", text: "text-white", border: "border-green-400" },
+  mulligan: {
+    bg: "bg-amber-400",
+    text: "text-white",
+    border: "border-amber-300",
+  },
+  shield: { bg: "bg-blue-500", text: "text-white", border: "border-blue-400" },
+  base: {
+    bg: "bg-neutral-500",
+    text: "text-white",
+    border: "border-neutral-400",
+  },
+  exres: { bg: "bg-teal-500", text: "text-white", border: "border-teal-400" },
+  start: { bg: "bg-red-500", text: "text-white", border: "border-red-400" },
 };
 
 // ── HandStrip ─────────────────────────────────────────────────────────────────
 
 function HandStrip({
-  count, accent, mulligan, flipped, cardImages, mulliganPhase, drawPhase,
+  count,
+  accent,
+  mulligan,
+  flipped,
+  cardImages,
+  mulliganPhase,
+  drawPhase,
 }: {
-  count: number; accent: boolean; mulligan: boolean; flipped: boolean;
+  count: number;
+  accent: boolean;
+  mulligan: boolean;
+  flipped: boolean;
   cardImages?: SetupHandImages;
   mulliganPhase?: MulliganPhase;
   drawPhase?: DrawPhase;
@@ -91,7 +130,9 @@ function HandStrip({
         className={cn(
           "rounded-[3px] border overflow-hidden",
           i < count
-            ? accent ? "border-primary/80" : "border-green-300"
+            ? accent
+              ? "border-primary/80"
+              : "border-green-300"
             : "border-dashed border-border/20 opacity-20",
           "w-[18px] h-[26px]",
         )}
@@ -101,11 +142,20 @@ function HandStrip({
             : { transitionDelay: `${i * 35}ms` }
         }
       >
-        {i < count && url
-          ? <img src={url} alt="" className="w-full h-full object-cover object-top" />
-          : i < count
-            ? <div className={cn("w-full h-full", accent ? "bg-primary/40" : "bg-green-100")} />
-            : null}
+        {i < count && url ? (
+          <img
+            src={url}
+            alt=""
+            className="w-full h-full object-cover object-top"
+          />
+        ) : i < count ? (
+          <div
+            className={cn(
+              "w-full h-full",
+              accent ? "bg-primary/40" : "bg-green-100",
+            )}
+          />
+        ) : null}
       </div>
     );
   });
@@ -126,20 +176,30 @@ function HandStrip({
         flipped && "flex-row-reverse",
       )}
     >
-      <span className={cn(
-        "text-[9px] font-semibold shrink-0 transition-all duration-200",
-        accent ? "text-primary" : "text-green-700",
-      )}>
-        {showShuffling ? "셔플" : showDrawing ? "드로우" : `패 ${count > 0 ? `${count}장` : ""}`}
+      <span
+        className={cn(
+          "text-[9px] font-semibold shrink-0 transition-all duration-200",
+          accent ? "text-primary" : "text-green-700",
+        )}
+      >
+        {showShuffling
+          ? "셔플"
+          : showDrawing
+            ? "드로우"
+            : `패 ${count > 0 ? `${count}장` : ""}`}
       </span>
       <div className={cn("flex gap-0.5", flipped && "flex-row-reverse")}>
         {cards}
       </div>
       {showMulliganBadge && (
-        <span className={cn(
-          "text-[8px] rounded px-1 py-0.5 font-bold shrink-0",
-          accent ? "bg-primary/20 text-primary" : "bg-amber-100 text-amber-700",
-        )}>
+        <span
+          className={cn(
+            "text-[8px] rounded px-1 py-0.5 font-bold shrink-0",
+            accent
+              ? "bg-primary/20 text-primary"
+              : "bg-amber-100 text-amber-700",
+          )}
+        >
           멀리건?
         </span>
       )}
@@ -149,7 +209,12 @@ function HandStrip({
 
 // ── SetupShieldArea ───────────────────────────────────────────────────────────
 
-function SetupShieldArea({ board, accentBase, accentShield, flipped }: {
+function SetupShieldArea({
+  board,
+  accentBase,
+  accentShield,
+  flipped,
+}: {
   board: SetupBoardState;
   accentBase: boolean;
   accentShield: boolean;
@@ -159,10 +224,10 @@ function SetupShieldArea({ board, accentBase, accentShield, flipped }: {
     <div
       className={cn(
         "shrink-0 flex flex-col rounded border p-0.5 gap-0.5 transition-all duration-300",
-        (accentBase || accentShield)
+        accentBase || accentShield
           ? "border-primary/50 bg-primary/5"
           : "border-border bg-muted/20",
-        flipped ? "flex-col-reverse" : ""
+        flipped ? "flex-col-reverse" : "",
       )}
       style={{ width: 76 }}
     >
@@ -177,12 +242,20 @@ function SetupShieldArea({ board, accentBase, accentShield, flipped }: {
         dim={!board.hasBase}
         className="flex-none py-1"
       />
-      <div className={cn(
-        "flex-1 rounded border p-0.5 flex flex-row gap-0.5 transition-all duration-300",
-        accentShield ? "border-primary/50 bg-primary/5" : "border-border/50",
-      )}>
-        <span className="text-[8px] text-muted-foreground leading-none self-center">실드존</span>
-        <ShieldSlots count={board.shieldCount} accent={accentShield} />
+      <div
+        className={cn(
+          "flex-1 rounded border p-0.5 flex flex-row gap-0.5 transition-all duration-300",
+          accentShield ? "border-primary/50 bg-primary/5" : "border-border/50",
+        )}
+      >
+        <span className="text-[8px] text-muted-foreground leading-none self-center">
+          실드존
+        </span>
+        <ShieldSlots
+          count={board.shieldCount}
+          accent={accentShield}
+          reversed={flipped}
+        />
       </div>
     </div>
   );
@@ -190,7 +263,16 @@ function SetupShieldArea({ board, accentBase, accentShield, flipped }: {
 
 // ── SetupHalfBoard ────────────────────────────────────────────────────────────
 
-function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, accentExRes, deckShuffling }: {
+function SetupHalfBoard({
+  board,
+  flipped,
+  accentDeck,
+  accentBase,
+  accentShield,
+  accentExRes,
+  deckShuffling,
+  battleContent,
+}: {
   board: SetupBoardState;
   flipped: boolean;
   accentDeck: boolean;
@@ -198,22 +280,27 @@ function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, 
   accentShield: boolean;
   accentExRes: boolean;
   deckShuffling?: boolean;
+  battleContent?: React.ReactNode;
 }) {
   const resArea = (
-    <div className={cn(
-      "flex-[4] h-full rounded border flex flex-col items-center justify-center transition-all duration-300",
-      board.hasExRes
-        ? accentExRes
-          ? "bg-primary/15 border-primary text-primary"
-          : "bg-teal-50 border-teal-200 text-teal-700"
-        : "border-border/50 bg-background",
-    )}>
+    <div
+      className={cn(
+        "flex-[4] h-full rounded border flex flex-col items-center justify-center transition-all duration-300",
+        board.hasExRes
+          ? accentExRes
+            ? "bg-primary/15 border-primary text-primary"
+            : "bg-teal-50 border-teal-200 text-teal-700"
+          : "border-border/50 bg-background",
+      )}
+    >
       <span className="text-[9px] font-semibold leading-none">리소스</span>
       {board.hasExRes && (
-        <span className={cn(
-          "text-[8px] mt-0.5 rounded px-1 font-bold",
-          accentExRes ? "bg-primary/20" : "bg-teal-100",
-        )}>
+        <span
+          className={cn(
+            "text-[8px] mt-0.5 rounded px-1 font-bold",
+            accentExRes ? "bg-primary/20" : "bg-teal-100",
+          )}
+        >
           EX×1
         </span>
       )}
@@ -224,8 +311,23 @@ function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, 
     <BoardHalfLayout
       flipped={flipped}
       slots={{
-        shieldArea: <SetupShieldArea board={board} accentBase={accentBase} accentShield={accentShield} flipped={flipped} />,
-        battle: <ZoneBox label="배틀 에어리어" active={true} className="flex-[3] h-full" />,
+        shieldArea: (
+          <SetupShieldArea
+            board={board}
+            accentBase={accentBase}
+            accentShield={accentShield}
+            flipped={flipped}
+          />
+        ),
+        battle: (
+          <ZoneBox
+            label="배틀 에어리어"
+            active={true}
+            className="flex-[3] h-full"
+          >
+            {battleContent}
+          </ZoneBox>
+        ),
         deck: (
           <ZoneBox
             label={deckShuffling ? "셔플 중" : "덱"}
@@ -233,7 +335,9 @@ function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, 
             active={board.hasDeck}
             accent={(accentDeck && board.hasDeck) || deckShuffling}
             className="flex-[1] h-full"
-            animation={deckShuffling ? "deck-shuffle 0.42s ease-in-out 2" : undefined}
+            animation={
+              deckShuffling ? "deck-shuffle 0.42s ease-in-out 2" : undefined
+            }
           />
         ),
         resDeck: (
@@ -246,7 +350,9 @@ function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, 
           />
         ),
         resource: resArea,
-        trash: <ZoneBox label="트래시" active={true} className="flex-[2] h-full" />,
+        trash: (
+          <ZoneBox label="트래시" active={true} className="flex-[2] h-full" />
+        ),
       }}
     />
   );
@@ -255,7 +361,18 @@ function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, 
 // ── SetupDualPlayfield ────────────────────────────────────────────────────────
 
 export function SetupDualPlayfield({
-  p1, p2, hl, p1Label, p2Label, p1HandImages, p2HandImages, mulliganPhase, drawPhase, orderPhase,
+  p1,
+  p2,
+  hl,
+  p1Label,
+  p2Label,
+  p1HandImages,
+  p2HandImages,
+  mulliganPhase,
+  drawPhase,
+  orderPhase,
+  p1BattleContent,
+  p2BattleContent,
 }: {
   p1: SetupBoardState;
   p2: SetupBoardState;
@@ -267,6 +384,8 @@ export function SetupDualPlayfield({
   mulliganPhase?: MulliganPhase;
   drawPhase?: DrawPhase;
   orderPhase?: OrderPhase;
+  p1BattleContent?: React.ReactNode;
+  p2BattleContent?: React.ReactNode;
 }) {
   const accent = (zone: SetupHighlight) => hl === zone;
   const deckShuffling = mulliganPhase === "shuffling";
@@ -284,43 +403,59 @@ export function SetupDualPlayfield({
           mulliganPhase={mulliganPhase}
           drawPhase={drawPhase}
         />
-        <div className={cn(
-          "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
-          (accent("order") ? orderPhase === "both" : false)
-            ? cn(HL[hl].bg, HL[hl].text)
-            : "text-muted-foreground",
-        )}>
+        <div
+          className={cn(
+            "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
+            (accent("order") ? orderPhase === "both" : false)
+              ? cn(HL[hl].bg, HL[hl].text)
+              : "text-muted-foreground",
+          )}
+        >
           {p2Label}
         </div>
         <SetupHalfBoard
-          board={p2} flipped={true}
-          accentDeck={accent("deck")} accentBase={accent("base")}
-          accentShield={accent("shield")} accentExRes={accent("exres")}
+          board={p2}
+          flipped={true}
+          accentDeck={accent("deck")}
+          accentBase={accent("base")}
+          accentShield={accent("shield")}
+          accentExRes={accent("exres")}
           deckShuffling={deckShuffling}
+          battleContent={p2BattleContent}
         />
       </div>
 
       {/* ── CENTER DIVIDER ── */}
       <div className="flex items-center gap-2 py-0.5">
         <div className="flex-1 h-px bg-border" />
-        <span className="text-[9px] text-muted-foreground font-medium px-1">VS</span>
+        <span className="text-[9px] text-muted-foreground font-medium px-1">
+          VS
+        </span>
         <div className="flex-1 h-px bg-border" />
       </div>
 
       {/* ── P1 (bottom) ── */}
       <div className="flex flex-col gap-0.5 rounded-md bg-rose-50/60 px-1.5 pt-1.5 pb-1">
         <SetupHalfBoard
-          board={p1} flipped={false}
-          accentDeck={accent("deck")} accentBase={accent("base")}
-          accentShield={accent("shield")} accentExRes={accent("exres")}
+          board={p1}
+          flipped={false}
+          accentDeck={accent("deck")}
+          accentBase={accent("base")}
+          accentShield={accent("shield")}
+          accentExRes={accent("exres")}
           deckShuffling={deckShuffling}
+          battleContent={p1BattleContent}
         />
-        <div className={cn(
-          "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
-          (accent("order") ? orderPhase === "p1" || orderPhase === "both" : false) || accent("start")
-            ? cn(HL[hl].bg, HL[hl].text)
-            : "text-muted-foreground",
-        )}>
+        <div
+          className={cn(
+            "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
+            (accent("order")
+              ? orderPhase === "p1" || orderPhase === "both"
+              : false) || accent("start")
+              ? cn(HL[hl].bg, HL[hl].text)
+              : "text-muted-foreground",
+          )}
+        >
           {p1Label}
         </div>
         <HandStrip

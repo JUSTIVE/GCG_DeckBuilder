@@ -152,11 +152,16 @@ function KeywordEntry({
   className?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const entry = KEYWORD_DESCRIPTIONS[keyword];
   if (!entry) return null;
 
   return (
-    <div className={cn("rounded-lg border border-border", className)}>
+    <div className={cn(
+      "rounded-lg border transition-all duration-300",
+      playing ? "border-primary/60 bg-primary/5" : "border-border",
+      className,
+    )}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -175,7 +180,7 @@ function KeywordEntry({
           )}
         />
       </button>
-      <AbilityDemo keyword={keyword} />
+      <AbilityDemo keyword={keyword} onPlayingChange={setPlaying} />
       {open && (
         <Suspense
           fallback={

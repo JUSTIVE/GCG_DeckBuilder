@@ -44,8 +44,8 @@ export function VisibilityDot({ id }: { id: ZoneId }) {
 //   row B: [리소스덱 flex-2] | [리소스 flex-4] | [트래시 flex-2]
 // P2 is flipped=true → rows and columns are mirrored.
 
-export const BATTLE_H = 56;
-export const RES_H = 38;
+export const BATTLE_H = 120;
+export const RES_H = 56;
 
 export type BoardHalfSlots = {
   shieldArea: React.ReactNode;
@@ -65,24 +65,64 @@ export function BoardHalfLayout({
 }) {
   const battleRow = (
     <div className="flex gap-0.5" style={{ height: BATTLE_H }}>
-      {flipped ? <>{slots.deck}{slots.battle}</> : <>{slots.battle}{slots.deck}</>}
+      {flipped ? (
+        <>
+          {slots.deck}
+          {slots.battle}
+        </>
+      ) : (
+        <>
+          {slots.battle}
+          {slots.deck}
+        </>
+      )}
     </div>
   );
   const resourceRow = (
     <div className="flex gap-0.5" style={{ height: RES_H }}>
-      {flipped
-        ? <>{slots.trash}{slots.resource}{slots.resDeck}</>
-        : <>{slots.resDeck}{slots.resource}{slots.trash}</>}
+      {flipped ? (
+        <>
+          {slots.trash}
+          {slots.resource}
+          {slots.resDeck}
+        </>
+      ) : (
+        <>
+          {slots.resDeck}
+          {slots.resource}
+          {slots.trash}
+        </>
+      )}
     </div>
   );
   const rightCols = (
     <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-      {flipped ? <>{resourceRow}{battleRow}</> : <>{battleRow}{resourceRow}</>}
+      {flipped ? (
+        <>
+          {resourceRow}
+          {battleRow}
+        </>
+      ) : (
+        <>
+          {battleRow}
+          {resourceRow}
+        </>
+      )}
     </div>
   );
   return (
     <div className="flex gap-0.5">
-      {flipped ? <>{rightCols}{slots.shieldArea}</> : <>{slots.shieldArea}{rightCols}</>}
+      {flipped ? (
+        <>
+          {rightCols}
+          {slots.shieldArea}
+        </>
+      ) : (
+        <>
+          {slots.shieldArea}
+          {rightCols}
+        </>
+      )}
     </div>
   );
 }
@@ -114,7 +154,8 @@ export function ZoneBox({
   return (
     <div
       className={cn(
-        "rounded border flex flex-col items-center justify-center text-center leading-none transition-all duration-300 overflow-hidden",
+        "relative rounded border flex flex-col items-center justify-center text-center leading-none transition-all duration-300",
+        children ? "overflow-visible" : "overflow-hidden",
         active
           ? accent
             ? "bg-primary/15 border-primary text-primary"
@@ -125,9 +166,23 @@ export function ZoneBox({
       )}
       style={{ transitionDelay: `${delay}ms`, animation }}
     >
-      {label && <span className="text-[9px] font-semibold px-0.5">{label}</span>}
-      {sub && <span className="text-[8px] opacity-60 mt-0.5">{sub}</span>}
-      {children}
+      {children ? (
+        <>
+          {children}
+          {label && (
+            <span className="absolute bottom-0.5 inset-x-0 text-[7px] text-center opacity-30 leading-none pointer-events-none">
+              {label}
+            </span>
+          )}
+        </>
+      ) : (
+        <>
+          {label && (
+            <span className="text-[9px] font-semibold px-0.5">{label}</span>
+          )}
+          {sub && <span className="text-[8px] opacity-60 mt-0.5">{sub}</span>}
+        </>
+      )}
     </div>
   );
 }
@@ -138,9 +193,11 @@ export function ZoneBox({
 export function ShieldSlots({
   count,
   accent,
+  reversed = false,
 }: {
   count: number;
   accent: boolean;
+  reversed?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-[2px] self-stretch">
@@ -155,7 +212,7 @@ export function ShieldSlots({
                 : "bg-slate-700 border-slate-500"
               : "border-dashed border-border/30 opacity-20",
           )}
-          style={{ transitionDelay: `${i * 45}ms` }}
+          style={{ transitionDelay: `${(reversed ? 5 - i : i) * 45}ms` }}
         />
       ))}
     </div>
