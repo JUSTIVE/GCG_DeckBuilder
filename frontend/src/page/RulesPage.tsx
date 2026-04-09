@@ -1124,7 +1124,8 @@ export function RulesPage() {
       {/* ── 덱 구성 ── */}
       <Section title="덱 구성 규칙">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <div className="rounded-md border p-3">
+          <div className="relative rounded-md border p-3 overflow-hidden">
+            <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">50</span>
             <p className="text-xs font-semibold mb-2">메인 덱 — 50장</p>
             <ul className="text-xs text-muted-foreground flex flex-col gap-1">
               <li>· 유닛 / 파일럿 / 커맨드 / 베이스 카드로 구성</li>
@@ -1132,7 +1133,8 @@ export function RulesPage() {
               <li>· 같은 카드 No. 최대 4장</li>
             </ul>
           </div>
-          <div className="rounded-md border p-3">
+          <div className="relative rounded-md border p-3 overflow-hidden">
+            <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">10</span>
             <p className="text-xs font-semibold mb-2">리소스 덱 — 10장</p>
             <ul className="text-xs text-muted-foreground flex flex-col gap-1">
               <li>· 리소스 카드로만 구성</li>
