@@ -680,6 +680,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
           maxHp={2}
           color="red"
           destroyed={step >= 1}
+          attackDir={1}
         />
       ) : null,
   },

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import {
   BoardHalfLayout,
@@ -101,6 +101,9 @@ export function ShieldSimulator() {
   const [flash, setFlash] = useState<"base" | "shield" | "player" | null>(null);
   const [isAttacking, setIsAttacking] = useState(false);
   const [burstKey, setBurstKey] = useState(0);
+  const [burstFrom, setBurstFrom] = useState({ x: 54, y: 8 });
+  const shieldZoneRef = useRef<HTMLDivElement>(null);
+  const p2WrapperRef = useRef<HTMLDivElement>(null);
 
   function addLog(msg: string) {
     setLog((l) => [msg, ...l.slice(0, 7)]);
@@ -134,6 +137,16 @@ export function ShieldSimulator() {
         const newShields = snap.shields - 1;
         setShields(newShields);
         if (snap.hasBurst) {
+          const shieldEl = shieldZoneRef.current;
+          const wrapperEl = p2WrapperRef.current;
+          if (shieldEl && wrapperEl) {
+            const sr = shieldEl.getBoundingClientRect();
+            const wr = wrapperEl.getBoundingClientRect();
+            setBurstFrom({
+              x: Math.round((sr.left + sr.right) / 2 - (wr.left + wr.right) / 2),
+              y: Math.round((sr.top + sr.bottom) / 2 - (wr.top + wr.bottom) / 2),
+            });
+          }
           setBurstKey((k) => k + 1);
           addLog(`실드 1장 파괴 → 【버스트】 발동! (남은: ${newShields}장)`);
         } else {
@@ -185,6 +198,7 @@ export function ShieldSimulator() {
         animation={flash === "base" ? "hit-shake 320ms ease-out" : undefined}
       />
       <div
+        ref={shieldZoneRef}
         className={cn(
           "flex-1 rounded border p-0.5 flex flex-col gap-0.5 transition-all duration-300",
           flash === "shield"
@@ -232,6 +246,21 @@ export function ShieldSimulator() {
     <ZoneBox label={label} active={true} className={cls} />
   );
 
+  // Burst card fly — dynamic keyframe based on measured shield zone position
+  const { x: fx, y: fy } = burstFrom;
+  // Arc midpoint: halfway X, pull upward by 30px for the curve
+  const arcX = Math.round(fx * 0.45);
+  const arcY = Math.round(fy - 30);
+  const burstCardKeyframe = `
+    @keyframes burst-card-fly {
+      0%   { transform: translate(${fx}px, ${fy}px) rotate(-14deg) scale(0.8);  opacity: 1; }
+      30%  { transform: translate(${arcX}px, ${arcY}px) rotate(-5deg)  scale(0.92); opacity: 1; }
+      58%  { transform: translate(4px, -6px)  rotate(3deg)   scale(1.05); opacity: 1; }
+      72%  { transform: translate(0, 0)       rotate(-1deg)  scale(1.15); opacity: 1; }
+      86%  { transform: translate(0, 0)       scale(1.35);               opacity: 0.6; }
+      100% { transform: translate(0, 0)       scale(0);                  opacity: 0; }
+    }`;
+
   // Generate per-particle keyframes with individual trajectories
   const particleKeyframes = Array.from({ length: 10 })
     .map((_, i) => {
@@ -264,15 +293,7 @@ export function ShieldSimulator() {
           82%  { transform: translateX(-2px);}
           100% { transform: translateX(0);   }
         }
-        /* Curved arc: card starts right of center, swings up then curves down to center */
-        @keyframes burst-card-fly {
-          0%   { transform: translate(54px, 8px)  rotate(-14deg) scale(0.8);  opacity: 1; }
-          30%  { transform: translate(28px, -26px) rotate(-6deg)  scale(0.95); opacity: 1; }
-          58%  { transform: translate(4px,  -6px)  rotate(3deg)   scale(1.05); opacity: 1; }
-          72%  { transform: translate(0,    0)     rotate(-1deg)  scale(1.15); opacity: 1; }
-          86%  { transform: translate(0,    0)     scale(1.35);               opacity: 0.6; }
-          100% { transform: translate(0,    0)     scale(0);                  opacity: 0; }
-        }
+        ${burstCardKeyframe}
         @keyframes burst-flash {
           0%   { transform: scale(0.2); opacity: 0.9; }
           50%  { transform: scale(1.6); opacity: 0.5; }
@@ -285,6 +306,12 @@ export function ShieldSimulator() {
           100% { transform: translateY(-5px) scale(0.9); opacity: 0; }
         }
         ${particleKeyframes}
+        @keyframes defeat-pop {
+          0%   { transform: scale(0.3) rotate(-8deg); opacity: 0; }
+          60%  { transform: scale(1.12) rotate(2deg); opacity: 1; }
+          80%  { transform: scale(0.96) rotate(-1deg); }
+          100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
       `}</style>
       <div className="rounded-xl border border-border shadow-sm overflow-hidden">
         {/* Header */}
@@ -305,11 +332,12 @@ export function ShieldSimulator() {
 
         <div className="p-3 flex flex-col gap-0.5 text-[10px] select-none">
           {/* ── P2 (top, flipped) — 상대 ── */}
-          <div className="relative">
+          <div className="relative" ref={p2WrapperRef}>
             <PlayerSection
               player="p2"
               className={cn(
-                "transition-all duration-300",
+                "transition-all duration-500",
+                defeated && "opacity-30",
                 flash === "player" && "border-red-400 bg-red-100/80",
               )}
             >
@@ -337,12 +365,22 @@ export function ShieldSimulator() {
               />
             </PlayerSection>
             <BurstOverlay animKey={burstKey} />
+            {/* Defeat overlay */}
+            {defeated && (
+              <div className="absolute inset-0 pointer-events-none flex items-center justify-center" style={{ zIndex: 40 }}>
+                <div className="text-[18px] font-black text-red-600 bg-white/95 px-4 py-1.5 rounded-xl shadow-xl border-2 border-red-400 tracking-wide"
+                  style={{ animation: "defeat-pop 400ms cubic-bezier(0.34,1.56,0.64,1) forwards" }}>
+                  ☠ 패배
+                </div>
+              </div>
+            )}
           </div>
 
           <VsDivider active={isAttacking} />
 
           {/* ── P1 (bottom, not flipped) — 나 ── */}
-          <PlayerSection player="p1">
+          <div className="relative">
+          <PlayerSection player="p1" className={cn("transition-all duration-500", defeated && "opacity-30")}>
             <BoardHalfLayout
               flipped={false}
               slots={{
@@ -366,6 +404,16 @@ export function ShieldSimulator() {
               나
             </div>
           </PlayerSection>
+          {/* Victory overlay */}
+          {defeated && (
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center" style={{ zIndex: 40 }}>
+              <div className="text-[18px] font-black text-blue-600 bg-white/95 px-4 py-1.5 rounded-xl shadow-xl border-2 border-blue-400 tracking-wide"
+                style={{ animation: "defeat-pop 400ms cubic-bezier(0.34,1.56,0.64,1) 120ms both" }}>
+                ★ 승리
+              </div>
+            </div>
+          )}
+          </div>
         </div>
 
         {/* Controls + log */}
