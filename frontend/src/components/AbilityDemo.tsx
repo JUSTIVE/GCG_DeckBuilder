@@ -360,7 +360,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         hp={step >= 2 ? 0 : 2}
         maxHp={2}
         color="blue"
-        rested={step >= 1}
+        rested={true}
         highlight={step === 2}
         hit={step === 2}
         destroyed={step >= 2}
@@ -565,7 +565,7 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
         maxHp={3}
         color="blue"
         dim={step === 0}
-        rested={step >= 3}
+        rested={true}
         highlight={step === 3}
         hit={step === 3}
         destroyed={step >= 3}
