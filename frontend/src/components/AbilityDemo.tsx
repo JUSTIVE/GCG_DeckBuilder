@@ -278,11 +278,13 @@ const DEMOS: Partial<Record<string, DemoConfig>> = {
       <MiniCard
         name="공격 유닛"
         ap={3}
-        hp={3}
+        hp={step >= 3 ? 1 : 3}
+        maxHp={3}
         color="red"
         rested={step >= 1}
         highlight={step === 1}
         attacking={step === 1 || step === 2}
+        hit={step === 3}
       />
     ),
     p2Battle: (step) => (
