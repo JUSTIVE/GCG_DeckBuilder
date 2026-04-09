@@ -8,9 +8,86 @@ import {
   VsDivider,
 } from "@/components/PlayfieldLayout";
 
+// ── BurstOverlay ──────────────────────────────────────────────────────────────
+// Absolute overlay inside the P2 section: shield card arcs from the right
+// shield area → center, then explodes with particles + "버스트 효과 발동!" text.
+
+function BurstOverlay({ animKey }: { animKey: number }) {
+  if (animKey === 0) return null;
+
+  const PARTICLE_COUNT = 10;
+  const colors = ["#f97316", "#fbbf24", "#fb923c", "#fde68a", "#ef4444"];
+
+  return (
+    <div
+      key={animKey}
+      className="absolute inset-0 pointer-events-none flex items-center justify-center"
+      style={{ zIndex: 30 }}
+    >
+      {/* Shield card — arcs from shield area (right) to center */}
+      <div
+        style={{
+          position: "absolute",
+          width: 34,
+          height: 24,
+          animation: "burst-card-fly 620ms cubic-bezier(0.25,0.1,0.25,1) forwards",
+        }}
+        className="rounded border-2 border-yellow-400 bg-yellow-50 shadow-lg flex items-center justify-center text-[8px] font-black text-yellow-700"
+      >
+        실드
+      </div>
+
+      {/* Flash ring */}
+      <div
+        style={{
+          position: "absolute",
+          width: 56,
+          height: 56,
+          borderRadius: "50%",
+          animation: "burst-flash 380ms ease-out 540ms forwards",
+          opacity: 0,
+        }}
+        className="bg-yellow-300/50 border-2 border-yellow-400/60"
+      />
+
+      {/* Particles */}
+      {Array.from({ length: PARTICLE_COUNT }).map((_, i) => {
+        const size = 5 + (i % 3) * 2;
+        return (
+          <div
+            key={i}
+            style={
+              {
+                position: "absolute",
+                width: size,
+                height: size,
+                borderRadius: i % 3 === 0 ? "2px" : "50%",
+                background: colors[i % colors.length],
+                animation: `burst-particle-${i} 520ms ease-out 540ms forwards`,
+                opacity: 0,
+              } as React.CSSProperties
+            }
+          />
+        );
+      })}
+
+      {/* "버스트 효과 발동!" text */}
+      <div
+        style={{
+          position: "absolute",
+          animation: "burst-text 1400ms ease-out 580ms forwards",
+          opacity: 0,
+          whiteSpace: "nowrap",
+        }}
+        className="text-[11px] font-black text-orange-600 bg-white/95 px-2.5 py-1 rounded-lg shadow-lg border border-orange-300"
+      >
+        【버스트】 효과 발동!
+      </div>
+    </div>
+  );
+}
+
 // ── ShieldSimulator ───────────────────────────────────────────────────────────
-// Interactive play-sheet-proportioned simulator showing how player attacks
-// resolve against 실드 에어리어 (베이스 존 first, then 실드 존 top-to-bottom).
 
 export function ShieldSimulator() {
   const INIT_SHIELDS = 6;
@@ -23,6 +100,7 @@ export function ShieldSimulator() {
   const [hasBurst, setHasBurst] = useState(false);
   const [flash, setFlash] = useState<"base" | "shield" | "player" | null>(null);
   const [isAttacking, setIsAttacking] = useState(false);
+  const [burstKey, setBurstKey] = useState(0);
 
   function addLog(msg: string) {
     setLog((l) => [msg, ...l.slice(0, 7)]);
@@ -36,11 +114,9 @@ export function ShieldSimulator() {
   function attack() {
     if (defeated || isAttacking) return;
 
-    // Snapshot current state to avoid stale closure inside timeout
     const snap = { hasBase, baseHp, shields, hasBurst };
     setIsAttacking(true);
 
-    // Damage lands at peak of lunge animation (~220ms)
     setTimeout(() => {
       if (snap.hasBase) {
         const newHp = snap.baseHp - 1;
@@ -57,8 +133,12 @@ export function ShieldSimulator() {
         triggerFlash("shield");
         const newShields = snap.shields - 1;
         setShields(newShields);
-        const burst = snap.hasBurst ? " → 【버스트】 발동!" : " → 트래시";
-        addLog(`실드 1장 파괴${burst} (남은: ${newShields}장)`);
+        if (snap.hasBurst) {
+          setBurstKey((k) => k + 1);
+          addLog(`실드 1장 파괴 → 【버스트】 발동! (남은: ${newShields}장)`);
+        } else {
+          addLog(`실드 1장 파괴 → 트래시 (남은: ${newShields}장)`);
+        }
       } else {
         triggerFlash("player");
         setDefeated(true);
@@ -77,9 +157,9 @@ export function ShieldSimulator() {
     setLog([]);
     setFlash(null);
     setIsAttacking(false);
+    setBurstKey(0);
   }
 
-  // ── Opponent's shield area (P2 top, flipped → shield on RIGHT) ──────────────
   const opponentShieldArea = (
     <div
       className={cn(
@@ -123,7 +203,6 @@ export function ShieldSimulator() {
     </div>
   );
 
-  // ── My battle area (P1 bottom, attacker unit) ─────────────────────────────
   const myBattleZone = (
     <div className="flex-[3] h-full rounded border border-orange-400/40 bg-orange-400/5 flex items-center justify-center overflow-visible">
       <div
@@ -153,6 +232,21 @@ export function ShieldSimulator() {
     <ZoneBox label={label} active={true} className={cls} />
   );
 
+  // Generate per-particle keyframes with individual trajectories
+  const particleKeyframes = Array.from({ length: 10 })
+    .map((_, i) => {
+      const angle = (i / 10) * 360;
+      const dist = 28 + (i % 3) * 10;
+      const tx = Math.cos((angle * Math.PI) / 180) * dist;
+      const ty = Math.sin((angle * Math.PI) / 180) * dist;
+      return `
+        @keyframes burst-particle-${i} {
+          0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+          100% { transform: translate(${tx}px, ${ty}px) scale(0); opacity: 0; }
+        }`;
+    })
+    .join("\n");
+
   return (
     <>
       <style>{`
@@ -170,6 +264,27 @@ export function ShieldSimulator() {
           82%  { transform: translateX(-2px);}
           100% { transform: translateX(0);   }
         }
+        /* Curved arc: card starts right of center, swings up then curves down to center */
+        @keyframes burst-card-fly {
+          0%   { transform: translate(54px, 8px)  rotate(-14deg) scale(0.8);  opacity: 1; }
+          30%  { transform: translate(28px, -26px) rotate(-6deg)  scale(0.95); opacity: 1; }
+          58%  { transform: translate(4px,  -6px)  rotate(3deg)   scale(1.05); opacity: 1; }
+          72%  { transform: translate(0,    0)     rotate(-1deg)  scale(1.15); opacity: 1; }
+          86%  { transform: translate(0,    0)     scale(1.35);               opacity: 0.6; }
+          100% { transform: translate(0,    0)     scale(0);                  opacity: 0; }
+        }
+        @keyframes burst-flash {
+          0%   { transform: scale(0.2); opacity: 0.9; }
+          50%  { transform: scale(1.6); opacity: 0.5; }
+          100% { transform: scale(2.4); opacity: 0; }
+        }
+        @keyframes burst-text {
+          0%   { transform: translateY(6px) scale(0.65); opacity: 0; }
+          18%  { transform: translateY(0) scale(1.08);   opacity: 1; }
+          65%  { transform: translateY(0) scale(1);      opacity: 1; }
+          100% { transform: translateY(-5px) scale(0.9); opacity: 0; }
+        }
+        ${particleKeyframes}
       `}</style>
       <div className="rounded-xl border border-border shadow-sm overflow-hidden">
         {/* Header */}
@@ -190,36 +305,39 @@ export function ShieldSimulator() {
 
         <div className="p-3 flex flex-col gap-0.5 text-[10px] select-none">
           {/* ── P2 (top, flipped) — 상대 ── */}
-          <PlayerSection
-            player="p2"
-            className={cn(
-              "transition-all duration-300",
-              flash === "player" && "border-red-400 bg-red-100/80",
-            )}
-          >
-            <div className="flex items-center justify-between text-[9px] font-semibold pb-0.5">
-              <span className="text-slate-400">상대</span>
-              <span
-                className={cn(
-                  "transition-all",
-                  defeated ? "text-red-500 animate-pulse" : "text-slate-400",
-                )}
-              >
-                {defeated ? "☠ 패배" : "★ 생존"}
-              </span>
-            </div>
-            <BoardHalfLayout
-              flipped={true}
-              slots={{
-                shieldArea: opponentShieldArea,
-                battle: dim("⑤ 배틀", "flex-[3] h-full"),
-                deck: dim("① 덱", "flex-[1] h-full"),
-                resDeck: dim("② 리소스덱", "flex-[2] h-full"),
-                resource: dim("④ 리소스", "flex-[4] h-full"),
-                trash: dim("⑦ 트래시", "flex-[2] h-full"),
-              }}
-            />
-          </PlayerSection>
+          <div className="relative">
+            <PlayerSection
+              player="p2"
+              className={cn(
+                "transition-all duration-300",
+                flash === "player" && "border-red-400 bg-red-100/80",
+              )}
+            >
+              <div className="flex items-center justify-between text-[9px] font-semibold pb-0.5">
+                <span className="text-slate-400">상대</span>
+                <span
+                  className={cn(
+                    "transition-all",
+                    defeated ? "text-red-500 animate-pulse" : "text-slate-400",
+                  )}
+                >
+                  {defeated ? "☠ 패배" : "★ 생존"}
+                </span>
+              </div>
+              <BoardHalfLayout
+                flipped={true}
+                slots={{
+                  shieldArea: opponentShieldArea,
+                  battle: dim("⑤ 배틀", "flex-[3] h-full"),
+                  deck: dim("① 덱", "flex-[1] h-full"),
+                  resDeck: dim("② 리소스덱", "flex-[2] h-full"),
+                  resource: dim("④ 리소스", "flex-[4] h-full"),
+                  trash: dim("⑦ 트래시", "flex-[2] h-full"),
+                }}
+              />
+            </PlayerSection>
+            <BurstOverlay animKey={burstKey} />
+          </div>
 
           <VsDivider active={isAttacking} />
 
