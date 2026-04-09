@@ -260,7 +260,7 @@ export function ShieldSlots({
   const TOTAL_H = CARD_H + 5 * STRIP_H; // 74px
   const renderOrder = reversed ? [5, 4, 3, 2, 1, 0] : [0, 1, 2, 3, 4, 5];
   return (
-    <div className="relative w-full" style={{ height: TOTAL_H }}>
+    <div className="relative w-full overflow-hidden isolate" style={{ height: TOTAL_H }}>
       {renderOrder.map((idx, pos) => {
         // Topmost card (highest z-index) breaks first as count decreases.
         // reversed: topmost = pos 5; not reversed: topmost = pos 0.
