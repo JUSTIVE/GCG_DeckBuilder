@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import { graphql } from "relay-runtime";
@@ -480,10 +480,11 @@ function extractSetupCardUrl(ref: RulesPage_SetupMiniCard$key | null | undefined
 // ── zone box primitives ───────────────────────────────────────────────────────
 
 function ZoneBox({
-  label, sub, active, accent, dim, children, className, delay = 0,
+  label, sub, active, accent, dim, children, className, delay = 0, animation,
 }: {
   label?: string; sub?: string; active: boolean; accent?: boolean;
   dim?: boolean; children?: React.ReactNode; className?: string; delay?: number;
+  animation?: string;
 }) {
   return (
     <div
@@ -497,7 +498,7 @@ function ZoneBox({
         dim && "opacity-40",
         className,
       )}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${delay}ms`, animation }}
     >
       {label && <span className="text-[9px] font-semibold px-0.5">{label}</span>}
       {sub && <span className="text-[8px] opacity-60 mt-0.5">{sub}</span>}
@@ -530,26 +531,61 @@ function ShieldSlots({ count, accent }: { count: number; accent: boolean }) {
 
 // Hand cards strip
 function HandStrip({
-  count, accent, mulligan, flipped, cardImages,
+  count, accent, mulligan, flipped, cardImages, mulliganPhase,
 }: {
   count: number; accent: boolean; mulligan: boolean; flipped: boolean;
   cardImages?: readonly (string | null | undefined)[];
+  mulliganPhase?: MulliganPhase;
 }) {
+  const isReturning = mulliganPhase === "returning";
+  const isShuffling = mulliganPhase === "shuffling";
+  const isDrawing = mulliganPhase === "drawing";
+
   const cards = Array.from({ length: 5 }, (_, i) => {
     const url = cardImages?.[i];
+
+    // Fly direction: P1 (not flipped) → up; P2 (flipped) → down
+    const flyY = flipped ? "55px" : "-55px";
+
+    let transform = "translateY(0px) scale(1)";
+    let opacity: number | undefined;
+    let transition = `transform 300ms ease, opacity 300ms ease`;
+    let transitionDelay = `${i * 35}ms`;
+
+    if (isReturning) {
+      transform = `translateY(${flyY}) scale(0.1)`;
+      opacity = 0;
+      transition = `transform 380ms ease-in, opacity 300ms ease`;
+      transitionDelay = `${i * 45}ms`;
+    } else if (isShuffling) {
+      // Snap to the out position without animating (no transition)
+      transform = `translateY(${flyY}) scale(0.1)`;
+      opacity = 0;
+      transition = `none`;
+      transitionDelay = `0ms`;
+    } else if (isDrawing) {
+      // Animate back from out position to normal
+      transform = `translateY(0px) scale(1)`;
+      opacity = 1;
+      transition = `transform 380ms cubic-bezier(0.22,1,0.36,1), opacity 280ms ease`;
+      transitionDelay = `${i * 65}ms`;
+    }
+
     return (
       <div
         key={i}
         className={cn(
-          "rounded-[3px] border transition-all duration-300 overflow-hidden",
+          "rounded-[3px] border overflow-hidden",
           i < count
-            ? accent
-              ? "border-primary/80"
-              : "border-green-300"
+            ? accent ? "border-primary/80" : "border-green-300"
             : "border-dashed border-border/20 opacity-20",
           "w-[18px] h-[26px]",
         )}
-        style={{ transitionDelay: `${i * 35}ms` }}
+        style={
+          i < count
+            ? { transition, transitionDelay, transform, opacity }
+            : { transitionDelay: `${i * 35}ms` }
+        }
       >
         {i < count && url
           ? <img src={url} alt="" className="w-full h-full object-cover object-top" />
@@ -559,6 +595,10 @@ function HandStrip({
       </div>
     );
   });
+
+  const showMulliganBadge = mulligan && count > 0 && !mulliganPhase;
+  const showShuffling = isShuffling;
+  const showDrawing = isDrawing;
 
   return (
     <div
@@ -573,15 +613,15 @@ function HandStrip({
       )}
     >
       <span className={cn(
-        "text-[9px] font-semibold shrink-0",
+        "text-[9px] font-semibold shrink-0 transition-all duration-200",
         accent ? "text-primary" : "text-green-700",
       )}>
-        패 {count > 0 ? `${count}장` : ""}
+        {showShuffling ? "셔플" : showDrawing ? "드로우" : `패 ${count > 0 ? `${count}장` : ""}`}
       </span>
       <div className={cn("flex gap-0.5", flipped && "flex-row-reverse")}>
         {cards}
       </div>
-      {mulligan && count > 0 && (
+      {showMulliganBadge && (
         <span className={cn(
           "text-[8px] rounded px-1 py-0.5 font-bold shrink-0",
           accent ? "bg-primary/20 text-primary" : "bg-amber-100 text-amber-700",
@@ -646,21 +686,23 @@ function SetupShieldArea({ board, accentBase, accentShield }: {
 }
 
 // Battle + deck row only (shield is handled separately as a tall column)
-function SetupBattleAndDeckRow({ board, flipped, accentDeck }: {
+function SetupBattleAndDeckRow({ board, flipped, accentDeck, deckShuffling }: {
   board: SetupBoardState;
   flipped: boolean;
   accentDeck: boolean;
+  deckShuffling?: boolean;
 }) {
   const battle = (
     <ZoneBox label="배틀 에어리어" active={true} className="flex-[3] h-full" />
   );
   const deck = (
     <ZoneBox
-      label="덱"
-      sub={board.hasDeck ? "50장" : undefined}
+      label={deckShuffling ? "셔플 중" : "덱"}
+      sub={board.hasDeck && !deckShuffling ? "50장" : undefined}
       active={board.hasDeck}
-      accent={accentDeck && board.hasDeck}
+      accent={(accentDeck && board.hasDeck) || deckShuffling}
       className="flex-[1] h-full"
+      animation={deckShuffling ? "deck-shuffle 0.42s ease-in-out 2" : undefined}
     />
   );
   return (
@@ -671,18 +713,19 @@ function SetupBattleAndDeckRow({ board, flipped, accentDeck }: {
 }
 
 // Half-board: shield column (full height) + stacked battle/resource rows
-function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, accentExRes }: {
+function SetupHalfBoard({ board, flipped, accentDeck, accentBase, accentShield, accentExRes, deckShuffling }: {
   board: SetupBoardState;
   flipped: boolean;
   accentDeck: boolean;
   accentBase: boolean;
   accentShield: boolean;
   accentExRes: boolean;
+  deckShuffling?: boolean;
 }) {
   const shieldCol = (
     <SetupShieldArea board={board} accentBase={accentBase} accentShield={accentShield} />
   );
-  const battleRow = <SetupBattleAndDeckRow board={board} flipped={flipped} accentDeck={accentDeck} />;
+  const battleRow = <SetupBattleAndDeckRow board={board} flipped={flipped} accentDeck={accentDeck} deckShuffling={deckShuffling} />;
   const resourceRow = <SetupResourceRow board={board} flipped={flipped} accentDeck={accentDeck} accentExRes={accentExRes} />;
   const rightCols = (
     <div className="flex flex-col gap-0.5 flex-1 min-w-0">
@@ -742,9 +785,10 @@ function SetupResourceRow({ board, flipped, accentDeck, accentExRes }: {
 }
 
 type SetupHandImages = readonly (string | null | undefined)[];
+type MulliganPhase = "idle" | "returning" | "shuffling" | "drawing" | "done";
 
 function SetupDualPlayfield({
-  p1, p2, hl, p1Label, p2Label, p1HandImages, p2HandImages,
+  p1, p2, hl, p1Label, p2Label, p1HandImages, p2HandImages, mulliganPhase,
 }: {
   p1: SetupBoardState;
   p2: SetupBoardState;
@@ -753,8 +797,10 @@ function SetupDualPlayfield({
   p2Label: string;
   p1HandImages?: SetupHandImages;
   p2HandImages?: SetupHandImages;
+  mulliganPhase?: MulliganPhase;
 }) {
   const accent = (zone: SetupStep["highlight"]) => hl === zone;
+  const deckShuffling = mulliganPhase === "shuffling";
 
   return (
     <div className="flex flex-col gap-0.5 text-[10px] select-none">
@@ -766,6 +812,7 @@ function SetupDualPlayfield({
         mulligan={accent("mulligan")}
         flipped={true}
         cardImages={p2HandImages}
+        mulliganPhase={mulliganPhase}
       />
 
       {/* P2 label */}
@@ -783,6 +830,7 @@ function SetupDualPlayfield({
         board={p2} flipped={true}
         accentDeck={accent("deck")} accentBase={accent("base")}
         accentShield={accent("shield")} accentExRes={accent("exres")}
+        deckShuffling={deckShuffling}
       />
 
       {/* ── CENTER DIVIDER ── */}
@@ -797,6 +845,7 @@ function SetupDualPlayfield({
         board={p1} flipped={false}
         accentDeck={accent("deck")} accentBase={accent("base")}
         accentShield={accent("shield")} accentExRes={accent("exres")}
+        deckShuffling={deckShuffling}
       />
 
       {/* P1 label */}
@@ -816,20 +865,60 @@ function SetupDualPlayfield({
         mulligan={accent("mulligan")}
         flipped={false}
         cardImages={p1HandImages}
+        mulliganPhase={mulliganPhase}
       />
     </div>
   );
 }
 
-function GameSetupWalkthrough({ p1HandImages, p2HandImages }: {
+const MULLIGAN_STEP_INDEX = 3;
+
+function GameSetupWalkthrough({
+  p1HandImages, p2HandImages, newP1HandImages, newP2HandImages,
+}: {
   p1HandImages?: SetupHandImages;
   p2HandImages?: SetupHandImages;
+  newP1HandImages?: SetupHandImages;
+  newP2HandImages?: SetupHandImages;
 }) {
   const [step, setStep] = useState(0);
+  const [mulliganPhase, setMulliganPhase] = useState<MulliganPhase>("idle");
+  const [replayKey, setReplayKey] = useState(0);
   const cur = SETUP_STEPS[step];
   const hlColor = HL[cur.highlight];
 
+  useEffect(() => {
+    if (step !== MULLIGAN_STEP_INDEX) {
+      setMulliganPhase("idle");
+      return;
+    }
+    setMulliganPhase("idle");
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const at = (fn: () => void, ms: number) => timers.push(setTimeout(fn, ms));
+    at(() => setMulliganPhase("returning"), 350);
+    at(() => setMulliganPhase("shuffling"), 1100);
+    at(() => setMulliganPhase("drawing"), 1950);
+    at(() => setMulliganPhase("done"), 2750);
+    return () => timers.forEach(clearTimeout);
+  }, [step, replayKey]);
+
+  const inMulligan = step === MULLIGAN_STEP_INDEX;
+  const showNewImages = mulliganPhase === "drawing" || mulliganPhase === "done";
+  const activeP1Images = showNewImages ? newP1HandImages : p1HandImages;
+  const activeP2Images = showNewImages ? newP2HandImages : p2HandImages;
+
   return (
+    <>
+      <style>{`
+        @keyframes deck-shuffle {
+          0%   { transform: translateY(0) rotate(0deg); }
+          20%  { transform: translateY(-4px) rotate(-5deg); }
+          40%  { transform: translateY(-4px) rotate(5deg); }
+          60%  { transform: translateY(-2px) rotate(-3deg); }
+          80%  { transform: translateY(-1px) rotate(2deg); }
+          100% { transform: translateY(0) rotate(0deg); }
+        }
+      `}</style>
     <div className="flex flex-col gap-3">
       {/* Step pills */}
       <div className="flex gap-1 flex-wrap">
@@ -877,9 +966,21 @@ function GameSetupWalkthrough({ p1HandImages, p2HandImages }: {
         hl={cur.highlight}
         p1Label={cur.p1Label ?? "플레이어 1"}
         p2Label={cur.p2Label ?? "플레이어 2"}
-        p1HandImages={p1HandImages}
-        p2HandImages={p2HandImages}
+        p1HandImages={activeP1Images}
+        p2HandImages={activeP2Images}
+        mulliganPhase={inMulligan ? mulliganPhase : undefined}
       />
+
+      {/* Mulligan replay button */}
+      {inMulligan && (
+        <button
+          type="button"
+          onClick={() => { setMulliganPhase("idle"); setReplayKey((k) => k + 1); }}
+          className="self-center text-[10px] px-2.5 py-1 rounded border border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100 transition-all"
+        >
+          ↺ 멀리건 애니메이션 다시 보기
+        </button>
+      )}
 
       {/* Nav */}
       <div className="flex items-center gap-2">
@@ -916,6 +1017,7 @@ function GameSetupWalkthrough({ p1HandImages, p2HandImages }: {
         </button>
       </div>
     </div>
+    </>
   );
 }
 
@@ -1649,6 +1751,21 @@ export function RulesPage() {
     extractSetupCardUrl(data.baseSample),
     extractSetupCardUrl(data.commandSample),
   ];
+  // New hands after mulligan (different card order to visually distinguish)
+  const newP1HandImages: SetupHandImages = [
+    extractSetupCardUrl(data.pilotSample),
+    extractSetupCardUrl(data.commandSample),
+    extractSetupCardUrl(data.baseSample),
+    extractSetupCardUrl(data.commandSample),
+    extractSetupCardUrl(data.unitSample),
+  ];
+  const newP2HandImages: SetupHandImages = [
+    extractSetupCardUrl(data.unitSample),
+    extractSetupCardUrl(data.baseSample),
+    extractSetupCardUrl(data.pilotSample),
+    extractSetupCardUrl(data.commandSample),
+    extractSetupCardUrl(data.unitSample),
+  ];
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-4 w-full">
@@ -1818,7 +1935,10 @@ export function RulesPage() {
 
       {/* ── 게임 준비 ── */}
       <Section title="게임 준비 순서">
-        <GameSetupWalkthrough p1HandImages={p1HandImages} p2HandImages={p2HandImages} />
+        <GameSetupWalkthrough
+          p1HandImages={p1HandImages} p2HandImages={p2HandImages}
+          newP1HandImages={newP1HandImages} newP2HandImages={newP2HandImages}
+        />
       </Section>
 
       {/* ── 턴 진행 ── */}
