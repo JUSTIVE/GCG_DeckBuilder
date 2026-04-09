@@ -31,7 +31,7 @@ const replaceList = {
   "(G Team)": "(G-팀)",
   "(Maganac Corps)": "(마그아낙 부대)",
   "(Cyclops Team)": "(사이클롭스 부대)",
-  "AGE System": "AGE 시스템",
+  "(AGE System)": "(AGE 시스템)",
   "[Hy-Gogg]": "[하이-곡그]",
   "Pilot】": "파일럿】",
   "this Unit gets AP+2 during this battle.": "이 배틀 동안, 이 유닛을 AP+2 한다.",
@@ -273,9 +273,13 @@ const replaceList = {
   "While there is a friendly white Base in play,": "백색의 아군의 베이스가 있는 동안,",
   "It gets AP-3 during this battle.": "이 배틀 동안, 그 유닛을 AP-3 한다.",
   "If you have a (걀라르호른) Link Unit in play,": "(걀라르호른)의 자신의 링크 유닛이 있다면,",
+  "While you have a (솔레스탈 비잉) Link Unit in play,":
+    "자신의 (솔레스탈 비잉)의 링크 유닛이 있는 동안,",
   "This card's name is also treated as [샤아 아즈나블]":
     "이 카드의 카드명은 [샤아 아즈나블]이라고도 취급한다.",
   "If this is an (에우고) Unit,": "이 유닛이 (에우고)라면,",
+  "If this is an (AGE 시스템) Unit,": "이 유닛이 (AGE 시스템)이라면,",
+  "it gets AP+1 and <돌파 1>.": "이 유닛은 AP+1 되고, <돌파 1>을 얻는다.",
   "discard 1.": "자신은 패 1장을 버린다.",
   "Choose 1 enemy Unit with 4 or less HP battling a friendly Unit with <블로커>.":
     "<블로커>를 가진 아군의 유닛과 배틀하고 있는, HP4 이하의 적 유닛 1개를 선택한다.",
@@ -393,6 +397,17 @@ const replaceList = {
   "When you pair a Pilot that is Lv.3 or lower with one of your Units,":
     "자신의 유닛에 Lv.3 이하의 파일럿이 세트되었을 때,",
   "Choose 1 of your (사이클롭스 부대) Units.": "(사이클롭스 부대)의 자신의 유닛 1개를 선택한다.",
+  "Deploy 1 rested [GQuuuuuuX (Omega Psycommu)]((클랜)･AP3･HP2) Unit token and 1 rested [Red Gundam]((클랜)･AP2･HP3) Unit token.":
+    "[지쿠악스 (오메가 사이코뮤 기동 시)]((클랜)･AP3･HP2)의 유닛 토큰 1개와,[붉은 건담]((클랜)･AP2･HP3)의 유닛 토큰 1개를 레스트로 배치한다.",
+  "During this turn,": "이 턴 동안,",
+  "it may choose an active enemy Unit that has no Pilot paired with it as its attack target.":
+    "그 유닛은, 파일럿이 세트되어 있지 않은 액티브의 상대의 유닛을 공격 대상으로 선택할 수 있다.",
+  "Increase this Unit's AP by an amount equal to the number of (사이클롭스 부대) Pilot cards/Command cards with unique names in your trash.":
+    "이 유닛을, 자신의 트래시의 카드명이 다른 (사이클롭스 부대)의, 파일럿/커맨드 카드와 같은 수만큼 AP+ 한다.",
+  "deal 2 damage to all enemy Units with <블로커>.":
+    "<블로커>를 가진 상대의 유닛 전부에 2 대미지를 준다.",
+  "If you are attacking an enemy Unit,": "상대의 유닛에 공격하고 있다면,",
+  "Deal 5 damage to it.": "그 유닛에 5 대미지를 준다.",
 };
 
 function applyReplacements(v: string): string {
