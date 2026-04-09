@@ -13,6 +13,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Link } from "@tanstack/react-router";
 import { navMain } from "@/lib/nav";
@@ -33,7 +34,7 @@ const DeckListQuery = graphql`
   }
 `;
 
-function DeckSubItems() {
+function DeckSubItems({ onNavigate }: { onNavigate: () => void }) {
   const data = useLazyLoadQuery<AppSideBarDeckListQuery>(DeckListQuery, {});
   const decks = data.deckList.decks;
 
@@ -47,6 +48,7 @@ function DeckSubItems() {
                 to="/deck/$deckId"
                 params={{ deckId: deck.id }}
                 search={deck.colors.length >= 2 ? { color: deck.colors as any } : {}}
+                onClick={onNavigate}
               >
                 <span className="truncate flex-1">{deck.name}</span>
                 <span className="flex gap-0.5 shrink-0">
@@ -67,6 +69,9 @@ function DeckSubItems() {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { setOpenMobile } = useSidebar();
+  const closeOnMobile = () => setOpenMobile(false);
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -75,7 +80,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton
               size="lg"
               render={
-                <Link to="/">
+                <Link to="/" onClick={closeOnMobile}>
                   <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                     <GalleryVerticalEnd className="size-4" />
                   </div>
@@ -95,7 +100,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton
                   render={
-                    <Link to={item.url} className="font-medium">
+                    <Link to={item.url} className="font-medium" onClick={closeOnMobile}>
                       {item.title}
                     </Link>
                   }
@@ -105,14 +110,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     {item.items.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton
-                          render={<Link to={subItem.url}>{subItem.title}</Link>}
+                          render={<Link to={subItem.url} onClick={closeOnMobile}>{subItem.title}</Link>}
                           isActive={subItem.isActive}
                         />
                       </SidebarMenuSubItem>
                     ))}
                     {item.items.some((subItem) => subItem.url === "/decklist") && (
                       <React.Suspense fallback={null}>
-                        <DeckSubItems />
+                        <DeckSubItems onNavigate={closeOnMobile} />
                       </React.Suspense>
                     )}
                   </SidebarMenuSub>

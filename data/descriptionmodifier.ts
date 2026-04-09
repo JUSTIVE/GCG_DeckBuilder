@@ -71,6 +71,7 @@ const replaceList = {
   "Choose 1 friendly Link Unit.": "아군의 링크 유닛 1개를 선택한다.",
   "It gains <돌파 1> during this turn.": "이 턴 동안, 그 유닛은 <돌파 1>을 얻는다.",
   "This Unit gets AP+1 and HP+1.": "이 유닛을 AP+1, HP+1 한다.",
+  "this Unit gets AP+1 and <리페어 1>.": "이 유닛은 AP+1 되고, <리페어 1>을 얻는다.",
   "Set this Unit as active.": "이 유닛을 액티브로 한다.",
   "set this Unit as active.": "이 유닛을 액티브로 한다.",
   "when this Unit destroys an enemy Unit with battle damage,":
@@ -103,6 +104,7 @@ const replaceList = {
   "If this Unit is damaged and Lv.5 or lower,": "이 유닛이 대미지를 받고 있고, Lv.5 이하라면,",
   "it gains <고기동> during this battle.": "이 배틀 동안, 이 유닛은 <고기동>을 얻는다.",
   "Choose 1 enemy Unit that is Lv.3 or lower.": "Lv.3 이하의 상대의 유닛 1개를 선택한다.",
+  "choose 1 enemy Unit that is Lv.3 or lower.": "Lv.3 이하의 상대의 유닛 1개를 선택한다.",
   "Place the top 2 cards of your deck into your trash.":
     "자신의 덱을 위에서 2장, 자신의 트래쉬에 둔다.",
   "choose 1 enemy Unit with 2 or less AP.": "AP2 이하의 상대의 유닛 1개를 선택한다.",
@@ -185,6 +187,8 @@ const replaceList = {
     "자신의 트래쉬에 (걀라르호른)의 카드가 4장 이상 있다면,",
   "Then,": "그 후,",
   "if a friendly (걀라르호른) Unit is in play,": "(걀라르호른)의 아군의 유닛이 있다면,",
+  "if a friendly (주피트리스) Unit is in play,": "(주피트리스)의 아군의 유닛이 있다면,",
+  "If a friendly (주피트리스) Unit is in play,": "(주피트리스)의 아군의 유닛이 있다면,",
   "This Base can't receive enemy effect damage.":
     "이 베이스는 상대로부터 효과 대미지를 받지 않는다.",
   "Choose 1 of your (에우고) Units/Bases.": "(에우고)의 자신의, 유닛 1개/베이스 1개를 선택한다.",
@@ -263,8 +267,13 @@ const replaceList = {
     "이 유닛 이외의, (걀라르호른)의 자신의 유닛이 있는 동안,",
   "While you have another (초대국군) Unit in play,":
     "이 유닛 이외의, (초대국군)의 자신의 유닛이 있는 동안,",
+  "While you have another (주피트리스) Unit in play,":
+    "이 유닛 이외의, (주피트리스)의 자신의 유닛이 있는 동안,",
   "If you have another (삼척동맹) Unit in play,":
     "이 유닛 이외의 (삼척동맹)의 자신의 유닛이 있다면,",
+  "If you have another (사이클롭스 부대) Unit in play,":
+    "이 유닛 이외의 (사이클롭스 부대)의 자신의 유닛이 있다면,",
+
   "If it is your opponent's turn,": "상대의 턴 이라면,",
   "choose 1 of your (걀라르호른) Units. Set it as active.":
     "(걀라르호른)의 자신의 유닛 1개를 선택한다. 그 유닛을 액티브로 한다.",
@@ -292,6 +301,7 @@ const replaceList = {
   "you may choose 1 friendly Unit.": "아군의 유닛 1개를 선택할 수 있다.",
   "While you have 2 or more (초대국군)/(UN) Units in play,":
     "(초대국군)/(UN)의 자신의 유닛이 2개 이상 있는 한,",
+  "While you have 2 or more (티탄즈) Units in play,": "(티탄즈)의 자신의 유닛이 2개 이상 있는 한,",
   "this card in your hand gets cost -1.": "패의 이 카드를 코스트-1 한다.",
   "This Unit can only attack during a turn when one of your (초대국군)/(UN) Units is deployed.":
     "이 유닛은, (초대국군)/(UN)의 자신의 유닛이 배치된 턴에만 공격할 수 있다.",
@@ -343,6 +353,7 @@ const replaceList = {
     "이 유닛이 Lv.5 이하의 상대의 유닛에 배틀 대미지를 주었을 때,",
   "choose 1 enemy Unit with 4 or less AP.": "AP4 이하의 상대의 유닛 1개를 선택한다.",
   "While this Unit has 1 HP,": "이 유닛이 HP1인 동안,",
+  "While this Unit has 5 or more AP,": "이 유닛이 AP5 이상인 동안,",
   "choose 1 active enemy Unit that is Lv.4 or lower instead.":
     "대신에 액티브의 Lv.4 이하의 상대의 유닛 1개를 선택한다.",
 
@@ -408,6 +419,14 @@ const replaceList = {
     "<블로커>를 가진 상대의 유닛 전부에 2 대미지를 준다.",
   "If you are attacking an enemy Unit,": "상대의 유닛에 공격하고 있다면,",
   "Deal 5 damage to it.": "그 유닛에 5 대미지를 준다.",
+  "deploy 1 rested [하이-곡그]((사이클롭스 부대)･AP2･HP1) Unit token.":
+    "[하이-곡그]((사이클롭스 부대)･AP2･HP1) 유닛 토큰 1개를 레스트로 배치한다.",
+  "Enemy Units choose one of your rested (마그아낙 부대) Units as their attack target if possible when attacking.":
+    "상대의 유닛은 공격할 때, 가능하면 레스트의 자신의 (마그아낙 부대)의 유닛을 공격 대상으로 선택해야 한다.",
+  "When you place an EX Resource,": "자신의 EX리소스가 추가됐을 때,",
+  "choose 1 of your (AGE 시스템) Units.": "(AGE 시스템)의 자신의 유닛 1개를 선택한다.",
+  "Choose 1 (사이클롭스 부대) Pilot card from your trash.":
+    "자신의 트래시에서 (사이클롭스 부대)의 파일럿 카드 1장을 선택한다.",
 };
 
 function applyReplacements(v: string): string {

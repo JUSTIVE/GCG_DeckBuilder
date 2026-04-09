@@ -11314,7 +11314,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While you have another (주피트리스) Unit in play, this Unit gets AP+1 and <리페어 1>.",
+      "이 유닛 이외의, (주피트리스)의 자신의 유닛이 있는 동안, 이 유닛은 AP+1 되고, <리페어 1>을 얻는다.",
       "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
     ],
     "__typename": "UnitCard",
@@ -11339,7 +11339,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While you have 2 or more (티탄즈) Units in play, 패의 이 카드를 코스트-1 한다."
+      "(티탄즈)의 자신의 유닛이 2개 이상 있는 한, 패의 이 카드를 코스트-1 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-014",
@@ -11426,7 +11426,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【버스트】 Choose 1 (사이클롭스 부대) Pilot card from your trash. 그 카드를 패에 추가한다.",
+      "【버스트】 자신의 트래시에서 (사이클롭스 부대)의 파일럿 카드 1장을 선택한다. 그 카드를 패에 추가한다.",
       "【세트 시･(사이클롭스 부대) 파일럿】 All your (사이클롭스 부대) Units may choose an active enemy Unit with 5 or less AP as their attack target during this turn."
     ],
     "__typename": "UnitCard",
@@ -11460,7 +11460,7 @@
     "relatedTrait": [],
     "description": [
       "<돌파 5> (공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)",
-      "【공격 시】 <블로커>를 가진 상대의 유닛 1개를 선택한다. Deal 5 damage to it."
+      "【공격 시】 <블로커>를 가진 상대의 유닛 1개를 선택한다. 그 유닛에 5 대미지를 준다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-018",
@@ -11620,7 +11620,7 @@
       "AGE_SYSTEM"
     ],
     "description": [
-      "When you place an EX Resource, choose 1 of your (AGE 시스템) Units. 이 턴 동안, 그 유닛은 <고기동>을 얻는다.",
+      "자신의 EX리소스가 추가됐을 때, (AGE 시스템)의 자신의 유닛 1개를 선택한다. 이 턴 동안, 그 유닛은 <고기동>을 얻는다.",
       "(이 유닛은 블록당하지 않는다.)"
     ],
     "__typename": "UnitCard",
@@ -11652,7 +11652,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "【링크 시】 If you have another (사이클롭스 부대) Unit in play, deploy 1 rested [하이-곡그]((사이클롭스 부대)･AP2･HP1) Unit token."
+      "【링크 시】 이 유닛 이외의 (사이클롭스 부대)의 자신의 유닛이 있다면, [하이-곡그]((사이클롭스 부대)･AP2･HP1) 유닛 토큰 1개를 레스트로 배치한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-024",
@@ -11681,7 +11681,7 @@
       "MAGANAC_CORPS"
     ],
     "description": [
-      "Enemy Units choose one of your rested (마그아낙 부대) Units as their attack target if possible when attacking."
+      "상대의 유닛은 공격할 때, 가능하면 레스트의 자신의 (마그아낙 부대)의 유닛을 공격 대상으로 선택해야 한다."
     ],
     "__typename": "UnitCard",
     "id": "GD03-025",
@@ -12188,7 +12188,7 @@
     ],
     "relatedTrait": [],
     "description": [
-      "While this Unit has 5 or more AP, it may choose an active enemy Unit that is Lv.5 or lower as its attack target."
+      "이 유닛이 AP5 이상인 동안, it may choose an active enemy Unit that is Lv.5 or lower as its attack target."
     ],
     "__typename": "UnitCard",
     "id": "GD03-042",
@@ -14364,7 +14364,7 @@
     "relatedTrait": [],
     "description": [
       "【버스트】 이 카드를 배치한다.",
-      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, if a friendly (주피트리스) Unit is in play, choose 1 enemy Unit that is Lv.3 or lower. 그 유닛을 레스트로 한다."
+      "【배치 시】 자신의 실드 1장을 패에 추가한다. 그 후, (주피트리스)의 아군의 유닛이 있다면, Lv.3 이하의 상대의 유닛 1개를 선택한다. 그 유닛을 레스트로 한다."
     ],
     "__typename": "BaseCard",
     "id": "GD03-123",
