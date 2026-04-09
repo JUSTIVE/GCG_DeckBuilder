@@ -46,7 +46,7 @@ function DualShieldArea({
       className={cn(
         "shrink-0 flex flex-col rounded border p-0.5 gap-0.5 transition-all duration-300",
         accentShield || accentBase
-          ? "border-primary/50 bg-primary/5"
+          ? "border-orange-400/50 bg-orange-400/5"
           : "border-border bg-white",
         flipped ? "flex-col-reverse" : "",
       )}
@@ -65,7 +65,7 @@ function DualShieldArea({
       <div
         className={cn(
           "flex-1 rounded border p-0.5 flex flex-col gap-0.5 transition-all duration-300",
-          accentShield ? "border-primary/50 bg-primary/5" : "border-border/50",
+          accentShield ? "border-orange-400/50 bg-orange-400/5" : "border-border/50",
         )}
       >
         <span className="text-[8px] text-center text-muted-foreground leading-none">

@@ -85,7 +85,7 @@ export function ShieldSimulator() {
       className={cn(
         "shrink-0 flex flex-col-reverse rounded border p-0.5 gap-0.5 transition-all duration-300",
         flash === "base" || flash === "shield"
-          ? "border-primary/50 bg-primary/5"
+          ? "border-orange-400/50 bg-orange-400/5"
           : flash === "player"
             ? "border-red-300 bg-red-50/50"
             : "border-border bg-white",
@@ -108,7 +108,7 @@ export function ShieldSimulator() {
         className={cn(
           "flex-1 rounded border p-0.5 flex flex-col gap-0.5 transition-all duration-300",
           flash === "shield"
-            ? "border-primary/50 bg-primary/5"
+            ? "border-orange-400/50 bg-orange-400/5"
             : "border-border/50",
         )}
         style={{

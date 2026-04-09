@@ -206,7 +206,7 @@ export function ZoneBox({
         children ? "overflow-visible" : "overflow-hidden",
         active
           ? accent
-            ? "bg-primary/15 border-primary text-primary"
+            ? "bg-orange-500/15 border-orange-500 text-orange-600"
             : "bg-background border-border text-foreground"
           : "border-dashed border-border/40 bg-transparent opacity-25",
         dim && "opacity-40",
@@ -274,7 +274,7 @@ export function ShieldSlots({
               "absolute w-full rounded border transition-all duration-300",
               filled
                 ? accent
-                  ? "bg-slate-500 border-slate-700"
+                  ? "bg-orange-500 border-orange-700"
                   : "bg-slate-200 border-slate-400"
                 : "border-dashed border-border/30 opacity-100",
             )}

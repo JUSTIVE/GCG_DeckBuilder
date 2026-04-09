@@ -606,7 +606,7 @@ function TurnPhaseWalkthrough() {
         <p className="text-xs text-muted-foreground font-medium">관련 영역</p>
         <MiniPlayfield highlights={phase.highlights} />
         {phase.highlights.includes("hand") && (
-          <div className="text-xs text-center rounded border border-primary/50 bg-primary/10 text-primary font-bold px-2 py-1 transition-all">
+          <div className="text-xs text-center rounded border border-orange-400/50 bg-orange-400/10 text-orange-600 font-bold px-2 py-1 transition-all">
             패 (손패) — 플레이 시트 밖, 자신만 열람
           </div>
         )}
@@ -668,7 +668,7 @@ function BattleStepsWalkthrough() {
             onClick={() => setActive(isActive ? null : i)}
             className={cn(
               "flex gap-3 text-xs text-left rounded-md px-2 -mx-2 transition-all duration-200",
-              isActive ? "bg-primary/8" : "hover:bg-muted/30",
+              isActive ? "bg-orange-500/8" : "hover:bg-muted/30",
             )}
           >
             <div className="shrink-0 flex flex-col items-center">
@@ -676,7 +676,7 @@ function BattleStepsWalkthrough() {
                 className={cn(
                   "w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-200 mt-2.5",
                   isActive
-                    ? "bg-primary text-primary-foreground scale-110"
+                    ? "bg-orange-500 text-white scale-110"
                     : "bg-muted",
                 )}
               >
@@ -686,7 +686,7 @@ function BattleStepsWalkthrough() {
                 <div
                   className={cn(
                     "w-px flex-1 min-h-3 my-0.5 transition-colors duration-200",
-                    isActive ? "bg-primary/30" : "bg-border",
+                    isActive ? "bg-orange-400/30" : "bg-border",
                   )}
                 />
               )}
@@ -695,7 +695,7 @@ function BattleStepsWalkthrough() {
               <p
                 className={cn(
                   "font-semibold transition-colors duration-200",
-                  isActive ? "text-primary" : "",
+                  isActive ? "text-orange-600" : "",
                 )}
               >
                 {step.name}
@@ -802,7 +802,7 @@ function ZoneSection() {
               className={cn(
                 "rounded border p-2 text-left transition-all duration-200",
                 isSelected
-                  ? "border-primary bg-primary/8 shadow-sm"
+                  ? "border-orange-400 bg-orange-500/8 shadow-sm"
                   : "border-border hover:bg-muted/40 hover:border-muted-foreground/30",
               )}
             >
@@ -810,7 +810,7 @@ function ZoneSection() {
                 <span
                   className={cn(
                     "font-semibold transition-colors",
-                    isSelected && "text-primary",
+                    isSelected && "text-orange-600",
                   )}
                 >
                   {z.name}
@@ -859,7 +859,7 @@ function ZoneSection() {
         </p>
         <MiniPlayfield highlights={highlights} />
         {selected === "패 (손패)" && (
-          <div className="text-[11px] text-center rounded border border-primary/50 bg-primary/10 text-primary font-bold px-2 py-1">
+          <div className="text-[11px] text-center rounded border border-orange-400/50 bg-orange-400/10 text-orange-600 font-bold px-2 py-1">
             패 (손패) — 플레이 시트 밖, 자신만 열람
           </div>
         )}

@@ -144,7 +144,7 @@ function MiniCard({
               "rounded border-2 flex flex-col overflow-hidden shrink-0 select-none",
               c.border,
               c.bg,
-              highlight && "ring-2 ring-offset-1 ring-primary shadow-md",
+              highlight && "ring-2 ring-offset-1 ring-orange-500 shadow-md",
               dim && "opacity-25",
             )}
             style={{
