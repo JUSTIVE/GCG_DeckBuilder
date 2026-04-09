@@ -408,6 +408,7 @@ type Query {
   searchHistory: SearchHistoryList!
   deckList: DeckList!
   randomCard(kind: CardKind!): Card
+  randomCards(kind: CardKind!, count: Int!): [Card!]!
 }
 
 input DeckCardInput {

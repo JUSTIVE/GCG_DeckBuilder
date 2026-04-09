@@ -1707,13 +1707,49 @@ type CardTypeEntry = {
 function CardTypeItem({
   ct,
   cardRef,
+  cardRefs,
   onOpen,
 }: {
   ct: CardTypeEntry;
   cardRef: CardPreview_card$key | null | undefined;
+  cardRefs?: readonly (CardPreview_card$key | null | undefined)[];
   onOpen: (id: string) => void;
 }) {
+  const pool = cardRefs && cardRefs.length > 0 ? cardRefs : cardRef ? [cardRef] : [];
+  const [idx, setIdx] = useState(0);
+  const [slide, setSlide] = useState<"idle" | "out" | "in">("idle");
+  const [rotation, setRotation] = useState(ct.rotate);
+
+  const handleRefresh = () => {
+    if (pool.length <= 1 || slide !== "idle") return;
+    setSlide("out");
+    setTimeout(() => {
+      setIdx((i) => (i + 1) % pool.length);
+      setRotation((Math.random() * 18 - 9) | 0);
+      setSlide("in");
+      setTimeout(() => setSlide("idle"), 460);
+    }, 220);
+  };
+
+  const currentRef = pool[idx % pool.length];
+
   return (
+    <>
+      <style>{`
+        @keyframes card-type-slide-out {
+          0%   { transform: translateX(0);    opacity: 1; }
+          18%  { transform: translateX(-10%); opacity: 1; }
+          100% { transform: translateX(210%); opacity: 0; }
+        }
+        @keyframes card-type-slide-in {
+          0%   { transform: translateX(210%); opacity: 0; }
+          12%  { opacity: 1; }
+          55%  { transform: translateX(-14%); }
+          75%  { transform: translateX(6%);   }
+          90%  { transform: translateX(-2%);  }
+          100% { transform: translateX(0);    }
+        }
+      `}</style>
     <div className={cn("relative rounded-md border overflow-visible", ct.color)}>
       {/* content — right padding to leave room for the peeking card */}
       <div className="p-3 pr-16">
@@ -1741,18 +1777,47 @@ function CardTypeItem({
       </div>
 
       {/* peeking card — half-overlapping right edge, slightly tilted */}
-      {cardRef && (
+      {currentRef && (
         <div
           className="absolute top-1/2 right-0 z-10 drop-shadow-lg"
           style={{
             width: 56,
-            transform: `translateX(45%) translateY(-50%) rotate(${ct.rotate}deg)`,
+            transform: `translateX(45%) translateY(-50%) rotate(${rotation}deg)`,
           }}
         >
-          <CardPreview cardRef={cardRef} onOpen={onOpen} />
+          <div
+            style={{
+              animation: slide === "out"
+                ? "card-type-slide-out 220ms ease-in forwards"
+                : slide === "in"
+                ? "card-type-slide-in 460ms ease-out forwards"
+                : "none",
+            }}
+          >
+            <CardPreview cardRef={currentRef} onOpen={onOpen} />
+          </div>
         </div>
       )}
+
+      {/* refresh button */}
+      {pool.length > 1 && (
+        <button
+          type="button"
+          onClick={handleRefresh}
+          title="다른 카드 보기"
+          className={cn(
+            "absolute bottom-1.5 right-[60px] z-20",
+            "w-5 h-5 rounded-full flex items-center justify-center",
+            "bg-white/80 border border-border/60 text-muted-foreground",
+            "hover:bg-white hover:text-foreground transition-all text-[10px]",
+            slide !== "idle" && "opacity-50 cursor-not-allowed",
+          )}
+        >
+          ↺
+        </button>
+      )}
     </div>
+    </>
   );
 }
 
@@ -1779,6 +1844,21 @@ export const Query = graphql`
     resourceSample: randomCard(kind: RESOURCE) {
       ...CardPreview_card
       ...RulesPage_SetupMiniCard
+    }
+    unitSamples: randomCards(kind: UNIT, count: 6) {
+      ...CardPreview_card
+    }
+    pilotSamples: randomCards(kind: PILOT, count: 6) {
+      ...CardPreview_card
+    }
+    commandSamples: randomCards(kind: COMMAND, count: 6) {
+      ...CardPreview_card
+    }
+    baseSamples: randomCards(kind: BASE, count: 6) {
+      ...CardPreview_card
+    }
+    resourceSamples: randomCards(kind: RESOURCE, count: 6) {
+      ...CardPreview_card
     }
   }
 `;
@@ -1917,6 +1997,7 @@ export function RulesPage() {
                 ],
                 rotate: 6,
                 cardRef: data.unitSample,
+                cardRefs: data.unitSamples,
               },
               {
                 name: "파일럿",
@@ -1932,6 +2013,7 @@ export function RulesPage() {
                 ],
                 rotate: -5,
                 cardRef: data.pilotSample,
+                cardRefs: data.pilotSamples,
               },
               {
                 name: "커맨드",
@@ -1947,6 +2029,7 @@ export function RulesPage() {
                 ],
                 rotate: 8,
                 cardRef: data.commandSample,
+                cardRefs: data.commandSamples,
               },
               {
                 name: "베이스",
@@ -1960,6 +2043,7 @@ export function RulesPage() {
                 ],
                 rotate: -7,
                 cardRef: data.baseSample,
+                cardRefs: data.baseSamples,
               },
               {
                 name: "리소스",
@@ -1973,10 +2057,11 @@ export function RulesPage() {
                 ],
                 rotate: 5,
                 cardRef: data.resourceSample,
+                cardRefs: data.resourceSamples,
               },
             ] as const
           ).map((ct) => (
-            <CardTypeItem key={ct.name} ct={ct} cardRef={ct.cardRef} onOpen={setOverlayCardId} />
+            <CardTypeItem key={ct.name} ct={ct} cardRef={ct.cardRef} cardRefs={ct.cardRefs} onOpen={setOverlayCardId} />
           ))}
         </div>
         <Note>

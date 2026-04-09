@@ -154,6 +154,22 @@ const rootValue = {
     return pool[Math.floor(Math.random() * pool.length)];
   },
 
+  randomCards({ kind, count }: { kind: string; count: number }) {
+    const typeName: Record<string, string> = {
+      UNIT: "UnitCard",
+      PILOT: "PilotCard",
+      COMMAND: "CommandCard",
+      BASE: "BaseCard",
+      RESOURCE: "ResourceCard",
+    };
+    const target = typeName[kind];
+    if (!target) return [];
+    const pool = allCards.filter((c) => c.__typename === target);
+    if (!pool.length) return [];
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, Math.min(count, shuffled.length));
+  },
+
   addFilterSearch,
   addCardView,
   removeSearchHistory,
