@@ -1,5 +1,6 @@
 import { renderKeyword } from "@/render/keyword";
-import type { CardKeyword, CardTrait } from "@/routes/cardlist";
+import { renderSeries } from "@/render/series";
+import type { CardKeyword, CardTrait, CardSeries } from "@/routes/cardlist";
 
 export const SORT_OPTIONS: Array<{ value: string; label: string }> = [
   { value: "NAME_ASC", label: "이름 ↑" },
@@ -180,6 +181,28 @@ export const TRAIT_LABELS: Record<CardTrait, string> = {
   UN: "UN",
   MINERVA_SQUAD: "미네르바",
 };
+
+export const ALL_SERIES: CardSeries[] = [
+  "MOBILE_SUIT_GUNDAM",
+  "MOBILE_SUIT_Z_GUNDAM",
+  "MOBILE_SUIT_GUNDAM_CHARS_COUNTERATTACK",
+  "MOBILE_SUIT_GUNDAM_0080_WAR_IN_THE_POCKET",
+  "MOBILE_SUIT_GUNDAM_WING",
+  "AFTER_WAR_GUNDAM_X",
+  "MOBILE_SUIT_GUNDAM_SEED",
+  "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+  "MOBILE_SUIT_GUNDAM_00",
+  "MOBILE_SUIT_GUNDAM_UNICORN",
+  "MOBILE_SUIT_GUNDAM_AGE",
+  "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+  "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+  "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+  "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+];
+
+export const SERIES_LABELS = Object.fromEntries(
+  ALL_SERIES.map((s) => [s, renderSeries(s)]),
+) as Record<CardSeries, string>;
 
 export const PACK_GROUPS: {
   label: string;

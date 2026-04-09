@@ -6,12 +6,12 @@ import { COLOR_BG } from "src/render/color";
 import {
   SORT_OPTIONS, ALL_KINDS, ALL_ZONES, ZONE_LABELS, ALL_COLORS, COLOR_LABELS,
   KIND_LABELS, COST_OPTIONS, LEVEL_OPTIONS, ALL_KEYWORDS, KEYWORD_LABELS,
-  ALL_TRAITS, TRAIT_LABELS, PACK_GROUPS,
+  ALL_TRAITS, TRAIT_LABELS, PACK_GROUPS, ALL_SERIES, SERIES_LABELS,
 } from "@/lib/filterConstants";
 
 export { SORT_OPTIONS, ALL_KINDS, ALL_ZONES, ZONE_LABELS, ALL_COLORS, COLOR_LABELS,
   KIND_LABELS, COST_OPTIONS, LEVEL_OPTIONS, ALL_KEYWORDS, KEYWORD_LABELS,
-  ALL_TRAITS, TRAIT_LABELS, PACK_GROUPS } from "@/lib/filterConstants";
+  ALL_TRAITS, TRAIT_LABELS, PACK_GROUPS, ALL_SERIES, SERIES_LABELS } from "@/lib/filterConstants";
 
 export const INITIAL_FILTER: CardFilterInput = { kind: [] };
 
@@ -28,6 +28,7 @@ export function activeFilterCount(filter: CardFilterInput): number {
   if ((filter.keyword as string[] | null | undefined)?.length) count++;
   if ((filter.trait as string[] | null | undefined)?.length) count++;
   if (filter.package) count++;
+  if ((filter as any).series?.length) count++;
   if (filter.query) count++;
   return count;
 }
@@ -119,6 +120,11 @@ export function FilterControls({ filter, sort, onChange, onSortChange, deckColor
     const next = current.includes(t) ? current.filter((x) => x !== t) : [...current, t];
     patch({ trait: next.length > 0 ? (next as CardFilterInput["trait"]) : null });
   }
+  function toggleSeries(s: string) {
+    const current = ((filter as any).series as string[] | undefined) ?? [];
+    const next = current.includes(s) ? current.filter((x) => x !== s) : [...current, s];
+    patch({ series: next.length > 0 ? (next as any) : null } as any);
+  }
   function onQueryChange(value: string) {
     setQueryText(value);
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -132,6 +138,7 @@ export function FilterControls({ filter, sort, onChange, onSortChange, deckColor
   const activeColor = (filter.color as string[] | undefined) ?? [];
   const activeKeyword = (filter.keyword as string[] | undefined) ?? [];
   const activeTrait = (filter.trait as string[] | undefined) ?? [];
+  const activeSeries = ((filter as any).series as string[] | undefined) ?? [];
   const activePackage = filter.package as string | null | undefined;
 
   const chipClass = (active: boolean) => cn(
@@ -201,6 +208,10 @@ export function FilterControls({ filter, sort, onChange, onSortChange, deckColor
           ))}
         </div>
       </div>
+
+      <CollapsibleChips label="시리즈" activeCount={activeSeries.length}>
+        {ALL_SERIES.map((s) => <button type="button" key={s} onClick={() => toggleSeries(s)} className={chipClass(activeSeries.includes(s))}>{SERIES_LABELS[s]}</button>)}
+      </CollapsibleChips>
 
       <CollapsibleChips label="키워드" activeCount={activeKeyword.length}>
         {ALL_KEYWORDS.map((k) => <button type="button" key={k} onClick={() => toggleKeyword(k)} className={chipClass(activeKeyword.includes(k))}>{KEYWORD_LABELS[k]}</button>)}

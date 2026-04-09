@@ -100,6 +100,23 @@ const VALID_PACKAGES = [
   "BASIC_CARDS",
   "PROMOTION_CARD",
 ] as const;
+const VALID_SERIES = [
+  "MOBILE_SUIT_GUNDAM",
+  "MOBILE_SUIT_Z_GUNDAM",
+  "MOBILE_SUIT_GUNDAM_CHARS_COUNTERATTACK",
+  "MOBILE_SUIT_GUNDAM_0080_WAR_IN_THE_POCKET",
+  "MOBILE_SUIT_GUNDAM_WING",
+  "AFTER_WAR_GUNDAM_X",
+  "MOBILE_SUIT_GUNDAM_SEED",
+  "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+  "MOBILE_SUIT_GUNDAM_00",
+  "MOBILE_SUIT_GUNDAM_UNICORN",
+  "MOBILE_SUIT_GUNDAM_AGE",
+  "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
+  "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+  "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+  "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+] as const;
 const VALID_SORTS = [
   "NAME_ASC",
   "NAME_DESC",
@@ -122,6 +139,7 @@ export type CardListSearch = {
   keyword?: Array<(typeof VALID_KEYWORDS)[number]>;
   trait?: Array<(typeof VALID_TRAITS)[number]>;
   package?: (typeof VALID_PACKAGES)[number];
+  series?: Array<(typeof VALID_SERIES)[number]>;
   query?: string;
   sort?: (typeof VALID_SORTS)[number];
   cardId?: string;
@@ -129,6 +147,7 @@ export type CardListSearch = {
 
 export type CardKeyword = (typeof VALID_KEYWORDS)[number];
 export type CardTrait = (typeof VALID_TRAITS)[number];
+export type CardSeries = (typeof VALID_SERIES)[number];
 
 export const Route = createFileRoute("/cardlist")({
   validateSearch: (raw: Record<string, unknown>): CardListSearch => ({
@@ -168,6 +187,11 @@ export const Route = createFileRoute("/cardlist")({
       typeof raw.package === "string" && (VALID_PACKAGES as readonly string[]).includes(raw.package)
         ? (raw.package as CardListSearch["package"])
         : undefined,
+    series: Array.isArray(raw.series)
+      ? ((raw.series as string[]).filter((s) =>
+          (VALID_SERIES as readonly string[]).includes(s),
+        ) as CardListSearch["series"])
+      : undefined,
     query: typeof raw.query === "string" && raw.query.trim() ? raw.query : undefined,
     sort:
       typeof raw.sort === "string" && (VALID_SORTS as readonly string[]).includes(raw.sort)
@@ -184,6 +208,7 @@ export const Route = createFileRoute("/cardlist")({
     keyword: search.keyword,
     trait: search.trait,
     package: search.package,
+    series: search.series,
     query: search.query,
     sort: search.sort,
   }),
@@ -198,6 +223,7 @@ export const Route = createFileRoute("/cardlist")({
         keyword: deps.keyword ?? null,
         trait: deps.trait ?? null,
         package: deps.package ?? null,
+        series: deps.series ?? null,
         query: deps.query ?? null,
       },
       sort: (deps.sort as any) ?? null,

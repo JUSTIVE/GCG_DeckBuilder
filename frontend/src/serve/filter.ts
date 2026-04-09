@@ -19,6 +19,7 @@ export interface CardFilterInput {
   zone?: string[];
   color?: string[];
   query?: string;
+  series?: string[];
 }
 
 export function applySort(cards: RawCard[], sort: string | undefined): RawCard[] {
@@ -95,6 +96,10 @@ export function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[
     if (filter.color?.length) {
       const cardColor = typeof c["color"] === "string" ? c["color"] : null;
       if (!cardColor || !filter.color.includes(cardColor)) return false;
+    }
+    if (filter.series?.length) {
+      const cardSeries = typeof c["series"] === "string" ? c["series"] : null;
+      if (!cardSeries || !filter.series.includes(cardSeries)) return false;
     }
     if (filter.query) {
       const q = filter.query.toLowerCase();

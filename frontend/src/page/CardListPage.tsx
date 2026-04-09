@@ -51,6 +51,7 @@ function buildFilter(search: CardListSearch): CardFilterInput {
     keyword: search.keyword ?? null,
     trait: search.trait ?? null,
     package: search.package ?? null,
+    series: search.series ?? null,
     query: search.query ?? null,
   };
 }
@@ -74,6 +75,7 @@ function filterToSearch(
     | undefined;
   const trait = filter.trait as CardListSearch["trait"] | null | undefined;
   const pkg = filter.package as CardListSearch["package"] | null | undefined;
+  const series = (filter as any).series as CardListSearch["series"] | null | undefined;
   const query = filter.query as string | null | undefined;
   return {
     kind: kind,
@@ -84,6 +86,7 @@ function filterToSearch(
     keyword: keyword?.length ? keyword : undefined,
     trait: trait?.length ? trait : undefined,
     package: pkg || undefined,
+    series: series?.length ? series : undefined,
     query: query || undefined,
     sort: sort as CardListSearch["sort"] | undefined,
   };
