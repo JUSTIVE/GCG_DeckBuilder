@@ -125,9 +125,9 @@ export function ShieldSimulator() {
 
   // ── My battle area (P1 bottom, attacker unit) ─────────────────────────────
   const myBattleZone = (
-    <div className="flex-[3] h-full rounded border border-primary/40 bg-primary/5 flex items-center justify-center overflow-visible">
+    <div className="flex-[3] h-full rounded border border-orange-400/40 bg-orange-400/5 flex items-center justify-center overflow-visible">
       <div
-        className="rounded border-2 border-primary/50 bg-white shadow-sm flex flex-col items-center justify-center gap-0.5"
+        className="rounded border-2 border-orange-400/50 bg-white shadow-sm flex flex-col items-center justify-center gap-0.5"
         style={{
           width: 34,
           height: 48,
@@ -138,11 +138,11 @@ export function ShieldSimulator() {
             : "none",
         }}
       >
-        <span className="text-[7px] text-primary/50 leading-none">공격</span>
-        <span className="text-[9px] font-bold text-primary leading-none">
+        <span className="text-[7px] text-orange-400/70 leading-none">공격</span>
+        <span className="text-[9px] font-bold text-orange-600 leading-none">
           유닛
         </span>
-        <span className="text-[7px] bg-primary/15 rounded px-1 text-primary font-semibold leading-none">
+        <span className="text-[7px] bg-orange-500/15 rounded px-1 text-orange-600 font-semibold leading-none">
           AP
         </span>
       </div>
@@ -284,7 +284,7 @@ export function ShieldSimulator() {
                   <span
                     className={cn(
                       "shrink-0 w-1 h-1 rounded-full mt-1",
-                      i === 0 ? "bg-primary" : "bg-muted-foreground/40",
+                      i === 0 ? "bg-orange-500" : "bg-muted-foreground/40",
                     )}
                   />
                   {entry}
