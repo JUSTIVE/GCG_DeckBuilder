@@ -207,16 +207,22 @@ export function ShieldSlots({
   // Shields are horizontal cards (landscape ratio = MiniCard rotated 90°: 67:48).
   // Rendered front-first so the front card has the highest z-index and appears on top.
   // For P1 (not reversed): front = index 0. For P2 (reversed): front = index 5.
+  // Use absolute positioning + fixed dimensions instead of aspect-ratio + negative margins
+  // to avoid Safari's broken aspect-ratio behaviour inside flex containers.
+  // Card: 67:48 landscape ratio ≈ 29px tall at ~40px inner width.
+  const CARD_H = 29;
+  const STRIP_H = 9; // visible strip per subsequent card
+  const TOTAL_H = CARD_H + 5 * STRIP_H; // 74px
   const renderOrder = reversed ? [5, 4, 3, 2, 1, 0] : [0, 1, 2, 3, 4, 5];
   return (
-    <div className="flex flex-col relative">
+    <div className="relative w-full" style={{ height: TOTAL_H }}>
       {renderOrder.map((idx, pos) => {
         const filled = idx < count;
         return (
           <div
             key={idx}
             className={cn(
-              "relative w-full aspect-[67/48] rounded border transition-all duration-300",
+              "absolute w-full rounded border transition-all duration-300",
               filled
                 ? accent
                   ? "bg-slate-500 border-slate-700"
@@ -224,9 +230,10 @@ export function ShieldSlots({
                 : "border-dashed border-border/30 opacity-100",
             )}
             style={{
+              height: CARD_H,
+              top: pos * STRIP_H,
               transitionDelay: `${idx * 45}ms`,
               zIndex: reversed ? pos + 1 : 6 - pos,
-              marginTop: pos > 0 ? "-21px" : undefined,
             }}
           >
             {idx === 0 && filled && (

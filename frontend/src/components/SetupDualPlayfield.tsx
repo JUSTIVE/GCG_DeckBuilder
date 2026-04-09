@@ -226,7 +226,7 @@ function SetupShieldArea({
         "shrink-0 flex flex-col rounded border p-0.5 gap-0.5 transition-all duration-300",
         accentBase || accentShield
           ? "border-primary/50 bg-primary/5"
-          : "border-border bg-muted/20",
+          : "border-border bg-white",
         flipped ? "flex-col-reverse" : "",
       )}
       style={{ width: 56 }}
@@ -393,7 +393,7 @@ export function SetupDualPlayfield({
   return (
     <div className="flex flex-col gap-0.5 text-[10px] select-none">
       {/* ── P2 (top) ── */}
-      <div className="flex flex-col gap-0.5 rounded-md bg-blue-50/60 px-1.5 pt-1 pb-1.5">
+      <div className="flex flex-col gap-0.5 rounded-md border border-rose-300 bg-rose-100/80 px-1.5 pt-1 pb-1.5">
         <HandStrip
           count={p2.handCount}
           accent={accent("hand") || accent("mulligan")}
@@ -435,7 +435,7 @@ export function SetupDualPlayfield({
       </div>
 
       {/* ── P1 (bottom) ── */}
-      <div className="flex flex-col gap-0.5 rounded-md bg-rose-50/60 px-1.5 pt-1.5 pb-1">
+      <div className="flex flex-col gap-0.5 rounded-md border border-blue-300 bg-blue-100/80 px-1.5 pt-1.5 pb-1">
         <SetupHalfBoard
           board={p1}
           flipped={false}

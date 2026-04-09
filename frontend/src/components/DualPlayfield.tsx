@@ -45,7 +45,7 @@ function DualShieldArea({
         "shrink-0 flex flex-col rounded border p-0.5 gap-0.5 transition-all duration-300",
         accentShield || accentBase
           ? "border-primary/50 bg-primary/5"
-          : "border-border bg-muted/20",
+          : "border-border bg-white",
         flipped ? "flex-col-reverse" : "",
       )}
       style={{ width: 56, animation: hitKey > 0 ? "card-hit 320ms ease" : undefined }}
@@ -150,7 +150,7 @@ export function DualPlayfield({
   return (
     <div className="dual-playfield flex flex-col gap-0.5 text-[10px] select-none">
       {/* P2 (top, flipped) */}
-      <div className="flex flex-col gap-0.5 rounded-md bg-blue-50/60 px-1.5 pt-1 pb-1.5">
+      <div className="flex flex-col gap-0.5 rounded-md border border-rose-300 bg-rose-100/80 px-1.5 pt-1 pb-1.5">
         <div className="text-center text-[10px] font-bold py-0.5 text-muted-foreground">
           {p2Label}
         </div>
@@ -172,7 +172,7 @@ export function DualPlayfield({
       </div>
 
       {/* P1 (bottom, normal) */}
-      <div className="flex flex-col gap-0.5 rounded-md bg-rose-50/60 px-1.5 pt-1.5 pb-1">
+      <div className="flex flex-col gap-0.5 rounded-md border border-blue-300 bg-blue-100/80 px-1.5 pt-1.5 pb-1">
         <DualHalfBoard
           board={p1}
           flipped={false}

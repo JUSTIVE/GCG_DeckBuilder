@@ -36,7 +36,7 @@ export function MiniPlayfield({ highlights }: { highlights: ZoneId[] }) {
         "shrink-0 flex flex-col gap-0.5 rounded border p-0.5 transition-all duration-300",
         hi("base") || hi("shield")
           ? "border-primary/50 bg-primary/5"
-          : "border-border bg-muted/20",
+          : "border-border bg-white",
       )}
       style={{ width: 76 }}
     >

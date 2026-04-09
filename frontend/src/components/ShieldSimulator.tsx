@@ -86,7 +86,7 @@ export function ShieldSimulator() {
           ? "border-primary/50 bg-primary/5"
           : flash === "player"
             ? "border-red-300 bg-red-50/50"
-            : "border-border bg-muted/20",
+            : "border-border bg-white",
       )}
       style={{ width: 56 }}
     >
@@ -190,8 +190,8 @@ export function ShieldSimulator() {
           {/* ── P2 (top, flipped) — 상대 ── */}
           <div
             className={cn(
-              "flex flex-col gap-0.5 rounded-md px-1.5 pt-1 pb-1.5 transition-all duration-300",
-              flash === "player" ? "bg-red-50/60" : "bg-blue-50/60",
+              "flex flex-col gap-0.5 rounded-md border px-1.5 pt-1 pb-1.5 transition-all duration-300",
+              flash === "player" ? "border-red-400 bg-red-100/80" : "border-rose-300 bg-rose-100/80",
             )}
           >
             <div className="flex items-center justify-between text-[9px] font-semibold pb-0.5">
@@ -235,7 +235,7 @@ export function ShieldSimulator() {
           </div>
 
           {/* ── P1 (bottom, not flipped) — 나 ── */}
-          <div className="flex flex-col gap-0.5 rounded-md bg-rose-50/60 px-1.5 pt-1.5 pb-1">
+          <div className="flex flex-col gap-0.5 rounded-md border border-blue-300 bg-blue-100/80 px-1.5 pt-1.5 pb-1">
             <BoardHalfLayout
               flipped={false}
               slots={{
