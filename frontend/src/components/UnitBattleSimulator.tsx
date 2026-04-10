@@ -13,6 +13,7 @@ const UNIT_PRESETS: Array<{ ap: number; hp: number; label: string }> = [
   { ap: 5, hp: 3, label: "AP5/HP3" },
 ];
 
+type RosterEntry = { id: number; presetIdx: number; rested: boolean };
 type BattlePhase = "idle" | "attack" | "block" | "action" | "damage" | "end";
 
 const PHASE_STEPS: Array<{ key: BattlePhase; label: string }> = [
@@ -187,15 +188,19 @@ const INIT_BASE_HP = 3; // EX 베이스 HP
 
 export function UnitBattleSimulator() {
   // ── Unit Battle state ──
-  const [myIdx, setMyIdx] = useState(2); // AP3/HP4
-  const [enemyIdx, setEnemyIdx] = useState(1); // AP2/HP3
+  const idRef = useRef(2);
+  const [myRoster, setMyRoster] = useState<RosterEntry[]>([{ id: 0, presetIdx: 2, rested: false }]);
+  const [enemyRoster, setEnemyRoster] = useState<RosterEntry[]>([{ id: 1, presetIdx: 1, rested: false }]);
+  const [addMyPreset, setAddMyPreset] = useState(2);
+  const [addEnemyPreset, setAddEnemyPreset] = useState(1);
   const [hasBlocker, setHasBlocker] = useState(false);
   const [hasFirstStrike, setHasFirstStrike] = useState(false);
+  const [hasHighMobility, setHasHighMobility] = useState(false);
   const [breakthroughN, setBreakthroughN] = useState(0);
   const [hasBurst, setHasBurst] = useState(false);
 
-  const myUnit = UNIT_PRESETS[myIdx];
-  const enemyUnit = UNIT_PRESETS[enemyIdx];
+  const myUnit = UNIT_PRESETS[myRoster[0]?.presetIdx ?? 0];
+  const enemyUnit = UNIT_PRESETS[enemyRoster[0]?.presetIdx ?? 0];
 
   // Battle state
   const [phase, setPhase] = useState<BattlePhase>("idle");
@@ -215,7 +220,8 @@ export function UnitBattleSimulator() {
   const [breakthroughTarget, setBreakthroughTarget] = useState<"base" | "shield" | null>(null);
   const [unitLog, setUnitLog] = useState<string[]>([]);
   const [isRunning, setIsRunning] = useState(false);
-  const [isDone, setIsDone] = useState(false);
+  const [, setIsDone] = useState(false);
+  const [turnBanner, setTurnBanner] = useState<"opponent" | "mine" | null>(null);
 
   // Targeting arrow
   const [targetCoords, setTargetCoords] = useState({ sx: 0, sy: 0, ex: 0, ey: 0 });
@@ -233,6 +239,10 @@ export function UnitBattleSimulator() {
   const containerRef = useRef<HTMLDivElement>(null);
   const myBattleRef = useRef<HTMLDivElement>(null);
   const enemyBattleRef = useRef<HTMLDivElement>(null);
+  const myHpRef = useRef(UNIT_PRESETS[2].hp);
+  const enemyHpRef = useRef(UNIT_PRESETS[1].hp);
+  const battleZoneRef = useRef<HTMLDivElement>(null);
+  const [battleZoneW, setBattleZoneW] = useState(120);
 
   // ── Functions ──
 
@@ -246,6 +256,8 @@ export function UnitBattleSimulator() {
     setPhase("idle");
     setMyHp(myMaxHp);
     setEnemyHp(enemyMaxHp);
+    myHpRef.current = myMaxHp;
+    enemyHpRef.current = enemyMaxHp;
     setMyRested(false);
     setBlockerRested(false);
     setMyAttacking(false);
@@ -256,6 +268,8 @@ export function UnitBattleSimulator() {
     setEnemyShields(INIT_SHIELD);
     setEnemyBaseHp(INIT_BASE_HP);
     setEnemyHasBase(true);
+    setTurnBanner(null);
+    setMyRoster((prev) => prev.map((e) => ({ ...e, rested: false })));
     setBreakthroughFired(false);
     setBreakthroughTarget(null);
     setTargetCoords({ sx: 0, sy: 0, ex: 0, ey: 0 });
@@ -267,9 +281,36 @@ export function UnitBattleSimulator() {
   }
 
   useEffect(() => {
-    doReset(UNIT_PRESETS[myIdx].hp, UNIT_PRESETS[enemyIdx].hp);
+    doReset(myUnit.hp, enemyUnit.hp);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [myIdx, enemyIdx, hasBlocker, hasFirstStrike, breakthroughN, hasBurst]);
+  }, [hasBlocker, hasFirstStrike, hasHighMobility, breakthroughN, hasBurst]);
+
+  useEffect(() => {
+    const el = battleZoneRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => setBattleZoneW(entry.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  function handleNextTurn() {
+    if (turnBanner !== null || isRunning) return;
+    setTurnBanner("opponent");
+    const t1 = setTimeout(() => {
+      setTurnBanner("mine");
+      const t2 = setTimeout(() => {
+        setTurnBanner(null);
+        setMyRested(false);
+        setBlockerRested(false);
+        setMyRoster((prev) => prev.map((e) => ({ ...e, rested: false })));
+        setPhase("idle");
+        setIsDone(false);
+        addUnitLog("─── 새 턴 ───");
+      }, 1200);
+      timersRef.current.push(t2);
+    }, 1500);
+    timersRef.current.push(t1);
+  }
 
   function addUnitLog(msg: string) {
     setUnitLog((l) => [msg, ...l.slice(0, 7)]);
@@ -340,7 +381,22 @@ export function UnitBattleSimulator() {
   }
 
   function runBattle() {
-    if (isRunning || isDone) return;
+    if (isRunning) return;
+    // 애니메이션 상태만 초기화 (HP·실드·베이스는 유지)
+    clearTimers();
+    setPhase("idle");
+    setMyRested(false);
+    setBlockerRested(false);
+    setMyAttacking(false);
+    setMyHit(false);
+    setEnemyHit(false);
+    setMyDestroyed(false);
+    setEnemyDestroyed(false);
+    setBreakthroughFired(false);
+    setBreakthroughTarget(null);
+    setShowTarget(false);
+    setProjKey(0);
+    setIsDone(false);
     setIsRunning(true);
 
     const timers: ReturnType<typeof setTimeout>[] = [];
@@ -369,11 +425,14 @@ export function UnitBattleSimulator() {
     }
 
     const myAp = myUnit.ap;
-    const myMaxHp = myUnit.hp;
+    const myMaxHp = myHp; // 현재 HP 기준 (공격 간 HP 이어받음)
     const enemyAp = enemyUnit.ap;
-    const enemyMaxHp = enemyUnit.hp;
+    const enemyMaxHp = enemyHp;
     const afterMyHp = Math.max(0, myMaxHp - enemyAp);
     const afterEnemyHp = Math.max(0, enemyMaxHp - myAp);
+    myHpRef.current = myMaxHp;
+    enemyHpRef.current = enemyMaxHp;
+    const wasBlocker = hasBlocker;
     // 배틀 시작 시점의 상대 실드 에어리어 상태를 클로저로 캡처
     const initShields = enemyShields;
     const initBaseHp = enemyBaseHp;
@@ -382,10 +441,10 @@ export function UnitBattleSimulator() {
     // ① 어택 스텝
     at(() => {
       setPhase("attack");
-      setMyRested(true);
+      if (!hasHighMobility) setMyRested(true);
       setTargetCoords(shieldCoords);
       setShowTarget(true);
-      addUnitLog("어택 스텝: 어택 유닛을 레스트하고 어택 선언.");
+      addUnitLog(hasHighMobility ? "어택 스텝: 《고기동》 — 레스트 없이 어택 선언." : "어택 스텝: 어택 유닛을 레스트하고 어택 선언.");
     }, 100);
 
     // ② 블록 스텝
@@ -440,14 +499,14 @@ export function UnitBattleSimulator() {
       // 블로커 없음: 실드 에어리어 직접 피격, 유닛 전투 없음
       at(() => {
         if (initHasBase) {
-          const newHp = initBaseHp - 1;
+          const newHp = initBaseHp - myAp;
           if (newHp <= 0) {
             setEnemyBaseHp(0);
             setEnemyHasBase(false);
-            addUnitLog("베이스에 히트! HP 0 → 베이스 파괴!");
+            addUnitLog(`베이스에 ${myAp} 대미지! HP 0 → 베이스 파괴!`);
           } else {
             setEnemyBaseHp(newHp);
-            addUnitLog(`베이스에 히트! (HP ${initBaseHp} → ${newHp})`);
+            addUnitLog(`베이스에 ${myAp} 대미지! (HP ${initBaseHp} → ${newHp})`);
           }
         } else if (initShields > 0) {
           const newShields = initShields - 1;
@@ -477,7 +536,7 @@ export function UnitBattleSimulator() {
       // 블로커 있음 + 선제공격
       at(() => {
         setEnemyHit(true);
-        setEnemyHp(afterEnemyHp);
+        setEnemyHp(afterEnemyHp); enemyHpRef.current = afterEnemyHp;
         addUnitLog(`《선제공격》: 상대 유닛에 ${myAp} 대미지! HP ${enemyMaxHp} → ${afterEnemyHp}`);
       }, 3100);
       at(() => setEnemyHit(false), 3440);
@@ -495,7 +554,7 @@ export function UnitBattleSimulator() {
       } else {
         at(() => {
           setMyHit(true);
-          setMyHp(afterMyHp);
+          setMyHp(afterMyHp); myHpRef.current = afterMyHp;
           addUnitLog(`반격: 내 유닛에 ${enemyAp} 대미지! HP ${myMaxHp} → ${afterMyHp}`);
         }, 3600);
         at(() => {
@@ -512,8 +571,8 @@ export function UnitBattleSimulator() {
       at(() => {
         setMyHit(afterMyHp < myMaxHp);
         setEnemyHit(afterEnemyHp < enemyMaxHp);
-        setMyHp(afterMyHp);
-        setEnemyHp(afterEnemyHp);
+        setMyHp(afterMyHp); myHpRef.current = afterMyHp;
+        setEnemyHp(afterEnemyHp); enemyHpRef.current = afterEnemyHp;
         addUnitLog(`배틀 대미지 교환: 내 유닛 −${Math.min(enemyAp, myMaxHp)} HP, 상대 유닛 −${Math.min(myAp, enemyMaxHp)} HP.`);
       }, 3100);
       at(() => {
@@ -535,10 +594,46 @@ export function UnitBattleSimulator() {
     at(() => {
       setIsRunning(false);
       setIsDone(true);
+      // 파괴된 유닛 제거 후 다음 유닛으로 전진, 살아있으면 rested 처리
+      const fMyHp = myHpRef.current;
+      const fEnemyHp = enemyHpRef.current;
+      if (fMyHp <= 0) {
+        setMyRoster((prev) => {
+          const next = prev.slice(1);
+          if (next.length > 0) {
+            const hp = UNIT_PRESETS[next[0].presetIdx].hp;
+            setMyHp(hp); myHpRef.current = hp;
+          }
+          return next;
+        });
+      } else {
+        setMyRoster((prev) => prev.map((e, i) => i === 0 ? { ...e, rested: true } : e));
+      }
+      if (wasBlocker && fEnemyHp <= 0) {
+        setEnemyRoster((prev) => {
+          const next = prev.slice(1);
+          if (next.length > 0) {
+            const hp = UNIT_PRESETS[next[0].presetIdx].hp;
+            setEnemyHp(hp); enemyHpRef.current = hp;
+          }
+          return next;
+        });
+      }
     }, 4700);
   }
 
   // ── Derived values ──
+
+  const allMyRested = myRoster.length > 0 && myRoster.every((e) => e.rested);
+
+  // 컨테이너 너비 기반 카드 scale 계산 (카드 64px + gap 2px 기준)
+  function cardScale(n: number) {
+    if (n === 0) return 1;
+    const available = battleZoneW - 4; // px 패딩
+    const fit = available / (n * 64 + (n - 1) * 2);
+    return Math.min(1, fit);
+  }
+  const isNextTurnRunning = turnBanner !== null;
 
   const p1Board: DualBoardState = { shieldCount: 6, hasBase: true };
   const p2Board: DualBoardState = { shieldCount: enemyShields, hasBase: enemyHasBase, baseHp: enemyHasBase ? enemyBaseHp : undefined };
@@ -662,27 +757,56 @@ export function UnitBattleSimulator() {
         <div className="p-3 flex flex-col gap-3">
           {/* ── Config ── */}
           <div className="grid grid-cols-2 gap-2 text-[10px]">
+            {/* 내 유닛 */}
             <div className="flex flex-col gap-1.5">
               <span className="font-semibold text-blue-600">내 유닛 (어택)</span>
-              <select
-                value={myIdx}
-                onChange={(e) => setMyIdx(Number(e.target.value))}
-                disabled={isRunning}
-                className="border rounded px-1 py-0.5 text-[10px] bg-background disabled:opacity-50"
-              >
-                {UNIT_PRESETS.map((p, i) => (
-                  <option key={i} value={i}>{p.label}</option>
-                ))}
-              </select>
-              <label className="flex items-center gap-1 cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={hasFirstStrike}
-                  onChange={(e) => setHasFirstStrike(e.target.checked)}
+              {/* 로스터 */}
+              {myRoster.length > 0 ? (
+                <div className="flex flex-col gap-0.5">
+                  {myRoster.map((entry, idx) => (
+                    <div key={entry.id} className={cn("flex items-center gap-1 px-1 py-0.5 rounded", idx === 0 ? "bg-blue-50 border border-blue-200" : "bg-muted/30")}>
+                      <span className={cn("flex-1 truncate", idx === 0 ? "font-semibold text-blue-700" : "text-muted-foreground")}>
+                        {idx === 0 ? "▶ " : ""}{UNIT_PRESETS[entry.presetIdx].label}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setMyRoster((prev) => prev.filter((e) => e.id !== entry.id))}
+                        disabled={isRunning}
+                        className="text-muted-foreground hover:text-destructive disabled:opacity-40 leading-none"
+                      >×</button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-muted-foreground italic">유닛 없음</div>
+              )}
+              {/* 추가 */}
+              <div className="flex gap-1">
+                <select
+                  value={addMyPreset}
+                  onChange={(e) => setAddMyPreset(Number(e.target.value))}
                   disabled={isRunning}
-                  className="accent-blue-500"
-                />
+                  className="flex-1 border rounded px-1 py-0.5 text-[10px] bg-background disabled:opacity-50"
+                >
+                  {UNIT_PRESETS.map((p, i) => (
+                    <option key={i} value={i}>{p.label}</option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  onClick={() => setMyRoster((prev) => [...prev, { id: idRef.current++, presetIdx: addMyPreset, rested: false }])}
+                  disabled={isRunning || myRoster.length >= 6}
+                  className="px-2 py-0.5 rounded border border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100 disabled:opacity-40 font-bold"
+                >+</button>
+              </div>
+              {/* 옵션 */}
+              <label className="flex items-center gap-1 cursor-pointer select-none">
+                <input type="checkbox" checked={hasFirstStrike} onChange={(e) => setHasFirstStrike(e.target.checked)} disabled={isRunning} className="accent-blue-500" />
                 <span className="text-muted-foreground">《선제공격》</span>
+              </label>
+              <label className="flex items-center gap-1 cursor-pointer select-none">
+                <input type="checkbox" checked={hasHighMobility} onChange={(e) => setHasHighMobility(e.target.checked)} disabled={isRunning} className="accent-blue-500" />
+                <span className="text-muted-foreground">《고기동》</span>
               </label>
               <label className="flex items-center gap-1 cursor-pointer select-none">
                 <span className="text-muted-foreground">《돌파》:</span>
@@ -698,36 +822,55 @@ export function UnitBattleSimulator() {
                 </select>
               </label>
             </div>
+            {/* 상대 유닛 */}
             <div className="flex flex-col gap-1.5">
               <span className="font-semibold text-red-600">상대 유닛</span>
-              <select
-                value={enemyIdx}
-                onChange={(e) => setEnemyIdx(Number(e.target.value))}
-                disabled={isRunning}
-                className="border rounded px-1 py-0.5 text-[10px] bg-background disabled:opacity-50"
-              >
-                {UNIT_PRESETS.map((p, i) => (
-                  <option key={i} value={i}>{p.label}</option>
-                ))}
-              </select>
-              <label className="flex items-center gap-1 cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={hasBlocker}
-                  onChange={(e) => setHasBlocker(e.target.checked)}
+              {/* 로스터 */}
+              {enemyRoster.length > 0 ? (
+                <div className="flex flex-col gap-0.5">
+                  {enemyRoster.map((entry, idx) => (
+                    <div key={entry.id} className={cn("flex items-center gap-1 px-1 py-0.5 rounded", idx === 0 ? "bg-red-50 border border-red-200" : "bg-muted/30")}>
+                      <span className={cn("flex-1 truncate", idx === 0 ? "font-semibold text-red-700" : "text-muted-foreground")}>
+                        {idx === 0 ? "▶ " : ""}{UNIT_PRESETS[entry.presetIdx].label}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setEnemyRoster((prev) => prev.filter((e) => e.id !== entry.id))}
+                        disabled={isRunning}
+                        className="text-muted-foreground hover:text-destructive disabled:opacity-40 leading-none"
+                      >×</button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-muted-foreground italic">유닛 없음</div>
+              )}
+              {/* 추가 */}
+              <div className="flex gap-1">
+                <select
+                  value={addEnemyPreset}
+                  onChange={(e) => setAddEnemyPreset(Number(e.target.value))}
                   disabled={isRunning}
-                  className="accent-red-500"
-                />
+                  className="flex-1 border rounded px-1 py-0.5 text-[10px] bg-background disabled:opacity-50"
+                >
+                  {UNIT_PRESETS.map((p, i) => (
+                    <option key={i} value={i}>{p.label}</option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  onClick={() => setEnemyRoster((prev) => [...prev, { id: idRef.current++, presetIdx: addEnemyPreset, rested: false }])}
+                  disabled={isRunning || enemyRoster.length >= 6}
+                  className="px-2 py-0.5 rounded border border-red-300 bg-red-50 text-red-700 hover:bg-red-100 disabled:opacity-40 font-bold"
+                >+</button>
+              </div>
+              {/* 옵션 */}
+              <label className="flex items-center gap-1 cursor-pointer select-none">
+                <input type="checkbox" checked={hasBlocker} onChange={(e) => setHasBlocker(e.target.checked)} disabled={isRunning} className="accent-red-500" />
                 <span className="text-muted-foreground">《블로커》</span>
               </label>
               <label className="flex items-center gap-1 cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={hasBurst}
-                  onChange={(e) => setHasBurst(e.target.checked)}
-                  disabled={isRunning}
-                  className="accent-red-500"
-                />
+                <input type="checkbox" checked={hasBurst} onChange={(e) => setHasBurst(e.target.checked)} disabled={isRunning} className="accent-red-500" />
                 <span className="text-muted-foreground">실드에 《버스트》</span>
               </label>
             </div>
@@ -742,46 +885,85 @@ export function UnitBattleSimulator() {
               p2Label="상대"
               accent={accent}
               p2Accent={p2BreakthroughAccent}
-              p1Battle={
-                <div
-                  ref={myBattleRef}
-                  className="w-full h-full flex items-center justify-center overflow-visible"
-                >
-                  <MiniCard
-                    name="나"
-                    ap={myUnit.ap}
-                    hp={myHp}
-                    maxHp={myUnit.hp}
-                    color="blue"
-                    rested={myRested}
-                    attacking={myAttacking}
-                    attackDir={-1}
-                    hit={myHit}
-                    destroyed={myDestroyed}
-                    tag={[hasFirstStrike ? "선제" : "", breakthroughN > 0 ? `돌파${breakthroughN}` : ""].filter(Boolean).join(" ") || undefined}
-                    highlight={phase === "damage"}
-                  />
-                </div>
-              }
-              p2Battle={
-                <div
-                  ref={enemyBattleRef}
-                  className="w-full h-full flex items-center justify-center overflow-visible"
-                >
-                  <MiniCard
-                    name="상대"
-                    ap={enemyUnit.ap}
-                    hp={enemyHp}
-                    maxHp={enemyUnit.hp}
-                    color="red"
-                    rested={blockerRested}
-                    attackDir={1}
-                    hit={enemyHit}
-                    destroyed={enemyDestroyed}
-                    tag={hasBlocker ? "블로커" : undefined}
-                  />
-                </div>
-              }
+              p1Battle={(() => {
+                const n = myRoster.length;
+                const s = cardScale(n);
+                const w = Math.round(64 * s);
+                const h = Math.round(89 * s);
+                return (
+                  <div ref={battleZoneRef} className="w-full h-full flex items-center justify-start gap-0.5 px-0.5 overflow-hidden">
+                    {myRoster.map((entry, idx) => {
+                      const p = UNIT_PRESETS[entry.presetIdx];
+                      const isActive = idx === 0;
+                      return (
+                        <div
+                          key={entry.id}
+                          ref={isActive ? myBattleRef : undefined}
+                          className="shrink-0 overflow-visible"
+                          style={{ width: w, height: h }}
+                        >
+                          <div style={{ transform: `scale(${s})`, transformOrigin: "top left" }}>
+                            <MiniCard
+                              name={isActive ? "나" : p.label}
+                              ap={p.ap}
+                              hp={isActive ? myHp : p.hp}
+                              maxHp={p.hp}
+                              color="blue"
+                              rested={isActive ? myRested : entry.rested}
+                              attacking={isActive ? myAttacking : false}
+                              attackDir={-1}
+                              hit={isActive ? myHit : false}
+                              destroyed={isActive ? myDestroyed : false}
+                              tag={isActive ? ([hasFirstStrike ? "선제" : "", hasHighMobility ? "고기동" : "", breakthroughN > 0 ? `돌파${breakthroughN}` : ""].filter(Boolean).join(" ") || undefined) : undefined}
+                              highlight={isActive && phase === "damage"}
+                              dim={!isActive}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
+              p2Battle={(() => {
+                const n = enemyRoster.length;
+                const s = cardScale(n);
+                const w = Math.round(64 * s);
+                const h = Math.round(89 * s);
+                return (
+                  <div className="w-full h-full flex items-center justify-end gap-0.5 px-0.5 overflow-hidden">
+                    {[...enemyRoster].reverse().map((entry, revIdx) => {
+                      const idx = enemyRoster.length - 1 - revIdx;
+                      const p = UNIT_PRESETS[entry.presetIdx];
+                      const isActive = idx === 0;
+                      return (
+                        <div
+                          key={entry.id}
+                          ref={isActive ? enemyBattleRef : undefined}
+                          className="shrink-0 overflow-visible"
+                          style={{ width: w, height: h }}
+                        >
+                          <div style={{ transform: `scale(${s})`, transformOrigin: "top left" }}>
+                            <MiniCard
+                              name={isActive ? "상대" : p.label}
+                              ap={p.ap}
+                              hp={isActive ? enemyHp : p.hp}
+                              maxHp={p.hp}
+                              color="red"
+                              rested={isActive ? blockerRested : false}
+                              attackDir={1}
+                              hit={isActive ? enemyHit : false}
+                              destroyed={isActive ? enemyDestroyed : false}
+                              tag={isActive && hasBlocker ? "블로커" : undefined}
+                              dim={!isActive}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
             />
 
             {/* Targeting arrow overlay */}
@@ -804,6 +986,23 @@ export function UnitBattleSimulator() {
 
             {/* Burst overlay */}
             <BurstOverlay animKey={burstKey} />
+
+            {/* Turn banner overlay */}
+            {turnBanner && (
+              <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                <div
+                  className={cn(
+                    "px-6 py-2 rounded-xl font-black text-base shadow-lg border-2",
+                    turnBanner === "opponent"
+                      ? "bg-red-500/90 text-white border-red-700"
+                      : "bg-blue-500/90 text-white border-blue-700",
+                  )}
+                  style={{ animation: "card-appear 200ms cubic-bezier(0.22,1,0.36,1) both" }}
+                >
+                  {turnBanner === "opponent" ? "상대 턴" : "내 턴"}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* ── Breakthrough badge ── */}
@@ -819,17 +1018,33 @@ export function UnitBattleSimulator() {
           {/* ── Controls & log ── */}
           <div className="flex flex-col gap-2">
             <div className="flex gap-1.5">
+              {allMyRested ? (
+                <button
+                  type="button"
+                  onClick={handleNextTurn}
+                  disabled={isNextTurnRunning}
+                  className="flex-1 text-xs py-2 rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
+                >
+                  다음 턴 →
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={runBattle}
+                  disabled={isRunning || myHp <= 0 || myRoster.length === 0}
+                  className="flex-1 text-xs py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
+                >
+                  어택!
+                </button>
+              )}
               <button
                 type="button"
-                onClick={runBattle}
-                disabled={isRunning || isDone}
-                className="flex-1 text-xs py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
-              >
-                어택!
-              </button>
-              <button
-                type="button"
-                onClick={() => doReset(myUnit.hp, enemyUnit.hp)}
+                onClick={() => {
+                  setMyRoster([{ id: 0, presetIdx: 2, rested: false }]);
+                  setEnemyRoster([{ id: 1, presetIdx: 1, rested: false }]);
+                  idRef.current = 2;
+                  doReset(UNIT_PRESETS[2].hp, UNIT_PRESETS[1].hp);
+                }}
                 className="text-xs px-3 py-2 rounded-lg border border-border hover:bg-muted/40 active:scale-95 transition-all text-muted-foreground"
               >
                 ↺
