@@ -2,13 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { DualPlayfield, type DualBoardState, type DualAccent } from "@/components/DualPlayfield";
 import { MiniCard } from "@/components/MiniCard";
-import {
-  BoardHalfLayout,
-  ZoneBox,
-  ShieldSlots,
-  PlayerSection,
-  VsDivider,
-} from "@/components/PlayfieldLayout";
 
 // ── Presets & types ───────────────────────────────────────────────────────────
 
@@ -29,8 +22,6 @@ const PHASE_STEPS: Array<{ key: BattlePhase; label: string }> = [
   { key: "damage", label: "대미지 스텝" },
   { key: "end", label: "배틀 종료 스텝" },
 ];
-
-type Tab = "unit" | "player";
 
 // ── TargetingArrow ────────────────────────────────────────────────────────────
 // 어택 스텝: 아군 유닛 → 타겟(실드 에어리어 or 블로커)을 향한 SVG 점선 화살표.
@@ -111,8 +102,8 @@ function AttackProjectile({
 }
 
 // ── BurstOverlay ──────────────────────────────────────────────────────────────
-// Absolute overlay inside the P2 section: shield card arcs from the right
-// shield area → center, then explodes with particles + "버스트 효과 발동!" text.
+// Absolute overlay inside the container: shield card arcs from the shield
+// area → center, then explodes with particles + "버스트 효과 발동!" text.
 
 function BurstOverlay({ animKey }: { animKey: number }) {
   if (animKey === 0) return null;
@@ -195,15 +186,13 @@ const INIT_SHIELD = 6;
 const INIT_BASE_HP = 3; // EX 베이스 HP
 
 export function UnitBattleSimulator() {
-  // ── Tab state ──
-  const [tab, setTab] = useState<Tab>("unit");
-
-  // ── Unit Battle (tab: "unit") state ──
+  // ── Unit Battle state ──
   const [myIdx, setMyIdx] = useState(2); // AP3/HP4
   const [enemyIdx, setEnemyIdx] = useState(1); // AP2/HP3
   const [hasBlocker, setHasBlocker] = useState(false);
   const [hasFirstStrike, setHasFirstStrike] = useState(false);
   const [breakthroughN, setBreakthroughN] = useState(0);
+  const [hasBurst, setHasBurst] = useState(false);
 
   const myUnit = UNIT_PRESETS[myIdx];
   const enemyUnit = UNIT_PRESETS[enemyIdx];
@@ -236,28 +225,16 @@ export function UnitBattleSimulator() {
   const [projKey, setProjKey] = useState(0);
   const [projCoords, setProjCoords] = useState({ sx: 0, sy: 0, ex: 0, ey: 0 });
 
+  // Burst animation
+  const [burstKey, setBurstKey] = useState(0);
+  const [burstFrom, setBurstFrom] = useState({ x: 54, y: 8 });
+
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const myBattleRef = useRef<HTMLDivElement>(null);
   const enemyBattleRef = useRef<HTMLDivElement>(null);
 
-  // ── Player Attack (tab: "player") state ──
-  const SHIELD_INIT_SHIELDS = 6;
-  const SHIELD_INIT_BASE_HP = 3;
-  const [pShields, setPShields] = useState(SHIELD_INIT_SHIELDS);
-  const [pBaseHp, setPBaseHp] = useState(SHIELD_INIT_BASE_HP);
-  const [pHasBase, setPHasBase] = useState(true);
-  const [pDefeated, setPDefeated] = useState(false);
-  const [pLog, setPLog] = useState<string[]>([]);
-  const [hasBurst, setHasBurst] = useState(false);
-  const [pFlash, setPFlash] = useState<"base" | "shield" | "player" | null>(null);
-  const [pIsAttacking, setPIsAttacking] = useState(false);
-  const [burstKey, setBurstKey] = useState(0);
-  const [burstFrom, setBurstFrom] = useState({ x: 54, y: 8 });
-  const shieldZoneRef = useRef<HTMLDivElement>(null);
-  const p2WrapperRef = useRef<HTMLDivElement>(null);
-
-  // ── Unit Battle functions ──
+  // ── Functions ──
 
   function clearTimers() {
     timersRef.current.forEach(clearTimeout);
@@ -292,17 +269,7 @@ export function UnitBattleSimulator() {
   useEffect(() => {
     doReset(UNIT_PRESETS[myIdx].hp, UNIT_PRESETS[enemyIdx].hp);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [myIdx, enemyIdx, hasBlocker, hasFirstStrike, breakthroughN]);
-
-  // Reset the active simulator when switching tabs
-  useEffect(() => {
-    if (tab === "unit") {
-      doReset(UNIT_PRESETS[myIdx].hp, UNIT_PRESETS[enemyIdx].hp);
-    } else {
-      pReset();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tab]);
+  }, [myIdx, enemyIdx, hasBlocker, hasFirstStrike, breakthroughN, hasBurst]);
 
   function addUnitLog(msg: string) {
     setUnitLog((l) => [msg, ...l.slice(0, 7)]);
@@ -353,6 +320,21 @@ export function UnitBattleSimulator() {
       setEnemyShields(shields - 1);
       addUnitLog(`《돌파 ${n}》: 실드 1장 파괴! (남은: ${shields - 1}장)`);
       setBreakthroughTarget("shield");
+
+      // Burst animation when shield is destroyed via breakthrough
+      if (hasBurst) {
+        const cr = containerRef.current;
+        const shieldEl = cr?.querySelector('[data-target="p2-shield"]');
+        if (shieldEl && cr) {
+          const sr = shieldEl.getBoundingClientRect();
+          const wr = cr.getBoundingClientRect();
+          setBurstFrom({
+            x: Math.round((sr.left + sr.right) / 2 - (wr.left + wr.right) / 2),
+            y: Math.round((sr.top + sr.bottom) / 2 - (wr.top + wr.bottom) / 2),
+          });
+        }
+        setBurstKey((k) => k + 1);
+      }
     }
     setBreakthroughFired(true);
   }
@@ -504,77 +486,7 @@ export function UnitBattleSimulator() {
     }, 4700);
   }
 
-  // ── Player Attack functions ──
-
-  function addPLog(msg: string) {
-    setPLog((l) => [msg, ...l.slice(0, 7)]);
-  }
-
-  function triggerFlash(zone: "base" | "shield" | "player") {
-    setPFlash(zone);
-    setTimeout(() => setPFlash(null), 600);
-  }
-
-  function pAttack() {
-    if (pDefeated || pIsAttacking) return;
-
-    const snap = { hasBase: pHasBase, baseHp: pBaseHp, shields: pShields, hasBurst };
-    setPIsAttacking(true);
-
-    setTimeout(() => {
-      if (snap.hasBase) {
-        const newHp = snap.baseHp - 1;
-        triggerFlash("base");
-        if (newHp <= 0) {
-          setPBaseHp(0);
-          setPHasBase(false);
-          addPLog("베이스 HP 0 → 파괴!");
-        } else {
-          setPBaseHp(newHp);
-          addPLog(`베이스에 대미지 (남은 HP: ${newHp}/3)`);
-        }
-      } else if (snap.shields > 0) {
-        triggerFlash("shield");
-        const newShields = snap.shields - 1;
-        setPShields(newShields);
-        if (snap.hasBurst) {
-          const shieldEl = shieldZoneRef.current;
-          const wrapperEl = p2WrapperRef.current;
-          if (shieldEl && wrapperEl) {
-            const sr = shieldEl.getBoundingClientRect();
-            const wr = wrapperEl.getBoundingClientRect();
-            setBurstFrom({
-              x: Math.round((sr.left + sr.right) / 2 - (wr.left + wr.right) / 2),
-              y: Math.round((sr.top + sr.bottom) / 2 - (wr.top + wr.bottom) / 2),
-            });
-          }
-          setBurstKey((k) => k + 1);
-          addPLog(`실드 1장 파괴 → 【버스트】 발동! (남은: ${newShields}장)`);
-        } else {
-          addPLog(`실드 1장 파괴 → 트래시 (남은: ${newShields}장)`);
-        }
-      } else {
-        triggerFlash("player");
-        setPDefeated(true);
-        addPLog("배틀 대미지 직격 → 패배!");
-      }
-    }, 220);
-
-    setTimeout(() => setPIsAttacking(false), 650);
-  }
-
-  function pReset() {
-    setPShields(SHIELD_INIT_SHIELDS);
-    setPBaseHp(SHIELD_INIT_BASE_HP);
-    setPHasBase(true);
-    setPDefeated(false);
-    setPLog([]);
-    setPFlash(null);
-    setPIsAttacking(false);
-    setBurstKey(0);
-  }
-
-  // ── Derived values (unit tab) ──
+  // ── Derived values ──
 
   const p1Board: DualBoardState = { shieldCount: 6, hasBase: true };
   const p2Board: DualBoardState = { shieldCount: enemyShields, hasBase: enemyHasBase, baseHp: enemyHasBase ? enemyBaseHp : undefined };
@@ -590,7 +502,7 @@ export function UnitBattleSimulator() {
 
   const phaseIdx = PHASE_STEPS.findIndex((s) => s.key === phase);
 
-  // ── Player Attack JSX helpers ──
+  // ── Dynamic keyframes for burst animation ──
 
   const { x: fx, y: fy } = burstFrom;
   const arcX = Math.round(fx * 0.45);
@@ -619,79 +531,6 @@ export function UnitBattleSimulator() {
     })
     .join("\n");
 
-  const opponentShieldArea = (
-    <div
-      className={cn(
-        "shrink-0 flex flex-col-reverse rounded border p-0.5 gap-0.5 transition-all duration-300",
-        pFlash === "base" || pFlash === "shield"
-          ? "border-orange-400/50 bg-orange-400/5"
-          : pFlash === "player"
-            ? "border-red-300 bg-red-50/50"
-            : "border-border bg-white",
-      )}
-      style={{ width: 56 }}
-    >
-      <span className="text-[8px] text-center text-muted-foreground leading-none font-medium">
-        실드 에어리어
-      </span>
-      <ZoneBox
-        label={pHasBase ? "⑥ 베이스" : "⑥ 파괴"}
-        sub={pHasBase ? `HP ${pBaseHp}/${SHIELD_INIT_BASE_HP}` : undefined}
-        active={true}
-        accent={pFlash === "base"}
-        dim={!pHasBase}
-        className="flex-none py-1"
-        animation={pFlash === "base" ? "hit-shake 320ms ease-out" : undefined}
-      />
-      <div
-        ref={shieldZoneRef}
-        className={cn(
-          "flex-1 rounded border p-0.5 flex flex-col gap-0.5 transition-all duration-300",
-          pFlash === "shield"
-            ? "border-orange-400/50 bg-orange-400/5"
-            : "border-border/50",
-        )}
-        style={{
-          animation: pFlash === "shield" ? "hit-shake 320ms ease-out" : "none",
-        }}
-      >
-        <span className="text-[8px] text-center text-muted-foreground leading-none">
-          ③ 실드
-        </span>
-        <ShieldSlots count={pShields} accent={pFlash === "shield"} reversed />
-      </div>
-    </div>
-  );
-
-  const myBattleZone = (
-    <div className="flex-[3] h-full rounded border border-orange-400/40 bg-orange-400/5 flex items-center justify-center overflow-visible">
-      <div
-        className="rounded border-2 border-orange-400/50 bg-white shadow-sm flex flex-col items-center justify-center gap-0.5"
-        style={{
-          width: 34,
-          height: 48,
-          position: "relative",
-          zIndex: pIsAttacking ? 20 : undefined,
-          animation: pIsAttacking
-            ? "unit-attack-diag 640ms ease-in-out forwards"
-            : "none",
-        }}
-      >
-        <span className="text-[7px] text-orange-400/70 leading-none">공격</span>
-        <span className="text-[9px] font-bold text-orange-600 leading-none">
-          유닛
-        </span>
-        <span className="text-[7px] bg-orange-500/15 rounded px-1 text-orange-600 font-semibold leading-none">
-          AP
-        </span>
-      </div>
-    </div>
-  );
-
-  const dim = (label: string, cls: string) => (
-    <ZoneBox label={label} active={true} className={cls} />
-  );
-
   return (
     <>
       <style>{`
@@ -715,20 +554,6 @@ export function UnitBattleSimulator() {
           75%  { transform: scale(0.97); }
           100% { transform: scale(1) translateY(0); opacity: 1; }
         }
-        @keyframes unit-attack-diag {
-          0%   { transform: translateY(0)     translateX(0)     rotate(0deg);  }
-          30%  { transform: translateY(-94px) translateX(100px) rotate(14deg); }
-          46%  { transform: translateY(-82px) translateX(88px)  rotate(10deg); }
-          100% { transform: translateY(0)     translateX(0)     rotate(0deg);  }
-        }
-        @keyframes hit-shake {
-          0%   { transform: translateX(0);   }
-          20%  { transform: translateX(5px); }
-          45%  { transform: translateX(-4px);}
-          65%  { transform: translateX(3px); }
-          82%  { transform: translateX(-2px);}
-          100% { transform: translateX(0);   }
-        }
         ${burstCardKeyframe}
         @keyframes burst-flash {
           0%   { transform: scale(0.2); opacity: 0.9; }
@@ -742,415 +567,247 @@ export function UnitBattleSimulator() {
           100% { transform: translateY(-5px) scale(0.9); opacity: 0; }
         }
         ${particleKeyframes}
-        @keyframes defeat-pop {
-          0%   { transform: scale(0.3) rotate(-8deg); opacity: 0; }
-          60%  { transform: scale(1.12) rotate(2deg); opacity: 1; }
-          80%  { transform: scale(0.96) rotate(-1deg); }
-          100% { transform: scale(1) rotate(0deg); opacity: 1; }
-        }
       `}</style>
 
       <div className="rounded-xl border border-border shadow-sm overflow-hidden">
         {/* ── Header ── */}
         <div className="px-3 py-2 bg-muted/30 border-b flex items-center justify-between">
           <span className="text-xs font-bold">어택 시뮬레이터</span>
-          {tab === "player" && (
-            <label className="flex items-center gap-1.5 text-[11px] text-muted-foreground cursor-pointer select-none">
-              <input
-                type="checkbox"
-                checked={hasBurst}
-                onChange={(e) => setHasBurst(e.target.checked)}
-                className="accent-primary"
-              />
-              실드에 【버스트】
-            </label>
-          )}
         </div>
 
-        {/* ── Tab bar ── */}
-        <div className="flex border-b">
-          <button
-            type="button"
-            onClick={() => setTab("unit")}
-            className={cn(
-              "flex-1 py-1.5 text-xs font-medium transition-colors",
-              tab === "unit"
-                ? "border-b-2 border-orange-500 text-orange-600"
-                : "text-muted-foreground hover:text-foreground",
-            )}
-          >
-            유닛 배틀
-          </button>
-          <button
-            type="button"
-            onClick={() => setTab("player")}
-            className={cn(
-              "flex-1 py-1.5 text-xs font-medium transition-colors",
-              tab === "player"
-                ? "border-b-2 border-orange-500 text-orange-600"
-                : "text-muted-foreground hover:text-foreground",
-            )}
-          >
-            플레이어 어택
-          </button>
-        </div>
-
-        {tab === "unit" && (
-          <>
-            {/* ── Phase progress ── */}
-            <div className="flex items-center px-3 pt-2 pb-1 border-b gap-0 overflow-hidden">
-              {PHASE_STEPS.map((s, i) => {
-                const done = phaseIdx > i;
-                const active = phaseIdx === i;
-                return (
-                  <div key={s.key} className="flex items-center min-w-0">
-                    {i > 0 && (
-                      <div
-                        className={cn(
-                          "h-px min-w-[6px] max-w-[20px] flex-1 transition-colors duration-300",
-                          done || active ? "bg-orange-400" : "bg-border",
-                        )}
-                      />
-                    )}
-                    <span
-                      className={cn(
-                        "shrink-0 text-[9px] px-1.5 py-0.5 rounded-full whitespace-nowrap transition-all duration-300",
-                        active
-                          ? "bg-orange-500 text-white font-bold shadow-sm"
-                          : done
-                            ? "bg-orange-100 text-orange-600"
-                            : "text-muted-foreground",
-                      )}
-                    >
-                      {s.label}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="p-3 flex flex-col gap-3">
-              {/* ── Config ── */}
-              <div className="grid grid-cols-2 gap-2 text-[10px]">
-                <div className="flex flex-col gap-1.5">
-                  <span className="font-semibold text-blue-600">내 유닛 (어택)</span>
-                  <select
-                    value={myIdx}
-                    onChange={(e) => setMyIdx(Number(e.target.value))}
-                    disabled={isRunning}
-                    className="border rounded px-1 py-0.5 text-[10px] bg-background disabled:opacity-50"
-                  >
-                    {UNIT_PRESETS.map((p, i) => (
-                      <option key={i} value={i}>{p.label}</option>
-                    ))}
-                  </select>
-                  <label className="flex items-center gap-1 cursor-pointer select-none">
-                    <input
-                      type="checkbox"
-                      checked={hasFirstStrike}
-                      onChange={(e) => setHasFirstStrike(e.target.checked)}
-                      disabled={isRunning}
-                      className="accent-blue-500"
-                    />
-                    <span className="text-muted-foreground">《선제공격》</span>
-                  </label>
-                  <label className="flex items-center gap-1 cursor-pointer select-none">
-                    <span className="text-muted-foreground">《돌파》:</span>
-                    <select
-                      value={breakthroughN}
-                      onChange={(e) => setBreakthroughN(Number(e.target.value))}
-                      disabled={isRunning}
-                      className="border rounded px-1 text-[10px] bg-background disabled:opacity-50"
-                    >
-                      <option value={0}>없음</option>
-                      <option value={1}>1</option>
-                      <option value={2}>2</option>
-                    </select>
-                  </label>
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <span className="font-semibold text-red-600">상대 유닛</span>
-                  <select
-                    value={enemyIdx}
-                    onChange={(e) => setEnemyIdx(Number(e.target.value))}
-                    disabled={isRunning}
-                    className="border rounded px-1 py-0.5 text-[10px] bg-background disabled:opacity-50"
-                  >
-                    {UNIT_PRESETS.map((p, i) => (
-                      <option key={i} value={i}>{p.label}</option>
-                    ))}
-                  </select>
-                  <label className="flex items-center gap-1 cursor-pointer select-none">
-                    <input
-                      type="checkbox"
-                      checked={hasBlocker}
-                      onChange={(e) => setHasBlocker(e.target.checked)}
-                      disabled={isRunning}
-                      className="accent-red-500"
-                    />
-                    <span className="text-muted-foreground">《블로커》</span>
-                  </label>
-                </div>
-              </div>
-
-              {/* ── DualPlayfield ── */}
-              <div className="relative" ref={containerRef}>
-                <DualPlayfield
-                  p1={p1Board}
-                  p2={p2Board}
-                  p1Label="나 (어택)"
-                  p2Label="상대"
-                  accent={accent}
-                  p2Accent={p2BreakthroughAccent}
-                  p1Battle={
-                    <div
-                      ref={myBattleRef}
-                      className="w-full h-full flex items-center justify-center overflow-visible"
-                    >
-                      <MiniCard
-                        name="나"
-                        ap={myUnit.ap}
-                        hp={myHp}
-                        maxHp={myUnit.hp}
-                        color="blue"
-                        rested={myRested}
-                        attacking={myAttacking}
-                        attackDir={-1}
-                        hit={myHit}
-                        destroyed={myDestroyed}
-                        tag={[hasFirstStrike ? "선제" : "", breakthroughN > 0 ? `돌파${breakthroughN}` : ""].filter(Boolean).join(" ") || undefined}
-                        highlight={phase === "damage"}
-                      />
-                    </div>
-                  }
-                  p2Battle={
-                    <div
-                      ref={enemyBattleRef}
-                      className="w-full h-full flex items-center justify-center overflow-visible"
-                    >
-                      <MiniCard
-                        name="상대"
-                        ap={enemyUnit.ap}
-                        hp={enemyHp}
-                        maxHp={enemyUnit.hp}
-                        color="red"
-                        rested={blockerRested}
-                        attackDir={1}
-                        hit={enemyHit}
-                        destroyed={enemyDestroyed}
-                        tag={hasBlocker ? "블로커" : undefined}
-                      />
-                    </div>
-                  }
-                />
-
-                {/* Targeting arrow overlay */}
-                <TargetingArrow
-                  sx={targetCoords.sx}
-                  sy={targetCoords.sy}
-                  ex={targetCoords.ex}
-                  ey={targetCoords.ey}
-                  show={showTarget}
-                />
-
-                {/* Attack projectile overlay */}
-                <AttackProjectile
-                  sx={projCoords.sx}
-                  sy={projCoords.sy}
-                  ex={projCoords.ex}
-                  ey={projCoords.ey}
-                  animKey={projKey}
-                />
-              </div>
-
-              {/* ── Breakthrough badge ── */}
-              {breakthroughFired && (
-                <div
-                  className="text-center text-[11px] font-black text-orange-600 bg-orange-50 border border-orange-300 rounded-lg px-2 py-1.5 shadow-sm"
-                  style={{ animation: "breakthrough-badge 380ms cubic-bezier(0.34,1.56,0.64,1) both" }}
-                >
-                  《돌파 {breakthroughN}》 발동 — 실드 {enemyShields}장{enemyHasBase ? ` · 베이스 HP ${enemyBaseHp}` : ""} 남음
-                </div>
-              )}
-
-              {/* ── Controls & log ── */}
-              <div className="flex flex-col gap-2">
-                <div className="flex gap-1.5">
-                  <button
-                    type="button"
-                    onClick={runBattle}
-                    disabled={isRunning || isDone}
-                    className="flex-1 text-xs py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
-                  >
-                    어택!
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => doReset(myUnit.hp, enemyUnit.hp)}
-                    className="text-xs px-3 py-2 rounded-lg border border-border hover:bg-muted/40 active:scale-95 transition-all text-muted-foreground"
-                  >
-                    ↺
-                  </button>
-                </div>
-                {unitLog.length > 0 && (
-                  <div className="rounded-lg border border-border/60 bg-muted/20 px-2.5 py-2 flex flex-col gap-1 max-h-28 overflow-y-auto">
-                    {unitLog.map((entry, i) => (
-                      <div
-                        key={i}
-                        className={cn(
-                          "flex items-start gap-2 text-[11px]",
-                          i === 0
-                            ? "text-foreground font-semibold"
-                            : "text-muted-foreground",
-                        )}
-                      >
-                        <span
-                          className={cn(
-                            "shrink-0 w-1 h-1 rounded-full mt-1",
-                            i === 0 ? "bg-orange-500" : "bg-muted-foreground/40",
-                          )}
-                        />
-                        {entry}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </>
-        )}
-
-        {tab === "player" && (
-          <div className="p-3 flex flex-col gap-0.5 text-[10px] select-none">
-            {/* ── P2 (top, flipped) — 상대 ── */}
-            <div className="relative" ref={p2WrapperRef}>
-              <PlayerSection
-                player="p2"
-                className={cn(
-                  "transition-all duration-500",
-                  pDefeated && "opacity-30",
-                  pFlash === "player" && "border-red-400 bg-red-100/80",
-                )}
-              >
-                <div className="flex items-center justify-between text-[9px] font-semibold pb-0.5">
-                  <span className="text-slate-400">상대</span>
-                  <span
+        {/* ── Phase progress ── */}
+        <div className="flex items-center px-3 pt-2 pb-1 border-b gap-0 overflow-hidden">
+          {PHASE_STEPS.map((s, i) => {
+            const done = phaseIdx > i;
+            const active = phaseIdx === i;
+            return (
+              <div key={s.key} className="flex items-center min-w-0">
+                {i > 0 && (
+                  <div
                     className={cn(
-                      "transition-all",
-                      pDefeated ? "text-red-500 animate-pulse" : "text-slate-400",
+                      "h-px min-w-[6px] max-w-[20px] flex-1 transition-colors duration-300",
+                      done || active ? "bg-orange-400" : "bg-border",
                     )}
-                  >
-                    {pDefeated ? "☠ 패배" : "★ 생존"}
-                  </span>
-                </div>
-                <BoardHalfLayout
-                  flipped={true}
-                  slots={{
-                    shieldArea: opponentShieldArea,
-                    battle: dim("⑤ 배틀", "flex-[3] h-full"),
-                    deck: dim("① 덱", "flex-[1] h-full"),
-                    resDeck: dim("② 리소스덱", "flex-[2] h-full"),
-                    resource: dim("④ 리소스", "flex-[4] h-full"),
-                    trash: dim("⑦ 트래시", "flex-[2] h-full"),
-                  }}
-                />
-              </PlayerSection>
-              <BurstOverlay animKey={burstKey} />
-              {/* Defeat overlay */}
-              {pDefeated && (
-                <div className="absolute inset-0 pointer-events-none flex items-center justify-center" style={{ zIndex: 40 }}>
-                  <div className="text-[18px] font-black text-red-600 bg-white/95 px-4 py-1.5 rounded-xl shadow-xl border-2 border-red-400 tracking-wide"
-                    style={{ animation: "defeat-pop 400ms cubic-bezier(0.34,1.56,0.64,1) forwards" }}>
-                    ☠ 패배
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <VsDivider active={pIsAttacking} />
-
-            {/* ── P1 (bottom, not flipped) — 나 ── */}
-            <div className="relative">
-              <PlayerSection player="p1" className={cn("transition-all duration-500", pDefeated && "opacity-30")}>
-                <BoardHalfLayout
-                  flipped={false}
-                  slots={{
-                    shieldArea: (
-                      <ZoneBox
-                        label="실드 에어리어"
-                        active={true}
-                        className="shrink-0"
-                        // @ts-expect-error ZoneBox forwards style via inline usage
-                        style={{ width: 56 }}
-                      />
-                    ),
-                    battle: myBattleZone,
-                    deck: dim("① 덱", "flex-[1] h-full"),
-                    resDeck: dim("② 리소스덱", "flex-[2] h-full"),
-                    resource: dim("④ 리소스", "flex-[4] h-full"),
-                    trash: dim("⑦ 트래시", "flex-[2] h-full"),
-                  }}
-                />
-                <div className="text-center text-[9px] font-semibold text-blue-400 py-0.5">
-                  나
-                </div>
-              </PlayerSection>
-              {/* Victory overlay */}
-              {pDefeated && (
-                <div className="absolute inset-0 pointer-events-none flex items-center justify-center" style={{ zIndex: 40 }}>
-                  <div className="text-[18px] font-black text-blue-600 bg-white/95 px-4 py-1.5 rounded-xl shadow-xl border-2 border-blue-400 tracking-wide"
-                    style={{ animation: "defeat-pop 400ms cubic-bezier(0.34,1.56,0.64,1) 120ms both" }}>
-                    ★ 승리
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Controls + log */}
-            <div className="pt-2 flex flex-col gap-2">
-              <div className="flex gap-1.5">
-                <button
-                  type="button"
-                  onClick={pAttack}
-                  disabled={pDefeated || pIsAttacking}
-                  className="flex-1 text-xs py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
+                  />
+                )}
+                <span
+                  className={cn(
+                    "shrink-0 text-[9px] px-1.5 py-0.5 rounded-full whitespace-nowrap transition-all duration-300",
+                    active
+                      ? "bg-orange-500 text-white font-bold shadow-sm"
+                      : done
+                        ? "bg-orange-100 text-orange-600"
+                        : "text-muted-foreground",
+                  )}
                 >
-                  어택!
-                </button>
-                <button
-                  type="button"
-                  onClick={pReset}
-                  className="text-xs px-3 py-2 rounded-lg border border-border hover:bg-muted/40 active:scale-95 transition-all text-muted-foreground"
-                >
-                  ↺
-                </button>
+                  {s.label}
+                </span>
               </div>
-              {pLog.length > 0 && (
-                <div className="rounded-lg border border-border/60 bg-muted/20 px-2.5 py-2 flex flex-col gap-1 max-h-28 overflow-y-auto">
-                  {pLog.map((entry, i) => (
-                    <div
-                      key={i}
-                      className={cn(
-                        "flex items-start gap-2 text-[11px]",
-                        i === 0
-                          ? "text-foreground font-semibold"
-                          : "text-muted-foreground",
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          "shrink-0 w-1 h-1 rounded-full mt-1",
-                          i === 0 ? "bg-orange-500" : "bg-muted-foreground/40",
-                        )}
-                      />
-                      {entry}
-                    </div>
-                  ))}
-                </div>
-              )}
+            );
+          })}
+        </div>
+
+        <div className="p-3 flex flex-col gap-3">
+          {/* ── Config ── */}
+          <div className="grid grid-cols-2 gap-2 text-[10px]">
+            <div className="flex flex-col gap-1.5">
+              <span className="font-semibold text-blue-600">내 유닛 (어택)</span>
+              <select
+                value={myIdx}
+                onChange={(e) => setMyIdx(Number(e.target.value))}
+                disabled={isRunning}
+                className="border rounded px-1 py-0.5 text-[10px] bg-background disabled:opacity-50"
+              >
+                {UNIT_PRESETS.map((p, i) => (
+                  <option key={i} value={i}>{p.label}</option>
+                ))}
+              </select>
+              <label className="flex items-center gap-1 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={hasFirstStrike}
+                  onChange={(e) => setHasFirstStrike(e.target.checked)}
+                  disabled={isRunning}
+                  className="accent-blue-500"
+                />
+                <span className="text-muted-foreground">《선제공격》</span>
+              </label>
+              <label className="flex items-center gap-1 cursor-pointer select-none">
+                <span className="text-muted-foreground">《돌파》:</span>
+                <select
+                  value={breakthroughN}
+                  onChange={(e) => setBreakthroughN(Number(e.target.value))}
+                  disabled={isRunning}
+                  className="border rounded px-1 text-[10px] bg-background disabled:opacity-50"
+                >
+                  <option value={0}>없음</option>
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                </select>
+              </label>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <span className="font-semibold text-red-600">상대 유닛</span>
+              <select
+                value={enemyIdx}
+                onChange={(e) => setEnemyIdx(Number(e.target.value))}
+                disabled={isRunning}
+                className="border rounded px-1 py-0.5 text-[10px] bg-background disabled:opacity-50"
+              >
+                {UNIT_PRESETS.map((p, i) => (
+                  <option key={i} value={i}>{p.label}</option>
+                ))}
+              </select>
+              <label className="flex items-center gap-1 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={hasBlocker}
+                  onChange={(e) => setHasBlocker(e.target.checked)}
+                  disabled={isRunning}
+                  className="accent-red-500"
+                />
+                <span className="text-muted-foreground">《블로커》</span>
+              </label>
+              <label className="flex items-center gap-1 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={hasBurst}
+                  onChange={(e) => setHasBurst(e.target.checked)}
+                  disabled={isRunning}
+                  className="accent-red-500"
+                />
+                <span className="text-muted-foreground">실드에 《버스트》</span>
+              </label>
             </div>
           </div>
-        )}
+
+          {/* ── DualPlayfield ── */}
+          <div className="relative" ref={containerRef}>
+            <DualPlayfield
+              p1={p1Board}
+              p2={p2Board}
+              p1Label="나 (어택)"
+              p2Label="상대"
+              accent={accent}
+              p2Accent={p2BreakthroughAccent}
+              p1Battle={
+                <div
+                  ref={myBattleRef}
+                  className="w-full h-full flex items-center justify-center overflow-visible"
+                >
+                  <MiniCard
+                    name="나"
+                    ap={myUnit.ap}
+                    hp={myHp}
+                    maxHp={myUnit.hp}
+                    color="blue"
+                    rested={myRested}
+                    attacking={myAttacking}
+                    attackDir={-1}
+                    hit={myHit}
+                    destroyed={myDestroyed}
+                    tag={[hasFirstStrike ? "선제" : "", breakthroughN > 0 ? `돌파${breakthroughN}` : ""].filter(Boolean).join(" ") || undefined}
+                    highlight={phase === "damage"}
+                  />
+                </div>
+              }
+              p2Battle={
+                <div
+                  ref={enemyBattleRef}
+                  className="w-full h-full flex items-center justify-center overflow-visible"
+                >
+                  <MiniCard
+                    name="상대"
+                    ap={enemyUnit.ap}
+                    hp={enemyHp}
+                    maxHp={enemyUnit.hp}
+                    color="red"
+                    rested={blockerRested}
+                    attackDir={1}
+                    hit={enemyHit}
+                    destroyed={enemyDestroyed}
+                    tag={hasBlocker ? "블로커" : undefined}
+                  />
+                </div>
+              }
+            />
+
+            {/* Targeting arrow overlay */}
+            <TargetingArrow
+              sx={targetCoords.sx}
+              sy={targetCoords.sy}
+              ex={targetCoords.ex}
+              ey={targetCoords.ey}
+              show={showTarget}
+            />
+
+            {/* Attack projectile overlay */}
+            <AttackProjectile
+              sx={projCoords.sx}
+              sy={projCoords.sy}
+              ex={projCoords.ex}
+              ey={projCoords.ey}
+              animKey={projKey}
+            />
+
+            {/* Burst overlay */}
+            <BurstOverlay animKey={burstKey} />
+          </div>
+
+          {/* ── Breakthrough badge ── */}
+          {breakthroughFired && (
+            <div
+              className="text-center text-[11px] font-black text-orange-600 bg-orange-50 border border-orange-300 rounded-lg px-2 py-1.5 shadow-sm"
+              style={{ animation: "breakthrough-badge 380ms cubic-bezier(0.34,1.56,0.64,1) both" }}
+            >
+              《돌파 {breakthroughN}》 발동 — 실드 {enemyShields}장{enemyHasBase ? ` · 베이스 HP ${enemyBaseHp}` : ""} 남음
+            </div>
+          )}
+
+          {/* ── Controls & log ── */}
+          <div className="flex flex-col gap-2">
+            <div className="flex gap-1.5">
+              <button
+                type="button"
+                onClick={runBattle}
+                disabled={isRunning || isDone}
+                className="flex-1 text-xs py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
+              >
+                어택!
+              </button>
+              <button
+                type="button"
+                onClick={() => doReset(myUnit.hp, enemyUnit.hp)}
+                className="text-xs px-3 py-2 rounded-lg border border-border hover:bg-muted/40 active:scale-95 transition-all text-muted-foreground"
+              >
+                ↺
+              </button>
+            </div>
+            {unitLog.length > 0 && (
+              <div className="rounded-lg border border-border/60 bg-muted/20 px-2.5 py-2 flex flex-col gap-1 max-h-28 overflow-y-auto">
+                {unitLog.map((entry, i) => (
+                  <div
+                    key={i}
+                    className={cn(
+                      "flex items-start gap-2 text-[11px]",
+                      i === 0
+                        ? "text-foreground font-semibold"
+                        : "text-muted-foreground",
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "shrink-0 w-1 h-1 rounded-full mt-1",
+                        i === 0 ? "bg-orange-500" : "bg-muted-foreground/40",
+                      )}
+                    />
+                    {entry}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </>
   );
