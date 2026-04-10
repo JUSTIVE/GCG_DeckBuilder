@@ -1,4 +1,6 @@
 import { useTransition, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 import { graphql, useRefetchableFragment, useFragment } from "react-relay";
 import { serveGraphQL } from "@/serve";
 import { cn } from "@/lib/utils";
@@ -82,28 +84,18 @@ const CLEAR_MUTATION = `mutation { clearSearchHistory }`;
 
 // ─── Label maps ───────────────────────────────────────────────────────────────
 
-const KIND_LABELS: Record<string, string> = {
-  UNIT: "유닛", PILOT: "파일럿", BASE: "베이스", COMMAND: "커맨드", RESOURCE: "리소스",
-};
-const COLOR_LABELS: Record<string, string> = {
-  BLUE: "파랑", GREEN: "초록", RED: "빨강", YELLOW: "노랑", PURPLE: "보라", WHITE: "하양",
-};
-const SORT_LABELS: Record<string, string> = {
-  NAME_ASC: "이름 ↑", NAME_DESC: "이름 ↓",
-  COST_ASC: "코스트 ↑", COST_DESC: "코스트 ↓",
-  LEVEL_ASC: "레벨 ↑", LEVEL_DESC: "레벨 ↓",
-  AP_ASC: "공격력 ↑", AP_DESC: "공격력 ↓",
-  HP_ASC: "체력 ↑", HP_DESC: "체력 ↓",
-};
+function getKindLabel(k: string) { return (i18n.t as any)(`kind.${k}`, { ns: "game" }); }
+function getColorLabel(c: string) { return (i18n.t as any)(`color.${c}`, { ns: "game" }); }
+function getSortLabel(s: string) { return (i18n.t as any)(`sort.${s}`, { ns: "filters" }); }
 
-function formatRelativeTime(iso: string): string {
+function formatRelativeTime(iso: string, t: (key: any, opts?: any) => string): string {
   const diff = Date.now() - new Date(iso).getTime();
   const m = Math.floor(diff / 60000);
-  if (m < 1) return "방금";
-  if (m < 60) return `${m}분 전`;
+  if (m < 1) return t("search.just");
+  if (m < 60) return t("search.minutesAgo", { count: m });
   const h = Math.floor(m / 60);
-  if (h < 24) return `${h}시간 전`;
-  return `${Math.floor(h / 24)}일 전`;
+  if (h < 24) return t("search.hoursAgo", { count: h });
+  return t("search.daysAgo", { count: Math.floor(h / 24) });
 }
 
 // ─── Filter summary chips ─────────────────────────────────────────────────────
@@ -122,7 +114,7 @@ type HistoryFilter = {
   rarity?: string | null;
 };
 
-function FilterSummary({ f }: { f: HistoryFilter }) {
+function FilterSummary({ f, t }: { f: HistoryFilter; t: (key: any, opts?: any) => string }) {
   const parts: React.ReactNode[] = [];
 
   const kinds = [...(f.kind ?? [])];
@@ -130,7 +122,7 @@ function FilterSummary({ f }: { f: HistoryFilter }) {
     kinds.forEach((k) =>
       parts.push(
         <span key={`k-${k}`} className="rounded px-1.5 py-0.5 bg-muted text-xs font-medium">
-          {KIND_LABELS[k] ?? k}
+          {getKindLabel(k)}
         </span>,
       ),
     );
@@ -146,7 +138,7 @@ function FilterSummary({ f }: { f: HistoryFilter }) {
           c === "WHITE" ? "text-gray-500 border border-border" : "text-white",
         )}
       >
-        {COLOR_LABELS[c] ?? c}
+        {getColorLabel(c)}
       </span>,
     ),
   );
@@ -191,9 +183,10 @@ function FilterSummary({ f }: { f: HistoryFilter }) {
   );
 
   if ((f.cost?.length ?? 0) > 0) {
+    const values = [...(f.cost ?? [])].join("·");
     parts.push(
       <span key="cost" className="rounded px-1.5 py-0.5 bg-muted text-xs">
-        코스트 {[...(f.cost ?? [])].join("·")}
+        {`${t("filter.cost")} ${values}`}
       </span>,
     );
   }
@@ -217,13 +210,13 @@ function FilterSummary({ f }: { f: HistoryFilter }) {
   if (f.sort) {
     parts.push(
       <span key="s" className="rounded px-1.5 py-0.5 bg-muted/50 text-xs text-muted-foreground">
-        {SORT_LABELS[f.sort] ?? f.sort}
+        {getSortLabel(f.sort)}
       </span>,
     );
   }
 
   if (parts.length === 0) {
-    parts.push(<span key="all" className="text-xs text-muted-foreground">전체 카드</span>);
+    parts.push(<span key="all" className="text-xs text-muted-foreground">{t("search.allCards")}</span>);
   }
 
   return <div className="flex flex-wrap gap-1">{parts}</div>;
@@ -240,6 +233,7 @@ function FilterSearchRow({
   onRestore: (filter: CardFilterInput, sort: CardSort | null) => void;
   onRemove: (id: string, e: React.MouseEvent) => void;
 }) {
+  const { t } = useTranslation("common");
   const entry = useFragment(FilterSearchFragment, entryRef);
   const { sort, ...filterFields } = entry.filter;
 
@@ -254,18 +248,18 @@ function FilterSearchRow({
       >
         <div className="flex items-center gap-1 text-muted-foreground mb-0.5">
           <SearchIcon className="h-3 w-3 shrink-0" />
-          <span className="text-[10px]">필터 검색</span>
+          <span className="text-[10px]">{t("search.filterSearch")}</span>
         </div>
-        <FilterSummary f={entry.filter} />
+        <FilterSummary f={entry.filter} t={t} />
         <span className="text-[10px] text-muted-foreground">
-          {formatRelativeTime(entry.searchedAt)}
+          {formatRelativeTime(entry.searchedAt, t)}
         </span>
       </button>
       <button
         type="button"
         onClick={(e) => onRemove(entry.id, e)}
         className="p-2 text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-destructive cursor-pointer transition-all shrink-0"
-        aria-label="삭제"
+        aria-label={t("action.delete")}
       >
         <XIcon className="h-3.5 w-3.5" />
       </button>
@@ -282,6 +276,7 @@ function CardViewRow({
   onRestore: (cardId: string) => void;
   onRemove: (id: string, e: React.MouseEvent) => void;
 }) {
+  const { t } = useTranslation("common");
   const entry = useFragment(CardViewFragment, entryRef);
 
   const borderColor = entry.color ? entry.color === "WHITE" ? "var(--border)" : COLOR_HEX[entry.color] : "var(--border)";
@@ -300,7 +295,7 @@ function CardViewRow({
           <div className="flex flex-col gap-1.5 min-w-0 w-full">
             <div className="flex items-center text-muted-foreground w-full">
               <EyeIcon className="h-3 w-3 shrink-0" />
-              <span className="text-[10px]">카드 조회</span>
+              <span className="text-[10px]">{t("search.cardLookup")}</span>
             </div>
             <div className="flex items-start gap-2">
               <img
@@ -315,7 +310,7 @@ function CardViewRow({
               </div>
             </div>
             <span className="text-[10px] text-muted-foreground">
-              {formatRelativeTime(entry.searchedAt)}
+              {formatRelativeTime(entry.searchedAt, t)}
             </span>
           </div>
         </button>
@@ -323,7 +318,7 @@ function CardViewRow({
           type="button"
           onClick={(e) => onRemove(entry.id, e)}
           className="p-2 text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-destructive cursor-pointer transition-all shrink-0"
-          aria-label="삭제"
+          aria-label={t("action.delete")}
         >
           <XIcon className="h-3.5 w-3.5" />
         </button>
@@ -342,6 +337,7 @@ type Props = {
 };
 
 export function SearchHistoryPanel({ queryRef, onRestore, onRestoreCardView, fetchKey }: Props) {
+  const { t } = useTranslation("common");
   const [, startTransition] = useTransition();
   const [data, refetch] = useRefetchableFragment(SearchHistoryPanelFragment, queryRef);
 
@@ -380,7 +376,7 @@ export function SearchHistoryPanel({ queryRef, onRestore, onRestoreCardView, fet
       <div className="flex items-center justify-between">
         <span className="flex items-center gap-1 text-xs font-medium text-muted-foreground">
           <ClockIcon className="h-3 w-3" />
-          검색 기록
+          {t("search.history")}
         </span>
         <button
           type="button"
@@ -388,7 +384,7 @@ export function SearchHistoryPanel({ queryRef, onRestore, onRestoreCardView, fet
           className="flex items-center gap-1 text-xs text-muted-foreground hover:text-destructive cursor-pointer transition-colors"
         >
           <Trash2Icon className="h-3 w-3" />
-          전체 삭제
+          {t("action.deleteAll")}
         </button>
       </div>
       <div className="flex flex-col gap-1">

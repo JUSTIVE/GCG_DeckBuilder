@@ -6,6 +6,7 @@ import { renderSeries } from "@/render/series";
 import { renderPackage } from "@/render/package";
 import { CardDescription } from "@/components/CardDescription";
 import { KeywordContent } from "./KeywordPanel";
+import { useTranslation } from "react-i18next";
 
 export function UnitCardDetail({
   node,
@@ -14,6 +15,7 @@ export function UnitCardDetail({
   node: any;
   navigateWithFilter: (filter: Partial<CardListSearch>) => void;
 }) {
+  const { t } = useTranslation("common");
   const linkItems = (node.links ?? [])
     .map((x: any) => {
       if (x.__typename === "LinkPilot" && x.pilot) {
@@ -36,7 +38,7 @@ export function UnitCardDetail({
         <div className="text-xs text-white/60">{node.id}</div>
         <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
           <span>Lv {node.level}</span>
-          <span>코스트 {node.cost}</span>
+          <span>{t("card.cost", { value: node.cost })}</span>
           <span>AP {node.AP}</span>
           <span>HP {node.HP}</span>
         </div>
@@ -51,7 +53,7 @@ export function UnitCardDetail({
 
       {(node.zone?.length ?? 0) > 0 && (
         <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">지형</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.zone")}</span>
           <div className="flex flex-wrap gap-1">
             {(node.zone ?? []).map((z: string) => (
               <button key={z} type="button" onClick={() => navigateWithFilter({ zone: [z as any] })} className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer">
@@ -64,7 +66,7 @@ export function UnitCardDetail({
 
       {(node.traits?.length ?? 0) > 0 && (
         <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">특성</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.trait")}</span>
           <div className="flex flex-wrap gap-1">
             {(node.traits ?? []).map((t: string) => (
               <button key={t} type="button" onClick={() => navigateWithFilter({ trait: [t as CardTrait] })} className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer">
@@ -76,7 +78,7 @@ export function UnitCardDetail({
       )}
       {(node.relatedTraits?.length ?? 0) > 0 && (
         <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">관련 특성</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.relatedTrait")}</span>
           <div className="flex flex-wrap gap-1">
             {(node.relatedTraits ?? []).map((t: string) => (
               <button key={t} type="button" onClick={() => navigateWithFilter({ trait: [t as CardTrait] })} className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer">
@@ -89,7 +91,7 @@ export function UnitCardDetail({
 
       {linkItems.length > 0 && (
         <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">링크</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.link")}</span>
           <div className="flex flex-wrap gap-1">
             {linkItems.map((item: any) => (
               <button key={item.label} type="button" onClick={item.onClick} className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer">
@@ -102,7 +104,7 @@ export function UnitCardDetail({
 
       {(node.description?.length ?? 0) > 0 && (
         <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">효과</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.effect")}</span>
           <CardDescription lines={node.description ?? []} />
         </div>
       )}

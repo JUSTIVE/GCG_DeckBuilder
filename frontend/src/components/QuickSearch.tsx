@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { serveGraphQL } from "@/serve";
 import { cn } from "@/lib/utils";
 import { useNavigate, useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 
 // ─── GraphQL ──────────────────────────────────────────────────────────────────
 
@@ -84,17 +86,21 @@ function resultMeta(r: SearchResult): string {
   }
 }
 
-const KIND_LABEL: Record<string, string> = {
-  UnitCard: "유닛",
-  PilotCard: "파일럿",
-  BaseCard: "베이스",
-  CommandCard: "커맨드",
-  Resource: "리소스",
-};
+function getKindLabel(typename: string): string {
+  const map: Record<string, string> = {
+    UnitCard: i18n.t("kind.UNIT", { ns: "game" }),
+    PilotCard: i18n.t("kind.PILOT", { ns: "game" }),
+    BaseCard: i18n.t("kind.BASE", { ns: "game" }),
+    CommandCard: i18n.t("kind.COMMAND", { ns: "game" }),
+    Resource: i18n.t("kind.RESOURCE", { ns: "game" }),
+  };
+  return map[typename] ?? typename;
+}
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function QuickSearch() {
+  const { t } = useTranslation("common");
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -192,7 +198,7 @@ export function QuickSearch() {
         className="flex h-8 items-center gap-2 rounded-md border border-input bg-background px-3 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground"
       >
         <SearchIcon className="h-3.5 w-3.5" />
-        <span className="hidden sm:inline">검색</span>
+        <span className="hidden sm:inline">{t("search.label")}</span>
         <kbd className="hidden rounded border border-border bg-muted px-1.5 text-xs sm:inline-block">
           ⌘K
         </kbd>
@@ -210,7 +216,7 @@ export function QuickSearch() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={onKeyDown}
-                placeholder="카드 이름, 효과, 특성으로 검색…"
+                placeholder={t("search.placeholder")}
                 className="h-12 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               />
               {query && (
@@ -227,14 +233,14 @@ export function QuickSearch() {
             <div className="max-h-[26rem] overflow-y-auto">
               {!query.trim() && (
                 <p className="px-4 py-8 text-center text-sm text-muted-foreground">
-                  검색어를 입력하세요
+                  {t("search.prompt")}
                 </p>
               )}
               {loading && (
-                <p className="px-4 py-8 text-center text-sm text-muted-foreground">검색 중…</p>
+                <p className="px-4 py-8 text-center text-sm text-muted-foreground">{t("search.searching")}</p>
               )}
               {!loading && query.trim() && results.length === 0 && (
-                <p className="px-4 py-8 text-center text-sm text-muted-foreground">결과 없음</p>
+                <p className="px-4 py-8 text-center text-sm text-muted-foreground">{t("search.noResults")}</p>
               )}
               {!loading && results.length > 0 && (
                 <ul ref={listRef} className="p-1">
@@ -251,7 +257,7 @@ export function QuickSearch() {
                         onClick={() => selectResult(r)}
                       >
                         <span className="w-14 shrink-0 rounded border border-border bg-muted px-1.5 py-0.5 text-center text-xs text-muted-foreground">
-                          {KIND_LABEL[r.__typename] ?? r.__typename}
+                          {getKindLabel(r.__typename)}
                         </span>
                         <span className="flex-1 truncate text-sm font-medium">
                           {resultLabel(r)}

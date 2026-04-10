@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type PlayerState = {
   level: number;
@@ -42,6 +43,7 @@ function initPlayers(firstPlayer: PlayerTurn): [PlayerState, PlayerState] {
 type PlayerTurn = "p1" | "p2";
 
 export function ResourceCounterPage() {
+  const { t } = useTranslation("common");
   const [phase, setPhase] = useState<Phase>("select-first");
   const [firstPlayer, setFirstPlayer] = useState<PlayerTurn>("p1");
   const [currentTurn, setCurrentTurn] = useState<PlayerTurn>("p1");
@@ -131,12 +133,12 @@ export function ResourceCounterPage() {
           <span className="text-blue-400 text-lg font-semibold tracking-widest uppercase">
             Player 1
           </span>
-          <span className="text-5xl font-bold">선공</span>
+          <span className="text-5xl font-bold">{t("game.firstPlayer")}</span>
         </button>
 
         <div className="flex flex-col items-center justify-center w-px bg-white/10 relative">
           <span className="absolute bg-[var(--bg-base)] text-[var(--sea-ink)] text-xs font-bold px-3 py-1.5 rounded-full border border-[var(--line)] whitespace-nowrap z-10">
-            선공 선택
+            {t("game.selectFirst")}
           </span>
         </div>
 
@@ -148,7 +150,7 @@ export function ResourceCounterPage() {
           <span className="text-red-400 text-lg font-semibold tracking-widest uppercase">
             Player 2
           </span>
-          <span className="text-5xl font-bold">선공</span>
+          <span className="text-5xl font-bold">{t("game.firstPlayer")}</span>
         </button>
       </div>
     );
@@ -216,6 +218,7 @@ function PlayerPanel({
   onAdjustResource,
   onUseEx,
 }: PlayerPanelProps) {
+  const { t } = useTranslation("common");
   const isFirst = firstPlayer === playerId;
   const isP1 = playerId === "p1";
 
@@ -252,17 +255,17 @@ function PlayerPanel({
           <span
             className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${borderClass} ${accentClass}`}
           >
-            선공
+            {t("game.firstPlayer")}
           </span>
         ) : (
           <span
             className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${borderClass} ${accentClass}`}
           >
-            후공
+            {t("game.secondPlayer")}
           </span>
         )}
         {isActive && (
-          <span className="text-xs font-medium text-green-600 animate-pulse ">● 진행 중</span>
+          <span className="text-xs font-medium text-green-600 animate-pulse ">{t("game.inProgress")}</span>
         )}
       </div>
 
@@ -291,7 +294,7 @@ function PlayerPanel({
                   className="flex items-center gap-2 px-5 py-2 rounded-xl border border-yellow-600/60 bg-yellow-900/40 hover:bg-yellow-800/50 active:bg-yellow-900/70 text-yellow-300 font-bold text-sm transition-colors w-full justify-center"
                 >
                   <span className="text-yellow-400 text-base">⚡</span>
-                  EX 리소스 사용
+                  {t("game.useExResource")}
                 </button>
               ) : null}
               {!turnStarted ? (
@@ -300,7 +303,7 @@ function PlayerPanel({
                   onClick={onStartTurn}
                   className={`w-full px-6 py-2.5 rounded-xl text-white font-bold text-sm transition-colors ${btnClass}`}
                 >
-                  턴 시작 (+1 레벨 / 리소스 회복)
+                  {t("game.turnStart")}
                 </button>
               ) : (
                 <button
@@ -308,7 +311,7 @@ function PlayerPanel({
                   onClick={onEndTurn}
                   className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 active:bg-white/5 text-white/80 font-bold text-sm transition-colors border border-white/20 w-full"
                 >
-                  턴 종료
+                  {t("game.turnEnd")}
                 </button>
               )}
             </>

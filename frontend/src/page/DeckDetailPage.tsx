@@ -9,6 +9,7 @@ import type { CardFilterInput, CardSort } from "@/__generated__/CardListFragment
 import { Route } from "@/routes/$locale/deck/$deckId";
 import type { DeckDetailSearch } from "@/routes/$locale/deck/$deckId";
 import { useState, Suspense } from "react";
+import { useTranslation } from "react-i18next";
 import { useRouter } from "@tanstack/react-router";
 import { CardList } from "@/components/CardList";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
@@ -117,6 +118,7 @@ function filterToSearch(f: CardFilterInput): Omit<DeckDetailSearch, "view" | "so
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export function DeckDetailPage() {
+  const { t } = useTranslation("common");
   const { deckId } = Route.useParams();
   const search = Route.useSearch();
   const router = useRouter();
@@ -140,7 +142,7 @@ export function DeckDetailPage() {
 
   const node = data.node;
   if (!node || node.__typename !== "Deck") {
-    return <div className="px-4 py-8"><p className="text-muted-foreground">덱을 찾을 수 없습니다.</p></div>;
+    return <div className="px-4 py-8"><p className="text-muted-foreground">{t("deck.notFound")}</p></div>;
   }
 
   const deck = node;
@@ -172,13 +174,13 @@ export function DeckDetailPage() {
       onCompleted: (res) => {
         const result = res.addCardToDeck;
         if (!result || "deck" in result) return;
-        let msg = "카드를 추가할 수 없습니다.";
+        let msg = t("deck.addError.generic");
         if ("current" in result && "max" in result && !("currentColors" in result)) {
-          msg = `덱이 가득 찼습니다 (${(result as any).current}/${(result as any).max}장)`;
+          msg = t("deck.addError.full", { current: (result as any).current, max: (result as any).max });
         } else if ("currentColors" in result) {
-          msg = `색상 제한 초과 (최대 ${(result as any).max}색)`;
+          msg = t("deck.addError.colorLimit", { max: (result as any).max });
         } else if ("limit" in result) {
-          msg = `복사 한도 초과 (최대 ${(result as any).limit}장)`;
+          msg = t("deck.addError.copyLimit", { limit: (result as any).limit });
         }
         setErrorMessage(msg);
         setTimeout(() => setErrorMessage(null), 3000);
@@ -205,7 +207,7 @@ export function DeckDetailPage() {
             <FilterControls filter={filter} sort={sort} onChange={setFilter} onSortChange={setSort} deckColors={deckColors} />
             {filterActiveCount > 0 && (
               <button type="button" onClick={resetFilter} className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer self-start">
-                초기화
+                {t("action.reset")}
               </button>
             )}
           </aside>
@@ -215,18 +217,18 @@ export function DeckDetailPage() {
           {/* Mobile toolbar */}
           <div className="flex md:hidden items-center gap-2 px-3 py-2 border-b border-border shrink-0">
             <button type="button" onClick={toggleView} className={cn("flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer", isDeckView ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground")}>
-              <LayoutGridIcon className="h-3.5 w-3.5" />덱 보기
+              <LayoutGridIcon className="h-3.5 w-3.5" />{t("deck.view")}
             </button>
             <button type="button" onClick={() => setShowDescription((v) => !v)} className={cn("flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer", showDescription ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground")}>
-              <FileTextIcon className="h-3.5 w-3.5" />효과
+              <FileTextIcon className="h-3.5 w-3.5" />{t("card.effect")}
             </button>
             {!isDeckView && (
               <>
                 <button type="button" onClick={() => setFilterSheetOpen(true)} className={cn("flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer", filterActiveCount > 0 ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground")}>
-                  <SlidersHorizontalIcon className="h-3.5 w-3.5" />필터
+                  <SlidersHorizontalIcon className="h-3.5 w-3.5" />{t("filter.label")}
                   {filterActiveCount > 0 && <span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary-foreground text-[10px] font-bold text-primary">{filterActiveCount}</span>}
                 </button>
-                {filterActiveCount > 0 && <button type="button" onClick={resetFilter} className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer">초기화</button>}
+                {filterActiveCount > 0 && <button type="button" onClick={resetFilter} className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer">{t("action.reset")}</button>}
               </>
             )}
           </div>
@@ -234,10 +236,10 @@ export function DeckDetailPage() {
           {/* Desktop toolbar */}
           <div className="hidden md:flex items-center gap-2 border-b border-border px-3 py-2 shrink-0">
             <button type="button" onClick={toggleView} className={cn("flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer", isDeckView ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground")}>
-              <LayoutGridIcon className="h-3.5 w-3.5" />덱 보기
+              <LayoutGridIcon className="h-3.5 w-3.5" />{t("deck.view")}
             </button>
             <button type="button" onClick={() => setShowDescription((v) => !v)} className={cn("flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer", showDescription ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground")}>
-              <FileTextIcon className="h-3.5 w-3.5" />효과
+              <FileTextIcon className="h-3.5 w-3.5" />{t("card.effect")}
             </button>
           </div>
 
@@ -258,7 +260,7 @@ export function DeckDetailPage() {
       <Sheet open={filterSheetOpen} onOpenChange={setFilterSheetOpen}>
         <SheetContent side="bottom" showCloseButton={false} className="px-4 pb-0 pt-0 rounded-t-xl max-h-[85dvh] flex flex-col">
           <div className="mx-auto mb-4 mt-3 h-1 w-10 rounded-full bg-muted-foreground/30 shrink-0" />
-          <SheetHeader className="p-0 mb-4 shrink-0"><SheetTitle>필터</SheetTitle></SheetHeader>
+          <SheetHeader className="p-0 mb-4 shrink-0"><SheetTitle>{t("filter.label")}</SheetTitle></SheetHeader>
           <div className="overflow-y-auto pb-8">
             <FilterControls filter={filter} sort={sort} onChange={setFilter} onSortChange={setSort} deckColors={deckColors} />
           </div>
@@ -268,7 +270,7 @@ export function DeckDetailPage() {
       <div className="md:hidden fixed bottom-4 right-4 z-30">
         <Button onClick={() => setDeckSheetOpen(true)} className="rounded-full shadow-lg h-11 px-4 gap-2">
           <LayersIcon className="size-4" />
-          <span className="text-sm">덱 ({totalCards}/50)</span>
+          <span className="text-sm">{t("deck.cardCountOf", { count: totalCards, max: 50 })}</span>
         </Button>
       </div>
 

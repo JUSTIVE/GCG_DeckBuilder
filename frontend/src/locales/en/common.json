@@ -9,6 +9,100 @@
     "info": "Info",
     "gameRules": "Game Rules",
     "keywordDictionary": "Keyword Dictionary",
-    "translationCoverage": "Translation Coverage"
+    "translationCoverage": "Translation Coverage",
+    "menu": "Menu"
+  },
+  "action": {
+    "viewAll": "View All",
+    "reset": "Reset",
+    "delete": "Delete",
+    "deleteAll": "Delete All",
+    "create": "Create",
+    "import": "Import",
+    "copy": "Copy"
+  },
+  "search": {
+    "label": "Search",
+    "placeholder": "Search by name, effect, trait…",
+    "prompt": "Type to search",
+    "searching": "Searching…",
+    "noResults": "No results",
+    "allCards": "All cards",
+    "filterSearch": "Filter search",
+    "cardLookup": "Card lookup",
+    "history": "Search History",
+    "just": "just now",
+    "minutesAgo": "{{count}}m ago",
+    "hoursAgo": "{{count}}h ago",
+    "daysAgo": "{{count}}d ago"
+  },
+  "card": {
+    "cost": "Cost {{value}}",
+    "zone": "Zone",
+    "trait": "Trait",
+    "relatedTrait": "Related Trait",
+    "link": "Link",
+    "effect": "Effect",
+    "pilot": "Pilot",
+    "keyword": "Keyword",
+    "noCards": "No cards."
+  },
+  "deck": {
+    "list": "Deck List",
+    "empty": "No decks.",
+    "create": "Create Deck",
+    "newDeckName": "New deck name",
+    "notFound": "Deck not found.",
+    "noCards": "No cards.",
+    "cardCount": "{{count}} cards",
+    "cardCountOf": "{{count}} / {{max}} cards",
+    "view": "Deck View",
+    "confirmDelete": "Delete \"{{name}}\" deck?",
+    "confirmClear": "Clear all cards from deck?",
+    "copyMsaCode": "Copy MSA Code",
+    "downloadExcel": "Download Deck Recipe",
+    "copyDeckCode": "Copy Deck Code",
+    "importDeckCode": "Import Deck Code",
+    "pasteDeckCode": "Paste deck code",
+    "invalidDeckCode": "Invalid deck code.",
+    "addError": {
+      "full": "Deck is full ({{current}}/{{max}} cards)",
+      "colorLimit": "Color limit exceeded (max {{max}} colors)",
+      "copyLimit": "Copy limit exceeded (max {{limit}} copies)",
+      "generic": "Cannot add card."
+    }
+  },
+  "filter": {
+    "label": "Filter",
+    "sort": "Sort",
+    "kind": "Kind",
+    "cost": "Cost",
+    "level": "Level",
+    "zone": "Zone",
+    "color": "Color",
+    "pack": "Pack",
+    "series": "Series",
+    "keyword": "Keyword",
+    "trait": "Trait",
+    "query": "Search",
+    "default": "Default"
+  },
+  "gyro": {
+    "allow": "Allow Gyro Sensor",
+    "label": "Gyro"
+  },
+  "mulligan": {
+    "noDecks": "No decks. Please create a deck first.",
+    "selectDeck": "Select deck...",
+    "searchDeck": "Search decks..."
+  },
+  "game": {
+    "firstPlayer": "First",
+    "secondPlayer": "Second",
+    "selectFirst": "Select First",
+    "inProgress": "● In Progress",
+    "useExResource": "Use EX Resource",
+    "turnStart": "Turn Start (+1 Level / Resource Recovery)",
+    "turnEnd": "Turn End"
   }
 }

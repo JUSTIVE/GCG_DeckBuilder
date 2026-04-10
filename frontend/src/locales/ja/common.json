@@ -9,6 +9,100 @@
     "info": "情報",
     "gameRules": "ゲームルール",
     "keywordDictionary": "キーワード辞典",
-    "translationCoverage": "翻訳カバレッジ"
+    "translationCoverage": "翻訳状況",
+    "menu": "メニュー"
+  },
+  "action": {
+    "viewAll": "全て見る",
+    "reset": "リセット",
+    "delete": "削除",
+    "deleteAll": "全削除",
+    "create": "作成",
+    "import": "インポート",
+    "copy": "コピー"
+  },
+  "search": {
+    "label": "検索",
+    "placeholder": "カード名・効果・特性で検索…",
+    "prompt": "検索ワードを入力",
+    "searching": "検索中…",
+    "noResults": "結果なし",
+    "allCards": "全カード",
+    "filterSearch": "フィルター検索",
+    "cardLookup": "カード照会",
+    "history": "検索履歴",
+    "just": "たった今",
+    "minutesAgo": "{{count}}分前",
+    "hoursAgo": "{{count}}時間前",
+    "daysAgo": "{{count}}日前"
+  },
+  "card": {
+    "cost": "コスト{{value}}",
+    "zone": "地形",
+    "trait": "特性",
+    "relatedTrait": "関連特性",
+    "link": "リンク",
+    "effect": "効果",
+    "pilot": "パイロット",
+    "keyword": "キーワード",
+    "noCards": "カードがありません。"
+  },
+  "deck": {
+    "list": "デッキ一覧",
+    "empty": "デッキがありません。",
+    "create": "デッキ作成",
+    "newDeckName": "新デッキ名",
+    "notFound": "デッキが見つかりません。",
+    "noCards": "カードがありません。",
+    "cardCount": "{{count}}枚",
+    "cardCountOf": "{{count}} / {{max}}枚",
+    "view": "デッキ表示",
+    "confirmDelete": "「{{name}}」デッキを削除しますか？",
+    "confirmClear": "デッキの全カードを削除しますか？",
+    "copyMsaCode": "MSAコードをコピー",
+    "downloadExcel": "デッキレシピをダウンロード",
+    "copyDeckCode": "デッキコードをコピー",
+    "importDeckCode": "デッキコードをインポート",
+    "pasteDeckCode": "デッキコードを貼り付け",
+    "invalidDeckCode": "無効なデッキコードです。",
+    "addError": {
+      "full": "デッキが満杯です ({{current}}/{{max}}枚)",
+      "colorLimit": "カラー制限超過 (最大{{max}}色)",
+      "copyLimit": "コピー上限超過 (最大{{limit}}枚)",
+      "generic": "カードを追加できません。"
+    }
+  },
+  "filter": {
+    "label": "フィルター",
+    "sort": "並び替え",
+    "kind": "種類",
+    "cost": "コスト",
+    "level": "レベル",
+    "zone": "地形",
+    "color": "カラー",
+    "pack": "パック",
+    "series": "シリーズ",
+    "keyword": "キーワード",
+    "trait": "特性",
+    "query": "検索",
+    "default": "デフォルト"
+  },
+  "gyro": {
+    "allow": "ジャイロセンサーを許可",
+    "label": "ジャイロ"
+  },
+  "mulligan": {
+    "noDecks": "デッキがありません。先にデッキを作成してください。",
+    "selectDeck": "デッキを選択...",
+    "searchDeck": "デッキ検索..."
+  },
+  "game": {
+    "firstPlayer": "先攻",
+    "secondPlayer": "後攻",
+    "selectFirst": "先攻選択",
+    "inProgress": "● 進行中",
+    "useExResource": "EXリソース使用",
+    "turnStart": "ターン開始 (+1レベル / リソース回復)",
+    "turnEnd": "ターン終了"
   }
 }

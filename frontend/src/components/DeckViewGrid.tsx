@@ -1,4 +1,5 @@
 import { MinusIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { COLOR_HEX } from "src/render/color";
 import { CardDescription } from "@/components/CardDescription";
 import { extractCardInfo } from "@/lib/cardInfo";
@@ -14,6 +15,7 @@ export function DeckViewGrid({
   onOpenCard: (cardId: string) => void;
   showDescription: boolean;
 }) {
+  const { t } = useTranslation("common");
   const items = cards
     .map(({ card, count }) => {
       const info = extractCardInfo(card);
@@ -25,7 +27,7 @@ export function DeckViewGrid({
   if (items.length === 0) {
     return (
       <div className="flex items-center justify-center h-full text-sm text-muted-foreground">
-        카드가 없습니다.
+        {t("deck.noCards")}
       </div>
     );
   }

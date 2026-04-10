@@ -1,4 +1,5 @@
 import { COLOR_HEX } from "src/render/color";
+import { useTranslation } from "react-i18next";
 
 const CHART_H = 36;
 const COLOR_ORDER = ["BLUE", "GREEN", "RED", "PURPLE", "YELLOW", "WHITE"] as const;
@@ -69,25 +70,27 @@ function Histogram({
 }
 
 export function CostHistogram({ cards }: { cards: readonly { count: number; card: any }[] }) {
+  const { t } = useTranslation("common");
   return (
     <Histogram
       cards={cards}
       getValue={(card) => card?.cost}
       maxBucket={7}
       label={(i) => (i === 7 ? "7+" : String(i))}
-      title="코스트"
+      title={t("filter.cost")}
     />
   );
 }
 
 export function LevelHistogram({ cards }: { cards: readonly { count: number; card: any }[] }) {
+  const { t } = useTranslation("common");
   return (
     <Histogram
       cards={cards}
       getValue={(card) => card?.level}
       maxBucket={7}
       label={(i) => (i === 7 ? "7+" : String(i))}
-      title="레벨"
+      title={t("filter.level")}
     />
   );
 }

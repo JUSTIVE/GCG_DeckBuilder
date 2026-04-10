@@ -9,6 +9,100 @@
     "info": "정보",
     "gameRules": "게임 규칙",
     "keywordDictionary": "키워드 사전",
-    "translationCoverage": "번역 커버리지"
+    "translationCoverage": "번역 현황",
+    "menu": "메뉴"
+  },
+  "action": {
+    "viewAll": "전체 보기",
+    "reset": "초기화",
+    "delete": "삭제",
+    "deleteAll": "전체 삭제",
+    "create": "만들기",
+    "import": "불러오기",
+    "copy": "복사"
+  },
+  "search": {
+    "label": "검색",
+    "placeholder": "카드 이름, 효과, 특성으로 검색…",
+    "prompt": "검색어를 입력하세요",
+    "searching": "검색 중…",
+    "noResults": "결과 없음",
+    "allCards": "전체 카드",
+    "filterSearch": "필터 검색",
+    "cardLookup": "카드 조회",
+    "history": "검색 기록",
+    "just": "방금",
+    "minutesAgo": "{{count}}분 전",
+    "hoursAgo": "{{count}}시간 전",
+    "daysAgo": "{{count}}일 전"
+  },
+  "card": {
+    "cost": "코스트 {{value}}",
+    "zone": "지형",
+    "trait": "특성",
+    "relatedTrait": "관련 특성",
+    "link": "링크",
+    "effect": "효과",
+    "pilot": "파일럿",
+    "keyword": "키워드",
+    "noCards": "카드가 없습니다."
+  },
+  "deck": {
+    "list": "덱 목록",
+    "empty": "덱이 없습니다.",
+    "create": "덱 만들기",
+    "newDeckName": "새 덱 이름",
+    "notFound": "덱을 찾을 수 없습니다.",
+    "noCards": "카드가 없습니다.",
+    "cardCount": "{{count}}장",
+    "cardCountOf": "{{count}} / {{max}}장",
+    "view": "덱 보기",
+    "confirmDelete": "\"{{name}}\" 덱을 삭제하시겠습니까?",
+    "confirmClear": "덱의 모든 카드를 삭제하시겠습니까?",
+    "copyMsaCode": "MSA 코드 복사",
+    "downloadExcel": "덱 레시피 엑셀 받기",
+    "copyDeckCode": "덱 코드 복사",
+    "importDeckCode": "덱 코드 불러오기",
+    "pasteDeckCode": "덱 코드를 붙여넣으세요",
+    "invalidDeckCode": "유효하지 않은 덱 코드입니다.",
+    "addError": {
+      "full": "덱이 가득 찼습니다 ({{current}}/{{max}}장)",
+      "colorLimit": "색상 제한 초과 (최대 {{max}}색)",
+      "copyLimit": "복사 한도 초과 (최대 {{limit}}장)",
+      "generic": "카드를 추가할 수 없습니다."
+    }
+  },
+  "filter": {
+    "label": "필터",
+    "sort": "정렬",
+    "kind": "종류",
+    "cost": "코스트",
+    "level": "레벨",
+    "zone": "지형",
+    "color": "색상",
+    "pack": "팩",
+    "series": "시리즈",
+    "keyword": "키워드",
+    "trait": "특성",
+    "query": "검색",
+    "default": "기본"
+  },
+  "gyro": {
+    "allow": "자이로 센서 허용",
+    "label": "자이로"
+  },
+  "mulligan": {
+    "noDecks": "덱이 없습니다. 먼저 덱을 만들어주세요.",
+    "selectDeck": "덱 선택...",
+    "searchDeck": "덱 검색..."
+  },
+  "game": {
+    "firstPlayer": "선공",
+    "secondPlayer": "후공",
+    "selectFirst": "선공 선택",
+    "inProgress": "● 진행 중",
+    "useExResource": "EX 리소스 사용",
+    "turnStart": "턴 시작 (+1 레벨 / 리소스 회복)",
+    "turnEnd": "턴 종료"
   }
 }

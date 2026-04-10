@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { graphql, useLazyLoadQuery } from "react-relay";
 import type { MulliganSimulatorPageDeckListQuery } from "@/__generated__/MulliganSimulatorPageDeckListQuery.graphql";
 import type { MulliganSimulatorPageDeckCardsQuery } from "@/__generated__/MulliganSimulatorPageDeckCardsQuery.graphql";
@@ -66,6 +67,7 @@ function drawCards(cards: readonly DeckCardEntry[], n: number): CardFragment$key
 }
 
 function DeckDrawer({ deckId }: { deckId: string }) {
+  const { t } = useTranslation("common");
   const data = useLazyLoadQuery<MulliganSimulatorPageDeckCardsQuery>(DeckCardsQuery, { deckId });
   const deck = data.node?.__typename === "Deck" ? data.node : null;
 
@@ -76,7 +78,7 @@ function DeckDrawer({ deckId }: { deckId: string }) {
   }));
   const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
 
-  if (!deck) return <p className="text-muted-foreground text-sm">덱을 찾을 수 없습니다.</p>;
+  if (!deck) return <p className="text-muted-foreground text-sm">{t("deck.notFound")}</p>;
 
   const totalCards = deck.cards.reduce((s, c) => s + c.count, 0);
   const nextRound = drawn.id + 1;
@@ -107,7 +109,7 @@ function DeckDrawer({ deckId }: { deckId: string }) {
 
       {history.length > 0 && (
         <div className="flex flex-col gap-3">
-          <div className="text-sm font-medium text-muted-foreground border-t pt-4">히스토리</div>
+          <div className="text-sm font-medium text-muted-foreground border-t pt-4">{t("search.history")}</div>
           {history.map((entry) => (
             <div key={entry.id} className="flex flex-col gap-2">
               <div className="text-xs text-muted-foreground/60">뽑기 #{entry.id}</div>
@@ -133,6 +135,7 @@ function DeckDrawer({ deckId }: { deckId: string }) {
 }
 
 export function MulliganSimulatorPage() {
+  const { t } = useTranslation("common");
   const data = useLazyLoadQuery<MulliganSimulatorPageDeckListQuery>(DeckListQuery, {});
   const decks = data.deckList.decks;
   const [selectedId, setSelectedId] = useState<string | null>(
@@ -146,11 +149,11 @@ export function MulliganSimulatorPage() {
     <div className="px-6 py-8 flex flex-col gap-6">
       <div className="flex items-center gap-2">
         <DicesIcon className="size-5 text-muted-foreground" />
-        <h1 className="text-xl font-bold">멀리건 시뮬레이터</h1>
+        <h1 className="text-xl font-bold">{t("nav.mulliganSimulator")}</h1>
       </div>
 
       {decks.length === 0 ? (
-        <p className="text-muted-foreground text-sm">덱이 없습니다. 먼저 덱을 만들어주세요.</p>
+        <p className="text-muted-foreground text-sm">{t("mulligan.noDecks")}</p>
       ) : (
         <>
           <Popover open={open} onOpenChange={setOpen}>
@@ -161,15 +164,15 @@ export function MulliganSimulatorPage() {
               )}
             >
               <span className={cn(!selectedName && "text-muted-foreground")}>
-                {selectedName ?? "덱 선택..."}
+                {selectedName ?? t("mulligan.selectDeck")}
               </span>
               <ChevronsUpDownIcon className="size-4 shrink-0 opacity-50" />
             </PopoverTrigger>
             <PopoverContent className="w-56 p-0">
               <Command>
-                <CommandInput placeholder="덱 검색..." />
+                <CommandInput placeholder={t("mulligan.searchDeck")} />
                 <CommandList>
-                  <CommandEmpty>덱을 찾을 수 없습니다.</CommandEmpty>
+                  <CommandEmpty>{t("deck.notFound")}</CommandEmpty>
                   <CommandGroup>
                     {decks.map((deck) => (
                       <CommandItem
@@ -197,7 +200,7 @@ export function MulliganSimulatorPage() {
           </Popover>
 
           {selectedId && (
-            <Suspense fallback={<p className="text-muted-foreground text-sm">로딩 중...</p>}>
+            <Suspense fallback={<p className="text-muted-foreground text-sm">{t("search.searching")}</p>}>
               <DeckDrawer key={selectedId} deckId={selectedId} />
             </Suspense>
           )}

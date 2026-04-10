@@ -1,4 +1,6 @@
 import { graphql, usePreloadedQuery, useMutation } from "react-relay";
+import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 import type { PreloadedQuery } from "react-relay";
 import type { DeckListPageQuery } from "@/__generated__/DeckListPageQuery.graphql";
 import { Route } from "@/routes/$locale/decklist";
@@ -127,6 +129,7 @@ export function DeckListPage() {
   const router = useRouter();
   const { locale } = Route.useParams();
   const [newName, setNewName] = useState("");
+  const { t } = useTranslation("common");
 
   const decks = data.deckList.decks;
 
@@ -141,7 +144,7 @@ export function DeckListPage() {
   }
 
   function handleDelete(id: string, name: string) {
-    if (!confirm(`"${name}" 덱을 삭제하시겠습니까?`)) return;
+    if (!confirm(t("deck.confirmDelete", { name }))) return;
     commitDelete({ variables: { id } });
   }
 
@@ -150,10 +153,10 @@ export function DeckListPage() {
   }
 
   const KIND_LABELS: Record<string, string> = {
-    UnitCard: "유닛",
-    PilotCard: "파일럿",
-    BaseCard: "베이스",
-    CommandCard: "커맨드",
+    UnitCard: i18n.t("kind.UNIT", { ns: "game" }),
+    PilotCard: i18n.t("kind.PILOT", { ns: "game" }),
+    BaseCard: i18n.t("kind.BASE", { ns: "game" }),
+    CommandCard: i18n.t("kind.COMMAND", { ns: "game" }),
   };
   const KIND_ORDER = [
     "UnitCard",
@@ -191,25 +194,25 @@ export function DeckListPage() {
     <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col gap-6">
       <div className="flex items-center gap-2">
         <LayersIcon className="size-5 text-muted-foreground" />
-        <h1 className="text-xl font-bold">덱 목록</h1>
+        <h1 className="text-xl font-bold">{t("deck.list")}</h1>
       </div>
 
       <form onSubmit={handleCreate} className="flex gap-2">
         <Input
-          placeholder="새 덱 이름"
+          placeholder={t("deck.newDeckName")}
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
           className="flex-1"
         />
         <Button type="submit" disabled={isCreating || !newName.trim()}>
           <PlusIcon />
-          만들기
+          {t("action.create")}
         </Button>
       </form>
 
       {decks.length === 0 ? (
         <p className="text-muted-foreground text-sm text-center py-8">
-          덱이 없습니다.
+          {t("deck.empty")}
         </p>
       ) : (
         <ul className="grid gap-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min-content, 1fr))" }}>
@@ -232,7 +235,7 @@ export function DeckListPage() {
                 <div className="font-semibold truncate mt-2">{deck.name}</div>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-xs text-muted-foreground">
-                    {totalCards(deck.cards)}장
+                    {t("deck.cardCount", { count: totalCards(deck.cards) })}
                   </span>
                   <div className="flex gap-1 p-1">
                     {deck.colors.map((color) => (

@@ -1,17 +1,18 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { computeCoverage } from "@/lib/coverage";
 import type { CoveragePackage, CoverageColor, CoverageCard } from "@/lib/coverage";
 import { renderPackage } from "@/render/package";
 import { COLOR_HEX } from "src/render/color";
+import i18n from "@/i18n";
 import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "lucide-react";
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 
-const COLOR_KO: Record<string, string> = {
-  RED: "레드", BLUE: "블루", GREEN: "그린",
-  YELLOW: "옐로", PURPLE: "퍼플", WHITE: "화이트",
-};
+function colorLabel(color: string): string {
+  return i18n.t(`color.${color}`, { ns: "game", defaultValue: color });
+}
 
 function pct(translated: number, total: number): number {
   return total === 0 ? 100 : Math.round((translated / total) * 100);
@@ -115,9 +116,9 @@ function ColorSection({ color }: { color: CoverageColor }) {
           style={{ background: COLOR_HEX[color.color] ?? "#ccc" }}
         />
         <span className="text-sm font-medium flex-1 min-w-0 truncate">
-          {COLOR_KO[color.color] ?? color.color}
+          {colorLabel(color.color)}
         </span>
-        <span className="hidden sm:inline text-xs text-muted-foreground shrink-0">{color.cards.length}장</span>
+        <span className="hidden sm:inline text-xs text-muted-foreground shrink-0">{i18n.t("deck.cardCount", { ns: "common", count: color.cards.length })}</span>
         <ProgressBar translated={color.translated} total={color.total} />
         <ChevronRightIcon className={cn("size-3.5 text-muted-foreground shrink-0 transition-transform", open && "rotate-90")} />
       </button>
@@ -165,13 +166,14 @@ function PackageSection({ pkg }: { pkg: CoveragePackage }) {
 // ── page ──────────────────────────────────────────────────────────────────────
 
 export function InfoPage() {
+  const { t } = useTranslation("common");
   const coverage = useMemo(() => computeCoverage(), []);
   const overall = pct(coverage.translated, coverage.total);
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-6 w-full">
       <div>
-        <h1 className="text-lg font-bold mb-3">번역 커버리지</h1>
+        <h1 className="text-lg font-bold mb-3">{t("nav.translationCoverage")}</h1>
         <div className="flex items-center gap-3 p-4 rounded-lg border border-border bg-muted/30">
           <div className="flex-1 min-w-0">
             <div className="h-2 w-full rounded-full bg-muted overflow-hidden">

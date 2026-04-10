@@ -5,6 +5,7 @@ import { renderSeries } from "@/render/series";
 import { renderPackage } from "@/render/package";
 import { CardDescription } from "@/components/CardDescription";
 import { KeywordContent } from "./KeywordPanel";
+import { useTranslation } from "react-i18next";
 
 export function CommandCardDetail({
   node,
@@ -13,6 +14,7 @@ export function CommandCardDetail({
   node: any;
   navigateWithFilter: (filter: Partial<CardListSearch>) => void;
 }) {
+  const { t } = useTranslation("common");
   return (
     <div className="pointer-events-auto max-h-[80dvh] w-72 overflow-y-auto rounded-xl bg-black/75 px-4 py-5 text-white backdrop-blur-md flex flex-col gap-4">
       <div>
@@ -23,7 +25,7 @@ export function CommandCardDetail({
         <div className="text-xs text-white/60">{node.id}</div>
         <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
           <span>Lv {node.level}</span>
-          <span>코스트 {node.cost}</span>
+          <span>{t("card.cost", { value: node.cost })}</span>
         </div>
       </div>
 
@@ -36,7 +38,7 @@ export function CommandCardDetail({
 
       {node.commandPilot && (
         <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">파일럿</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.pilot")}</span>
           <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs">
             <button type="button" className="hover:text-white cursor-pointer" onClick={() => navigateWithFilter({ query: node.commandPilot!.name })}>
               {node.commandPilot.name}
@@ -49,7 +51,7 @@ export function CommandCardDetail({
 
       {(node.traits?.length ?? 0) > 0 && (
         <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">특성</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.trait")}</span>
           <div className="flex flex-wrap gap-1">
             {(node.traits ?? []).map((t: string) => (
               <button key={t} type="button" onClick={() => navigateWithFilter({ trait: [t as CardTrait] })} className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer">
@@ -61,7 +63,7 @@ export function CommandCardDetail({
       )}
       {(node.relatedTraits?.length ?? 0) > 0 && (
         <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">관련 특성</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.relatedTrait")}</span>
           <div className="flex flex-wrap gap-1">
             {(node.relatedTraits ?? []).map((t: string) => (
               <button key={t} type="button" onClick={() => navigateWithFilter({ trait: [t as CardTrait] })} className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer">
@@ -74,7 +76,7 @@ export function CommandCardDetail({
 
       {(node.description?.length ?? 0) > 0 && (
         <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">효과</span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.effect")}</span>
           <CardDescription lines={node.description ?? []} />
         </div>
       )}

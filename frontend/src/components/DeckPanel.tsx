@@ -11,11 +11,19 @@ import { CostHistogram, LevelHistogram } from "@/components/DeckHistograms";
 import { extractCardInfo } from "@/lib/cardInfo";
 import { encodeDeckCode, decodeDeckCode } from "@/lib/deckCode";
 import { downloadDeckExcel } from "@/lib/deckExcel";
+import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 
 const KIND_ORDER = ["UnitCard", "PilotCard", "BaseCard", "CommandCard"] as const;
-const KIND_LABELS: Record<string, string> = {
-  UnitCard: "유닛", PilotCard: "파일럿", BaseCard: "베이스", CommandCard: "커맨드",
-};
+function getKindLabel(kind: string): string {
+  const map: Record<string, string> = {
+    UnitCard: i18n.t("kind.UNIT", { ns: "game" }),
+    PilotCard: i18n.t("kind.PILOT", { ns: "game" }),
+    BaseCard: i18n.t("kind.BASE", { ns: "game" }),
+    CommandCard: i18n.t("kind.COMMAND", { ns: "game" }),
+  };
+  return map[kind] ?? kind;
+}
 
 export type DeckPanelProps = {
   deckName: string;
@@ -42,6 +50,7 @@ export function DeckPanel({
   onOpenCard,
   scrollAll = false,
 }: DeckPanelProps) {
+  const { t } = useTranslation("common");
   const [editing, setEditing] = useState(false);
   const [editName, setEditName] = useState("");
   const [pasteOpen, setPasteOpen] = useState(false);
@@ -86,7 +95,7 @@ export function DeckPanel({
           </div>
           <Button size="icon-sm" variant="ghost" onClick={startEditing}><PencilIcon /></Button>
           {cards.length > 0 && (
-            <Button size="icon-sm" variant="ghost" onClick={() => { if (confirm("덱의 모든 카드를 삭제하시겠습니까?")) onSetCards([]); }}>
+            <Button size="icon-sm" variant="ghost" onClick={() => { if (confirm(t("deck.confirmClear"))) onSetCards([]); }}>
               <Trash2Icon className="text-destructive" />
             </Button>
           )}
@@ -95,7 +104,7 @@ export function DeckPanel({
 
       <div className="px-3 pb-2 shrink-0">
         <div className="flex items-center justify-between mb-1">
-          <span className="text-xs text-muted-foreground">{totalCards} / 50장</span>
+          <span className="text-xs text-muted-foreground">{t("deck.cardCountOf", { count: totalCards, max: 50 })}</span>
           <span className="text-xs text-muted-foreground">{Math.round((totalCards / 50) * 100)}%</span>
         </div>
         <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
@@ -117,7 +126,7 @@ export function DeckPanel({
 
       <div className={scrollAll ? "px-2 pb-4" : "flex-1 min-h-0 overflow-y-auto px-2 pb-4"}>
         {cards.length === 0 && (
-          <p className="text-xs text-muted-foreground text-center py-4">카드가 없습니다.</p>
+          <p className="text-xs text-muted-foreground text-center py-4">{t("deck.noCards")}</p>
         )}
         {KIND_ORDER.map((kind) => {
           const group = grouped.get(kind) ?? [];
@@ -126,7 +135,7 @@ export function DeckPanel({
           return (
             <div key={kind} className="mb-3">
               <div className="px-1 mb-1 text-xs font-semibold text-muted-foreground">
-                {KIND_LABELS[kind]} ({groupTotal})
+                {getKindLabel(kind)} ({groupTotal})
               </div>
               <ul className="flex flex-col gap-0.5">
                 {group.map((dc, i) => {
@@ -179,7 +188,7 @@ export function DeckPanel({
             navigator.clipboard.writeText(text);
           }}
         >
-          <ClipboardCopyIcon className="size-3.5" />MSA 코드 복사
+          <ClipboardCopyIcon className="size-3.5" />{t("deck.copyMsaCode")}
         </Button>
         <Button
           className="w-full"
@@ -188,14 +197,14 @@ export function DeckPanel({
           disabled={totalCards !== 50}
           onClick={() => downloadDeckExcel(deckName, cards)}
         >
-          <FileSpreadsheetIcon className="size-3.5" />덱 레시피 엑셀 받기
+          <FileSpreadsheetIcon className="size-3.5" />{t("deck.downloadExcel")}
         </Button>
         <div className="flex gap-1.5">
           <Button className="flex-1" size="sm" variant="outline" onClick={() => navigator.clipboard.writeText(encodeDeckCode(cards))}>
-            <ClipboardCopyIcon className="size-3.5" />덱 코드 복사
+            <ClipboardCopyIcon className="size-3.5" />{t("deck.copyDeckCode")}
           </Button>
           <Button className="flex-1" size="sm" variant="outline" onClick={() => { setPasteOpen((v) => !v); setPasteValue(""); setPasteError(false); }}>
-            <ClipboardPasteIcon className="size-3.5" />덱 코드 불러오기
+            <ClipboardPasteIcon className="size-3.5" />{t("deck.importDeckCode")}
           </Button>
         </div>
         {pasteOpen && (
@@ -203,11 +212,11 @@ export function DeckPanel({
             <textarea
               className={cn("w-full rounded-md border bg-background px-2 py-1.5 text-xs font-mono resize-none focus:outline-none focus:ring-1 focus:ring-ring", pasteError && "border-destructive focus:ring-destructive")}
               rows={3}
-              placeholder="덱 코드를 붙여넣으세요"
+              placeholder={t("deck.pasteDeckCode")}
               value={pasteValue}
               onChange={(e) => { setPasteValue(e.target.value); setPasteError(false); }}
             />
-            {pasteError && <p className="text-[10px] text-destructive">유효하지 않은 덱 코드입니다.</p>}
+            {pasteError && <p className="text-[10px] text-destructive">{t("deck.invalidDeckCode")}</p>}
             <div className="flex gap-1.5">
               <Button
                 size="sm"
@@ -220,7 +229,7 @@ export function DeckPanel({
                   setPasteValue("");
                 }}
               >
-                <CheckIcon className="size-3.5" />불러오기
+                <CheckIcon className="size-3.5" />{t("action.import")}
               </Button>
               <Button size="sm" variant="ghost" onClick={() => setPasteOpen(false)}>
                 <XIcon className="size-3.5" />

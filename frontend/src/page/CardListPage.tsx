@@ -23,6 +23,7 @@ import {
   type FilterControlsProps,
 } from "@/components/CardFilterControls";
 import { useRef, useState, Suspense, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { SearchHistoryPanel } from "@/components/SearchHistoryPanel";
 import type { SearchHistoryPanel_query$key } from "@/__generated__/SearchHistoryPanel_query.graphql";
 import {
@@ -109,6 +110,7 @@ function FilterBar({
   historyQueryRef: SearchHistoryPanel_query$key;
   historyFetchKey: string;
 }) {
+  const { t } = useTranslation("common");
   const hasFilters = activeFilterCount(filter) > 0;
 
   return (
@@ -125,7 +127,7 @@ function FilterBar({
           onClick={() => onChange(INITIAL_FILTER)}
           className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer self-start"
         >
-          초기화
+          {t("action.reset")}
         </button>
       )}
       <div className="border-t border-border pt-3">
@@ -161,6 +163,7 @@ function FilterBottomSheet({
   historyQueryRef: SearchHistoryPanel_query$key;
   historyFetchKey: string;
 }) {
+  const { t } = useTranslation("common");
   const [open, setOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const [dragY, setDragY] = useState(0);
@@ -203,7 +206,7 @@ function FilterBottomSheet({
         )}
       >
         <FileTextIcon className="h-3.5 w-3.5" />
-        효과
+        {t("card.effect")}
       </button>
       <button
         type="button"
@@ -211,7 +214,7 @@ function FilterBottomSheet({
         className="flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer"
       >
         <SlidersHorizontalIcon className="h-3.5 w-3.5" />
-        필터
+        {t("filter.label")}
         {count > 0 && (
           <span className="ml-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
             {count}
@@ -225,7 +228,7 @@ function FilterBottomSheet({
         className="flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer"
       >
         <ClockIcon className="h-3.5 w-3.5" />
-        기록
+        {t("search.history")}
       </button>
 
       {count > 0 && (
@@ -234,7 +237,7 @@ function FilterBottomSheet({
           onClick={() => onChange(INITIAL_FILTER)}
           className="text-xs text-muted-foreground underline-offset-2 hover:underline cursor-pointer"
         >
-          초기화
+          {t("action.reset")}
         </button>
       )}
 
@@ -246,7 +249,7 @@ function FilterBottomSheet({
         >
           <div className="mx-auto mb-4 mt-3 h-1 w-10 rounded-full bg-muted-foreground/30 shrink-0" />
           <SheetHeader className="p-0 mb-4 shrink-0">
-            <SheetTitle>검색 기록</SheetTitle>
+            <SheetTitle>{t("search.history")}</SheetTitle>
           </SheetHeader>
           <div className="overflow-y-auto pb-8">
             <SearchHistoryPanel
@@ -277,7 +280,7 @@ function FilterBottomSheet({
             onPointerCancel={onHandlePointerUp}
           />
           <SheetHeader className="p-0 mb-4 shrink-0">
-            <SheetTitle>필터</SheetTitle>
+            <SheetTitle>{t("filter.label")}</SheetTitle>
           </SheetHeader>
           <div className="overflow-y-auto pb-8">
             <FilterControls
@@ -322,6 +325,7 @@ function CardListContent({
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export function CardListPage() {
+  const { t } = useTranslation("common");
   const search = Route.useSearch();
   const { locale } = Route.useParams();
   const router = useRouter();
@@ -420,7 +424,7 @@ export function CardListPage() {
             )}
           >
             <FileTextIcon className="h-3.5 w-3.5" />
-            효과
+            {t("card.effect")}
           </button>
         </div>
         <CardListContent

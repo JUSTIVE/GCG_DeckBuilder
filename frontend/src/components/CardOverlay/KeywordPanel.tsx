@@ -1,6 +1,7 @@
 import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
 import { CardDescription } from "@/components/CardDescription";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 export function KeywordContent({
   keywords,
@@ -9,6 +10,7 @@ export function KeywordContent({
   keywords: string[];
   borderClass?: string;
 }) {
+  const { t } = useTranslation("common");
   const entries = keywords
     .map((k) => KEYWORD_DESCRIPTIONS[k])
     .filter((e): e is NonNullable<typeof e> => e != null);
@@ -16,7 +18,7 @@ export function KeywordContent({
 
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">키워드</span>
+      <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.keyword")}</span>
       {entries.map((entry, i) => (
         <div key={i} className={cn("flex flex-col gap-1.5 rounded-lg border px-3 py-2", borderClass ?? "border-white/20")}>
           <CardDescription lines={[entry.name]} borderClass={borderClass} />

@@ -1,5 +1,7 @@
 import { Suspense, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { graphql, useLazyLoadQuery } from "react-relay";
+import i18n from "@/i18n";
 import type { KeywordsPageCardsQuery } from "@/__generated__/KeywordsPageCardsQuery.graphql";
 import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
 import { ALL_KEYWORDS } from "@/lib/filterConstants";
@@ -92,12 +94,17 @@ function KeywordBadge({ name }: { name: string }) {
 
 // ── card list ─────────────────────────────────────────────────────────────────
 
-const TYPENAME_KO: Record<string, string> = {
-  UnitCard: "유닛",
-  PilotCard: "파일럿",
-  BaseCard: "베이스",
-  CommandCard: "커맨드",
+const TYPENAME_KIND: Record<string, string> = {
+  UnitCard: "UNIT",
+  PilotCard: "PILOT",
+  BaseCard: "BASE",
+  CommandCard: "COMMAND",
 };
+
+function typenameLabel(typename: string): string {
+  const kind = TYPENAME_KIND[typename];
+  return kind ? i18n.t(`kind.${kind}`, { ns: "game", defaultValue: typename }) : "";
+}
 
 function KeywordCardList({ keyword, onOpen }: { keyword: string; onOpen: (id: string) => void }) {
   const data = useLazyLoadQuery<KeywordsPageCardsQuery>(CardsQuery, {
@@ -130,7 +137,7 @@ function KeywordCardList({ keyword, onOpen }: { keyword: string; onOpen: (id: st
             </span>
             <span className="text-xs flex-1 min-w-0 truncate">{name}</span>
             <span className="text-[10px] text-muted-foreground shrink-0">
-              {TYPENAME_KO[node.__typename] ?? ""}
+              {typenameLabel(node.__typename)}
             </span>
           </button>
         );
@@ -184,7 +191,7 @@ function KeywordEntry({
         <Suspense
           fallback={
             <div className="border-t border-border px-5 py-3 text-xs text-muted-foreground">
-              불러오는 중…
+              {i18n.t("search.searching", { ns: "common" })}
             </div>
           }
         >
@@ -205,11 +212,12 @@ const abilityKeywords = ALL_KEYWORDS.filter((k) =>
 );
 
 export function KeywordsPage() {
+  const { t } = useTranslation("common");
   const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-8 w-full">
-      <h1 className="text-lg font-bold">키워드 사전</h1>
+      <h1 className="text-lg font-bold">{t("nav.keywordDictionary")}</h1>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
