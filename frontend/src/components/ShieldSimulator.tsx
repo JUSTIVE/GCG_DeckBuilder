@@ -248,7 +248,6 @@ export function ShieldSimulator() {
 
   // Burst card fly — dynamic keyframe based on measured shield zone position
   const { x: fx, y: fy } = burstFrom;
-  // Arc midpoint: halfway X, pull upward by 30px for the curve
   const arcX = Math.round(fx * 0.45);
   const arcY = Math.round(fy - 30);
   const burstCardKeyframe = `
@@ -261,7 +260,6 @@ export function ShieldSimulator() {
       100% { transform: translate(0, 0)       scale(0);                  opacity: 0; }
     }`;
 
-  // Generate per-particle keyframes with individual trajectories
   const particleKeyframes = Array.from({ length: 10 })
     .map((_, i) => {
       const angle = (i / 10) * 360;
@@ -317,7 +315,7 @@ export function ShieldSimulator() {
         {/* Header */}
         <div className="flex items-center justify-between px-3 py-2 bg-muted/30 border-b">
           <span className="text-xs font-bold tracking-wide">
-            어택 시뮬레이터
+            플레이어 어택 시뮬레이터
           </span>
           <label className="flex items-center gap-1.5 text-[11px] text-muted-foreground cursor-pointer select-none">
             <input
@@ -380,39 +378,39 @@ export function ShieldSimulator() {
 
           {/* ── P1 (bottom, not flipped) — 나 ── */}
           <div className="relative">
-          <PlayerSection player="p1" className={cn("transition-all duration-500", defeated && "opacity-30")}>
-            <BoardHalfLayout
-              flipped={false}
-              slots={{
-                shieldArea: (
-                  <ZoneBox
-                    label="실드 에어리어"
-                    active={true}
-                    className="shrink-0"
-                    // @ts-expect-error ZoneBox forwards style via inline usage
-                    style={{ width: 56 }}
-                  />
-                ),
-                battle: myBattleZone,
-                deck: dim("① 덱", "flex-[1] h-full"),
-                resDeck: dim("② 리소스덱", "flex-[2] h-full"),
-                resource: dim("④ 리소스", "flex-[4] h-full"),
-                trash: dim("⑦ 트래시", "flex-[2] h-full"),
-              }}
-            />
-            <div className="text-center text-[9px] font-semibold text-blue-400 py-0.5">
-              나
-            </div>
-          </PlayerSection>
-          {/* Victory overlay */}
-          {defeated && (
-            <div className="absolute inset-0 pointer-events-none flex items-center justify-center" style={{ zIndex: 40 }}>
-              <div className="text-[18px] font-black text-blue-600 bg-white/95 px-4 py-1.5 rounded-xl shadow-xl border-2 border-blue-400 tracking-wide"
-                style={{ animation: "defeat-pop 400ms cubic-bezier(0.34,1.56,0.64,1) 120ms both" }}>
-                ★ 승리
+            <PlayerSection player="p1" className={cn("transition-all duration-500", defeated && "opacity-30")}>
+              <BoardHalfLayout
+                flipped={false}
+                slots={{
+                  shieldArea: (
+                    <ZoneBox
+                      label="실드 에어리어"
+                      active={true}
+                      className="shrink-0"
+                      // @ts-expect-error ZoneBox forwards style via inline usage
+                      style={{ width: 56 }}
+                    />
+                  ),
+                  battle: myBattleZone,
+                  deck: dim("① 덱", "flex-[1] h-full"),
+                  resDeck: dim("② 리소스덱", "flex-[2] h-full"),
+                  resource: dim("④ 리소스", "flex-[4] h-full"),
+                  trash: dim("⑦ 트래시", "flex-[2] h-full"),
+                }}
+              />
+              <div className="text-center text-[9px] font-semibold text-blue-400 py-0.5">
+                나
               </div>
-            </div>
-          )}
+            </PlayerSection>
+            {/* Victory overlay */}
+            {defeated && (
+              <div className="absolute inset-0 pointer-events-none flex items-center justify-center" style={{ zIndex: 40 }}>
+                <div className="text-[18px] font-black text-blue-600 bg-white/95 px-4 py-1.5 rounded-xl shadow-xl border-2 border-blue-400 tracking-wide"
+                  style={{ animation: "defeat-pop 400ms cubic-bezier(0.34,1.56,0.64,1) 120ms both" }}>
+                  ★ 승리
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

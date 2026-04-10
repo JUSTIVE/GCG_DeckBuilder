@@ -13,6 +13,7 @@ import { Route } from "@/routes/rules";
 import { type ZoneId } from "@/components/PlayfieldLayout";
 import { MiniPlayfield } from "@/components/MiniPlayfield";
 import { ShieldSimulator } from "@/components/ShieldSimulator";
+import { UnitBattleSimulator } from "@/components/UnitBattleSimulator";
 import {
   type SetupBoardState,
   type SetupHandImages,
@@ -1286,15 +1287,7 @@ export function RulesPage() {
 
           <ShieldSimulator />
 
-          <div className="rounded-md border p-3">
-            <p className="text-xs font-semibold mb-2">유닛 어택 시</p>
-            <p className="text-xs text-muted-foreground">
-              어택 유닛·어택 대상 유닛이 서로 AP만큼 배틀 대미지를 동시에 교환.
-              HP 0이 된 유닛은 트래시에. 《선제공격》 보유 시 먼저 대미지를 주고,
-              그 대미지로 상대가 파괴되면 반격 대미지를 받지 않음.
-              양측 동시 파괴도 가능.
-            </p>
-          </div>
+          <UnitBattleSimulator />
 
           <Note>
             어택 스텝/블록 스텝 종료 시 유닛이 영역 이동했다면 다음 스텝을 건너뛰고 배틀 종료 스텝으로.
