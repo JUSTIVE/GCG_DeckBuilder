@@ -1,3 +1,7 @@
+---
+description: GCG DeckBuilder 앱 목적, 기술 스택, 디렉토리 구조 요약
+---
+
 # GCG DeckBuilder — 프로젝트 개요
 
 ## 무엇을 하는 앱인가

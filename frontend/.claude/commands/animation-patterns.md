@@ -1,3 +1,7 @@
+---
+description: 이 프로젝트의 애니메이션 구현 패턴 참고 (setTimeout 체인, IntersectionObserver, MiniCard 상태 등)
+---
+
 # 애니메이션 패턴
 
 ## 단계별 상태 기계 (Step State Machine)

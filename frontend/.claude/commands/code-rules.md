@@ -1,3 +1,7 @@
+---
+description: 이 프로젝트의 코드 작성 규칙 (타입 체크 명령, Relay 패턴, Tailwind 규칙, 한국어 게임 용어 대조)
+---
+
 # 코드 작성 규칙 및 제약사항
 
 ## 타입 체크
@@ -13,7 +17,7 @@ tsgo -p .
 - `useLazyLoadQuery` — Suspense와 함께 사용
 - `readInlineData` — fragment inline 읽기
 - 생성된 타입은 `src/__generated__/` — 직접 수정 금지
-- 쿼리 변수 타입 캐스팅: `keyword as any` (enum 불일치 시)
+- 쿼리 변수 타입은 `src/__generated__/` 의 생성된 타입 사용 — `as any` 캐스팅 금지
 
 ## 컴포넌트 설계 원칙
 
@@ -32,6 +36,7 @@ tsgo -p .
 
 ## 파일 분리 기준
 
+- 파일이 **300라인**을 초과하면 분리 검토
 - 컴포넌트가 다른 페이지에서 재사용되거나
 - 컴포넌트가 관련 없는 상태를 너무 많이 받게 되면 분리
 
