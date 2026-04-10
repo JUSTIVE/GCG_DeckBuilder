@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { computeCoverage } from "@/lib/coverage";
+import { computeCoverage, type CoverageLocale } from "@/lib/coverage";
 import type { CoveragePackage, CoverageColor, CoverageCard } from "@/lib/coverage";
 import { renderPackage } from "@/render/package";
 import { COLOR_HEX } from "src/render/color";
@@ -61,9 +61,9 @@ function CardRow({ card }: { card: CoverageCard }) {
           <div className="font-mono text-[10px] text-muted-foreground">{card.id}</div>
         </div>
         {done ? (
-          <span className="text-xs text-green-600 shrink-0">완료</span>
+          <span className="text-xs text-green-600 shrink-0">✓</span>
         ) : (
-          <span className="text-xs text-destructive shrink-0">{badFields.length}개</span>
+          <span className="text-xs text-destructive shrink-0">{badFields.length}</span>
         )}
         <ChevronRightIcon className={cn("size-3 text-muted-foreground shrink-0 transition-transform", open && "rotate-90")} />
       </button>
@@ -118,7 +118,7 @@ function ColorSection({ color }: { color: CoverageColor }) {
         <span className="text-sm font-medium flex-1 min-w-0 truncate">
           {colorLabel(color.color)}
         </span>
-        <span className="hidden sm:inline text-xs text-muted-foreground shrink-0">{i18n.t("deck.cardCount", { ns: "common", count: color.cards.length })}</span>
+        <span className="hidden sm:inline text-xs text-muted-foreground shrink-0">{i18n.t("deck.cardCount" as any, { ns: "common", count: color.cards.length }) as string}</span>
         <ProgressBar translated={color.translated} total={color.total} />
         <ChevronRightIcon className={cn("size-3.5 text-muted-foreground shrink-0 transition-transform", open && "rotate-90")} />
       </button>
@@ -163,40 +163,79 @@ function PackageSection({ pkg }: { pkg: CoveragePackage }) {
   );
 }
 
+// ── locale tabs ───────────────────────────────────────────────────────────────
+
+const LOCALE_TABS: { locale: CoverageLocale; label: string; sublabel: string }[] = [
+  { locale: "ko", label: "한국어", sublabel: "Korean" },
+  { locale: "en", label: "English", sublabel: "영어" },
+  { locale: "ja", label: "日本語", sublabel: "일본어" },
+];
+
 // ── page ──────────────────────────────────────────────────────────────────────
 
 export function InfoPage() {
   const { t } = useTranslation("common");
-  const coverage = useMemo(() => computeCoverage(), []);
+  const [activeLocale, setActiveLocale] = useState<CoverageLocale>("ko");
+  const coverage = useMemo(() => computeCoverage(activeLocale), [activeLocale]);
   const overall = pct(coverage.translated, coverage.total);
+  const isUnavailable = coverage.total === 0;
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-6 w-full">
       <div>
-        <h1 className="text-lg font-bold mb-3">{t("nav.translationCoverage")}</h1>
-        <div className="flex items-center gap-3 p-4 rounded-lg border border-border bg-muted/30">
-          <div className="flex-1 min-w-0">
-            <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-              <div
-                className={cn("h-full rounded-full transition-all", barClass(overall))}
-                style={{ width: `${overall}%` }}
-              />
-            </div>
-          </div>
-          <span className={cn("text-sm font-semibold tabular-nums shrink-0", pctClass(overall))}>
-            {overall}%
-          </span>
-          <span className="text-xs text-muted-foreground tabular-nums shrink-0">
-            {coverage.translated}/{coverage.total}
-          </span>
+        <h1 className="text-lg font-bold mb-3">{t("nav.translationCoverage" as any)}</h1>
+
+        {/* Language tabs */}
+        <div className="flex border-b border-border mb-4">
+          {LOCALE_TABS.map(({ locale, label, sublabel }) => (
+            <button
+              key={locale}
+              type="button"
+              onClick={() => setActiveLocale(locale)}
+              className={cn(
+                "px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors",
+                activeLocale === locale
+                  ? "border-primary text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {label}
+              <span className="ml-1.5 text-xs text-muted-foreground font-normal hidden sm:inline">{sublabel}</span>
+            </button>
+          ))}
         </div>
+
+        {isUnavailable ? (
+          <div className="flex items-center justify-center py-12 text-muted-foreground text-sm">
+            준비 중
+          </div>
+        ) : (
+          <div className="flex items-center gap-3 p-4 rounded-lg border border-border bg-muted/30">
+            <div className="flex-1 min-w-0">
+              <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+                <div
+                  className={cn("h-full rounded-full transition-all", barClass(overall))}
+                  style={{ width: `${overall}%` }}
+                />
+              </div>
+            </div>
+            <span className={cn("text-sm font-semibold tabular-nums shrink-0", pctClass(overall))}>
+              {overall}%
+            </span>
+            <span className="text-xs text-muted-foreground tabular-nums shrink-0">
+              {coverage.translated}/{coverage.total}
+            </span>
+          </div>
+        )}
       </div>
 
-      <div className="flex flex-col gap-2">
-        {coverage.packages.map((pkg) => (
-          <PackageSection key={pkg.package} pkg={pkg} />
-        ))}
-      </div>
+      {!isUnavailable && (
+        <div className="flex flex-col gap-2">
+          {coverage.packages.map((pkg) => (
+            <PackageSection key={pkg.package} pkg={pkg} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

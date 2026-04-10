@@ -1,5 +1,6 @@
-import allCardsRaw from "../../../data/3.processed.json";
-import { checkCard } from "../../../data/coverage/coverageCore";
+import allCardsKo from "../../../data/3.processed.json";
+import allCardsEn from "../../../data/raw.json";
+import { checkCard, checkCardEn } from "../../../data/coverage/coverageCore";
 import type { FieldResult } from "../../../data/coverage/coverageCore";
 export type { FieldResult } from "../../../data/coverage/coverageCore";
 
@@ -32,18 +33,16 @@ export type CoverageData = {
   total: number;
 };
 
+export type CoverageLocale = "ko" | "en" | "ja";
+
 // ── compute ───────────────────────────────────────────────────────────────────
 
 const COLOR_ORDER = ["RED", "BLUE", "GREEN", "YELLOW", "PURPLE", "WHITE"];
 const CARD_TYPES = new Set(["UnitCard", "BaseCard", "PilotCard", "CommandCard"]);
 
-let cached: CoverageData | null = null;
+const cache = new Map<CoverageLocale, CoverageData>();
 
-export function computeCoverage(): CoverageData {
-  if (cached) return cached;
-
-  const cards = (allCardsRaw as any[]).filter((c) => CARD_TYPES.has(c.__typename));
-
+function buildCoverage(cards: any[], checker: (card: any) => FieldResult[]): CoverageData {
   const byPackage = new Map<string, any[]>();
   for (const card of cards) {
     const pkg = (card.package as string) || "UNKNOWN";
@@ -79,7 +78,7 @@ export function computeCoverage(): CoverageData {
       const coverageCards: CoverageCard[] = [];
 
       for (const card of colorCards) {
-        const fields = checkCard(card);
+        const fields = checker(card);
         const t = fields.filter((f) => f.translated).length;
         colorTotal += fields.length;
         colorTranslated += t;
@@ -96,6 +95,25 @@ export function computeCoverage(): CoverageData {
     grandTranslated += pkgTranslated;
   }
 
-  cached = { packages, translated: grandTranslated, total: grandTotal };
-  return cached;
+  return { packages, translated: grandTranslated, total: grandTotal };
+}
+
+export function computeCoverage(locale: CoverageLocale = "ko"): CoverageData {
+  if (cache.has(locale)) return cache.get(locale)!;
+
+  let result: CoverageData;
+
+  if (locale === "en") {
+    const cards = (allCardsEn as any[]).filter((c) => CARD_TYPES.has(c.__typename));
+    result = buildCoverage(cards, checkCardEn);
+  } else if (locale === "ko") {
+    const cards = (allCardsKo as any[]).filter((c) => CARD_TYPES.has(c.__typename));
+    result = buildCoverage(cards, checkCard);
+  } else {
+    // Japanese: source data not available yet
+    result = { packages: [], translated: 0, total: 0 };
+  }
+
+  cache.set(locale, result);
+  return result;
 }

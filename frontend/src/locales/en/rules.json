@@ -1,0 +1,524 @@
+{
+  "title": "Game Rules",
+  "subtitle": "Gundam Card Game Comprehensive Rules Ver. 1.4.1 Summary",
+  "footer": "Gundam Card Game Comprehensive Rules Ver. 1.4.1 (based on original text dated January 16, 2026)",
+  "nav": {
+    "prev": "Prev",
+    "next": "Next"
+  },
+  "setup": {
+    "player1Default": "Player 1",
+    "player2Default": "Player 2",
+    "mulliganReplay": "↺ Replay Mulligan Animation",
+    "steps": {
+      "deck": {
+        "title": "Prepare Decks",
+        "desc": "Prepare a Main Deck (50 cards) and a Resource Deck (10 cards) and shuffle each thoroughly."
+      },
+      "order": {
+        "title": "Determine Turn Order",
+        "desc": "Decide who goes first via rock-paper-scissors or another method.",
+        "p1Label": "First ①",
+        "p2Label": "Second ②"
+      },
+      "firstHand": {
+        "title": "Draw Opening Hand",
+        "desc": "Each player draws 5 cards from the top of their deck as their opening hand.",
+        "p1Label": "First ①",
+        "p2Label": "Second ②"
+      },
+      "mulligan": {
+        "title": "Mulligan (Optional)",
+        "desc": "Starting with the first player, each player may mulligan once. Return your entire hand to the bottom of your deck, redraw 5 cards, then shuffle. This is optional.",
+        "note": "The second player mulligans after the first player declares going first.",
+        "p1Label": "First ①",
+        "p2Label": "Second ②"
+      },
+      "shield": {
+        "title": "Place Shields",
+        "desc": "Each player places 6 cards face-down from the top of their deck into the Shield Zone.",
+        "note": "Shields are stacked from front to outermost. Each counts as HP 1.",
+        "p1Label": "First ①",
+        "p2Label": "Second ②"
+      },
+      "base": {
+        "title": "Place EX Base",
+        "desc": "Each player places 1 EX Base token (AP 0 / HP 3) in their Base Zone.",
+        "p1Label": "First ①",
+        "p2Label": "Second ②"
+      },
+      "exres": {
+        "title": "Place EX Resource (Second Player Only)",
+        "desc": "Only the second player places 1 EX Resource token in their Resource Area.",
+        "note": "This token compensates for the first player's draw advantage. Removed after use.",
+        "p1Label": "First ①",
+        "p2Label": "Second ②"
+      },
+      "start": {
+        "title": "Game Start!",
+        "desc": "The game begins with the first player's Start Phase.",
+        "p1Label": "First ① ← Turn",
+        "p2Label": "Second ②"
+      }
+    }
+  },
+  "phases": {
+    "start": {
+      "label": "Start Phase",
+      "steps": {
+        "active": {
+          "name": "Active Step",
+          "desc": "Simultaneously active all rested cards on your field (Battle Area, Resource Area, and Base Zone)."
+        },
+        "start": {
+          "name": "Start Step",
+          "desc": "Trigger effects with \"At the start of your turn\" activate."
+        }
+      }
+    },
+    "draw": {
+      "label": "Draw Phase",
+      "steps": {
+        "draw": {
+          "name": "Draw",
+          "desc": "Draw 1 card from the top of your deck. If your deck reaches 0 cards, you lose at that moment."
+        }
+      }
+    },
+    "resource": {
+      "label": "Resource Phase",
+      "steps": {
+        "add": {
+          "name": "Add Resource",
+          "desc": "Place 1 card from the top of your Resource Deck face-up and active in the Resource Area."
+        }
+      }
+    },
+    "main": {
+      "label": "Main Phase",
+      "steps": {
+        "play": {
+          "name": "Play Cards",
+          "desc": "Pay costs to deploy units / deploy bases / set pilots / activate [Main] command effects."
+        },
+        "activate": {
+          "name": "Activate [Activate·Main]",
+          "desc": "Activate [Activate·Main] effects when not in the middle of a unit attack."
+        },
+        "attack": {
+          "name": "Unit Attack",
+          "desc": "Attack the opponent player or a rested opponent unit with an active unit."
+        }
+      },
+      "note": "Repeat any of the above 3 actions in any order as many times as desired. Declare \"End Main Phase\" to proceed to the End Phase."
+    },
+    "end": {
+      "label": "End Phase",
+      "steps": {
+        "action": {
+          "name": "Action Step",
+          "desc": "Starting with the non-turn player, both players alternately activate [Action]/[Activate·Action] effects. Ends when both players pass consecutively."
+        },
+        "end": {
+          "name": "End Step",
+          "desc": "Trigger effects with \"At the end of your turn\" activate."
+        },
+        "hand": {
+          "name": "Hand Step",
+          "desc": "If you have more than 10 cards in hand, discard cards until you have exactly 10."
+        },
+        "cleanup": {
+          "name": "Cleanup Step",
+          "desc": "Effects lasting \"this turn\" expire. Resolve any triggered effects, then pass the turn to your opponent."
+        }
+      }
+    }
+  },
+  "battleSteps": {
+    "attack": {
+      "name": "Attack Step",
+      "desc": "Rest 1 active unit and declare a target: the opponent player or a rested opponent unit. [When Attacking] effects trigger."
+    },
+    "block": {
+      "name": "Block Step",
+      "desc": "The non-turn player may rest a unit with [Blocker] to redirect the attack target to that unit. Only once per attack."
+    },
+    "action": {
+      "name": "Action Step",
+      "desc": "Both players alternately activate [Action]/[Activate·Action] effects. Ends when both players pass consecutively."
+    },
+    "damage": {
+      "name": "Damage Step",
+      "desc": "The attack resolves. In unit vs. unit battles, both exchange battle damage equal to their AP. When attacking the player, deal damage to shields in order."
+    },
+    "battleEnd": {
+      "name": "Battle End Step",
+      "desc": "All effects lasting \"this battle\" expire. Return to the Main Phase."
+    }
+  },
+  "zones": {
+    "clickHint": "Click a zone card to see its location on the play sheet.",
+    "locationOf": "Location of \"{{name}}\"",
+    "outsideBoard": "\"{{name}}\" is located outside the play sheet.",
+    "handOutside": "\"Hand\" is outside the play sheet (cards held in hand).",
+    "handLabel": "Hand — Outside play sheet, visible only to owner",
+    "note": "When cards move between zones, they are treated as new cards unless otherwise specified (previous effects expire).\nThe Resource Area, Battle Area, and Shield Area are collectively called the \"Field.\"",
+    "relatedArea": "Related Areas",
+    "items": {
+      "deck": {
+        "name": "Deck Area",
+        "num": "①",
+        "type": "Private",
+        "desc": "Where your game deck is placed. Draw 1 card at a time from the top."
+      },
+      "resourceDeck": {
+        "name": "Resource Deck Area",
+        "num": "②",
+        "type": "Private",
+        "desc": "Where your resource deck is placed."
+      },
+      "shield": {
+        "name": "Shield Area",
+        "num": "③⑥",
+        "type": "Mixed",
+        "desc": "Base Zone (public, ⑥) + Shield Zone (private, ③)."
+      },
+      "resource": {
+        "name": "Resource Area",
+        "num": "④",
+        "type": "Public",
+        "desc": "Where resources are placed. Maximum 15 cards."
+      },
+      "battle": {
+        "name": "Battle Area",
+        "num": "⑤",
+        "type": "Public",
+        "desc": "Where units and pilots are placed. Maximum 6 units."
+      },
+      "hand": {
+        "name": "Hand",
+        "num": "—",
+        "type": "Private",
+        "desc": "Cards you have drawn. Maximum 10. Visible only to you."
+      },
+      "trash": {
+        "name": "Trash",
+        "num": "⑦",
+        "type": "Public",
+        "desc": "Destroyed or used cards. Order may be changed."
+      },
+      "exclude": {
+        "name": "Exclude Area",
+        "num": "—",
+        "type": "Public",
+        "desc": "Excluded cards. Treated differently from destruction."
+      }
+    },
+    "typeLabels": {
+      "공개": "Public",
+      "비공개": "Private",
+      "혼합": "Mixed"
+    }
+  },
+  "sections": {
+    "objective": {
+      "title": "Game Objective & Win/Loss Conditions",
+      "win": {
+        "label": "Win Conditions",
+        "conditions": [
+          "Deal battle damage to the opponent with a unit while they have 0 cards in their Shield Area",
+          "Reduce the opponent's deck to 0 cards"
+        ]
+      },
+      "lose": {
+        "label": "Loss Conditions",
+        "conditions": [
+          "Receive battle damage while your Shield Area has 0 cards",
+          "Your deck reaches 0 cards (including at draw time)",
+          "Declare surrender → Immediate loss"
+        ]
+      },
+      "note": "If card text contradicts the comprehensive rules, card text takes priority.\nProhibition effects always take priority over permission effects."
+    },
+    "deckRules": {
+      "title": "Deck Building Rules",
+      "mainDeck": {
+        "label": "Main Deck — 50 cards",
+        "rules": [
+          "Consists of Unit / Pilot / Command / Base cards",
+          "Must use only 1 or 2 colors",
+          "Maximum 4 copies of the same card number"
+        ]
+      },
+      "resourceDeck": {
+        "label": "Resource Deck — 10 cards",
+        "rules": [
+          "Consists of Resource cards only",
+          "No limit on copies of the same card number"
+        ]
+      },
+      "playConditions": {
+        "label": "Card Play Conditions",
+        "level": {
+          "name": "Lv. (Level)",
+          "desc": "A card can be played if your total resource count ≥ card's Lv. Active/rested resources both count."
+        },
+        "cost": {
+          "name": "Cost",
+          "desc": "Rest the required number of active resources to pay the cost."
+        }
+      },
+      "note": "Resource Area maximum: 15 cards (including up to 5 EX Resources).\nHand limit: 10 cards (discard excess during End Phase Hand Step)."
+    },
+    "cardTypes": {
+      "title": "Card Types (5 Types)",
+      "viewOtherCard": "View another card",
+      "note": "EX Base: A Base token with AP 0 / HP 3. Automatically placed in the Base Zone at game start.\nEX Resource: A one-time-use Resource token. Given to the second player (1 copy). Removed after use.",
+      "items": {
+        "unit": {
+          "name": "Unit",
+          "desc": "When played, place in the Battle Area. Maximum 6 units.",
+          "attrs": ["AP (Attack Power)", "HP (Durability)", "Link Condition"],
+          "notes": [
+            "Cannot attack on the turn it is deployed (except Link Units).",
+            "A Link Unit (pilot satisfying link condition set) can attack immediately on deployment turn.",
+            "HP reaches 0 → Destroyed → Sent to Trash.",
+            "The color of a unit in the Battle Area is unaffected by the color of a set pilot."
+          ]
+        },
+        "pilot": {
+          "name": "Pilot",
+          "desc": "When played, set under a unit in the Battle Area. One pilot per unit.",
+          "attrs": ["AP modifier (+N)", "HP modifier (+N)"],
+          "notes": [
+            "Text above card name → Pilot's own effects (usually [Burst]).",
+            "Text below card name → Effects granted to the set unit.",
+            "Pilot's traits are not added to the unit.",
+            "Cannot be voluntarily replaced or removed. Moves with the unit when the unit is moved."
+          ]
+        },
+        "command": {
+          "name": "Command",
+          "desc": "When played, activate the command effect. Sent to Trash after activation (unless the effect specifies otherwise).",
+          "attrs": ["[Main] or [Action] timing"],
+          "notes": [
+            "While the effect is activating, the card is considered to not be in any zone.",
+            "If it has [Pilot]: Can be set as a pilot on a unit instead of activating the effect.",
+            "May have [Burst].",
+            "Cannot be played if no valid target can be selected for the command effect."
+          ]
+        },
+        "base": {
+          "name": "Base",
+          "desc": "When played, place in the Base Zone of the Shield Area. Maximum 1 card.",
+          "attrs": ["AP (Attack Power)", "HP (Durability)"],
+          "notes": [
+            "While a Base is present, damage dealt to the Shield Area is absorbed by the Base first.",
+            "HP reaches 0 → Destroyed → Sent to Trash."
+          ]
+        },
+        "resource": {
+          "name": "Resource",
+          "desc": "Placed directly in the Resource Area from the Resource Deck. Used to pay costs.",
+          "attrs": [],
+          "notes": [
+            "Rest active resources to pay costs.",
+            "Level check counts all resources regardless of active/rested status."
+          ]
+        }
+      }
+    },
+    "gameSetup": {
+      "title": "Game Setup Sequence"
+    },
+    "turnFlow": {
+      "title": "Turn Flow",
+      "note": "If effects are triggered during any phase/step, resolve all of them before proceeding.\nDuring an attack, playing cards from hand and activating [Activate·Main] effects are not allowed."
+    },
+    "battle": {
+      "title": "Attacks & Battles",
+      "attackConditionNote": "Attack conditions: Your own active unit. Cannot attack on the turn it was deployed (except Link Units).\nDeclare the opponent player or a rested opponent unit as the target.",
+      "clickHint": "Click a step to view its details.",
+      "note": "If a unit leaves its zone at the end of the Attack Step or Block Step, skip to the Battle End Step.\n[Blocker] can only be activated once per attack. The original attack target unit cannot activate [Blocker]."
+    },
+    "zones": {
+      "title": "Game Zones"
+    },
+    "abilities": {
+      "title": "Keyword Abilities",
+      "items": {
+        "repair": {
+          "badge": "Repair",
+          "timing": "At the end of your turn",
+          "desc": "[Repair N]: Recover N at the end of your turn. If you have multiple, add the values together."
+        },
+        "breakthrough": {
+          "badge": "Breakthrough",
+          "timing": "During your turn, when an opponent unit is destroyed by battle damage",
+          "desc": "[Breakthrough N]: When an opponent unit is destroyed by battle damage, deal N damage to the opponent's Shield Area. (Base absorbs first; if no Base, destroy 1 shield.) Does not trigger if the opponent has 0 shields/bases. Multiple copies stack."
+        },
+        "support": {
+          "badge": "Support",
+          "timing": "[Activate·Main] Rest this unit",
+          "desc": "[Support N]: [Activate·Main] Rest this unit: Choose 1 other friendly unit. That unit gains AP +N this turn. Multiple copies stack."
+        },
+        "blocker": {
+          "badge": "Blocker",
+          "timing": "Block Step",
+          "desc": "[Blocker]: During the Block Step, rest this unit to redirect the attack target to this unit. Once per attack. The original attack target cannot use [Blocker]. A unit cannot have multiple [Blocker] abilities."
+        },
+        "firstStrike": {
+          "badge": "First Strike",
+          "timing": "Damage Step",
+          "desc": "[First Strike]: Deal battle damage before the opponent in battle. If this damage destroys the opponent's unit/base, you do not receive counter-damage. A unit cannot have multiple [First Strike] abilities."
+        },
+        "highMobility": {
+          "badge": "High Mobility",
+          "timing": "Continuously while attacking",
+          "desc": "[High Mobility]: While this unit is attacking, opponent units cannot activate [Blocker]. A unit cannot have multiple [High Mobility] abilities."
+        },
+        "suppress": {
+          "badge": "Suppress",
+          "timing": "When attacking a player",
+          "desc": "[Suppress]: When dealing battle damage to shields, deal damage to the top 2 shields simultaneously. If only 1 shield remains, only 1 is damaged. If both simultaneously destroyed shields have [Burst], the owner determines resolution order. A unit cannot have multiple [Suppress] abilities."
+        }
+      }
+    },
+    "triggers": {
+      "title": "Keywords (Triggers)",
+      "items": {
+        "activateMain": {
+          "badge": "Activate·Main",
+          "desc": "An activated effect that triggers during your Main Phase (excluding while a unit is attacking) when conditions are met."
+        },
+        "activateAction": {
+          "badge": "Activate·Action",
+          "desc": "An activated effect that triggers during the Action Step when conditions are met."
+        },
+        "main": {
+          "badge": "Main",
+          "desc": "Command cards only. Play during your Main Phase (excluding while attacking) to activate the command effect."
+        },
+        "action": {
+          "badge": "Action",
+          "desc": "Command cards only. Play during the Action Step to activate the command effect. Command cards with [Pilot] cannot be set as a pilot during the Action timing."
+        },
+        "burst": {
+          "badge": "Burst",
+          "desc": "When a shield is destroyed and flipped face-up, you may activate the effect at no cost. Activation is optional. Activates before the shield is sent to Trash. [Burst] effects are resolved with highest priority among triggered effects."
+        },
+        "onPlace": {
+          "badge": "When Placed",
+          "desc": "Triggers when a card is placed."
+        },
+        "onAttack": {
+          "badge": "When Attacking",
+          "desc": "Triggers when a unit declares an attack during the Attack Step."
+        },
+        "onDestroy": {
+          "badge": "When Destroyed",
+          "desc": "Triggers when a unit/base is destroyed by battle or an effect and placed in the Trash. Activates from Trash. Card state references the field state just before destruction."
+        },
+        "onSet": {
+          "badge": "When Set",
+          "desc": "Triggers when a pilot is set on a unit. Conditions can be specified using \"[When Set • Condition]\" format."
+        },
+        "whileSet": {
+          "badge": "While Set",
+          "desc": "Has an effect while a pilot is set. Conditions (traits, etc.) can be specified using \"[While Set • Condition]\" format."
+        },
+        "onLink": {
+          "badge": "When Linked",
+          "desc": "Triggers when a pilot satisfying the link condition is set."
+        },
+        "whileLink": {
+          "badge": "While Linked",
+          "desc": "Has an effect while a pilot satisfying the link condition is set."
+        },
+        "oncePer": {
+          "badge": "Once Per Turn",
+          "desc": "Can only be activated once per turn. Even if multiple cards have the same effect, each may be activated once."
+        }
+      }
+    },
+    "effects": {
+      "title": "Effect Types & Resolution",
+      "note": "\"Do\" → Process as much as possible.　\"May\" → Activation is optional.\n\"If you did\" → If the preceding text was not resolved, the following text cannot be resolved.　\"Then\" → The following text can be resolved regardless of whether the preceding text was resolved.",
+      "items": {
+        "continuous": {
+          "name": "Continuous Effect",
+          "desc": "Always active. Applied immediately when the card enters the relevant zone without waiting to trigger. If multiple conflicting continuous effects exist, prohibitions take priority."
+        },
+        "triggered": {
+          "name": "Triggered Effect",
+          "desc": "Automatically triggered when a specific event occurs. If triggered simultaneously, the turn player's effects resolve first. If new effects are triggered, resolve the newest first. [Burst] effects are resolved with highest priority."
+        },
+        "activated": {
+          "name": "Activated Effect",
+          "desc": "Activated at the player's discretion. Format: \"Condition : Effect\". Activates when all conditions are met."
+        },
+        "command": {
+          "name": "Command Effect",
+          "desc": "Activated by playing a command card at the specified timing. Cannot be played if no valid target can be selected."
+        },
+        "replacement": {
+          "name": "Replacement Effect",
+          "desc": "Format: \"Instead of (A), do (B)\". Replaces event A with event B."
+        }
+      }
+    },
+    "glossary": {
+      "title": "Key Terms Glossary",
+      "items": {
+        "activeRest": {
+          "term": "Active / Rested",
+          "def": "Card placed vertically / Card placed horizontally. Applies to cards in the Field, Resource Area, and Base Zone."
+        },
+        "place": {
+          "term": "Place",
+          "def": "To put a unit or base on the field."
+        },
+        "set": {
+          "term": "Set",
+          "def": "A pilot card (or [Pilot] command) being placed under a unit."
+        },
+        "destroy": {
+          "term": "Destroy",
+          "def": "Damage ≥ HP or effect causes the card to move from the field to Trash. When a shield is destroyed, flip it face-up to check [Burst] before sending to Trash."
+        },
+        "exclude": {
+          "term": "Exclude",
+          "def": "Move from any zone to the Exclude Area. Treated differently from destruction."
+        },
+        "discard": {
+          "term": "Discard",
+          "def": "Move a card from hand to Trash."
+        },
+        "draw": {
+          "term": "Draw",
+          "def": "Secretly add the top card of your deck to your hand."
+        },
+        "play": {
+          "term": "Play",
+          "def": "Reveal a card from your hand, pay its cost, and use it."
+        },
+        "recover": {
+          "term": "Recover",
+          "def": "Remove the specified number of damage counters from a unit/base. Cannot recover beyond maximum HP."
+        },
+        "battleDamage": {
+          "term": "Battle Damage / Effect Damage",
+          "def": "Damage resulting from battle resolution / Damage caused by card effects."
+        },
+        "turnPlayer": {
+          "term": "Turn Player",
+          "def": "The player whose turn is currently in progress."
+        },
+        "slash": {
+          "term": "/ (Slash)",
+          "def": "When used in traits, means \"or\". Example: [Zeon]/[Neo-Zeon] = either one."
+        }
+      }
+    }
+  }
+}

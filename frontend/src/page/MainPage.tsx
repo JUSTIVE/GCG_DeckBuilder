@@ -145,7 +145,7 @@ export function MainPage() {
                   <div className="flex-1 min-w-0">
                     <div className="font-semibold text-sm truncate">{deck.name}</div>
                     <div className="flex items-center gap-2 mt-0.5">
-                      <span className="text-xs text-muted-foreground">{t("deck.cardCount", { count: totalCards(deck.cards) } as any)}</span>
+                      <span className="text-xs text-muted-foreground">{t("deck.cardCount" as any, { count: totalCards(deck.cards) }) as string}</span>
                       <div className="flex gap-1">
                         {deck.colors.map((color) => (
                           <span

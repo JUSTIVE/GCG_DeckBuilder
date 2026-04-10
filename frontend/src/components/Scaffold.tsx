@@ -12,6 +12,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/s
 import type { PropsWithChildren } from "react";
 import React from "react";
 import { QuickSearch } from "@/components/QuickSearch";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useRouterState, Link, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { resolveBreadcrumb } from "@/lib/nav";
@@ -101,7 +102,8 @@ export default function Scaffold({ children }: PropsWithChildren) {
             <Separator orientation="vertical" className="mr-2 h-4" />
             <AppBreadcrumb />
           </div>
-          <div className="ml-auto px-3">
+          <div className="ml-auto flex items-center gap-1 px-3">
+            <LanguageSwitcher />
             <QuickSearch />
           </div>
         </header>

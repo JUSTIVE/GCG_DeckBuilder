@@ -117,3 +117,51 @@ export function checkCard(card: Card): FieldResult[] {
 
   return results;
 }
+
+// ── English checker ───────────────────────────────────────────────────────────
+
+const JA_REGEX = /[\u3040-\u30FF\u4E00-\u9FFF]/;
+
+export function isEnglishTranslated(value: string): boolean {
+  return value !== "" && !JA_REGEX.test(value);
+}
+
+/** Check English translation coverage (raw.json source). */
+export function checkCardEn(card: Card): FieldResult[] {
+  const results: FieldResult[] = [];
+
+  if (card.name != null) {
+    const ok = isEnglishTranslated(card.name);
+    results.push({
+      field: "name",
+      translated: ok,
+      detail: card.name,
+      untranslatedValues: ok ? undefined : [card.name],
+    });
+  }
+
+  if (card.description != null && card.description.length > 0) {
+    const ok = (card.description as string[]).every((line) => isEnglishTranslated(line));
+    const bad = (card.description as string[]).filter((line) => !isEnglishTranslated(line));
+    results.push({
+      field: "description",
+      translated: ok,
+      detail: bad.length > 0 ? `${bad.length} lines untranslated` : `${(card.description as string[]).length} lines done`,
+      values: card.description as string[],
+      untranslatedValues: bad.length > 0 ? bad : undefined,
+    });
+  }
+
+  if (card.link?.__typename === "LinkPilot") {
+    const name = (card.link as LinkPilot).pilotName;
+    const ok = isEnglishTranslated(name);
+    results.push({
+      field: "link.pilotName",
+      translated: ok,
+      detail: name,
+      untranslatedValues: ok ? undefined : [name],
+    });
+  }
+
+  return results;
+}

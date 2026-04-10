@@ -30,6 +30,8 @@ import {
   TRIGGER_FALLBACK,
   ABILITY_FALLBACK,
 } from "@/components/CardDescription";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 
 // ── badge helpers ─────────────────────────────────────────────────────────────
 
@@ -127,115 +129,125 @@ type Phase = {
   note?: string;
 };
 
-const PHASES: Phase[] = [
-  {
-    label: "스타트 페이즈",
-    color: "bg-blue-50 border-blue-200",
-    headColor: "text-blue-700",
-    dotColor: "bg-blue-500",
-    highlights: ["battle", "resource", "base", "shield"],
-    steps: [
-      {
-        name: "액티브 스텝",
-        desc: "자신 필드(배틀 에어리어·리소스 에어리어·베이스 존)의 레스트 카드 전부를 동시에 액티브로.",
-      },
-      { name: "스타트 스텝", desc: "「턴 개시 시」 효과 발동." },
-    ],
-  },
-  {
-    label: "드로우 페이즈",
-    color: "bg-green-50 border-green-200",
-    headColor: "text-green-700",
-    dotColor: "bg-green-500",
-    highlights: ["deck", "hand"],
-    steps: [
-      {
-        name: "드로우",
-        desc: "덱 위에서 1장 드로우. 덱이 0장이 되면 그 시점에 패배.",
-      },
-    ],
-  },
-  {
-    label: "리소스 페이즈",
-    color: "bg-yellow-50 border-yellow-200",
-    headColor: "text-yellow-700",
-    dotColor: "bg-yellow-500",
-    highlights: ["resourceDeck", "resource"],
-    steps: [
-      {
-        name: "리소스 추가",
-        desc: "리소스 덱 위에서 1장을 리소스 에어리어에 앞면 액티브 상태로 배치.",
-      },
-    ],
-  },
-  {
-    label: "메인 페이즈",
-    color: "bg-orange-50 border-orange-200",
-    headColor: "text-orange-700",
-    dotColor: "bg-orange-500",
-    highlights: ["battle", "resource", "hand"],
-    steps: [
-      {
-        name: "패 플레이",
-        desc: "코스트를 지불해 유닛 배치 / 베이스 배치 / 파일럿 세트 / 【메인】 커맨드 발동.",
-      },
-      {
-        name: "【기동･메인】 발동",
-        desc: "유닛 어택 중이 아닐 때 기동메인 효과 발동.",
-      },
-      {
-        name: "유닛 어택",
-        desc: "액티브 유닛으로 상대 플레이어 또는 레스트 상태 상대 유닛을 어택.",
-      },
-    ],
-    note: "위 3가지를 원하는 순서로 몇 번이고 반복. 「메인 페이즈 종료」를 선언하면 엔드 페이즈로.",
-  },
-  {
-    label: "엔드 페이즈",
-    color: "bg-purple-50 border-purple-200",
-    headColor: "text-purple-700",
-    dotColor: "bg-purple-500",
-    highlights: ["hand", "trash"],
-    steps: [
-      {
-        name: "액션 스텝",
-        desc: "비 턴 플레이어부터 교대로 【액션】/【기동･액션】 발동 가능. 양측 연속 패스로 종료.",
-      },
-      { name: "엔드 스텝", desc: "「턴 종료 시」 효과 발동." },
-      {
-        name: "핸드 스텝",
-        desc: "패가 10장 초과 시 10장이 되도록 카드를 선택해 버림.",
-      },
-      {
-        name: "클린업 스텝",
-        desc: "「이 턴 중」 효과 소멸. 발생한 효과 해결 후 상대에게 턴 이동.",
-      },
-    ],
-  },
-];
+function getPhases(t: TFunction<"rules">): Phase[] {
+  return [
+    {
+      label: t("phases.start.label"),
+      color: "bg-blue-50 border-blue-200",
+      headColor: "text-blue-700",
+      dotColor: "bg-blue-500",
+      highlights: ["battle", "resource", "base", "shield"],
+      steps: [
+        {
+          name: t("phases.start.steps.active.name"),
+          desc: t("phases.start.steps.active.desc"),
+        },
+        {
+          name: t("phases.start.steps.start.name"),
+          desc: t("phases.start.steps.start.desc"),
+        },
+      ],
+    },
+    {
+      label: t("phases.draw.label"),
+      color: "bg-green-50 border-green-200",
+      headColor: "text-green-700",
+      dotColor: "bg-green-500",
+      highlights: ["deck", "hand"],
+      steps: [
+        {
+          name: t("phases.draw.steps.draw.name"),
+          desc: t("phases.draw.steps.draw.desc"),
+        },
+      ],
+    },
+    {
+      label: t("phases.resource.label"),
+      color: "bg-yellow-50 border-yellow-200",
+      headColor: "text-yellow-700",
+      dotColor: "bg-yellow-500",
+      highlights: ["resourceDeck", "resource"],
+      steps: [
+        {
+          name: t("phases.resource.steps.add.name"),
+          desc: t("phases.resource.steps.add.desc"),
+        },
+      ],
+    },
+    {
+      label: t("phases.main.label"),
+      color: "bg-orange-50 border-orange-200",
+      headColor: "text-orange-700",
+      dotColor: "bg-orange-500",
+      highlights: ["battle", "resource", "hand"],
+      steps: [
+        {
+          name: t("phases.main.steps.play.name"),
+          desc: t("phases.main.steps.play.desc"),
+        },
+        {
+          name: t("phases.main.steps.activate.name"),
+          desc: t("phases.main.steps.activate.desc"),
+        },
+        {
+          name: t("phases.main.steps.attack.name"),
+          desc: t("phases.main.steps.attack.desc"),
+        },
+      ],
+      note: t("phases.main.note"),
+    },
+    {
+      label: t("phases.end.label"),
+      color: "bg-purple-50 border-purple-200",
+      headColor: "text-purple-700",
+      dotColor: "bg-purple-500",
+      highlights: ["hand", "trash"],
+      steps: [
+        {
+          name: t("phases.end.steps.action.name"),
+          desc: t("phases.end.steps.action.desc"),
+        },
+        {
+          name: t("phases.end.steps.end.name"),
+          desc: t("phases.end.steps.end.desc"),
+        },
+        {
+          name: t("phases.end.steps.hand.name"),
+          desc: t("phases.end.steps.hand.desc"),
+        },
+        {
+          name: t("phases.end.steps.cleanup.name"),
+          desc: t("phases.end.steps.cleanup.desc"),
+        },
+      ],
+    },
+  ];
+}
 
-const BATTLE_STEPS = [
-  {
-    name: "어택 스텝",
-    desc: "액티브 유닛 1기를 레스트시키고, 상대 플레이어 또는 레스트 상태 상대 유닛을 어택 대상으로 선언. 【어택 시】 효과 발동.",
-  },
-  {
-    name: "블록 스텝",
-    desc: "비 턴 플레이어는 《블로커》 보유 유닛을 레스트시켜 어택 대상을 변경 가능. 1회의 어택에 1번만.",
-  },
-  {
-    name: "액션 스텝",
-    desc: "양측 교대로 【액션】/【기동･액션】 발동 가능. 양측 연속 패스로 종료.",
-  },
-  {
-    name: "대미지 스텝",
-    desc: "어택 성립. 유닛끼리 어택 시 서로 AP만큼 배틀 대미지 교환. 플레이어 어택 시 실드 에어리어에 순서대로 대미지.",
-  },
-  {
-    name: "배틀 종료 스텝",
-    desc: "「이 배틀 중」 효과 전부 소멸. 메인 페이즈로 복귀.",
-  },
-];
+function getBattleSteps(t: TFunction<"rules">) {
+  return [
+    {
+      name: t("battleSteps.attack.name"),
+      desc: t("battleSteps.attack.desc"),
+    },
+    {
+      name: t("battleSteps.block.name"),
+      desc: t("battleSteps.block.desc"),
+    },
+    {
+      name: t("battleSteps.action.name"),
+      desc: t("battleSteps.action.desc"),
+    },
+    {
+      name: t("battleSteps.damage.name"),
+      desc: t("battleSteps.damage.desc"),
+    },
+    {
+      name: t("battleSteps.battleEnd.name"),
+      desc: t("battleSteps.battleEnd.desc"),
+    },
+  ];
+}
 
 // ── interactive: game setup walkthrough ──────────────────────────────────────
 
@@ -255,81 +267,83 @@ type SetupStep = {
   p2Label?: string;
 };
 
-const SETUP_STEPS: SetupStep[] = [
-  {
-    title: "덱 준비",
-    desc: "덱(50장)과 리소스 덱(10장)을 각각 준비하고 충분히 셔플합니다.",
-    highlight: "deck",
-    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
-    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
-  },
-  {
-    title: "선공·후공 결정",
-    desc: "가위바위보 등으로 선공·후공을 결정합니다.",
-    highlight: "order",
-    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
-    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
-    p1Label: "선공 ①",
-    p2Label: "후공 ②",
-  },
-  {
-    title: "첫 패 드로우",
-    desc: "각 플레이어가 덱 위에서 5장을 드로우해 첫 패로 가져갑니다.",
-    highlight: "hand",
-    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
-    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
-    p1Label: "선공 ①",
-    p2Label: "후공 ②",
-  },
-  {
-    title: "멀리건 (선택)",
-    desc: "선공 플레이어부터 순서대로 1회 멀리건 가능. 패 전체를 덱 아래에 돌려놓고 5장 다시 드로우 후 셔플. 선택 사항.",
-    note: "멀리건은 선공 선언 후 후공이 진행.",
-    highlight: "mulligan",
-    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
-    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
-    p1Label: "선공 ①",
-    p2Label: "후공 ②",
-  },
-  {
-    title: "실드 배치",
-    desc: "각 플레이어가 덱 위에서 6장을 뒷면으로 실드 존에 배치합니다.",
-    note: "실드는 앞에서부터 바깥쪽으로 쌓음. 각각 HP 1로 취급.",
-    highlight: "shield",
-    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6 },
-    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6 },
-    p1Label: "선공 ①",
-    p2Label: "후공 ②",
-  },
-  {
-    title: "EX 베이스 배치",
-    desc: "각 플레이어 베이스 존에 EX 베이스 토큰(AP 0 / HP 3) 1장을 배치합니다.",
-    highlight: "base",
-    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
-    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
-    p1Label: "선공 ①",
-    p2Label: "후공 ②",
-  },
-  {
-    title: "EX 리소스 배치 (후공만)",
-    desc: "후공 플레이어만 리소스 에어리어에 EX 리소스 토큰 1장을 배치합니다.",
-    note: "선공의 드로우 이점을 보정하는 토큰. 사용 후 제거.",
-    highlight: "exres",
-    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: false },
-    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: true },
-    p1Label: "선공 ①",
-    p2Label: "후공 ②",
-  },
-  {
-    title: "게임 시작!",
-    desc: "선공 플레이어의 스타트 페이즈부터 게임을 시작합니다.",
-    highlight: "start",
-    p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
-    p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: true },
-    p1Label: "선공 ① ← 턴",
-    p2Label: "후공 ②",
-  },
-];
+function getSetupSteps(t: TFunction<"rules">): SetupStep[] {
+  return [
+    {
+      title: t("setup.steps.deck.title"),
+      desc: t("setup.steps.deck.desc"),
+      highlight: "deck",
+      p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
+      p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
+    },
+    {
+      title: t("setup.steps.order.title"),
+      desc: t("setup.steps.order.desc"),
+      highlight: "order",
+      p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
+      p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true },
+      p1Label: t("setup.steps.order.p1Label"),
+      p2Label: t("setup.steps.order.p2Label"),
+    },
+    {
+      title: t("setup.steps.firstHand.title"),
+      desc: t("setup.steps.firstHand.desc"),
+      highlight: "hand",
+      p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
+      p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
+      p1Label: t("setup.steps.firstHand.p1Label"),
+      p2Label: t("setup.steps.firstHand.p2Label"),
+    },
+    {
+      title: t("setup.steps.mulligan.title"),
+      desc: t("setup.steps.mulligan.desc"),
+      note: t("setup.steps.mulligan.note"),
+      highlight: "mulligan",
+      p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
+      p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5 },
+      p1Label: t("setup.steps.mulligan.p1Label"),
+      p2Label: t("setup.steps.mulligan.p2Label"),
+    },
+    {
+      title: t("setup.steps.shield.title"),
+      desc: t("setup.steps.shield.desc"),
+      note: t("setup.steps.shield.note"),
+      highlight: "shield",
+      p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6 },
+      p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6 },
+      p1Label: t("setup.steps.shield.p1Label"),
+      p2Label: t("setup.steps.shield.p2Label"),
+    },
+    {
+      title: t("setup.steps.base.title"),
+      desc: t("setup.steps.base.desc"),
+      highlight: "base",
+      p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
+      p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
+      p1Label: t("setup.steps.base.p1Label"),
+      p2Label: t("setup.steps.base.p2Label"),
+    },
+    {
+      title: t("setup.steps.exres.title"),
+      desc: t("setup.steps.exres.desc"),
+      note: t("setup.steps.exres.note"),
+      highlight: "exres",
+      p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: false },
+      p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: true },
+      p1Label: t("setup.steps.exres.p1Label"),
+      p2Label: t("setup.steps.exres.p2Label"),
+    },
+    {
+      title: t("setup.steps.start.title"),
+      desc: t("setup.steps.start.desc"),
+      highlight: "start",
+      p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
+      p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: true },
+      p1Label: t("setup.steps.start.p1Label"),
+      p2Label: t("setup.steps.start.p2Label"),
+    },
+  ];
+}
 
 // ── setup mini card ───────────────────────────────────────────────────────────
 
@@ -353,19 +367,21 @@ const HAND_STEP_INDEX = 2;
 const ORDER_STEP_INDEX = 1;
 
 function GameSetupWalkthrough({
-  p1HandImages, p2HandImages, newP1HandImages, newP2HandImages,
+  p1HandImages, p2HandImages, newP1HandImages, newP2HandImages, setupSteps, t,
 }: {
   p1HandImages?: SetupHandImages;
   p2HandImages?: SetupHandImages;
   newP1HandImages?: SetupHandImages;
   newP2HandImages?: SetupHandImages;
+  setupSteps: SetupStep[];
+  t: TFunction<"rules">;
 }) {
   const [step, setStep] = useState(0);
   const [mulliganPhase, setMulliganPhase] = useState<MulliganPhase>("idle");
   const [drawPhase, setDrawPhase] = useState<DrawPhase>("done");
   const [orderPhase, setOrderPhase] = useState<OrderPhase>("idle");
   const [replayKey, setReplayKey] = useState(0);
-  const cur = SETUP_STEPS[step];
+  const cur = setupSteps[step];
   const hlColor = HL[cur.highlight];
 
   useEffect(() => {
@@ -429,7 +445,7 @@ function GameSetupWalkthrough({
       <div className="flex flex-col gap-3">
         {/* Step pills */}
         <div className="flex gap-1 flex-wrap">
-          {SETUP_STEPS.map((_s, i) => (
+          {setupSteps.map((_s, i) => (
             <button
               key={i}
               type="button"
@@ -458,7 +474,7 @@ function GameSetupWalkthrough({
               {step + 1}
             </span>
             <p className="text-sm font-bold">{cur.title}</p>
-            <span className="text-xs text-muted-foreground ml-auto">{step + 1} / {SETUP_STEPS.length}</span>
+            <span className="text-xs text-muted-foreground ml-auto">{step + 1} / {setupSteps.length}</span>
           </div>
           <p className="text-xs leading-relaxed">{cur.desc}</p>
           {cur.note && (
@@ -471,8 +487,8 @@ function GameSetupWalkthrough({
           p1={cur.p1}
           p2={cur.p2}
           hl={cur.highlight}
-          p1Label={cur.p1Label ?? "플레이어 1"}
-          p2Label={cur.p2Label ?? "플레이어 2"}
+          p1Label={cur.p1Label ?? t("setup.player1Default")}
+          p2Label={cur.p2Label ?? t("setup.player2Default")}
           p1HandImages={activeP1Images}
           p2HandImages={activeP2Images}
           mulliganPhase={inMulligan ? mulliganPhase : undefined}
@@ -487,7 +503,7 @@ function GameSetupWalkthrough({
             onClick={() => { setMulliganPhase("idle"); setReplayKey((k) => k + 1); }}
             className="self-center text-[10px] px-2.5 py-1 rounded border border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100 transition-all"
           >
-            ↺ 멀리건 애니메이션 다시 보기
+            {t("setup.mulliganReplay")}
           </button>
         )}
 
@@ -500,10 +516,10 @@ function GameSetupWalkthrough({
             className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
           >
             <ChevronLeftIcon className="size-3" />
-            이전
+            {t("nav.prev")}
           </button>
           <div className="flex-1 flex justify-center gap-1">
-            {SETUP_STEPS.map((_, i) => (
+            {setupSteps.map((_, i) => (
               <button
                 key={i}
                 type="button"
@@ -517,11 +533,11 @@ function GameSetupWalkthrough({
           </div>
           <button
             type="button"
-            onClick={() => setStep((v) => Math.min(SETUP_STEPS.length - 1, v + 1))}
-            disabled={step === SETUP_STEPS.length - 1}
+            onClick={() => setStep((v) => Math.min(setupSteps.length - 1, v + 1))}
+            disabled={step === setupSteps.length - 1}
             className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
           >
-            다음
+            {t("nav.next")}
             <ChevronRightIcon className="size-3" />
           </button>
         </div>
@@ -532,15 +548,15 @@ function GameSetupWalkthrough({
 
 // ── interactive: turn phase walkthrough ──────────────────────────────────────
 
-function TurnPhaseWalkthrough() {
+function TurnPhaseWalkthrough({ phases, t }: { phases: Phase[]; t: TFunction<"rules"> }) {
   const [active, setActive] = useState(0);
-  const phase = PHASES[active];
+  const phase = phases[active];
 
   return (
     <div className="flex flex-col gap-3">
       {/* Phase pill tabs */}
       <div className="flex gap-1.5 flex-wrap">
-        {PHASES.map((p, i) => (
+        {phases.map((p, i) => (
           <button
             key={p.label}
             type="button"
@@ -569,7 +585,7 @@ function TurnPhaseWalkthrough() {
             {phase.label}
           </p>
           <span className={cn("text-xs font-medium opacity-60", phase.headColor)}>
-            {active + 1} / {PHASES.length}
+            {active + 1} / {phases.length}
           </span>
         </div>
         <div className="flex flex-col gap-2">
@@ -604,11 +620,11 @@ function TurnPhaseWalkthrough() {
 
       {/* Mini playfield — full width below phase detail */}
       <div className="flex flex-col gap-1.5">
-        <p className="text-xs text-muted-foreground font-medium">관련 영역</p>
+        <p className="text-xs text-muted-foreground font-medium">{t("zones.relatedArea")}</p>
         <MiniPlayfield highlights={phase.highlights} />
         {phase.highlights.includes("hand") && (
           <div className="text-xs text-center rounded border border-orange-400/50 bg-orange-400/10 text-orange-600 font-bold px-2 py-1 transition-all">
-            패 (손패) — 플레이 시트 밖, 자신만 열람
+            {t("zones.handLabel")}
           </div>
         )}
       </div>
@@ -622,10 +638,10 @@ function TurnPhaseWalkthrough() {
           className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
         >
           <ChevronLeftIcon className="size-3" />
-          이전
+          {t("nav.prev")}
         </button>
         <div className="flex-1 flex justify-center gap-1.5">
-          {PHASES.map((_, i) => (
+          {phases.map((_, i) => (
             <button
               key={i}
               type="button"
@@ -641,11 +657,11 @@ function TurnPhaseWalkthrough() {
         </div>
         <button
           type="button"
-          onClick={() => setActive((v) => Math.min(PHASES.length - 1, v + 1))}
-          disabled={active === PHASES.length - 1}
+          onClick={() => setActive((v) => Math.min(phases.length - 1, v + 1))}
+          disabled={active === phases.length - 1}
           className="flex items-center gap-1 text-xs px-3 py-1.5 rounded border border-border hover:bg-muted/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
         >
-          다음
+          {t("nav.next")}
           <ChevronRightIcon className="size-3" />
         </button>
       </div>
@@ -655,12 +671,12 @@ function TurnPhaseWalkthrough() {
 
 // ── interactive: battle steps walkthrough ────────────────────────────────────
 
-function BattleStepsWalkthrough() {
+function BattleStepsWalkthrough({ battleSteps }: { battleSteps: { name: string; desc: string }[] }) {
   const [active, setActive] = useState<number | null>(null);
 
   return (
     <div className="flex flex-col">
-      {BATTLE_STEPS.map((step, i) => {
+      {battleSteps.map((step, i) => {
         const isActive = active === i;
         return (
           <button
@@ -683,7 +699,7 @@ function BattleStepsWalkthrough() {
               >
                 {i + 1}
               </span>
-              {i < BATTLE_STEPS.length - 1 && (
+              {i < battleSteps.length - 1 && (
                 <div
                   className={cn(
                     "w-px flex-1 min-h-3 my-0.5 transition-colors duration-200",
@@ -725,75 +741,87 @@ function BattleStepsWalkthrough() {
 
 // ── zone section (interactive playfield highlight) ───────────────────────────
 
-const ZONES = [
-  {
-    name: "덱 에어리어",
-    num: "①",
-    type: "비공개" as const,
-    desc: "게임 덱을 두는 곳. 위에서 1장씩 드로우.",
-    ids: ["deck"] as ZoneId[],
-  },
-  {
-    name: "리소스 덱 에어리어",
-    num: "②",
-    type: "비공개" as const,
-    desc: "리소스 덱을 두는 곳.",
-    ids: ["resourceDeck"] as ZoneId[],
-  },
-  {
-    name: "실드 에어리어",
-    num: "③⑥",
-    type: "혼합" as const,
-    desc: "베이스 존(공개, ⑥) + 실드 존(비공개, ③).",
-    ids: ["base", "shield"] as ZoneId[],
-  },
-  {
-    name: "리소스 에어리어",
-    num: "④",
-    type: "공개" as const,
-    desc: "리소스를 두는 곳. 최대 15장.",
-    ids: ["resource"] as ZoneId[],
-  },
-  {
-    name: "배틀 에어리어",
-    num: "⑤",
-    type: "공개" as const,
-    desc: "유닛·파일럿을 두는 곳. 유닛 최대 6기.",
-    ids: ["battle"] as ZoneId[],
-  },
-  {
-    name: "패 (손패)",
-    num: "—",
-    type: "비공개" as const,
-    desc: "드로우한 카드. 상한 10장. 자신만 열람 가능.",
-    ids: ["hand"] as ZoneId[],
-  },
-  {
-    name: "트래시",
-    num: "⑦",
-    type: "공개" as const,
-    desc: "파괴·사용된 카드. 순서 변경 가능.",
-    ids: ["trash"] as ZoneId[],
-  },
-  {
-    name: "제외 에어리어",
-    num: "—",
-    type: "공개" as const,
-    desc: "제외된 카드. 파괴와는 다른 처리.",
-    ids: [] as ZoneId[],
-  },
-];
+type ZoneEntry = {
+  name: string;
+  num: string;
+  type: "공개" | "비공개" | "혼합";
+  desc: string;
+  ids: ZoneId[];
+};
 
-function ZoneSection() {
+function getZones(t: TFunction<"rules">): ZoneEntry[] {
+  return [
+    {
+      name: t("zones.items.deck.name"),
+      num: t("zones.items.deck.num"),
+      type: "비공개",
+      desc: t("zones.items.deck.desc"),
+      ids: ["deck"] as ZoneId[],
+    },
+    {
+      name: t("zones.items.resourceDeck.name"),
+      num: t("zones.items.resourceDeck.num"),
+      type: "비공개",
+      desc: t("zones.items.resourceDeck.desc"),
+      ids: ["resourceDeck"] as ZoneId[],
+    },
+    {
+      name: t("zones.items.shield.name"),
+      num: t("zones.items.shield.num"),
+      type: "혼합",
+      desc: t("zones.items.shield.desc"),
+      ids: ["base", "shield"] as ZoneId[],
+    },
+    {
+      name: t("zones.items.resource.name"),
+      num: t("zones.items.resource.num"),
+      type: "공개",
+      desc: t("zones.items.resource.desc"),
+      ids: ["resource"] as ZoneId[],
+    },
+    {
+      name: t("zones.items.battle.name"),
+      num: t("zones.items.battle.num"),
+      type: "공개",
+      desc: t("zones.items.battle.desc"),
+      ids: ["battle"] as ZoneId[],
+    },
+    {
+      name: t("zones.items.hand.name"),
+      num: t("zones.items.hand.num"),
+      type: "비공개",
+      desc: t("zones.items.hand.desc"),
+      ids: ["hand"] as ZoneId[],
+    },
+    {
+      name: t("zones.items.trash.name"),
+      num: t("zones.items.trash.num"),
+      type: "공개",
+      desc: t("zones.items.trash.desc"),
+      ids: ["trash"] as ZoneId[],
+    },
+    {
+      name: t("zones.items.exclude.name"),
+      num: t("zones.items.exclude.num"),
+      type: "공개",
+      desc: t("zones.items.exclude.desc"),
+      ids: [] as ZoneId[],
+    },
+  ];
+}
+
+function ZoneSection({ t }: { t: TFunction<"rules"> }) {
+  const zones = getZones(t);
+  const handZoneName = t("zones.items.hand.name");
   const [selected, setSelected] = useState<string | null>(null);
 
-  const selectedZone = ZONES.find((z) => z.name === selected);
+  const selectedZone = zones.find((z) => z.name === selected);
   const highlights: ZoneId[] = selectedZone?.ids ?? [];
 
   return (
-    <Section title="게임 영역 (존)">
+    <Section title={t("sections.zones.title")}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-        {ZONES.map((z) => {
+        {zones.map((z) => {
           const isSelected = selected === z.name;
           return (
             <button
@@ -831,7 +859,7 @@ function ZoneSection() {
                         : "bg-yellow-100 text-yellow-700",
                   )}
                 >
-                  {z.type}
+                  {t(`zones.typeLabels.${z.type}`)}
                 </span>
               </div>
               <p
@@ -852,23 +880,22 @@ function ZoneSection() {
         <p className="text-xs text-muted-foreground">
           {selected
             ? selectedZone?.ids.length === 0
-              ? `「${selected}」는 플레이 시트 밖에 위치합니다.`
-              : selected === "패 (손패)"
-                ? `「패」는 플레이 시트 밖 (손에 들고 있는 카드)입니다.`
-                : `「${selected}」의 위치`
-            : "영역 카드를 클릭하면 플레이 시트에서 위치를 확인할 수 있습니다."}
+              ? t("zones.outsideBoard", { name: selected })
+              : selected === handZoneName
+                ? t("zones.handOutside")
+                : t("zones.locationOf", { name: selected })
+            : t("zones.clickHint")}
         </p>
         <MiniPlayfield highlights={highlights} />
-        {selected === "패 (손패)" && (
+        {selected === handZoneName && (
           <div className="text-[11px] text-center rounded border border-orange-400/50 bg-orange-400/10 text-orange-600 font-bold px-2 py-1">
-            패 (손패) — 플레이 시트 밖, 자신만 열람
+            {t("zones.handLabel")}
           </div>
         )}
       </div>
 
       <Note>
-        카드가 영역 간 이동 시, 특별한 지시 없이는 새로운 카드로 취급 (이전 효과 소멸).
-        리소스 에어리어·배틀 에어리어·실드 에어리어를 합쳐 「필드」라고 부르기도 함.
+        {t("zones.note")}
       </Note>
     </Section>
   );
@@ -891,11 +918,13 @@ function CardTypeItem({
   cardRef,
   cardRefs,
   onOpen,
+  viewOtherCardLabel,
 }: {
   ct: CardTypeEntry;
   cardRef: CardPreview_card$key | null | undefined;
   cardRefs?: readonly (CardPreview_card$key | null | undefined)[];
   onOpen: (id: string) => void;
+  viewOtherCardLabel: string;
 }) {
   const pool = cardRefs && cardRefs.length > 0 ? cardRefs : cardRef ? [cardRef] : [];
   const [idx, setIdx] = useState(0);
@@ -986,7 +1015,7 @@ function CardTypeItem({
           <button
             type="button"
             onClick={handleRefresh}
-            title="다른 카드 보기"
+            title={viewOtherCardLabel}
             className={cn(
               "absolute bottom-4 right-0 z-20 translate-x-[45%]",
               "w-5 h-5 rounded-full flex items-center justify-center",
@@ -1048,9 +1077,14 @@ export const Query = graphql`
 // ── page ──────────────────────────────────────────────────────────────────────
 
 export function RulesPage() {
+  const { t } = useTranslation("rules");
   const queryRef = Route.useLoaderData() as PreloadedQuery<RulesPageQueryType>;
   const data = usePreloadedQuery<RulesPageQueryType>(Query, queryRef);
   const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
+
+  const phases = getPhases(t);
+  const battleSteps = getBattleSteps(t);
+  const setupSteps = getSetupSteps(t);
 
   const p1HandImages: SetupHandImages = [
     extractSetupCardUrl(data.unitSample),
@@ -1082,6 +1116,8 @@ export function RulesPage() {
     extractSetupCardUrl(data.unitSample),
   ];
 
+  const viewOtherCardLabel = t("sections.cardTypes.viewOtherCard");
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-4 w-full">
       {overlayCardId && (
@@ -1091,436 +1127,267 @@ export function RulesPage() {
         />
       )}
       <div>
-        <h1 className="text-lg font-bold">게임 규칙</h1>
+        <h1 className="text-lg font-bold">{t("title")}</h1>
         <p className="text-xs text-muted-foreground mt-0.5">
-          건담 카드 게임 종합 규칙 Ver. 1.4.1 요약
+          {t("subtitle")}
         </p>
       </div>
 
-      {/* ── 게임 목표 ── */}
-      <Section title="게임 목표와 승패" defaultOpen>
+      {/* ── objective ── */}
+      <Section title={t("sections.objective.title")} defaultOpen>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div className="rounded-md border border-green-200 bg-green-50 p-3">
-            <p className="text-xs font-semibold text-green-700 mb-1.5">승리 조건</p>
+            <p className="text-xs font-semibold text-green-700 mb-1.5">{t("sections.objective.win.label")}</p>
             <ul className="text-xs text-green-800 flex flex-col gap-1">
-              <li>· 상대 실드 에어리어가 0장인 상태에서 유닛으로 배틀 대미지를 줌</li>
-              <li>· 상대 덱을 0장으로 만듦</li>
+              {(t("sections.objective.win.conditions", { returnObjects: true }) as string[]).map((c, i) => (
+                <li key={i}>· {c}</li>
+              ))}
             </ul>
           </div>
           <div className="rounded-md border border-red-200 bg-red-50 p-3">
-            <p className="text-xs font-semibold text-red-700 mb-1.5">패배 조건</p>
+            <p className="text-xs font-semibold text-red-700 mb-1.5">{t("sections.objective.lose.label")}</p>
             <ul className="text-xs text-red-800 flex flex-col gap-1">
-              <li>· 실드 에어리어 0장 상태에서 배틀 대미지를 받음</li>
-              <li>· 덱이 0장이 됨 (드로우 시점 포함)</li>
-              <li>· 투료 선언 → 즉시 패배</li>
+              {(t("sections.objective.lose.conditions", { returnObjects: true }) as string[]).map((c, i) => (
+                <li key={i}>· {c}</li>
+              ))}
             </ul>
           </div>
         </div>
         <Note>
-          카드 텍스트가 종합 규칙과 모순될 경우 카드 텍스트가 우선합니다.
-          금지 효과는 항상 허용 효과보다 우선합니다.
+          {t("sections.objective.note")}
         </Note>
       </Section>
 
-      {/* ── 덱 구성 ── */}
-      <Section title="덱 구성 규칙">
+      {/* ── deck rules ── */}
+      <Section title={t("sections.deckRules.title")}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div className="relative rounded-md border p-3 overflow-hidden">
             <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">50</span>
-            <p className="text-xs font-semibold mb-2">메인 덱 — 50장</p>
+            <p className="text-xs font-semibold mb-2">{t("sections.deckRules.mainDeck.label")}</p>
             <ul className="text-xs text-muted-foreground flex flex-col gap-1">
-              <li>· 유닛 / 파일럿 / 커맨드 / 베이스 카드로 구성</li>
-              <li>· 1색 또는 2색으로만 구성</li>
-              <li>· 같은 카드 No. 최대 4장</li>
+              {(t("sections.deckRules.mainDeck.rules", { returnObjects: true }) as string[]).map((r, i) => (
+                <li key={i}>· {r}</li>
+              ))}
             </ul>
           </div>
           <div className="relative rounded-md border p-3 overflow-hidden">
             <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">10</span>
-            <p className="text-xs font-semibold mb-2">리소스 덱 — 10장</p>
+            <p className="text-xs font-semibold mb-2">{t("sections.deckRules.resourceDeck.label")}</p>
             <ul className="text-xs text-muted-foreground flex flex-col gap-1">
-              <li>· 리소스 카드로만 구성</li>
-              <li>· 같은 카드 No. 제한 없음</li>
+              {(t("sections.deckRules.resourceDeck.rules", { returnObjects: true }) as string[]).map((r, i) => (
+                <li key={i}>· {r}</li>
+              ))}
             </ul>
           </div>
         </div>
         <div className="rounded-md border p-3 flex flex-col gap-2 text-xs">
-          <p className="font-semibold">카드 플레이 조건</p>
+          <p className="font-semibold">{t("sections.deckRules.playConditions.label")}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-muted-foreground">
             <div>
-              <span className="font-medium text-foreground">Lv.(레벨)</span>
-              <p>자신의 리소스 총 수 ≥ 카드 Lv. 이면 플레이 가능. 액티브/레스트 불문.</p>
+              <span className="font-medium text-foreground">{t("sections.deckRules.playConditions.level.name")}</span>
+              <p>{t("sections.deckRules.playConditions.level.desc")}</p>
             </div>
             <div>
-              <span className="font-medium text-foreground">코스트</span>
-              <p>액티브 리소스를 필요한 수만큼 레스트시켜 지불.</p>
+              <span className="font-medium text-foreground">{t("sections.deckRules.playConditions.cost.name")}</span>
+              <p>{t("sections.deckRules.playConditions.cost.desc")}</p>
             </div>
           </div>
         </div>
         <Note>
-          리소스 에어리어 최대 15장 (EX 리소스는 최대 5장 포함).
-          패 상한은 10장 (엔드 페이즈 핸드 스텝에 초과분 버림).
+          {t("sections.deckRules.note")}
         </Note>
       </Section>
 
-      {/* ── 카드 타입 ── */}
-      <Section title="카드 타입 (5종)">
+      {/* ── card types ── */}
+      <Section title={t("sections.cardTypes.title")}>
         <div className="flex flex-col gap-2">
           {(
             [
               {
-                name: "유닛",
+                name: t("sections.cardTypes.items.unit.name"),
                 color: "bg-blue-50 border-blue-200",
                 head: "text-blue-700",
-                desc: "플레이 시 배틀 에어리어에 배치. 상한 6기.",
-                attrs: ["AP (공격력)", "HP (내구력)", "링크 조건"],
-                notes: [
-                  "배치 직후 그 턴에는 어택 불가 (링크 유닛 예외).",
-                  "링크 조건 만족 파일럿 세트 = 링크 유닛 → 배치 턴 즉시 어택 가능.",
-                  "HP 0 → 파괴 → 트래시.",
-                  "배틀 에어리어의 유닛 색은 세트된 파일럿 색 영향 없음.",
-                ],
+                desc: t("sections.cardTypes.items.unit.desc"),
+                attrs: t("sections.cardTypes.items.unit.attrs", { returnObjects: true }) as string[],
+                notes: t("sections.cardTypes.items.unit.notes", { returnObjects: true }) as string[],
                 rotate: 6,
                 cardRef: data.unitSample,
                 cardRefs: data.unitSamples,
               },
               {
-                name: "파일럿",
+                name: t("sections.cardTypes.items.pilot.name"),
                 color: "bg-pink-50 border-pink-200",
                 head: "text-pink-700",
-                desc: "플레이 시 배틀 에어리어 유닛 아래에 세트. 유닛 1기에 1명.",
-                attrs: ["AP 수정치 (+N)", "HP 수정치 (+N)"],
-                notes: [
-                  "카드 명 위 텍스트 → 파일럿 자신의 효과 (주로 【버스트】).",
-                  "카드 명 아래 텍스트 → 세트된 유닛이 얻는 효과.",
-                  "파일럿의 특징은 유닛에 추가되지 않음.",
-                  "임의 교체/제거 불가. 유닛 이동 시 파일럿도 함께 이동.",
-                ],
+                desc: t("sections.cardTypes.items.pilot.desc"),
+                attrs: t("sections.cardTypes.items.pilot.attrs", { returnObjects: true }) as string[],
+                notes: t("sections.cardTypes.items.pilot.notes", { returnObjects: true }) as string[],
                 rotate: -5,
                 cardRef: data.pilotSample,
                 cardRefs: data.pilotSamples,
               },
               {
-                name: "커맨드",
+                name: t("sections.cardTypes.items.command.name"),
                 color: "bg-teal-50 border-teal-200",
                 head: "text-teal-700",
-                desc: "플레이 시 커맨드 효과를 발동. 발동 후 트래시 (효과로 이동 지정 없을 경우).",
-                attrs: ["【메인】 또는 【액션】 타이밍"],
-                notes: [
-                  "효과 발동 중에는 어느 영역에도 없는 것으로 취급.",
-                  "【파일럿】 보유 시: 효과 발동 대신 파일럿으로 유닛에 세트 가능.",
-                  "【버스트】 보유 가능.",
-                  "커맨드 효과 대상 선택 불가 시 플레이 불가.",
-                ],
+                desc: t("sections.cardTypes.items.command.desc"),
+                attrs: t("sections.cardTypes.items.command.attrs", { returnObjects: true }) as string[],
+                notes: t("sections.cardTypes.items.command.notes", { returnObjects: true }) as string[],
                 rotate: 8,
                 cardRef: data.commandSample,
                 cardRefs: data.commandSamples,
               },
               {
-                name: "베이스",
+                name: t("sections.cardTypes.items.base.name"),
                 color: "bg-gray-50 border-gray-200",
                 head: "text-gray-700",
-                desc: "플레이 시 실드 에어리어 베이스 존에 배치. 상한 1장.",
-                attrs: ["AP (공격력)", "HP (내구력)"],
-                notes: [
-                  "베이스가 있는 동안 실드 에어리어에 가해지는 대미지는 베이스가 우선 흡수.",
-                  "HP 0 → 파괴 → 트래시.",
-                ],
+                desc: t("sections.cardTypes.items.base.desc"),
+                attrs: t("sections.cardTypes.items.base.attrs", { returnObjects: true }) as string[],
+                notes: t("sections.cardTypes.items.base.notes", { returnObjects: true }) as string[],
                 rotate: -7,
                 cardRef: data.baseSample,
                 cardRefs: data.baseSamples,
               },
               {
-                name: "리소스",
+                name: t("sections.cardTypes.items.resource.name"),
                 color: "bg-yellow-50 border-yellow-200",
                 head: "text-yellow-700",
-                desc: "리소스 덱에서 리소스 에어리어에 직접 배치. 코스트 지불에 사용.",
-                attrs: [],
-                notes: [
-                  "액티브 리소스를 레스트시켜 코스트 지불.",
-                  "Lv. 판정은 액티브/레스트 불문 총 수 기준.",
-                ],
+                desc: t("sections.cardTypes.items.resource.desc"),
+                attrs: t("sections.cardTypes.items.resource.attrs", { returnObjects: true }) as string[],
+                notes: t("sections.cardTypes.items.resource.notes", { returnObjects: true }) as string[],
                 rotate: 5,
                 cardRef: data.resourceSample,
                 cardRefs: data.resourceSamples,
               },
             ] as const
           ).map((ct) => (
-            <CardTypeItem key={ct.name} ct={ct} cardRef={ct.cardRef} cardRefs={ct.cardRefs} onOpen={setOverlayCardId} />
+            <CardTypeItem
+              key={ct.name}
+              ct={ct}
+              cardRef={ct.cardRef}
+              cardRefs={ct.cardRefs}
+              onOpen={setOverlayCardId}
+              viewOtherCardLabel={viewOtherCardLabel}
+            />
           ))}
         </div>
         <Note>
-          <span className="font-medium">EX 베이스:</span> AP 0 / HP 3 베이스 토큰. 게임 시작 시 베이스 존에 자동 배치.
+          <span className="font-medium">EX {t("sections.cardTypes.items.base.name")}:</span>{" "}
+          {t("sections.cardTypes.note").split("\n")[0]}
           {"\n"}
-          <span className="font-medium">EX 리소스:</span> 코스트 지불 1회용 리소스 토큰. 후공 플레이어에게 1장 제공. 사용 후 제거.
+          <span className="font-medium">EX {t("sections.cardTypes.items.resource.name")}:</span>{" "}
+          {t("sections.cardTypes.note").split("\n")[1]}
         </Note>
       </Section>
 
-      {/* ── 게임 준비 ── */}
-      <Section title="게임 준비 순서">
+      {/* ── game setup ── */}
+      <Section title={t("sections.gameSetup.title")}>
         <GameSetupWalkthrough
           p1HandImages={p1HandImages} p2HandImages={p2HandImages}
           newP1HandImages={newP1HandImages} newP2HandImages={newP2HandImages}
+          setupSteps={setupSteps}
+          t={t}
         />
       </Section>
 
-      {/* ── 턴 진행 ── */}
-      <Section title="턴 진행 흐름">
-        <TurnPhaseWalkthrough />
+      {/* ── turn flow ── */}
+      <Section title={t("sections.turnFlow.title")}>
+        <TurnPhaseWalkthrough phases={phases} t={t} />
         <Note>
-          각 페이즈/스텝에서 유발된 효과가 있으면 전부 해결 후 다음으로 진행.
-          어택 중에는 패 플레이·기동메인 발동 불가.
+          {t("sections.turnFlow.note")}
         </Note>
       </Section>
 
-      {/* ── 어택과 배틀 ── */}
-      <Section title="어택과 배틀">
+      {/* ── battle ── */}
+      <Section title={t("sections.battle.title")}>
         <div className="flex flex-col gap-3">
           <Note>
-            <span className="font-medium">어택 가능 조건:</span> 액티브 상태의 자신 유닛. 배치 직후 그 턴은 어택 불가 (링크 유닛 제외).
-            상대 플레이어 또는 레스트 상태의 상대 유닛을 대상 선언.
+            <span className="font-medium">{t("sections.battle.attackConditionNote").split("\n")[0]}</span>
+            {"\n"}
+            {t("sections.battle.attackConditionNote").split("\n")[1]}
           </Note>
 
           <p className="text-xs text-muted-foreground">
-            스텝을 클릭하면 상세 내용을 확인할 수 있습니다.
+            {t("sections.battle.clickHint")}
           </p>
-          <BattleStepsWalkthrough />
+          <BattleStepsWalkthrough battleSteps={battleSteps} />
 
           <ShieldSimulator />
 
           <UnitBattleSimulator />
 
           <Note>
-            어택 스텝/블록 스텝 종료 시 유닛이 영역 이동했다면 다음 스텝을 건너뛰고 배틀 종료 스텝으로.
-            《블로커》는 1회의 어택에 1번만 발동 가능. 원래 어택 대상 유닛은 《블로커》 발동 불가.
+            {t("sections.battle.note")}
           </Note>
         </div>
       </Section>
 
-      {/* ── 게임 영역 ── */}
-      <ZoneSection />
+      {/* ── zones ── */}
+      <ZoneSection t={t} />
 
-      {/* ── 키워드 효과 ── */}
-      <Section title="키워드 효과 (어빌리티)">
+      {/* ── abilities ── */}
+      <Section title={t("sections.abilities.title")}>
         <div className="flex flex-col gap-4">
-          {[
-            {
-              badge: <ABadge name="리페어" />,
-              timing: "자신의 턴 종료 시",
-              desc: "《리페어 N》: 자신의 턴 종료 시 N 회복. 여러 개 보유 시 수치 합산.",
-            },
-            {
-              badge: <ABadge name="돌파" />,
-              timing: "자신의 턴 중, 배틀 대미지로 상대 유닛 파괴 시",
-              desc: "《돌파 N》: 배틀 대미지로 상대 유닛 파괴 시 상대 실드 에어리어에 N 대미지. (베이스 우선, 없으면 실드 1장.) 상대 실드/베이스가 0장이면 발동하지 않음. 여러 개 보유 시 수치 합산.",
-            },
-            {
-              badge: <ABadge name="원호" />,
-              timing: "【기동･메인】 이 유닛을 레스트",
-              desc: "《원호 N》: 【기동･메인】 이 유닛을 레스트 : 다른 아군 유닛 1기를 골라 이 턴 중 AP +N. 여러 개 보유 시 수치 합산.",
-            },
-            {
-              badge: <ABadge name="블로커" />,
-              timing: "블록 스텝",
-              desc: "《블로커》: 블록 스텝에 이 유닛을 레스트시켜 어택 대상을 이 유닛으로 변경. 1회 어택에 1번. 원래 어택 대상 유닛은 《블로커》 발동 불가. 한 유닛이 다수 보유 불가.",
-            },
-            {
-              badge: <ABadge name="선제공격" />,
-              timing: "대미지 스텝",
-              desc: "《선제공격》: 배틀 시 상대보다 먼저 배틀 대미지 부여. 이 대미지로 상대 유닛/베이스가 파괴되면 반격 대미지를 받지 않음. 한 유닛이 다수 보유 불가.",
-            },
-            {
-              badge: <ABadge name="고기동" />,
-              timing: "어택하는 동안 상시",
-              desc: "《고기동》: 이 유닛이 어택하는 동안, 상대 유닛은 《블로커》를 발동할 수 없다. 한 유닛이 다수 보유 불가.",
-            },
-            {
-              badge: <ABadge name="제압" />,
-              timing: "플레이어 어택 시",
-              desc: "《제압》: 실드에 배틀 대미지를 줄 때 위에서 2개 실드에 동시 대미지. 실드 1개뿐이면 1개만. 동시 파괴된 두 실드 모두에 【버스트】가 있으면 소유자가 처리 순서 결정. 한 유닛이 다수 보유 불가.",
-            },
-          ].map((kw, i) => (
-            <div key={i} className="flex flex-col gap-1.5">
+          {(["repair", "breakthrough", "support", "blocker", "firstStrike", "highMobility", "suppress"] as const).map((key) => (
+            <div key={key} className="flex flex-col gap-1.5">
               <div className="flex items-center gap-2 flex-wrap">
-                {kw.badge}
+                <ABadge name={t(`sections.abilities.items.${key}.badge`)} />
                 <span className="text-xs text-muted-foreground">
-                  {kw.timing}
+                  {t(`sections.abilities.items.${key}.timing`)}
                 </span>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                {kw.desc}
+                {t(`sections.abilities.items.${key}.desc`)}
               </p>
             </div>
           ))}
         </div>
       </Section>
 
-      {/* ── 키워드 (트리거) ── */}
-      <Section title="키워드 (트리거)">
+      {/* ── triggers ── */}
+      <Section title={t("sections.triggers.title")}>
         <div className="flex flex-col gap-3">
-          {[
-            {
-              badge: <TBadge name="기동･메인" />,
-              desc: "자신의 메인 페이즈(유닛 어택 중 제외)에 조건을 만족해 발동하는 기동 효과.",
-            },
-            {
-              badge: <TBadge name="기동･액션" />,
-              desc: "액션 스텝에 조건을 만족해 발동하는 기동 효과.",
-            },
-            {
-              badge: <TBadge name="메인" />,
-              desc: "커맨드 카드 전용. 자신의 메인 페이즈(어택 중 제외)에 플레이해 커맨드 효과 발동.",
-            },
-            {
-              badge: <TBadge name="액션" />,
-              desc: "커맨드 카드 전용. 액션 스텝에 플레이해 커맨드 효과 발동. 【파일럿】 보유 커맨드 카드는 액션 타이밍에 파일럿으로 세트 불가.",
-            },
-            {
-              badge: <TBadge name="버스트" />,
-              desc: "실드가 파괴되어 앞면이 되었을 때, 코스트 없이 효과 발동 가능. 발동 여부는 선택. 트래시에 놓이기 전에 발동. 【버스트】 효과는 다른 유발 효과보다 최우선으로 처리.",
-            },
-            {
-              badge: <TBadge name="배치 시" />,
-              desc: "카드가 배치되었을 때 발동.",
-            },
-            {
-              badge: <TBadge name="어택 시" />,
-              desc: "유닛이 어택 스텝에 어택을 선언했을 때 발동.",
-            },
-            {
-              badge: <TBadge name="파괴 시" />,
-              desc: "유닛/베이스가 배틀 또는 효과로 파괴되어 트래시에 놓였을 때 발동. 트래시에서 발동. 카드 상태는 파괴 직전 필드 상태를 참조.",
-            },
-            {
-              badge: <TBadge name="세트 시" />,
-              desc: "유닛에 파일럿이 세트되었을 때 발동. 「【세트 시•조건】」 형식으로 조건 지정 가능.",
-            },
-            {
-              badge: <TBadge name="세트 중" />,
-              desc: "파일럿이 세트되어 있는 동안 효과를 가짐. 「【세트 중•조건】」 형식으로 조건(특징 등) 지정 가능.",
-            },
-            {
-              badge: <TBadge name="링크 시" />,
-              desc: "링크 조건을 만족하는 파일럿이 세트되었을 때 발동.",
-            },
-            {
-              badge: <TBadge name="링크 중" />,
-              desc: "링크 조건을 만족하는 파일럿이 세트되어 있는 동안 효과를 가짐.",
-            },
-            {
-              badge: <TBadge name="턴 1회" />,
-              desc: "그 턴 중 1번만 발동 가능. 같은 효과를 가진 카드가 여러 장 있어도 각각 1번씩 발동 가능.",
-            },
-          ].map((kw, i) => (
-            <div key={i} className="flex flex-col gap-1">
-              <div>{kw.badge}</div>
+          {(["activateMain", "activateAction", "main", "action", "burst", "onPlace", "onAttack", "onDestroy", "onSet", "whileSet", "onLink", "whileLink", "oncePer"] as const).map((key) => (
+            <div key={key} className="flex flex-col gap-1">
+              <div>
+                <TBadge name={t(`sections.triggers.items.${key}.badge`)} />
+              </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                {kw.desc}
+                {t(`sections.triggers.items.${key}.desc`)}
               </p>
             </div>
           ))}
         </div>
       </Section>
 
-      {/* ── 효과 종류 ── */}
-      <Section title="효과의 종류와 해결">
+      {/* ── effects ── */}
+      <Section title={t("sections.effects.title")}>
         <div className="flex flex-col gap-2 text-xs">
-          {[
-            {
-              name: "상시 효과",
-              desc: "항상 발동 중. 유발 대기 없이 해당 영역에 나온 즉시 적용. 모순되는 상시 효과가 여럿이면 금지 효과 우선.",
-            },
-            {
-              name: "유발 효과",
-              desc: "특정 사건 발생 시 자동으로 유발. 동시 유발 시 턴 플레이어 효과를 먼저 해결. 새로운 효과가 유발되면 새것을 먼저 해결. 【버스트】 효과는 최우선 처리.",
-            },
-            {
-              name: "기동 효과",
-              desc: "플레이어가 임의로 발동. 「조건 : 효과」 형식. 모든 조건 만족 시 효과 발동.",
-            },
-            {
-              name: "커맨드 효과",
-              desc: "커맨드 카드를 지정 타이밍에 플레이해 발동. 대상 선택 불가 시 플레이 불가.",
-            },
-            {
-              name: "치환 효과",
-              desc: "「(A)하는 대신 (B)한다」 형식. 사건 A를 사건 B로 대체.",
-            },
-          ].map((e) => (
-            <div key={e.name} className="rounded border p-2">
-              <p className="font-semibold mb-0.5">{e.name}</p>
-              <p className="text-muted-foreground leading-relaxed">{e.desc}</p>
+          {(["continuous", "triggered", "activated", "command", "replacement"] as const).map((key) => (
+            <div key={key} className="rounded border p-2">
+              <p className="font-semibold mb-0.5">{t(`sections.effects.items.${key}.name`)}</p>
+              <p className="text-muted-foreground leading-relaxed">{t(`sections.effects.items.${key}.desc`)}</p>
             </div>
           ))}
         </div>
         <Note>
-          「한다」→ 가능한 한 처리.　「해도 좋다」→ 발동 여부 선택 가능.{"\n"}
-          「그렇게 했다면」→ 앞 문장 미해결 시 뒷 문장 해결 불가.　「그 후」→ 앞 문장 결과 무관하게 뒷 문장 해결 가능.
+          {t("sections.effects.note")}
         </Note>
       </Section>
 
-      {/* ── 주요 용어 ── */}
-      <Section title="주요 용어 정리">
+      {/* ── glossary ── */}
+      <Section title={t("sections.glossary.title")}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-          {[
-            {
-              term: "액티브 / 레스트",
-              def: "카드를 세로로 놓은 상태 / 가로로 놓은 상태. 필드·리소스 에어리어·베이스 존 카드에 적용.",
-            },
-            {
-              term: "배치",
-              def: "유닛이나 베이스를 필드에 놓는 것.",
-            },
-            {
-              term: "세트",
-              def: "파일럿 카드(또는 【파일럿】 커맨드)가 유닛 아래에 겹쳐지는 것.",
-            },
-            {
-              term: "파괴",
-              def: "HP ≥ 대미지 or 효과로 필드에서 트래시로 이동. 실드 파괴 시 앞면으로 해 【버스트】 확인 후 트래시.",
-            },
-            {
-              term: "제외",
-              def: "어느 영역에서 제외 에어리어로 이동. 파괴와 다름.",
-            },
-            {
-              term: "버리다",
-              def: "패에서 트래시로 이동.",
-            },
-            {
-              term: "드로우",
-              def: "덱 맨 위의 카드를 비공개로 자신의 패에 더하는 것.",
-            },
-            {
-              term: "플레이",
-              def: "패의 카드를 공개하고 코스트를 지불해 사용하는 것.",
-            },
-            {
-              term: "회복",
-              def: "유닛/베이스의 대미지 카운터를 지정 수만큼 제거. HP 이상으로 회복되지는 않음.",
-            },
-            {
-              term: "배틀 대미지 / 효과 대미지",
-              def: "배틀 결과로 발생하는 대미지 / 카드 효과로 발생하는 대미지.",
-            },
-            {
-              term: "턴 플레이어",
-              def: "현재 진행 중인 턴의 플레이어.",
-            },
-            {
-              term: "/ (슬래시)",
-              def: "특징 등에서 사용 시 「또는」의 의미. 예: 〔지온〕/〔네오지온〕 = 둘 중 하나.",
-            },
-          ].map((e) => (
-            <div key={e.term} className="rounded border p-2">
-              <p className="font-semibold mb-0.5">{e.term}</p>
-              <p className="text-muted-foreground leading-relaxed">{e.def}</p>
+          {(["activeRest", "place", "set", "destroy", "exclude", "discard", "draw", "play", "recover", "battleDamage", "turnPlayer", "slash"] as const).map((key) => (
+            <div key={key} className="rounded border p-2">
+              <p className="font-semibold mb-0.5">{t(`sections.glossary.items.${key}.term`)}</p>
+              <p className="text-muted-foreground leading-relaxed">{t(`sections.glossary.items.${key}.def`)}</p>
             </div>
           ))}
         </div>
       </Section>
 
       <p className="text-xs text-muted-foreground text-center">
-        건담 카드 게임 종합 규칙 Ver. 1.4.1 (2026년 1월 16일 원문 기준)
+        {t("footer")}
       </p>
     </div>
   );
