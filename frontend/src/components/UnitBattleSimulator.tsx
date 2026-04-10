@@ -13,7 +13,7 @@ const UNIT_PRESETS: Array<{ ap: number; hp: number; label: string }> = [
   { ap: 5, hp: 3, label: "AP5/HP3" },
 ];
 
-type RosterEntry = { id: number; presetIdx: number; rested: boolean };
+type RosterEntry = { id: number; presetIdx: number; rested: boolean; blocker?: boolean };
 type BattlePhase = "idle" | "attack" | "block" | "action" | "damage" | "end";
 
 const PHASE_STEPS: Array<{ key: BattlePhase; label: string }> = [
@@ -193,7 +193,7 @@ export function UnitBattleSimulator() {
   const [enemyRoster, setEnemyRoster] = useState<RosterEntry[]>([{ id: 1, presetIdx: 1, rested: false }]);
   const [addMyPreset, setAddMyPreset] = useState(2);
   const [addEnemyPreset, setAddEnemyPreset] = useState(1);
-  const [hasBlocker, setHasBlocker] = useState(false);
+  const [addWithBlocker, setAddWithBlocker] = useState(false);
   const [hasFirstStrike, setHasFirstStrike] = useState(false);
   const [hasHighMobility, setHasHighMobility] = useState(false);
   const [breakthroughN, setBreakthroughN] = useState(0);
@@ -283,7 +283,7 @@ export function UnitBattleSimulator() {
   useEffect(() => {
     doReset(myUnit.hp, enemyUnit.hp);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasBlocker, hasFirstStrike, hasHighMobility, breakthroughN, hasBurst]);
+  }, [hasFirstStrike, hasHighMobility, breakthroughN, hasBurst]);
 
   useEffect(() => {
     const el = battleZoneRef.current;
@@ -624,6 +624,7 @@ export function UnitBattleSimulator() {
 
   // ── Derived values ──
 
+  const hasBlocker = enemyRoster[0]?.blocker ?? false;
   const allMyRested = myRoster.length > 0 && myRoster.every((e) => e.rested);
 
   // 컨테이너 너비 기반 카드 scale 계산 (카드 64px + gap 2px 기준)
@@ -833,6 +834,7 @@ export function UnitBattleSimulator() {
                       <span className={cn("flex-1 truncate", idx === 0 ? "font-semibold text-red-700" : "text-muted-foreground")}>
                         {idx === 0 ? "▶ " : ""}{UNIT_PRESETS[entry.presetIdx].label}
                       </span>
+                      {entry.blocker && <span className="text-[8px] bg-red-200 text-red-800 rounded px-0.5 leading-tight shrink-0">블로커</span>}
                       <button
                         type="button"
                         onClick={() => setEnemyRoster((prev) => prev.filter((e) => e.id !== entry.id))}
@@ -859,15 +861,15 @@ export function UnitBattleSimulator() {
                 </select>
                 <button
                   type="button"
-                  onClick={() => setEnemyRoster((prev) => [...prev, { id: idRef.current++, presetIdx: addEnemyPreset, rested: false }])}
+                  onClick={() => setEnemyRoster((prev) => [...prev, { id: idRef.current++, presetIdx: addEnemyPreset, rested: false, blocker: addWithBlocker }])}
                   disabled={isRunning || enemyRoster.length >= 6}
                   className="px-2 py-0.5 rounded border border-red-300 bg-red-50 text-red-700 hover:bg-red-100 disabled:opacity-40 font-bold"
                 >+</button>
               </div>
               {/* 옵션 */}
               <label className="flex items-center gap-1 cursor-pointer select-none">
-                <input type="checkbox" checked={hasBlocker} onChange={(e) => setHasBlocker(e.target.checked)} disabled={isRunning} className="accent-red-500" />
-                <span className="text-muted-foreground">《블로커》</span>
+                <input type="checkbox" checked={addWithBlocker} onChange={(e) => setAddWithBlocker(e.target.checked)} className="accent-red-500" />
+                <span className="text-muted-foreground">추가 시 《블로커》</span>
               </label>
               <label className="flex items-center gap-1 cursor-pointer select-none">
                 <input type="checkbox" checked={hasBurst} onChange={(e) => setHasBurst(e.target.checked)} disabled={isRunning} className="accent-red-500" />
@@ -954,7 +956,7 @@ export function UnitBattleSimulator() {
                               attackDir={1}
                               hit={isActive ? enemyHit : false}
                               destroyed={isActive ? enemyDestroyed : false}
-                              tag={isActive && hasBlocker ? "블로커" : undefined}
+                              tag={entry.blocker ? "블로커" : undefined}
                               dim={!isActive}
                             />
                           </div>
