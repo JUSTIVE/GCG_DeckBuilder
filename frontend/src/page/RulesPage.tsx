@@ -12,7 +12,6 @@ import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 import { Route } from "@/routes/$locale/rules";
 import { type ZoneId } from "@/components/PlayfieldLayout";
 import { MiniPlayfield } from "@/components/MiniPlayfield";
-import { ShieldSimulator } from "@/components/ShieldSimulator";
 import { UnitBattleSimulator } from "@/components/UnitBattleSimulator";
 import {
   type SetupBoardState,
@@ -1310,8 +1309,6 @@ export function RulesPage() {
             {t("sections.battle.clickHint")}
           </p>
           <BattleStepsWalkthrough battleSteps={battleSteps} />
-
-          <ShieldSimulator />
 
           <UnitBattleSimulator />
 
