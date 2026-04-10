@@ -12,7 +12,8 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/s
 import type { PropsWithChildren } from "react";
 import React from "react";
 import { QuickSearch } from "@/components/QuickSearch";
-import { useRouterState, Link } from "@tanstack/react-router";
+import { useRouterState, Link, useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { resolveBreadcrumb } from "@/lib/nav";
 import { graphql, useLazyLoadQuery } from "react-relay";
 import type { ScaffoldDeckNameQuery } from "@/__generated__/ScaffoldDeckNameQuery.graphql";
@@ -41,13 +42,15 @@ function AppBreadcrumb() {
         ?.deckId as string | undefined,
     }),
   });
+  const { locale = "ko" } = useParams({ strict: false });
+  const { t } = useTranslation("common");
 
   if (deckId) {
     return (
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem className="hidden md:block">
-            <BreadcrumbLink render={<Link to="/decklist" />}>덱 목록</BreadcrumbLink>
+            <BreadcrumbLink render={<Link to="/$locale/decklist" params={{ locale }} />}>{t("nav.deckList")}</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator className="hidden md:block" />
           <BreadcrumbItem>
@@ -70,16 +73,16 @@ function AppBreadcrumb() {
         {child ? (
           <>
             <BreadcrumbItem className="hidden md:block">
-              <BreadcrumbLink render={<Link to={parent.url} />}>{parent.title}</BreadcrumbLink>
+              <BreadcrumbLink render={<Link to={`/${locale}${parent.path}` as any} />}>{t(parent.titleKey as any)}</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator className="hidden md:block" />
             <BreadcrumbItem>
-              <BreadcrumbPage>{child.title}</BreadcrumbPage>
+              <BreadcrumbPage>{t(child.titleKey as any)}</BreadcrumbPage>
             </BreadcrumbItem>
           </>
         ) : (
           <BreadcrumbItem>
-            <BreadcrumbPage>{parent.title}</BreadcrumbPage>
+            <BreadcrumbPage>{t(parent.titleKey as any)}</BreadcrumbPage>
           </BreadcrumbItem>
         )}
       </BreadcrumbList>

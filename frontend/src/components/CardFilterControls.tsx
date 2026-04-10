@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import i18n from "@/i18n";
 import type { CardFilterInput, CardSort } from "@/__generated__/CardListFragmentRefetchQuery.graphql";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon, XIcon } from "lucide-react";
@@ -152,7 +153,7 @@ export function FilterControls({ filter, sort, onChange, onSortChange, deckColor
         <span className="text-xs text-muted-foreground w-10 shrink-0">정렬</span>
         <select value={sort || ""} onChange={(e) => onSortChange(e.target.value ? (e.target.value as CardSort) : null)} className="h-7 flex-1 rounded-md border border-input bg-background px-2.5 text-xs outline-none focus:border-primary cursor-pointer">
           <option value="">기본</option>
-          {SORT_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+          {SORT_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{(i18n.t as any)(opt.labelKey, { ns: "filters" })}</option>)}
         </select>
       </div>
 

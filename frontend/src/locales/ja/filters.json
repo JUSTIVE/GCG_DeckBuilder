@@ -1,0 +1,25 @@
+{
+  "sort": {
+    "NAME_ASC": "名前 ↑",
+    "NAME_DESC": "名前 ↓",
+    "COST_ASC": "コスト ↑",
+    "COST_DESC": "コスト ↓",
+    "LEVEL_ASC": "レベル ↑",
+    "LEVEL_DESC": "レベル ↓",
+    "AP_ASC": "AP ↑",
+    "AP_DESC": "AP ↓",
+    "HP_ASC": "HP ↑",
+    "HP_DESC": "HP ↓"
+  },
+  "packGroup": {
+    "boosterPack": "ブースターパック",
+    "starterDeck": "スターターデッキ",
+    "other": "その他"
+  },
+  "packItem": {
+    "basic": "基本",
+    "beta": "ベータ",
+    "promo": "プロモ",
+    "otherProduct": "その他製品"
+  }
+}

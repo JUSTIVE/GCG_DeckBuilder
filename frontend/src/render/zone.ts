@@ -1,10 +1,4 @@
-export const renderZone = (zone: string) => {
-  switch (zone) {
-    case "SPACE":
-      return "우주";
-    case "EARTH":
-      return "지구";
-    default:
-      return "";
-  }
-};
+import i18n from "@/i18n";
+
+export const renderZone = (zone: string): string =>
+  i18n.t(`zone.${zone}`, { ns: "game", defaultValue: zone });

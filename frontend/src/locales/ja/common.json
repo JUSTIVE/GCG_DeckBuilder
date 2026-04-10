@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "cardSearch": "カード検索",
+    "allCards": "全カード",
+    "deckManagement": "デッキ管理",
+    "deckList": "デッキ一覧",
+    "tools": "ツール",
+    "mulliganSimulator": "マリガンシミュレーター",
+    "info": "情報",
+    "gameRules": "ゲームルール",
+    "keywordDictionary": "キーワード辞典",
+    "translationCoverage": "翻訳カバレッジ"
+  }
+}

@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { loadQuery } from "react-relay";
 import { relayEnvironment } from "@/relay-environment";
-import { RulesPage, Query } from "@/page/RulesPage";
+import { MainPage, Query } from "@/page/MainPage";
 
-export const Route = createFileRoute("/rules")({
+export const Route = createFileRoute("/$locale/")({
   loader: () => loadQuery(relayEnvironment, Query, {}),
-  component: RulesPage,
+  component: MainPage,
 });

@@ -1,0 +1,25 @@
+{
+  "sort": {
+    "NAME_ASC": "이름 ↑",
+    "NAME_DESC": "이름 ↓",
+    "COST_ASC": "코스트 ↑",
+    "COST_DESC": "코스트 ↓",
+    "LEVEL_ASC": "레벨 ↑",
+    "LEVEL_DESC": "레벨 ↓",
+    "AP_ASC": "공격력 ↑",
+    "AP_DESC": "공격력 ↓",
+    "HP_ASC": "체력 ↑",
+    "HP_DESC": "체력 ↓"
+  },
+  "packGroup": {
+    "boosterPack": "부스트팩",
+    "starterDeck": "스타터덱",
+    "other": "기타"
+  },
+  "packItem": {
+    "basic": "기본",
+    "beta": "베타",
+    "promo": "프로모",
+    "otherProduct": "기타 상품"
+  }
+}

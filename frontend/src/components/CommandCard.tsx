@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import Marquee from "@/components/Marquee";
 
 import { renderTrait } from "@/render/trait";
-import { useRouter, useSearch } from "@tanstack/react-router";
+import { useRouter, useSearch, useParams } from "@tanstack/react-router";
 import {
   COLOR_BG,
   COLOR_BG20,
@@ -209,13 +209,15 @@ export function CommandCard({ commandCardRef, onOpen }: Props) {
   const commandCard = useFragment(Fragment, commandCardRef);
   const search = useSearch({ strict: false }) as { cardId?: string };
   const router = useRouter();
+  const { locale = "ko" } = useParams({ strict: false });
 
   const open = search.cardId === commandCard.id;
 
   function openDialog() {
     if (onOpen) { onOpen(commandCard.id); return; }
     router.navigate({
-      to: "/cardlist",
+      to: "/$locale/cardlist",
+      params: { locale },
       search: (prev) => ({ ...prev, cardId: commandCard.id }),
       replace: true,
     });

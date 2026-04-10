@@ -1,22 +1,25 @@
 import { renderKeyword } from "@/render/keyword";
 import { renderSeries } from "@/render/series";
-import type { CardKeyword, CardTrait, CardSeries } from "@/routes/cardlist";
+import type { CardKeyword, CardTrait, CardSeries } from "@/routes/$locale/cardlist";
+import i18n from "@/i18n";
 
-export const SORT_OPTIONS: Array<{ value: string; label: string }> = [
-  { value: "NAME_ASC", label: "이름 ↑" },
-  { value: "NAME_DESC", label: "이름 ↓" },
-  { value: "COST_ASC", label: "코스트 ↑" },
-  { value: "COST_DESC", label: "코스트 ↓" },
-  { value: "LEVEL_ASC", label: "레벨 ↑" },
-  { value: "LEVEL_DESC", label: "레벨 ↓" },
-  { value: "AP_ASC", label: "공격력 ↑" },
-  { value: "AP_DESC", label: "공격력 ↓" },
-  { value: "HP_ASC", label: "체력 ↑" },
-  { value: "HP_DESC", label: "체력 ↓" },
+export const SORT_OPTIONS: Array<{ value: string; labelKey: string }> = [
+  { value: "NAME_ASC", labelKey: "sort.NAME_ASC" },
+  { value: "NAME_DESC", labelKey: "sort.NAME_DESC" },
+  { value: "COST_ASC", labelKey: "sort.COST_ASC" },
+  { value: "COST_DESC", labelKey: "sort.COST_DESC" },
+  { value: "LEVEL_ASC", labelKey: "sort.LEVEL_ASC" },
+  { value: "LEVEL_DESC", labelKey: "sort.LEVEL_DESC" },
+  { value: "AP_ASC", labelKey: "sort.AP_ASC" },
+  { value: "AP_DESC", labelKey: "sort.AP_DESC" },
+  { value: "HP_ASC", labelKey: "sort.HP_ASC" },
+  { value: "HP_DESC", labelKey: "sort.HP_DESC" },
 ];
 
 export const ALL_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND"] as const;
 export const ALL_ZONES = ["SPACE", "EARTH"] as const;
+export const getZoneLabel = (zone: string) =>
+  i18n.t(`zone.${zone}`, { ns: "game", defaultValue: zone });
 export const ZONE_LABELS: Record<string, string> = {
   SPACE: "우주",
   EARTH: "지구",
@@ -29,6 +32,8 @@ export const ALL_COLORS = [
   "PURPLE",
   "WHITE",
 ] as const;
+export const getColorLabel = (color: string) =>
+  i18n.t(`color.${color}`, { ns: "game", defaultValue: color });
 export const COLOR_LABELS: Record<string, string> = {
   BLUE: "파랑",
   GREEN: "초록",
@@ -37,6 +42,8 @@ export const COLOR_LABELS: Record<string, string> = {
   PURPLE: "보라",
   WHITE: "하양",
 };
+export const getKindLabel = (kind: string) =>
+  i18n.t(`kind.${kind}`, { ns: "game", defaultValue: kind });
 export const KIND_LABELS: Record<string, string> = {
   UNIT: "유닛",
   PILOT: "파일럿",
@@ -72,9 +79,14 @@ export const ALL_KEYWORDS: CardKeyword[] = [
   "WHEN_PAIRED",
 ];
 
-export const KEYWORD_LABELS = Object.fromEntries(
-  ALL_KEYWORDS.map((k) => [k, renderKeyword(k)]),
-) as Record<CardKeyword, string>;
+/** Compute at call-site (inside component render) for reactive language switching. */
+export const getKeywordLabels = () =>
+  Object.fromEntries(ALL_KEYWORDS.map((k) => [k, renderKeyword(k)])) as Record<
+    CardKeyword,
+    string
+  >;
+// Legacy static export — not reactive to language changes.
+export const KEYWORD_LABELS = getKeywordLabels();
 
 export const ALL_TRAITS: CardTrait[] = [
   "EARTH_FEDERATION",
@@ -200,43 +212,49 @@ export const ALL_SERIES: CardSeries[] = [
   "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
 ];
 
-export const SERIES_LABELS = Object.fromEntries(
-  ALL_SERIES.map((s) => [s, renderSeries(s)]),
-) as Record<CardSeries, string>;
+export const getSeriesLabels = () =>
+  Object.fromEntries(ALL_SERIES.map((s) => [s, renderSeries(s)])) as Record<
+    CardSeries,
+    string
+  >;
+export const SERIES_LABELS = getSeriesLabels();
 
-export const PACK_GROUPS: {
-  label: string;
-  items: { value: string; label: string }[];
-}[] = [
-  {
-    label: "부스트팩",
-    items: [
-      { value: "GD01", label: "GD01" },
-      { value: "GD02", label: "GD02" },
-      { value: "GD03", label: "GD03" },
-    ],
-  },
-  {
-    label: "스타터덱",
-    items: [
-      { value: "ST01", label: "ST01" },
-      { value: "ST02", label: "ST02" },
-      { value: "ST03", label: "ST03" },
-      { value: "ST04", label: "ST04" },
-      { value: "ST05", label: "ST05" },
-      { value: "ST06", label: "ST06" },
-      { value: "ST07", label: "ST07" },
-      { value: "ST08", label: "ST08" },
-      { value: "ST09", label: "ST09" },
-    ],
-  },
-  {
-    label: "기타",
-    items: [
-      { value: "BASIC_CARDS", label: "기본" },
-      { value: "EDITION_BETA", label: "베타" },
-      { value: "PROMOTION_CARD", label: "프로모" },
-      { value: "OTHER_PRODUCT_CARD", label: "기타 상품" },
-    ],
-  },
-];
+export const getPackGroups = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const t = (key: string) => (i18n.t as any)(key, { ns: "filters" }) as string;
+  return [
+    {
+      label: t("packGroup.boosterPack"),
+      items: [
+        { value: "GD01", label: "GD01" },
+        { value: "GD02", label: "GD02" },
+        { value: "GD03", label: "GD03" },
+      ],
+    },
+    {
+      label: t("packGroup.starterDeck"),
+      items: [
+        { value: "ST01", label: "ST01" },
+        { value: "ST02", label: "ST02" },
+        { value: "ST03", label: "ST03" },
+        { value: "ST04", label: "ST04" },
+        { value: "ST05", label: "ST05" },
+        { value: "ST06", label: "ST06" },
+        { value: "ST07", label: "ST07" },
+        { value: "ST08", label: "ST08" },
+        { value: "ST09", label: "ST09" },
+      ],
+    },
+    {
+      label: t("packGroup.other"),
+      items: [
+        { value: "BASIC_CARDS", label: t("packItem.basic") },
+        { value: "EDITION_BETA", label: t("packItem.beta") },
+        { value: "PROMOTION_CARD", label: t("packItem.promo") },
+        { value: "OTHER_PRODUCT_CARD", label: t("packItem.otherProduct") },
+      ],
+    },
+  ];
+};
+// Legacy static export — not reactive to language changes.
+export const PACK_GROUPS = getPackGroups();

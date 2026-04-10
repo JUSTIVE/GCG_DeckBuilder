@@ -1,4 +1,4 @@
-import type { CardListSearch, CardTrait } from "@/routes/cardlist";
+import type { CardListSearch, CardTrait } from "@/routes/$locale/cardlist";
 import { COLOR_HEX } from "src/render/color";
 import { renderTrait } from "@/render/trait";
 import { renderZone } from "@/render/zone";

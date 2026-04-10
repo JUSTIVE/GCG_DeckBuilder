@@ -1,12 +1,19 @@
-import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { Outlet, createRootRoute, redirect } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 
 import "../styles.css";
 
 import Scaffold from "@/components/Scaffold";
+import { DEFAULT_LOCALE } from "@/i18n";
 
 export const Route = createRootRoute({
+  beforeLoad: ({ location }) => {
+    // Redirect bare "/" to the default locale
+    if (location.pathname === "/") {
+      throw redirect({ to: "/$locale", params: { locale: DEFAULT_LOCALE }, replace: true });
+    }
+  },
   component: RootComponent,
 });
 

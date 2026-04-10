@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "cardSearch": "카드 찾기",
+    "allCards": "전체 카드",
+    "deckManagement": "덱 관리",
+    "deckList": "덱 목록",
+    "tools": "도구",
+    "mulliganSimulator": "멀리건 시뮬레이터",
+    "info": "정보",
+    "gameRules": "게임 규칙",
+    "keywordDictionary": "키워드 사전",
+    "translationCoverage": "번역 커버리지"
+  }
+}

@@ -7,7 +7,7 @@ import Marquee from "@/components/Marquee";
 
 import { ZoneChip } from "./ZoneChip";
 import { renderTrait } from "@/render/trait";
-import { useRouter, useSearch } from "@tanstack/react-router";
+import { useRouter, useSearch, useParams } from "@tanstack/react-router";
 import {
   COLOR_BG,
   COLOR_BG20,
@@ -223,6 +223,7 @@ export function UnitCard({ unitCardRef, onOpen }: Props) {
   const unitCard = useFragment(Fragment, unitCardRef);
   const search = useSearch({ strict: false }) as { cardId?: string };
   const router = useRouter();
+  const { locale = "ko" } = useParams({ strict: false });
 
   const open = search.cardId === unitCard.id;
 
@@ -232,7 +233,8 @@ export function UnitCard({ unitCardRef, onOpen }: Props) {
   function openDialog() {
     if (onOpen) { onOpen(unitCard.id); return; }
     router.navigate({
-      to: "/cardlist",
+      to: "/$locale/cardlist",
+      params: { locale },
       search: (prev) => ({ ...prev, cardId: unitCard.id }),
       replace: true,
     });

@@ -8,7 +8,7 @@ import { graphql } from "relay-runtime";
 import {
   Route,
   type CardListSearch,
-} from "@/routes/cardlist";
+} from "@/routes/$locale/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import {
@@ -323,6 +323,7 @@ function CardListContent({
 
 export function CardListPage() {
   const search = Route.useSearch();
+  const { locale } = Route.useParams();
   const router = useRouter();
   const filter = buildFilter(search);
   const sort = buildSort(search);
@@ -334,7 +335,8 @@ export function CardListPage() {
 
   function handleFilterChange(newFilter: CardFilterInput) {
     router.navigate({
-      to: "/cardlist",
+      to: "/$locale/cardlist",
+      params: { locale },
       search: (prev) => ({
         ...filterToSearch(newFilter, sort),
         cardId: prev.cardId,
@@ -345,7 +347,8 @@ export function CardListPage() {
 
   function handleSortChange(newSort: CardSort | null) {
     router.navigate({
-      to: "/cardlist",
+      to: "/$locale/cardlist",
+      params: { locale },
       search: (prev) => ({
         ...filterToSearch(filter, newSort),
         cardId: prev.cardId,
@@ -356,7 +359,8 @@ export function CardListPage() {
 
   function handleRestore(newFilter: CardFilterInput, newSort: CardSort | null) {
     router.navigate({
-      to: "/cardlist",
+      to: "/$locale/cardlist",
+      params: { locale },
       search: (prev) => ({
         ...filterToSearch(newFilter, newSort),
         cardId: prev.cardId,
@@ -367,7 +371,8 @@ export function CardListPage() {
 
   function handleRestoreCardView(cardId: string) {
     router.navigate({
-      to: "/cardlist",
+      to: "/$locale/cardlist",
+      params: { locale },
       search: (prev) => ({ ...prev, cardId }),
       replace: true,
     });

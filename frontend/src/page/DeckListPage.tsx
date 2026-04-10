@@ -1,7 +1,7 @@
 import { graphql, usePreloadedQuery, useMutation } from "react-relay";
 import type { PreloadedQuery } from "react-relay";
 import type { DeckListPageQuery } from "@/__generated__/DeckListPageQuery.graphql";
-import { Route } from "@/routes/decklist";
+import { Route } from "@/routes/$locale/decklist";
 import type { DeckListPageCreateDeckMutation } from "@/__generated__/DeckListPageCreateDeckMutation.graphql";
 import type { DeckListPageDeleteDeckMutation } from "@/__generated__/DeckListPageDeleteDeckMutation.graphql";
 import { useRouter } from "@tanstack/react-router";
@@ -125,6 +125,7 @@ export function DeckListPage() {
   const [commitDelete] =
     useMutation<DeckListPageDeleteDeckMutation>(DELETE_DECK_MUTATION);
   const router = useRouter();
+  const { locale } = Route.useParams();
   const [newName, setNewName] = useState("");
 
   const decks = data.deckList.decks;
@@ -222,8 +223,8 @@ export function DeckListPage() {
                 className="flex-1 text-left min-w-0 flex flex-col gap-1"
                 onClick={() =>
                   router.navigate({
-                    to: "/deck/$deckId",
-                    params: { deckId: deck.id },
+                    to: "/$locale/deck/$deckId",
+                    params: { locale, deckId: deck.id },
                     search: deck.colors.length >= 2 ? { color: deck.colors as any } : {},
                   })
                 }

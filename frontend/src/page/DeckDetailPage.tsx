@@ -6,8 +6,8 @@ import type { DeckDetailPageRemoveCardMutation } from "@/__generated__/DeckDetai
 import type { DeckDetailPageRenameDeckMutation } from "@/__generated__/DeckDetailPageRenameDeckMutation.graphql";
 import type { DeckDetailPageSetDeckCardsMutation } from "@/__generated__/DeckDetailPageSetDeckCardsMutation.graphql";
 import type { CardFilterInput, CardSort } from "@/__generated__/CardListFragmentRefetchQuery.graphql";
-import { Route } from "@/routes/deck/$deckId";
-import type { DeckDetailSearch } from "@/routes/deck/$deckId";
+import { Route } from "@/routes/$locale/deck/$deckId";
+import type { DeckDetailSearch } from "@/routes/$locale/deck/$deckId";
 import { useState, Suspense } from "react";
 import { useRouter } from "@tanstack/react-router";
 import { CardList } from "@/components/CardList";
@@ -152,8 +152,9 @@ export function DeckDetailPage() {
     if (id) deckCardCounts[id] = count;
   }
 
+  const { locale } = Route.useParams();
   function navigate(search: (prev: DeckDetailSearch) => DeckDetailSearch) {
-    router.navigate({ to: "/deck/$deckId", params: { deckId }, search, replace: true });
+    router.navigate({ to: "/$locale/deck/$deckId", params: { locale, deckId }, search, replace: true });
   }
   function toggleView() { navigate((prev) => ({ ...prev, view: isDeckView ? undefined : "deck" })); }
   function setFilter(f: CardFilterInput) { navigate((prev) => ({ ...prev, ...filterToSearch(f) })); }

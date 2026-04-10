@@ -149,7 +149,7 @@ export type CardKeyword = (typeof VALID_KEYWORDS)[number];
 export type CardTrait = (typeof VALID_TRAITS)[number];
 export type CardSeries = (typeof VALID_SERIES)[number];
 
-export const Route = createFileRoute("/cardlist")({
+export const Route = createFileRoute("/$locale/cardlist")({
   validateSearch: (raw: Record<string, unknown>): CardListSearch => ({
     kind:
       Array.isArray(raw.kind) && raw.kind.length > 0

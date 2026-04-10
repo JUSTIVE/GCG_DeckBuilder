@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { useRouter } from "@tanstack/react-router";
-import type { CardKeyword } from "@/routes/cardlist";
+import { useRouter, useParams } from "@tanstack/react-router";
+import type { CardKeyword } from "@/routes/$locale/cardlist";
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
 // 【트리거】 키워드별 클래스. 매칭되지 않으면 fallback 사용.
@@ -133,10 +133,12 @@ type Props = {
 
 export function CardDescription({ lines, className, borderClass }: Props) {
   const router = useRouter();
+  const { locale = "ko" } = useParams({ strict: false });
 
   function navigateKeyword(keyword: CardKeyword) {
     router.navigate({
-      to: "/cardlist",
+      to: "/$locale/cardlist",
+      params: { locale },
       search: { keyword: [keyword] },
       replace: true,
     });

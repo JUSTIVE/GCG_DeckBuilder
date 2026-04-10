@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "cardSearch": "Card Search",
+    "allCards": "All Cards",
+    "deckManagement": "Deck Management",
+    "deckList": "Deck List",
+    "tools": "Tools",
+    "mulliganSimulator": "Mulligan Simulator",
+    "info": "Info",
+    "gameRules": "Game Rules",
+    "keywordDictionary": "Keyword Dictionary",
+    "translationCoverage": "Translation Coverage"
+  }
+}

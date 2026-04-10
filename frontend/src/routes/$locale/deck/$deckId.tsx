@@ -62,7 +62,7 @@ function arr<T extends string>(raw: unknown, valid: readonly T[]): T[] | undefin
   return filtered.length > 0 ? filtered : undefined;
 }
 
-export const Route = createFileRoute("/deck/$deckId")({
+export const Route = createFileRoute("/$locale/deck/$deckId")({
   loaderDeps: ({ search }) => ({
     kind: search.kind,
     cost: search.cost,

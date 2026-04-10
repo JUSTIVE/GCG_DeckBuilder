@@ -3,7 +3,7 @@ import { SearchIcon, XIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { serveGraphQL } from "@/serve";
 import { cn } from "@/lib/utils";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useParams } from "@tanstack/react-router";
 
 // ─── GraphQL ──────────────────────────────────────────────────────────────────
 
@@ -104,6 +104,7 @@ export function QuickSearch() {
   const listRef = useRef<HTMLUListElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigate = useNavigate();
+  const { locale = "ko" } = useParams({ strict: false });
 
   // cmd+k / ctrl+k
   useEffect(() => {
@@ -156,7 +157,8 @@ export function QuickSearch() {
   function selectResult(r: SearchResult) {
     setOpen(false);
     navigate({
-      to: "/cardlist",
+      to: "/$locale/cardlist",
+      params: { locale },
       search: (prev) => ({ ...prev, cardId: r.id }),
     });
   }

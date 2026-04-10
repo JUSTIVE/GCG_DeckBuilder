@@ -1,50 +1,48 @@
 export type NavItem = {
-  title: string;
-  url: string;
+  titleKey: string;
+  /** Path relative to locale prefix, e.g. "/cardlist". Prepend /$locale at render time. */
+  path: string;
   isActive?: boolean;
   items?: NavItem[];
 };
 
 export const navMain: NavItem[] = [
   {
-    title: "카드 찾기",
-    url: "",
-    items: [{ title: "전체 카드", url: "/cardlist" }],
-  },
-
-  {
-    title: "덱 관리",
-    url: "",
-    items: [{ title: "덱 목록", url: "/decklist" }],
+    titleKey: "nav.cardSearch",
+    path: "",
+    items: [{ titleKey: "nav.allCards", path: "/cardlist" }],
   },
   {
-    title: "도구",
-    url: "",
-    items: [{ title: "멀리건 시뮬레이터", url: "/tools/mulligan" }],
+    titleKey: "nav.deckManagement",
+    path: "",
+    items: [{ titleKey: "nav.deckList", path: "/decklist" }],
   },
   {
-    title: "정보",
-    url: "",
+    titleKey: "nav.tools",
+    path: "",
+    items: [{ titleKey: "nav.mulliganSimulator", path: "/tools/mulligan" }],
+  },
+  {
+    titleKey: "nav.info",
+    path: "",
     items: [
-      { title: "게임 규칙", url: "/rules" },
-      { title: "키워드 사전", url: "/keywords" },
-      { title: "번역 커버리지", url: "/info" },
+      { titleKey: "nav.gameRules", path: "/rules" },
+      { titleKey: "nav.keywordDictionary", path: "/keywords" },
+      { titleKey: "nav.translationCoverage", path: "/info" },
     ],
   },
 ];
 
-/** Returns [parentItem, childItem?] matching the given pathname. */
+/** Returns [parentItem, childItem?] matching the given path (without locale prefix). */
 export function resolveBreadcrumb(
   pathname: string,
 ): [NavItem, NavItem?] | null {
+  // Strip locale prefix: "/ko/cardlist" → "/cardlist"
+  const stripped = pathname.replace(/^\/(ko|en|jp)/, "") || "/";
   for (const parent of navMain) {
-    if (parent.url !== "#" && parent.url === pathname) {
-      return [parent];
-    }
+    if (parent.path && parent.path === stripped) return [parent];
     for (const child of parent.items ?? []) {
-      if (child.url !== "#" && child.url === pathname) {
-        return [parent, child];
-      }
+      if (child.path && child.path === stripped) return [parent, child];
     }
   }
   return null;

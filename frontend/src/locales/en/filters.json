@@ -1,0 +1,25 @@
+{
+  "sort": {
+    "NAME_ASC": "Name ↑",
+    "NAME_DESC": "Name ↓",
+    "COST_ASC": "Cost ↑",
+    "COST_DESC": "Cost ↓",
+    "LEVEL_ASC": "Level ↑",
+    "LEVEL_DESC": "Level ↓",
+    "AP_ASC": "AP ↑",
+    "AP_DESC": "AP ↓",
+    "HP_ASC": "HP ↑",
+    "HP_DESC": "HP ↓"
+  },
+  "packGroup": {
+    "boosterPack": "Booster Pack",
+    "starterDeck": "Starter Deck",
+    "other": "Other"
+  },
+  "packItem": {
+    "basic": "Basic",
+    "beta": "Beta",
+    "promo": "Promo",
+    "otherProduct": "Other Products"
+  }
+}

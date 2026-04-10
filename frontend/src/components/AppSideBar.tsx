@@ -15,7 +15,8 @@ import {
   SidebarRail,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Link } from "@tanstack/react-router";
+import { Link, useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { navMain } from "@/lib/nav";
 import { graphql, useLazyLoadQuery } from "react-relay";
 import type { AppSideBarDeckListQuery } from "@/__generated__/AppSideBarDeckListQuery.graphql";
@@ -34,7 +35,7 @@ const DeckListQuery = graphql`
   }
 `;
 
-function DeckSubItems({ onNavigate }: { onNavigate: () => void }) {
+function DeckSubItems({ onNavigate, locale }: { onNavigate: () => void; locale: string }) {
   const data = useLazyLoadQuery<AppSideBarDeckListQuery>(DeckListQuery, {});
   const decks = data.deckList.decks;
 
@@ -45,8 +46,8 @@ function DeckSubItems({ onNavigate }: { onNavigate: () => void }) {
           <SidebarMenuSubButton
             render={
               <Link
-                to="/deck/$deckId"
-                params={{ deckId: deck.id }}
+                to="/$locale/deck/$deckId"
+                params={{ locale: locale as "en" | "jp" | "ko", deckId: deck.id }}
                 search={deck.colors.length >= 2 ? { color: deck.colors as any } : {}}
                 onClick={onNavigate}
               >
@@ -71,6 +72,9 @@ function DeckSubItems({ onNavigate }: { onNavigate: () => void }) {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { setOpenMobile } = useSidebar();
   const closeOnMobile = () => setOpenMobile(false);
+  const { locale = "ko" } = useParams({ strict: false });
+  const { t } = useTranslation("common");
+  const lp = (path: string) => `/${locale}${path}` as const;
 
   return (
     <Sidebar {...props}>
@@ -80,7 +84,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton
               size="lg"
               render={
-                <Link to="/" onClick={closeOnMobile}>
+                <Link to={lp("") as any} onClick={closeOnMobile}>
                   <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                     <GalleryVerticalEnd className="size-4" />
                   </div>
@@ -97,27 +101,27 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarMenu>
             {navMain.map((item) => (
-              <SidebarMenuItem key={item.title}>
+              <SidebarMenuItem key={item.titleKey}>
                 <SidebarMenuButton
                   render={
-                    <Link to={item.url} className="font-medium" onClick={closeOnMobile}>
-                      {item.title}
+                    <Link to={lp(item.path) as any} className="font-medium" onClick={closeOnMobile}>
+                      {t(item.titleKey as any)}
                     </Link>
                   }
                 />
                 {item.items?.length ? (
                   <SidebarMenuSub>
                     {item.items.map((subItem) => (
-                      <SidebarMenuSubItem key={subItem.title}>
+                      <SidebarMenuSubItem key={subItem.titleKey}>
                         <SidebarMenuSubButton
-                          render={<Link to={subItem.url} onClick={closeOnMobile}>{subItem.title}</Link>}
+                          render={<Link to={lp(subItem.path) as any} onClick={closeOnMobile}>{t(subItem.titleKey as any)}</Link>}
                           isActive={subItem.isActive}
                         />
                       </SidebarMenuSubItem>
                     ))}
-                    {item.items.some((subItem) => subItem.url === "/decklist") && (
+                    {item.items.some((subItem) => subItem.path === "/decklist") && (
                       <React.Suspense fallback={null}>
-                        <DeckSubItems onNavigate={closeOnMobile} />
+                        <DeckSubItems onNavigate={closeOnMobile} locale={locale} />
                       </React.Suspense>
                     )}
                   </SidebarMenuSub>

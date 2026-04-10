@@ -11,8 +11,8 @@ import { renderRarity } from "@/render/rarity";
 import { COLOR_BG, COLOR_BORDER, COLOR_SHADOW } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { Dialog } from "@base-ui/react/dialog";
-import { useRouter } from "@tanstack/react-router";
-import type { CardListSearch } from "@/routes/cardlist";
+import { useRouter, useParams } from "@tanstack/react-router";
+import type { CardListSearch } from "@/routes/$locale/cardlist";
 import { KeywordPanel } from "./CardOverlay/KeywordPanel";
 import { UnitCardDetail } from "./CardOverlay/UnitCardDetail";
 import { PilotCardDetail } from "./CardOverlay/PilotCardDetail";
@@ -74,6 +74,7 @@ export function CardByIdOverlay({
 }) {
   const data = useLazyLoadQuery<CardByIdOverlayQuery>(Query, { id: cardId });
   const router = useRouter();
+  const { locale = "ko" } = useParams({ strict: false });
   const node = data.node;
 
   const [commitAddCardView] = useMutation<CardByIdOverlayAddCardViewMutation>(ADD_CARD_VIEW_MUTATION);
@@ -152,7 +153,7 @@ export function CardByIdOverlay({
       const nextIdx = e.key === "ArrowRight" ? idx + 1 : idx - 1;
       if (nextIdx < 0 || nextIdx >= cardIds!.length) return;
       e.preventDefault();
-      router.navigate({ to: "/cardlist", search: (prev) => ({ ...prev, cardId: cardIds![nextIdx] }), replace: true, viewTransition: true });
+      router.navigate({ to: "/$locale/cardlist", params: { locale }, search: (prev) => ({ ...prev, cardId: cardIds![nextIdx] }), replace: true, viewTransition: true });
     }
     document.addEventListener("keydown", handleKey, { capture: true });
     return () => document.removeEventListener("keydown", handleKey, { capture: true });
@@ -162,11 +163,11 @@ export function CardByIdOverlay({
 
   function closeDialog() {
     if (onClose) { onClose(); return; }
-    router.navigate({ to: "/cardlist", search: (prev) => ({ ...prev, cardId: undefined }), replace: true });
+    router.navigate({ to: "/$locale/cardlist", params: { locale }, search: (prev) => ({ ...prev, cardId: undefined }), replace: true });
   }
 
   function navigateWithFilter(filter: Partial<CardListSearch>) {
-    router.navigate({ to: "/cardlist", search: filter, replace: true });
+    router.navigate({ to: "/$locale/cardlist", params: { locale }, search: filter, replace: true });
   }
 
   function renderDetail() {

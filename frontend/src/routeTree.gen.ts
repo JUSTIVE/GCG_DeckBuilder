@@ -9,222 +9,250 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as RulesRouteImport } from './routes/rules'
-import { Route as ResourceCounterRouteImport } from './routes/resource-counter'
-import { Route as KeywordsRouteImport } from './routes/keywords'
-import { Route as InfoRouteImport } from './routes/info'
-import { Route as DecklistRouteImport } from './routes/decklist'
-import { Route as CardlistRouteImport } from './routes/cardlist'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as ToolsMulliganRouteImport } from './routes/tools/mulligan'
-import { Route as DeckDeckIdRouteImport } from './routes/deck/$deckId'
+import { Route as LocaleRouteImport } from './routes/$locale'
+import { Route as LocaleIndexRouteImport } from './routes/$locale/index'
+import { Route as LocaleRulesRouteImport } from './routes/$locale/rules'
+import { Route as LocaleResourceCounterRouteImport } from './routes/$locale/resource-counter'
+import { Route as LocaleKeywordsRouteImport } from './routes/$locale/keywords'
+import { Route as LocaleInfoRouteImport } from './routes/$locale/info'
+import { Route as LocaleDecklistRouteImport } from './routes/$locale/decklist'
+import { Route as LocaleCardlistRouteImport } from './routes/$locale/cardlist'
+import { Route as LocaleToolsMulliganRouteImport } from './routes/$locale/tools/mulligan'
+import { Route as LocaleDeckDeckIdRouteImport } from './routes/$locale/deck/$deckId'
 
-const RulesRoute = RulesRouteImport.update({
-  id: '/rules',
-  path: '/rules',
+const LocaleRoute = LocaleRouteImport.update({
+  id: '/$locale',
+  path: '/$locale',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResourceCounterRoute = ResourceCounterRouteImport.update({
-  id: '/resource-counter',
-  path: '/resource-counter',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KeywordsRoute = KeywordsRouteImport.update({
-  id: '/keywords',
-  path: '/keywords',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InfoRoute = InfoRouteImport.update({
-  id: '/info',
-  path: '/info',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DecklistRoute = DecklistRouteImport.update({
-  id: '/decklist',
-  path: '/decklist',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CardlistRoute = CardlistRouteImport.update({
-  id: '/cardlist',
-  path: '/cardlist',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
+const LocaleIndexRoute = LocaleIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LocaleRoute,
 } as any)
-const ToolsMulliganRoute = ToolsMulliganRouteImport.update({
+const LocaleRulesRoute = LocaleRulesRouteImport.update({
+  id: '/rules',
+  path: '/rules',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleResourceCounterRoute = LocaleResourceCounterRouteImport.update({
+  id: '/resource-counter',
+  path: '/resource-counter',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleKeywordsRoute = LocaleKeywordsRouteImport.update({
+  id: '/keywords',
+  path: '/keywords',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleInfoRoute = LocaleInfoRouteImport.update({
+  id: '/info',
+  path: '/info',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleDecklistRoute = LocaleDecklistRouteImport.update({
+  id: '/decklist',
+  path: '/decklist',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleCardlistRoute = LocaleCardlistRouteImport.update({
+  id: '/cardlist',
+  path: '/cardlist',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleToolsMulliganRoute = LocaleToolsMulliganRouteImport.update({
   id: '/tools/mulligan',
   path: '/tools/mulligan',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LocaleRoute,
 } as any)
-const DeckDeckIdRoute = DeckDeckIdRouteImport.update({
+const LocaleDeckDeckIdRoute = LocaleDeckDeckIdRouteImport.update({
   id: '/deck/$deckId',
   path: '/deck/$deckId',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LocaleRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/cardlist': typeof CardlistRoute
-  '/decklist': typeof DecklistRoute
-  '/info': typeof InfoRoute
-  '/keywords': typeof KeywordsRoute
-  '/resource-counter': typeof ResourceCounterRoute
-  '/rules': typeof RulesRoute
-  '/deck/$deckId': typeof DeckDeckIdRoute
-  '/tools/mulligan': typeof ToolsMulliganRoute
+  '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/cardlist': typeof LocaleCardlistRoute
+  '/$locale/decklist': typeof LocaleDecklistRoute
+  '/$locale/info': typeof LocaleInfoRoute
+  '/$locale/keywords': typeof LocaleKeywordsRoute
+  '/$locale/resource-counter': typeof LocaleResourceCounterRoute
+  '/$locale/rules': typeof LocaleRulesRoute
+  '/$locale/': typeof LocaleIndexRoute
+  '/$locale/deck/$deckId': typeof LocaleDeckDeckIdRoute
+  '/$locale/tools/mulligan': typeof LocaleToolsMulliganRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/cardlist': typeof CardlistRoute
-  '/decklist': typeof DecklistRoute
-  '/info': typeof InfoRoute
-  '/keywords': typeof KeywordsRoute
-  '/resource-counter': typeof ResourceCounterRoute
-  '/rules': typeof RulesRoute
-  '/deck/$deckId': typeof DeckDeckIdRoute
-  '/tools/mulligan': typeof ToolsMulliganRoute
+  '/$locale/cardlist': typeof LocaleCardlistRoute
+  '/$locale/decklist': typeof LocaleDecklistRoute
+  '/$locale/info': typeof LocaleInfoRoute
+  '/$locale/keywords': typeof LocaleKeywordsRoute
+  '/$locale/resource-counter': typeof LocaleResourceCounterRoute
+  '/$locale/rules': typeof LocaleRulesRoute
+  '/$locale': typeof LocaleIndexRoute
+  '/$locale/deck/$deckId': typeof LocaleDeckDeckIdRoute
+  '/$locale/tools/mulligan': typeof LocaleToolsMulliganRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/cardlist': typeof CardlistRoute
-  '/decklist': typeof DecklistRoute
-  '/info': typeof InfoRoute
-  '/keywords': typeof KeywordsRoute
-  '/resource-counter': typeof ResourceCounterRoute
-  '/rules': typeof RulesRoute
-  '/deck/$deckId': typeof DeckDeckIdRoute
-  '/tools/mulligan': typeof ToolsMulliganRoute
+  '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/cardlist': typeof LocaleCardlistRoute
+  '/$locale/decklist': typeof LocaleDecklistRoute
+  '/$locale/info': typeof LocaleInfoRoute
+  '/$locale/keywords': typeof LocaleKeywordsRoute
+  '/$locale/resource-counter': typeof LocaleResourceCounterRoute
+  '/$locale/rules': typeof LocaleRulesRoute
+  '/$locale/': typeof LocaleIndexRoute
+  '/$locale/deck/$deckId': typeof LocaleDeckDeckIdRoute
+  '/$locale/tools/mulligan': typeof LocaleToolsMulliganRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/cardlist'
-    | '/decklist'
-    | '/info'
-    | '/keywords'
-    | '/resource-counter'
-    | '/rules'
-    | '/deck/$deckId'
-    | '/tools/mulligan'
+    | '/$locale'
+    | '/$locale/cardlist'
+    | '/$locale/decklist'
+    | '/$locale/info'
+    | '/$locale/keywords'
+    | '/$locale/resource-counter'
+    | '/$locale/rules'
+    | '/$locale/'
+    | '/$locale/deck/$deckId'
+    | '/$locale/tools/mulligan'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/cardlist'
-    | '/decklist'
-    | '/info'
-    | '/keywords'
-    | '/resource-counter'
-    | '/rules'
-    | '/deck/$deckId'
-    | '/tools/mulligan'
+    | '/$locale/cardlist'
+    | '/$locale/decklist'
+    | '/$locale/info'
+    | '/$locale/keywords'
+    | '/$locale/resource-counter'
+    | '/$locale/rules'
+    | '/$locale'
+    | '/$locale/deck/$deckId'
+    | '/$locale/tools/mulligan'
   id:
     | '__root__'
-    | '/'
-    | '/cardlist'
-    | '/decklist'
-    | '/info'
-    | '/keywords'
-    | '/resource-counter'
-    | '/rules'
-    | '/deck/$deckId'
-    | '/tools/mulligan'
+    | '/$locale'
+    | '/$locale/cardlist'
+    | '/$locale/decklist'
+    | '/$locale/info'
+    | '/$locale/keywords'
+    | '/$locale/resource-counter'
+    | '/$locale/rules'
+    | '/$locale/'
+    | '/$locale/deck/$deckId'
+    | '/$locale/tools/mulligan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  CardlistRoute: typeof CardlistRoute
-  DecklistRoute: typeof DecklistRoute
-  InfoRoute: typeof InfoRoute
-  KeywordsRoute: typeof KeywordsRoute
-  ResourceCounterRoute: typeof ResourceCounterRoute
-  RulesRoute: typeof RulesRoute
-  DeckDeckIdRoute: typeof DeckDeckIdRoute
-  ToolsMulliganRoute: typeof ToolsMulliganRoute
+  LocaleRoute: typeof LocaleRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/rules': {
-      id: '/rules'
-      path: '/rules'
-      fullPath: '/rules'
-      preLoaderRoute: typeof RulesRouteImport
+    '/$locale': {
+      id: '/$locale'
+      path: '/$locale'
+      fullPath: '/$locale'
+      preLoaderRoute: typeof LocaleRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resource-counter': {
-      id: '/resource-counter'
-      path: '/resource-counter'
-      fullPath: '/resource-counter'
-      preLoaderRoute: typeof ResourceCounterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/keywords': {
-      id: '/keywords'
-      path: '/keywords'
-      fullPath: '/keywords'
-      preLoaderRoute: typeof KeywordsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/info': {
-      id: '/info'
-      path: '/info'
-      fullPath: '/info'
-      preLoaderRoute: typeof InfoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/decklist': {
-      id: '/decklist'
-      path: '/decklist'
-      fullPath: '/decklist'
-      preLoaderRoute: typeof DecklistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cardlist': {
-      id: '/cardlist'
-      path: '/cardlist'
-      fullPath: '/cardlist'
-      preLoaderRoute: typeof CardlistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
+    '/$locale/': {
+      id: '/$locale/'
       path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/$locale/'
+      preLoaderRoute: typeof LocaleIndexRouteImport
+      parentRoute: typeof LocaleRoute
     }
-    '/tools/mulligan': {
-      id: '/tools/mulligan'
+    '/$locale/rules': {
+      id: '/$locale/rules'
+      path: '/rules'
+      fullPath: '/$locale/rules'
+      preLoaderRoute: typeof LocaleRulesRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/resource-counter': {
+      id: '/$locale/resource-counter'
+      path: '/resource-counter'
+      fullPath: '/$locale/resource-counter'
+      preLoaderRoute: typeof LocaleResourceCounterRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/keywords': {
+      id: '/$locale/keywords'
+      path: '/keywords'
+      fullPath: '/$locale/keywords'
+      preLoaderRoute: typeof LocaleKeywordsRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/info': {
+      id: '/$locale/info'
+      path: '/info'
+      fullPath: '/$locale/info'
+      preLoaderRoute: typeof LocaleInfoRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/decklist': {
+      id: '/$locale/decklist'
+      path: '/decklist'
+      fullPath: '/$locale/decklist'
+      preLoaderRoute: typeof LocaleDecklistRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/cardlist': {
+      id: '/$locale/cardlist'
+      path: '/cardlist'
+      fullPath: '/$locale/cardlist'
+      preLoaderRoute: typeof LocaleCardlistRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/tools/mulligan': {
+      id: '/$locale/tools/mulligan'
       path: '/tools/mulligan'
-      fullPath: '/tools/mulligan'
-      preLoaderRoute: typeof ToolsMulliganRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/$locale/tools/mulligan'
+      preLoaderRoute: typeof LocaleToolsMulliganRouteImport
+      parentRoute: typeof LocaleRoute
     }
-    '/deck/$deckId': {
-      id: '/deck/$deckId'
+    '/$locale/deck/$deckId': {
+      id: '/$locale/deck/$deckId'
       path: '/deck/$deckId'
-      fullPath: '/deck/$deckId'
-      preLoaderRoute: typeof DeckDeckIdRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/$locale/deck/$deckId'
+      preLoaderRoute: typeof LocaleDeckDeckIdRouteImport
+      parentRoute: typeof LocaleRoute
     }
   }
 }
 
+interface LocaleRouteChildren {
+  LocaleCardlistRoute: typeof LocaleCardlistRoute
+  LocaleDecklistRoute: typeof LocaleDecklistRoute
+  LocaleInfoRoute: typeof LocaleInfoRoute
+  LocaleKeywordsRoute: typeof LocaleKeywordsRoute
+  LocaleResourceCounterRoute: typeof LocaleResourceCounterRoute
+  LocaleRulesRoute: typeof LocaleRulesRoute
+  LocaleIndexRoute: typeof LocaleIndexRoute
+  LocaleDeckDeckIdRoute: typeof LocaleDeckDeckIdRoute
+  LocaleToolsMulliganRoute: typeof LocaleToolsMulliganRoute
+}
+
+const LocaleRouteChildren: LocaleRouteChildren = {
+  LocaleCardlistRoute: LocaleCardlistRoute,
+  LocaleDecklistRoute: LocaleDecklistRoute,
+  LocaleInfoRoute: LocaleInfoRoute,
+  LocaleKeywordsRoute: LocaleKeywordsRoute,
+  LocaleResourceCounterRoute: LocaleResourceCounterRoute,
+  LocaleRulesRoute: LocaleRulesRoute,
+  LocaleIndexRoute: LocaleIndexRoute,
+  LocaleDeckDeckIdRoute: LocaleDeckDeckIdRoute,
+  LocaleToolsMulliganRoute: LocaleToolsMulliganRoute,
+}
+
+const LocaleRouteWithChildren =
+  LocaleRoute._addFileChildren(LocaleRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  CardlistRoute: CardlistRoute,
-  DecklistRoute: DecklistRoute,
-  InfoRoute: InfoRoute,
-  KeywordsRoute: KeywordsRoute,
-  ResourceCounterRoute: ResourceCounterRoute,
-  RulesRoute: RulesRoute,
-  DeckDeckIdRoute: DeckDeckIdRoute,
-  ToolsMulliganRoute: ToolsMulliganRoute,
+  LocaleRoute: LocaleRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

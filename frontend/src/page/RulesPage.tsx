@@ -9,7 +9,7 @@ import type { CardPreview_card$key } from "@/__generated__/CardPreview_card.grap
 import type { RulesPage_SetupMiniCard$key } from "@/__generated__/RulesPage_SetupMiniCard.graphql";
 import { CardPreview } from "@/components/CardPreview";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
-import { Route } from "@/routes/rules";
+import { Route } from "@/routes/$locale/rules";
 import { type ZoneId } from "@/components/PlayfieldLayout";
 import { MiniPlayfield } from "@/components/MiniPlayfield";
 import { ShieldSimulator } from "@/components/ShieldSimulator";
