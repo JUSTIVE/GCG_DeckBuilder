@@ -407,19 +407,74 @@ export function UnitBattleSimulator() {
       addUnitLog("액션 스텝: 양측 교대로 【액션】 발동 가능. 양측 패스로 종료.");
     }, 1700);
 
-    // ④ 대미지 스텝: 투사체 발사
+    // ④ 대미지 스텝
     at(() => {
       setPhase("damage");
       setMyAttacking(true);
-      addUnitLog("대미지 스텝: 배틀 대미지 교환.");
-      fireProjectile();
+      if (hasBlocker) {
+        addUnitLog("대미지 스텝: 배틀 대미지 교환.");
+        fireProjectile(); // 블로커 유닛으로 투사체
+      } else {
+        addUnitLog("대미지 스텝: 실드 에어리어에 어택 히트.");
+        // 투사체를 실드 존으로 발사
+        const cr = containerRef.current;
+        const mr = myBattleRef.current;
+        if (cr && mr) {
+          const crRect = cr.getBoundingClientRect();
+          const mrRect = mr.getBoundingClientRect();
+          const sx = (mrRect.left + mrRect.right) / 2 - crRect.left;
+          const sy = (mrRect.top + mrRect.bottom) / 2 - crRect.top;
+          const shieldEl = cr.querySelector('[data-target="p2-shield"]');
+          if (shieldEl) {
+            const sr = shieldEl.getBoundingClientRect();
+            setProjCoords({ sx, sy, ex: (sr.left + sr.right) / 2 - crRect.left, ey: (sr.top + sr.bottom) / 2 - crRect.top });
+            setProjKey((k) => k + 1);
+          }
+        }
+      }
     }, 2500);
 
-    // 대미지 적용 후 myAttacking 해제
     at(() => setMyAttacking(false), 3050);
 
-    if (hasFirstStrike) {
-      // 선제공격: 내 유닛 먼저 대미지
+    if (!hasBlocker) {
+      // 블로커 없음: 실드 에어리어 직접 피격, 유닛 전투 없음
+      at(() => {
+        if (initHasBase) {
+          const newHp = initBaseHp - 1;
+          if (newHp <= 0) {
+            setEnemyBaseHp(0);
+            setEnemyHasBase(false);
+            addUnitLog("베이스에 히트! HP 0 → 베이스 파괴!");
+          } else {
+            setEnemyBaseHp(newHp);
+            addUnitLog(`베이스에 히트! (HP ${initBaseHp} → ${newHp})`);
+          }
+        } else if (initShields > 0) {
+          const newShields = initShields - 1;
+          setEnemyShields(newShields);
+          if (hasBurst) {
+            const cr = containerRef.current;
+            const shieldEl = cr?.querySelector('[data-target="p2-shield"]');
+            if (shieldEl && cr) {
+              const sr = shieldEl.getBoundingClientRect();
+              const wr = cr.getBoundingClientRect();
+              setBurstFrom({ x: Math.round((sr.left + sr.right) / 2 - (wr.left + wr.right) / 2), y: Math.round((sr.top + sr.bottom) / 2 - (wr.top + wr.bottom) / 2) });
+            }
+            setBurstKey((k) => k + 1);
+            addUnitLog(`실드 1장 파괴 → 【버스트】 발동! (남은: ${newShields}장)`);
+          } else {
+            addUnitLog(`실드 1장 파괴 → 트래시. (남은: ${newShields}장)`);
+          }
+        } else {
+          addUnitLog("실드·베이스 없음 → 직격! 상대 패배.");
+        }
+      }, 3100);
+      at(() => {
+        setPhase("end");
+        addUnitLog("배틀 종료 스텝: 배틀 중 효과 소멸.");
+      }, 4100);
+    } else if (hasFirstStrike) {
+      // 블로커 있음 + 선제공격
       at(() => {
         setEnemyHit(true);
         setEnemyHp(afterEnemyHp);
@@ -438,7 +493,6 @@ export function UnitBattleSimulator() {
           addUnitLog("배틀 종료 스텝: 배틀 중 효과 소멸.");
         }, 4100);
       } else {
-        // 반격
         at(() => {
           setMyHit(true);
           setMyHp(afterMyHp);
@@ -454,15 +508,13 @@ export function UnitBattleSimulator() {
         }, 4500);
       }
     } else {
-      // 동시 대미지 교환
+      // 블로커 있음 + 동시 대미지 교환
       at(() => {
         setMyHit(afterMyHp < myMaxHp);
         setEnemyHit(afterEnemyHp < enemyMaxHp);
         setMyHp(afterMyHp);
         setEnemyHp(afterEnemyHp);
-        addUnitLog(
-          `배틀 대미지 교환: 내 유닛 −${Math.min(enemyAp, myMaxHp)} HP, 상대 유닛 −${Math.min(myAp, enemyMaxHp)} HP.`,
-        );
+        addUnitLog(`배틀 대미지 교환: 내 유닛 −${Math.min(enemyAp, myMaxHp)} HP, 상대 유닛 −${Math.min(myAp, enemyMaxHp)} HP.`);
       }, 3100);
       at(() => {
         setMyHit(false);
