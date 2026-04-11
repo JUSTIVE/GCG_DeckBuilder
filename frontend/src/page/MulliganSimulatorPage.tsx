@@ -4,7 +4,8 @@ import type { MulliganSimulatorPageDeckListQuery } from "@/__generated__/Mulliga
 import type { MulliganSimulatorPageDeckCardsQuery } from "@/__generated__/MulliganSimulatorPageDeckCardsQuery.graphql";
 import type { CardFragment$key } from "@/__generated__/CardFragment.graphql";
 import type { FragmentRefs } from "relay-runtime";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 import { Button } from "@/components/ui/button";
 import { ShuffleIcon, DicesIcon, ChevronsUpDownIcon, CheckIcon } from "lucide-react";
@@ -74,12 +75,21 @@ function DeckDrawer({ deckId }: { deckId: string }) {
   const data = useLazyLoadQuery<MulliganSimulatorPageDeckCardsQuery>(DeckCardsQuery, { deckId });
   const deck = data.node?.__typename === "Deck" ? data.node : null;
 
+  const [animPhase, setAnimPhase] = useState<"idle" | "out" | "in">("idle");
   const [history, setHistory] = useState<{ id: number; cards: CardFragment$key[] }[]>([]);
   const [drawn, setDrawn] = useState<{ id: number; cards: CardFragment$key[] }>(() => ({
     id: 1,
     cards: deck ? drawCards(deck.cards, 5) : [],
   }));
   const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    },
+    [],
+  );
 
   if (!deck) return <p className="text-muted-foreground text-sm">{t("deck.notFound")}</p>;
 
@@ -87,8 +97,33 @@ function DeckDrawer({ deckId }: { deckId: string }) {
   const nextRound = drawn.id + 1;
 
   function redraw() {
-    setHistory((h) => [drawn, ...h].slice(0, 10));
-    setDrawn({ id: nextRound, cards: drawCards(deck!.cards, 5) });
+    const next = { id: nextRound, cards: drawCards(deck!.cards, 5) };
+    setAnimPhase("out");
+    timerRef.current = setTimeout(() => {
+      setHistory((h) => [drawn, ...h].slice(0, 10));
+      setDrawn(next);
+      setAnimPhase("in");
+    }, 400);
+  }
+
+  function cardStyle(i: number): CSSProperties {
+    if (animPhase === "out") {
+      return {
+        transform: "translateY(-50px) scale(0.15)",
+        opacity: 0,
+        transition: "transform 220ms ease-in, opacity 180ms ease-in",
+        transitionDelay: `${i * 30}ms`,
+      };
+    }
+    if (animPhase === "in") {
+      return {
+        transform: "translateY(0) scale(1)",
+        opacity: 1,
+        transition: "transform 380ms cubic-bezier(0.34,1.56,0.64,1), opacity 200ms ease-out",
+        transitionDelay: `${i * 60}ms`,
+      };
+    }
+    return {};
   }
 
   return (
@@ -105,7 +140,9 @@ function DeckDrawer({ deckId }: { deckId: string }) {
         </div>
         <div className="grid grid-cols-5 gap-2">
           {drawn.cards.map((cardRef, i) => (
-            <Card key={i} cardRef={cardRef} showDescription={false} onOpen={setOverlayCardId} />
+            <div key={i} style={cardStyle(i)}>
+              <Card cardRef={cardRef} showDescription={false} onOpen={setOverlayCardId} />
+            </div>
           ))}
         </div>
       </div>
@@ -156,7 +193,7 @@ export function MulliganSimulatorPage() {
   const selectedName = decks.find((d) => d.id === selectedId)?.name;
 
   return (
-    <div className="px-6 py-8 flex flex-col gap-6">
+    <div className="max-w-xl mx-auto w-full px-6 py-8 flex flex-col gap-6">
       <div className="flex items-center gap-2">
         <DicesIcon className="size-5 text-muted-foreground" />
         <h1 className="text-xl font-bold">{t("nav.mulliganSimulator")}</h1>
