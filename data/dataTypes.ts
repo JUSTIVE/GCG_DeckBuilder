@@ -7,6 +7,8 @@ import type {
   CardSchema,
   CardTraitSchema,
   CommandCardSchema,
+  DescriptionLineSchema,
+  DescriptionTokenSchema,
   GundamSeriesSchema,
   LinkPilotSchema,
   LinkTraitSchema,
@@ -24,6 +26,8 @@ export type GundamSeries = z.infer<typeof GundamSeriesSchema>;
 export type CardKeyword = z.infer<typeof CardKeywordSchema>;
 export type Zone = z.infer<typeof ZoneSchema>;
 export type CardPackage = z.infer<typeof CardPackageSchema>;
+export type DescriptionToken = z.infer<typeof DescriptionTokenSchema>;
+export type DescriptionLine = z.infer<typeof DescriptionLineSchema>;
 export type LinkTrait = z.infer<typeof LinkTraitSchema>;
 export type LinkPilot = z.infer<typeof LinkPilotSchema>;
 export type UnitLink = z.infer<typeof UnitLinkSchema>;

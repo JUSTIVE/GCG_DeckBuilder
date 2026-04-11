@@ -61,7 +61,7 @@ describe("Query.cards – kind filter", () => {
       `query($f: CardFilterInput!) {
         cards(filter: $f) {
           totalCount
-          edges { node { __typename ... on PilotCard { id pilot { name AP HP } } } }
+          edges { node { __typename ... on PilotCard { id pilot { name { en ko } AP HP } } } }
         }
       }`,
       { f: { kind: ["PILOT"] } },
@@ -501,7 +501,7 @@ describe("UnitCard.links – [UnitLink!]!", () => {
                 links {
                   __typename
                   ... on LinkTrait { trait }
-                  ... on LinkPilot  { pilot { name } }
+                  ... on LinkPilot  { pilot { name { en ko } } }
                 }
               }
             }
@@ -548,7 +548,7 @@ describe("UnitCard.links – [UnitLink!]!", () => {
             id
             links {
               __typename
-              ... on LinkPilot { pilot { name AP HP } }
+              ... on LinkPilot { pilot { name { en ko } AP HP } }
             }
           }
         }
@@ -615,7 +615,7 @@ describe("LinkPilot.pilot – pilotName → Pilot lookup", () => {
           ... on UnitCard {
             links {
               ... on LinkPilot {
-                pilot { name AP HP }
+                pilot { name { en ko } AP HP }
               }
             }
           }
@@ -647,7 +647,7 @@ describe("LinkPilot.pilot – pilotName → Pilot lookup", () => {
               ... on UnitCard {
                 links {
                   __typename
-                  ... on LinkPilot { pilot { name AP HP } }
+                  ... on LinkPilot { pilot { name { en ko } AP HP } }
                 }
               }
             }
@@ -702,7 +702,7 @@ describe("PilotCard.pilot – flat raw fields → Pilot object", () => {
             node {
               ... on PilotCard {
                 id
-                pilot { name AP HP }
+                pilot { name { en ko } AP HP }
                 rarity
               }
             }
@@ -746,7 +746,7 @@ describe("CommandCard.pilot – nullable Pilot", () => {
             node {
               ... on CommandCard {
                 id name
-                pilot { name AP HP }
+                pilot { name { en ko } AP HP }
               }
             }
           }
@@ -878,7 +878,7 @@ describe("Query.node", () => {
     const data = await gql(
       `{ node(id: "ST01-010") {
           id
-          ... on PilotCard { pilot { name AP HP } rarity }
+          ... on PilotCard { pilot { name { en ko } AP HP } rarity }
         }
       }`,
     );

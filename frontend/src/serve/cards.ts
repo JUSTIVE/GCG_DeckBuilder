@@ -12,14 +12,17 @@ export const cardById = new Map<string, RawCard>(
     .map((c) => [c.id, c]),
 );
 
-/** O(1) pilot lookup for LinkPilot.pilot resolution, keyed by pilot name. */
+/** O(1) pilot lookup for LinkPilot.pilot resolution, keyed by Korean pilot name. */
 export const pilotByName = new Map<string, AnyRecord>(
   allCards
-    .filter(
-      (c): c is RawCard & { name: string } =>
-        c.__typename === "PilotCard" && "name" in c && typeof c.name === "string",
-    )
-    .map((c) => [(c as AnyRecord)["name"] as string, c as AnyRecord]),
+    .filter((c) => c.__typename === "PilotCard" && "name" in c)
+    .map((c) => {
+      const name = (c as AnyRecord)["name"];
+      const key = typeof name === "object" && name !== null
+        ? (name as { ko: string }).ko
+        : (name as string);
+      return [key, c as AnyRecord];
+    }),
 );
 
 // ─── FZF-style search ─────────────────────────────────────────────────────────
@@ -67,8 +70,13 @@ export function cardSearchTokens(card: AnyRecord): {
   if (typeof card["id"] === "string") id.push(card["id"]);
   if (typeof card["name"] === "string") name.push(card["name"]);
   if (Array.isArray(card["description"])) {
-    for (const line of card["description"] as unknown[])
-      if (typeof line === "string") description.push(line);
+    for (const line of card["description"] as Array<{ tokens?: Array<{ type: string; ko?: string }> }>) {
+      const ko = (line.tokens ?? [])
+        .filter((t) => t.type === "prose" && t.ko)
+        .map((t) => t.ko!)
+        .join(" ");
+      if (ko) description.push(ko);
+    }
   }
   if (Array.isArray(card["trait"])) {
     for (const t of card["trait"] as unknown[])

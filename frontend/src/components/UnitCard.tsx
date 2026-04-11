@@ -26,6 +26,7 @@ export function UnitCardBody({
   cardBg: string;
   isWhite: boolean;
 }) {
+  const { locale = "ko" } = useParams({ strict: false });
   const unitCard = useFragment(
     graphql`
       fragment UnitCard_UnitCardBody on UnitCard {
@@ -44,7 +45,7 @@ export function UnitCardBody({
           __typename
           ... on LinkPilot {
             pilot {
-              name
+              name { en ko }
             }
           }
           ... on LinkTrait {
@@ -161,7 +162,7 @@ export function UnitCardBody({
                     <Marquee speed={6}>
                       {unitCard.links.map((x) =>
                         x.__typename === "LinkPilot" && x.pilot ? (
-                          <span key={x.pilot.name}>[{x.pilot.name}]</span>
+                          <span key={x.pilot.name.ko}>[{locale === "en" ? x.pilot.name.en : x.pilot.name.ko}]</span>
                         ) : x.__typename === "LinkTrait" && x.trait ? (
                           <span key={x.trait}>({renderTrait(x.trait)})</span>
                         ) : null,
@@ -194,7 +195,13 @@ const Fragment = graphql`
     cost
     name
     color
-    description
+    description {
+      tokens {
+        ... on TriggerToken { type keyword qualifier { en ko } }
+        ... on AbilityToken { type keyword n }
+        ... on ProseToken { type en ko }
+      }
+    }
     rarity
     AP
     HP
@@ -204,7 +211,7 @@ const Fragment = graphql`
       __typename
       ... on LinkPilot {
         pilot {
-          name
+          name { en ko }
         }
       }
       ... on LinkTrait {

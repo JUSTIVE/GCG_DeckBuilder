@@ -15,11 +15,14 @@ export function UnitCardDetail({
   node: any;
   navigateWithFilter: (filter: Partial<CardListSearch>) => void;
 }) {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const linkItems = (node.links ?? [])
     .map((x: any) => {
       if (x.__typename === "LinkPilot" && x.pilot) {
-        return { label: `[${x.pilot.name}]`, onClick: () => navigateWithFilter({ query: x.pilot!.name }) };
+        const pilotName = typeof x.pilot.name === "object"
+          ? (i18n.language === "en" ? x.pilot.name.en : x.pilot.name.ko)
+          : x.pilot.name;
+        return { label: `[${pilotName}]`, onClick: () => navigateWithFilter({ query: x.pilot!.name.ko ?? x.pilot!.name }) };
       }
       if (x.__typename === "LinkTrait" && x.trait) {
         return { label: `(${renderTrait(x.trait)})`, onClick: () => navigateWithFilter({ trait: [x.trait as CardTrait] }) };
@@ -105,7 +108,7 @@ export function UnitCardDetail({
       {(node.description?.length ?? 0) > 0 && (
         <div className="flex flex-col gap-1.5">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.effect")}</span>
-          <CardDescription lines={node.description ?? []} />
+          <CardDescription lines={(node.description ?? []).map((l: any) => l.tokens) as any} />
         </div>
       )}
       {(node.keywords?.length ?? 0) > 0 && (

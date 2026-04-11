@@ -17,7 +17,13 @@ const Fragment = graphql`
     ... on UnitCard {
       id
       color
-      description
+      description {
+        tokens {
+          ... on TriggerToken { type keyword qualifier { en ko } }
+          ... on AbilityToken { type keyword n }
+          ... on ProseToken { type en ko }
+        }
+      }
       limit
       blocked
       ...UnitCardFragment
@@ -25,7 +31,13 @@ const Fragment = graphql`
     ... on PilotCard {
       id
       color
-      description
+      description {
+        tokens {
+          ... on TriggerToken { type keyword qualifier { en ko } }
+          ... on AbilityToken { type keyword n }
+          ... on ProseToken { type en ko }
+        }
+      }
       limit
       blocked
       ...PilotCardFragment
@@ -33,7 +45,13 @@ const Fragment = graphql`
     ... on BaseCard {
       id
       color
-      description
+      description {
+        tokens {
+          ... on TriggerToken { type keyword qualifier { en ko } }
+          ... on AbilityToken { type keyword n }
+          ... on ProseToken { type en ko }
+        }
+      }
       limit
       blocked
       ...BaseCardFragment
@@ -41,7 +59,13 @@ const Fragment = graphql`
     ... on CommandCard {
       id
       color
-      description
+      description {
+        tokens {
+          ... on TriggerToken { type keyword qualifier { en ko } }
+          ... on AbilityToken { type keyword n }
+          ... on ProseToken { type en ko }
+        }
+      }
       limit
       blocked
       ...CommandCardFragment
@@ -65,12 +89,12 @@ type Props = {
 export function Card({ cardRef, showDescription, onAdd, onOpen, deckCardCount = 0, deckColors }: Props) {
   const card = useFragment(Fragment, cardRef);
 
-  const description: readonly string[] =
+  const description =
     card.__typename === "UnitCard" ||
     card.__typename === "PilotCard" ||
     card.__typename === "BaseCard" ||
     card.__typename === "CommandCard"
-      ? card.description
+      ? card.description.map((l) => l.tokens as any)
       : [];
 
   const borderClass =

@@ -1,7 +1,7 @@
 import { MinusIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { COLOR_HEX } from "src/render/color";
-import { CardDescription } from "@/components/CardDescription";
+import { CardDescription, type DescriptionLine } from "@/components/CardDescription";
 import { extractCardInfo } from "@/lib/cardInfo";
 
 export function DeckViewGrid({
@@ -20,7 +20,7 @@ export function DeckViewGrid({
     .map(({ card, count }) => {
       const info = extractCardInfo(card);
       if (!info) return null;
-      return { ...info, count, description: (card?.description ?? []) as string[] };
+      return { ...info, count, description: ((card?.description ?? []) as any[]).map((l: any) => l.tokens ?? []) as DescriptionLine[] };
     })
     .filter((x): x is NonNullable<typeof x> => x !== null);
 

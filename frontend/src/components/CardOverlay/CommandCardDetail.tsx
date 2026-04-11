@@ -77,7 +77,7 @@ export function CommandCardDetail({
       {(node.description?.length ?? 0) > 0 && (
         <div className="flex flex-col gap-1.5">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{t("card.effect")}</span>
-          <CardDescription lines={node.description ?? []} />
+          <CardDescription lines={(node.description ?? []).map((l: any) => l.tokens) as any} />
         </div>
       )}
       {(node.keywords?.length ?? 0) > 0 && (

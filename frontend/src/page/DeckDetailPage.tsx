@@ -34,10 +34,10 @@ export const Query = graphql`
           count
           card {
             __typename
-            ... on UnitCard { id name cost level color imageUrl description }
-            ... on PilotCard { id pilot { name } cost level color imageUrl description }
-            ... on BaseCard { id name cost level color imageUrl description }
-            ... on CommandCard { id name cost level color imageUrl description }
+            ... on UnitCard { id name cost level color imageUrl description { tokens { ... on TriggerToken { type keyword qualifier { en ko } } ... on AbilityToken { type keyword n } ... on ProseToken { type en ko } } } }
+            ... on PilotCard { id pilot { name { en ko } } cost level color imageUrl description { tokens { ... on TriggerToken { type keyword qualifier { en ko } } ... on AbilityToken { type keyword n } ... on ProseToken { type en ko } } } }
+            ... on BaseCard { id name cost level color imageUrl description { tokens { ... on TriggerToken { type keyword qualifier { en ko } } ... on AbilityToken { type keyword n } ... on ProseToken { type en ko } } } }
+            ... on CommandCard { id name cost level color imageUrl description { tokens { ... on TriggerToken { type keyword qualifier { en ko } } ... on AbilityToken { type keyword n } ... on ProseToken { type en ko } } } }
           }
         }
       }
@@ -50,7 +50,7 @@ const ADD_CARD_MUTATION = graphql`
   mutation DeckDetailPageAddCardMutation($deckId: ID!, $cardId: ID!) {
     addCardToDeck(deckId: $deckId, cardId: $cardId) {
       ... on AddCardToDeckSuccess {
-        deck { id colors cards { count card { __typename ... on UnitCard { id name cost color } ... on PilotCard { id pilot { name } cost color } ... on BaseCard { id name cost color } ... on CommandCard { id name cost color } } } }
+        deck { id colors cards { count card { __typename ... on UnitCard { id name cost color } ... on PilotCard { id pilot { name { en ko } } cost color } ... on BaseCard { id name cost color } ... on CommandCard { id name cost color } } } }
       }
       ... on DeckFullError { current max }
       ... on DeckColorLimitExceededError { currentColors max }
@@ -62,7 +62,7 @@ const ADD_CARD_MUTATION = graphql`
 const REMOVE_CARD_MUTATION = graphql`
   mutation DeckDetailPageRemoveCardMutation($deckId: ID!, $cardId: ID!) {
     removeCardFromDeck(deckId: $deckId, cardId: $cardId) {
-      id colors cards { count card { __typename ... on UnitCard { id name cost color } ... on PilotCard { id pilot { name } cost color } ... on BaseCard { id name cost color } ... on CommandCard { id name cost color } } }
+      id colors cards { count card { __typename ... on UnitCard { id name cost color } ... on PilotCard { id pilot { name { en ko } } cost color } ... on BaseCard { id name cost color } ... on CommandCard { id name cost color } } }
     }
   }
 `;
@@ -76,7 +76,7 @@ const RENAME_MUTATION = graphql`
 const SET_DECK_CARDS_MUTATION = graphql`
   mutation DeckDetailPageSetDeckCardsMutation($deckId: ID!, $cards: [DeckCardInput!]!) {
     setDeckCards(deckId: $deckId, cards: $cards) {
-      id colors cards { count card { __typename ... on UnitCard { id name cost level color } ... on PilotCard { id pilot { name } cost level color } ... on BaseCard { id name cost level color } ... on CommandCard { id name cost level color } } }
+      id colors cards { count card { __typename ... on UnitCard { id name cost level color } ... on PilotCard { id pilot { name { en ko } } cost level color } ... on BaseCard { id name cost level color } ... on CommandCard { id name cost level color } } }
     }
   }
 `;

@@ -137,6 +137,34 @@ export const GundamSeriesSchema = z.enum([
 
 export const CardKindSchema = z.enum(["RESOURCE", "BASE", "UNIT", "PILOT", "COMMAND"]);
 
+/* DESCRIPTION TOKENS */
+
+export const TriggerTokenSchema = z.object({
+  type: z.literal("trigger"),
+  keyword: CardKeywordSchema,
+  qualifier: z.object({ en: z.string(), ko: z.string() }).optional(),
+});
+
+export const AbilityTokenSchema = z.object({
+  type: z.literal("ability"),
+  keyword: CardKeywordSchema,
+  n: z.number().int().optional(),
+});
+
+export const ProseTokenSchema = z.object({
+  type: z.literal("prose"),
+  en: z.string(),
+  ko: z.string(),
+});
+
+export const DescriptionTokenSchema = z.discriminatedUnion("type", [
+  TriggerTokenSchema,
+  AbilityTokenSchema,
+  ProseTokenSchema,
+]);
+
+export const DescriptionLineSchema = z.array(DescriptionTokenSchema);
+
 /* BASE INTERFACES */
 
 export const NodeSchema = z.object({
@@ -153,7 +181,7 @@ export const PlayableCardSchema = z.object({
   keywords: z.array(CardKeywordSchema),
   trait: z.array(CardTraitSchema),
   relatedTrait: z.array(CardTraitSchema).default([]),
-  description: z.array(z.string()),
+  description: z.array(DescriptionLineSchema),
   rarity: CardRaritySchema.optional(),
 });
 

@@ -22,6 +22,7 @@ export function CommandCardBody({
 }: {
   commandCardRef: CommandCard_CommandCardBody$key;
 }) {
+  const { locale = "ko" } = useParams({ strict: false });
   const commandCard = useFragment(
     graphql`
       fragment CommandCard_CommandCardBody on CommandCard {
@@ -34,7 +35,7 @@ export function CommandCardBody({
         imageUrl
         traits
         commandPilot: pilot {
-          name
+          name { en ko }
           AP
           HP
         }
@@ -122,7 +123,7 @@ export function CommandCardBody({
                     )}
                   >
                     <Marquee speed={6} gap={16}>
-                      <span>{commandCard.commandPilot.name}</span>
+                      <span>{locale === "en" ? commandCard.commandPilot.name.en : commandCard.commandPilot.name.ko}</span>
                     </Marquee>
                   </div>
                 </div>
@@ -192,11 +193,17 @@ const Fragment = graphql`
     rarity
     traits
     commandPilot: pilot {
-      name
+      name { en ko }
       AP
       HP
     }
-    description
+    description {
+      tokens {
+        ... on TriggerToken { type keyword qualifier { en ko } }
+        ... on AbilityToken { type keyword n }
+        ... on ProseToken { type en ko }
+      }
+    }
   }
 `;
 

@@ -1,8 +1,34 @@
 ---
-description: 이 프로젝트의 코드 작성 규칙 (타입 체크 명령, Relay 패턴, Tailwind 규칙, 한국어 게임 용어 대조)
+description: 이 프로젝트의 코드 작성 규칙 (타입 체크 명령, Relay 패턴, Tailwind 규칙, 한국어 게임 용어 대조, 표현 불가능한 타입 금지)
 ---
 
 # 코드 작성 규칙 및 제약사항
+
+## 표현 가능한 타입만 사용
+
+TypeScript 타입이든 GraphQL/Zod 스키마든, **런타임에서 실제로 표현 불가능한 상태가 생기지 않도록** 타입을 설계한다.
+
+### 금지 패턴
+
+- `any`, `unknown` 을 이유 없이 사용 — 타입 정보를 버리는 캐스팅 금지
+- `as SomeType` 강제 캐스팅 — 타입 체커를 속이는 것은 런타임 버그의 원인
+- 서로 배타적인 필드를 같은 객체에 optional로 나열 (`foo?: A; bar?: B` 형태로 둘 중 하나만 의미 있는 경우) — **discriminated union**으로 교체
+- `| null | undefined` 를 아무 곳에나 — nullable은 꼭 필요한 경우에만, 도달 불가능한 분기를 만들지 말 것
+
+### 권장 패턴
+
+```ts
+// Bad: 어느 쪽인지 타입으로 알 수 없음
+type Result = { data?: Data; error?: string };
+
+// Good: 상태가 타입 수준에서 명확
+type Result = { ok: true; data: Data } | { ok: false; error: string };
+```
+
+- 상태 머신(FSM)의 각 상태를 **discriminated union** 으로 표현
+- 배열 인덱스 접근 대신 구조 분해 또는 `at()` + 명시적 null 체크
+- `Record<string, V>` 보다 `Map<K, V>` 또는 구체적인 키 리터럴 유니언 선호
+- 스키마(Zod 등) 정의와 TypeScript 타입을 **하나의 소스**에서 파생 (`z.infer<typeof schema>`)
 
 ## 타입 체크
 

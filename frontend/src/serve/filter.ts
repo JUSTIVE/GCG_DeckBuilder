@@ -106,7 +106,10 @@ export function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[
       const nameHit = typeof c["name"] === "string" && c["name"].toLowerCase().includes(q);
       const descHit =
         Array.isArray(c["description"]) &&
-        (c["description"] as string[]).some((line) => line.toLowerCase().includes(q));
+        (c["description"] as Array<{ tokens: Array<{ type: string; ko?: string }> }>)
+          .some((line) =>
+            line.tokens?.some((t) => t.type === "prose" && t.ko?.toLowerCase().includes(q))
+          );
       if (!nameHit && !descHit) return false;
     }
 

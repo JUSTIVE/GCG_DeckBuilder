@@ -38,7 +38,13 @@ export function BaseCardBody({
         HP
         zone
         traits
-        description
+        description {
+          tokens {
+            ... on TriggerToken { type keyword qualifier { en ko } }
+            ... on AbilityToken { type keyword n }
+            ... on ProseToken { type en ko }
+          }
+        }
       }
     `,
     baseCardRef,
@@ -187,7 +193,13 @@ const Fragment = graphql`
     HP
     zone
     traits
-    description
+    description {
+      tokens {
+        ... on TriggerToken { type keyword qualifier { en ko } }
+        ... on AbilityToken { type keyword n }
+        ... on ProseToken { type en ko }
+      }
+    }
   }
 `;
 

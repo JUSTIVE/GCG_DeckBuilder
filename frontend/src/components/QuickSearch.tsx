@@ -14,9 +14,9 @@ const QUICKSEARCH_QUERY = `
     quicksearch(query: $q, first: $first) {
       __typename
       ... on UnitCard    { id name level cost color AP HP }
-      ... on PilotCard   { id pilot { name AP HP } level cost color }
+      ... on PilotCard   { id pilot { name { en ko } AP HP } level cost color }
       ... on BaseCard    { id name level cost AP HP }
-      ... on CommandCard { id name cost color commandPilot: pilot { name AP HP } }
+      ... on CommandCard { id name cost color commandPilot: pilot { name { en ko } AP HP } }
       ... on Resource    { id name }
     }
   }

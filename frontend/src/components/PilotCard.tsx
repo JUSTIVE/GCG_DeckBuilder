@@ -21,6 +21,7 @@ export function PilotCardBody({
 }: {
   pilotCardRef: PilotCard_PilotCardBody$key;
 }) {
+  const { locale = "ko" } = useParams({ strict: false });
   const pilotCard = useFragment(
     graphql`
       fragment PilotCard_PilotCardBody on PilotCard {
@@ -32,7 +33,7 @@ export function PilotCardBody({
         imageUrl
         traits
         pilot {
-          name
+          name { en ko }
           AP
           HP
         }
@@ -46,7 +47,7 @@ export function PilotCardBody({
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
         src={pilotCard.imageUrl}
-        alt={pilotCard.pilot.name}
+        alt={locale === "en" ? pilotCard.pilot.name.en : pilotCard.pilot.name.ko}
       />
       <div className="flex flex-col gap-[5cqw]">
         <div className="flex flex-row items-start justify-between z-1">
@@ -104,7 +105,7 @@ export function PilotCardBody({
           <div className="flex flex-col justify-end flex-1 overflow-hidden">
             <div className="">
               <div className="p-2 py-1 bg-black whitespace-pre-wrap cutout-tr-sm cutout text-[6cqw] font-bold text-center">
-                {pilotCard.pilot.name}
+                {locale === "en" ? pilotCard.pilot.name.en : pilotCard.pilot.name.ko}
               </div>
             </div>
             <div className="flex flex-row translate-y-px">
@@ -168,9 +169,15 @@ const Fragment = graphql`
     color
     rarity
     traits
-    description
+    description {
+      tokens {
+        ... on TriggerToken { type keyword qualifier { en ko } }
+        ... on AbilityToken { type keyword n }
+        ... on ProseToken { type en ko }
+      }
+    }
     pilot {
-      name
+      name { en ko }
       AP
       HP
     }

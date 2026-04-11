@@ -15,7 +15,9 @@ import { COLOR_BG } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
 import { renderTrait } from "@/render/trait";
-import { triggerClass, abilityClass } from "@/components/CardDescription";
+import { triggerClassByKeyword, abilityClassByKeyword } from "@/components/CardDescription";
+import { renderKeyword } from "@/render/keyword";
+import type { CardKeyword } from "@/routes/$locale/cardlist";
 
 export const Query = graphql`
   query DeckListPageQuery {
@@ -287,16 +289,16 @@ export function DeckListPage() {
                   return (
                     <div className="flex flex-wrap gap-1 mt-1.5">
                       {kws.map((kw) => {
-                        const name = KEYWORD_DESCRIPTIONS[kw]?.name ?? kw;
-                        const isTrigger = name.startsWith("【");
-                        const label = name.slice(1, -1);
-                        if (isTrigger) {
+                        const firstToken = KEYWORD_DESCRIPTIONS[kw]?.name[0];
+                        const keyword = kw as CardKeyword;
+                        const label = renderKeyword(keyword);
+                        if (firstToken?.type === "trigger") {
                           return (
                             <span
                               key={kw}
                               className={cn(
                                 "inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold leading-none",
-                                triggerClass(label),
+                                triggerClassByKeyword(keyword),
                               )}
                             >
                               {label}
@@ -308,7 +310,7 @@ export function DeckListPage() {
                             key={kw}
                             className={cn(
                               "inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] leading-none",
-                              abilityClass(label),
+                              abilityClassByKeyword(keyword),
                             )}
                           >
                             {label}

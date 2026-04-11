@@ -6,11 +6,14 @@ import type { KeywordsPageCardsQuery } from "@/__generated__/KeywordsPageCardsQu
 import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
 import { ALL_KEYWORDS } from "@/lib/filterConstants";
 import {
-  triggerClass,
-  abilityClass,
+  triggerClassByKeyword,
+  abilityClassByKeyword,
   TRIGGER_FALLBACK,
   ABILITY_FALLBACK,
+  CardDescription,
 } from "@/components/CardDescription";
+import { renderKeyword } from "@/render/keyword";
+import type { CardKeyword } from "@/routes/$locale/cardlist";
 import { COLOR_HEX } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "lucide-react";
@@ -37,7 +40,7 @@ const CardsQuery = graphql`
           ... on PilotCard {
             id
             pilot {
-              name
+              name { en ko }
             }
             color
           }
@@ -62,11 +65,12 @@ const CardsQuery = graphql`
 const TRIGGER_LIGHT_FALLBACK = "bg-gray-100 text-gray-700";
 const ABILITY_LIGHT_FALLBACK = "border-gray-300 bg-gray-50 text-gray-700";
 
-function KeywordBadge({ name }: { name: string }) {
-  const isTrigger = name.startsWith("【");
-  if (isTrigger) {
-    const inner = name.replace(/^【/, "").replace(/】$/, "");
-    const cls = triggerClass(inner);
+function KeywordBadge({ keyword }: { keyword: string }) {
+  const kw = keyword as CardKeyword;
+  const firstToken = KEYWORD_DESCRIPTIONS[keyword]?.name[0];
+  const label = renderKeyword(kw);
+  if (firstToken?.type === "trigger") {
+    const cls = triggerClassByKeyword(kw);
     return (
       <span
         className={cn(
@@ -74,12 +78,11 @@ function KeywordBadge({ name }: { name: string }) {
           cls === TRIGGER_FALLBACK ? TRIGGER_LIGHT_FALLBACK : cls,
         )}
       >
-        {inner}
+        {label}
       </span>
     );
   }
-  const inner = name.replace(/^</, "").replace(/>$/, "");
-  const cls = abilityClass(inner);
+  const cls = abilityClassByKeyword(kw);
   return (
     <span
       className={cn(
@@ -87,7 +90,7 @@ function KeywordBadge({ name }: { name: string }) {
         cls === ABILITY_FALLBACK ? ABILITY_LIGHT_FALLBACK : cls,
       )}
     >
-      {inner}
+      {label}
     </span>
   );
 }
@@ -174,10 +177,10 @@ function KeywordEntry({
         className="w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-muted/30 rounded-lg"
       >
         <div className="flex-1 min-w-0 flex flex-col gap-1.5">
-          <KeywordBadge name={entry.name} />
-          <p className="text-xs text-muted-foreground leading-relaxed">
-            {entry.description}
-          </p>
+          <KeywordBadge keyword={keyword} />
+          <div className="text-xs text-muted-foreground leading-relaxed">
+            <CardDescription lines={[entry.description]} />
+          </div>
         </div>
         <ChevronRightIcon
           className={cn(
@@ -205,10 +208,10 @@ function KeywordEntry({
 // ── page ──────────────────────────────────────────────────────────────────────
 
 const triggerKeywords = ALL_KEYWORDS.filter((k) =>
-  KEYWORD_DESCRIPTIONS[k]?.name.startsWith("【"),
+  KEYWORD_DESCRIPTIONS[k]?.name[0]?.type === "trigger",
 );
 const abilityKeywords = ALL_KEYWORDS.filter((k) =>
-  KEYWORD_DESCRIPTIONS[k]?.name.startsWith("<"),
+  KEYWORD_DESCRIPTIONS[k]?.name[0]?.type === "ability",
 );
 
 export function KeywordsPage() {

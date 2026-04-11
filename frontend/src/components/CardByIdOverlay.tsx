@@ -34,26 +34,54 @@ const Query = graphql`
       __typename
       ... on UnitCard {
         ...UnitCard_UnitCardBody
-        id name level cost color AP HP description zone traits relatedTraits keywords series package
+        id name level cost color AP HP zone traits relatedTraits keywords series package
+        description {
+          tokens {
+            ... on TriggerToken { type keyword qualifier { en ko } }
+            ... on AbilityToken { type keyword n }
+            ... on ProseToken { type en ko }
+          }
+        }
         links {
           __typename
-          ... on LinkPilot { pilot { name } }
+          ... on LinkPilot { pilot { name { en ko } } }
           ... on LinkTrait { trait }
         }
       }
       ... on PilotCard {
         ...PilotCard_PilotCardBody
-        id level cost color traits relatedTraits keywords description series package
-        pilot { name AP HP }
+        id level cost color traits relatedTraits keywords series package
+        description {
+          tokens {
+            ... on TriggerToken { type keyword qualifier { en ko } }
+            ... on AbilityToken { type keyword n }
+            ... on ProseToken { type en ko }
+          }
+        }
+        pilot { name { en ko } AP HP }
       }
       ... on BaseCard {
         ...BaseCard_BaseCardBody
-        id name level cost color AP HP description zone traits relatedTraits keywords series package
+        id name level cost color AP HP zone traits relatedTraits keywords series package
+        description {
+          tokens {
+            ... on TriggerToken { type keyword qualifier { en ko } }
+            ... on AbilityToken { type keyword n }
+            ... on ProseToken { type en ko }
+          }
+        }
       }
       ... on CommandCard {
         ...CommandCard_CommandCardBody
-        id name level cost color traits relatedTraits keywords description series package
-        commandPilot: pilot { name AP HP }
+        id name level cost color traits relatedTraits keywords series package
+        description {
+          tokens {
+            ... on TriggerToken { type keyword qualifier { en ko } }
+            ... on AbilityToken { type keyword n }
+            ... on ProseToken { type en ko }
+          }
+        }
+        commandPilot: pilot { name { en ko } AP HP }
       }
       ... on Resource {
         ...ResourceCard_ResourceCardBody_Fragment
