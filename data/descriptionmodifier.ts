@@ -429,6 +429,8 @@ const replaceList = {
   "choose 1 of your (AGE 시스템) Units.": "(AGE 시스템)의 자신의 유닛 1개를 선택한다.",
   "Choose 1 (사이클롭스 부대) Pilot card from your trash.":
     "자신의 트래시에서 (사이클롭스 부대)의 파일럿 카드 1장을 선택한다.",
+  "it may choose an active enemy Unit as its attack target.":
+    "그 유닛은 액티브의 상대의 유닛을 어택 대상으로 선택할 수 있다.",
 };
 
 function applyReplacements(v: string): string {
