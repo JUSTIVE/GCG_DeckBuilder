@@ -1069,10 +1069,10 @@ function CardTypeItem({
             onClick={handleRefresh}
             title={viewOtherCardLabel}
             className={cn(
-              "absolute bottom-4 right-0 z-20 translate-x-[45%]",
-              "w-5 h-5 rounded-full flex items-center justify-center",
+              "absolute bottom-3 right-0 z-20 translate-x-[45%]",
+              "w-8 h-8 rounded-full flex items-center justify-center",
               "bg-white/80 border border-border/60 text-muted-foreground",
-              "hover:bg-white hover:text-foreground transition-all text-[10px]",
+              "hover:bg-white hover:text-foreground transition-all text-sm",
               slide !== "idle" && "opacity-50 cursor-not-allowed",
             )}
           >
