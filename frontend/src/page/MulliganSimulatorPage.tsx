@@ -232,12 +232,6 @@ export function MulliganSimulatorPage() {
                         }}
                       >
                         {deck.name}
-                        <CheckIcon
-                          className={cn(
-                            "ml-auto size-4",
-                            selectedId === deck.id ? "opacity-100" : "opacity-0",
-                          )}
-                        />
                       </CommandItem>
                     ))}
                   </CommandGroup>
