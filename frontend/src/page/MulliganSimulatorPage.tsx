@@ -103,11 +103,9 @@ function DeckDrawer({ deckId }: { deckId: string }) {
             {t("mulligan.redraw")}
           </Button>
         </div>
-        <div className="flex flex-row gap-3 overflow-x-auto pb-2">
+        <div className="grid grid-cols-5 gap-2">
           {drawn.cards.map((cardRef, i) => (
-            <div key={i} className="w-40 shrink-0">
-              <Card cardRef={cardRef} showDescription={false} onOpen={setOverlayCardId} />
-            </div>
+            <Card key={i} cardRef={cardRef} showDescription={false} onOpen={setOverlayCardId} />
           ))}
         </div>
       </div>
@@ -122,11 +120,14 @@ function DeckDrawer({ deckId }: { deckId: string }) {
               <div className="text-xs text-muted-foreground/60">
                 {t("mulligan.drawLabel", { id: entry.id })}
               </div>
-              <div className="flex flex-row gap-2 overflow-x-auto pb-1">
+              <div className="grid grid-cols-5 gap-1.5">
                 {entry.cards.map((cardRef, i) => (
-                  <div key={i} className="w-32 shrink-0">
-                    <Card cardRef={cardRef} showDescription={false} onOpen={setOverlayCardId} />
-                  </div>
+                  <Card
+                    key={i}
+                    cardRef={cardRef}
+                    showDescription={false}
+                    onOpen={setOverlayCardId}
+                  />
                 ))}
               </div>
             </div>
