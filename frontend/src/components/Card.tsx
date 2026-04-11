@@ -19,9 +19,24 @@ const Fragment = graphql`
       color
       description {
         tokens {
-          ... on TriggerToken { type keyword qualifier { en ko } }
-          ... on AbilityToken { type keyword n }
-          ... on ProseToken { type en ko }
+          ... on TriggerToken {
+            type
+            keyword
+            qualifier {
+              en
+              ko
+            }
+          }
+          ... on AbilityToken {
+            type
+            keyword
+            n
+          }
+          ... on ProseToken {
+            type
+            en
+            ko
+          }
         }
       }
       limit
@@ -33,9 +48,24 @@ const Fragment = graphql`
       color
       description {
         tokens {
-          ... on TriggerToken { type keyword qualifier { en ko } }
-          ... on AbilityToken { type keyword n }
-          ... on ProseToken { type en ko }
+          ... on TriggerToken {
+            type
+            keyword
+            qualifier {
+              en
+              ko
+            }
+          }
+          ... on AbilityToken {
+            type
+            keyword
+            n
+          }
+          ... on ProseToken {
+            type
+            en
+            ko
+          }
         }
       }
       limit
@@ -47,9 +77,24 @@ const Fragment = graphql`
       color
       description {
         tokens {
-          ... on TriggerToken { type keyword qualifier { en ko } }
-          ... on AbilityToken { type keyword n }
-          ... on ProseToken { type en ko }
+          ... on TriggerToken {
+            type
+            keyword
+            qualifier {
+              en
+              ko
+            }
+          }
+          ... on AbilityToken {
+            type
+            keyword
+            n
+          }
+          ... on ProseToken {
+            type
+            en
+            ko
+          }
         }
       }
       limit
@@ -61,9 +106,24 @@ const Fragment = graphql`
       color
       description {
         tokens {
-          ... on TriggerToken { type keyword qualifier { en ko } }
-          ... on AbilityToken { type keyword n }
-          ... on ProseToken { type en ko }
+          ... on TriggerToken {
+            type
+            keyword
+            qualifier {
+              en
+              ko
+            }
+          }
+          ... on AbilityToken {
+            type
+            keyword
+            n
+          }
+          ... on ProseToken {
+            type
+            en
+            ko
+          }
         }
       }
       limit
@@ -86,7 +146,14 @@ type Props = {
   deckColors?: string[];
 };
 
-export function Card({ cardRef, showDescription, onAdd, onOpen, deckCardCount = 0, deckColors }: Props) {
+export function Card({
+  cardRef,
+  showDescription,
+  onAdd,
+  onOpen,
+  deckCardCount = 0,
+  deckColors,
+}: Props) {
   const card = useFragment(Fragment, cardRef);
 
   const description =
@@ -165,12 +232,7 @@ export function Card({ cardRef, showDescription, onAdd, onOpen, deckCardCount = 
         {cardEl}
       </div>
       {showDescription && description.length > 0 && (
-        <div
-          className={cn(
-            "mt-2 rounded-xl bg-black px-3 py-3 text-white border",
-            borderClass,
-          )}
-        >
+        <div className={cn("mt-2 rounded-xl bg-black px-3 py-3 text-white border", borderClass)}>
           <CardDescription lines={description} />
         </div>
       )}

@@ -128,5 +128,17 @@
     "BASE": "ベース",
     "COMMAND": "コマンド",
     "RESOURCE": "リソース"
+  },
+  "area": {
+    "shieldArea": "シールドエリア",
+    "baseZone": "ベースゾーン",
+    "shieldZone": "シールドゾーン",
+    "battle": "バトルエリア",
+    "deck": "デッキ",
+    "resourceDeck": "リソースデッキ",
+    "resource": "リソースエリア",
+    "trash": "トラッシュ",
+    "visible": "公開",
+    "hidden": "非公開"
   }
 }

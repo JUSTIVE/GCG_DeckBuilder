@@ -26,7 +26,15 @@ function barClass(p: number): string {
   return p === 100 ? "bg-green-500" : p >= 50 ? "bg-yellow-500" : "bg-destructive";
 }
 
-function ProgressBar({ translated, total, className }: { translated: number; total: number; className?: string }) {
+function ProgressBar({
+  translated,
+  total,
+  className,
+}: {
+  translated: number;
+  total: number;
+  className?: string;
+}) {
   const p = pct(translated, total);
   return (
     <div className={cn("flex items-center gap-1.5 shrink-0", className)}>
@@ -65,7 +73,12 @@ function CardRow({ card }: { card: CoverageCard }) {
         ) : (
           <span className="text-xs text-destructive shrink-0">{badFields.length}</span>
         )}
-        <ChevronRightIcon className={cn("size-3 text-muted-foreground shrink-0 transition-transform", open && "rotate-90")} />
+        <ChevronRightIcon
+          className={cn(
+            "size-3 text-muted-foreground shrink-0 transition-transform",
+            open && "rotate-90",
+          )}
+        />
       </button>
       {open && (
         <div className="ml-6 mb-1 flex flex-col gap-1.5 pr-2">
@@ -74,20 +87,35 @@ function CardRow({ card }: { card: CoverageCard }) {
             return (
               <div key={f.field} className="text-xs">
                 <div className="flex items-center gap-1.5 mb-0.5">
-                  <span className={cn("font-medium", f.translated ? "text-green-600" : "text-muted-foreground")}>{f.field}</span>
-                  {!f.values && (
-                    <span className="text-muted-foreground">{f.detail}</span>
-                  )}
+                  <span
+                    className={cn(
+                      "font-medium",
+                      f.translated ? "text-green-600" : "text-muted-foreground",
+                    )}
+                  >
+                    {f.field}
+                  </span>
+                  {!f.values && <span className="text-muted-foreground">{f.detail}</span>}
                 </div>
                 {f.values ? (
                   <div className="flex flex-col gap-0.5 ml-2">
                     {f.values.map((v: string, i: number) => (
-                      <div key={i} className={cn("break-all", badSet.has(v) ? "text-destructive" : "text-green-600")}>{v}</div>
+                      <div
+                        key={i}
+                        className={cn(
+                          "break-all",
+                          badSet.has(v) ? "text-destructive" : "text-green-600",
+                        )}
+                      >
+                        {v}
+                      </div>
                     ))}
                   </div>
                 ) : (
                   f.untranslatedValues?.map((v: string, i: number) => (
-                    <div key={i} className="ml-2 text-destructive break-all">{v}</div>
+                    <div key={i} className="ml-2 text-destructive break-all">
+                      {v}
+                    </div>
                   ))
                 )}
               </div>
@@ -118,9 +146,16 @@ function ColorSection({ color }: { color: CoverageColor }) {
         <span className="text-sm font-medium flex-1 min-w-0 truncate">
           {colorLabel(color.color)}
         </span>
-        <span className="hidden sm:inline text-xs text-muted-foreground shrink-0">{i18n.t("deck.cardCount" as any, { ns: "common", count: color.cards.length }) as string}</span>
+        <span className="hidden sm:inline text-xs text-muted-foreground shrink-0">
+          {i18n.t("deck.cardCount" as any, { ns: "common", count: color.cards.length }) as string}
+        </span>
         <ProgressBar translated={color.translated} total={color.total} />
-        <ChevronRightIcon className={cn("size-3.5 text-muted-foreground shrink-0 transition-transform", open && "rotate-90")} />
+        <ChevronRightIcon
+          className={cn(
+            "size-3.5 text-muted-foreground shrink-0 transition-transform",
+            open && "rotate-90",
+          )}
+        />
       </button>
       {open && (
         <div className="ml-3 border-l border-border pl-2 py-1 flex flex-col gap-0.5">
@@ -150,7 +185,12 @@ function PackageSection({ pkg }: { pkg: CoveragePackage }) {
           <span className="text-sm font-medium truncate">{renderPackage(pkg.package)}</span>
         </div>
         <ProgressBar translated={pkg.translated} total={pkg.total} />
-        <ChevronRightIcon className={cn("size-4 text-muted-foreground shrink-0 transition-transform", open && "rotate-90")} />
+        <ChevronRightIcon
+          className={cn(
+            "size-4 text-muted-foreground shrink-0 transition-transform",
+            open && "rotate-90",
+          )}
+        />
       </button>
       {open && (
         <div className="border-t border-border px-3 py-2 flex flex-col gap-0.5">
@@ -200,7 +240,9 @@ export function InfoPage() {
               )}
             >
               {label}
-              <span className="ml-1.5 text-xs text-muted-foreground font-normal hidden sm:inline">{sublabel}</span>
+              <span className="ml-1.5 text-xs text-muted-foreground font-normal hidden sm:inline">
+                {sublabel}
+              </span>
             </button>
           ))}
         </div>

@@ -64,7 +64,9 @@ function buildCoverage(cards: any[], checker: (card: any) => FieldResult[]): Cov
 
     const orderedColors = [
       ...COLOR_ORDER.filter((c) => byColor.has(c)),
-      ...Array.from(byColor.keys()).filter((c) => !COLOR_ORDER.includes(c)).sort(),
+      ...Array.from(byColor.keys())
+        .filter((c) => !COLOR_ORDER.includes(c))
+        .sort(),
     ];
 
     const colors: CoverageColor[] = [];
@@ -72,7 +74,10 @@ function buildCoverage(cards: any[], checker: (card: any) => FieldResult[]): Cov
     let pkgTranslated = 0;
 
     for (const color of orderedColors) {
-      const colorCards = byColor.get(color)!.slice().sort((a: any, b: any) => a.id.localeCompare(b.id));
+      const colorCards = byColor
+        .get(color)!
+        .slice()
+        .sort((a: any, b: any) => a.id.localeCompare(b.id));
       let colorTotal = 0;
       let colorTranslated = 0;
       const coverageCards: CoverageCard[] = [];
@@ -82,7 +87,17 @@ function buildCoverage(cards: any[], checker: (card: any) => FieldResult[]): Cov
         const t = fields.filter((f) => f.translated).length;
         colorTotal += fields.length;
         colorTranslated += t;
-        coverageCards.push({ id: card.id, name: card.name ?? card.pilot?.name, color: card.color, fields, translated: t, total: fields.length });
+        const rawName = card.name ?? card.pilot?.name;
+        const displayName =
+          typeof rawName === "object" && rawName !== null ? (rawName.ko ?? rawName.en) : rawName;
+        coverageCards.push({
+          id: card.id,
+          name: displayName,
+          color: card.color,
+          fields,
+          translated: t,
+          total: fields.length,
+        });
       }
 
       colors.push({ color, cards: coverageCards, translated: colorTranslated, total: colorTotal });

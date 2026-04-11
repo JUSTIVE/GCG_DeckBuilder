@@ -84,9 +84,15 @@ const CLEAR_MUTATION = `mutation { clearSearchHistory }`;
 
 // ─── Label maps ───────────────────────────────────────────────────────────────
 
-function getKindLabel(k: string) { return (i18n.t as any)(`kind.${k}`, { ns: "game" }); }
-function getColorLabel(c: string) { return (i18n.t as any)(`color.${c}`, { ns: "game" }); }
-function getSortLabel(s: string) { return (i18n.t as any)(`sort.${s}`, { ns: "filters" }); }
+function getKindLabel(k: string) {
+  return (i18n.t as any)(`kind.${k}`, { ns: "game" });
+}
+function getColorLabel(c: string) {
+  return (i18n.t as any)(`color.${c}`, { ns: "game" });
+}
+function getSortLabel(s: string) {
+  return (i18n.t as any)(`sort.${s}`, { ns: "filters" });
+}
 
 function formatRelativeTime(iso: string, t: (key: any, opts?: any) => string): string {
   const diff = Date.now() - new Date(iso).getTime();
@@ -154,7 +160,9 @@ function FilterSummary({ f, t }: { f: HistoryFilter; t: (key: any, opts?: any) =
   const traitCount = f.trait?.length ?? 0;
   if (traitCount > 3) {
     parts.push(
-      <span key="t-more" className="text-xs text-muted-foreground">+{traitCount - 3}</span>,
+      <span key="t-more" className="text-xs text-muted-foreground">
+        +{traitCount - 3}
+      </span>,
     );
   }
 
@@ -216,7 +224,11 @@ function FilterSummary({ f, t }: { f: HistoryFilter; t: (key: any, opts?: any) =
   }
 
   if (parts.length === 0) {
-    parts.push(<span key="all" className="text-xs text-muted-foreground">{t("search.allCards")}</span>);
+    parts.push(
+      <span key="all" className="text-xs text-muted-foreground">
+        {t("search.allCards")}
+      </span>,
+    );
   }
 
   return <div className="flex flex-wrap gap-1">{parts}</div>;
@@ -279,7 +291,11 @@ function CardViewRow({
   const { t } = useTranslation("common");
   const entry = useFragment(CardViewFragment, entryRef);
 
-  const borderColor = entry.color ? entry.color === "WHITE" ? "var(--border)" : COLOR_HEX[entry.color] : "var(--border)";
+  const borderColor = entry.color
+    ? entry.color === "WHITE"
+      ? "var(--border)"
+      : COLOR_HEX[entry.color]
+    : "var(--border)";
 
   return (
     <div
@@ -301,7 +317,11 @@ function CardViewRow({
               <img
                 className="h-10 w-10 shrink-0 rounded object-cover cutout cutout-br-md"
                 src={entry.imageUrl}
-                style={entry.color ? { backgroundColor: COLOR_HEX[entry.color] + "33" } : { backgroundColor: "var(--muted)" }}
+                style={
+                  entry.color
+                    ? { backgroundColor: COLOR_HEX[entry.color] + "33" }
+                    : { backgroundColor: "var(--muted)" }
+                }
                 alt={entry.cardName}
               />
               <div className="flex flex-col gap-0.5 min-w-0">
@@ -350,7 +370,10 @@ export function SearchHistoryPanel({ queryRef, onRestore, onRestoreCardView, fet
     });
   }, [fetchKey, refetch]);
 
-  const historyList = useFragment(SearchHistoryListFragment, data.searchHistory as SearchHistoryPanel_list$key);
+  const historyList = useFragment(
+    SearchHistoryListFragment,
+    data.searchHistory as SearchHistoryPanel_list$key,
+  );
   const entries = historyList?.items ?? [];
   if (entries.length === 0) return null;
 

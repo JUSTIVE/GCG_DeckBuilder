@@ -1,3 +1,4 @@
+import { useLocalize } from "@/lib/localize";
 import { graphql } from "relay-runtime";
 import type { BaseCardFragment$key } from "@/__generated__/BaseCardFragment.graphql";
 import { useFragment } from "react-relay";
@@ -6,13 +7,7 @@ import Marquee from "@/components/Marquee";
 import { ZoneChip } from "./ZoneChip";
 import { renderTrait } from "@/render/trait";
 import { useRouter, useSearch, useParams } from "@tanstack/react-router";
-import {
-  COLOR_BG,
-  COLOR_BG20,
-  COLOR_TEXT,
-  COLOR_BORDER,
-  COLOR_SHADOW,
-} from "src/render/color";
+import { COLOR_BG, COLOR_BG20, COLOR_TEXT, COLOR_BORDER, COLOR_SHADOW } from "src/render/color";
 import type { BaseCard_BaseCardBody$key } from "src/__generated__/BaseCard_BaseCardBody.graphql";
 import { renderRarity } from "src/render/rarity";
 
@@ -24,6 +19,7 @@ export function BaseCardBody({
 
   isWhite: boolean;
 }) {
+  const localize = useLocalize();
   const baseCard = useFragment(
     graphql`
       fragment BaseCard_BaseCardBody on BaseCard {
@@ -31,7 +27,10 @@ export function BaseCardBody({
         level
         cost
         rarity
-        name
+        name {
+          en
+          ko
+        }
         color
         imageUrl
         AP
@@ -40,9 +39,24 @@ export function BaseCardBody({
         traits
         description {
           tokens {
-            ... on TriggerToken { type keyword qualifier { en ko } }
-            ... on AbilityToken { type keyword n }
-            ... on ProseToken { type en ko }
+            ... on TriggerToken {
+              type
+              keyword
+              qualifier {
+                en
+                ko
+              }
+            }
+            ... on AbilityToken {
+              type
+              keyword
+              n
+            }
+            ... on ProseToken {
+              type
+              en
+              ko
+            }
           }
         }
       }
@@ -54,7 +68,7 @@ export function BaseCardBody({
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
         src={baseCard.imageUrl}
-        alt={baseCard.name}
+        alt={localize(baseCard.name)}
       />
       <div className="flex flex-col gap-[5cqw]">
         <div className="flex flex-row items-start justify-between z-1">
@@ -110,7 +124,7 @@ export function BaseCardBody({
       <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
           <div className="p-2 bg-black whitespace-pre-wrap break-words cutout-tl-sm cutout text-[6cqw] font-bold text-center">
-            {baseCard.name}
+            {localize(baseCard.name)}
           </div>
         </div>
         <div className="flex flex-col gap-0.5">
@@ -118,19 +132,12 @@ export function BaseCardBody({
             {baseCard.zone.map((x) => (
               <ZoneChip
                 zone={x}
-                className={cn(
-                  COLOR_BG[baseCard.color],
-                  isWhite ? "text-black" : "",
-                )}
+                className={cn(COLOR_BG[baseCard.color], isWhite ? "text-black" : "")}
                 key={x}
               />
             ))}
           </div>
-          <div
-            className={cn(
-              "flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm",
-            )}
-          >
+          <div className={cn("flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm")}>
             <div className="flex flex-col justify-end flex-1 overflow-hidden">
               <div className="flex flex-row translate-y-px">
                 <div className="w-2 bg-transparent -mr-5" />
@@ -154,9 +161,7 @@ export function BaseCardBody({
                 className={cn(
                   "aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_BG20[baseCard.color],
-                  baseCard.color === "WHITE"
-                    ? "text-gray-400"
-                    : COLOR_TEXT[baseCard.color],
+                  baseCard.color === "WHITE" ? "text-gray-400" : COLOR_TEXT[baseCard.color],
                 )}
               >
                 {baseCard.AP}
@@ -165,9 +170,7 @@ export function BaseCardBody({
                 className={cn(
                   "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
                   COLOR_BG20[baseCard.color],
-                  baseCard.color === "WHITE"
-                    ? "text-gray-400"
-                    : COLOR_TEXT[baseCard.color],
+                  baseCard.color === "WHITE" ? "text-gray-400" : COLOR_TEXT[baseCard.color],
                 )}
               >
                 {baseCard.HP}
@@ -184,7 +187,10 @@ const Fragment = graphql`
   fragment BaseCardFragment on BaseCard {
     ...BaseCard_BaseCardBody
     id
-    name
+    name {
+      en
+      ko
+    }
     level
     cost
     color
@@ -195,9 +201,24 @@ const Fragment = graphql`
     traits
     description {
       tokens {
-        ... on TriggerToken { type keyword qualifier { en ko } }
-        ... on AbilityToken { type keyword n }
-        ... on ProseToken { type en ko }
+        ... on TriggerToken {
+          type
+          keyword
+          qualifier {
+            en
+            ko
+          }
+        }
+        ... on AbilityToken {
+          type
+          keyword
+          n
+        }
+        ... on ProseToken {
+          type
+          en
+          ko
+        }
       }
     }
   }
@@ -219,7 +240,10 @@ export function BaseCard({ baseCardRef, onOpen }: Props) {
   const isWhite = baseCard.color === "WHITE";
 
   function openDialog() {
-    if (onOpen) { onOpen(baseCard.id); return; }
+    if (onOpen) {
+      onOpen(baseCard.id);
+      return;
+    }
     router.navigate({
       to: "/$locale/cardlist",
       params: { locale },

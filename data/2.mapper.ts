@@ -20,7 +20,7 @@ function maps(target: string, kvMap: [string, string][]): string {
 const pilotNameMapper = (raw: unknown[]) =>
   raw
     .map((x) => {
-      if (x.name == null) return x;
+      if (x.name == null || typeof x.name === "object") return x;
       const enName = x.name as string;
       const koName = maps(enName, pilotNameEntries);
       if (x.__typename === "PilotCard") {
@@ -40,20 +40,23 @@ const pilotNameMapper = (raw: unknown[]) =>
 
 const unitNameMapper = (raw: unknown[]) =>
   raw.map((x) => {
-    if (x.name == null && x.__typename !== "UnitCard") return x;
-    return { ...x, name: unitnames[x.name] ?? x.name };
+    if (x.__typename !== "UnitCard" || x.name == null || typeof x.name === "object") return x;
+    const en = x.name as string;
+    return { ...x, name: { en, ko: unitnames[en] ?? en } };
   });
 
 const baseNameMapper = (raw: unknown[]) =>
   raw.map((x) => {
-    if (x.name == null && x.__typename !== "BaseCard") return x;
-    return { ...x, name: basenames[x.name] ?? x.name };
+    if (x.__typename !== "BaseCard" || x.name == null || typeof x.name === "object") return x;
+    const en = x.name as string;
+    return { ...x, name: { en, ko: basenames[en] ?? en } };
   });
 
 const commandNameMapper = (raw: unknown[]) =>
   raw.map((x) => {
-    if (x.name == null && x.__typename !== "CommandCard") return x;
-    return { ...x, name: commandnames[x.name] ?? x.name };
+    if (x.__typename !== "CommandCard" || x.name == null || typeof x.name === "object") return x;
+    const en = x.name as string;
+    return { ...x, name: { en, ko: commandnames[en] ?? en } };
   });
 
 // ─── Description tokenizer ───────────────────────────────────────────────────

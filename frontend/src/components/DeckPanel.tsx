@@ -2,8 +2,14 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
-  PencilIcon, CheckIcon, XIcon, MinusIcon,
-  ClipboardCopyIcon, ClipboardPasteIcon, Trash2Icon, FileSpreadsheetIcon,
+  PencilIcon,
+  CheckIcon,
+  XIcon,
+  MinusIcon,
+  ClipboardCopyIcon,
+  ClipboardPasteIcon,
+  Trash2Icon,
+  FileSpreadsheetIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COLOR_BG, COLOR_HEX } from "src/render/color";
@@ -50,14 +56,17 @@ export function DeckPanel({
   onOpenCard,
   scrollAll = false,
 }: DeckPanelProps) {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const [editing, setEditing] = useState(false);
   const [editName, setEditName] = useState("");
   const [pasteOpen, setPasteOpen] = useState(false);
   const [pasteValue, setPasteValue] = useState("");
   const [pasteError, setPasteError] = useState(false);
 
-  function startEditing() { setEditName(deckName); setEditing(true); }
+  function startEditing() {
+    setEditName(deckName);
+    setEditing(true);
+  }
   function commitEdit() {
     const name = editName.trim();
     if (name && name !== deckName) onRename(name);
@@ -74,28 +83,60 @@ export function DeckPanel({
   return (
     <div className={scrollAll ? "flex flex-col" : "flex flex-col h-full"}>
       {editing ? (
-        <div className={cn("flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0", scrollAll && "sticky top-0 z-10 bg-background")}>
+        <div
+          className={cn(
+            "flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0",
+            scrollAll && "sticky top-0 z-10 bg-background",
+          )}
+        >
           <Input
             value={editName}
             onChange={(e) => setEditName(e.target.value)}
-            onKeyDown={(e) => { if (e.key === "Enter") commitEdit(); if (e.key === "Escape") setEditing(false); }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") commitEdit();
+              if (e.key === "Escape") setEditing(false);
+            }}
             className="flex-1 h-7 text-sm font-bold"
             autoFocus
           />
-          <Button size="icon-sm" onClick={commitEdit}><CheckIcon /></Button>
-          <Button size="icon-sm" variant="ghost" onClick={() => setEditing(false)}><XIcon /></Button>
+          <Button size="icon-sm" onClick={commitEdit}>
+            <CheckIcon />
+          </Button>
+          <Button size="icon-sm" variant="ghost" onClick={() => setEditing(false)}>
+            <XIcon />
+          </Button>
         </div>
       ) : (
-        <div className={cn("flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0", scrollAll && "sticky top-0 z-10 bg-background")}>
+        <div
+          className={cn(
+            "flex items-center gap-1.5 px-3 pt-3 pb-2 shrink-0",
+            scrollAll && "sticky top-0 z-10 bg-background",
+          )}
+        >
           <h2 className="font-bold text-sm flex-1 truncate">{deckName}</h2>
           <div className="flex gap-1 shrink-0">
             {colors.map((color) => (
-              <span key={color} className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")} />
+              <span
+                key={color}
+                className={cn(
+                  "inline-block w-2.5 h-2.5 rounded-full",
+                  COLOR_BG[color],
+                  color === "WHITE" && "border border-gray-200",
+                )}
+              />
             ))}
           </div>
-          <Button size="icon-sm" variant="ghost" onClick={startEditing}><PencilIcon /></Button>
+          <Button size="icon-sm" variant="ghost" onClick={startEditing}>
+            <PencilIcon />
+          </Button>
           {cards.length > 0 && (
-            <Button size="icon-sm" variant="ghost" onClick={() => { if (confirm(t("deck.confirmClear"))) onSetCards([]); }}>
+            <Button
+              size="icon-sm"
+              variant="ghost"
+              onClick={() => {
+                if (confirm(t("deck.confirmClear"))) onSetCards([]);
+              }}
+            >
               <Trash2Icon className="text-destructive" />
             </Button>
           )}
@@ -104,12 +145,19 @@ export function DeckPanel({
 
       <div className="px-3 pb-2 shrink-0">
         <div className="flex items-center justify-between mb-1">
-          <span className="text-xs text-muted-foreground">{t("deck.cardCountOf", { count: totalCards, max: 50 })}</span>
-          <span className="text-xs text-muted-foreground">{Math.round((totalCards / 50) * 100)}%</span>
+          <span className="text-xs text-muted-foreground">
+            {t("deck.cardCountOf", { count: totalCards, max: 50 })}
+          </span>
+          <span className="text-xs text-muted-foreground">
+            {Math.round((totalCards / 50) * 100)}%
+          </span>
         </div>
         <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
           <div
-            className={cn("h-full rounded-full transition-all duration-300", totalCards >= 50 ? "bg-green-500" : "bg-primary")}
+            className={cn(
+              "h-full rounded-full transition-all duration-300",
+              totalCards >= 50 ? "bg-green-500" : "bg-primary",
+            )}
             style={{ width: `${Math.min((totalCards / 50) * 100, 100)}%` }}
           />
         </div>
@@ -139,16 +187,23 @@ export function DeckPanel({
               </div>
               <ul className="flex flex-col gap-0.5">
                 {group.map((dc, i) => {
-                  const info = extractCardInfo(dc.card);
+                  const info = extractCardInfo(dc.card, i18n.language);
                   if (!info) return null;
                   return (
-                    <li key={`${info.id}-${i}`} className="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-muted/50">
+                    <li
+                      key={`${info.id}-${i}`}
+                      className="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-muted/50"
+                    >
                       <div className="relative shrink-0">
                         <button type="button" className="block" onClick={() => onOpenCard(info.id)}>
                           <img
                             className="h-10 w-8 rounded object-cover cutout cutout-br-md"
                             src={info.imageUrl ?? undefined}
-                            style={{ backgroundColor: COLOR_HEX[info.color] ? `${COLOR_HEX[info.color]}33` : "var(--muted)" }}
+                            style={{
+                              backgroundColor: COLOR_HEX[info.color]
+                                ? `${COLOR_HEX[info.color]}33`
+                                : "var(--muted)",
+                            }}
                             alt={info.name}
                           />
                         </button>
@@ -157,7 +212,15 @@ export function DeckPanel({
                             {info.level}
                           </div>
                         )}
-                        <div className={cn("absolute bottom-0 right-0 w-4 h-4 rounded-tl text-[9px] font-bold flex items-center justify-center leading-none", COLOR_BG[info.color] ?? "bg-gray-500", info.color === "WHITE" ? "text-gray-700 border-t border-l border-gray-200" : "text-white")}>
+                        <div
+                          className={cn(
+                            "absolute bottom-0 right-0 w-4 h-4 rounded-tl text-[9px] font-bold flex items-center justify-center leading-none",
+                            COLOR_BG[info.color] ?? "bg-gray-500",
+                            info.color === "WHITE"
+                              ? "text-gray-700 border-t border-l border-gray-200"
+                              : "text-white",
+                          )}
+                        >
                           {info.cost ?? "-"}
                         </div>
                       </div>
@@ -165,7 +228,9 @@ export function DeckPanel({
                         <div>{info.name}</div>
                         <div>{info.id}</div>
                       </span>
-                      <span className="text-xs font-semibold text-muted-foreground w-5 text-center">×{dc.count}</span>
+                      <span className="text-xs font-semibold text-muted-foreground w-5 text-center">
+                        ×{dc.count}
+                      </span>
                       <Button variant="ghost" size="icon-xs" onClick={() => onRemove(info.id)}>
                         <MinusIcon className="text-muted-foreground" />
                       </Button>
@@ -178,17 +243,29 @@ export function DeckPanel({
         })}
       </div>
 
-      <div className={cn("px-3 pb-3 shrink-0 border-t border-border pt-3 flex flex-col gap-2", scrollAll && "sticky bottom-0 bg-background")}>
+      <div
+        className={cn(
+          "px-3 pb-3 shrink-0 border-t border-border pt-3 flex flex-col gap-2",
+          scrollAll && "sticky bottom-0 bg-background",
+        )}
+      >
         <Button
           className="w-full"
           size="sm"
           disabled={totalCards !== 50}
           onClick={() => {
-            const text = cards.map((dc) => { const id = (dc.card as any)?.id; return id ? `${dc.count}X ${id}` : null; }).filter(Boolean).join("\n");
+            const text = cards
+              .map((dc) => {
+                const id = (dc.card as any)?.id;
+                return id ? `${dc.count}X ${id}` : null;
+              })
+              .filter(Boolean)
+              .join("\n");
             navigator.clipboard.writeText(text);
           }}
         >
-          <ClipboardCopyIcon className="size-3.5" />{t("deck.copyMsaCode")}
+          <ClipboardCopyIcon className="size-3.5" />
+          {t("deck.copyMsaCode")}
         </Button>
         <Button
           className="w-full"
@@ -197,39 +274,68 @@ export function DeckPanel({
           disabled={totalCards !== 50}
           onClick={() => downloadDeckExcel(deckName, cards)}
         >
-          <FileSpreadsheetIcon className="size-3.5" />{t("deck.downloadExcel")}
+          <FileSpreadsheetIcon className="size-3.5" />
+          {t("deck.downloadExcel")}
         </Button>
         <div className="flex gap-1.5">
-          <Button className="flex-1" size="sm" variant="outline" onClick={() => navigator.clipboard.writeText(encodeDeckCode(cards))}>
-            <ClipboardCopyIcon className="size-3.5" />{t("deck.copyDeckCode")}
+          <Button
+            className="flex-1"
+            size="sm"
+            variant="outline"
+            onClick={() => navigator.clipboard.writeText(encodeDeckCode(cards))}
+          >
+            <ClipboardCopyIcon className="size-3.5" />
+            {t("deck.copyDeckCode")}
           </Button>
-          <Button className="flex-1" size="sm" variant="outline" onClick={() => { setPasteOpen((v) => !v); setPasteValue(""); setPasteError(false); }}>
-            <ClipboardPasteIcon className="size-3.5" />{t("deck.importDeckCode")}
+          <Button
+            className="flex-1"
+            size="sm"
+            variant="outline"
+            onClick={() => {
+              setPasteOpen((v) => !v);
+              setPasteValue("");
+              setPasteError(false);
+            }}
+          >
+            <ClipboardPasteIcon className="size-3.5" />
+            {t("deck.importDeckCode")}
           </Button>
         </div>
         {pasteOpen && (
           <div className="flex flex-col gap-1.5">
             <textarea
-              className={cn("w-full rounded-md border bg-background px-2 py-1.5 text-xs font-mono resize-none focus:outline-none focus:ring-1 focus:ring-ring", pasteError && "border-destructive focus:ring-destructive")}
+              className={cn(
+                "w-full rounded-md border bg-background px-2 py-1.5 text-xs font-mono resize-none focus:outline-none focus:ring-1 focus:ring-ring",
+                pasteError && "border-destructive focus:ring-destructive",
+              )}
               rows={3}
               placeholder={t("deck.pasteDeckCode")}
               value={pasteValue}
-              onChange={(e) => { setPasteValue(e.target.value); setPasteError(false); }}
+              onChange={(e) => {
+                setPasteValue(e.target.value);
+                setPasteError(false);
+              }}
             />
-            {pasteError && <p className="text-[10px] text-destructive">{t("deck.invalidDeckCode")}</p>}
+            {pasteError && (
+              <p className="text-[10px] text-destructive">{t("deck.invalidDeckCode")}</p>
+            )}
             <div className="flex gap-1.5">
               <Button
                 size="sm"
                 className="flex-1"
                 onClick={() => {
                   const cards = decodeDeckCode(pasteValue);
-                  if (!cards) { setPasteError(true); return; }
+                  if (!cards) {
+                    setPasteError(true);
+                    return;
+                  }
                   onSetCards(cards);
                   setPasteOpen(false);
                   setPasteValue("");
                 }}
               >
-                <CheckIcon className="size-3.5" />{t("action.import")}
+                <CheckIcon className="size-3.5" />
+                {t("action.import")}
               </Button>
               <Button size="sm" variant="ghost" onClick={() => setPasteOpen(false)}>
                 <XIcon className="size-3.5" />

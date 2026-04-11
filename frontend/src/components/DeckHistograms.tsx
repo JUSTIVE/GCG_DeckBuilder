@@ -40,7 +40,11 @@ function Histogram({
           const count = totalPerBucket[i];
           const barH = count > 0 ? Math.max(Math.round((count / maxCount) * CHART_H), 4) : 0;
           return (
-            <div key={i} className="flex flex-col items-center flex-1" style={{ height: CHART_H + 24 }}>
+            <div
+              key={i}
+              className="flex flex-col items-center flex-1"
+              style={{ height: CHART_H + 24 }}
+            >
               <div className="flex flex-col justify-end flex-1 w-full">
                 {count > 0 && (
                   <span className="text-[9px] text-muted-foreground text-center leading-none mb-0.5">
@@ -55,7 +59,10 @@ function Histogram({
                     const colorCount = colorMap[i]?.[color] ?? 0;
                     if (!colorCount) return null;
                     return (
-                      <div key={color} style={{ flex: colorCount, backgroundColor: COLOR_HEX[color] }} />
+                      <div
+                        key={color}
+                        style={{ flex: colorCount, backgroundColor: COLOR_HEX[color] }}
+                      />
                     );
                   })}
                 </div>

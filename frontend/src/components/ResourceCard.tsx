@@ -16,7 +16,10 @@ export function ResourceCardBody({
     graphql`
       fragment ResourceCard_ResourceCardBody_Fragment on Resource {
         id
-        name
+        name {
+          en
+          ko
+        }
         rarity
       }
     `,
@@ -25,18 +28,14 @@ export function ResourceCardBody({
 
   return (
     <>
-      <img
-        className="absolute w-full h-full object-cover top-0"
-        src={resourceImg}
-        alt={""}
-      />
+      <img className="absolute w-full h-full object-cover top-0" src={resourceImg} alt={""} />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
       <div className="bg-black text-white z-1 w-fit self-end px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
         {resourceCard.id}-{renderRarity(resourceCard.rarity)}
       </div>
       <div className="z-1 px-2 pb-2">
         <div className="p-2 bg-black/80 text-white text-[6cqw] font-bold text-center cutout-tl-sm cutout whitespace-pre-wrap">
-          {resourceCard.name}
+          {resourceCard.name.ko}
         </div>
       </div>
     </>
@@ -47,7 +46,10 @@ const Fragment = graphql`
   fragment ResourceCardFragment on Resource {
     ...ResourceCard_ResourceCardBody_Fragment
     id
-    name
+    name {
+      en
+      ko
+    }
   }
 `;
 
@@ -65,7 +67,10 @@ export function ResourceCard({ resourceCardRef, onOpen }: Props) {
   const open = search.cardId === resourceCard.id;
 
   function openDialog() {
-    if (onOpen) { onOpen(resourceCard.id); return; }
+    if (onOpen) {
+      onOpen(resourceCard.id);
+      return;
+    }
     router.navigate({
       to: "/$locale/cardlist",
       params: { locale },

@@ -9,9 +9,7 @@ function descriptionToGraphQL(rawDesc: unknown): { tokens: object[] }[] {
     tokens: line.map((token: any) => {
       const t = token?.type;
       const __typename =
-        t === "trigger" ? "TriggerToken" :
-        t === "ability" ? "AbilityToken" :
-        "ProseToken";
+        t === "trigger" ? "TriggerToken" : t === "ability" ? "AbilityToken" : "ProseToken";
       return { __typename, ...token };
     }),
   }));
@@ -28,9 +26,10 @@ export function fieldResolver(
 
   if (typeName === "PilotCard" && fieldName === "pilot") {
     const nameRaw = source["name"] as { en: string; ko: string } | string | undefined;
-    const name = typeof nameRaw === "object" && nameRaw !== null
-      ? nameRaw
-      : { en: nameRaw ?? "", ko: nameRaw ?? "" };
+    const name =
+      typeof nameRaw === "object" && nameRaw !== null
+        ? nameRaw
+        : { en: nameRaw ?? "", ko: nameRaw ?? "" };
     return {
       name,
       AP: (source["AP"] as number | null | undefined) ?? 0,
@@ -51,11 +50,15 @@ export function fieldResolver(
           if (token.type === "prose") {
             if (token.ko) {
               const m = /\[([^\]]+)\]/.exec(token.ko);
-              if (m?.[1]) { nameKo = m[1]; }
+              if (m?.[1]) {
+                nameKo = m[1];
+              }
             }
             if (token.en) {
               const m = /\[([^\]]+)\]/.exec(token.en);
-              if (m?.[1]) { nameEn = m[1]; }
+              if (m?.[1]) {
+                nameEn = m[1];
+              }
             }
             if (nameKo && nameEn) break outer;
           }
@@ -71,9 +74,10 @@ export function fieldResolver(
 
   if (typeName === "LinkPilot" && fieldName === "pilot") {
     const pilotName = source["pilotName"] as { en: string; ko: string } | string | undefined;
-    const nameObj = typeof pilotName === "object" && pilotName !== null
-      ? pilotName
-      : { en: pilotName ?? "unknown", ko: pilotName ?? "unknown" };
+    const nameObj =
+      typeof pilotName === "object" && pilotName !== null
+        ? pilotName
+        : { en: pilotName ?? "unknown", ko: pilotName ?? "unknown" };
     const card = pilotByName.get(nameObj.ko);
     return {
       name: nameObj,
@@ -86,9 +90,24 @@ export function fieldResolver(
     return (source[fieldName] as number | null | undefined) ?? 0;
   }
 
+  if (typeName === "Resource" && fieldName === "name") {
+    const raw = source["name"] as string | undefined;
+    return { en: raw ?? "", ko: raw ?? "" };
+  }
+
   if (
-    (typeName === "UnitCard" || typeName === "PilotCard" ||
-      typeName === "BaseCard" || typeName === "CommandCard") &&
+    (typeName === "UnitCard" || typeName === "BaseCard" || typeName === "CommandCard") &&
+    fieldName === "name"
+  ) {
+    const raw = source["name"] as { en: string; ko: string } | string | undefined;
+    return typeof raw === "object" && raw !== null ? raw : { en: raw ?? "", ko: raw ?? "" };
+  }
+
+  if (
+    (typeName === "UnitCard" ||
+      typeName === "PilotCard" ||
+      typeName === "BaseCard" ||
+      typeName === "CommandCard") &&
     fieldName === "imageUrl"
   ) {
     return `/cards/${source["id"]}.webp`;
@@ -99,8 +118,10 @@ export function fieldResolver(
   }
 
   if (
-    (typeName === "UnitCard" || typeName === "PilotCard" ||
-      typeName === "BaseCard" || typeName === "CommandCard") &&
+    (typeName === "UnitCard" ||
+      typeName === "PilotCard" ||
+      typeName === "BaseCard" ||
+      typeName === "CommandCard") &&
     (fieldName === "limit" || fieldName === "blocked")
   ) {
     const limit =
@@ -109,8 +130,10 @@ export function fieldResolver(
   }
 
   if (
-    (typeName === "UnitCard" || typeName === "BaseCard" ||
-      typeName === "PilotCard" || typeName === "CommandCard") &&
+    (typeName === "UnitCard" ||
+      typeName === "BaseCard" ||
+      typeName === "PilotCard" ||
+      typeName === "CommandCard") &&
     fieldName === "traits"
   ) {
     const raw = source["trait"];
@@ -118,8 +141,10 @@ export function fieldResolver(
   }
 
   if (
-    (typeName === "UnitCard" || typeName === "BaseCard" ||
-      typeName === "PilotCard" || typeName === "CommandCard") &&
+    (typeName === "UnitCard" ||
+      typeName === "BaseCard" ||
+      typeName === "PilotCard" ||
+      typeName === "CommandCard") &&
     fieldName === "relatedTraits"
   ) {
     const raw = source["relatedTrait"];
@@ -161,7 +186,10 @@ export function fieldResolver(
       const items = Array.isArray(rawField) ? (rawField as string[]) : [];
       for (const item of items) counts.set(item, (counts.get(item) ?? 0) + dc.count);
     }
-    return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, limit).map(([kw]) => kw);
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, limit)
+      .map(([kw]) => kw);
   }
 
   if (typeName === "DeckCard" && fieldName === "card") {
@@ -175,8 +203,10 @@ export function fieldResolver(
   }
 
   if (
-    (typeName === "UnitCard" || typeName === "PilotCard" ||
-      typeName === "BaseCard" || typeName === "CommandCard") &&
+    (typeName === "UnitCard" ||
+      typeName === "PilotCard" ||
+      typeName === "BaseCard" ||
+      typeName === "CommandCard") &&
     fieldName === "description"
   ) {
     return descriptionToGraphQL(source["description"]);

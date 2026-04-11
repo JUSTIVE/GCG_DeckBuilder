@@ -9,9 +9,7 @@ description: 이 프로젝트의 애니메이션 구현 패턴 참고 (setTimeou
 `setTimeout` 체인으로 구현. `delays` 배열의 각 항목이 해당 단계 진입 시각:
 
 ```ts
-delays.forEach((delay, i) =>
-  timers.push(setTimeout(() => setStep(i + 1), delay))
-);
+delays.forEach((delay, i) => timers.push(setTimeout(() => setStep(i + 1), delay)));
 ```
 
 - step 0 = 초기 상태 (딜레이 전)
@@ -22,8 +20,10 @@ delays.forEach((delay, i) =>
 
 ```ts
 const observer = new IntersectionObserver(
-  ([entry]) => { if (entry.isIntersecting) setTriggered(true); },
-  { threshold: 0.4 },   // 40% 보일 때 트리거
+  ([entry]) => {
+    if (entry.isIntersecting) setTriggered(true);
+  },
+  { threshold: 0.4 }, // 40% 보일 때 트리거
 );
 observer.observe(el);
 ```
@@ -48,14 +48,27 @@ stagger: `transitionDelay: i * 45ms` (returning), `i * 65ms` (drawing)
 
 ```css
 @keyframes deck-shuffle {
-  0%   { transform: translateY(0) rotate(0deg); }
-  20%  { transform: translateY(-4px) rotate(-5deg); }
-  40%  { transform: translateY(-4px) rotate(5deg); }
-  60%  { transform: translateY(-2px) rotate(-3deg); }
-  80%  { transform: translateY(-1px) rotate(2deg); }
-  100% { transform: translateY(0) rotate(0deg); }
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  20% {
+    transform: translateY(-4px) rotate(-5deg);
+  }
+  40% {
+    transform: translateY(-4px) rotate(5deg);
+  }
+  60% {
+    transform: translateY(-2px) rotate(-3deg);
+  }
+  80% {
+    transform: translateY(-1px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
 }
 ```
+
 `animation="deck-shuffle 0.42s ease-in-out 2"` — 2회 반복
 
 ## MiniCard 애니메이션

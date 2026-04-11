@@ -24,14 +24,7 @@ export const ZONE_LABELS: Record<string, string> = {
   SPACE: "우주",
   EARTH: "지구",
 };
-export const ALL_COLORS = [
-  "BLUE",
-  "GREEN",
-  "RED",
-  "YELLOW",
-  "PURPLE",
-  "WHITE",
-] as const;
+export const ALL_COLORS = ["BLUE", "GREEN", "RED", "YELLOW", "PURPLE", "WHITE"] as const;
 export const getColorLabel = (color: string) =>
   i18n.t(`color.${color}`, { ns: "game", defaultValue: color });
 export const COLOR_LABELS: Record<string, string> = {
@@ -81,10 +74,7 @@ export const ALL_KEYWORDS: CardKeyword[] = [
 
 /** Compute at call-site (inside component render) for reactive language switching. */
 export const getKeywordLabels = () =>
-  Object.fromEntries(ALL_KEYWORDS.map((k) => [k, renderKeyword(k)])) as Record<
-    CardKeyword,
-    string
-  >;
+  Object.fromEntries(ALL_KEYWORDS.map((k) => [k, renderKeyword(k)])) as Record<CardKeyword, string>;
 // Legacy static export — not reactive to language changes.
 export const KEYWORD_LABELS = getKeywordLabels();
 
@@ -213,10 +203,7 @@ export const ALL_SERIES: CardSeries[] = [
 ];
 
 export const getSeriesLabels = () =>
-  Object.fromEntries(ALL_SERIES.map((s) => [s, renderSeries(s)])) as Record<
-    CardSeries,
-    string
-  >;
+  Object.fromEntries(ALL_SERIES.map((s) => [s, renderSeries(s)])) as Record<CardSeries, string>;
 export const SERIES_LABELS = getSeriesLabels();
 
 export const getPackGroups = () => {

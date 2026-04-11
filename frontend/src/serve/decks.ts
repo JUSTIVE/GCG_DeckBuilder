@@ -96,13 +96,7 @@ export function renameDeck({ id, name }: { id: string; name: string }): Deck {
   return updated;
 }
 
-export function addCardToDeck({
-  deckId,
-  cardId,
-}: {
-  deckId: string;
-  cardId: string;
-}): AnyRecord {
+export function addCardToDeck({ deckId, cardId }: { deckId: string; cardId: string }): AnyRecord {
   const decks = readDecks();
   const idx = decks.findIndex((d) => d.id === deckId);
   if (idx === -1) return { __typename: "DeckNotFoundError", deckId };
@@ -118,7 +112,12 @@ export function addCardToDeck({
   const existing = deck.cards.find((dc) => dc.cardId === cardId);
   const currentCount = existing?.count ?? 0;
   if (currentCount >= cardLimit) {
-    return { __typename: "CardCopyLimitExceededError", cardId, limit: cardLimit, current: currentCount };
+    return {
+      __typename: "CardCopyLimitExceededError",
+      cardId,
+      limit: cardLimit,
+      current: currentCount,
+    };
   }
 
   if (!isResource) {
@@ -151,13 +150,7 @@ export function addCardToDeck({
   return { __typename: "AddCardToDeckSuccess", deck };
 }
 
-export function removeCardFromDeck({
-  deckId,
-  cardId,
-}: {
-  deckId: string;
-  cardId: string;
-}): Deck {
+export function removeCardFromDeck({ deckId, cardId }: { deckId: string; cardId: string }): Deck {
   const decks = readDecks();
   const idx = decks.findIndex((d) => d.id === deckId);
   if (idx === -1) throw new Error(`Deck not found: ${deckId}`);

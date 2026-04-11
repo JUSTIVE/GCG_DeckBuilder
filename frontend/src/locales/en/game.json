@@ -128,5 +128,17 @@
     "BASE": "Base",
     "COMMAND": "Command",
     "RESOURCE": "Resource"
+  },
+  "area": {
+    "shieldArea": "Shield Area",
+    "baseZone": "Base Zone",
+    "shieldZone": "Shield Zone",
+    "battle": "Battle Area",
+    "deck": "Deck",
+    "resourceDeck": "Resource Deck",
+    "resource": "Resource Area",
+    "trash": "Trash",
+    "visible": "Open",
+    "hidden": "Hidden"
   }
 }

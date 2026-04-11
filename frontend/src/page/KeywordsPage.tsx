@@ -1,6 +1,7 @@
 import { Suspense, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useLazyLoadQuery } from "react-relay";
+import { localize } from "@/lib/localize";
 import i18n from "@/i18n";
 import type { KeywordsPageCardsQuery } from "@/__generated__/KeywordsPageCardsQuery.graphql";
 import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
@@ -24,34 +25,43 @@ import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 
 const CardsQuery = graphql`
   query KeywordsPageCardsQuery($keyword: CardKeyword!) {
-    cards(
-      first: 200
-      filter: { keyword: [$keyword], kind: [UNIT, PILOT, BASE, COMMAND] }
-    ) {
+    cards(first: 200, filter: { keyword: [$keyword], kind: [UNIT, PILOT, BASE, COMMAND] }) {
       totalCount
       edges {
         node {
           __typename
           ... on UnitCard {
             id
-            name
+            name {
+              en
+              ko
+            }
             color
           }
           ... on PilotCard {
             id
             pilot {
-              name { en ko }
+              name {
+                en
+                ko
+              }
             }
             color
           }
           ... on BaseCard {
             id
-            name
+            name {
+              en
+              ko
+            }
             color
           }
           ... on CommandCard {
             id
-            name
+            name {
+              en
+              ko
+            }
             color
           }
         }
@@ -110,19 +120,19 @@ function typenameLabel(typename: string): string {
 }
 
 function KeywordCardList({ keyword, onOpen }: { keyword: string; onOpen: (id: string) => void }) {
+  const { i18n } = useTranslation();
   const data = useLazyLoadQuery<KeywordsPageCardsQuery>(CardsQuery, {
     keyword: keyword as any,
   });
   const edges = data.cards.edges;
 
   return (
-    <div
-      className={cn("border-t border-border px-3 py-2 flex flex-col gap-0.5")}
-    >
+    <div className={cn("border-t border-border px-3 py-2 flex flex-col gap-0.5")}>
       {edges.map(({ node }) => {
         const n = node as any;
         const id: string = n.id ?? "";
-        const name: string = n.name ?? n.pilot?.name ?? id;
+        const rawName = n.name ?? n.pilot?.name;
+        const name: string = rawName ? localize(rawName, i18n.language) : id;
         const color: string = n.color ?? "";
         return (
           <button
@@ -166,11 +176,13 @@ function KeywordEntry({
   if (!entry) return null;
 
   return (
-    <div className={cn(
-      "rounded-lg border transition-all duration-300",
-      playing ? "border-primary/60 bg-primary/5" : "border-border",
-      className,
-    )}>
+    <div
+      className={cn(
+        "rounded-lg border transition-all duration-300",
+        playing ? "border-primary/60 bg-primary/5" : "border-border",
+        className,
+      )}
+    >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -207,11 +219,11 @@ function KeywordEntry({
 
 // ── page ──────────────────────────────────────────────────────────────────────
 
-const triggerKeywords = ALL_KEYWORDS.filter((k) =>
-  KEYWORD_DESCRIPTIONS[k]?.name[0]?.type === "trigger",
+const triggerKeywords = ALL_KEYWORDS.filter(
+  (k) => KEYWORD_DESCRIPTIONS[k]?.name[0]?.type === "trigger",
 );
-const abilityKeywords = ALL_KEYWORDS.filter((k) =>
-  KEYWORD_DESCRIPTIONS[k]?.name[0]?.type === "ability",
+const abilityKeywords = ALL_KEYWORDS.filter(
+  (k) => KEYWORD_DESCRIPTIONS[k]?.name[0]?.type === "ability",
 );
 
 export function KeywordsPage() {
@@ -239,7 +251,12 @@ export function KeywordsPage() {
         </h2>
         <div className="flex flex-col gap-2">
           {abilityKeywords.map((kw) => (
-            <KeywordEntry key={kw} keyword={kw} className={"bg-gray-800/10"} onOpen={setOverlayCardId} />
+            <KeywordEntry
+              key={kw}
+              keyword={kw}
+              className={"bg-gray-800/10"}
+              onOpen={setOverlayCardId}
+            />
           ))}
         </div>
       </section>

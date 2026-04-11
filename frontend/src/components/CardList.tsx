@@ -33,10 +33,18 @@ const Fragment = graphql`
       edges {
         cursor
         node {
-          ... on UnitCard { id }
-          ... on PilotCard { id }
-          ... on BaseCard { id }
-          ... on CommandCard { id }
+          ... on UnitCard {
+            id
+          }
+          ... on PilotCard {
+            id
+          }
+          ... on BaseCard {
+            id
+          }
+          ... on CommandCard {
+            id
+          }
           ...CardFragment
         }
       }
@@ -70,9 +78,13 @@ export function CardList({
   deckColors,
 }: Props) {
   const [, startTransition] = useTransition();
-  const [commitAddFilterSearch] = useMutation<CardListAddFilterSearchMutation>(ADD_FILTER_SEARCH_MUTATION);
-  const { data, refetch, loadNext, hasNext, isLoadingNext } =
-    usePaginationFragment(Fragment, queryRef);
+  const [commitAddFilterSearch] = useMutation<CardListAddFilterSearchMutation>(
+    ADD_FILTER_SEARCH_MUTATION,
+  );
+  const { data, refetch, loadNext, hasNext, isLoadingNext } = usePaginationFragment(
+    Fragment,
+    queryRef,
+  );
 
   // refetch when filter or sort changes, keeping old content visible via startTransition
   const prevParamsRef = useRef(JSON.stringify({ filter, sort }));
@@ -133,10 +145,7 @@ export function CardList({
     getScrollElement: () => parentRef.current,
     estimateSize: () => {
       const cardHeight =
-        ((parentRef.current?.offsetWidth ?? 0 - (columns - 1) * 32) /
-          columns /
-          800) *
-        1117;
+        ((parentRef.current?.offsetWidth ?? 0 - (columns - 1) * 32) / columns / 800) * 1117;
       return showDescription ? cardHeight + 120 : cardHeight;
     },
     measureElement: (el) => el.getBoundingClientRect().height,
@@ -155,10 +164,7 @@ export function CardList({
   }, [hasNext, isLoadingNext, loadNext, rowCount, virtualItems]);
 
   return (
-    <div
-      ref={parentRef}
-      className={scrollClassName}
-    >
+    <div ref={parentRef} className={scrollClassName}>
       <div
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
@@ -168,10 +174,7 @@ export function CardList({
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
           const startIndex = virtualRow.index * columns;
-          const endIndex = Math.min(
-            startIndex + columns,
-            data.cards.edges.length,
-          );
+          const endIndex = Math.min(startIndex + columns, data.cards.edges.length);
           const rowItems = data.cards.edges.slice(startIndex, endIndex);
 
           return (
@@ -199,7 +202,9 @@ export function CardList({
                     showDescription={showDescription}
                     onAdd={onCardAdd}
                     onOpen={onCardOpen}
-                    deckCardCount={deckCardCounts ? (deckCardCounts[(edge.node as any).id] ?? 0) : 0}
+                    deckCardCount={
+                      deckCardCounts ? (deckCardCounts[(edge.node as any).id] ?? 0) : 0
+                    }
                     deckColors={deckColors}
                   />
                 ))}

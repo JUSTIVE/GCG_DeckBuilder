@@ -265,7 +265,9 @@ function PlayerPanel({
           </span>
         )}
         {isActive && (
-          <span className="text-xs font-medium text-green-600 animate-pulse ">{t("game.inProgress")}</span>
+          <span className="text-xs font-medium text-green-600 animate-pulse ">
+            {t("game.inProgress")}
+          </span>
         )}
       </div>
 

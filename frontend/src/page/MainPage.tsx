@@ -8,12 +8,7 @@ import { useTranslation } from "react-i18next";
 import { navMain } from "@/lib/nav";
 import { COLOR_BG } from "src/render/color";
 import { cn } from "@/lib/utils";
-import {
-  SearchIcon,
-  LayersIcon,
-  WrenchIcon,
-  ChevronRightIcon,
-} from "lucide-react";
+import { SearchIcon, LayersIcon, WrenchIcon, ChevronRightIcon } from "lucide-react";
 
 export const Query = graphql`
   query MainPageQuery {
@@ -26,10 +21,18 @@ export const Query = graphql`
           count
           card {
             __typename
-            ... on UnitCard { imageUrl }
-            ... on PilotCard { imageUrl }
-            ... on BaseCard { imageUrl }
-            ... on CommandCard { imageUrl }
+            ... on UnitCard {
+              imageUrl
+            }
+            ... on PilotCard {
+              imageUrl
+            }
+            ... on BaseCard {
+              imageUrl
+            }
+            ... on CommandCard {
+              imageUrl
+            }
           }
         }
       }
@@ -74,7 +77,9 @@ export function MainPage() {
     <div className="max-w-2xl mx-auto px-4 py-8 flex flex-col gap-8">
       {/* Nav grid */}
       <section>
-        <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">{t("nav.menu" as any)}</h2>
+        <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+          {t("nav.menu" as any)}
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {navMain.flatMap((group) =>
             (group.items ?? []).map((item) => (
@@ -90,7 +95,7 @@ export function MainPage() {
                 <span className="text-sm font-semibold">{t(item.titleKey as any)}</span>
                 <span className="text-xs text-muted-foreground">{t(group.titleKey as any)}</span>
               </button>
-            ))
+            )),
           )}
         </div>
       </section>
@@ -98,7 +103,9 @@ export function MainPage() {
       {/* Deck list */}
       <section>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t("nav.deckList")}</h2>
+          <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            {t("nav.deckList")}
+          </h2>
           <button
             type="button"
             onClick={() => router.navigate({ to: lp("/decklist") as any })}
@@ -126,17 +133,18 @@ export function MainPage() {
               <li key={deck.id}>
                 <button
                   type="button"
-                  onClick={() => router.navigate({ to: "/$locale/deck/$deckId", params: { locale, deckId: deck.id }, search: deck.colors.length >= 2 ? { color: deck.colors as any } : {} })}
+                  onClick={() =>
+                    router.navigate({
+                      to: "/$locale/deck/$deckId",
+                      params: { locale, deckId: deck.id },
+                      search: deck.colors.length >= 2 ? { color: deck.colors as any } : {},
+                    })
+                  }
                   className="w-full flex items-center gap-3 rounded-xl border border-border bg-muted/30 px-4 py-3 hover:bg-muted/60 transition-colors text-left"
                 >
                   <div className="flex gap-1 shrink-0">
                     {deckPreviewImages(deck.cards).map((url, i) => (
-                      <img
-                        key={i}
-                        src={url}
-                        className="h-10 w-7 rounded object-cover"
-                        alt=""
-                      />
+                      <img key={i} src={url} className="h-10 w-7 rounded object-cover" alt="" />
                     ))}
                     {deckPreviewImages(deck.cards).length === 0 && (
                       <div className="h-10 w-7 rounded bg-muted" />
@@ -145,12 +153,18 @@ export function MainPage() {
                   <div className="flex-1 min-w-0">
                     <div className="font-semibold text-sm truncate">{deck.name}</div>
                     <div className="flex items-center gap-2 mt-0.5">
-                      <span className="text-xs text-muted-foreground">{t("deck.cardCount" as any, { count: totalCards(deck.cards) }) as string}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {t("deck.cardCount" as any, { count: totalCards(deck.cards) }) as string}
+                      </span>
                       <div className="flex gap-1">
                         {deck.colors.map((color) => (
                           <span
                             key={color}
-                            className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")}
+                            className={cn(
+                              "inline-block w-2.5 h-2.5 rounded-full",
+                              COLOR_BG[color],
+                              color === "WHITE" && "border border-gray-200",
+                            )}
                           />
                         ))}
                       </div>

@@ -222,7 +222,7 @@ type Pilot {
 
 type UnitCard implements Node {
   id: ID!
-  name: String!
+  name: LocalizedString!
   level: Int! #레벨
   cost: Int! # 비용
   series: GundamSeries! # 시리즈
@@ -245,12 +245,12 @@ type UnitCard implements Node {
 type Resource implements Node {
   id: ID!
   rarity: CardRarity!
-  name: String!
+  name: LocalizedString!
 }
 
 type BaseCard implements Node {
   id: ID!
-  name: String!
+  name: LocalizedString!
   AP: Int!
   HP: Int!
   zone: [Zone!]!
@@ -271,7 +271,7 @@ type BaseCard implements Node {
 
 type CommandCard implements Node {
   id: ID!
-  name: String!
+  name: LocalizedString!
   level: Int!
   color: CardColor!
   rarity: CardRarity!
@@ -433,12 +433,7 @@ union AddCardToDeckResult =
 
 type Query {
   node(id: ID!): Node
-  cards(
-    first: Int
-    after: String
-    filter: CardFilterInput
-    sort: CardSort
-  ): CardConnection!
+  cards(first: Int, after: String, filter: CardFilterInput, sort: CardSort): CardConnection!
   quicksearch(query: String!, first: Int): [Card!]!
   searchHistory: SearchHistoryList!
   deckList: DeckList!

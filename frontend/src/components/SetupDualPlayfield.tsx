@@ -19,12 +19,7 @@ export type SetupBoardState = {
 };
 
 export type SetupHandImages = readonly (string | null | undefined)[];
-export type MulliganPhase =
-  | "idle"
-  | "returning"
-  | "shuffling"
-  | "drawing"
-  | "done";
+export type MulliganPhase = "idle" | "returning" | "shuffling" | "drawing" | "done";
 export type DrawPhase = "initial" | "drawing" | "done";
 export type OrderPhase = "idle" | "p1" | "both";
 export type SetupHighlight =
@@ -39,10 +34,7 @@ export type SetupHighlight =
 
 // ── Highlight color map ───────────────────────────────────────────────────────
 
-export const HL: Record<
-  SetupHighlight,
-  { bg: string; text: string; border: string }
-> = {
+export const HL: Record<SetupHighlight, { bg: string; text: string; border: string }> = {
   deck: { bg: "bg-slate-500", text: "text-white", border: "border-slate-400" },
   order: {
     bg: "bg-violet-500",
@@ -145,18 +137,9 @@ function HandStrip({
         }
       >
         {i < count && url ? (
-          <img
-            src={url}
-            alt=""
-            className="w-full h-full object-cover object-top"
-          />
+          <img src={url} alt="" className="w-full h-full object-cover object-top" />
         ) : i < count ? (
-          <div
-            className={cn(
-              "w-full h-full",
-              accent ? "bg-primary/40" : "bg-green-100",
-            )}
-          />
+          <div className={cn("w-full h-full", accent ? "bg-primary/40" : "bg-green-100")} />
         ) : null}
       </div>
     );
@@ -184,22 +167,14 @@ function HandStrip({
           accent ? "text-primary" : "text-green-700",
         )}
       >
-        {showShuffling
-          ? "셔플"
-          : showDrawing
-            ? "드로우"
-            : `패 ${count > 0 ? `${count}장` : ""}`}
+        {showShuffling ? "셔플" : showDrawing ? "드로우" : `패 ${count > 0 ? `${count}장` : ""}`}
       </span>
-      <div className={cn("flex gap-0.5", flipped && "flex-row-reverse")}>
-        {cards}
-      </div>
+      <div className={cn("flex gap-0.5", flipped && "flex-row-reverse")}>{cards}</div>
       {showMulliganBadge && (
         <span
           className={cn(
             "text-[8px] rounded px-1 py-0.5 font-bold shrink-0",
-            accent
-              ? "bg-primary/20 text-primary"
-              : "bg-amber-100 text-amber-700",
+            accent ? "bg-primary/20 text-primary" : "bg-amber-100 text-amber-700",
           )}
         >
           멀리건?
@@ -226,9 +201,7 @@ function SetupShieldArea({
     <div
       className={cn(
         "shrink-0 flex flex-col rounded border p-0.5 gap-0.5 transition-all duration-300",
-        accentBase || accentShield
-          ? "border-primary/50 bg-primary/5"
-          : "border-border bg-white",
+        accentBase || accentShield ? "border-primary/50 bg-primary/5" : "border-border bg-white",
         flipped ? "flex-col-reverse" : "",
       )}
       style={{ width: 56 }}
@@ -250,14 +223,8 @@ function SetupShieldArea({
           accentShield ? "border-primary/50 bg-primary/5" : "border-border/50",
         )}
       >
-        <span className="text-[8px] text-center text-muted-foreground leading-none">
-          실드존
-        </span>
-        <ShieldSlots
-          count={board.shieldCount}
-          accent={accentShield}
-          reversed={flipped}
-        />
+        <span className="text-[8px] text-center text-muted-foreground leading-none">실드존</span>
+        <ShieldSlots count={board.shieldCount} accent={accentShield} reversed={flipped} />
       </div>
     </div>
   );
@@ -322,11 +289,7 @@ function SetupHalfBoard({
           />
         ),
         battle: (
-          <ZoneBox
-            label="배틀 에어리어"
-            active={true}
-            className="flex-[3] h-full"
-          >
+          <ZoneBox label="배틀 에어리어" active={true} className="flex-[3] h-full">
             {battleContent}
           </ZoneBox>
         ),
@@ -337,9 +300,7 @@ function SetupHalfBoard({
             active={board.hasDeck}
             accent={(accentDeck && board.hasDeck) || deckShuffling}
             className="flex-[1] h-full"
-            animation={
-              deckShuffling ? "deck-shuffle 0.42s ease-in-out 2" : undefined
-            }
+            animation={deckShuffling ? "deck-shuffle 0.42s ease-in-out 2" : undefined}
           />
         ),
         resDeck: (
@@ -352,9 +313,7 @@ function SetupHalfBoard({
           />
         ),
         resource: resArea,
-        trash: (
-          <ZoneBox label="트래시" active={true} className="flex-[2] h-full" />
-        ),
+        trash: <ZoneBox label="트래시" active={true} className="flex-[2] h-full" />,
       }}
     />
   );
@@ -444,9 +403,8 @@ export function SetupDualPlayfield({
         <div
           className={cn(
             "text-center text-[10px] font-bold py-0.5 rounded transition-all duration-300",
-            (accent("order")
-              ? orderPhase === "p1" || orderPhase === "both"
-              : false) || accent("start")
+            (accent("order") ? orderPhase === "p1" || orderPhase === "both" : false) ||
+              accent("start")
               ? cn(HL[hl].bg, HL[hl].text)
               : "text-muted-foreground",
           )}

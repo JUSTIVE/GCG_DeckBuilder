@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import i18n from "@/i18n";
+import { localize } from "@/lib/localize";
 
 // ─── GraphQL ──────────────────────────────────────────────────────────────────
 
@@ -13,21 +14,23 @@ const QUICKSEARCH_QUERY = `
   query QuickSearchQuery($q: String!, $first: Int) {
     quicksearch(query: $q, first: $first) {
       __typename
-      ... on UnitCard    { id name level cost color AP HP }
+      ... on UnitCard    { id name { en ko } level cost color AP HP }
       ... on PilotCard   { id pilot { name { en ko } AP HP } level cost color }
-      ... on BaseCard    { id name level cost AP HP }
-      ... on CommandCard { id name cost color commandPilot: pilot { name { en ko } AP HP } }
-      ... on Resource    { id name }
+      ... on BaseCard    { id name { en ko } level cost AP HP }
+      ... on CommandCard { id name { en ko } cost color commandPilot: pilot { name { en ko } AP HP } }
+      ... on Resource    { id name { en ko } }
     }
   }
 `;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
+type LocalizedString = { en: string; ko: string };
+
 type UnitResult = {
   __typename: "UnitCard";
   id: string;
-  name: string;
+  name: LocalizedString;
   level: number;
   cost: number;
   color: string;
@@ -37,7 +40,7 @@ type UnitResult = {
 type PilotResult = {
   __typename: "PilotCard";
   id: string;
-  pilot: { name: string; AP: number; HP: number };
+  pilot: { name: LocalizedString; AP: number; HP: number };
   level: number;
   cost: number;
   color: string;
@@ -45,7 +48,7 @@ type PilotResult = {
 type BaseResult = {
   __typename: "BaseCard";
   id: string;
-  name: string;
+  name: LocalizedString;
   level: number;
   cost: number;
   AP: number;
@@ -54,19 +57,20 @@ type BaseResult = {
 type CommandResult = {
   __typename: "CommandCard";
   id: string;
-  name: string;
+  name: LocalizedString;
   cost: number;
   color: string;
-  commandPilot?: { name: string; AP: number; HP: number } | null;
+  commandPilot?: { name: LocalizedString; AP: number; HP: number } | null;
 };
-type ResourceResult = { __typename: "Resource"; id: string; name: string };
+type ResourceResult = { __typename: "Resource"; id: string; name: LocalizedString };
 
 type SearchResult = UnitResult | PilotResult | BaseResult | CommandResult | ResourceResult;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function resultLabel(r: SearchResult): string {
-  return r.__typename === "PilotCard" ? r.pilot.name : r.name;
+  const name = r.__typename === "PilotCard" ? r.pilot.name : r.name;
+  return localize(name, i18n.language);
 }
 
 function resultMeta(r: SearchResult): string {
@@ -237,10 +241,14 @@ export function QuickSearch() {
                 </p>
               )}
               {loading && (
-                <p className="px-4 py-8 text-center text-sm text-muted-foreground">{t("search.searching")}</p>
+                <p className="px-4 py-8 text-center text-sm text-muted-foreground">
+                  {t("search.searching")}
+                </p>
               )}
               {!loading && query.trim() && results.length === 0 && (
-                <p className="px-4 py-8 text-center text-sm text-muted-foreground">{t("search.noResults")}</p>
+                <p className="px-4 py-8 text-center text-sm text-muted-foreground">
+                  {t("search.noResults")}
+                </p>
               )}
               {!loading && results.length > 0 && (
                 <ul ref={listRef} className="p-1">

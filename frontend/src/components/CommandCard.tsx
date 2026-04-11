@@ -1,3 +1,4 @@
+import { useLocalize } from "@/lib/localize";
 import { graphql } from "relay-runtime";
 import type { CommandCardFragment$key } from "@/__generated__/CommandCardFragment.graphql";
 import type { CommandCard_CommandCardBody$key } from "@/__generated__/CommandCard_CommandCardBody.graphql";
@@ -8,13 +9,7 @@ import Marquee from "@/components/Marquee";
 
 import { renderTrait } from "@/render/trait";
 import { useRouter, useSearch, useParams } from "@tanstack/react-router";
-import {
-  COLOR_BG,
-  COLOR_BG20,
-  COLOR_TEXT20,
-  COLOR_BORDER,
-  COLOR_SHADOW,
-} from "src/render/color";
+import { COLOR_BG, COLOR_BG20, COLOR_TEXT20, COLOR_BORDER, COLOR_SHADOW } from "src/render/color";
 import { renderRarity } from "src/render/rarity";
 
 export function CommandCardBody({
@@ -22,20 +17,26 @@ export function CommandCardBody({
 }: {
   commandCardRef: CommandCard_CommandCardBody$key;
 }) {
-  const { locale = "ko" } = useParams({ strict: false });
+  const localize = useLocalize();
   const commandCard = useFragment(
     graphql`
       fragment CommandCard_CommandCardBody on CommandCard {
         id
         level
         cost
-        name
+        name {
+          en
+          ko
+        }
         rarity
         color
         imageUrl
         traits
         commandPilot: pilot {
-          name { en ko }
+          name {
+            en
+            ko
+          }
           AP
           HP
         }
@@ -49,7 +50,7 @@ export function CommandCardBody({
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
         src={commandCard.imageUrl}
-        alt={commandCard.name}
+        alt={localize(commandCard.name)}
       />
       <div className="flex flex-col gap-[5cqw]">
         <div className="flex flex-row items-start justify-between z-1">
@@ -88,9 +89,7 @@ export function CommandCardBody({
             <span
               className={cn(
                 "rotate-90 min-w-[20cqw] translate-x-[-7cqw] scale-y-80",
-                commandCard.color === "WHITE"
-                  ? "text-gray-400"
-                  : "text-white/80",
+                commandCard.color === "WHITE" ? "text-gray-400" : "text-white/80",
               )}
             >
               커맨드
@@ -107,7 +106,7 @@ export function CommandCardBody({
       <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
           <div className="p-2 bg-black break-words cutout-tl-sm cutout text-[6cqw] font-bold text-center line-clamp-2">
-            {commandCard.name}
+            {localize(commandCard.name)}
           </div>
         </div>
         {commandCard.commandPilot != null ? (
@@ -123,7 +122,7 @@ export function CommandCardBody({
                     )}
                   >
                     <Marquee speed={6} gap={16}>
-                      <span>{locale === "en" ? commandCard.commandPilot.name.en : commandCard.commandPilot.name.ko}</span>
+                      <span>{localize(commandCard.commandPilot.name)}</span>
                     </Marquee>
                   </div>
                 </div>
@@ -186,22 +185,43 @@ const Fragment = graphql`
   fragment CommandCardFragment on CommandCard {
     ...CommandCard_CommandCardBody
     id
-    name
+    name {
+      en
+      ko
+    }
     level
     cost
     color
     rarity
     traits
     commandPilot: pilot {
-      name { en ko }
+      name {
+        en
+        ko
+      }
       AP
       HP
     }
     description {
       tokens {
-        ... on TriggerToken { type keyword qualifier { en ko } }
-        ... on AbilityToken { type keyword n }
-        ... on ProseToken { type en ko }
+        ... on TriggerToken {
+          type
+          keyword
+          qualifier {
+            en
+            ko
+          }
+        }
+        ... on AbilityToken {
+          type
+          keyword
+          n
+        }
+        ... on ProseToken {
+          type
+          en
+          ko
+        }
       }
     }
   }
@@ -221,7 +241,10 @@ export function CommandCard({ commandCardRef, onOpen }: Props) {
   const open = search.cardId === commandCard.id;
 
   function openDialog() {
-    if (onOpen) { onOpen(commandCard.id); return; }
+    if (onOpen) {
+      onOpen(commandCard.id);
+      return;
+    }
     router.navigate({
       to: "/$locale/cardlist",
       params: { locale },

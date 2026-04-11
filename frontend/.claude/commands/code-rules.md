@@ -1,5 +1,5 @@
 ---
-description: 이 프로젝트의 코드 작성 규칙 (타입 체크 명령, Relay 패턴, Tailwind 규칙, 한국어 게임 용어 대조, 표현 불가능한 타입 금지)
+description: 이 프로젝트의 코드 작성 규칙 (완료 전 체크리스트, 타입 체크, oxlint/oxfmt, i18n 패턴, Relay 패턴, Tailwind 규칙, 한국어 게임 용어 대조, 표현 불가능한 타입 금지)
 ---
 
 # 코드 작성 규칙 및 제약사항
@@ -30,12 +30,65 @@ type Result = { ok: true; data: Data } | { ok: false; error: string };
 - `Record<string, V>` 보다 `Map<K, V>` 또는 구체적인 키 리터럴 유니언 선호
 - 스키마(Zod 등) 정의와 TypeScript 타입을 **하나의 소스**에서 파생 (`z.infer<typeof schema>`)
 
-## 타입 체크
+## 작업 완료 전 체크리스트
+
+작업이 끝나고 완료를 선언하기 전에 아래 네 가지를 순서대로 실행한다. 모두 오류 0개여야 한다.
 
 ```bash
-tsgo -p .
+tsgo -p .          # 타입 체크
+bun run lint       # oxlint (src/ 대상)
+bun run fmt:check  # oxfmt 포맷 확인
+bun run test       # vitest
 ```
-`pnpm exec tsc --noEmit` 대신 이걸 사용. 훨씬 빠름.
+
+- `fmt:check` 가 실패하면 `bun run fmt` 로 자동 수정 후 다시 확인
+- `pnpm exec tsc --noEmit` 대신 `tsgo -p .` 사용 — 훨씬 빠름
+- 패키지 매니저는 **bun** 사용 (pnpm 금지)
+
+## i18n 패턴
+
+**네임스페이스**: `common`, `game`, `filters`, `rules`
+
+**컴포넌트에서 문자열 표시**
+
+```tsx
+// Hook — 언어 변경 시 자동 re-render
+const { t } = useTranslation("game");
+t("area.battle")        // → "배틀 에어리어" / "Battle Area"
+t("kind.UNIT")          // → "유닛" / "Unit"
+```
+
+**카드 이름 (LocalizedString)**
+
+```tsx
+// LocalizedString = { en: string; ko: string; [lang: string]: string }
+import { useLocalize } from "@/lib/localize";      // 컴포넌트용 hook
+import { localize } from "@/lib/localize";          // 비-hook 컨텍스트용
+
+const localize = useLocalize();
+localize(card.name)                                 // 현재 언어로 자동 선택
+localize(card.pilot?.name)                          // null-safe
+```
+
+**정적 레이블 (필터 등) — 반드시 컴포넌트 render 안에서 호출**
+
+```tsx
+// ❌ 모듈 최상위에서 호출 — 언어 변경에 반응 안 함
+const labels = getKeywordLabels();
+
+// ✓ 컴포넌트 body 안에서 호출
+function FilterControls() {
+  const { t } = useTranslation("common");   // re-render 트리거
+  const keywordLabels = getKeywordLabels(); // 매 render마다 현재 언어로 계산
+  const seriesLabels = getSeriesLabels();
+  const packGroups = getPackGroups();
+  // getKindLabel(k), getZoneLabel(z), getColorLabel(c) — 단건 조회도 동일
+}
+```
+
+**locale 파일 위치**: `src/locales/{ko,en,ja}/{namespace}.json`
+
+새 문자열 추가 시 **세 locale 모두** 동시에 추가한다.
 
 ## Relay / GraphQL
 
@@ -76,25 +129,25 @@ tsgo -p .
 
 ## 한국어 게임 용어 대조
 
-| 한국어 | 영어 변수명/타입 |
-|--------|----------------|
-| 실드 | shield |
-| 베이스존 | base |
-| 배틀 에어리어 | battle |
-| 덱 | deck |
-| 리소스덱 | resDeck / resourceDeck |
-| 리소스 | resource |
-| 트래시 | trash |
-| 손패 | hand |
-| 레스트 | rested |
-| 블로커 | blocker (tag) |
-| 선제공격 | first strike |
-| 고기동 | high maneuver |
-| 돌파 | breach |
-| 원호 | support |
-| 제압 | suppression |
-| 리페어 | repair |
-| 멀리건 | mulligan |
+| 한국어        | 영어 변수명/타입       |
+| ------------- | ---------------------- |
+| 실드          | shield                 |
+| 베이스존      | base                   |
+| 배틀 에어리어 | battle                 |
+| 덱            | deck                   |
+| 리소스덱      | resDeck / resourceDeck |
+| 리소스        | resource               |
+| 트래시        | trash                  |
+| 손패          | hand                   |
+| 레스트        | rested                 |
+| 블로커        | blocker (tag)          |
+| 선제공격      | first strike           |
+| 고기동        | high maneuver          |
+| 돌파          | breach                 |
+| 원호          | support                |
+| 제압          | suppression            |
+| 리페어        | repair                 |
+| 멀리건        | mulligan               |
 
 ## shadcn/ui 색상 토큰
 

@@ -20,7 +20,13 @@ const UNIT_PRESETS: Array<{ ap: number; hp: number; label: string }> = [
   { ap: 5, hp: 3, label: "AP5/HP3" },
 ];
 
-type RosterEntry = { id: number; presetIdx: number; hp: number; rested: boolean; blocker?: boolean };
+type RosterEntry = {
+  id: number;
+  presetIdx: number;
+  hp: number;
+  rested: boolean;
+  blocker?: boolean;
+};
 
 // PHASE_STEPS: UI 진행 표시용 (내부 sub-phase는 damage에 포함)
 const PHASE_STEPS: Array<{ key: BattlePhase; label: string }> = [
@@ -42,19 +48,27 @@ const PHASE_DURATION: Partial<Record<BattlePhase, number>> = {
   attack: 800,
   block: 800,
   action: 800,
-  damage: 550,  // 투사체 비행
-  hit: 360,     // 히트 애니메이션
+  damage: 550, // 투사체 비행
+  hit: 360, // 히트 애니메이션
   counter: 360, // 반격 히트 애니메이션
-  clear: 600,   // 파괴/돌파 표시
+  clear: 600, // 파괴/돌파 표시
   end: 600,
 };
 
 // ── TargetingArrow ────────────────────────────────────────────────────────────
 
 function TargetingArrow({
-  sx, sy, ex, ey, show,
+  sx,
+  sy,
+  ex,
+  ey,
+  show,
 }: {
-  sx: number; sy: number; ex: number; ey: number; show: boolean;
+  sx: number;
+  sy: number;
+  ex: number;
+  ey: number;
+  show: boolean;
 }) {
   if (!show) return null;
   const dx = ex - sx;
@@ -75,7 +89,10 @@ function TargetingArrow({
         </marker>
       </defs>
       <line
-        x1={sx} y1={sy} x2={exA} y2={eyA}
+        x1={sx}
+        y1={sy}
+        x2={exA}
+        y2={eyA}
         stroke="rgb(249,115,22)"
         strokeWidth="2.5"
         strokeDasharray="8 4"
@@ -89,9 +106,17 @@ function TargetingArrow({
 // ── AttackProjectile ──────────────────────────────────────────────────────────
 
 function AttackProjectile({
-  sx, sy, ex, ey, animKey,
+  sx,
+  sy,
+  ex,
+  ey,
+  animKey,
 }: {
-  sx: number; sy: number; ex: number; ey: number; animKey: number;
+  sx: number;
+  sy: number;
+  ex: number;
+  ey: number;
+  animKey: number;
 }) {
   if (animKey === 0) return null;
 
@@ -492,10 +517,23 @@ export function UnitBattleSimulator() {
 
   // ── 리셋 핸들러 ──
   function handleReset() {
-    setMyRoster([{ id: 0, presetIdx: INIT_MY_PRESET, hp: UNIT_PRESETS[INIT_MY_PRESET].hp, rested: false }]);
-    setEnemyRoster([{ id: 1, presetIdx: INIT_ENEMY_PRESET, hp: UNIT_PRESETS[INIT_ENEMY_PRESET].hp, rested: false }]);
+    setMyRoster([
+      { id: 0, presetIdx: INIT_MY_PRESET, hp: UNIT_PRESETS[INIT_MY_PRESET].hp, rested: false },
+    ]);
+    setEnemyRoster([
+      {
+        id: 1,
+        presetIdx: INIT_ENEMY_PRESET,
+        hp: UNIT_PRESETS[INIT_ENEMY_PRESET].hp,
+        rested: false,
+      },
+    ]);
     idRef.current = 2;
-    dispatch({ type: "RESET", myHp: UNIT_PRESETS[INIT_MY_PRESET].hp, enemyHp: UNIT_PRESETS[INIT_ENEMY_PRESET].hp });
+    dispatch({
+      type: "RESET",
+      myHp: UNIT_PRESETS[INIT_MY_PRESET].hp,
+      enemyHp: UNIT_PRESETS[INIT_ENEMY_PRESET].hp,
+    });
   }
 
   // ── 상대 어택 핸들러 (상대 턴에 자동 호출) ──
@@ -563,15 +601,14 @@ export function UnitBattleSimulator() {
   // p2 타격 대상: snap이 있으면 타격 대상을 전 페이즈에 걸쳐 일관 적용
   const p2Target: DualAccent = (() => {
     if (!snap) return null;
-    if (snap.wasBlocker) return "battle";               // 블로커 유닛 전투
-    if (snap.initHasBase) return "base";                // 베이스 직접 타격
-    if (snap.initShields > 0) return "shield";          // 실드 직접 타격
+    if (snap.wasBlocker) return "battle"; // 블로커 유닛 전투
+    if (snap.initHasBase) return "base"; // 베이스 직접 타격
+    if (snap.initShields > 0) return "shield"; // 실드 직접 타격
     return null;
   })();
 
   // p1 (내 유닛 배틀존): 전투 진행 중에만 "battle"
-  const accent: DualAccent =
-    (isBattleActive && !(battle?.breakthroughFired)) ? "battle" : null;
+  const accent: DualAccent = isBattleActive && !battle?.breakthroughFired ? "battle" : null;
 
   // p2: 돌파 발동 후엔 돌파 대상, 그 전엔 타격 대상
   const p2BreakthroughAccent: DualAccent = (() => {
@@ -701,16 +738,30 @@ export function UnitBattleSimulator() {
               {myRoster.length > 0 ? (
                 <div className="flex flex-col gap-0.5">
                   {myRoster.map((entry, idx) => (
-                    <div key={entry.id} className={cn("flex items-center gap-1 px-1 py-0.5 rounded", idx === 0 ? "bg-blue-50 border border-blue-200" : "bg-muted/30")}>
-                      <span className={cn("flex-1 truncate", idx === 0 ? "font-semibold text-blue-700" : "text-muted-foreground")}>
-                        {idx === 0 ? "▶ " : ""}{UNIT_PRESETS[entry.presetIdx].label}
+                    <div
+                      key={entry.id}
+                      className={cn(
+                        "flex items-center gap-1 px-1 py-0.5 rounded",
+                        idx === 0 ? "bg-blue-50 border border-blue-200" : "bg-muted/30",
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "flex-1 truncate",
+                          idx === 0 ? "font-semibold text-blue-700" : "text-muted-foreground",
+                        )}
+                      >
+                        {idx === 0 ? "▶ " : ""}
+                        {UNIT_PRESETS[entry.presetIdx].label}
                       </span>
                       <button
                         type="button"
                         onClick={() => setMyRoster((prev) => prev.filter((e) => e.id !== entry.id))}
                         disabled={isRunning}
                         className="text-muted-foreground hover:text-destructive disabled:opacity-40 leading-none"
-                      >×</button>
+                      >
+                        ×
+                      </button>
                     </div>
                   ))}
                 </div>
@@ -725,22 +776,48 @@ export function UnitBattleSimulator() {
                   className="flex-1 border rounded px-1 py-0.5 text-[10px] bg-background disabled:opacity-50"
                 >
                   {UNIT_PRESETS.map((p, i) => (
-                    <option key={i} value={i}>{p.label}</option>
+                    <option key={i} value={i}>
+                      {p.label}
+                    </option>
                   ))}
                 </select>
                 <button
                   type="button"
-                  onClick={() => setMyRoster((prev) => [...prev, { id: idRef.current++, presetIdx: addMyPreset, hp: UNIT_PRESETS[addMyPreset].hp, rested: false }])}
+                  onClick={() =>
+                    setMyRoster((prev) => [
+                      ...prev,
+                      {
+                        id: idRef.current++,
+                        presetIdx: addMyPreset,
+                        hp: UNIT_PRESETS[addMyPreset].hp,
+                        rested: false,
+                      },
+                    ])
+                  }
                   disabled={isRunning || myRoster.length >= 6}
                   className="px-2 py-0.5 rounded border border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100 disabled:opacity-40 font-bold"
-                >+</button>
+                >
+                  +
+                </button>
               </div>
               <label className="flex items-center gap-1 cursor-pointer select-none">
-                <input type="checkbox" checked={hasFirstStrike} onChange={(e) => setHasFirstStrike(e.target.checked)} disabled={isRunning} className="accent-blue-500" />
+                <input
+                  type="checkbox"
+                  checked={hasFirstStrike}
+                  onChange={(e) => setHasFirstStrike(e.target.checked)}
+                  disabled={isRunning}
+                  className="accent-blue-500"
+                />
                 <span className="text-muted-foreground">《선제공격》</span>
               </label>
               <label className="flex items-center gap-1 cursor-pointer select-none">
-                <input type="checkbox" checked={hasHighMobility} onChange={(e) => setHasHighMobility(e.target.checked)} disabled={isRunning} className="accent-blue-500" />
+                <input
+                  type="checkbox"
+                  checked={hasHighMobility}
+                  onChange={(e) => setHasHighMobility(e.target.checked)}
+                  disabled={isRunning}
+                  className="accent-blue-500"
+                />
                 <span className="text-muted-foreground">《고기동》</span>
               </label>
               <label className="flex items-center gap-1 cursor-pointer select-none">
@@ -764,17 +841,37 @@ export function UnitBattleSimulator() {
               {enemyRoster.length > 0 ? (
                 <div className="flex flex-col gap-0.5">
                   {enemyRoster.map((entry, idx) => (
-                    <div key={entry.id} className={cn("flex items-center gap-1 px-1 py-0.5 rounded", idx === 0 ? "bg-red-50 border border-red-200" : "bg-muted/30")}>
-                      <span className={cn("flex-1 truncate", idx === 0 ? "font-semibold text-red-700" : "text-muted-foreground")}>
-                        {idx === 0 ? "▶ " : ""}{UNIT_PRESETS[entry.presetIdx].label}
+                    <div
+                      key={entry.id}
+                      className={cn(
+                        "flex items-center gap-1 px-1 py-0.5 rounded",
+                        idx === 0 ? "bg-red-50 border border-red-200" : "bg-muted/30",
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "flex-1 truncate",
+                          idx === 0 ? "font-semibold text-red-700" : "text-muted-foreground",
+                        )}
+                      >
+                        {idx === 0 ? "▶ " : ""}
+                        {UNIT_PRESETS[entry.presetIdx].label}
                       </span>
-                      {entry.blocker && <span className="text-[8px] bg-red-200 text-red-800 rounded px-0.5 leading-tight shrink-0">블로커</span>}
+                      {entry.blocker && (
+                        <span className="text-[8px] bg-red-200 text-red-800 rounded px-0.5 leading-tight shrink-0">
+                          블로커
+                        </span>
+                      )}
                       <button
                         type="button"
-                        onClick={() => setEnemyRoster((prev) => prev.filter((e) => e.id !== entry.id))}
+                        onClick={() =>
+                          setEnemyRoster((prev) => prev.filter((e) => e.id !== entry.id))
+                        }
                         disabled={isRunning}
                         className="text-muted-foreground hover:text-destructive disabled:opacity-40 leading-none"
-                      >×</button>
+                      >
+                        ×
+                      </button>
                     </div>
                   ))}
                 </div>
@@ -789,22 +886,48 @@ export function UnitBattleSimulator() {
                   className="flex-1 border rounded px-1 py-0.5 text-[10px] bg-background disabled:opacity-50"
                 >
                   {UNIT_PRESETS.map((p, i) => (
-                    <option key={i} value={i}>{p.label}</option>
+                    <option key={i} value={i}>
+                      {p.label}
+                    </option>
                   ))}
                 </select>
                 <button
                   type="button"
-                  onClick={() => setEnemyRoster((prev) => [...prev, { id: idRef.current++, presetIdx: addEnemyPreset, hp: UNIT_PRESETS[addEnemyPreset].hp, rested: false, blocker: addWithBlocker }])}
+                  onClick={() =>
+                    setEnemyRoster((prev) => [
+                      ...prev,
+                      {
+                        id: idRef.current++,
+                        presetIdx: addEnemyPreset,
+                        hp: UNIT_PRESETS[addEnemyPreset].hp,
+                        rested: false,
+                        blocker: addWithBlocker,
+                      },
+                    ])
+                  }
                   disabled={isRunning || enemyRoster.length >= 6}
                   className="px-2 py-0.5 rounded border border-red-300 bg-red-50 text-red-700 hover:bg-red-100 disabled:opacity-40 font-bold"
-                >+</button>
+                >
+                  +
+                </button>
               </div>
               <label className="flex items-center gap-1 cursor-pointer select-none">
-                <input type="checkbox" checked={addWithBlocker} onChange={(e) => setAddWithBlocker(e.target.checked)} className="accent-red-500" />
+                <input
+                  type="checkbox"
+                  checked={addWithBlocker}
+                  onChange={(e) => setAddWithBlocker(e.target.checked)}
+                  className="accent-red-500"
+                />
                 <span className="text-muted-foreground">추가 시 《블로커》</span>
               </label>
               <label className="flex items-center gap-1 cursor-pointer select-none">
-                <input type="checkbox" checked={hasBurst} onChange={(e) => setHasBurst(e.target.checked)} disabled={isRunning} className="accent-red-500" />
+                <input
+                  type="checkbox"
+                  checked={hasBurst}
+                  onChange={(e) => setHasBurst(e.target.checked)}
+                  disabled={isRunning}
+                  className="accent-red-500"
+                />
                 <span className="text-muted-foreground">실드에 《버스트》</span>
               </label>
             </div>
@@ -818,13 +941,19 @@ export function UnitBattleSimulator() {
                   className="absolute inset-0 top-0 bottom-1/2 z-20 flex items-center justify-center pointer-events-none"
                   style={{ animation: "defeat-pop 0.45s cubic-bezier(0.34,1.56,0.64,1) both" }}
                 >
-                  <span className="text-2xl font-black text-rose-500 drop-shadow-lg select-none">☠ 패배</span>
+                  <span className="text-2xl font-black text-rose-500 drop-shadow-lg select-none">
+                    ☠ 패배
+                  </span>
                 </div>
                 <div
                   className="absolute inset-0 top-1/2 bottom-0 z-20 flex items-center justify-center pointer-events-none"
-                  style={{ animation: "defeat-pop 0.45s 0.12s cubic-bezier(0.34,1.56,0.64,1) both" }}
+                  style={{
+                    animation: "defeat-pop 0.45s 0.12s cubic-bezier(0.34,1.56,0.64,1) both",
+                  }}
                 >
-                  <span className="text-2xl font-black text-emerald-500 drop-shadow-lg select-none">★ 승리</span>
+                  <span className="text-2xl font-black text-emerald-500 drop-shadow-lg select-none">
+                    ★ 승리
+                  </span>
                 </div>
               </>
             )}
@@ -834,109 +963,147 @@ export function UnitBattleSimulator() {
                   className="absolute inset-0 top-0 bottom-1/2 z-20 flex items-center justify-center pointer-events-none"
                   style={{ animation: "defeat-pop 0.45s cubic-bezier(0.34,1.56,0.64,1) both" }}
                 >
-                  <span className="text-2xl font-black text-emerald-500 drop-shadow-lg select-none">★ 승리</span>
+                  <span className="text-2xl font-black text-emerald-500 drop-shadow-lg select-none">
+                    ★ 승리
+                  </span>
                 </div>
                 <div
                   className="absolute inset-0 top-1/2 bottom-0 z-20 flex items-center justify-center pointer-events-none"
-                  style={{ animation: "defeat-pop 0.45s 0.12s cubic-bezier(0.34,1.56,0.64,1) both" }}
+                  style={{
+                    animation: "defeat-pop 0.45s 0.12s cubic-bezier(0.34,1.56,0.64,1) both",
+                  }}
                 >
-                  <span className="text-2xl font-black text-rose-500 drop-shadow-lg select-none">☠ 패배</span>
+                  <span className="text-2xl font-black text-rose-500 drop-shadow-lg select-none">
+                    ☠ 패배
+                  </span>
                 </div>
               </>
             )}
-            <div className={cn("transition-all duration-500", (board.enemyDefeated || board.myDefeated) && "opacity-30")}>
-            <DualPlayfield
-              p1={p1Board}
-              p2={p2Board}
-              p1Label="나 (어택)"
-              p2Label="상대"
-              accent={accent}
-              p2Accent={p2BreakthroughAccent}
-              p1Battle={(() => {
-                const n = myRoster.length;
-                const s = cardScale(n);
-                const w = Math.round(64 * s);
-                const h = Math.round(89 * s);
-                return (
-                  <div ref={battleZoneRef} className="w-full h-full flex items-center justify-start gap-0.5 px-0.5 overflow-hidden">
-                    {myRoster.map((entry, idx) => {
-                      const p = UNIT_PRESETS[entry.presetIdx];
-                      const isActive = idx === 0;
-                      return (
-                        <div
-                          key={entry.id}
-                          ref={isActive ? myBattleRef : undefined}
-                          className="shrink-0 overflow-visible"
-                          style={{ width: w, height: h }}
-                        >
-                          <div style={{ transform: `scale(${s})`, transformOrigin: "top left" }}>
-                            <MiniCard
-                              name={isActive ? "나" : p.label}
-                              ap={p.ap}
-                              hp={isActive ? board.myHp : p.hp}
-                              maxHp={p.hp}
-                              color="blue"
-                              rested={isActive && battle !== null ? battle.myRested : entry.rested}
-                              attacking={isActive ? ((battle?.myAttacking ?? false) && attackDir === "mine") : false}
-                              attackDir={-1}
-                              hit={isActive ? (battle?.myHit ?? false) : false}
-                              destroyed={isActive ? (battle?.myDestroyed ?? false) : false}
-                              tag={isActive ? ([hasFirstStrike ? "선제" : "", hasHighMobility ? "고기동" : "", breakthroughN > 0 ? `돌파${breakthroughN}` : ""].filter(Boolean).join(" ") || undefined) : undefined}
-                              highlight={isActive && displayPhase === "damage"}
-                              dim={!isActive}
-                            />
+            <div
+              className={cn(
+                "transition-all duration-500",
+                (board.enemyDefeated || board.myDefeated) && "opacity-30",
+              )}
+            >
+              <DualPlayfield
+                p1={p1Board}
+                p2={p2Board}
+                p1Label="나 (어택)"
+                p2Label="상대"
+                accent={accent}
+                p2Accent={p2BreakthroughAccent}
+                p1Battle={(() => {
+                  const n = myRoster.length;
+                  const s = cardScale(n);
+                  const w = Math.round(64 * s);
+                  const h = Math.round(89 * s);
+                  return (
+                    <div
+                      ref={battleZoneRef}
+                      className="w-full h-full flex items-center justify-start gap-0.5 px-0.5 overflow-hidden"
+                    >
+                      {myRoster.map((entry, idx) => {
+                        const p = UNIT_PRESETS[entry.presetIdx];
+                        const isActive = idx === 0;
+                        return (
+                          <div
+                            key={entry.id}
+                            ref={isActive ? myBattleRef : undefined}
+                            className="shrink-0 overflow-visible"
+                            style={{ width: w, height: h }}
+                          >
+                            <div style={{ transform: `scale(${s})`, transformOrigin: "top left" }}>
+                              <MiniCard
+                                name={isActive ? "나" : p.label}
+                                ap={p.ap}
+                                hp={isActive ? board.myHp : p.hp}
+                                maxHp={p.hp}
+                                color="blue"
+                                rested={
+                                  isActive && battle !== null ? battle.myRested : entry.rested
+                                }
+                                attacking={
+                                  isActive
+                                    ? (battle?.myAttacking ?? false) && attackDir === "mine"
+                                    : false
+                                }
+                                attackDir={-1}
+                                hit={isActive ? (battle?.myHit ?? false) : false}
+                                destroyed={isActive ? (battle?.myDestroyed ?? false) : false}
+                                tag={
+                                  isActive
+                                    ? [
+                                        hasFirstStrike ? "선제" : "",
+                                        hasHighMobility ? "고기동" : "",
+                                        breakthroughN > 0 ? `돌파${breakthroughN}` : "",
+                                      ]
+                                        .filter(Boolean)
+                                        .join(" ") || undefined
+                                    : undefined
+                                }
+                                highlight={isActive && displayPhase === "damage"}
+                                dim={!isActive}
+                              />
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                );
-              })()}
-              p2Battle={(() => {
-                const n = enemyRoster.length;
-                const s = cardScale(n);
-                const w = Math.round(64 * s);
-                const h = Math.round(89 * s);
-                return (
-                  <div className="w-full h-full flex items-center justify-end gap-0.5 px-0.5 overflow-hidden">
-                    {[...enemyRoster].reverse().map((entry, revIdx) => {
-                      const idx = enemyRoster.length - 1 - revIdx;
-                      const p = UNIT_PRESETS[entry.presetIdx];
-                      const isActive = idx === 0;
-                      return (
-                        <div
-                          key={entry.id}
-                          ref={isActive ? enemyBattleRef : undefined}
-                          className="shrink-0 overflow-visible"
-                          style={{ width: w, height: h }}
-                        >
-                          <div style={{ transform: `scale(${s})`, transformOrigin: "top left" }}>
-                            <MiniCard
-                              name={isActive ? "상대" : p.label}
-                              ap={p.ap}
-                              hp={isActive ? board.enemyHp : p.hp}
-                              maxHp={p.hp}
-                              color="red"
-                              rested={isActive && battle !== null
-                                ? (attackDir === "enemy"
-                                    ? battle.myRested
-                                    : (battle.snap.wasBlocker ? battle.blockerRested : entry.rested))
-                                : entry.rested}
-                              attacking={isActive ? ((battle?.myAttacking ?? false) && attackDir === "enemy") : false}
-                              attackDir={1}
-                              hit={isActive ? (battle?.enemyHit ?? false) : false}
-                              destroyed={isActive ? (battle?.enemyDestroyed ?? false) : false}
-                              tag={entry.blocker ? "블로커" : undefined}
-                              dim={!isActive}
-                            />
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
+                p2Battle={(() => {
+                  const n = enemyRoster.length;
+                  const s = cardScale(n);
+                  const w = Math.round(64 * s);
+                  const h = Math.round(89 * s);
+                  return (
+                    <div className="w-full h-full flex items-center justify-end gap-0.5 px-0.5 overflow-hidden">
+                      {[...enemyRoster].reverse().map((entry, revIdx) => {
+                        const idx = enemyRoster.length - 1 - revIdx;
+                        const p = UNIT_PRESETS[entry.presetIdx];
+                        const isActive = idx === 0;
+                        return (
+                          <div
+                            key={entry.id}
+                            ref={isActive ? enemyBattleRef : undefined}
+                            className="shrink-0 overflow-visible"
+                            style={{ width: w, height: h }}
+                          >
+                            <div style={{ transform: `scale(${s})`, transformOrigin: "top left" }}>
+                              <MiniCard
+                                name={isActive ? "상대" : p.label}
+                                ap={p.ap}
+                                hp={isActive ? board.enemyHp : p.hp}
+                                maxHp={p.hp}
+                                color="red"
+                                rested={
+                                  isActive && battle !== null
+                                    ? attackDir === "enemy"
+                                      ? battle.myRested
+                                      : battle.snap.wasBlocker
+                                        ? battle.blockerRested
+                                        : entry.rested
+                                    : entry.rested
+                                }
+                                attacking={
+                                  isActive
+                                    ? (battle?.myAttacking ?? false) && attackDir === "enemy"
+                                    : false
+                                }
+                                attackDir={1}
+                                hit={isActive ? (battle?.enemyHit ?? false) : false}
+                                destroyed={isActive ? (battle?.enemyDestroyed ?? false) : false}
+                                tag={entry.blocker ? "블로커" : undefined}
+                                dim={!isActive}
+                              />
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                );
-              })()}
-            />
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
+              />
             </div>
 
             <TargetingArrow
@@ -980,7 +1147,8 @@ export function UnitBattleSimulator() {
               className="text-center text-[11px] font-black text-orange-600 bg-orange-50 border border-orange-300 rounded-lg px-2 py-1.5 shadow-sm"
               style={{ animation: "breakthrough-badge 380ms cubic-bezier(0.34,1.56,0.64,1) both" }}
             >
-              《돌파 {battle.snap.breakthroughN}》 발동 — 실드 {board.enemyShields}장{board.enemyHasBase ? ` · 베이스 HP ${board.enemyBaseHp}` : ""} 남음
+              《돌파 {battle.snap.breakthroughN}》 발동 — 실드 {board.enemyShields}장
+              {board.enemyHasBase ? ` · 베이스 HP ${board.enemyBaseHp}` : ""} 남음
             </div>
           )}
 
@@ -1003,7 +1171,13 @@ export function UnitBattleSimulator() {
                 <button
                   type="button"
                   onClick={handleRun}
-                  disabled={isRunning || board.myHp <= 0 || myRoster.length === 0 || board.enemyDefeated || board.myDefeated}
+                  disabled={
+                    isRunning ||
+                    board.myHp <= 0 ||
+                    myRoster.length === 0 ||
+                    board.enemyDefeated ||
+                    board.myDefeated
+                  }
                   className="flex-1 text-xs py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
                 >
                   어택!

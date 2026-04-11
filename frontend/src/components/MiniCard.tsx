@@ -89,19 +89,13 @@ export function MiniCard({
     const cardEl = cardRef.current;
     if (!cardEl) return;
     const board = cardEl.closest(".dual-playfield");
-    const trashEl = board?.querySelector(
-      `[data-trash="${attackDir === 1 ? "p2" : "p1"}"]`,
-    );
+    const trashEl = board?.querySelector(`[data-trash="${attackDir === 1 ? "p2" : "p1"}"]`);
     if (!trashEl) return;
     const cardRect = cardEl.getBoundingClientRect();
     const trashRect = trashEl.getBoundingClientRect();
     setFlyTo({
-      x:
-        (trashRect.left + trashRect.right) / 2 -
-        (cardRect.left + cardRect.right) / 2,
-      y:
-        (trashRect.top + trashRect.bottom) / 2 -
-        (cardRect.top + cardRect.bottom) / 2,
+      x: (trashRect.left + trashRect.right) / 2 - (cardRect.left + cardRect.right) / 2,
+      y: (trashRect.top + trashRect.bottom) / 2 - (cardRect.top + cardRect.bottom) / 2,
     });
   }, [destroyed]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -118,8 +112,7 @@ export function MiniCard({
             ? {
                 transform: `translate(${flyTo.x}px, ${flyTo.y}px) scale(0.35) rotate(${attackDir * -25}deg)`,
                 opacity: 0,
-                transition:
-                  "transform 480ms cubic-bezier(0.4,0,0.8,1), opacity 360ms ease 160ms",
+                transition: "transform 480ms cubic-bezier(0.4,0,0.8,1), opacity 360ms ease 160ms",
                 pointerEvents: "none",
               }
             : {
@@ -130,10 +123,7 @@ export function MiniCard({
               }
         }
       >
-        <div
-          key={hitKey}
-          style={{ animation: hitKey > 0 ? `card-hit 320ms ease` : undefined }}
-        >
+        <div key={hitKey} style={{ animation: hitKey > 0 ? `card-hit 320ms ease` : undefined }}>
           <div
             className={cn(
               "rounded border-2 flex flex-col overflow-hidden shrink-0 select-none",
@@ -154,10 +144,7 @@ export function MiniCard({
             <div className={cn("h-5 shrink-0", c.head)} />
             <div className="flex-1 flex items-center justify-center px-1">
               <span
-                className={cn(
-                  "text-[10px] font-bold text-center leading-tight break-keep",
-                  c.stat,
-                )}
+                className={cn("text-[10px] font-bold text-center leading-tight break-keep", c.stat)}
               >
                 {name}
               </span>
@@ -175,9 +162,7 @@ export function MiniCard({
                   <span
                     className={cn(
                       "font-black leading-none transition-all duration-300",
-                      apBoost > 0
-                        ? "text-[15px] text-red-700"
-                        : `text-[13px] ${c.stat}`,
+                      apBoost > 0 ? "text-[15px] text-red-700" : `text-[13px] ${c.stat}`,
                     )}
                   >
                     <NumberFlow value={ap + apBoost} />

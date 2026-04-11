@@ -5,17 +5,10 @@ import { CardList } from "@/components/CardList";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 import { usePreloadedQuery, type PreloadedQuery } from "react-relay";
 import { graphql } from "relay-runtime";
-import {
-  Route,
-  type CardListSearch,
-} from "@/routes/$locale/cardlist";
+import { Route, type CardListSearch } from "@/routes/$locale/cardlist";
 import { useRouter } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
-import {
-  ClockIcon,
-  FileTextIcon,
-  SlidersHorizontalIcon,
-} from "lucide-react";
+import { ClockIcon, FileTextIcon, SlidersHorizontalIcon } from "lucide-react";
 import {
   FilterControls,
   activeFilterCount,
@@ -26,12 +19,7 @@ import { useRef, useState, Suspense, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { SearchHistoryPanel } from "@/components/SearchHistoryPanel";
 import type { SearchHistoryPanel_query$key } from "@/__generated__/SearchHistoryPanel_query.graphql";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 export const Query = graphql`
   query CardListPageQuery($filter: CardFilterInput!, $sort: CardSort) {
@@ -61,19 +49,13 @@ function buildSort(search: CardListSearch): CardSort | null {
   return (search.sort as CardSort) ?? null;
 }
 
-function filterToSearch(
-  filter: CardFilterInput,
-  sort: CardSort | null,
-): CardListSearch {
+function filterToSearch(filter: CardFilterInput, sort: CardSort | null): CardListSearch {
   const kind = filter.kind as CardListSearch["kind"];
   const cost = filter.cost as number[] | null | undefined;
   const level = filter.level as number[] | null | undefined;
   const zone = filter.zone as CardListSearch["zone"] | null | undefined;
   const color = filter.color as CardListSearch["color"] | null | undefined;
-  const keyword = filter.keyword as
-    | CardListSearch["keyword"]
-    | null
-    | undefined;
+  const keyword = filter.keyword as CardListSearch["keyword"] | null | undefined;
   const trait = filter.trait as CardListSearch["trait"] | null | undefined;
   const pkg = filter.package as CardListSearch["package"] | null | undefined;
   const series = (filter as any).series as CardListSearch["series"] | null | undefined;
@@ -115,12 +97,7 @@ function FilterBar({
 
   return (
     <aside className="hidden md:flex flex-col gap-4 w-85 shrink-0 border-r border-border px-4 py-4 overflow-y-auto h-[calc(100dvh-65px)]">
-      <FilterControls
-        filter={filter}
-        sort={sort}
-        onChange={onChange}
-        onSortChange={onSortChange}
-      />
+      <FilterControls filter={filter} sort={sort} onChange={onChange} onSortChange={onSortChange} />
       {hasFilters && (
         <button
           type="button"
@@ -255,8 +232,14 @@ function FilterBottomSheet({
             <SearchHistoryPanel
               queryRef={historyQueryRef}
               fetchKey={historyFetchKey}
-              onRestore={(f, s) => { onRestore(f, s); setHistoryOpen(false); }}
-              onRestoreCardView={(id) => { onRestoreCardView(id); setHistoryOpen(false); }}
+              onRestore={(f, s) => {
+                onRestore(f, s);
+                setHistoryOpen(false);
+              }}
+              onRestoreCardView={(id) => {
+                onRestoreCardView(id);
+                setHistoryOpen(false);
+              }}
             />
           </div>
         </SheetContent>
@@ -382,10 +365,7 @@ export function CardListPage() {
     });
   }
 
-  const historyFetchKey = useMemo(
-    () => JSON.stringify({ filter, sort }),
-    [filter, sort],
-  );
+  const historyFetchKey = useMemo(() => JSON.stringify({ filter, sort }), [filter, sort]);
 
   return (
     <div className="flex flex-col md:flex-row">

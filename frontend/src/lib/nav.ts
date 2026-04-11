@@ -34,9 +34,7 @@ export const navMain: NavItem[] = [
 ];
 
 /** Returns [parentItem, childItem?] matching the given path (without locale prefix). */
-export function resolveBreadcrumb(
-  pathname: string,
-): [NavItem, NavItem?] | null {
+export function resolveBreadcrumb(pathname: string): [NavItem, NavItem?] | null {
   // Strip locale prefix: "/ko/cardlist" → "/cardlist"
   const stripped = pathname.replace(/^\/(ko|en|jp)/, "") || "/";
   for (const parent of navMain) {

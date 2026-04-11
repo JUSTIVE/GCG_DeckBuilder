@@ -37,7 +37,7 @@ describe("Query.cards – kind filter", () => {
           edges {
             node {
               __typename
-              ... on UnitCard { id name AP HP }
+              ... on UnitCard { id name { en ko } AP HP }
             }
           }
         }
@@ -105,7 +105,7 @@ describe("Query.cards – kind filter", () => {
       `query($f: CardFilterInput!) {
         cards(filter: $f) {
           totalCount
-          edges { node { __typename ... on BaseCard { id name AP HP } } }
+          edges { node { __typename ... on BaseCard { id name { en ko } AP HP } } }
         }
       }`,
       { f: { kind: ["BASE"] } },
@@ -127,7 +127,7 @@ describe("Query.cards – kind filter", () => {
       `query($f: CardFilterInput!) {
         cards(filter: $f) {
           totalCount
-          edges { node { __typename ... on CommandCard { id name } } }
+          edges { node { __typename ... on CommandCard { id name { en ko } } } }
         }
       }`,
       { f: { kind: ["COMMAND"] } },
@@ -319,7 +319,7 @@ describe("Query.cards – filter combinations", () => {
       `query($f: CardFilterInput!) {
         cards(filter: $f) {
           totalCount
-          edges { node { ... on UnitCard { id name } } }
+          edges { node { ... on UnitCard { id name { en ko } } } }
         }
       }`,
       { f: { kind: ["UNIT"], query: "건담" } },
@@ -327,12 +327,12 @@ describe("Query.cards – filter combinations", () => {
 
     const conn = data["cards"] as {
       totalCount: number;
-      edges: Array<{ node: { name: string } }>;
+      edges: Array<{ node: { name: { en: string; ko: string } } }>;
     };
 
     expect(conn.totalCount).toBeGreaterThan(0);
     for (const edge of conn.edges) {
-      expect(edge.node.name).toContain("건담");
+      expect(edge.node.name.ko).toContain("건담");
     }
   });
 
@@ -625,14 +625,14 @@ describe("LinkPilot.pilot – pilotName → Pilot lookup", () => {
 
     const node = data["node"] as {
       links: Array<{
-        pilot?: { name: string; AP: number; HP: number };
+        pilot?: { name: { en: string; ko: string }; AP: number; HP: number };
       }>;
     };
 
     expect(node.links).toHaveLength(1);
     const pilot = node.links[0].pilot;
     expect(pilot).toBeDefined();
-    expect(pilot!.name).toBe("아무로 레이");
+    expect(pilot!.name.ko).toBe("아무로 레이");
     expect(typeof pilot!.AP).toBe("number");
     expect(typeof pilot!.HP).toBe("number");
   });
@@ -663,7 +663,7 @@ describe("LinkPilot.pilot – pilotName → Pilot lookup", () => {
           node: {
             links: Array<{
               __typename: string;
-              pilot?: { name: string; AP: number; HP: number };
+              pilot?: { name: { en: string; ko: string }; AP: number; HP: number };
             }>;
           };
         }>;
@@ -675,14 +675,14 @@ describe("LinkPilot.pilot – pilotName → Pilot lookup", () => {
           l,
         ): l is {
           __typename: "LinkPilot";
-          pilot: { name: string; AP: number; HP: number };
+          pilot: { name: { en: string; ko: string }; AP: number; HP: number };
         } => l.__typename === "LinkPilot",
       );
 
     for (const l of pilotLinks) {
       expect(l.pilot).toBeDefined();
-      expect(typeof l.pilot.name).toBe("string");
-      expect(l.pilot.name.length).toBeGreaterThan(0);
+      expect(typeof l.pilot.name).toBe("object");
+      expect(l.pilot.name.ko).toBeTruthy();
       expect(typeof l.pilot.AP).toBe("number");
       expect(typeof l.pilot.HP).toBe("number");
     }
@@ -717,7 +717,7 @@ describe("PilotCard.pilot – flat raw fields → Pilot object", () => {
         edges: Array<{
           node: {
             id: string;
-            pilot: { name: string; AP: number; HP: number };
+            pilot: { name: { en: string; ko: string }; AP: number; HP: number };
             rarity: string;
           };
         }>;
@@ -726,8 +726,8 @@ describe("PilotCard.pilot – flat raw fields → Pilot object", () => {
 
     expect(edges.length).toBeGreaterThan(0);
     for (const edge of edges) {
-      expect(typeof edge.node.pilot.name).toBe("string");
-      expect(edge.node.pilot.name.length).toBeGreaterThan(0);
+      expect(typeof edge.node.pilot.name).toBe("object");
+      expect(edge.node.pilot.name.ko).toBeTruthy();
       expect(typeof edge.node.pilot.AP).toBe("number");
       expect(typeof edge.node.pilot.HP).toBe("number");
     }
@@ -745,7 +745,7 @@ describe("CommandCard.pilot – nullable Pilot", () => {
           edges {
             node {
               ... on CommandCard {
-                id name
+                id name { en ko }
                 pilot { name { en ko } AP HP }
               }
             }
@@ -761,8 +761,8 @@ describe("CommandCard.pilot – nullable Pilot", () => {
         edges: Array<{
           node: {
             id: string;
-            name: string;
-            pilot: { name: string; AP: number; HP: number } | null;
+            name: { en: string; ko: string };
+            pilot: { name: { en: string; ko: string }; AP: number; HP: number } | null;
           };
         }>;
       }
@@ -772,7 +772,7 @@ describe("CommandCard.pilot – nullable Pilot", () => {
     // pilot is nullable — some will be null, some will be an object
     for (const edge of edges) {
       if (edge.node.pilot !== null) {
-        expect(typeof edge.node.pilot.name).toBe("string");
+        expect(typeof edge.node.pilot.name).toBe("object");
         expect(typeof edge.node.pilot.AP).toBe("number");
         expect(typeof edge.node.pilot.HP).toBe("number");
       }
@@ -811,7 +811,7 @@ describe("BaseCard.AP null coercion → 0", () => {
         cards(filter: $f) {
           edges {
             node {
-              ... on BaseCard { id name AP HP }
+              ... on BaseCard { id name { en ko } AP HP }
             }
           }
         }
@@ -833,7 +833,9 @@ describe("BaseCard.AP null coercion → 0", () => {
 
   // ST01-015 (White Base) has "AP": null in mapped.json
   it("White Base AP is 0 after coercion", async () => {
-    const data = await gql(`{ node(id: "ST01-015") { ... on BaseCard { id name AP HP } } }`);
+    const data = await gql(
+      `{ node(id: "ST01-015") { ... on BaseCard { id name { en ko } AP HP } } }`,
+    );
     const node = data["node"] as { id: string; AP: number; HP: number };
     expect(node.id).toBe("ST01-015");
     expect(node.AP).toBe(0);
@@ -848,21 +850,21 @@ describe("Query.node", () => {
     const data = await gql(
       `{ node(id: "ST01-001") {
           id
-          ... on UnitCard { name AP HP level cost color series keywords zone rarity }
+          ... on UnitCard { name { en ko } AP HP level cost color series keywords zone rarity }
         }
       }`,
     );
 
     const node = data["node"] as {
       id: string;
-      name: string;
+      name: { en: string; ko: string };
       AP: number;
       HP: number;
       rarity: string;
     };
 
     expect(node.id).toBe("ST01-001");
-    expect(node.name).toBe("건담");
+    expect(node.name.ko).toBe("건담");
     expect(node.AP).toBe(3);
     expect(node.HP).toBe(4);
     expect(node.rarity).toBe("COMMON");
@@ -885,20 +887,119 @@ describe("Query.node", () => {
 
     const node = data["node"] as {
       id: string;
-      pilot: { name: string; AP: number; HP: number };
+      pilot: { name: { en: string; ko: string }; AP: number; HP: number };
       rarity: string;
     };
     expect(node.id).toBe("ST01-010");
-    expect(node.pilot.name).toBeTruthy();
+    expect(node.pilot.name.ko).toBeTruthy();
     expect(typeof node.pilot.AP).toBe("number");
     expect(typeof node.pilot.HP).toBe("number");
     expect(node.rarity).toBe("COMMON");
   });
 
   it("node(id) returns a ResourceCard by id", async () => {
-    const data = await gql(`{ node(id: "T-001") { id ... on Resource { name rarity } } }`);
-    const node = data["node"] as { id: string; name: string; rarity: string };
+    const data = await gql(
+      `{ node(id: "T-001") { id ... on Resource { name { en ko } rarity } } }`,
+    );
+    const node = data["node"] as { id: string; name: { en: string; ko: string }; rarity: string };
     expect(node.id).toBe("T-001");
-    expect(typeof node.name).toBe("string");
+    expect(typeof node.name).toBe("object");
+  });
+});
+
+// ─── Regression – LocalizedString name field ──────────────────────────────────
+
+describe("Regression – LocalizedString name field", () => {
+  it("UnitCard name is LocalizedString with en and ko", async () => {
+    const data = await gql(`{ node(id: "ST01-001") { ... on UnitCard { name { en ko } } } }`);
+    const node = data["node"] as { name: { en: string; ko: string } };
+    expect(node.name.en).toBe("Gundam");
+    expect(node.name.ko).toBe("건담");
+  });
+
+  it("PilotCard pilot name is LocalizedString – unitNameMapper does not clobber pilot names", async () => {
+    const data = await gql(
+      `{ node(id: "ST01-010") { ... on PilotCard { pilot { name { en ko } } } } }`,
+    );
+    const node = data["node"] as { pilot: { name: { en: string; ko: string } } };
+    expect(node.pilot.name.en).toBe("Amuro Ray");
+    expect(node.pilot.name.ko).toBe("아무로 레이");
+  });
+
+  it("Korean name search returns results", async () => {
+    const data = await gql(`query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`, {
+      f: { kind: ["UNIT"], query: "건담" },
+    });
+    const conn = data["cards"] as { totalCount: number };
+    expect(conn.totalCount).toBeGreaterThan(0);
+  });
+
+  it("English name search returns results", async () => {
+    const data = await gql(`query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`, {
+      f: { kind: ["UNIT"], query: "Gundam" },
+    });
+    const conn = data["cards"] as { totalCount: number };
+    expect(conn.totalCount).toBeGreaterThan(0);
+  });
+
+  it("Korean pilot name search returns results", async () => {
+    const data = await gql(`query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`, {
+      f: { kind: ["PILOT"], query: "아무로" },
+    });
+    const conn = data["cards"] as { totalCount: number };
+    expect(conn.totalCount).toBeGreaterThan(0);
+  });
+
+  it("English pilot name search returns results", async () => {
+    const data = await gql(`query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`, {
+      f: { kind: ["PILOT"], query: "Amuro" },
+    });
+    const conn = data["cards"] as { totalCount: number };
+    expect(conn.totalCount).toBeGreaterThan(0);
+  });
+
+  it("name { en ko } never has nested objects – guards against double-wrapping", async () => {
+    const data = await gql(
+      `query($f: CardFilterInput!) {
+        cards(first: 20, filter: $f) {
+          edges { node { ... on UnitCard { name { en ko } } } }
+        }
+      }`,
+      { f: { kind: ["UNIT"] } },
+    );
+    const edges = (
+      data["cards"] as {
+        edges: Array<{ node: { name?: { en: string; ko: string } } }>;
+      }
+    ).edges;
+    expect(edges.length).toBeGreaterThan(0);
+    for (const edge of edges) {
+      if (edge.node.name) {
+        expect(typeof edge.node.name.en).toBe("string");
+        expect(typeof edge.node.name.ko).toBe("string");
+      }
+    }
+  });
+
+  it("PilotCard in full-text search by Korean pilot name", async () => {
+    const data = await gql(
+      `query($f: CardFilterInput!) {
+        cards(filter: $f) {
+          totalCount
+          edges { node { ... on PilotCard { id pilot { name { en ko } } } } }
+        }
+      }`,
+      { f: { kind: ["PILOT"], query: "아무로" } },
+    );
+    const conn = data["cards"] as {
+      totalCount: number;
+      edges: Array<{ node: { id?: string; pilot?: { name: { en: string; ko: string } } } }>;
+    };
+    expect(conn.totalCount).toBeGreaterThan(0);
+    for (const edge of conn.edges) {
+      if (edge.node.pilot) {
+        expect(edge.node.pilot.name.ko).toContain("아무로");
+      }
+    }
   });
 });

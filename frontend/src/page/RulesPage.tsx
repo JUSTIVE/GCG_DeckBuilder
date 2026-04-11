@@ -251,8 +251,12 @@ function getBattleSteps(t: TFunction<"rules">) {
 // ── interactive: game setup walkthrough ──────────────────────────────────────
 
 const EMPTY_BOARD: SetupBoardState = {
-  hasDeck: false, hasResDeck: false, handCount: 0,
-  shieldCount: 0, hasBase: false, hasExRes: false,
+  hasDeck: false,
+  hasResDeck: false,
+  handCount: 0,
+  shieldCount: 0,
+  hasBase: false,
+  hasExRes: false,
 };
 
 type SetupStep = {
@@ -317,8 +321,22 @@ function getSetupSteps(t: TFunction<"rules">): SetupStep[] {
       title: t("setup.steps.base.title"),
       desc: t("setup.steps.base.desc"),
       highlight: "base",
-      p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
-      p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
+      p1: {
+        ...EMPTY_BOARD,
+        hasDeck: true,
+        hasResDeck: true,
+        handCount: 5,
+        shieldCount: 6,
+        hasBase: true,
+      },
+      p2: {
+        ...EMPTY_BOARD,
+        hasDeck: true,
+        hasResDeck: true,
+        handCount: 5,
+        shieldCount: 6,
+        hasBase: true,
+      },
       p1Label: t("setup.steps.base.p1Label"),
       p2Label: t("setup.steps.base.p2Label"),
     },
@@ -327,8 +345,24 @@ function getSetupSteps(t: TFunction<"rules">): SetupStep[] {
       desc: t("setup.steps.exres.desc"),
       note: t("setup.steps.exres.note"),
       highlight: "exres",
-      p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: false },
-      p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: true },
+      p1: {
+        ...EMPTY_BOARD,
+        hasDeck: true,
+        hasResDeck: true,
+        handCount: 5,
+        shieldCount: 6,
+        hasBase: true,
+        hasExRes: false,
+      },
+      p2: {
+        ...EMPTY_BOARD,
+        hasDeck: true,
+        hasResDeck: true,
+        handCount: 5,
+        shieldCount: 6,
+        hasBase: true,
+        hasExRes: true,
+      },
       p1Label: t("setup.steps.exres.p1Label"),
       p2Label: t("setup.steps.exres.p2Label"),
     },
@@ -336,8 +370,23 @@ function getSetupSteps(t: TFunction<"rules">): SetupStep[] {
       title: t("setup.steps.start.title"),
       desc: t("setup.steps.start.desc"),
       highlight: "start",
-      p1: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true },
-      p2: { ...EMPTY_BOARD, hasDeck: true, hasResDeck: true, handCount: 5, shieldCount: 6, hasBase: true, hasExRes: true },
+      p1: {
+        ...EMPTY_BOARD,
+        hasDeck: true,
+        hasResDeck: true,
+        handCount: 5,
+        shieldCount: 6,
+        hasBase: true,
+      },
+      p2: {
+        ...EMPTY_BOARD,
+        hasDeck: true,
+        hasResDeck: true,
+        handCount: 5,
+        shieldCount: 6,
+        hasBase: true,
+        hasExRes: true,
+      },
       p1Label: t("setup.steps.start.p1Label"),
       p2Label: t("setup.steps.start.p2Label"),
     },
@@ -348,10 +397,18 @@ function getSetupSteps(t: TFunction<"rules">): SetupStep[] {
 
 const SetupMiniCardFragment = graphql`
   fragment RulesPage_SetupMiniCard on Card @inline {
-    ... on UnitCard { imageUrl }
-    ... on PilotCard { imageUrl }
-    ... on BaseCard { imageUrl }
-    ... on CommandCard { imageUrl }
+    ... on UnitCard {
+      imageUrl
+    }
+    ... on PilotCard {
+      imageUrl
+    }
+    ... on BaseCard {
+      imageUrl
+    }
+    ... on CommandCard {
+      imageUrl
+    }
   }
 `;
 
@@ -366,7 +423,12 @@ const HAND_STEP_INDEX = 2;
 const ORDER_STEP_INDEX = 1;
 
 function GameSetupWalkthrough({
-  p1HandImages, p2HandImages, newP1HandImages, newP2HandImages, setupSteps, t,
+  p1HandImages,
+  p2HandImages,
+  newP1HandImages,
+  newP2HandImages,
+  setupSteps,
+  t,
 }: {
   p1HandImages?: SetupHandImages;
   p2HandImages?: SetupHandImages;
@@ -466,18 +528,25 @@ function GameSetupWalkthrough({
         {/* Step detail */}
         <div className={cn("rounded-lg border-2 p-3 transition-all duration-300", hlColor.border)}>
           <div className="flex items-center gap-2 mb-2">
-            <span className={cn(
-              "w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0",
-              hlColor.bg, hlColor.text,
-            )}>
+            <span
+              className={cn(
+                "w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0",
+                hlColor.bg,
+                hlColor.text,
+              )}
+            >
               {step + 1}
             </span>
             <p className="text-sm font-bold">{cur.title}</p>
-            <span className="text-xs text-muted-foreground ml-auto">{step + 1} / {setupSteps.length}</span>
+            <span className="text-xs text-muted-foreground ml-auto">
+              {step + 1} / {setupSteps.length}
+            </span>
           </div>
           <p className="text-xs leading-relaxed">{cur.desc}</p>
           {cur.note && (
-            <p className="text-xs text-muted-foreground bg-muted/50 rounded px-2 py-1 mt-1.5">{cur.note}</p>
+            <p className="text-xs text-muted-foreground bg-muted/50 rounded px-2 py-1 mt-1.5">
+              {cur.note}
+            </p>
           )}
         </div>
 
@@ -499,7 +568,10 @@ function GameSetupWalkthrough({
         {inMulligan && (
           <button
             type="button"
-            onClick={() => { setMulliganPhase("idle"); setReplayKey((k) => k + 1); }}
+            onClick={() => {
+              setMulliganPhase("idle");
+              setReplayKey((k) => k + 1);
+            }}
             className="self-center text-[10px] px-2.5 py-1 rounded border border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100 transition-all"
           >
             {t("setup.mulliganReplay")}
@@ -525,7 +597,9 @@ function GameSetupWalkthrough({
                 onClick={() => setStep(i)}
                 className={cn(
                   "rounded-full transition-all duration-200",
-                  i === step ? "w-3 h-2 bg-foreground" : "w-2 h-2 bg-muted-foreground/30 hover:bg-muted-foreground/60",
+                  i === step
+                    ? "w-3 h-2 bg-foreground"
+                    : "w-2 h-2 bg-muted-foreground/30 hover:bg-muted-foreground/60",
                 )}
               />
             ))}
@@ -573,26 +647,16 @@ function TurnPhaseWalkthrough({ phases, t }: { phases: Phase[]; t: TFunction<"ru
       </div>
 
       {/* Phase detail panel (full width) */}
-      <div
-        className={cn(
-          "rounded-lg border-2 p-3 transition-all duration-300",
-          phase.color,
-        )}
-      >
+      <div className={cn("rounded-lg border-2 p-3 transition-all duration-300", phase.color)}>
         <div className="flex items-center justify-between mb-2">
-          <p className={cn("text-sm font-bold", phase.headColor)}>
-            {phase.label}
-          </p>
+          <p className={cn("text-sm font-bold", phase.headColor)}>{phase.label}</p>
           <span className={cn("text-xs font-medium opacity-60", phase.headColor)}>
             {active + 1} / {phases.length}
           </span>
         </div>
         <div className="flex flex-col gap-2">
           {phase.steps.map((step, i) => (
-            <div
-              key={step.name}
-              className="flex gap-2 text-xs bg-white/60 rounded-md p-2"
-            >
+            <div key={step.name} className="flex gap-2 text-xs bg-white/60 rounded-md p-2">
               <span
                 className={cn(
                   "shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white",
@@ -603,17 +667,13 @@ function TurnPhaseWalkthrough({ phases, t }: { phases: Phase[]; t: TFunction<"ru
               </span>
               <div className="flex flex-col gap-0.5 min-w-0">
                 <p className="font-semibold leading-none">{step.name}</p>
-                <p className="text-xs opacity-75 leading-relaxed">
-                  {step.desc}
-                </p>
+                <p className="text-xs opacity-75 leading-relaxed">{step.desc}</p>
               </div>
             </div>
           ))}
         </div>
         {phase.note && (
-          <p className="text-xs mt-2 opacity-60 border-t border-current/20 pt-2">
-            {phase.note}
-          </p>
+          <p className="text-xs mt-2 opacity-60 border-t border-current/20 pt-2">{phase.note}</p>
         )}
       </div>
 
@@ -670,7 +730,11 @@ function TurnPhaseWalkthrough({ phases, t }: { phases: Phase[]; t: TFunction<"ru
 
 // ── interactive: battle steps walkthrough ────────────────────────────────────
 
-function BattleStepsWalkthrough({ battleSteps }: { battleSteps: { name: string; desc: string }[] }) {
+function BattleStepsWalkthrough({
+  battleSteps,
+}: {
+  battleSteps: { name: string; desc: string }[];
+}) {
   const [active, setActive] = useState<number | null>(null);
 
   return (
@@ -691,9 +755,7 @@ function BattleStepsWalkthrough({ battleSteps }: { battleSteps: { name: string; 
               <span
                 className={cn(
                   "w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-200 mt-2.5",
-                  isActive
-                    ? "bg-orange-500 text-white scale-110"
-                    : "bg-muted",
+                  isActive ? "bg-orange-500 text-white scale-110" : "bg-muted",
                 )}
               >
                 {i + 1}
@@ -836,17 +898,12 @@ function ZoneSection({ t }: { t: TFunction<"rules"> }) {
             >
               <div className="flex items-center gap-1.5 mb-0.5">
                 <span
-                  className={cn(
-                    "font-semibold transition-colors",
-                    isSelected && "text-orange-600",
-                  )}
+                  className={cn("font-semibold transition-colors", isSelected && "text-orange-600")}
                 >
                   {z.name}
                 </span>
                 {z.num !== "—" && (
-                  <span className="text-[11px] text-muted-foreground font-mono">
-                    {z.num}
-                  </span>
+                  <span className="text-[11px] text-muted-foreground font-mono">{z.num}</span>
                 )}
                 <span
                   className={cn(
@@ -893,9 +950,7 @@ function ZoneSection({ t }: { t: TFunction<"rules"> }) {
         )}
       </div>
 
-      <Note>
-        {t("zones.note")}
-      </Note>
+      <Note>{t("zones.note")}</Note>
     </Section>
   );
 }
@@ -968,10 +1023,7 @@ function CardTypeItem({
           {ct.attrs.length > 0 && (
             <div className="flex flex-wrap gap-1 mb-2">
               {ct.attrs.map((a) => (
-                <span
-                  key={a}
-                  className="text-xs bg-white/70 border rounded px-1.5 py-0.5"
-                >
+                <span key={a} className="text-xs bg-white/70 border rounded px-1.5 py-0.5">
                   {a}
                 </span>
               ))}
@@ -997,11 +1049,12 @@ function CardTypeItem({
           >
             <div
               style={{
-                animation: slide === "out"
-                  ? "card-type-slide-out 220ms ease-in forwards"
-                  : slide === "in"
-                    ? "card-type-slide-in 460ms ease-out forwards"
-                    : "none",
+                animation:
+                  slide === "out"
+                    ? "card-type-slide-out 220ms ease-in forwards"
+                    : slide === "in"
+                      ? "card-type-slide-in 460ms ease-out forwards"
+                      : "none",
               }}
             >
               <CardPreview cardRef={currentRef} onOpen={onOpen} />
@@ -1120,60 +1173,71 @@ export function RulesPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-4 w-full">
       {overlayCardId && (
-        <CardByIdOverlay
-          cardId={overlayCardId}
-          onClose={() => setOverlayCardId(null)}
-        />
+        <CardByIdOverlay cardId={overlayCardId} onClose={() => setOverlayCardId(null)} />
       )}
       <div>
         <h1 className="text-lg font-bold">{t("title")}</h1>
-        <p className="text-xs text-muted-foreground mt-0.5">
-          {t("subtitle")}
-        </p>
+        <p className="text-xs text-muted-foreground mt-0.5">{t("subtitle")}</p>
       </div>
 
       {/* ── objective ── */}
       <Section title={t("sections.objective.title")} defaultOpen>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div className="rounded-md border border-green-200 bg-green-50 p-3">
-            <p className="text-xs font-semibold text-green-700 mb-1.5">{t("sections.objective.win.label")}</p>
+            <p className="text-xs font-semibold text-green-700 mb-1.5">
+              {t("sections.objective.win.label")}
+            </p>
             <ul className="text-xs text-green-800 flex flex-col gap-1">
-              {(t("sections.objective.win.conditions", { returnObjects: true }) as string[]).map((c, i) => (
-                <li key={i}>· {c}</li>
-              ))}
+              {(t("sections.objective.win.conditions", { returnObjects: true }) as string[]).map(
+                (c, i) => (
+                  <li key={i}>· {c}</li>
+                ),
+              )}
             </ul>
           </div>
           <div className="rounded-md border border-red-200 bg-red-50 p-3">
-            <p className="text-xs font-semibold text-red-700 mb-1.5">{t("sections.objective.lose.label")}</p>
+            <p className="text-xs font-semibold text-red-700 mb-1.5">
+              {t("sections.objective.lose.label")}
+            </p>
             <ul className="text-xs text-red-800 flex flex-col gap-1">
-              {(t("sections.objective.lose.conditions", { returnObjects: true }) as string[]).map((c, i) => (
-                <li key={i}>· {c}</li>
-              ))}
+              {(t("sections.objective.lose.conditions", { returnObjects: true }) as string[]).map(
+                (c, i) => (
+                  <li key={i}>· {c}</li>
+                ),
+              )}
             </ul>
           </div>
         </div>
-        <Note>
-          {t("sections.objective.note")}
-        </Note>
+        <Note>{t("sections.objective.note")}</Note>
       </Section>
 
       {/* ── deck rules ── */}
       <Section title={t("sections.deckRules.title")}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div className="relative rounded-md border p-3 overflow-hidden">
-            <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">50</span>
+            <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">
+              50
+            </span>
             <p className="text-xs font-semibold mb-2">{t("sections.deckRules.mainDeck.label")}</p>
             <ul className="text-xs text-muted-foreground flex flex-col gap-1">
-              {(t("sections.deckRules.mainDeck.rules", { returnObjects: true }) as string[]).map((r, i) => (
-                <li key={i}>· {r}</li>
-              ))}
+              {(t("sections.deckRules.mainDeck.rules", { returnObjects: true }) as string[]).map(
+                (r, i) => (
+                  <li key={i}>· {r}</li>
+                ),
+              )}
             </ul>
           </div>
           <div className="relative rounded-md border p-3 overflow-hidden">
-            <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">10</span>
-            <p className="text-xs font-semibold mb-2">{t("sections.deckRules.resourceDeck.label")}</p>
+            <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">
+              10
+            </span>
+            <p className="text-xs font-semibold mb-2">
+              {t("sections.deckRules.resourceDeck.label")}
+            </p>
             <ul className="text-xs text-muted-foreground flex flex-col gap-1">
-              {(t("sections.deckRules.resourceDeck.rules", { returnObjects: true }) as string[]).map((r, i) => (
+              {(
+                t("sections.deckRules.resourceDeck.rules", { returnObjects: true }) as string[]
+              ).map((r, i) => (
                 <li key={i}>· {r}</li>
               ))}
             </ul>
@@ -1183,18 +1247,20 @@ export function RulesPage() {
           <p className="font-semibold">{t("sections.deckRules.playConditions.label")}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-muted-foreground">
             <div>
-              <span className="font-medium text-foreground">{t("sections.deckRules.playConditions.level.name")}</span>
+              <span className="font-medium text-foreground">
+                {t("sections.deckRules.playConditions.level.name")}
+              </span>
               <p>{t("sections.deckRules.playConditions.level.desc")}</p>
             </div>
             <div>
-              <span className="font-medium text-foreground">{t("sections.deckRules.playConditions.cost.name")}</span>
+              <span className="font-medium text-foreground">
+                {t("sections.deckRules.playConditions.cost.name")}
+              </span>
               <p>{t("sections.deckRules.playConditions.cost.desc")}</p>
             </div>
           </div>
         </div>
-        <Note>
-          {t("sections.deckRules.note")}
-        </Note>
+        <Note>{t("sections.deckRules.note")}</Note>
       </Section>
 
       {/* ── card types ── */}
@@ -1207,8 +1273,12 @@ export function RulesPage() {
                 color: "bg-blue-50 border-blue-200",
                 head: "text-blue-700",
                 desc: t("sections.cardTypes.items.unit.desc"),
-                attrs: t("sections.cardTypes.items.unit.attrs", { returnObjects: true }) as string[],
-                notes: t("sections.cardTypes.items.unit.notes", { returnObjects: true }) as string[],
+                attrs: t("sections.cardTypes.items.unit.attrs", {
+                  returnObjects: true,
+                }) as string[],
+                notes: t("sections.cardTypes.items.unit.notes", {
+                  returnObjects: true,
+                }) as string[],
                 rotate: 6,
                 cardRef: data.unitSample,
                 cardRefs: data.unitSamples,
@@ -1218,8 +1288,12 @@ export function RulesPage() {
                 color: "bg-pink-50 border-pink-200",
                 head: "text-pink-700",
                 desc: t("sections.cardTypes.items.pilot.desc"),
-                attrs: t("sections.cardTypes.items.pilot.attrs", { returnObjects: true }) as string[],
-                notes: t("sections.cardTypes.items.pilot.notes", { returnObjects: true }) as string[],
+                attrs: t("sections.cardTypes.items.pilot.attrs", {
+                  returnObjects: true,
+                }) as string[],
+                notes: t("sections.cardTypes.items.pilot.notes", {
+                  returnObjects: true,
+                }) as string[],
                 rotate: -5,
                 cardRef: data.pilotSample,
                 cardRefs: data.pilotSamples,
@@ -1229,8 +1303,12 @@ export function RulesPage() {
                 color: "bg-teal-50 border-teal-200",
                 head: "text-teal-700",
                 desc: t("sections.cardTypes.items.command.desc"),
-                attrs: t("sections.cardTypes.items.command.attrs", { returnObjects: true }) as string[],
-                notes: t("sections.cardTypes.items.command.notes", { returnObjects: true }) as string[],
+                attrs: t("sections.cardTypes.items.command.attrs", {
+                  returnObjects: true,
+                }) as string[],
+                notes: t("sections.cardTypes.items.command.notes", {
+                  returnObjects: true,
+                }) as string[],
                 rotate: 8,
                 cardRef: data.commandSample,
                 cardRefs: data.commandSamples,
@@ -1240,8 +1318,12 @@ export function RulesPage() {
                 color: "bg-gray-50 border-gray-200",
                 head: "text-gray-700",
                 desc: t("sections.cardTypes.items.base.desc"),
-                attrs: t("sections.cardTypes.items.base.attrs", { returnObjects: true }) as string[],
-                notes: t("sections.cardTypes.items.base.notes", { returnObjects: true }) as string[],
+                attrs: t("sections.cardTypes.items.base.attrs", {
+                  returnObjects: true,
+                }) as string[],
+                notes: t("sections.cardTypes.items.base.notes", {
+                  returnObjects: true,
+                }) as string[],
                 rotate: -7,
                 cardRef: data.baseSample,
                 cardRefs: data.baseSamples,
@@ -1251,8 +1333,12 @@ export function RulesPage() {
                 color: "bg-yellow-50 border-yellow-200",
                 head: "text-yellow-700",
                 desc: t("sections.cardTypes.items.resource.desc"),
-                attrs: t("sections.cardTypes.items.resource.attrs", { returnObjects: true }) as string[],
-                notes: t("sections.cardTypes.items.resource.notes", { returnObjects: true }) as string[],
+                attrs: t("sections.cardTypes.items.resource.attrs", {
+                  returnObjects: true,
+                }) as string[],
+                notes: t("sections.cardTypes.items.resource.notes", {
+                  returnObjects: true,
+                }) as string[],
                 rotate: 5,
                 cardRef: data.resourceSample,
                 cardRefs: data.resourceSamples,
@@ -1273,7 +1359,9 @@ export function RulesPage() {
           <span className="font-medium">EX {t("sections.cardTypes.items.base.name")}:</span>{" "}
           {t("sections.cardTypes.note").split("\n")[0]}
           {"\n"}
-          <span className="font-medium">EX {t("sections.cardTypes.items.resource.name")}:</span>{" "}
+          <span className="font-medium">
+            EX {t("sections.cardTypes.items.resource.name")}:
+          </span>{" "}
           {t("sections.cardTypes.note").split("\n")[1]}
         </Note>
       </Section>
@@ -1281,8 +1369,10 @@ export function RulesPage() {
       {/* ── game setup ── */}
       <Section title={t("sections.gameSetup.title")}>
         <GameSetupWalkthrough
-          p1HandImages={p1HandImages} p2HandImages={p2HandImages}
-          newP1HandImages={newP1HandImages} newP2HandImages={newP2HandImages}
+          p1HandImages={p1HandImages}
+          p2HandImages={p2HandImages}
+          newP1HandImages={newP1HandImages}
+          newP2HandImages={newP2HandImages}
           setupSteps={setupSteps}
           t={t}
         />
@@ -1291,30 +1381,26 @@ export function RulesPage() {
       {/* ── turn flow ── */}
       <Section title={t("sections.turnFlow.title")}>
         <TurnPhaseWalkthrough phases={phases} t={t} />
-        <Note>
-          {t("sections.turnFlow.note")}
-        </Note>
+        <Note>{t("sections.turnFlow.note")}</Note>
       </Section>
 
       {/* ── battle ── */}
       <Section title={t("sections.battle.title")}>
         <div className="flex flex-col gap-3">
           <Note>
-            <span className="font-medium">{t("sections.battle.attackConditionNote").split("\n")[0]}</span>
+            <span className="font-medium">
+              {t("sections.battle.attackConditionNote").split("\n")[0]}
+            </span>
             {"\n"}
             {t("sections.battle.attackConditionNote").split("\n")[1]}
           </Note>
 
-          <p className="text-xs text-muted-foreground">
-            {t("sections.battle.clickHint")}
-          </p>
+          <p className="text-xs text-muted-foreground">{t("sections.battle.clickHint")}</p>
           <BattleStepsWalkthrough battleSteps={battleSteps} />
 
           <UnitBattleSimulator />
 
-          <Note>
-            {t("sections.battle.note")}
-          </Note>
+          <Note>{t("sections.battle.note")}</Note>
         </div>
       </Section>
 
@@ -1324,7 +1410,17 @@ export function RulesPage() {
       {/* ── abilities ── */}
       <Section title={t("sections.abilities.title")}>
         <div className="flex flex-col gap-4">
-          {(["repair", "breakthrough", "support", "blocker", "firstStrike", "highMobility", "suppress"] as const).map((key) => (
+          {(
+            [
+              "repair",
+              "breakthrough",
+              "support",
+              "blocker",
+              "firstStrike",
+              "highMobility",
+              "suppress",
+            ] as const
+          ).map((key) => (
             <div key={key} className="flex flex-col gap-1.5">
               <div className="flex items-center gap-2 flex-wrap">
                 <ABadge name={t(`sections.abilities.items.${key}.badge`)} />
@@ -1343,7 +1439,23 @@ export function RulesPage() {
       {/* ── triggers ── */}
       <Section title={t("sections.triggers.title")}>
         <div className="flex flex-col gap-3">
-          {(["activateMain", "activateAction", "main", "action", "burst", "onPlace", "onAttack", "onDestroy", "onSet", "whileSet", "onLink", "whileLink", "oncePer"] as const).map((key) => (
+          {(
+            [
+              "activateMain",
+              "activateAction",
+              "main",
+              "action",
+              "burst",
+              "onPlace",
+              "onAttack",
+              "onDestroy",
+              "onSet",
+              "whileSet",
+              "onLink",
+              "whileLink",
+              "oncePer",
+            ] as const
+          ).map((key) => (
             <div key={key} className="flex flex-col gap-1">
               <div>
                 <TBadge name={t(`sections.triggers.items.${key}.badge`)} />
@@ -1359,33 +1471,50 @@ export function RulesPage() {
       {/* ── effects ── */}
       <Section title={t("sections.effects.title")}>
         <div className="flex flex-col gap-2 text-xs">
-          {(["continuous", "triggered", "activated", "command", "replacement"] as const).map((key) => (
-            <div key={key} className="rounded border p-2">
-              <p className="font-semibold mb-0.5">{t(`sections.effects.items.${key}.name`)}</p>
-              <p className="text-muted-foreground leading-relaxed">{t(`sections.effects.items.${key}.desc`)}</p>
-            </div>
-          ))}
+          {(["continuous", "triggered", "activated", "command", "replacement"] as const).map(
+            (key) => (
+              <div key={key} className="rounded border p-2">
+                <p className="font-semibold mb-0.5">{t(`sections.effects.items.${key}.name`)}</p>
+                <p className="text-muted-foreground leading-relaxed">
+                  {t(`sections.effects.items.${key}.desc`)}
+                </p>
+              </div>
+            ),
+          )}
         </div>
-        <Note>
-          {t("sections.effects.note")}
-        </Note>
+        <Note>{t("sections.effects.note")}</Note>
       </Section>
 
       {/* ── glossary ── */}
       <Section title={t("sections.glossary.title")}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-          {(["activeRest", "place", "set", "destroy", "exclude", "discard", "draw", "play", "recover", "battleDamage", "turnPlayer", "slash"] as const).map((key) => (
+          {(
+            [
+              "activeRest",
+              "place",
+              "set",
+              "destroy",
+              "exclude",
+              "discard",
+              "draw",
+              "play",
+              "recover",
+              "battleDamage",
+              "turnPlayer",
+              "slash",
+            ] as const
+          ).map((key) => (
             <div key={key} className="rounded border p-2">
               <p className="font-semibold mb-0.5">{t(`sections.glossary.items.${key}.term`)}</p>
-              <p className="text-muted-foreground leading-relaxed">{t(`sections.glossary.items.${key}.def`)}</p>
+              <p className="text-muted-foreground leading-relaxed">
+                {t(`sections.glossary.items.${key}.def`)}
+              </p>
             </div>
           ))}
         </div>
       </Section>
 
-      <p className="text-xs text-muted-foreground text-center">
-        {t("footer")}
-      </p>
+      <p className="text-xs text-muted-foreground text-center">{t("footer")}</p>
     </div>
   );
 }

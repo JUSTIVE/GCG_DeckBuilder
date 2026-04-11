@@ -130,7 +130,7 @@ export function CardDescription({ lines, className, borderClass }: Props) {
   return (
     <ul className={cn("flex flex-col gap-2", className)}>
       {lines.map((tokens, i) => (
-        <li key={i} className="text-xs leading-relaxed text-white/90">
+        <li key={i} className="text-xs leading-relaxed ">
           {tokens.map((token, j) => {
             if (token.type === "trigger") {
               const keyword = token.keyword as CardKeyword;
@@ -141,7 +141,8 @@ export function CardDescription({ lines, className, borderClass }: Props) {
                   onClick={() => navigateKeyword(keyword)}
                   className={cn(
                     "inline-flex align-middle items-center rounded mx-0.5 px-1.5 py-0.5 text-[10px] font-semibold leading-none cursor-pointer hover:brightness-110",
-                    TRIGGER_STYLES[keyword.toUpperCase() as CardKeyword] ?? TRIGGER_FALLBACK,
+                    TRIGGER_STYLES[keyword.toUpperCase() as CardKeyword] ??
+                      TRIGGER_FALLBACK,
                   )}
                 >
                   {renderKeyword(keyword)}

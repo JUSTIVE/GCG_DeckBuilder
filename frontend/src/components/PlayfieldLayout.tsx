@@ -225,9 +225,7 @@ export function ZoneBox({
         </>
       ) : (
         <>
-          {label && (
-            <span className="text-[11px] font-semibold px-0.5">{label}</span>
-          )}
+          {label && <span className="text-[11px] font-semibold px-0.5">{label}</span>}
           {sub && <span className="text-[10px] opacity-60 mt-0.5">{sub}</span>}
         </>
       )}
@@ -286,7 +284,12 @@ export function ShieldSlots({
             }}
           >
             {showCount && (
-              <span className={cn("absolute inset-0 flex items-center justify-center text-[11px] font-bold select-none", accent ? "text-white" : "text-slate-600")}>
+              <span
+                className={cn(
+                  "absolute inset-0 flex items-center justify-center text-[11px] font-bold select-none",
+                  accent ? "text-white" : "text-slate-600",
+                )}
+              >
                 {count}
               </span>
             )}

@@ -12,12 +12,7 @@ const fetchGraphQL: FetchFunction = (request, variables) =>
     try {
       const resp = serveGraphQL(request.text ?? "", variables);
       if (process.env.NODE_ENV === "development") {
-        console.log(
-          "fetching",
-          request.text?.split("\n").at(0),
-          variables,
-          resp,
-        );
+        console.log("fetching", request.text?.split("\n").at(0), variables, resp);
       }
       sink.next(resp as GraphQLResponse);
       sink.complete();

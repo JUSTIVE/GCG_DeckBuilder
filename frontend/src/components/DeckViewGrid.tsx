@@ -15,12 +15,18 @@ export function DeckViewGrid({
   onOpenCard: (cardId: string) => void;
   showDescription: boolean;
 }) {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const items = cards
     .map(({ card, count }) => {
-      const info = extractCardInfo(card);
+      const info = extractCardInfo(card, i18n.language);
       if (!info) return null;
-      return { ...info, count, description: ((card?.description ?? []) as any[]).map((l: any) => l.tokens ?? []) as DescriptionLine[] };
+      return {
+        ...info,
+        count,
+        description: ((card?.description ?? []) as any[]).map(
+          (l: any) => l.tokens ?? [],
+        ) as DescriptionLine[],
+      };
     })
     .filter((x): x is NonNullable<typeof x> => x !== null);
 
@@ -71,7 +77,11 @@ export function DeckViewGrid({
                   );
                 })}
                 <div className="relative">
-                  <button type="button" className="w-full block" onClick={() => onOpenCard(info.id)}>
+                  <button
+                    type="button"
+                    className="w-full block"
+                    onClick={() => onOpenCard(info.id)}
+                  >
                     <img
                       src={info.imageUrl ?? undefined}
                       alt={info.name}

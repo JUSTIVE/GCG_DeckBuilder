@@ -252,10 +252,7 @@
       },
       "resourceDeck": {
         "label": "Resource Deck — 10 cards",
-        "rules": [
-          "Consists of Resource cards only",
-          "No limit on copies of the same card number"
-        ]
+        "rules": ["Consists of Resource cards only", "No limit on copies of the same card number"]
       },
       "playConditions": {
         "label": "Card Play Conditions",

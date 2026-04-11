@@ -32,11 +32,17 @@ export function applySort(cards: RawCard[], sort: string | undefined): RawCard[]
   const rawField = sort.slice(0, sep);
   const dir = sort.slice(sep + 1);
   const key =
-    rawField === "NAME" ? "name" :
-    rawField === "COST" ? "cost" :
-    rawField === "LEVEL" ? "level" :
-    rawField === "AP" ? "AP" :
-    rawField === "HP" ? "HP" : "id";
+    rawField === "NAME"
+      ? "name"
+      : rawField === "COST"
+        ? "cost"
+        : rawField === "LEVEL"
+          ? "level"
+          : rawField === "AP"
+            ? "AP"
+            : rawField === "HP"
+              ? "HP"
+              : "id";
   const sign = dir === "DESC" ? -1 : 1;
 
   return [...cards].sort((a, b) => {
@@ -58,7 +64,7 @@ export function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[
     filter.kind.length === 0
       ? NON_RESOURCE_TYPENAMES
       : filter.kind.map((k) => KIND_TO_TYPENAME[k]).filter((t): t is string => !!t);
-  const includePilotedCommands = filter.kind.length === 0 || filter.kind.includes("PILOT");
+  const includePilotedCommands = filter.kind.length === 0;
 
   return cards.filter((card) => {
     const typeMatch = targetTypenames.includes(card.__typename);
@@ -103,13 +109,18 @@ export function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[
     }
     if (filter.query) {
       const q = filter.query.toLowerCase();
-      const nameHit = typeof c["name"] === "string" && c["name"].toLowerCase().includes(q);
+      const rawName = c["name"];
+      const nameHit =
+        (typeof rawName === "string" && rawName.toLowerCase().includes(q)) ||
+        (rawName !== null &&
+          typeof rawName === "object" &&
+          (((rawName as { en?: string }).en ?? "").toLowerCase().includes(q) ||
+            ((rawName as { ko?: string }).ko ?? "").toLowerCase().includes(q)));
       const descHit =
         Array.isArray(c["description"]) &&
-        (c["description"] as Array<{ tokens: Array<{ type: string; ko?: string }> }>)
-          .some((line) =>
-            line.tokens?.some((t) => t.type === "prose" && t.ko?.toLowerCase().includes(q))
-          );
+        (c["description"] as Array<{ tokens: Array<{ type: string; ko?: string }> }>).some((line) =>
+          line.tokens?.some((t) => t.type === "prose" && t.ko?.toLowerCase().includes(q)),
+        );
       if (!nameHit && !descHit) return false;
     }
 

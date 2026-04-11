@@ -9,17 +9,20 @@
 
 export type BattlePhase =
   | "idle"
-  | "attack"    // 어택 선언
-  | "block"     // 블록 판정
-  | "action"    // 액션 스텝 (양측 패스 대기)
-  | "damage"    // 투사체 비행 중
-  | "hit"       // 대미지 적용 + 히트 애니메이션
-  | "counter"   // 선제공격 생존 시 반격 애니메이션
-  | "clear"     // 히트 클리어 + 파괴/돌파 처리
-  | "end";      // 배틀 종료 스텝
+  | "attack" // 어택 선언
+  | "block" // 블록 판정
+  | "action" // 액션 스텝 (양측 패스 대기)
+  | "damage" // 투사체 비행 중
+  | "hit" // 대미지 적용 + 히트 애니메이션
+  | "counter" // 선제공격 생존 시 반격 애니메이션
+  | "clear" // 히트 클리어 + 파괴/돌파 처리
+  | "end"; // 배틀 종료 스텝
 
 export interface Coords {
-  sx: number; sy: number; ex: number; ey: number;
+  sx: number;
+  sy: number;
+  ex: number;
+  ey: number;
 }
 
 // ── BattleSnap ────────────────────────────────────────────────────────────────
@@ -100,15 +103,15 @@ export interface ActiveCtx {
 // 그 외: battle 컨텍스트 포함, 배너 없음.
 
 export type BattleFSM =
-  | { phase: "idle";    board: BoardCtx; turnBanner: "opponent" | "mine" | null; battleDone: boolean }
-  | { phase: "attack";  board: BoardCtx; battle: ActiveCtx }
-  | { phase: "block";   board: BoardCtx; battle: ActiveCtx }
-  | { phase: "action";  board: BoardCtx; battle: ActiveCtx }
-  | { phase: "damage";  board: BoardCtx; battle: ActiveCtx }
-  | { phase: "hit";     board: BoardCtx; battle: ActiveCtx }
+  | { phase: "idle"; board: BoardCtx; turnBanner: "opponent" | "mine" | null; battleDone: boolean }
+  | { phase: "attack"; board: BoardCtx; battle: ActiveCtx }
+  | { phase: "block"; board: BoardCtx; battle: ActiveCtx }
+  | { phase: "action"; board: BoardCtx; battle: ActiveCtx }
+  | { phase: "damage"; board: BoardCtx; battle: ActiveCtx }
+  | { phase: "hit"; board: BoardCtx; battle: ActiveCtx }
   | { phase: "counter"; board: BoardCtx; battle: ActiveCtx }
-  | { phase: "clear";   board: BoardCtx; battle: ActiveCtx }
-  | { phase: "end";     board: BoardCtx; battle: ActiveCtx };
+  | { phase: "clear"; board: BoardCtx; battle: ActiveCtx }
+  | { phase: "end"; board: BoardCtx; battle: ActiveCtx };
 
 // 활성 전투 상태만 추출하는 편의 타입
 export type ActiveBattleFSM = Extract<BattleFSM, { battle: ActiveCtx }>;
@@ -116,11 +119,11 @@ export type ActiveBattleFSM = Extract<BattleFSM, { battle: ActiveCtx }>;
 // ── 이벤트 (ADT) ──────────────────────────────────────────────────────────────
 
 export type BattleEvent =
-  | { type: "RUN";          snap: BattleSnap }
+  | { type: "RUN"; snap: BattleSnap }
   | { type: "TICK" }
-  | { type: "BLOCK_TICK";   blockerCoords: Coords }
-  | { type: "DAMAGE_TICK";  projCoords: Coords }
-  | { type: "RESET";        myHp: number; enemyHp: number }
+  | { type: "BLOCK_TICK"; blockerCoords: Coords }
+  | { type: "DAMAGE_TICK"; projCoords: Coords }
+  | { type: "RESET"; myHp: number; enemyHp: number }
   | { type: "NEXT_TURN" }
   | { type: "TURN_BANNER_TICK" }
   | { type: "CLEANUP_DONE"; myHp: number; enemyHp: number };
@@ -232,7 +235,6 @@ function applyBreakthrough(
 
 export function battleTransition(state: BattleFSM, event: BattleEvent): BattleFSM {
   switch (event.type) {
-
     // ── RESET ──────────────────────────────────────────────────────────────────
     case "RESET":
       return makeIdleState(event.myHp, event.enemyHp);
@@ -273,11 +275,12 @@ export function battleTransition(state: BattleFSM, event: BattleEvent): BattleFS
     case "RUN": {
       if (state.phase !== "idle") return state;
       const { snap } = event;
-      const logMsg = snap.attackDir === "enemy"
-        ? "어택 스텝: 상대 유닛 어택 선언."
-        : snap.hasHighMobility
-          ? "어택 스텝: 어택 유닛을 레스트하고 어택 선언. 《고기동》 — 상대 《블로커》 발동 불가."
-          : "어택 스텝: 어택 유닛을 레스트하고 어택 선언.";
+      const logMsg =
+        snap.attackDir === "enemy"
+          ? "어택 스텝: 상대 유닛 어택 선언."
+          : snap.hasHighMobility
+            ? "어택 스텝: 어택 유닛을 레스트하고 어택 선언. 《고기동》 — 상대 《블로커》 발동 불가."
+            : "어택 스텝: 어택 유닛을 레스트하고 어택 선언.";
       return {
         phase: "attack",
         board: pushLog(state.board, logMsg),
@@ -290,12 +293,13 @@ export function battleTransition(state: BattleFSM, event: BattleEvent): BattleFS
       if (state.phase !== "attack") return state;
       const { snap } = state.battle;
       if (snap.wasBlocker) {
-        const randomMsg = snap.chosenBlockerLabel
-          ? ` [랜덤 선택: ${snap.chosenBlockerLabel}]`
-          : "";
+        const randomMsg = snap.chosenBlockerLabel ? ` [랜덤 선택: ${snap.chosenBlockerLabel}]` : "";
         return {
           phase: "block",
-          board: pushLog(state.board, `블록 스텝: 《블로커》 발동!${randomMsg} 이 유닛으로 어택 대상 변경.`),
+          board: pushLog(
+            state.board,
+            `블록 스텝: 《블로커》 발동!${randomMsg} 이 유닛으로 어택 대상 변경.`,
+          ),
           battle: { ...state.battle, blockerRested: true, targetCoords: event.blockerCoords },
         };
       }
@@ -327,12 +331,14 @@ export function battleTransition(state: BattleFSM, event: BattleEvent): BattleFS
     // ── TICK ───────────────────────────────────────────────────────────────────
     case "TICK": {
       switch (state.phase) {
-
         // block → action
         case "block":
           return {
             phase: "action",
-            board: pushLog(state.board, "액션 스텝: 양측 교대로 【액션】 발동 가능. 양측 패스로 종료."),
+            board: pushLog(
+              state.board,
+              "액션 스텝: 양측 교대로 【액션】 발동 가능. 양측 패스로 종료.",
+            ),
             battle: { ...state.battle, showTarget: false },
           };
 
@@ -374,11 +380,15 @@ export function battleTransition(state: BattleFSM, event: BattleEvent): BattleFS
             if (snap.initHasBase) {
               const newBaseHp = snap.initBaseHp - snap.myAp;
               if (newBaseHp <= 0) {
-                board = pushLog({ ...board, enemyBaseHp: 0, enemyHasBase: false },
-                  `베이스에 ${snap.myAp} 대미지! HP 0 → 베이스 파괴!`);
+                board = pushLog(
+                  { ...board, enemyBaseHp: 0, enemyHasBase: false },
+                  `베이스에 ${snap.myAp} 대미지! HP 0 → 베이스 파괴!`,
+                );
               } else {
-                board = pushLog({ ...board, enemyBaseHp: newBaseHp },
-                  `베이스에 ${snap.myAp} 대미지! (HP ${snap.initBaseHp} → ${newBaseHp})`);
+                board = pushLog(
+                  { ...board, enemyBaseHp: newBaseHp },
+                  `베이스에 ${snap.myAp} 대미지! (HP ${snap.initBaseHp} → ${newBaseHp})`,
+                );
               }
             } else if (snap.initShields > 0) {
               const newShields = snap.initShields - 1;
@@ -390,7 +400,10 @@ export function battleTransition(state: BattleFSM, event: BattleEvent): BattleFS
                 board = pushLog(board, `실드 1장 파괴 → 트래시. (남은: ${newShields}장)`);
               }
             } else {
-              board = pushLog({ ...board, enemyDefeated: true }, "실드·베이스 없음 → 직격! 상대 패배.");
+              board = pushLog(
+                { ...board, enemyDefeated: true },
+                "실드·베이스 없음 → 직격! 상대 패배.",
+              );
             }
             return { phase: "hit", board, battle };
           }

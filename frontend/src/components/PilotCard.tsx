@@ -1,3 +1,4 @@
+import { useLocalize } from "@/lib/localize";
 import { graphql } from "relay-runtime";
 import type { PilotCardFragment$key } from "@/__generated__/PilotCardFragment.graphql";
 import { useFragment } from "react-relay";
@@ -6,22 +7,12 @@ import Marquee from "@/components/Marquee";
 
 import { renderTrait } from "@/render/trait";
 import { useRouter, useSearch, useParams } from "@tanstack/react-router";
-import {
-  COLOR_BG,
-  COLOR_BG20,
-  COLOR_TEXT20,
-  COLOR_BORDER,
-  COLOR_SHADOW,
-} from "src/render/color";
+import { COLOR_BG, COLOR_BG20, COLOR_TEXT20, COLOR_BORDER, COLOR_SHADOW } from "src/render/color";
 import type { PilotCard_PilotCardBody$key } from "src/__generated__/PilotCard_PilotCardBody.graphql";
 import { renderRarity } from "src/render/rarity";
 
-export function PilotCardBody({
-  pilotCardRef,
-}: {
-  pilotCardRef: PilotCard_PilotCardBody$key;
-}) {
-  const { locale = "ko" } = useParams({ strict: false });
+export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotCardBody$key }) {
+  const localize = useLocalize();
   const pilotCard = useFragment(
     graphql`
       fragment PilotCard_PilotCardBody on PilotCard {
@@ -33,7 +24,10 @@ export function PilotCardBody({
         imageUrl
         traits
         pilot {
-          name { en ko }
+          name {
+            en
+            ko
+          }
           AP
           HP
         }
@@ -47,7 +41,7 @@ export function PilotCardBody({
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
         src={pilotCard.imageUrl}
-        alt={locale === "en" ? pilotCard.pilot.name.en : pilotCard.pilot.name.ko}
+        alt={localize(pilotCard.pilot.name)}
       />
       <div className="flex flex-col gap-[5cqw]">
         <div className="flex flex-row items-start justify-between z-1">
@@ -105,7 +99,7 @@ export function PilotCardBody({
           <div className="flex flex-col justify-end flex-1 overflow-hidden">
             <div className="">
               <div className="p-2 py-1 bg-black whitespace-pre-wrap cutout-tr-sm cutout text-[6cqw] font-bold text-center">
-                {locale === "en" ? pilotCard.pilot.name.en : pilotCard.pilot.name.ko}
+                {localize(pilotCard.pilot.name)}
               </div>
             </div>
             <div className="flex flex-row translate-y-px">
@@ -171,13 +165,31 @@ const Fragment = graphql`
     traits
     description {
       tokens {
-        ... on TriggerToken { type keyword qualifier { en ko } }
-        ... on AbilityToken { type keyword n }
-        ... on ProseToken { type en ko }
+        ... on TriggerToken {
+          type
+          keyword
+          qualifier {
+            en
+            ko
+          }
+        }
+        ... on AbilityToken {
+          type
+          keyword
+          n
+        }
+        ... on ProseToken {
+          type
+          en
+          ko
+        }
       }
     }
     pilot {
-      name { en ko }
+      name {
+        en
+        ko
+      }
       AP
       HP
     }
@@ -198,7 +210,10 @@ export function PilotCard({ pilotCardRef, onOpen }: Props) {
   const open = search.cardId === pilotCard.id;
 
   function openDialog() {
-    if (onOpen) { onOpen(pilotCard.id); return; }
+    if (onOpen) {
+      onOpen(pilotCard.id);
+      return;
+    }
     router.navigate({
       to: "/$locale/cardlist",
       params: { locale },

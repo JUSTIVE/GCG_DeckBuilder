@@ -71,14 +71,8 @@ function DualShieldArea({
           accentShield ? "border-orange-400/50" : "border-border/50",
         )}
       >
-        <span className="text-[8px] text-center text-muted-foreground leading-none">
-          실드존
-        </span>
-        <ShieldSlots
-          count={board.shieldCount}
-          accent={accentShield}
-          reversed={flipped}
-        />
+        <span className="text-[8px] text-center text-muted-foreground leading-none">실드존</span>
+        <ShieldSlots count={board.shieldCount} accent={accentShield} reversed={flipped} />
       </div>
     </div>
   );
@@ -102,7 +96,12 @@ function DualHalfBoard({
       flipped={flipped}
       slots={{
         shieldArea: (
-          <DualShieldArea board={board} accent={accent} flipped={flipped} dataTarget={flipped ? "p2-shield" : "p1-shield"} />
+          <DualShieldArea
+            board={board}
+            accent={accent}
+            flipped={flipped}
+            dataTarget={flipped ? "p2-shield" : "p1-shield"}
+          />
         ),
         battle: (
           <ZoneBox
@@ -115,14 +114,15 @@ function DualHalfBoard({
           </ZoneBox>
         ),
         deck: <ZoneBox label="덱" active={true} className="flex-[1] h-full" />,
-        resDeck: (
-          <ZoneBox label="리소스덱" active={true} className="flex-[2] h-full" />
-        ),
-        resource: (
-          <ZoneBox label="리소스" active={true} className="flex-[4] h-full" />
-        ),
+        resDeck: <ZoneBox label="리소스덱" active={true} className="flex-[2] h-full" />,
+        resource: <ZoneBox label="리소스" active={true} className="flex-[4] h-full" />,
         trash: (
-          <ZoneBox label="트래시" active={true} className="flex-[2] h-full" data-trash={flipped ? "p2" : "p1"} />
+          <ZoneBox
+            label="트래시"
+            active={true}
+            className="flex-[2] h-full"
+            data-trash={flipped ? "p2" : "p1"}
+          />
         ),
       }}
     />
@@ -169,12 +169,7 @@ export function DualPlayfield({
       <VsDivider />
 
       <PlayerSection player="p1">
-        <DualHalfBoard
-          board={p1}
-          flipped={false}
-          accent={accent}
-          battleContent={p1Battle}
-        />
+        <DualHalfBoard board={p1} flipped={false} accent={accent} battleContent={p1Battle} />
         <div className="text-center text-[10px] font-bold py-0.5 text-muted-foreground">
           {p1Label}
         </div>

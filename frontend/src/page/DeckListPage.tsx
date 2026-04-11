@@ -126,8 +126,7 @@ export function DeckListPage() {
   const data = usePreloadedQuery<DeckListPageQuery>(Query, queryRef);
   const [commitCreate, isCreating] =
     useMutation<DeckListPageCreateDeckMutation>(CREATE_DECK_MUTATION);
-  const [commitDelete] =
-    useMutation<DeckListPageDeleteDeckMutation>(DELETE_DECK_MUTATION);
+  const [commitDelete] = useMutation<DeckListPageDeleteDeckMutation>(DELETE_DECK_MUTATION);
   const router = useRouter();
   const { locale } = Route.useParams();
   const [newName, setNewName] = useState("");
@@ -160,12 +159,7 @@ export function DeckListPage() {
     BaseCard: i18n.t("kind.BASE", { ns: "game" }),
     CommandCard: i18n.t("kind.COMMAND", { ns: "game" }),
   };
-  const KIND_ORDER = [
-    "UnitCard",
-    "PilotCard",
-    "BaseCard",
-    "CommandCard",
-  ] as const;
+  const KIND_ORDER = ["UnitCard", "PilotCard", "BaseCard", "CommandCard"] as const;
 
   function deckKindCounts(cards: readonly { count: number; card: any }[]) {
     const counts: Record<string, number> = {};
@@ -176,9 +170,7 @@ export function DeckListPage() {
     return counts;
   }
 
-  function deckPreviewImages(
-    cards: readonly { count: number; card: any }[],
-  ): string[] {
+  function deckPreviewImages(cards: readonly { count: number; card: any }[]): string[] {
     const seen = new Set<string>();
     const urls: string[] = [];
     for (const { card } of cards) {
@@ -213,11 +205,12 @@ export function DeckListPage() {
       </form>
 
       {decks.length === 0 ? (
-        <p className="text-muted-foreground text-sm text-center py-8">
-          {t("deck.empty")}
-        </p>
+        <p className="text-muted-foreground text-sm text-center py-8">{t("deck.empty")}</p>
       ) : (
-        <ul className="grid gap-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min-content, 1fr))" }}>
+        <ul
+          className="grid gap-3"
+          style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min-content, 1fr))" }}
+        >
           {decks.map((deck) => (
             <li
               key={deck.id}
@@ -270,13 +263,8 @@ export function DeckListPage() {
                   return (
                     <div className="flex gap-2 mt-1">
                       {parts.map((k) => (
-                        <span
-                          key={k}
-                          className="text-[11px] text-muted-foreground"
-                        >
-                          <span className="font-medium text-foreground/70">
-                            {KIND_LABELS[k]}
-                          </span>{" "}
+                        <span key={k} className="text-[11px] text-muted-foreground">
+                          <span className="font-medium text-foreground/70">{KIND_LABELS[k]}</span>{" "}
                           {counts[k]}
                         </span>
                       ))}

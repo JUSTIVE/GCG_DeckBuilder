@@ -1,9 +1,6 @@
 import { cn } from "@/lib/utils";
-import {
-  type ZoneId,
-  VisibilityDot,
-  BoardHalfLayout,
-} from "@/components/PlayfieldLayout";
+import { type ZoneId, VisibilityDot, BoardHalfLayout } from "@/components/PlayfieldLayout";
+import { useTranslation } from "react-i18next";
 
 export type { ZoneId };
 
@@ -12,6 +9,7 @@ export type { ZoneId };
 // Pass `highlights` to accent specific zones (e.g. for turn-phase annotation).
 
 export function MiniPlayfield({ highlights }: { highlights: ZoneId[] }) {
+  const { t } = useTranslation("game");
   const hi = (id: ZoneId) => highlights.includes(id);
   const zone = (id: ZoneId, label: string, cls?: string) => (
     <div
@@ -41,10 +39,10 @@ export function MiniPlayfield({ highlights }: { highlights: ZoneId[] }) {
       style={{ width: 76 }}
     >
       <span className="text-[8px] text-center text-muted-foreground leading-none font-medium">
-        실드 에어리어
+        {t("area.shieldArea")}
       </span>
-      {zone("base", "⑥\n베이스존", "flex-none py-1 h-auto")}
-      {zone("shield", "③\n실드존", "flex-1")}
+      {zone("base", `⑥\n${t("area.baseZone")}`, "flex-none py-1 h-auto")}
+      {zone("shield", `③\n${t("area.shieldZone")}`, "flex-1")}
     </div>
   );
 
@@ -52,20 +50,22 @@ export function MiniPlayfield({ highlights }: { highlights: ZoneId[] }) {
     <div className="flex flex-col gap-1.5 text-[10px] select-none">
       <div className="flex gap-3 text-[10px] text-muted-foreground">
         <span className="flex items-center gap-1">
-          <span className="inline-block w-2 h-2 rounded-full bg-green-400" />공개
+          <span className="inline-block w-2 h-2 rounded-full bg-green-400" />
+          {t("area.visible")}
         </span>
         <span className="flex items-center gap-1">
-          <span className="inline-block w-2 h-2 rounded-full bg-gray-400" />비공개
+          <span className="inline-block w-2 h-2 rounded-full bg-gray-400" />
+          {t("area.hidden")}
         </span>
       </div>
       <BoardHalfLayout
         slots={{
           shieldArea,
-          battle: zone("battle", "⑤ 배틀 에어리어", "flex-[3]"),
-          deck: zone("deck", "①\n덱", "flex-[1] min-w-0"),
-          resDeck: zone("resourceDeck", "②\n리소스덱", "flex-[2] min-w-0"),
-          resource: zone("resource", "④ 리소스 에어리어", "flex-[4]"),
-          trash: zone("trash", "⑦\n트래시", "flex-[2] min-w-0"),
+          battle: zone("battle", `⑤ ${t("area.battle")}`, "flex-[3]"),
+          deck: zone("deck", `①\n${t("area.deck")}`, "flex-[1] min-w-0"),
+          resDeck: zone("resourceDeck", `②\n${t("area.resourceDeck")}`, "flex-[2] min-w-0"),
+          resource: zone("resource", `④ ${t("area.resource")}`, "flex-[4]"),
+          trash: zone("trash", `⑦\n${t("area.trash")}`, "flex-[2] min-w-0"),
         }}
       />
     </div>

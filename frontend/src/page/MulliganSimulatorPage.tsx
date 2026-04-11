@@ -49,7 +49,10 @@ const DeckCardsQuery = graphql`
   }
 `;
 
-type DeckCardEntry = { readonly count: number; readonly card: { readonly " $fragmentSpreads": FragmentRefs<"CardFragment"> } };
+type DeckCardEntry = {
+  readonly count: number;
+  readonly card: { readonly " $fragmentSpreads": FragmentRefs<"CardFragment"> };
+};
 
 function drawCards(cards: readonly DeckCardEntry[], n: number): CardFragment$key[] {
   const pool: CardFragment$key[] = [];
@@ -109,7 +112,9 @@ function DeckDrawer({ deckId }: { deckId: string }) {
 
       {history.length > 0 && (
         <div className="flex flex-col gap-3">
-          <div className="text-sm font-medium text-muted-foreground border-t pt-4">{t("search.history")}</div>
+          <div className="text-sm font-medium text-muted-foreground border-t pt-4">
+            {t("search.history")}
+          </div>
           {history.map((entry) => (
             <div key={entry.id} className="flex flex-col gap-2">
               <div className="text-xs text-muted-foreground/60">뽑기 #{entry.id}</div>
@@ -200,7 +205,9 @@ export function MulliganSimulatorPage() {
           </Popover>
 
           {selectedId && (
-            <Suspense fallback={<p className="text-muted-foreground text-sm">{t("search.searching")}</p>}>
+            <Suspense
+              fallback={<p className="text-muted-foreground text-sm">{t("search.searching")}</p>}
+            >
               <DeckDrawer key={selectedId} deckId={selectedId} />
             </Suspense>
           )}

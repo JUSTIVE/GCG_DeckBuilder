@@ -10,9 +10,7 @@ export function encodeDeckCode(cards: readonly { count: number; card: any }[]): 
   return btoa(JSON.stringify(payload));
 }
 
-export function decodeDeckCode(
-  code: string,
-): { cardId: string; count: number }[] | null {
+export function decodeDeckCode(code: string): { cardId: string; count: number }[] | null {
   try {
     const payload = JSON.parse(atob(code.trim())) as DeckCodePayload;
     if (payload.v !== 1 || !Array.isArray(payload.cards)) return null;

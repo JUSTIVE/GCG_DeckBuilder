@@ -39,8 +39,9 @@ function AppBreadcrumb() {
   const { pathname, deckId } = useRouterState({
     select: (s) => ({
       pathname: s.location.pathname,
-      deckId: (s.matches.find((m) => (m.params as any)?.deckId)?.params as any)
-        ?.deckId as string | undefined,
+      deckId: (s.matches.find((m) => (m.params as any)?.deckId)?.params as any)?.deckId as
+        | string
+        | undefined,
     }),
   });
   const { locale = "ko" } = useParams({ strict: false });
@@ -51,7 +52,9 @@ function AppBreadcrumb() {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem className="hidden md:block">
-            <BreadcrumbLink render={<Link to="/$locale/decklist" params={{ locale }} />}>{t("nav.deckList")}</BreadcrumbLink>
+            <BreadcrumbLink render={<Link to="/$locale/decklist" params={{ locale }} />}>
+              {t("nav.deckList")}
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator className="hidden md:block" />
           <BreadcrumbItem>
@@ -74,7 +77,9 @@ function AppBreadcrumb() {
         {child ? (
           <>
             <BreadcrumbItem className="hidden md:block">
-              <BreadcrumbLink render={<Link to={`/${locale}${parent.path}` as any} />}>{t(parent.titleKey as any)}</BreadcrumbLink>
+              <BreadcrumbLink render={<Link to={`/${locale}${parent.path}` as any} />}>
+                {t(parent.titleKey as any)}
+              </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator className="hidden md:block" />
             <BreadcrumbItem>

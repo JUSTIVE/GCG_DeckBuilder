@@ -1,10 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import {
-  DualPlayfield,
-  type DualBoardState,
-  type DualAccent,
-} from "@/components/DualPlayfield";
+import { DualPlayfield, type DualBoardState, type DualAccent } from "@/components/DualPlayfield";
 import { MiniCard } from "@/components/MiniCard";
 
 // ── Board state helpers ───────────────────────────────────────────────────────
@@ -526,9 +522,7 @@ function useStepAnim(
   useEffect(() => {
     if (animKey === 0) return;
     setStep(0);
-    const timers = delays.map((delay, i) =>
-      setTimeout(() => setStep(i + 1), delay),
-    );
+    const timers = delays.map((delay, i) => setTimeout(() => setStep(i + 1), delay));
     return () => timers.forEach(clearTimeout);
   }, [animKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -546,9 +540,7 @@ function DemoPlayer({
   onPlayingChange?: (playing: boolean) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [step, replay] = useStepAnim(config.delays, ref, () =>
-    onPlayingChange?.(true),
-  );
+  const [step, replay] = useStepAnim(config.delays, ref, () => onPlayingChange?.(true));
   const { steps } = config;
   const cur = steps[Math.min(step, steps.length - 1)];
   const done = step >= steps.length;

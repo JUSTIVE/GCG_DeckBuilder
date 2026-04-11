@@ -58,8 +58,7 @@ export function CardPreview({
   const cardBg = color ? COLOR_BG[color] : "bg-black";
   const isWhite = color === "WHITE";
 
-  const id =
-    card.__typename !== "%other" ? (card as { id: string }).id : null;
+  const id = card.__typename !== "%other" ? (card as { id: string }).id : null;
 
   const body = (() => {
     switch (card.__typename) {

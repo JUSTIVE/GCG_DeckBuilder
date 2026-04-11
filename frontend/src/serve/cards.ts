@@ -18,9 +18,8 @@ export const pilotByName = new Map<string, AnyRecord>(
     .filter((c) => c.__typename === "PilotCard" && "name" in c)
     .map((c) => {
       const name = (c as AnyRecord)["name"];
-      const key = typeof name === "object" && name !== null
-        ? (name as { ko: string }).ko
-        : (name as string);
+      const key =
+        typeof name === "object" && name !== null ? (name as { ko: string }).ko : (name as string);
       return [key, c as AnyRecord];
     }),
 );
@@ -68,9 +67,18 @@ export function cardSearchTokens(card: AnyRecord): {
   const links: string[] = [];
 
   if (typeof card["id"] === "string") id.push(card["id"]);
-  if (typeof card["name"] === "string") name.push(card["name"]);
+  const rawName = card["name"];
+  if (typeof rawName === "string") {
+    name.push(rawName);
+  } else if (rawName !== null && typeof rawName === "object") {
+    const n = rawName as { en?: string; ko?: string };
+    if (n.en) name.push(n.en);
+    if (n.ko) name.push(n.ko);
+  }
   if (Array.isArray(card["description"])) {
-    for (const line of card["description"] as Array<{ tokens?: Array<{ type: string; ko?: string }> }>) {
+    for (const line of card["description"] as Array<{
+      tokens?: Array<{ type: string; ko?: string }>;
+    }>) {
       const ko = (line.tokens ?? [])
         .filter((t) => t.type === "prose" && t.ko)
         .map((t) => t.ko!)
@@ -79,14 +87,20 @@ export function cardSearchTokens(card: AnyRecord): {
     }
   }
   if (Array.isArray(card["trait"])) {
-    for (const t of card["trait"] as unknown[])
-      if (typeof t === "string") traits.push(t);
+    for (const t of card["trait"] as unknown[]) if (typeof t === "string") traits.push(t);
   }
   const link = card["link"];
   if (link != null && typeof link === "object") {
     const l = link as AnyRecord;
     if (typeof l["trait"] === "string") links.push(l["trait"] as string);
-    if (typeof l["pilotName"] === "string") links.push(l["pilotName"] as string);
+    const rawPilotName = l["pilotName"];
+    if (typeof rawPilotName === "string") {
+      links.push(rawPilotName);
+    } else if (rawPilotName !== null && typeof rawPilotName === "object") {
+      const pn = rawPilotName as { en?: string; ko?: string };
+      if (pn.en) links.push(pn.en);
+      if (pn.ko) links.push(pn.ko);
+    }
   }
   return { id, name, description, traits, links };
 }

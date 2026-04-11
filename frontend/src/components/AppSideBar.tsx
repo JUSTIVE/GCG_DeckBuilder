@@ -56,7 +56,11 @@ function DeckSubItems({ onNavigate, locale }: { onNavigate: () => void; locale: 
                   {deck.colors.map((color) => (
                     <span
                       key={color}
-                      className={cn("inline-block w-2.5 h-2.5 rounded-full", COLOR_BG[color], color === "WHITE" && "border border-gray-200")}
+                      className={cn(
+                        "inline-block w-2.5 h-2.5 rounded-full",
+                        COLOR_BG[color],
+                        color === "WHITE" && "border border-gray-200",
+                      )}
                     />
                   ))}
                 </span>
@@ -114,7 +118,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     {item.items.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.titleKey}>
                         <SidebarMenuSubButton
-                          render={<Link to={lp(subItem.path) as any} onClick={closeOnMobile}>{t(subItem.titleKey as any)}</Link>}
+                          render={
+                            <Link to={lp(subItem.path) as any} onClick={closeOnMobile}>
+                              {t(subItem.titleKey as any)}
+                            </Link>
+                          }
                           isActive={subItem.isActive}
                         />
                       </SidebarMenuSubItem>

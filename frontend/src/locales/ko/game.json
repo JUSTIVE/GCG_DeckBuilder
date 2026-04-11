@@ -128,5 +128,17 @@
     "BASE": "베이스",
     "COMMAND": "커맨드",
     "RESOURCE": "리소스"
+  },
+  "area": {
+    "shieldArea": "실드 에어리어",
+    "baseZone": "베이스존",
+    "shieldZone": "실드존",
+    "battle": "배틀 에어리어",
+    "deck": "덱",
+    "resourceDeck": "리소스덱",
+    "resource": "리소스 에어리어",
+    "trash": "트래시",
+    "visible": "공개",
+    "hidden": "비공개"
   }
 }

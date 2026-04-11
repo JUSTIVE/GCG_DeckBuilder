@@ -1,3 +1,4 @@
+import { useLocalize } from "@/lib/localize";
 import { graphql } from "relay-runtime";
 import type { UnitCardFragment$key } from "@/__generated__/UnitCardFragment.graphql";
 import type { UnitCard_UnitCardBody$key } from "@/__generated__/UnitCard_UnitCardBody.graphql";
@@ -8,12 +9,7 @@ import Marquee from "@/components/Marquee";
 import { ZoneChip } from "./ZoneChip";
 import { renderTrait } from "@/render/trait";
 import { useRouter, useSearch, useParams } from "@tanstack/react-router";
-import {
-  COLOR_BG,
-  COLOR_BG20,
-  COLOR_BORDER,
-  COLOR_SHADOW,
-} from "src/render/color";
+import { COLOR_BG, COLOR_BG20, COLOR_BORDER, COLOR_SHADOW } from "src/render/color";
 import { renderRarity } from "src/render/rarity";
 
 // Shared card body used in both thumbnail and dialog.
@@ -26,12 +22,15 @@ export function UnitCardBody({
   cardBg: string;
   isWhite: boolean;
 }) {
-  const { locale = "ko" } = useParams({ strict: false });
+  const localize = useLocalize();
   const unitCard = useFragment(
     graphql`
       fragment UnitCard_UnitCardBody on UnitCard {
         id
-        name
+        name {
+          en
+          ko
+        }
         level
         rarity
         cost
@@ -45,7 +44,10 @@ export function UnitCardBody({
           __typename
           ... on LinkPilot {
             pilot {
-              name { en ko }
+              name {
+                en
+                ko
+              }
             }
           }
           ... on LinkTrait {
@@ -118,17 +120,13 @@ export function UnitCardBody({
       <div className="flex flex-col gap-2 ">
         <div className="px-2">
           <div className="p-2 bg-black whitespace-pre-wrap break-words cutout-tl-sm cutout text-[6cqw] font-bold text-center">
-            {unitCard.name}
+            {localize(unitCard.name)}
           </div>
         </div>
         <div className="flex flex-col gap-0.5">
           <div className="flex flex-row px-3">
             {unitCard.zone.map((x) => (
-              <ZoneChip
-                zone={x}
-                className={cn(cardBg, isWhite ? "text-black" : "")}
-                key={x}
-              />
+              <ZoneChip zone={x} className={cn(cardBg, isWhite ? "text-black" : "")} key={x} />
             ))}
           </div>
           <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
@@ -162,7 +160,7 @@ export function UnitCardBody({
                     <Marquee speed={6}>
                       {unitCard.links.map((x) =>
                         x.__typename === "LinkPilot" && x.pilot ? (
-                          <span key={x.pilot.name.ko}>[{locale === "en" ? x.pilot.name.en : x.pilot.name.ko}]</span>
+                          <span key={x.pilot.name.ko}>[{localize(x.pilot.name)}]</span>
                         ) : x.__typename === "LinkTrait" && x.trait ? (
                           <span key={x.trait}>({renderTrait(x.trait)})</span>
                         ) : null,
@@ -193,13 +191,31 @@ const Fragment = graphql`
     id
     level
     cost
-    name
+    name {
+      en
+      ko
+    }
     color
     description {
       tokens {
-        ... on TriggerToken { type keyword qualifier { en ko } }
-        ... on AbilityToken { type keyword n }
-        ... on ProseToken { type en ko }
+        ... on TriggerToken {
+          type
+          keyword
+          qualifier {
+            en
+            ko
+          }
+        }
+        ... on AbilityToken {
+          type
+          keyword
+          n
+        }
+        ... on ProseToken {
+          type
+          en
+          ko
+        }
       }
     }
     rarity
@@ -211,7 +227,10 @@ const Fragment = graphql`
       __typename
       ... on LinkPilot {
         pilot {
-          name { en ko }
+          name {
+            en
+            ko
+          }
         }
       }
       ... on LinkTrait {
@@ -238,7 +257,10 @@ export function UnitCard({ unitCardRef, onOpen }: Props) {
   const isWhite = unitCard.color === "WHITE";
 
   function openDialog() {
-    if (onOpen) { onOpen(unitCard.id); return; }
+    if (onOpen) {
+      onOpen(unitCard.id);
+      return;
+    }
     router.navigate({
       to: "/$locale/cardlist",
       params: { locale },
@@ -260,11 +282,7 @@ export function UnitCard({ unitCardRef, onOpen }: Props) {
         )}
         onClick={openDialog}
       >
-        <UnitCardBody
-          unitCardRefs={unitCard}
-          cardBg={cardBg}
-          isWhite={isWhite}
-        />
+        <UnitCardBody unitCardRefs={unitCard} cardBg={cardBg} isWhite={isWhite} />
       </button>
     </>
   );
