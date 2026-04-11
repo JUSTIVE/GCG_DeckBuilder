@@ -1,5 +1,4 @@
 import allCardsKo from "../../../data/3.processed.json";
-import allCardsEn from "../../../data/raw.json";
 import { checkCard, checkCardEn } from "../../../data/coverage/coverageCore";
 import type { FieldResult } from "../../../data/coverage/coverageCore";
 export type { FieldResult } from "../../../data/coverage/coverageCore";
@@ -119,7 +118,7 @@ export function computeCoverage(locale: CoverageLocale = "ko"): CoverageData {
   let result: CoverageData;
 
   if (locale === "en") {
-    const cards = (allCardsEn as any[]).filter((c) => CARD_TYPES.has(c.__typename));
+    const cards = (allCardsKo as any[]).filter((c) => CARD_TYPES.has(c.__typename));
     result = buildCoverage(cards, checkCardEn);
   } else if (locale === "ko") {
     const cards = (allCardsKo as any[]).filter((c) => CARD_TYPES.has(c.__typename));

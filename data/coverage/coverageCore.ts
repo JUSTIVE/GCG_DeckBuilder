@@ -188,5 +188,26 @@ export function checkCardEn(card: Card): FieldResult[] {
     });
   }
 
+  if (card.__typename === "CommandCard" && card.description != null) {
+    let pilotName: string | null = null;
+    outer: for (const line of card.description) {
+      for (const token of line) {
+        if (token.type === "prose" && token.en) {
+          const match = /\[([^\]]+)\]/.exec(token.en);
+          if (match?.[1]) { pilotName = match[1]; break outer; }
+        }
+      }
+    }
+    if (pilotName != null) {
+      const ok = isEnglishTranslated(pilotName);
+      results.push({
+        field: "pilot.name",
+        translated: ok,
+        detail: pilotName,
+        untranslatedValues: ok ? undefined : [pilotName],
+      });
+    }
+  }
+
   return results;
 }

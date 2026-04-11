@@ -269,7 +269,7 @@ function SetupHalfBoard({
         "flex-[4] h-full rounded border flex flex-col items-center justify-center transition-all duration-300",
         board.hasExRes
           ? accentExRes
-            ? "bg-primary/15 border-primary text-primary"
+            ? "bg-orange-500/15 border-orange-500 text-orange-600"
             : "bg-teal-50 border-teal-200 text-teal-700"
           : "border-border/50 bg-background",
       )}
@@ -279,7 +279,7 @@ function SetupHalfBoard({
         <span
           className={cn(
             "text-[8px] mt-0.5 rounded px-1 font-bold",
-            accentExRes ? "bg-primary/20" : "bg-teal-100",
+            accentExRes ? "bg-orange-500/20" : "bg-teal-100",
           )}
         >
           EX×1
