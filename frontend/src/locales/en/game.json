@@ -1,4 +1,8 @@
 {
+  "category": {
+    "trigger": "Triggers",
+    "ability": "Abilities"
+  },
   "keyword": {
     "ACTION": "Action",
     "ACTIVATE_ACTION": "Activate: Action",
@@ -153,6 +157,39 @@
     "unitSuppression": "Suppression Unit",
     "unitRepair": "Repair Unit",
     "unitSupportUnit": "Support Unit"
+  },
+  "simulator": {
+    "title": "Attack Simulator",
+    "step": {
+      "attack": "Attack Step",
+      "block": "Block Step",
+      "action": "Action Step",
+      "damage": "Damage Step",
+      "end": "Battle End Step"
+    },
+    "myUnit": "My Unit (Attk.)",
+    "enemyUnit": "Enemy Unit",
+    "noUnit": "No Units",
+    "me": "Me",
+    "enemy": "Enemy",
+    "meAttack": "Me (Attk.)",
+    "turnMine": "My Turn",
+    "turnOpponent": "Opp. Turn",
+    "attack": "Attack!",
+    "nextTurn": "Next Turn →",
+    "victory": "★ Victory",
+    "defeat": "☠ Defeat",
+    "shield": "Shield",
+    "burstActivated": "【Burst】 Activated!",
+    "addWithBlocker": "Add as 《Blocker》",
+    "shieldBurst": "Shield has 《Burst》",
+    "firstStrike": "《First Strike》",
+    "highManeuver": "《High Maneuver》",
+    "breakthrough": "《Breach》:",
+    "none": "None",
+    "blockerBadge": "Blocker",
+    "breakthroughFired": "《Breach {{n}}》 triggered — {{shields}} shield(s){{base}} remaining",
+    "breakthroughBase": " · Base HP {{hp}}"
   },
   "setup": {
     "shuffle": "Shuffle",

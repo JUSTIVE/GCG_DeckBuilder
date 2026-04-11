@@ -1,4 +1,5 @@
 import { useReducer, useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { DualPlayfield, type DualBoardState, type DualAccent } from "@/components/DualPlayfield";
 import { MiniCard } from "@/components/MiniCard";
@@ -28,14 +29,8 @@ type RosterEntry = {
   blocker?: boolean;
 };
 
-// PHASE_STEPS: UI 진행 표시용 (내부 sub-phase는 damage에 포함)
-const PHASE_STEPS: Array<{ key: BattlePhase; label: string }> = [
-  { key: "attack", label: "어택 스텝" },
-  { key: "block", label: "블록 스텝" },
-  { key: "action", label: "액션 스텝" },
-  { key: "damage", label: "대미지 스텝" },
-  { key: "end", label: "배틀 종료 스텝" },
-];
+// PHASE_STEP_KEYS: UI 진행 표시용 (내부 sub-phase는 damage에 포함)
+const PHASE_STEP_KEYS: BattlePhase[] = ["attack", "block", "action", "damage", "end"];
 
 // damage sub-phases를 "damage"로 매핑
 function toDisplayPhase(phase: BattlePhase): BattlePhase {
@@ -153,6 +148,7 @@ function AttackProjectile({
 // ── BurstOverlay ──────────────────────────────────────────────────────────────
 
 function BurstOverlay({ animKey }: { animKey: number }) {
+  const { t } = useTranslation("game");
   if (animKey === 0) return null;
 
   const PARTICLE_COUNT = 10;
@@ -173,7 +169,7 @@ function BurstOverlay({ animKey }: { animKey: number }) {
         }}
         className="rounded border-2 border-yellow-400 bg-yellow-50 shadow-lg flex items-center justify-center text-[8px] font-black text-yellow-700"
       >
-        실드
+        {t("simulator.shield")}
       </div>
       <div
         style={{
@@ -214,7 +210,7 @@ function BurstOverlay({ animKey }: { animKey: number }) {
         }}
         className="text-[11px] font-black text-orange-600 bg-white/95 px-2.5 py-1 rounded-lg shadow-lg border border-orange-300"
       >
-        【버스트】 효과 발동!
+        {t("simulator.burstActivated")}
       </div>
     </div>
   );
@@ -226,6 +222,7 @@ const INIT_MY_PRESET = 2;
 const INIT_ENEMY_PRESET = 1;
 
 export function UnitBattleSimulator() {
+  const { t } = useTranslation("game");
   // ── 로스터 & 옵션 (FSM 외부) ──
   const idRef = useRef(2);
   const [myRoster, setMyRoster] = useState<RosterEntry[]>([
@@ -570,7 +567,7 @@ export function UnitBattleSimulator() {
 
   // ── 파생값 ──
   const displayPhase = toDisplayPhase(phase);
-  const phaseIdx = PHASE_STEPS.findIndex((s) => s.key === displayPhase);
+  const phaseIdx = PHASE_STEP_KEYS.indexOf(displayPhase as (typeof PHASE_STEP_KEYS)[number]);
   const allMyRested = myRoster.length > 0 && myRoster.every((e) => e.rested);
   const isNextTurnRunning = turnBanner !== null;
 
@@ -694,16 +691,16 @@ export function UnitBattleSimulator() {
       <div className="rounded-xl border border-border shadow-sm overflow-hidden">
         {/* ── Header ── */}
         <div className="px-3 py-2 bg-muted/30 border-b flex items-center justify-between">
-          <span className="text-xs font-bold">어택 시뮬레이터</span>
+          <span className="text-xs font-bold">{t("simulator.title")}</span>
         </div>
 
         {/* ── Phase progress ── */}
         <div className="flex items-center px-3 pt-2 pb-1 border-b gap-0 overflow-hidden">
-          {PHASE_STEPS.map((s, i) => {
+          {PHASE_STEP_KEYS.map((key, i) => {
             const done = phaseIdx > i;
             const active = phaseIdx === i;
             return (
-              <div key={s.key} className="flex items-center min-w-0">
+              <div key={key} className="flex items-center min-w-0">
                 {i > 0 && (
                   <div
                     className={cn(
@@ -722,7 +719,7 @@ export function UnitBattleSimulator() {
                         : "text-muted-foreground",
                   )}
                 >
-                  {s.label}
+                  {t(`simulator.step.${key}`)}
                 </span>
               </div>
             );
@@ -734,7 +731,7 @@ export function UnitBattleSimulator() {
           <div className="grid grid-cols-2 gap-2 text-[10px]">
             {/* 내 유닛 */}
             <div className="flex flex-col gap-1.5">
-              <span className="font-semibold text-blue-600">내 유닛 (어택)</span>
+              <span className="font-semibold text-blue-600">{t("simulator.myUnit")}</span>
               {myRoster.length > 0 ? (
                 <div className="flex flex-col gap-0.5">
                   {myRoster.map((entry, idx) => (
@@ -766,7 +763,7 @@ export function UnitBattleSimulator() {
                   ))}
                 </div>
               ) : (
-                <div className="text-muted-foreground italic">유닛 없음</div>
+                <div className="text-muted-foreground italic">{t("simulator.noUnit")}</div>
               )}
               <div className="flex gap-1">
                 <select
@@ -808,7 +805,7 @@ export function UnitBattleSimulator() {
                   disabled={isRunning}
                   className="accent-blue-500"
                 />
-                <span className="text-muted-foreground">《선제공격》</span>
+                <span className="text-muted-foreground">{t("simulator.firstStrike")}</span>
               </label>
               <label className="flex items-center gap-1 cursor-pointer select-none">
                 <input
@@ -818,17 +815,17 @@ export function UnitBattleSimulator() {
                   disabled={isRunning}
                   className="accent-blue-500"
                 />
-                <span className="text-muted-foreground">《고기동》</span>
+                <span className="text-muted-foreground">{t("simulator.highManeuver")}</span>
               </label>
               <label className="flex items-center gap-1 cursor-pointer select-none">
-                <span className="text-muted-foreground">《돌파》:</span>
+                <span className="text-muted-foreground">{t("simulator.breakthrough")}</span>
                 <select
                   value={breakthroughN}
                   onChange={(e) => setBreakthroughN(Number(e.target.value))}
                   disabled={isRunning}
                   className="border rounded px-1 text-[10px] bg-background disabled:opacity-50"
                 >
-                  <option value={0}>없음</option>
+                  <option value={0}>{t("simulator.none")}</option>
                   <option value={1}>1</option>
                   <option value={2}>2</option>
                 </select>
@@ -837,7 +834,7 @@ export function UnitBattleSimulator() {
 
             {/* 상대 유닛 */}
             <div className="flex flex-col gap-1.5">
-              <span className="font-semibold text-red-600">상대 유닛</span>
+              <span className="font-semibold text-red-600">{t("simulator.enemyUnit")}</span>
               {enemyRoster.length > 0 ? (
                 <div className="flex flex-col gap-0.5">
                   {enemyRoster.map((entry, idx) => (
@@ -859,7 +856,7 @@ export function UnitBattleSimulator() {
                       </span>
                       {entry.blocker && (
                         <span className="text-[8px] bg-red-200 text-red-800 rounded px-0.5 leading-tight shrink-0">
-                          블로커
+                          {t("simulator.blockerBadge")}
                         </span>
                       )}
                       <button
@@ -876,7 +873,7 @@ export function UnitBattleSimulator() {
                   ))}
                 </div>
               ) : (
-                <div className="text-muted-foreground italic">유닛 없음</div>
+                <div className="text-muted-foreground italic">{t("simulator.noUnit")}</div>
               )}
               <div className="flex gap-1">
                 <select
@@ -918,7 +915,7 @@ export function UnitBattleSimulator() {
                   onChange={(e) => setAddWithBlocker(e.target.checked)}
                   className="accent-red-500"
                 />
-                <span className="text-muted-foreground">추가 시 《블로커》</span>
+                <span className="text-muted-foreground">{t("simulator.addWithBlocker")}</span>
               </label>
               <label className="flex items-center gap-1 cursor-pointer select-none">
                 <input
@@ -928,7 +925,7 @@ export function UnitBattleSimulator() {
                   disabled={isRunning}
                   className="accent-red-500"
                 />
-                <span className="text-muted-foreground">실드에 《버스트》</span>
+                <span className="text-muted-foreground">{t("simulator.shieldBurst")}</span>
               </label>
             </div>
           </div>
@@ -942,7 +939,7 @@ export function UnitBattleSimulator() {
                   style={{ animation: "defeat-pop 0.45s cubic-bezier(0.34,1.56,0.64,1) both" }}
                 >
                   <span className="text-2xl font-black text-rose-500 drop-shadow-lg select-none">
-                    ☠ 패배
+                    {t("simulator.defeat")}
                   </span>
                 </div>
                 <div
@@ -952,7 +949,7 @@ export function UnitBattleSimulator() {
                   }}
                 >
                   <span className="text-2xl font-black text-emerald-500 drop-shadow-lg select-none">
-                    ★ 승리
+                    {t("simulator.victory")}
                   </span>
                 </div>
               </>
@@ -964,7 +961,7 @@ export function UnitBattleSimulator() {
                   style={{ animation: "defeat-pop 0.45s cubic-bezier(0.34,1.56,0.64,1) both" }}
                 >
                   <span className="text-2xl font-black text-emerald-500 drop-shadow-lg select-none">
-                    ★ 승리
+                    {t("simulator.victory")}
                   </span>
                 </div>
                 <div
@@ -974,7 +971,7 @@ export function UnitBattleSimulator() {
                   }}
                 >
                   <span className="text-2xl font-black text-rose-500 drop-shadow-lg select-none">
-                    ☠ 패배
+                    {t("simulator.defeat")}
                   </span>
                 </div>
               </>
@@ -988,8 +985,8 @@ export function UnitBattleSimulator() {
               <DualPlayfield
                 p1={p1Board}
                 p2={p2Board}
-                p1Label="나 (어택)"
-                p2Label="상대"
+                p1Label={t("simulator.meAttack")}
+                p2Label={t("simulator.enemy")}
                 accent={accent}
                 p2Accent={p2BreakthroughAccent}
                 p1Battle={(() => {
@@ -1014,7 +1011,7 @@ export function UnitBattleSimulator() {
                           >
                             <div style={{ transform: `scale(${s})`, transformOrigin: "top left" }}>
                               <MiniCard
-                                name={isActive ? "나" : p.label}
+                                name={isActive ? t("simulator.me") : p.label}
                                 ap={p.ap}
                                 hp={isActive ? board.myHp : p.hp}
                                 maxHp={p.hp}
@@ -1033,9 +1030,11 @@ export function UnitBattleSimulator() {
                                 tag={
                                   isActive
                                     ? [
-                                        hasFirstStrike ? "선제" : "",
-                                        hasHighMobility ? "고기동" : "",
-                                        breakthroughN > 0 ? `돌파${breakthroughN}` : "",
+                                        hasFirstStrike ? t("keyword.FIRST_STRIKE") : "",
+                                        hasHighMobility ? t("keyword.HIGH_MANEUVER") : "",
+                                        breakthroughN > 0
+                                          ? `${t("keyword.BREACH")}${breakthroughN}`
+                                          : "",
                                       ]
                                         .filter(Boolean)
                                         .join(" ") || undefined
@@ -1071,7 +1070,7 @@ export function UnitBattleSimulator() {
                           >
                             <div style={{ transform: `scale(${s})`, transformOrigin: "top left" }}>
                               <MiniCard
-                                name={isActive ? "상대" : p.label}
+                                name={isActive ? t("simulator.enemy") : p.label}
                                 ap={p.ap}
                                 hp={isActive ? board.enemyHp : p.hp}
                                 maxHp={p.hp}
@@ -1093,7 +1092,7 @@ export function UnitBattleSimulator() {
                                 attackDir={1}
                                 hit={isActive ? (battle?.enemyHit ?? false) : false}
                                 destroyed={isActive ? (battle?.enemyDestroyed ?? false) : false}
-                                tag={entry.blocker ? "블로커" : undefined}
+                                tag={entry.blocker ? t("simulator.blockerBadge") : undefined}
                                 dim={!isActive}
                               />
                             </div>
@@ -1135,7 +1134,9 @@ export function UnitBattleSimulator() {
                   )}
                   style={{ animation: "card-appear 200ms cubic-bezier(0.22,1,0.36,1) both" }}
                 >
-                  {turnBanner === "opponent" ? "상대 턴" : "내 턴"}
+                  {turnBanner === "opponent"
+                    ? t("simulator.turnOpponent")
+                    : t("simulator.turnMine")}
                 </div>
               </div>
             )}
@@ -1147,8 +1148,13 @@ export function UnitBattleSimulator() {
               className="text-center text-[11px] font-black text-orange-600 bg-orange-50 border border-orange-300 rounded-lg px-2 py-1.5 shadow-sm"
               style={{ animation: "breakthrough-badge 380ms cubic-bezier(0.34,1.56,0.64,1) both" }}
             >
-              《돌파 {battle.snap.breakthroughN}》 발동 — 실드 {board.enemyShields}장
-              {board.enemyHasBase ? ` · 베이스 HP ${board.enemyBaseHp}` : ""} 남음
+              {t("simulator.breakthroughFired", {
+                n: battle.snap.breakthroughN,
+                shields: board.enemyShields,
+                base: board.enemyHasBase
+                  ? t("simulator.breakthroughBase", { hp: board.enemyBaseHp })
+                  : "",
+              })}
             </div>
           )}
 
@@ -1165,7 +1171,7 @@ export function UnitBattleSimulator() {
                   disabled={isNextTurnRunning || isRunning}
                   className="flex-1 text-xs py-2 rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
                 >
-                  다음 턴 →
+                  {t("simulator.nextTurn")}
                 </button>
               ) : (
                 <button
@@ -1180,7 +1186,7 @@ export function UnitBattleSimulator() {
                   }
                   className="flex-1 text-xs py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
                 >
-                  어택!
+                  {t("simulator.attack")}
                 </button>
               )}
               <button

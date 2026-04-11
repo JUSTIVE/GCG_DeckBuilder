@@ -1,4 +1,8 @@
 {
+  "category": {
+    "trigger": "トリガー",
+    "ability": "アビリティ"
+  },
   "keyword": {
     "ACTION": "アクション",
     "ACTIVATE_ACTION": "起動・アクション",
@@ -153,6 +157,39 @@
     "unitSuppression": "制圧ユニット",
     "unitRepair": "リペアユニット",
     "unitSupportUnit": "援護ユニット"
+  },
+  "simulator": {
+    "title": "アタックシミュレーター",
+    "step": {
+      "attack": "アタックステップ",
+      "block": "ブロックステップ",
+      "action": "アクションステップ",
+      "damage": "ダメージステップ",
+      "end": "バトル終了ステップ"
+    },
+    "myUnit": "自分ユニット（アタック）",
+    "enemyUnit": "相手ユニット",
+    "noUnit": "ユニットなし",
+    "me": "自分",
+    "enemy": "相手",
+    "meAttack": "自分（アタック）",
+    "turnMine": "自分のターン",
+    "turnOpponent": "相手のターン",
+    "attack": "アタック！",
+    "nextTurn": "次のターン →",
+    "victory": "★ 勝利",
+    "defeat": "☠ 敗北",
+    "shield": "シールド",
+    "burstActivated": "【バースト】効果発動！",
+    "addWithBlocker": "追加時《ブロッカー》",
+    "shieldBurst": "シールドに《バースト》",
+    "firstStrike": "《先制攻撃》",
+    "highManeuver": "《高機動》",
+    "breakthrough": "《突破》:",
+    "none": "なし",
+    "blockerBadge": "ブロッカー",
+    "breakthroughFired": "《突破 {{n}}》発動 — シールド {{shields}}枚{{base}} 残り",
+    "breakthroughBase": " · ベースHP {{hp}}"
   },
   "setup": {
     "shuffle": "シャッフル",

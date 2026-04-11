@@ -1,4 +1,8 @@
 {
+  "category": {
+    "trigger": "트리거",
+    "ability": "어빌리티"
+  },
   "keyword": {
     "ACTION": "액션",
     "ACTIVATE_ACTION": "기동･액션",
@@ -153,6 +157,39 @@
     "unitSuppression": "제압 유닛",
     "unitRepair": "리페어 유닛",
     "unitSupportUnit": "원호 유닛"
+  },
+  "simulator": {
+    "title": "어택 시뮬레이터",
+    "step": {
+      "attack": "어택 스텝",
+      "block": "블록 스텝",
+      "action": "액션 스텝",
+      "damage": "대미지 스텝",
+      "end": "배틀 종료 스텝"
+    },
+    "myUnit": "내 유닛 (어택)",
+    "enemyUnit": "상대 유닛",
+    "noUnit": "유닛 없음",
+    "me": "나",
+    "enemy": "상대",
+    "meAttack": "나 (어택)",
+    "turnMine": "내 턴",
+    "turnOpponent": "상대 턴",
+    "attack": "어택!",
+    "nextTurn": "다음 턴 →",
+    "victory": "★ 승리",
+    "defeat": "☠ 패배",
+    "shield": "실드",
+    "burstActivated": "【버스트】 효과 발동!",
+    "addWithBlocker": "추가 시 《블로커》",
+    "shieldBurst": "실드에 《버스트》",
+    "firstStrike": "《선제공격》",
+    "highManeuver": "《고기동》",
+    "breakthrough": "《돌파》:",
+    "none": "없음",
+    "blockerBadge": "블로커",
+    "breakthroughFired": "《돌파 {{n}}》 발동 — 실드 {{shields}}장{{base}} 남음",
+    "breakthroughBase": " · 베이스 HP {{hp}}"
   },
   "setup": {
     "shuffle": "셔플",

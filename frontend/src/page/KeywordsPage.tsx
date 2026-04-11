@@ -13,7 +13,6 @@ import {
   ABILITY_FALLBACK,
   CardDescription,
 } from "@/components/CardDescription";
-import { renderKeyword } from "@/render/keyword";
 import type { CardKeyword } from "@/routes/$locale/cardlist";
 import { COLOR_HEX } from "src/render/color";
 import { cn } from "@/lib/utils";
@@ -76,9 +75,10 @@ const TRIGGER_LIGHT_FALLBACK = "bg-gray-100 text-gray-700";
 const ABILITY_LIGHT_FALLBACK = "border-gray-300 bg-gray-50 text-gray-700";
 
 function KeywordBadge({ keyword }: { keyword: string }) {
+  const { t } = useTranslation("game");
   const kw = keyword as CardKeyword;
   const firstToken = KEYWORD_DESCRIPTIONS[keyword]?.name[0];
-  const label = renderKeyword(kw);
+  const label = t(`keyword.${kw.toUpperCase()}`);
   if (firstToken?.type === "trigger") {
     const cls = triggerClassByKeyword(kw);
     return (
@@ -170,6 +170,7 @@ function KeywordEntry({
   className?: string;
   onOpen: (id: string) => void;
 }) {
+  useTranslation("game"); // language-change subscription for CardDescription locale
   const [open, setOpen] = useState(false);
   const [playing, setPlaying] = useState(false);
   const entry = KEYWORD_DESCRIPTIONS[keyword];
@@ -228,38 +229,41 @@ const abilityKeywords = ALL_KEYWORDS.filter(
 
 export function KeywordsPage() {
   const { t } = useTranslation("common");
+  const { t: tGame } = useTranslation("game");
   const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-8 w-full">
+    <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col gap-6 w-full md:h-[calc(100vh-4rem)] md:overflow-hidden">
       <h1 className="text-lg font-bold">{t("nav.keywordDictionary")}</h1>
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-          트리거
-        </h2>
-        <div className="flex flex-col gap-2">
-          {triggerKeywords.map((kw) => (
-            <KeywordEntry key={kw} keyword={kw} onOpen={setOverlayCardId} />
-          ))}
-        </div>
-      </section>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8 items-start md:flex-1 md:min-h-0">
+        <section className="flex flex-col gap-3 md:h-full md:overflow-y-auto md:pr-1">
+          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider md:sticky md:top-0 md:bg-background md:z-10 md:py-1">
+            {tGame("category.trigger")}
+          </h2>
+          <div className="flex flex-col gap-2">
+            {triggerKeywords.map((kw) => (
+              <KeywordEntry key={kw} keyword={kw} onOpen={setOverlayCardId} />
+            ))}
+          </div>
+        </section>
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-          어빌리티
-        </h2>
-        <div className="flex flex-col gap-2">
-          {abilityKeywords.map((kw) => (
-            <KeywordEntry
-              key={kw}
-              keyword={kw}
-              className={"bg-gray-800/10"}
-              onOpen={setOverlayCardId}
-            />
-          ))}
-        </div>
-      </section>
+        <section className="flex flex-col gap-3 md:h-full md:overflow-y-auto md:pr-1">
+          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider md:sticky md:top-0 md:bg-background md:z-10 md:py-1">
+            {tGame("category.ability")}
+          </h2>
+          <div className="flex flex-col gap-2">
+            {abilityKeywords.map((kw) => (
+              <KeywordEntry
+                key={kw}
+                keyword={kw}
+                className={"bg-gray-800/10"}
+                onOpen={setOverlayCardId}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
 
       {overlayCardId && (
         <Suspense>

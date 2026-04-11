@@ -23,19 +23,13 @@ import {
   HL,
   SetupDualPlayfield,
 } from "@/components/SetupDualPlayfield";
-import {
-  triggerClass,
-  abilityClass,
-  TRIGGER_FALLBACK,
-  ABILITY_FALLBACK,
-} from "@/components/CardDescription";
+import { triggerClass, TRIGGER_FALLBACK } from "@/components/CardDescription";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 
 // ── badge helpers ─────────────────────────────────────────────────────────────
 
 const TRIGGER_LIGHT = "bg-gray-100 text-gray-700";
-const ABILITY_LIGHT = "border-gray-300 bg-gray-50 text-gray-700";
 
 function TBadge({ name }: { name: string }) {
   const cls = triggerClass(name);
@@ -44,20 +38,6 @@ function TBadge({ name }: { name: string }) {
       className={cn(
         "inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold",
         cls === TRIGGER_FALLBACK ? TRIGGER_LIGHT : cls,
-      )}
-    >
-      {name}
-    </span>
-  );
-}
-
-function ABadge({ name }: { name: string }) {
-  const cls = abilityClass(name);
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center rounded border px-2 py-0.5 text-xs font-semibold",
-        cls === ABILITY_FALLBACK ? ABILITY_LIGHT : cls,
       )}
     >
       {name}
@@ -1406,35 +1386,6 @@ export function RulesPage() {
 
       {/* ── zones ── */}
       <ZoneSection t={t} />
-
-      {/* ── abilities ── */}
-      <Section title={t("sections.abilities.title")}>
-        <div className="flex flex-col gap-4">
-          {(
-            [
-              "repair",
-              "breakthrough",
-              "support",
-              "blocker",
-              "firstStrike",
-              "highMobility",
-              "suppress",
-            ] as const
-          ).map((key) => (
-            <div key={key} className="flex flex-col gap-1.5">
-              <div className="flex items-center gap-2 flex-wrap">
-                <ABadge name={t(`sections.abilities.items.${key}.badge`)} />
-                <span className="text-xs text-muted-foreground">
-                  {t(`sections.abilities.items.${key}.timing`)}
-                </span>
-              </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                {t(`sections.abilities.items.${key}.desc`)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </Section>
 
       {/* ── triggers ── */}
       <Section title={t("sections.triggers.title")}>

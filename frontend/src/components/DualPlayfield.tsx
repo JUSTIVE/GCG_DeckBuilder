@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 import {
   BoardHalfLayout,
   ZoneBox,
@@ -36,6 +37,7 @@ function DualShieldArea({
   const accentBase = accent === "base";
   const hasBase = board.hasBase !== false;
 
+  const { t } = useTranslation("game");
   const [hitKey, setHitKey] = useState(0);
   const prevShieldCount = useRef(board.shieldCount);
   useEffect(() => {
@@ -55,10 +57,10 @@ function DualShieldArea({
       style={{ width: 56, animation: hitKey > 0 ? "card-hit 320ms ease" : undefined }}
     >
       <span className="text-[8px] text-center text-muted-foreground leading-none font-medium">
-        실드 에어리어
+        {t("area.shieldArea")}
       </span>
       <ZoneBox
-        label="베이스존"
+        label={t("area.baseZone")}
         sub={board.baseHp !== undefined && hasBase ? `HP ${board.baseHp}` : undefined}
         active={hasBase}
         accent={accentBase && hasBase}
@@ -71,7 +73,9 @@ function DualShieldArea({
           accentShield ? "border-orange-400/50" : "border-border/50",
         )}
       >
-        <span className="text-[8px] text-center text-muted-foreground leading-none">실드존</span>
+        <span className="text-[8px] text-center text-muted-foreground leading-none">
+          {t("area.shieldZone")}
+        </span>
         <ShieldSlots count={board.shieldCount} accent={accentShield} reversed={flipped} />
       </div>
     </div>
@@ -91,6 +95,7 @@ function DualHalfBoard({
   accent: DualAccent;
   battleContent?: React.ReactNode;
 }) {
+  const { t } = useTranslation("game");
   return (
     <BoardHalfLayout
       flipped={flipped}
@@ -105,7 +110,7 @@ function DualHalfBoard({
         ),
         battle: (
           <ZoneBox
-            label="배틀 에어리어"
+            label={t("area.battle")}
             active={true}
             accent={accent === "battle"}
             className="flex-[3] h-full"
@@ -113,12 +118,14 @@ function DualHalfBoard({
             {battleContent}
           </ZoneBox>
         ),
-        deck: <ZoneBox label="덱" active={true} className="flex-[1] h-full" />,
-        resDeck: <ZoneBox label="리소스덱" active={true} className="flex-[2] h-full" />,
-        resource: <ZoneBox label="리소스" active={true} className="flex-[4] h-full" />,
+        deck: <ZoneBox label={t("area.deck")} active={true} className="flex-[1] h-full" />,
+        resDeck: (
+          <ZoneBox label={t("area.resourceDeck")} active={true} className="flex-[2] h-full" />
+        ),
+        resource: <ZoneBox label={t("area.resource")} active={true} className="flex-[4] h-full" />,
         trash: (
           <ZoneBox
-            label="트래시"
+            label={t("area.trash")}
             active={true}
             className="flex-[2] h-full"
             data-trash={flipped ? "p2" : "p1"}
