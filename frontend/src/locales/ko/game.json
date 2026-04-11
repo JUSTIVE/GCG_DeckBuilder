@@ -16,7 +16,6 @@
     "SUPPRESSION": "제압",
     "MAIN": "메인",
     "ONCE_PER_TURN": "턴에 1회",
-    "END_OF_TURN": "내 턴이 끝날 때",
     "PILOT": "파일럿",
     "REPAIR": "리페어",
     "SUPPORT": "원호",
@@ -133,6 +132,7 @@
     "shieldArea": "실드 에어리어",
     "baseZone": "베이스존",
     "shieldZone": "실드존",
+    "exBase": "EX베이스",
     "battle": "배틀 에어리어",
     "deck": "덱",
     "resourceDeck": "리소스덱",
@@ -140,5 +140,29 @@
     "trash": "트래시",
     "visible": "공개",
     "hidden": "비공개"
+  },
+  "demo": {
+    "mechanism": "메커니즘",
+    "replay": "다시 보기",
+    "unitAttacker": "공격 유닛",
+    "unitP2": "P2 유닛",
+    "unitOpponent": "상대 유닛",
+    "unitFirstStrike": "선제 유닛",
+    "unitHighManeuver": "고기동 유닛",
+    "unitBreach": "돌파 유닛",
+    "unitSuppression": "제압 유닛",
+    "unitRepair": "리페어 유닛",
+    "unitSupportUnit": "원호 유닛"
+  },
+  "setup": {
+    "shuffle": "셔플",
+    "shuffling": "셔플 중",
+    "draw": "드로우",
+    "hand": "패",
+    "handCount": "패 {{count}}장",
+    "mulliganQ": "멀리건?",
+    "deckCount": "50장",
+    "resDeckCount": "10장",
+    "resource": "리소스"
   }
 }

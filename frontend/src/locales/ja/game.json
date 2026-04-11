@@ -16,7 +16,6 @@
     "SUPPRESSION": "制圧",
     "MAIN": "メイン",
     "ONCE_PER_TURN": "ターンに1回",
-    "END_OF_TURN": "自分のターン終了時",
     "PILOT": "パイロット",
     "REPAIR": "修復",
     "SUPPORT": "援護",
@@ -133,6 +132,7 @@
     "shieldArea": "シールドエリア",
     "baseZone": "ベースゾーン",
     "shieldZone": "シールドゾーン",
+    "exBase": "EXベース",
     "battle": "バトルエリア",
     "deck": "デッキ",
     "resourceDeck": "リソースデッキ",
@@ -140,5 +140,29 @@
     "trash": "トラッシュ",
     "visible": "公開",
     "hidden": "非公開"
+  },
+  "demo": {
+    "mechanism": "メカニズム",
+    "replay": "もう一度",
+    "unitAttacker": "攻撃ユニット",
+    "unitP2": "P2ユニット",
+    "unitOpponent": "相手ユニット",
+    "unitFirstStrike": "先制ユニット",
+    "unitHighManeuver": "高機動ユニット",
+    "unitBreach": "突破ユニット",
+    "unitSuppression": "制圧ユニット",
+    "unitRepair": "リペアユニット",
+    "unitSupportUnit": "援護ユニット"
+  },
+  "setup": {
+    "shuffle": "シャッフル",
+    "shuffling": "シャッフル中",
+    "draw": "ドロー",
+    "hand": "手札",
+    "handCount": "手札 {{count}}枚",
+    "mulliganQ": "マリガン?",
+    "deckCount": "50枚",
+    "resDeckCount": "10枚",
+    "resource": "リソース"
   }
 }

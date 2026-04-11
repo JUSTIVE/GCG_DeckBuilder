@@ -1,7 +1,19 @@
 import { renderKeyword } from "@/render/keyword";
 import { renderSeries } from "@/render/series";
-import type { CardKeyword, CardTrait, CardSeries } from "@/routes/$locale/cardlist";
+import {
+  ALL_KEYWORDS,
+  ALL_KINDS,
+  ALL_ZONES,
+  ALL_COLORS,
+  ALL_TRAITS,
+  ALL_SERIES,
+  type CardKeyword,
+  type CardTrait,
+  type CardSeries,
+} from "@/lib/gameConstants";
 import i18n from "@/i18n";
+
+export { ALL_KEYWORDS, ALL_KINDS, ALL_ZONES, ALL_COLORS, ALL_TRAITS, ALL_SERIES };
 
 export const SORT_OPTIONS: Array<{ value: string; labelKey: string }> = [
   { value: "NAME_ASC", labelKey: "sort.NAME_ASC" },
@@ -16,15 +28,12 @@ export const SORT_OPTIONS: Array<{ value: string; labelKey: string }> = [
   { value: "HP_DESC", labelKey: "sort.HP_DESC" },
 ];
 
-export const ALL_KINDS = ["UNIT", "PILOT", "BASE", "COMMAND"] as const;
-export const ALL_ZONES = ["SPACE", "EARTH"] as const;
 export const getZoneLabel = (zone: string) =>
   i18n.t(`zone.${zone}`, { ns: "game", defaultValue: zone });
 export const ZONE_LABELS: Record<string, string> = {
   SPACE: "우주",
   EARTH: "지구",
 };
-export const ALL_COLORS = ["BLUE", "GREEN", "RED", "YELLOW", "PURPLE", "WHITE"] as const;
 export const getColorLabel = (color: string) =>
   i18n.t(`color.${color}`, { ns: "game", defaultValue: color });
 export const COLOR_LABELS: Record<string, string> = {
@@ -47,89 +56,11 @@ export const KIND_LABELS: Record<string, string> = {
 export const COST_OPTIONS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 export const LEVEL_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-export const ALL_KEYWORDS: CardKeyword[] = [
-  "ACTION",
-  "ACTIVATE_ACTION",
-  "ACTIVATE_MAIN",
-  "ATTACK",
-  "BLOCKER",
-  "BREACH",
-  "BURST",
-  "DEPLOY",
-  "DESTROYED",
-  "DURING_LINK",
-  "DURING_PAIR",
-  "FIRST_STRIKE",
-  "HIGH_MANEUVER",
-  "SUPPRESSION",
-  "MAIN",
-  "ONCE_PER_TURN",
-  "END_OF_TURN",
-  "PILOT",
-  "REPAIR",
-  "SUPPORT",
-  "WHEN_LINKED",
-  "WHEN_PAIRED",
-];
-
 /** Compute at call-site (inside component render) for reactive language switching. */
 export const getKeywordLabels = () =>
   Object.fromEntries(ALL_KEYWORDS.map((k) => [k, renderKeyword(k)])) as Record<CardKeyword, string>;
 // Legacy static export — not reactive to language changes.
 export const KEYWORD_LABELS = getKeywordLabels();
-
-export const ALL_TRAITS: CardTrait[] = [
-  "EARTH_FEDERATION",
-  "ZEON",
-  "NEO_ZEON",
-  "OZ",
-  "ACADEMY",
-  "EARTH_ALLIANCE",
-  "MAGANAC_CORPS",
-  "ZAFT",
-  "OPERATION_METEOR",
-  "NEWTYPE",
-  "COORDINATOR",
-  "CYBER_NEWTYPE",
-  "STRONGHOLD",
-  "WARSHIP",
-  "TRIPLE_SHIP_ALLIANCE",
-  "CIVILIAN",
-  "WHITE_BASE_TEAM",
-  "G_TEAM",
-  "VANADIS_INSTITUTE",
-  "ORB",
-  "TEKKADAN",
-  "TEIWAZ",
-  "GJALLARHORN",
-  "GUNDAM_FRAME",
-  "ALAYA_VIJNANA",
-  "TITANS",
-  "VULTURE",
-  "AEUG",
-  "CLAN",
-  "AGE_SYSTEM",
-  "WHITE_FANG",
-  "SIDE_6",
-  "NEW_UNE",
-  "UE",
-  "VAGAN",
-  "BIOLOGICAL_CPU",
-  "ASUNO_FAMILY",
-  "X_ROUNDER",
-  "SUPERPOWER_BLOC",
-  "CB",
-  "INNOVADE",
-  "GN_DRIVE",
-  "SUPER_SOLDIER",
-  "MAFTY",
-  "SRA",
-  "OLD_UNE",
-  "JUPITRIS",
-  "CYCLOPS_TEAM",
-  "UN",
-  "MINERVA_SQUAD",
-];
 
 export const TRAIT_LABELS: Record<CardTrait, string> = {
   ACADEMY: "학원",
@@ -183,24 +114,6 @@ export const TRAIT_LABELS: Record<CardTrait, string> = {
   UN: "UN",
   MINERVA_SQUAD: "미네르바",
 };
-
-export const ALL_SERIES: CardSeries[] = [
-  "MOBILE_SUIT_GUNDAM",
-  "MOBILE_SUIT_Z_GUNDAM",
-  "MOBILE_SUIT_GUNDAM_CHARS_COUNTERATTACK",
-  "MOBILE_SUIT_GUNDAM_0080_WAR_IN_THE_POCKET",
-  "MOBILE_SUIT_GUNDAM_WING",
-  "AFTER_WAR_GUNDAM_X",
-  "MOBILE_SUIT_GUNDAM_SEED",
-  "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
-  "MOBILE_SUIT_GUNDAM_00",
-  "MOBILE_SUIT_GUNDAM_UNICORN",
-  "MOBILE_SUIT_GUNDAM_AGE",
-  "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS",
-  "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
-  "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
-  "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
-];
 
 export const getSeriesLabels = () =>
   Object.fromEntries(ALL_SERIES.map((s) => [s, renderSeries(s)])) as Record<CardSeries, string>;

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 import {
   BoardHalfLayout,
   ZoneBox,
@@ -76,6 +77,7 @@ function HandStrip({
   mulliganPhase?: MulliganPhase;
   drawPhase?: DrawPhase;
 }) {
+  const { t } = useTranslation("game");
   const isReturning = mulliganPhase === "returning";
   const isShuffling = mulliganPhase === "shuffling";
   const isDrawing = mulliganPhase === "drawing";
@@ -167,7 +169,13 @@ function HandStrip({
           accent ? "text-primary" : "text-green-700",
         )}
       >
-        {showShuffling ? "셔플" : showDrawing ? "드로우" : `패 ${count > 0 ? `${count}장` : ""}`}
+        {showShuffling
+          ? t("setup.shuffle")
+          : showDrawing
+            ? t("setup.draw")
+            : count > 0
+              ? t("setup.handCount", { count })
+              : t("setup.hand")}
       </span>
       <div className={cn("flex gap-0.5", flipped && "flex-row-reverse")}>{cards}</div>
       {showMulliganBadge && (
@@ -177,7 +185,7 @@ function HandStrip({
             accent ? "bg-primary/20 text-primary" : "bg-amber-100 text-amber-700",
           )}
         >
-          멀리건?
+          {t("setup.mulliganQ")}
         </span>
       )}
     </div>
@@ -197,6 +205,7 @@ function SetupShieldArea({
   accentShield: boolean;
   flipped: boolean;
 }) {
+  const { t } = useTranslation("game");
   return (
     <div
       className={cn(
@@ -207,10 +216,10 @@ function SetupShieldArea({
       style={{ width: 56 }}
     >
       <span className="text-[8px] text-center text-muted-foreground leading-none font-medium">
-        실드 에어리어
+        {t("area.shieldArea")}
       </span>
       <ZoneBox
-        label={board.hasBase ? "EX베이스" : "베이스존"}
+        label={board.hasBase ? t("area.exBase") : t("area.baseZone")}
         sub={board.hasBase ? "HP 3" : undefined}
         active={true}
         accent={accentBase && board.hasBase}
@@ -223,7 +232,9 @@ function SetupShieldArea({
           accentShield ? "border-primary/50 bg-primary/5" : "border-border/50",
         )}
       >
-        <span className="text-[8px] text-center text-muted-foreground leading-none">실드존</span>
+        <span className="text-[8px] text-center text-muted-foreground leading-none">
+          {t("area.shieldZone")}
+        </span>
         <ShieldSlots count={board.shieldCount} accent={accentShield} reversed={flipped} />
       </div>
     </div>
@@ -251,6 +262,7 @@ function SetupHalfBoard({
   deckShuffling?: boolean;
   battleContent?: React.ReactNode;
 }) {
+  const { t } = useTranslation("game");
   const resArea = (
     <div
       className={cn(
@@ -262,7 +274,7 @@ function SetupHalfBoard({
           : "border-border/50 bg-background",
       )}
     >
-      <span className="text-[9px] font-semibold leading-none">리소스</span>
+      <span className="text-[9px] font-semibold leading-none">{t("setup.resource")}</span>
       {board.hasExRes && (
         <span
           className={cn(
@@ -289,14 +301,14 @@ function SetupHalfBoard({
           />
         ),
         battle: (
-          <ZoneBox label="배틀 에어리어" active={true} className="flex-[3] h-full">
+          <ZoneBox label={t("area.battle")} active={true} className="flex-[3] h-full">
             {battleContent}
           </ZoneBox>
         ),
         deck: (
           <ZoneBox
-            label={deckShuffling ? "셔플 중" : "덱"}
-            sub={board.hasDeck && !deckShuffling ? "50장" : undefined}
+            label={deckShuffling ? t("setup.shuffling") : t("area.deck")}
+            sub={board.hasDeck && !deckShuffling ? t("setup.deckCount") : undefined}
             active={board.hasDeck}
             accent={(accentDeck && board.hasDeck) || deckShuffling}
             className="flex-[1] h-full"
@@ -305,15 +317,15 @@ function SetupHalfBoard({
         ),
         resDeck: (
           <ZoneBox
-            label="리소스덱"
-            sub={board.hasResDeck ? "10장" : undefined}
+            label={t("area.resourceDeck")}
+            sub={board.hasResDeck ? t("setup.resDeckCount") : undefined}
             active={board.hasResDeck}
             accent={accentDeck && board.hasResDeck}
             className="flex-[2] h-full"
           />
         ),
         resource: resArea,
-        trash: <ZoneBox label="트래시" active={true} className="flex-[2] h-full" />,
+        trash: <ZoneBox label={t("area.trash")} active={true} className="flex-[2] h-full" />,
       }}
     />
   );

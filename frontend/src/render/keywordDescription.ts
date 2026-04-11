@@ -108,13 +108,6 @@ export const KEYWORD_DESCRIPTIONS: Record<string, KeywordEntry> = {
       "A keyword indicating this effect can only be activated once per turn.",
     ),
   },
-  END_OF_TURN: {
-    name: [{ type: "trigger", keyword: "END_OF_TURN" }],
-    description: prose(
-      "자신의 턴 종료 시에 발동하는 효과.",
-      "An effect that activates at the end of your turn.",
-    ),
-  },
   REPAIR: {
     name: [
       { type: "ability", keyword: "REPAIR" },

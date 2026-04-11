@@ -16,7 +16,6 @@
     "SUPPRESSION": "Suppression",
     "MAIN": "Main",
     "ONCE_PER_TURN": "Once Per Turn",
-    "END_OF_TURN": "End of Turn",
     "PILOT": "Pilot",
     "REPAIR": "Repair",
     "SUPPORT": "Support",
@@ -133,6 +132,7 @@
     "shieldArea": "Shield Area",
     "baseZone": "Base Zone",
     "shieldZone": "Shield Zone",
+    "exBase": "EX Base",
     "battle": "Battle Area",
     "deck": "Deck",
     "resourceDeck": "Resource Deck",
@@ -140,5 +140,29 @@
     "trash": "Trash",
     "visible": "Open",
     "hidden": "Hidden"
+  },
+  "demo": {
+    "mechanism": "Mechanism",
+    "replay": "Replay",
+    "unitAttacker": "Attacker",
+    "unitP2": "P2 Unit",
+    "unitOpponent": "Opp. Unit",
+    "unitFirstStrike": "First Strike Unit",
+    "unitHighManeuver": "High Maneuver Unit",
+    "unitBreach": "Breach Unit",
+    "unitSuppression": "Suppression Unit",
+    "unitRepair": "Repair Unit",
+    "unitSupportUnit": "Support Unit"
+  },
+  "setup": {
+    "shuffle": "Shuffle",
+    "shuffling": "Shuffling",
+    "draw": "Draw",
+    "hand": "Hand",
+    "handCount": "Hand ({{count}})",
+    "mulliganQ": "Mulligan?",
+    "deckCount": "50 cards",
+    "resDeckCount": "10 cards",
+    "resource": "Resource"
   }
 }

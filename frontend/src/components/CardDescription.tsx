@@ -1,7 +1,13 @@
 import { cn } from "@/lib/utils";
 import { useRouter, useParams } from "@tanstack/react-router";
-import type { CardKeyword } from "@/routes/$locale/cardlist";
+import {
+  ALL_KEYWORDS,
+  TRIGGER_KEYWORD_SET,
+  ABILITY_KEYWORD_SET,
+  type CardKeyword,
+} from "@/lib/gameConstants";
 import { renderKeyword } from "@/render/keyword";
+import i18n from "@/i18n";
 
 // ─── Styles (CardKeyword enum 키) ─────────────────────────────────────────────
 
@@ -20,7 +26,6 @@ const TRIGGER_STYLES: Partial<Record<CardKeyword, string>> = {
   WHEN_LINKED: "bg-yellow-300 text-gray-800",
   DURING_LINK: "bg-yellow-300 text-gray-800",
   ONCE_PER_TURN: "bg-red-700 text-white",
-  END_OF_TURN: "bg-red-700 text-white",
 };
 
 const ABILITY_STYLES: Partial<Record<CardKeyword, string>> = {
@@ -39,34 +44,25 @@ export const ABILITY_FALLBACK = "border-white/30 bg-white/5 text-white/80";
 // ─── Keyword map — 외부 callers(DeckListPage, KeywordsPage, RulesPage)용 ───────
 // triggerClass(text) / abilityClass(text) 시그니처 유지
 
-const TRIGGER_KEYWORD_MAP: Array<[string, CardKeyword]> = [
-  ["기동･메인", "ACTIVATE_MAIN"],
-  ["기동･액션", "ACTIVATE_ACTION"],
-  ["메인", "MAIN"],
-  ["액션", "ACTION"],
-  ["버스트", "BURST"],
-  ["공격 시", "ATTACK"],
-  ["배치 시", "DEPLOY"],
-  ["파괴 시", "DESTROYED"],
-  ["링크 시", "WHEN_LINKED"],
-  ["링크 중", "DURING_LINK"],
-  ["세트 시", "WHEN_PAIRED"],
-  ["세트 중", "DURING_PAIR"],
-  ["파일럿", "PILOT"],
-  ["턴 1회", "ONCE_PER_TURN"],
-  ["내 턴이 끝날 때", "END_OF_TURN"],
-];
+// Derived from ko locale — single source of truth with game.json keyword.*
+const ko = (kw: CardKeyword) => i18n.t(`keyword.${kw}`, { lng: "ko", ns: "game" });
 
-const ABILITY_KEYWORD_MAP: Array<[string, CardKeyword]> = [
-  ["블로커", "BLOCKER"],
-  ["고기동", "HIGH_MANEUVER"],
-  ["선제 공격", "FIRST_STRIKE"],
-  ["선제공격", "FIRST_STRIKE"],
-  ["제압", "SUPPRESSION"],
-  ["돌파", "BREACH"],
-  ["리페어", "REPAIR"],
-  ["원호", "SUPPORT"],
-];
+const TRIGGER_KEYWORD_MAP: Array<[string, CardKeyword]> = ALL_KEYWORDS.filter((kw) =>
+  TRIGGER_KEYWORD_SET.has(kw),
+).map((kw) => [ko(kw), kw]);
+
+const ABILITY_KEYWORD_MAP: Array<[string, CardKeyword]> = ALL_KEYWORDS.filter((kw) =>
+  ABILITY_KEYWORD_SET.has(kw),
+).flatMap((kw) => {
+  const text = ko(kw);
+  // "선제 공격" (띄어쓰기 있는 표기)이 일부 카드 텍스트에서 사용됨
+  if (kw === "FIRST_STRIKE")
+    return [
+      [text, kw],
+      ["선제 공격", kw],
+    ] as [string, CardKeyword][];
+  return [[text, kw]] as [string, CardKeyword][];
+});
 
 function findKeyword(text: string, map: Array<[string, CardKeyword]>): CardKeyword | null {
   for (const [k, v] of map) {
