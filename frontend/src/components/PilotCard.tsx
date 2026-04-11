@@ -1,4 +1,5 @@
 import { useLocalize } from "@/lib/localize";
+import { getKindLabel } from "@/lib/filterConstants";
 import { graphql } from "relay-runtime";
 import type { PilotCardFragment$key } from "@/__generated__/PilotCardFragment.graphql";
 import { useFragment } from "react-relay";
@@ -83,7 +84,7 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
                 pilotCard.color === "WHITE" ? "text-gray-400" : "text-white/80",
               )}
             >
-              파일럿
+              {getKindLabel("PILOT")}
             </span>
           </div>
           <div
@@ -110,7 +111,7 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
                   pilotCard.color !== "WHITE" ? "text-white" : "text-black",
                 )}
               >
-                파일럿
+                {getKindLabel("PILOT")}
               </div>
               <div
                 className={cn(

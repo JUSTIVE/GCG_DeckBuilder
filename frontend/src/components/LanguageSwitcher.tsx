@@ -1,11 +1,13 @@
 import { Link, useParams, useRouterState } from "@tanstack/react-router";
-import { URL_LOCALES, type UrlLocale } from "@/i18n";
+import type { UrlLocale } from "@/i18n";
 
 const LABELS: Record<UrlLocale, string> = {
   ko: "한",
   en: "EN",
   jp: "JP",
 };
+
+const VISIBLE_LOCALES: UrlLocale[] = ["ko", "en"];
 
 export function LanguageSwitcher() {
   const { locale = "ko" } = useParams({ strict: false });
@@ -18,7 +20,7 @@ export function LanguageSwitcher() {
 
   return (
     <div className="flex items-center gap-0.5">
-      {URL_LOCALES.map((loc) => (
+      {VISIBLE_LOCALES.map((loc) => (
         <Link
           key={loc}
           to={buildPath(loc)}

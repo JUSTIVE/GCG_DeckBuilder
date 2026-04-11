@@ -71,48 +71,7 @@ bun run test       # vitest
 
 ## i18n 패턴
 
-**네임스페이스**: `common`, `game`, `filters`, `rules`
-
-**컴포넌트에서 문자열 표시**
-
-```tsx
-// Hook — 언어 변경 시 자동 re-render
-const { t } = useTranslation("game");
-t("area.battle"); // → "배틀 에어리어" / "Battle Area"
-t("kind.UNIT"); // → "유닛" / "Unit"
-```
-
-**카드 이름 (LocalizedString)**
-
-```tsx
-// LocalizedString = { en: string; ko: string; [lang: string]: string }
-import { useLocalize } from "@/lib/localize"; // 컴포넌트용 hook
-import { localize } from "@/lib/localize"; // 비-hook 컨텍스트용
-
-const localize = useLocalize();
-localize(card.name); // 현재 언어로 자동 선택
-localize(card.pilot?.name); // null-safe
-```
-
-**정적 레이블 (필터 등) — 반드시 컴포넌트 render 안에서 호출**
-
-```tsx
-// ❌ 모듈 최상위에서 호출 — 언어 변경에 반응 안 함
-const labels = getKeywordLabels();
-
-// ✓ 컴포넌트 body 안에서 호출
-function FilterControls() {
-  const { t } = useTranslation("common"); // re-render 트리거
-  const keywordLabels = getKeywordLabels(); // 매 render마다 현재 언어로 계산
-  const seriesLabels = getSeriesLabels();
-  const packGroups = getPackGroups();
-  // getKindLabel(k), getZoneLabel(z), getColorLabel(c) — 단건 조회도 동일
-}
-```
-
-**locale 파일 위치**: `src/locales/{ko,en,ja}/{namespace}.json`
-
-새 문자열 추가 시 **세 locale 모두** 동시에 추가한다.
+→ 상세 내용은 `/i18n` 스킬(`.claude/commands/i18n.md`) 참고.
 
 ## Relay / GraphQL
 

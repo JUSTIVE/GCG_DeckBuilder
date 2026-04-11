@@ -1,4 +1,5 @@
 import { useLocalize } from "@/lib/localize";
+import { getKindLabel } from "@/lib/filterConstants";
 import { graphql } from "relay-runtime";
 import type { CommandCardFragment$key } from "@/__generated__/CommandCardFragment.graphql";
 import type { CommandCard_CommandCardBody$key } from "@/__generated__/CommandCard_CommandCardBody.graphql";
@@ -92,7 +93,7 @@ export function CommandCardBody({
                 commandCard.color === "WHITE" ? "text-gray-400" : "text-white/80",
               )}
             >
-              커맨드
+              {getKindLabel("COMMAND")}
             </span>
           </div>
           <div
@@ -136,7 +137,7 @@ export function CommandCardBody({
                     commandCard.color !== "WHITE" ? "text-white" : "text-black",
                   )}
                 >
-                  파일럿
+                  {getKindLabel("PILOT")}
                 </div>
                 <div
                   className={cn(

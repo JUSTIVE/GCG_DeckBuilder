@@ -1,4 +1,5 @@
 import { useLocalize } from "@/lib/localize";
+import { getKindLabel } from "@/lib/filterConstants";
 import { graphql } from "relay-runtime";
 import type { UnitCardFragment$key } from "@/__generated__/UnitCardFragment.graphql";
 import type { UnitCard_UnitCardBody$key } from "@/__generated__/UnitCard_UnitCardBody.graphql";
@@ -106,7 +107,7 @@ export function UnitCardBody({
                 unitCard.color === "WHITE" ? "text-gray-400" : "text-white/80",
               )}
             >
-              유닛
+              {getKindLabel("UNIT")}
             </span>
           </div>
           <div

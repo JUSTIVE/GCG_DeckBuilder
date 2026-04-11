@@ -1,4 +1,5 @@
 import { useLocalize } from "@/lib/localize";
+import { getKindLabel } from "@/lib/filterConstants";
 import { graphql } from "relay-runtime";
 import type { BaseCardFragment$key } from "@/__generated__/BaseCardFragment.graphql";
 import { useFragment } from "react-relay";
@@ -110,7 +111,7 @@ export function BaseCardBody({
                 baseCard.color === "WHITE" ? "text-gray-400" : "text-white/80",
               )}
             >
-              베이스
+              {getKindLabel("BASE")}
             </span>
           </div>
           <div
