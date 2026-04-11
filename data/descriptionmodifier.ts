@@ -277,6 +277,8 @@ const replaceList = {
   "If it is your opponent's turn,": "상대의 턴 이라면,",
   "choose 1 of your (걀라르호른) Units. Set it as active.":
     "(걀라르호른)의 자신의 유닛 1개를 선택한다. 그 유닛을 액티브로 한다.",
+  "Choose 1 of your (오퍼레이션 메테오)/(G-팀) Units.":
+    "(오퍼레이션 메테오)/(G-팀)의 자신의 유닛 1개를 선택한다.",
   "Choose 1 (에우고) Base card from your trash.":
     "자신의 트래쉬의 (에우고)의 베이스 카드 1장을 선택한다.",
   "While there is a friendly white Base in play,": "백색의 아군의 베이스가 있는 동안,",

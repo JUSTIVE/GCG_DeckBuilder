@@ -43,6 +43,8 @@ export interface BattleSnap {
   initBaseHp: number;
   initHasBase: boolean;
   chosenBlockerLabel: string;
+  /** 어택 방향: "mine" = 내가 공격, "enemy" = 상대가 공격 */
+  attackDir: "mine" | "enemy";
 }
 
 // ── BoardCtx ──────────────────────────────────────────────────────────────────
@@ -51,6 +53,10 @@ export interface BattleSnap {
 export interface BoardCtx {
   myHp: number;
   enemyHp: number;
+  myShields: number;
+  myBaseHp: number;
+  myHasBase: boolean;
+  myDefeated: boolean;
   enemyShields: number;
   enemyBaseHp: number;
   enemyHasBase: boolean;
@@ -127,6 +133,10 @@ export function makeInitialBoard(myHp: number, enemyHp: number): BoardCtx {
   return {
     myHp,
     enemyHp,
+    myShields: 6,
+    myBaseHp: 3,
+    myHasBase: true,
+    myDefeated: false,
     enemyShields: 6,
     enemyBaseHp: 3,
     enemyHasBase: true,
@@ -263,9 +273,11 @@ export function battleTransition(state: BattleFSM, event: BattleEvent): BattleFS
     case "RUN": {
       if (state.phase !== "idle") return state;
       const { snap } = event;
-      const logMsg = snap.hasHighMobility
-        ? "어택 스텝: 어택 유닛을 레스트하고 어택 선언. 《고기동》 — 상대 《블로커》 발동 불가."
-        : "어택 스텝: 어택 유닛을 레스트하고 어택 선언.";
+      const logMsg = snap.attackDir === "enemy"
+        ? "어택 스텝: 상대 유닛 어택 선언."
+        : snap.hasHighMobility
+          ? "어택 스텝: 어택 유닛을 레스트하고 어택 선언. 《고기동》 — 상대 《블로커》 발동 불가."
+          : "어택 스텝: 어택 유닛을 레스트하고 어택 선언.";
       return {
         phase: "attack",
         board: pushLog(state.board, logMsg),
@@ -329,6 +341,33 @@ export function battleTransition(state: BattleFSM, event: BattleEvent): BattleFS
           const { snap } = state.battle;
           let board = { ...state.board };
           let battle = { ...state.battle, myAttacking: false };
+
+          // ── 상대 어택: 내 실드/베이스에 대미지 ──
+          if (snap.attackDir === "enemy") {
+            if (snap.initHasBase) {
+              const newBaseHp = snap.initBaseHp - snap.myAp;
+              if (newBaseHp <= 0) {
+                board = pushLog(
+                  { ...board, myBaseHp: 0, myHasBase: false },
+                  `상대 유닛이 내 베이스에 ${snap.myAp} 대미지! HP 0 → 베이스 파괴!`,
+                );
+              } else {
+                board = pushLog(
+                  { ...board, myBaseHp: newBaseHp },
+                  `상대 유닛이 내 베이스에 ${snap.myAp} 대미지! (HP ${snap.initBaseHp} → ${newBaseHp})`,
+                );
+              }
+            } else if (snap.initShields > 0) {
+              const newShields = snap.initShields - 1;
+              board = pushLog(
+                { ...board, myShields: newShields },
+                `내 실드 1장 파괴! (남은: ${newShields}장)`,
+              );
+            } else {
+              board = pushLog({ ...board, myDefeated: true }, "실드·베이스 없음 → 직격! 패배.");
+            }
+            return { phase: "hit", board, battle };
+          }
 
           if (!snap.wasBlocker) {
             // 블로커 없음: 실드/베이스 직접 피격
@@ -440,13 +479,16 @@ export function battleTransition(state: BattleFSM, event: BattleEvent): BattleFS
           };
 
         // end → idle: 배틀 완전 종료, 로스터 정리 트리거
-        case "end":
+        // 상대 어택이었으면 turnBanner: "mine" 으로 전환
+        case "end": {
+          const isEnemyAttack = state.battle.snap.attackDir === "enemy";
           return {
             phase: "idle",
             board: state.board,
-            turnBanner: null,
+            turnBanner: isEnemyAttack ? "mine" : null,
             battleDone: true,
           };
+        }
 
         default:
           return state;

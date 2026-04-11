@@ -297,13 +297,11 @@ export function UnitBattleSimulator() {
     // attack → block: DOM 재측정 후 BLOCK_TICK
     if (phase === "attack") {
       const t = setTimeout(() => {
-        const cr = containerRef.current;
-        const blockerCoords = measureCoords(
-          myBattleRef,
-          enemyBattleRef.current,
-        );
-        // 화살표는 블로커 있으면 블로커 유닛으로, 없으면 그대로
-        void cr; // suppress unused warning
+        if (fsmState.phase !== "attack") return;
+        const isEnemy = fsmState.battle.snap.attackDir === "enemy";
+        const blockerCoords = isEnemy
+          ? measureCoords(enemyBattleRef, myBattleRef.current)
+          : measureCoords(myBattleRef, enemyBattleRef.current);
         dispatch({ type: "BLOCK_TICK", blockerCoords });
       }, PHASE_DURATION.attack!);
       return () => clearTimeout(t);
@@ -318,12 +316,19 @@ export function UnitBattleSimulator() {
     // action → damage: DOM 측정 후 DAMAGE_TICK
     if (phase === "action") {
       const t = setTimeout(() => {
+        if (fsmState.phase !== "action") return;
         const snap = fsmState.battle.snap;
         const cr = containerRef.current;
-        const shieldEl = cr?.querySelector('[data-target="p2-shield"]');
-        const projCoords = snap.wasBlocker
-          ? measureCoords(myBattleRef, enemyBattleRef.current)
-          : measureCoords(myBattleRef, shieldEl ?? null);
+        let projCoords: Coords;
+        if (snap.attackDir === "enemy") {
+          const p1ShieldEl = cr?.querySelector('[data-target="p1-shield"]');
+          projCoords = measureCoords(enemyBattleRef, p1ShieldEl ?? null);
+        } else {
+          const shieldEl = cr?.querySelector('[data-target="p2-shield"]');
+          projCoords = snap.wasBlocker
+            ? measureCoords(myBattleRef, enemyBattleRef.current)
+            : measureCoords(myBattleRef, shieldEl ?? null);
+        }
         dispatch({ type: "DAMAGE_TICK", projCoords });
       }, PHASE_DURATION.action!);
       return () => clearTimeout(t);
@@ -363,15 +368,29 @@ export function UnitBattleSimulator() {
   // ── 턴 배너 타이머 ──
   useEffect(() => {
     if (!turnBanner) return;
-    const delay = turnBanner === "opponent" ? 1500 : 1200;
-    const t = setTimeout(() => {
-      dispatch({ type: "TURN_BANNER_TICK" });
-      if (turnBanner === "mine") {
+
+    // 상대 턴: 1500ms 후 첫 유닛 어택 (언레스트는 버튼 클릭 시 이미 처리됨)
+    if (turnBanner === "opponent") {
+      const t = setTimeout(() => {
+        const attacker = enemyRoster.find((e) => !e.rested);
+        if (attacker && !board.myDefeated) {
+          handleEnemyRun(attacker);
+        } else {
+          dispatch({ type: "TURN_BANNER_TICK" });
+        }
+      }, 1500);
+      return () => clearTimeout(t);
+    }
+
+    // 내 턴: 1200ms 후 내 유닛만 언레스트 (상대 유닛은 상대 턴 시작 시 언레스트)
+    if (turnBanner === "mine") {
+      const t = setTimeout(() => {
+        dispatch({ type: "TURN_BANNER_TICK" });
         setMyRoster((prev) => prev.map((e) => ({ ...e, rested: false })));
-      }
-    }, delay);
-    return () => clearTimeout(t);
-  }, [turnBanner]);
+      }, 1200);
+      return () => clearTimeout(t);
+    }
+  }, [turnBanner]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── 배틀 종료 후 로스터 정리 ──
   useEffect(() => {
@@ -381,6 +400,14 @@ export function UnitBattleSimulator() {
     const prevSnap = snapRef.current;
     if (!prevSnap) return;
 
+    // 상대 어택 종료: 공격한 적 유닛 레스트 처리, turnBanner는 FSM이 "mine"으로 설정
+    if (prevSnap.attackDir === "enemy") {
+      setEnemyRoster((prev) => prev.map((e, i) => (i === 0 ? { ...e, rested: true } : e)));
+      dispatch({ type: "CLEANUP_DONE", myHp: finalMyHp, enemyHp: finalEnemyHp });
+      return;
+    }
+
+    // 내 어택 종료
     let newMyHp = finalMyHp;
     let newEnemyHp = finalEnemyHp;
 
@@ -458,6 +485,7 @@ export function UnitBattleSimulator() {
         initBaseHp: board.enemyBaseHp,
         initHasBase: board.enemyHasBase,
         chosenBlockerLabel,
+        attackDir: "mine",
       },
     });
   }
@@ -468,6 +496,38 @@ export function UnitBattleSimulator() {
     setEnemyRoster([{ id: 1, presetIdx: INIT_ENEMY_PRESET, hp: UNIT_PRESETS[INIT_ENEMY_PRESET].hp, rested: false }]);
     idRef.current = 2;
     dispatch({ type: "RESET", myHp: UNIT_PRESETS[INIT_MY_PRESET].hp, enemyHp: UNIT_PRESETS[INIT_ENEMY_PRESET].hp });
+  }
+
+  // ── 상대 어택 핸들러 (상대 턴에 자동 호출) ──
+  function handleEnemyRun(attacker: RosterEntry) {
+    if (isRunning) return;
+    const preset = UNIT_PRESETS[attacker.presetIdx];
+    const cr = containerRef.current;
+    const p1ShieldEl = cr?.querySelector('[data-target="p1-shield"]') ?? null;
+    const shieldCoords = measureCoords(enemyBattleRef, p1ShieldEl);
+    dispatch({
+      type: "RUN",
+      snap: {
+        myAp: preset.ap,
+        enemyAp: 0,
+        myMaxHp: preset.hp,
+        enemyMaxHp: board.myHp,
+        afterMyHp: preset.hp,
+        afterEnemyHp: board.myHp,
+        wasBlocker: false,
+        hasFirstStrike: false,
+        hasHighMobility: false,
+        breakthroughN: 0,
+        hasBurst: false,
+        shieldCoords,
+        burstFrom: { x: 0, y: 0 },
+        initShields: board.myShields,
+        initBaseHp: board.myBaseHp,
+        initHasBase: board.myHasBase,
+        chosenBlockerLabel: "",
+        attackDir: "enemy",
+      },
+    });
   }
 
   // ── 파생값 ──
@@ -483,7 +543,13 @@ export function UnitBattleSimulator() {
     return Math.min(1, fit);
   }
 
-  const p1Board: DualBoardState = { shieldCount: 6, hasBase: true };
+  const attackDir = battle?.snap.attackDir ?? "mine";
+
+  const p1Board: DualBoardState = {
+    shieldCount: board.myShields,
+    hasBase: board.myHasBase,
+    baseHp: board.myHasBase ? board.myBaseHp : undefined,
+  };
   const p2Board: DualBoardState = {
     shieldCount: board.enemyShields,
     hasBase: board.enemyHasBase,
@@ -762,7 +828,23 @@ export function UnitBattleSimulator() {
                 </div>
               </>
             )}
-            <div className={cn("transition-all duration-500", board.enemyDefeated && "opacity-30")}>
+            {board.myDefeated && (
+              <>
+                <div
+                  className="absolute inset-0 top-0 bottom-1/2 z-20 flex items-center justify-center pointer-events-none"
+                  style={{ animation: "defeat-pop 0.45s cubic-bezier(0.34,1.56,0.64,1) both" }}
+                >
+                  <span className="text-2xl font-black text-emerald-500 drop-shadow-lg select-none">★ 승리</span>
+                </div>
+                <div
+                  className="absolute inset-0 top-1/2 bottom-0 z-20 flex items-center justify-center pointer-events-none"
+                  style={{ animation: "defeat-pop 0.45s 0.12s cubic-bezier(0.34,1.56,0.64,1) both" }}
+                >
+                  <span className="text-2xl font-black text-rose-500 drop-shadow-lg select-none">☠ 패배</span>
+                </div>
+              </>
+            )}
+            <div className={cn("transition-all duration-500", (board.enemyDefeated || board.myDefeated) && "opacity-30")}>
             <DualPlayfield
               p1={p1Board}
               p2={p2Board}
@@ -795,7 +877,7 @@ export function UnitBattleSimulator() {
                               maxHp={p.hp}
                               color="blue"
                               rested={isActive && battle !== null ? battle.myRested : entry.rested}
-                              attacking={isActive ? (battle?.myAttacking ?? false) : false}
+                              attacking={isActive ? ((battle?.myAttacking ?? false) && attackDir === "mine") : false}
                               attackDir={-1}
                               hit={isActive ? (battle?.myHit ?? false) : false}
                               destroyed={isActive ? (battle?.myDestroyed ?? false) : false}
@@ -835,7 +917,12 @@ export function UnitBattleSimulator() {
                               hp={isActive ? board.enemyHp : p.hp}
                               maxHp={p.hp}
                               color="red"
-                              rested={isActive ? (battle?.blockerRested ?? false) : false}
+                              rested={isActive && battle !== null
+                                ? (attackDir === "enemy"
+                                    ? battle.myRested
+                                    : (battle.snap.wasBlocker ? battle.blockerRested : entry.rested))
+                                : entry.rested}
+                              attacking={isActive ? ((battle?.myAttacking ?? false) && attackDir === "enemy") : false}
                               attackDir={1}
                               hit={isActive ? (battle?.enemyHit ?? false) : false}
                               destroyed={isActive ? (battle?.enemyDestroyed ?? false) : false}
@@ -903,8 +990,11 @@ export function UnitBattleSimulator() {
               {allMyRested ? (
                 <button
                   type="button"
-                  onClick={() => dispatch({ type: "NEXT_TURN" })}
-                  disabled={isNextTurnRunning}
+                  onClick={() => {
+                    setEnemyRoster((prev) => prev.map((e) => ({ ...e, rested: false })));
+                    dispatch({ type: "NEXT_TURN" });
+                  }}
+                  disabled={isNextTurnRunning || isRunning}
                   className="flex-1 text-xs py-2 rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
                 >
                   다음 턴 →
@@ -913,7 +1003,7 @@ export function UnitBattleSimulator() {
                 <button
                   type="button"
                   onClick={handleRun}
-                  disabled={isRunning || board.myHp <= 0 || myRoster.length === 0 || board.enemyDefeated}
+                  disabled={isRunning || board.myHp <= 0 || myRoster.length === 0 || board.enemyDefeated || board.myDefeated}
                   className="flex-1 text-xs py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
                 >
                   어택!

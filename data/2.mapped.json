@@ -11557,7 +11557,7 @@
       "OPERATION_METEOR"
     ],
     "description": [
-      "【배치 시】 Choose 1 of your (오퍼레이션 메테오)/(G-팀) Units. 이 턴 동안, it may choose an active enemy Unit as its attack target."
+      "【배치 시】 (오퍼레이션 메테오)/(G-팀)의 자신의 유닛 1개를 선택한다. 이 턴 동안, it may choose an active enemy Unit as its attack target."
     ],
     "__typename": "UnitCard",
     "id": "GD03-021",

@@ -102,7 +102,7 @@ function DualHalfBoard({
       flipped={flipped}
       slots={{
         shieldArea: (
-          <DualShieldArea board={board} accent={accent} flipped={flipped} dataTarget={flipped ? "p2-shield" : undefined} />
+          <DualShieldArea board={board} accent={accent} flipped={flipped} dataTarget={flipped ? "p2-shield" : "p1-shield"} />
         ),
         battle: (
           <ZoneBox
