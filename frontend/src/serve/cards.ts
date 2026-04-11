@@ -76,10 +76,9 @@ export function cardSearchTokens(card: AnyRecord): {
     if (n.ko) name.push(n.ko);
   }
   if (Array.isArray(card["description"])) {
-    for (const line of card["description"] as Array<{
-      tokens?: Array<{ type: string; ko?: string }>;
-    }>) {
-      const ko = (line.tokens ?? [])
+    for (const line of card["description"] as Array<Array<{ type: string; ko?: string }>>) {
+      if (!Array.isArray(line)) continue;
+      const ko = line
         .filter((t) => t.type === "prose" && t.ko)
         .map((t) => t.ko!)
         .join(" ");

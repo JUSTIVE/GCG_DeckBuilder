@@ -118,8 +118,10 @@ export function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[
             ((rawName as { ko?: string }).ko ?? "").toLowerCase().includes(q)));
       const descHit =
         Array.isArray(c["description"]) &&
-        (c["description"] as Array<{ tokens: Array<{ type: string; ko?: string }> }>).some((line) =>
-          line.tokens?.some((t) => t.type === "prose" && t.ko?.toLowerCase().includes(q)),
+        (c["description"] as Array<Array<{ type: string; ko?: string }>>).some(
+          (line) =>
+            Array.isArray(line) &&
+            line.some((t) => t.type === "prose" && t.ko?.toLowerCase().includes(q)),
         );
       if (!nameHit && !descHit) return false;
     }
