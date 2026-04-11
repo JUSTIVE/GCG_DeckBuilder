@@ -10,6 +10,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:e2e": "playwright test",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "lint": "oxlint --config oxlint.json src",
@@ -48,6 +49,7 @@
   "devDependencies": {
     "@locator/babel-jsx": "^0.5.1",
     "@locator/runtime": "^0.5.1",
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/devtools-vite": "latest",
     "@tanstack/router-plugin": "latest",

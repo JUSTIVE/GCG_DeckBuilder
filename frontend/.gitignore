@@ -12,3 +12,7 @@ dist-ssr
 __unconfig*
 todos.json
 src/__generated__
+src/routeTree.gen.ts
+.omc/
+test-results/
+playwright-report/

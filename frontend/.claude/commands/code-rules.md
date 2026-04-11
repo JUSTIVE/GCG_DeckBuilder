@@ -1,8 +1,32 @@
 ---
-description: 이 프로젝트의 코드 작성 규칙 (완료 전 체크리스트, 타입 체크, oxlint/oxfmt, i18n 패턴, Relay 패턴, Tailwind 규칙, 한국어 게임 용어 대조, 표현 불가능한 타입 금지)
+description: 이 프로젝트의 코드 작성 규칙 (완료 전 체크리스트, 타입 체크, oxlint/oxfmt, i18n 패턴, Relay 패턴, Tailwind 규칙, 한국어 게임 용어 대조, 표현 불가능한 타입 금지, 스킬 자동 업데이트)
 ---
 
 # 코드 작성 규칙 및 제약사항
+
+## 스킬 자동 업데이트
+
+복잡한 도메인 작업을 수행한 뒤, 그 과정에서 **새로 알게 된 패턴·규칙·구조**가 있으면 작업 완료 전에 해당 스킬을 스스로 업데이트한다.
+
+**업데이트 대상 스킬 (`.claude/commands/` 기준)**:
+
+| 도메인                     | 스킬 파일                                 |
+| -------------------------- | ----------------------------------------- |
+| 게임 룰·카드 타입·어빌리티 | `game-domain.md`                          |
+| 배틀 시뮬레이터 로직       | `battle-simulator.md`                     |
+| 컴포넌트 계층·설계 결정    | `component-architecture.md`               |
+| 애니메이션 구현 패턴       | `animation-patterns.md`                   |
+| 코드 작성 규칙·컨벤션      | `code-rules.md` (이 파일)                 |
+| i18n · 국제화              | `code-rules.md` § i18n 패턴               |
+| 테스트 전략·vitest 패턴    | `code-rules.md` § 작업 완료 전 체크리스트 |
+
+**업데이트 기준**:
+
+- 작업 중 기존 스킬에 없는 패턴을 발견했을 때
+- 기존 스킬의 내용이 실제 코드와 달라졌을 때 (리팩토링, 이름 변경 등)
+- 새로운 컴포넌트·훅·유틸리티가 추가되어 구조가 변경됐을 때
+
+**업데이트하지 않는 것**: 임시 디버깅 메모, 현재 작업 상태, git 히스토리로 충분히 알 수 있는 정보.
 
 ## 표현 가능한 타입만 사용
 
@@ -54,20 +78,20 @@ bun run test       # vitest
 ```tsx
 // Hook — 언어 변경 시 자동 re-render
 const { t } = useTranslation("game");
-t("area.battle")        // → "배틀 에어리어" / "Battle Area"
-t("kind.UNIT")          // → "유닛" / "Unit"
+t("area.battle"); // → "배틀 에어리어" / "Battle Area"
+t("kind.UNIT"); // → "유닛" / "Unit"
 ```
 
 **카드 이름 (LocalizedString)**
 
 ```tsx
 // LocalizedString = { en: string; ko: string; [lang: string]: string }
-import { useLocalize } from "@/lib/localize";      // 컴포넌트용 hook
-import { localize } from "@/lib/localize";          // 비-hook 컨텍스트용
+import { useLocalize } from "@/lib/localize"; // 컴포넌트용 hook
+import { localize } from "@/lib/localize"; // 비-hook 컨텍스트용
 
 const localize = useLocalize();
-localize(card.name)                                 // 현재 언어로 자동 선택
-localize(card.pilot?.name)                          // null-safe
+localize(card.name); // 현재 언어로 자동 선택
+localize(card.pilot?.name); // null-safe
 ```
 
 **정적 레이블 (필터 등) — 반드시 컴포넌트 render 안에서 호출**
@@ -78,7 +102,7 @@ const labels = getKeywordLabels();
 
 // ✓ 컴포넌트 body 안에서 호출
 function FilterControls() {
-  const { t } = useTranslation("common");   // re-render 트리거
+  const { t } = useTranslation("common"); // re-render 트리거
   const keywordLabels = getKeywordLabels(); // 매 render마다 현재 언어로 계산
   const seriesLabels = getSeriesLabels();
   const packGroups = getPackGroups();

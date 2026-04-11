@@ -68,10 +68,7 @@ const ABILITY_KEYWORD_MAP: Array<[string, CardKeyword]> = [
   ["원호", "SUPPORT"],
 ];
 
-function findKeyword(
-  text: string,
-  map: Array<[string, CardKeyword]>,
-): CardKeyword | null {
+function findKeyword(text: string, map: Array<[string, CardKeyword]>): CardKeyword | null {
   for (const [k, v] of map) {
     if (text === k || text.startsWith(k)) return v;
   }
@@ -141,8 +138,7 @@ export function CardDescription({ lines, className, borderClass }: Props) {
                   onClick={() => navigateKeyword(keyword)}
                   className={cn(
                     "inline-flex align-middle items-center rounded mx-0.5 px-1.5 py-0.5 text-[10px] font-semibold leading-none cursor-pointer hover:brightness-110",
-                    TRIGGER_STYLES[keyword.toUpperCase() as CardKeyword] ??
-                      TRIGGER_FALLBACK,
+                    TRIGGER_STYLES[keyword.toUpperCase() as CardKeyword] ?? TRIGGER_FALLBACK,
                   )}
                 >
                   {renderKeyword(keyword)}
@@ -154,8 +150,7 @@ export function CardDescription({ lines, className, borderClass }: Props) {
             if (token.type === "ability") {
               const keyword = token.keyword as CardKeyword;
               const label =
-                renderKeyword(keyword) +
-                (token.n !== undefined ? ` ${token?.n ?? ""}` : "");
+                renderKeyword(keyword) + (token.n !== undefined ? ` ${token?.n ?? ""}` : "");
               return (
                 <span
                   key={j}
