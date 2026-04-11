@@ -1,0 +1,18 @@
+# Cloudflare Pages cache headers
+#
+# index.html must never be cached — it references hashed asset filenames.
+# If it's cached stale, the browser requests old chunk hashes that no longer
+# exist, the SPA fallback returns index.html as text/html, and the browser
+# throws a MIME type error when trying to load it as a JS module.
+#
+# Hashed assets (*.js, *.css, *.woff2) are content-addressed and safe to
+# cache forever (immutable).
+
+/*.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

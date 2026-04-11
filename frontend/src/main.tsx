@@ -1,5 +1,13 @@
 import "./i18n"; // must be first
 import ReactDOM from "react-dom/client";
+
+// Vite emits this event when a dynamically imported chunk fails to load.
+// This happens after a new deployment invalidates old hashed filenames —
+// the server returns index.html (SPA fallback) instead of JS, causing a
+// MIME type error. Reloading fetches the latest index.html and assets.
+window.addEventListener("vite:preloadError", () => {
+  window.location.reload();
+});
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 import { RelayEnvironmentProvider } from "react-relay";
