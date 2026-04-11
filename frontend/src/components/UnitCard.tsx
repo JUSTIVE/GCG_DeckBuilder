@@ -25,6 +25,7 @@ export function UnitCardBody({
   isWhite: boolean;
 }) {
   useTranslation("game"); // language-change subscription for getKindLabel
+  const { t } = useTranslation("common");
   const localize = useLocalize();
   const unitCard = useFragment(
     graphql`
@@ -156,7 +157,7 @@ export function UnitCardBody({
               </div>
               <div className="flex flex-row items-center">
                 <div className="w-6 h-5 bg-black -mr-4 py-px z-1 text-[3cqw] pl-1.5 min-h-3 leading-[6cqw]">
-                  링크
+                  {t("card.link")}
                 </div>
                 <div className="bg-black overflow-hidden w-full pl-7 parallelogram parallelogram-sm px-2 pt-px pb-0.5 min-h-3 h-5 items-center flex">
                   <div className="flex text-end text-white text-[4cqw] items-center min-h-[6cqw]">
