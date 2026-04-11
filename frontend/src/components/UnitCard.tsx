@@ -278,7 +278,7 @@ export function UnitCard({ unitCardRef, onOpen }: Props) {
       <button
         type="button"
         className={cn(
-          "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline border-2",
+          "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline border-2 [contain:paint]",
           COLOR_BORDER[unitCard.color],
           COLOR_SHADOW[unitCard.color],
           open && "z-10",
