@@ -94,7 +94,10 @@
   "mulligan": {
     "noDecks": "No decks. Please create a deck first.",
     "selectDeck": "Select deck...",
-    "searchDeck": "Search decks..."
+    "searchDeck": "Search decks...",
+    "drawCount": "5 of {{count}} cards",
+    "redraw": "Redraw",
+    "drawLabel": "Draw #{{id}}"
   },
   "game": {
     "firstPlayer": "First",

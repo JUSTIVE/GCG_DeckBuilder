@@ -1,5 +1,6 @@
 import { useLocalize } from "@/lib/localize";
 import { getKindLabel } from "@/lib/filterConstants";
+import { useTranslation } from "react-i18next";
 import { graphql } from "relay-runtime";
 import type { PilotCardFragment$key } from "@/__generated__/PilotCardFragment.graphql";
 import { useFragment } from "react-relay";
@@ -13,6 +14,7 @@ import type { PilotCard_PilotCardBody$key } from "src/__generated__/PilotCard_Pi
 import { renderRarity } from "src/render/rarity";
 
 export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotCardBody$key }) {
+  useTranslation("game"); // language-change subscription for getKindLabel
   const localize = useLocalize();
   const pilotCard = useFragment(
     graphql`

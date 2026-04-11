@@ -95,7 +95,10 @@
   "mulligan": {
     "noDecks": "덱이 없습니다. 먼저 덱을 만들어주세요.",
     "selectDeck": "덱 선택...",
-    "searchDeck": "덱 검색..."
+    "searchDeck": "덱 검색...",
+    "drawCount": "{{count}}장 중 5장",
+    "redraw": "다시 뽑기",
+    "drawLabel": "뽑기 #{{id}}"
   },
   "game": {
     "firstPlayer": "선공",

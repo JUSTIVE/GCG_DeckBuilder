@@ -1,5 +1,6 @@
 import { useLocalize } from "@/lib/localize";
 import { getKindLabel } from "@/lib/filterConstants";
+import { useTranslation } from "react-i18next";
 import { graphql } from "relay-runtime";
 import type { UnitCardFragment$key } from "@/__generated__/UnitCardFragment.graphql";
 import type { UnitCard_UnitCardBody$key } from "@/__generated__/UnitCard_UnitCardBody.graphql";
@@ -23,6 +24,7 @@ export function UnitCardBody({
   cardBg: string;
   isWhite: boolean;
 }) {
+  useTranslation("game"); // language-change subscription for getKindLabel
   const localize = useLocalize();
   const unitCard = useFragment(
     graphql`

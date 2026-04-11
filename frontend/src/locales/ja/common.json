@@ -94,7 +94,10 @@
   "mulligan": {
     "noDecks": "デッキがありません。先にデッキを作成してください。",
     "selectDeck": "デッキを選択...",
-    "searchDeck": "デッキ検索..."
+    "searchDeck": "デッキ検索...",
+    "drawCount": "{{count}}枚中5枚",
+    "redraw": "再ドロー",
+    "drawLabel": "ドロー #{{id}}"
   },
   "game": {
     "firstPlayer": "先攻",

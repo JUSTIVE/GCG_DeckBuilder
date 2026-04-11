@@ -1,5 +1,6 @@
 import { useLocalize } from "@/lib/localize";
 import { getKindLabel } from "@/lib/filterConstants";
+import { useTranslation } from "react-i18next";
 import { graphql } from "relay-runtime";
 import type { BaseCardFragment$key } from "@/__generated__/BaseCardFragment.graphql";
 import { useFragment } from "react-relay";
@@ -20,6 +21,7 @@ export function BaseCardBody({
 
   isWhite: boolean;
 }) {
+  useTranslation("game"); // language-change subscription for getKindLabel
   const localize = useLocalize();
   const baseCard = useFragment(
     graphql`

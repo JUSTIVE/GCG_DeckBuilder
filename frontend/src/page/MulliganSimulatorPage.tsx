@@ -95,10 +95,12 @@ function DeckDrawer({ deckId }: { deckId: string }) {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-3">
         <div className="flex items-center gap-3">
-          <span className="text-sm text-muted-foreground">{totalCards}장 중 5장</span>
+          <span className="text-sm text-muted-foreground">
+            {t("mulligan.drawCount", { count: totalCards })}
+          </span>
           <Button onClick={redraw} variant="outline" size="sm">
             <ShuffleIcon className="size-4" />
-            다시 뽑기
+            {t("mulligan.redraw")}
           </Button>
         </div>
         <div className="flex flex-row gap-3 overflow-x-auto pb-2">
@@ -117,7 +119,9 @@ function DeckDrawer({ deckId }: { deckId: string }) {
           </div>
           {history.map((entry) => (
             <div key={entry.id} className="flex flex-col gap-2">
-              <div className="text-xs text-muted-foreground/60">뽑기 #{entry.id}</div>
+              <div className="text-xs text-muted-foreground/60">
+                {t("mulligan.drawLabel", { id: entry.id })}
+              </div>
               <div className="flex flex-row gap-2 overflow-x-auto pb-1">
                 {entry.cards.map((cardRef, i) => (
                   <div key={i} className="w-32 shrink-0">
