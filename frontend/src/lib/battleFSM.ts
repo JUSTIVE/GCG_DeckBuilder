@@ -54,6 +54,7 @@ export interface BoardCtx {
   enemyShields: number;
   enemyBaseHp: number;
   enemyHasBase: boolean;
+  enemyDefeated: boolean;
   log: string[];
 }
 
@@ -129,6 +130,7 @@ export function makeInitialBoard(myHp: number, enemyHp: number): BoardCtx {
     enemyShields: 6,
     enemyBaseHp: 3,
     enemyHasBase: true,
+    enemyDefeated: false,
     log: [],
   };
 }
@@ -145,7 +147,7 @@ export function makeIdleState(myHp: number, enemyHp: number): BattleFSM {
 function makeInitialActiveCtx(snap: BattleSnap): ActiveCtx {
   return {
     snap,
-    myRested: !snap.hasHighMobility,
+    myRested: true,
     blockerRested: false,
     myAttacking: false,
     myHit: false,
@@ -262,7 +264,7 @@ export function battleTransition(state: BattleFSM, event: BattleEvent): BattleFS
       if (state.phase !== "idle") return state;
       const { snap } = event;
       const logMsg = snap.hasHighMobility
-        ? "어택 스텝: 《고기동》 — 레스트 없이 어택 선언."
+        ? "어택 스텝: 어택 유닛을 레스트하고 어택 선언. 《고기동》 — 상대 《블로커》 발동 불가."
         : "어택 스텝: 어택 유닛을 레스트하고 어택 선언.";
       return {
         phase: "attack",
@@ -349,7 +351,7 @@ export function battleTransition(state: BattleFSM, event: BattleEvent): BattleFS
                 board = pushLog(board, `실드 1장 파괴 → 트래시. (남은: ${newShields}장)`);
               }
             } else {
-              board = pushLog(board, "실드·베이스 없음 → 직격! 상대 패배.");
+              board = pushLog({ ...board, enemyDefeated: true }, "실드·베이스 없음 → 직격! 상대 패배.");
             }
             return { phase: "hit", board, battle };
           }

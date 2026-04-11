@@ -409,11 +409,11 @@ export function UnitBattleSimulator() {
   function handleRun() {
     if (isRunning || myRoster.length === 0 || board.myHp <= 0) return;
 
-    // 블로커 랜덤 선택
-    const allBlockers = enemyRoster.filter((e) => e.blocker);
+    // 블로커 랜덤 선택 (《고기동》이면 블로커 무효)
+    const allBlockers = hasHighMobility ? [] : enemyRoster.filter((e) => e.blocker);
     let chosenBlockerLabel = "";
-    let wasBlocker = allBlockers.length > 0;
-    let activeEnemyEntry = enemyRoster[0]; // 기본: 첫 번째 상대 유닛
+    const wasBlocker = allBlockers.length > 0;
+    let activeEnemyEntry: RosterEntry | undefined = wasBlocker ? allBlockers[0] : undefined;
 
     if (allBlockers.length > 1) {
       const chosen = allBlockers[Math.floor(Math.random() * allBlockers.length)];
@@ -421,16 +421,13 @@ export function UnitBattleSimulator() {
       // 선택된 블로커를 로스터 앞으로 이동
       setEnemyRoster((prev) => [chosen, ...prev.filter((e) => e.id !== chosen.id)]);
       activeEnemyEntry = chosen;
-    } else if (allBlockers.length === 1) {
-      activeEnemyEntry = allBlockers[0];
     }
 
     const myPreset = UNIT_PRESETS[myRoster[0].presetIdx];
-    const enemyPreset = UNIT_PRESETS[activeEnemyEntry.presetIdx];
     const myMaxHp = board.myHp;
-    const enemyMaxHp = wasBlocker ? enemyPreset.hp : board.enemyHp;
     const myAp = myPreset.ap;
-    const enemyAp = wasBlocker ? enemyPreset.ap : 0;
+    const enemyMaxHp = wasBlocker ? UNIT_PRESETS[activeEnemyEntry!.presetIdx].hp : board.enemyHp;
+    const enemyAp = wasBlocker ? UNIT_PRESETS[activeEnemyEntry!.presetIdx].ap : 0;
 
     // 공격 유닛을 미리 레스트 처리 — end→idle 전이 시 roster.rested가 false인 프레임 방지
     setMyRoster((prev) => prev.map((e, i) => (i === 0 ? { ...e, rested: true } : e)));
@@ -569,6 +566,12 @@ export function UnitBattleSimulator() {
           55%  { transform: scale(1.1) translateY(-1px); opacity: 1; }
           75%  { transform: scale(0.97); }
           100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        @keyframes defeat-pop {
+          0%   { transform: scale(0.3) rotate(-8deg); opacity: 0; }
+          60%  { transform: scale(1.12) rotate(2deg); opacity: 1; }
+          80%  { transform: scale(0.96) rotate(-1deg); }
+          100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
         ${burstCardKeyframe}
         @keyframes burst-flash {
@@ -743,6 +746,23 @@ export function UnitBattleSimulator() {
 
           {/* ── DualPlayfield ── */}
           <div className="relative" ref={containerRef}>
+            {board.enemyDefeated && (
+              <>
+                <div
+                  className="absolute inset-0 top-0 bottom-1/2 z-20 flex items-center justify-center pointer-events-none"
+                  style={{ animation: "defeat-pop 0.45s cubic-bezier(0.34,1.56,0.64,1) both" }}
+                >
+                  <span className="text-2xl font-black text-rose-500 drop-shadow-lg select-none">☠ 패배</span>
+                </div>
+                <div
+                  className="absolute inset-0 top-1/2 bottom-0 z-20 flex items-center justify-center pointer-events-none"
+                  style={{ animation: "defeat-pop 0.45s 0.12s cubic-bezier(0.34,1.56,0.64,1) both" }}
+                >
+                  <span className="text-2xl font-black text-emerald-500 drop-shadow-lg select-none">★ 승리</span>
+                </div>
+              </>
+            )}
+            <div className={cn("transition-all duration-500", board.enemyDefeated && "opacity-30")}>
             <DualPlayfield
               p1={p1Board}
               p2={p2Board}
@@ -774,7 +794,7 @@ export function UnitBattleSimulator() {
                               hp={isActive ? board.myHp : p.hp}
                               maxHp={p.hp}
                               color="blue"
-                              rested={isActive ? (battle?.myRested ?? false) : entry.rested}
+                              rested={isActive && battle !== null ? battle.myRested : entry.rested}
                               attacking={isActive ? (battle?.myAttacking ?? false) : false}
                               attackDir={-1}
                               hit={isActive ? (battle?.myHit ?? false) : false}
@@ -830,6 +850,7 @@ export function UnitBattleSimulator() {
                 );
               })()}
             />
+            </div>
 
             <TargetingArrow
               sx={battle?.targetCoords.sx ?? 0}
@@ -892,7 +913,7 @@ export function UnitBattleSimulator() {
                 <button
                   type="button"
                   onClick={handleRun}
-                  disabled={isRunning || board.myHp <= 0 || myRoster.length === 0}
+                  disabled={isRunning || board.myHp <= 0 || myRoster.length === 0 || board.enemyDefeated}
                   className="flex-1 text-xs py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-bold shadow-sm"
                 >
                   어택!
