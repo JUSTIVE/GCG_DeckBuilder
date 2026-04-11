@@ -6,13 +6,15 @@ export const Route = createFileRoute("/$locale")({
     parse: ({ locale }) => ({ locale: locale as UrlLocale }),
     stringify: ({ locale }) => ({ locale }),
   },
-  beforeLoad: ({ params }) => {
+  beforeLoad: ({ params, cause }) => {
     if (!URL_LOCALES.includes(params.locale as UrlLocale)) {
       throw redirect({ to: "/$locale", params: { locale: DEFAULT_LOCALE }, replace: true });
     }
-    const i18nLocale = LOCALE_MAP[params.locale as UrlLocale];
-    if (i18nLocale && i18n.language !== i18nLocale) {
-      i18n.changeLanguage(i18nLocale);
+    if (cause !== "preload") {
+      const i18nLocale = LOCALE_MAP[params.locale as UrlLocale];
+      if (i18nLocale && i18n.language !== i18nLocale) {
+        i18n.changeLanguage(i18nLocale);
+      }
     }
   },
   component: LocaleLayout,
