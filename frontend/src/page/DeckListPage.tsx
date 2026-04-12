@@ -207,14 +207,11 @@ export function DeckListPage() {
       {decks.length === 0 ? (
         <p className="text-muted-foreground text-sm text-center py-8">{t("deck.empty")}</p>
       ) : (
-        <ul
-          className="grid gap-3"
-          style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min-content, 1fr))" }}
-        >
+        <ul className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {decks.map((deck) => (
             <li
               key={deck.id}
-              className="flex items-start gap-3 rounded-lg border border-border bg-muted/30 px-4 py-3 hover:bg-muted/60 transition-colors min-w-max"
+              className="flex items-start gap-3 rounded-lg border border-border bg-muted/30 px-4 py-3 hover:bg-muted/60 transition-colors"
             >
               <button
                 type="button"
