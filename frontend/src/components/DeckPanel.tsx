@@ -267,16 +267,18 @@ export function DeckPanel({
           <ClipboardCopyIcon className="size-3.5" />
           {t("deck.copyMsaCode")}
         </Button>
-        <Button
-          className="w-full"
-          size="sm"
-          variant="outline"
-          disabled={totalCards !== 50}
-          onClick={() => downloadDeckExcel(deckName, cards)}
-        >
-          <FileSpreadsheetIcon className="size-3.5" />
-          {t("deck.downloadExcel")}
-        </Button>
+        {i18n.language !== "en" && (
+          <Button
+            className="w-full"
+            size="sm"
+            variant="outline"
+            disabled={totalCards !== 50}
+            onClick={() => downloadDeckExcel(deckName, cards)}
+          >
+            <FileSpreadsheetIcon className="size-3.5" />
+            {t("deck.downloadExcel")}
+          </Button>
+        )}
         <div className="flex gap-1.5">
           <Button
             className="flex-1"
