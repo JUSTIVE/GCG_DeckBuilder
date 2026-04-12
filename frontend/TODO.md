@@ -5,7 +5,7 @@
 3. schema의 CardViewHistory가 Card를 참조하게 리팩토링
 4. 테스트 실패 확인 및 수정
 5. quicksearch 가 페이지를 이동하지 않고 카드 상세 오버레이를 보여주도록 변경
-6. quicksearch에 검색 히스토리 보여주기 
+6. quicksearch에 검색 히스토리 보여주기
 7. quicksearch에 i18n 수정
 8. 카드 검색 결과에 연관된 카드도 찾아주
 9. 검색 query에 trait, series, keyword 도 처리해주기

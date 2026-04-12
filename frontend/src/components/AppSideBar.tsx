@@ -1,6 +1,5 @@
 import * as React from "react";
 
-
 import {
   Sidebar,
   SidebarContent,
@@ -22,7 +21,7 @@ import { graphql, useLazyLoadQuery } from "react-relay";
 import type { AppSideBarDeckListQuery } from "@/__generated__/AppSideBarDeckListQuery.graphql";
 import { COLOR_BG } from "src/render/color";
 import { cn } from "@/lib/utils";
-import icon from '/favicon.ico'
+import icon from "/favicon.ico";
 
 const DeckListQuery = graphql`
   query AppSideBarDeckListQuery {
@@ -95,7 +94,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   </div>*/}
                   <img src={icon} alt="logo" className="size-8" />
                   <div className="flex flex-col gap-0.5 leading-none">
-                    <span className="font-medium">{t('nav.title') }</span>
+                    <span className="font-medium">{t("nav.title")}</span>
                   </div>
                 </Link>
               }

@@ -1,4 +1,3 @@
-/// <reference types="vitest/config" />
 import { defineConfig } from "vite";
 import { devtools } from "@tanstack/devtools-vite";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -9,9 +8,6 @@ import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 const config = defineConfig({
-  test: {
-    exclude: ["e2e/**", "node_modules/**"],
-  },
   plugins: [
     devtools(),
     tsconfigPaths({ projects: ["./tsconfig.json"] }),

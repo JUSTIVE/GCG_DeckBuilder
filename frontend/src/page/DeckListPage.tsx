@@ -10,7 +10,7 @@ import { useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PlusIcon, Trash2Icon, LayersIcon } from "lucide-react";
+import { PlusIcon, Trash2Icon, LayersIcon, AlertCircleIcon } from "lucide-react";
 import { COLOR_BG } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
@@ -229,9 +229,19 @@ export function DeckListPage() {
               >
                 <div className="font-semibold truncate mt-2">{deck.name}</div>
                 <div className="flex items-center gap-2 mt-1">
-                  <span className="text-xs text-muted-foreground">
-                    {t("deck.cardCount", { count: totalCards(deck.cards) })}
-                  </span>
+                  {totalCards(deck.cards) === 50 ? (
+                    <span className="text-xs text-muted-foreground">
+                      {t("deck.cardCount", { count: 50 })}
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-1 text-xs font-medium text-amber-600 dark:text-amber-400">
+                      <AlertCircleIcon className="size-3 shrink-0" />
+                      {t("deck.cardCountOf", {
+                        count: totalCards(deck.cards),
+                        max: 50,
+                      })}
+                    </span>
+                  )}
                   <div className="flex gap-1 p-1">
                     {deck.colors.map((color) => (
                       <span
