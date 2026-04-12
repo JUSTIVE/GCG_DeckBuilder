@@ -1,12 +1,12 @@
 import { Dialog } from "@base-ui/react/dialog";
 import { SearchIcon, XIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { serveGraphQL } from "@/serve";
 import { cn } from "@/lib/utils";
-import { useNavigate, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import i18n from "@/i18n";
 import { localize } from "@/lib/localize";
+import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 
 // ─── GraphQL ──────────────────────────────────────────────────────────────────
 
@@ -110,11 +110,10 @@ export function QuickSearch() {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const navigate = useNavigate();
-  const { locale = "ko" } = useParams({ strict: false });
 
   // cmd+k / ctrl+k
   useEffect(() => {
@@ -166,11 +165,7 @@ export function QuickSearch() {
 
   function selectResult(r: SearchResult) {
     setOpen(false);
-    navigate({
-      to: "/$locale/cardlist",
-      params: { locale },
-      search: (prev) => ({ ...prev, cardId: r.id }),
-    });
+    setOverlayCardId(r.id);
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -282,6 +277,12 @@ export function QuickSearch() {
           </Dialog.Popup>
         </Dialog.Portal>
       </Dialog.Root>
+
+      {overlayCardId && (
+        <Suspense>
+          <CardByIdOverlay cardId={overlayCardId} onClose={() => setOverlayCardId(null)} />
+        </Suspense>
+      )}
     </>
   );
 }
