@@ -57,6 +57,27 @@ export function bestFzfScore(pattern: string, targets: string[]): number {
   }, -1);
 }
 
+/**
+ * Structured token score — for keywords and series where exact/contains
+ * matching is more meaningful than fuzzy subsequence matching.
+ * Exact match → 500, target contains full pattern → fzf+50, otherwise fzf.
+ */
+export function bestExactScore(pattern: string, targets: string[]): number {
+  const p = pattern.toLowerCase().trim();
+  let best = -1;
+  for (const t of targets) {
+    const tl = t.toLowerCase();
+    if (tl === p) return 500;
+    if (tl.includes(p)) {
+      best = Math.max(best, fzfScore(pattern, t) + 50);
+      continue;
+    }
+    const s = fzfScore(pattern, t);
+    if (s >= 0) best = Math.max(best, s);
+  }
+  return best;
+}
+
 export function cardSearchTokens(card: AnyRecord): {
   id: string[];
   name: string[];
