@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -7,6 +7,10 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
     <title>건담 TCG 서포터</title>
+    <script>
+      var l = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+      document.documentElement.lang = l.startsWith("ko") ? "ko" : "en";
+    </script>
   </head>
   <body>
     <div id="app"></div>

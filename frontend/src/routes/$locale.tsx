@@ -12,8 +12,9 @@ export const Route = createFileRoute("/$locale")({
     }
     if (cause !== "preload") {
       const i18nLocale = LOCALE_MAP[params.locale as UrlLocale];
-      if (i18nLocale && i18n.language !== i18nLocale) {
-        i18n.changeLanguage(i18nLocale);
+      if (i18nLocale) {
+        if (i18n.language !== i18nLocale) i18n.changeLanguage(i18nLocale);
+        document.documentElement.lang = i18nLocale;
       }
     }
   },
