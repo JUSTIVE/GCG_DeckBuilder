@@ -196,7 +196,7 @@ export function QuickSearch() {
     debounceRef.current = setTimeout(async () => {
       const resp = await serveGraphQL(QUICKSEARCH_QUERY, {
         q: query,
-        first: 15,
+        first: 20,
       });
       const hits =
         ((resp.data as Record<string, unknown>)?.["quicksearch"] as SearchResult[]) ?? [];
