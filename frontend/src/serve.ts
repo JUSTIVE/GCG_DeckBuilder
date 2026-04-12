@@ -127,9 +127,19 @@ const rootValue = {
       const descScore = bestFzfScore(cleanQuery, tokens.description);
       const traitScore = bestFzfScore(cleanQuery, tokens.traits);
       const linkScore = bestFzfScore(cleanQuery, tokens.links);
+      const keywordScore = bestFzfScore(cleanQuery, tokens.keywords);
+      const seriesScore = bestFzfScore(cleanQuery, tokens.series);
       const boostedTraitScore =
         traitFocused && traitScore >= 0 ? traitScore + TRAIT_BONUS : traitScore;
-      const maxScore = Math.max(idScore, nameScore, descScore, boostedTraitScore, linkScore);
+      const maxScore = Math.max(
+        idScore,
+        nameScore,
+        descScore,
+        boostedTraitScore,
+        linkScore,
+        keywordScore,
+        seriesScore,
+      );
       if (maxScore >= 0) {
         const finalScore = !traitFocused && nameScore >= 0 ? maxScore + 20 : maxScore;
         scored.push({ score: finalScore, card });

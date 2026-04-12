@@ -1,4 +1,8 @@
 import allCardsRaw from "../../../data/3.processed.json";
+import koGame from "../locales/ko/game.json";
+
+const KO_KEYWORDS: Record<string, string> = koGame.keyword;
+const KO_SERIES: Record<string, string> = koGame.series;
 
 export type RawCard = (typeof allCardsRaw)[number];
 export type AnyRecord = Record<string, unknown>;
@@ -59,12 +63,16 @@ export function cardSearchTokens(card: AnyRecord): {
   description: string[];
   traits: string[];
   links: string[];
+  keywords: string[];
+  series: string[];
 } {
   const id: string[] = [];
   const name: string[] = [];
   const description: string[] = [];
   const traits: string[] = [];
   const links: string[] = [];
+  const keywords: string[] = [];
+  const series: string[] = [];
 
   if (typeof card["id"] === "string") id.push(card["id"]);
   const rawName = card["name"];
@@ -101,7 +109,21 @@ export function cardSearchTokens(card: AnyRecord): {
       if (pn.ko) links.push(pn.ko);
     }
   }
-  return { id, name, description, traits, links };
+  if (Array.isArray(card["keywords"])) {
+    for (const kw of card["keywords"] as unknown[]) {
+      if (typeof kw !== "string") continue;
+      keywords.push(kw);
+      const ko = KO_KEYWORDS[kw];
+      if (ko) keywords.push(ko);
+    }
+  }
+  const rawSeries = card["series"];
+  if (typeof rawSeries === "string") {
+    series.push(rawSeries);
+    const ko = KO_SERIES[rawSeries];
+    if (ko) series.push(ko);
+  }
+  return { id, name, description, traits, links, keywords, series };
 }
 
 // ─── Cursor helpers ───────────────────────────────────────────────────────────
