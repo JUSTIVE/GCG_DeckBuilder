@@ -4,7 +4,6 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { serveGraphQL } from "@/serve";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
-import i18n from "@/i18n";
 import { localize } from "@/lib/localize";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 
@@ -68,35 +67,39 @@ type SearchResult = UnitResult | PilotResult | BaseResult | CommandResult | Reso
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-function resultLabel(r: SearchResult): string {
+type TCommon = (key: string, opts?: Record<string, unknown>) => string;
+type TGame = (key: string) => string;
+
+function resultLabel(r: SearchResult, lang: string): string {
   const name = r.__typename === "PilotCard" ? r.pilot.name : r.name;
-  return localize(name, i18n.language);
+  return localize(name, lang);
 }
 
-function resultMeta(r: SearchResult): string {
+function resultMeta(r: SearchResult, t: TCommon): string {
+  const cost = (n: number) => t("card.cost", { value: n });
   switch (r.__typename) {
     case "UnitCard":
-      return `Lv${r.level} · ${r.cost}코 · AP${r.AP} HP${r.HP}`;
+      return `Lv${r.level} · ${cost(r.cost)} · AP${r.AP} HP${r.HP}`;
     case "PilotCard":
-      return `Lv${r.level} · ${r.cost}코 · AP${r.pilot.AP} HP${r.pilot.HP}`;
+      return `Lv${r.level} · ${cost(r.cost)} · AP${r.pilot.AP} HP${r.pilot.HP}`;
     case "BaseCard":
-      return `Lv${r.level} · ${r.cost}코 · AP${r.AP} HP${r.HP}`;
+      return `Lv${r.level} · ${cost(r.cost)} · AP${r.AP} HP${r.HP}`;
     case "CommandCard":
       return r.commandPilot
-        ? `${r.cost}코스트 · AP${r.commandPilot.AP} HP${r.commandPilot.HP}`
-        : `${r.cost}코스트`;
+        ? `${cost(r.cost)} · AP${r.commandPilot.AP} HP${r.commandPilot.HP}`
+        : cost(r.cost);
     case "Resource":
       return "";
   }
 }
 
-function getKindLabel(typename: string): string {
+function getKindLabel(typename: string, tGame: TGame): string {
   const map: Record<string, string> = {
-    UnitCard: i18n.t("kind.UNIT", { ns: "game" }),
-    PilotCard: i18n.t("kind.PILOT", { ns: "game" }),
-    BaseCard: i18n.t("kind.BASE", { ns: "game" }),
-    CommandCard: i18n.t("kind.COMMAND", { ns: "game" }),
-    Resource: i18n.t("kind.RESOURCE", { ns: "game" }),
+    UnitCard: tGame("kind.UNIT"),
+    PilotCard: tGame("kind.PILOT"),
+    BaseCard: tGame("kind.BASE"),
+    CommandCard: tGame("kind.COMMAND"),
+    Resource: tGame("kind.RESOURCE"),
   };
   return map[typename] ?? typename;
 }
@@ -104,7 +107,8 @@ function getKindLabel(typename: string): string {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function QuickSearch() {
-  const { t } = useTranslation("common");
+  const { t, i18n: i18nInstance } = useTranslation("common");
+  const { t: tGame } = useTranslation("game");
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -260,13 +264,13 @@ export function QuickSearch() {
                         onClick={() => selectResult(r)}
                       >
                         <span className="w-14 shrink-0 rounded border border-border bg-muted px-1.5 py-0.5 text-center text-xs text-muted-foreground">
-                          {getKindLabel(r.__typename)}
+                          {getKindLabel(r.__typename, tGame)}
                         </span>
                         <span className="flex-1 truncate text-sm font-medium">
-                          {resultLabel(r)}
+                          {resultLabel(r, i18nInstance.language)}
                         </span>
                         <span className="shrink-0 text-xs text-muted-foreground">
-                          {resultMeta(r)}
+                          {resultMeta(r, t)}
                         </span>
                       </button>
                     </li>
