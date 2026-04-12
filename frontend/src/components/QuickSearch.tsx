@@ -1,13 +1,32 @@
 import { Dialog } from "@base-ui/react/dialog";
-import { SearchIcon, XIcon } from "lucide-react";
+import { ClockIcon, SearchIcon, XIcon } from "lucide-react";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { serveGraphQL } from "@/serve";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import { localize } from "@/lib/localize";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
+import { COLOR_HEX } from "@/render/color";
 
 // ─── GraphQL ──────────────────────────────────────────────────────────────────
+
+const HISTORY_QUERY = `
+  query QuickSearchHistoryQuery {
+    searchHistory {
+      items {
+        __typename
+        ... on CardViewHistory {
+          id
+          cardId
+          cardName
+          color
+          imageUrl
+          searchedAt
+        }
+      }
+    }
+  }
+`;
 
 const QUICKSEARCH_QUERY = `
   query QuickSearchQuery($q: String!, $first: Int) {
@@ -65,6 +84,14 @@ type ResourceResult = { __typename: "Resource"; id: string; name: LocalizedStrin
 
 type SearchResult = UnitResult | PilotResult | BaseResult | CommandResult | ResourceResult;
 
+type CardViewHistoryItem = {
+  id: string;
+  cardId: string;
+  cardName: string;
+  color: string | null;
+  imageUrl: string | null;
+};
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 type TCommon = (key: string, opts?: Record<string, unknown>) => string;
@@ -115,6 +142,7 @@ export function QuickSearch() {
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
+  const [history, setHistory] = useState<CardViewHistoryItem[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -131,10 +159,24 @@ export function QuickSearch() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  // focus & reset
+  // focus, reset & fetch history
   useEffect(() => {
     if (open) {
       setTimeout(() => inputRef.current?.focus(), 30);
+      void (async () => {
+        const resp = await serveGraphQL(HISTORY_QUERY, {});
+        const items =
+          (
+            (resp.data as Record<string, unknown>)?.["searchHistory"] as
+              | { items: unknown[] }
+              | undefined
+          )?.items ?? [];
+        const cardViews = items.filter(
+          (i): i is CardViewHistoryItem & { __typename: "CardViewHistory" } =>
+            (i as Record<string, unknown>).__typename === "CardViewHistory",
+        );
+        setHistory(cardViews.slice(0, 8));
+      })();
     } else {
       setQuery("");
       setResults([]);
@@ -234,10 +276,57 @@ export function QuickSearch() {
 
             {/* Results */}
             <div className="max-h-[26rem] overflow-y-auto">
-              {!query.trim() && (
+              {!query.trim() && history.length === 0 && (
                 <p className="px-4 py-8 text-center text-sm text-muted-foreground">
                   {t("search.prompt")}
                 </p>
+              )}
+              {!query.trim() && history.length > 0 && (
+                <div className="p-2">
+                  <div className="flex items-center gap-1 px-2 py-1.5 text-xs text-muted-foreground">
+                    <ClockIcon className="h-3 w-3" />
+                    {t("search.history")}
+                  </div>
+                  <ul>
+                    {history.map((item) => (
+                      <li key={item.id}>
+                        <button
+                          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-accent hover:text-accent-foreground"
+                          onClick={() => {
+                            setOpen(false);
+                            setOverlayCardId(item.cardId);
+                          }}
+                        >
+                          {item.imageUrl ? (
+                            <img
+                              src={item.imageUrl}
+                              className="h-8 w-6 shrink-0 rounded object-cover object-top"
+                              style={
+                                item.color
+                                  ? { backgroundColor: COLOR_HEX[item.color] + "33" }
+                                  : undefined
+                              }
+                              alt=""
+                            />
+                          ) : (
+                            <span
+                              className="h-8 w-6 shrink-0 rounded"
+                              style={{
+                                backgroundColor: item.color
+                                  ? COLOR_HEX[item.color] + "33"
+                                  : "var(--muted)",
+                              }}
+                            />
+                          )}
+                          <span className="flex-1 truncate text-sm">{item.cardName}</span>
+                          <span className="shrink-0 font-mono text-[10px] text-muted-foreground">
+                            {item.cardId}
+                          </span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
               {loading && (
                 <p className="px-4 py-8 text-center text-sm text-muted-foreground">
