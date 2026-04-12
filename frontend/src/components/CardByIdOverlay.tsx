@@ -13,6 +13,7 @@ import { COLOR_BG, COLOR_BORDER, COLOR_SHADOW } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { Dialog } from "@base-ui/react/dialog";
 import { useRouter, useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import type { CardListSearch } from "@/routes/$locale/cardlist";
 import { KeywordPanel } from "./CardOverlay/KeywordPanel";
 import { UnitCardDetail } from "./CardOverlay/UnitCardDetail";
@@ -243,6 +244,7 @@ export function CardByIdOverlay({
   const router = useRouter();
   const { locale = "ko" } = useParams({ strict: false });
   const localize = useLocalize();
+  const { t } = useTranslation("common");
   const node = data.node;
 
   const [commitAddCardView] =
@@ -448,7 +450,7 @@ export function CardByIdOverlay({
                     onClick={requestGyroPermission}
                     className="absolute inset-0 flex items-end justify-center pb-4 bg-black/40 backdrop-blur-sm text-white text-xs font-semibold"
                   >
-                    자이로 센서 허용
+                    {t("gyro.allow")}
                   </button>
                 )}
               </div>
@@ -469,7 +471,7 @@ export function CardByIdOverlay({
                       gyroEnabled ? "bg-white" : "bg-white/30",
                     )}
                   />
-                  자이로
+                  {t("gyro.label")}
                 </button>
               )}
               {renderDetail()}
