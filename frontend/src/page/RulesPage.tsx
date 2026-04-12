@@ -433,10 +433,10 @@ function GameSetupWalkthrough({
     setMulliganPhase("idle");
     const timers: ReturnType<typeof setTimeout>[] = [];
     const at = (fn: () => void, ms: number) => timers.push(setTimeout(fn, ms));
-    at(() => setMulliganPhase("returning"), 350);
-    at(() => setMulliganPhase("shuffling"), 1100);
-    at(() => setMulliganPhase("drawing"), 1950);
-    at(() => setMulliganPhase("done"), 2750);
+    at(() => setMulliganPhase("returning"), 400);
+    at(() => setMulliganPhase("shuffling"), 1200);
+    at(() => setMulliganPhase("drawing"), 2200);
+    at(() => setMulliganPhase("done"), 3200);
     return () => timers.forEach(clearTimeout);
   }, [step, replayKey]);
 

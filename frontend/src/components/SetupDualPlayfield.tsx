@@ -91,13 +91,13 @@ function HandStrip({
     let transform = "translateY(0px) scale(1)";
     let opacity: number | undefined;
     let transition = `transform 300ms ease, opacity 300ms ease`;
-    let transitionDelay = `${i * 35}ms`;
+    let transitionDelay = `${i * 50}ms`;
 
     if (isReturning) {
       transform = `translateY(${flyY}) scale(0.1)`;
       opacity = 0;
       transition = `transform 380ms ease-in, opacity 300ms ease`;
-      transitionDelay = `${i * 45}ms`;
+      transitionDelay = `${i * 65}ms`;
     } else if (isShuffling) {
       transform = `translateY(${flyY}) scale(0.1)`;
       opacity = 0;
@@ -107,7 +107,7 @@ function HandStrip({
       transform = `translateY(0px) scale(1)`;
       opacity = 1;
       transition = `transform 380ms cubic-bezier(0.22,1,0.36,1), opacity 280ms ease`;
-      transitionDelay = `${i * 65}ms`;
+      transitionDelay = `${i * 90}ms`;
     } else if (isDrawInitial) {
       transform = `translateY(${flyY}) scale(0.1)`;
       opacity = 0;
@@ -117,7 +117,7 @@ function HandStrip({
       transform = `translateY(0px) scale(1)`;
       opacity = 1;
       transition = `transform 400ms cubic-bezier(0.22,1,0.36,1), opacity 300ms ease`;
-      transitionDelay = `${i * 80}ms`;
+      transitionDelay = `${i * 110}ms`;
     }
 
     return (
@@ -135,7 +135,7 @@ function HandStrip({
         style={
           i < count
             ? { transition, transitionDelay, transform, opacity }
-            : { transitionDelay: `${i * 35}ms` }
+            : { transitionDelay: `${i * 50}ms` }
         }
       >
         {i < count && url ? (
