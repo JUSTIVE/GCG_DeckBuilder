@@ -178,6 +178,7 @@ function KeywordEntry({
 
   return (
     <div
+      id={`kw-${keyword}`}
       className={cn(
         "rounded-lg border transition-all duration-300",
         playing ? "border-primary/60 bg-primary/5" : "border-border",

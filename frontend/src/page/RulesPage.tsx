@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { Link } from "@tanstack/react-router";
 import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import { graphql } from "relay-runtime";
 import { usePreloadedQuery, readInlineData } from "react-relay";
@@ -26,23 +27,57 @@ import {
 import { triggerClass, TRIGGER_FALLBACK } from "@/components/CardDescription";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
+import type { UrlLocale } from "@/i18n";
 
 // ── badge helpers ─────────────────────────────────────────────────────────────
 
 const TRIGGER_LIGHT = "bg-gray-100 text-gray-700";
 
-function TBadge({ name }: { name: string }) {
+// Mapping from rules trigger keys → KeywordsPage keyword IDs (kw-{keyword})
+const TRIGGER_KEY_TO_KEYWORD: Record<string, string> = {
+  activateMain: "ACTIVATE_MAIN",
+  activateAction: "ACTIVATE_ACTION",
+  main: "MAIN",
+  action: "ACTION",
+  burst: "BURST",
+  onPlace: "DEPLOY",
+  onAttack: "ATTACK",
+  onDestroy: "DESTROYED",
+  onSet: "WHEN_PAIRED",
+  whileSet: "DURING_PAIR",
+  onLink: "WHEN_LINKED",
+  whileLink: "DURING_LINK",
+  oncePer: "ONCE_PER_TURN",
+};
+
+function TBadge({
+  name,
+  triggerKey,
+  locale,
+}: {
+  name: string;
+  triggerKey?: string;
+  locale?: UrlLocale;
+}) {
   const cls = triggerClass(name);
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold",
-        cls === TRIGGER_FALLBACK ? TRIGGER_LIGHT : cls,
-      )}
-    >
-      {name}
-    </span>
+  const badgeClass = cn(
+    "inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold",
+    cls === TRIGGER_FALLBACK ? TRIGGER_LIGHT : cls,
   );
+  const keyword = triggerKey ? TRIGGER_KEY_TO_KEYWORD[triggerKey] : undefined;
+  if (keyword && locale) {
+    return (
+      <Link
+        to="/$locale/keywords"
+        params={{ locale }}
+        hash={`kw-${keyword}`}
+        className={cn(badgeClass, "hover:opacity-80 transition-opacity")}
+      >
+        {name}
+      </Link>
+    );
+  }
+  return <span className={badgeClass}>{name}</span>;
 }
 
 // ── layout helpers ────────────────────────────────────────────────────────────
@@ -1110,6 +1145,7 @@ export const Query = graphql`
 
 export function RulesPage() {
   const { t } = useTranslation("rules");
+  const { locale } = Route.useParams();
   const queryRef = Route.useLoaderData() as PreloadedQuery<RulesPageQueryType>;
   const data = usePreloadedQuery<RulesPageQueryType>(Query, queryRef);
   const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
@@ -1409,7 +1445,11 @@ export function RulesPage() {
           ).map((key) => (
             <div key={key} className="flex flex-col gap-1">
               <div>
-                <TBadge name={t(`sections.triggers.items.${key}.badge`)} />
+                <TBadge
+                  name={t(`sections.triggers.items.${key}.badge`)}
+                  triggerKey={key}
+                  locale={locale}
+                />
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 {t(`sections.triggers.items.${key}.desc`)}
