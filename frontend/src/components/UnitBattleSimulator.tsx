@@ -280,7 +280,6 @@ export function UnitBattleSimulator() {
       myHp: myUnit.hp,
       enemyHp: UNIT_PRESETS[INIT_ENEMY_PRESET].hp,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasFirstStrike, hasHighMobility, breakthroughN, hasBurst]);
 
   // ── DOM 측정 헬퍼 ──
@@ -385,8 +384,7 @@ export function UnitBattleSimulator() {
       const t = setTimeout(() => dispatch({ type: "TICK" }), PHASE_DURATION.end!);
       return () => clearTimeout(t);
     }
-  }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [phase]);
   // ── 턴 배너 타이머 ──
   useEffect(() => {
     if (!turnBanner) return;
@@ -412,8 +410,7 @@ export function UnitBattleSimulator() {
       }, 1200);
       return () => clearTimeout(t);
     }
-  }, [turnBanner]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [turnBanner]);
   // ── 배틀 종료 후 로스터 정리 ──
   useEffect(() => {
     if (!battleDone) return;
@@ -452,8 +449,7 @@ export function UnitBattleSimulator() {
     }
 
     dispatch({ type: "CLEANUP_DONE", myHp: newMyHp, enemyHp: newEnemyHp });
-  }, [battleDone]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [battleDone]);
   // ── 어택 버튼 핸들러 ──
   function handleRun() {
     if (isRunning || myRoster.length === 0 || board.myHp <= 0) return;

@@ -582,15 +582,13 @@ function useStepAnim(
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [ref]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [ref]);
   useEffect(() => {
     if (animKey === 0) return;
     setStep(0);
     const timers = delays.map((delay, i) => setTimeout(() => setStep(i + 1), delay));
     return () => timers.forEach(clearTimeout);
-  }, [animKey]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [animKey]);
   const replay = () => setAnimKey((k) => k + 1);
   return [step, replay];
 }
@@ -616,8 +614,7 @@ function DemoPlayer({
 
   useEffect(() => {
     if (step === 0) onPlayingChange?.(false);
-  }, [step]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [step]);
   return (
     <>
       <style>{`

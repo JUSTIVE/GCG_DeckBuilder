@@ -120,7 +120,6 @@ export const getSeriesLabels = () =>
 export const SERIES_LABELS = getSeriesLabels();
 
 export const getPackGroups = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const t = (key: string) => (i18n.t as any)(key, { ns: "filters" }) as string;
   return [
     {

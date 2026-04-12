@@ -97,8 +97,7 @@ export function MiniCard({
       x: (trashRect.left + trashRect.right) / 2 - (cardRect.left + cardRect.right) / 2,
       y: (trashRect.top + trashRect.bottom) / 2 - (cardRect.top + cardRect.bottom) / 2,
     });
-  }, [destroyed]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [destroyed]);
   return (
     <div
       ref={cardRef}

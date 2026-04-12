@@ -318,8 +318,7 @@ export function CardByIdOverlay({
   useEffect(() => {
     if (!node || node.__typename === "%other") return;
     commitAddCardView({ variables: { cardId } });
-  }, [cardId]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [cardId]);
   useEffect(() => {
     if (!cardIds?.length) return;
     function handleKey(e: KeyboardEvent) {
