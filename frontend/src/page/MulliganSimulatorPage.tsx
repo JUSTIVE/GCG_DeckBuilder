@@ -8,7 +8,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 import { Button } from "@/components/ui/button";
-import { ShuffleIcon, DicesIcon, ChevronsUpDownIcon, CheckIcon } from "lucide-react";
+import { ShuffleIcon, DicesIcon, ChevronsUpDownIcon } from "lucide-react";
 import { Card } from "@/components/Card";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
