@@ -5,13 +5,13 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import "../styles.css";
 
 import Scaffold from "@/components/Scaffold";
-import { DEFAULT_LOCALE } from "@/i18n";
+import { getDefaultLocale } from "@/i18n";
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => {
     // Redirect bare "/" to the default locale
     if (location.pathname === "/") {
-      throw redirect({ to: "/$locale", params: { locale: DEFAULT_LOCALE }, replace: true });
+      throw redirect({ to: "/$locale", params: { locale: getDefaultLocale() }, replace: true });
     }
   },
   component: RootComponent,

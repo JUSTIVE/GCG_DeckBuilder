@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
-import i18n, { LOCALE_MAP, URL_LOCALES, DEFAULT_LOCALE, type UrlLocale } from "@/i18n";
+import i18n, { LOCALE_MAP, URL_LOCALES, getDefaultLocale, type UrlLocale } from "@/i18n";
 
 export const Route = createFileRoute("/$locale")({
   params: {
@@ -8,7 +8,7 @@ export const Route = createFileRoute("/$locale")({
   },
   beforeLoad: ({ params, cause }) => {
     if (!URL_LOCALES.includes(params.locale as UrlLocale)) {
-      throw redirect({ to: "/$locale", params: { locale: DEFAULT_LOCALE }, replace: true });
+      throw redirect({ to: "/$locale", params: { locale: getDefaultLocale() }, replace: true });
     }
     if (cause !== "preload") {
       const i18nLocale = LOCALE_MAP[params.locale as UrlLocale];

@@ -23,6 +23,15 @@ export type UrlLocale = keyof typeof LOCALE_MAP;
 export const URL_LOCALES = Object.keys(LOCALE_MAP) as UrlLocale[];
 export const DEFAULT_LOCALE: UrlLocale = "ko";
 
+/** 브라우저 언어 설정 기반 기본 locale. 한국어면 ko, 그 외 모두 en. */
+export function getDefaultLocale(): UrlLocale {
+  const langs = navigator.languages?.length ? navigator.languages : [navigator.language ?? "en"];
+  for (const lang of langs) {
+    if (lang.toLowerCase().startsWith("ko")) return "ko";
+  }
+  return "en";
+}
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
