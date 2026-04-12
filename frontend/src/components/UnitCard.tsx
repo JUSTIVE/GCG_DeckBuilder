@@ -193,54 +193,7 @@ const Fragment = graphql`
   fragment UnitCardFragment on UnitCard {
     ...UnitCard_UnitCardBody
     id
-    level
-    cost
-    name {
-      en
-      ko
-    }
     color
-    description {
-      tokens {
-        ... on TriggerToken {
-          type
-          keyword
-          qualifier {
-            en
-            ko
-          }
-        }
-        ... on AbilityToken {
-          type
-          keyword
-          n
-        }
-        ... on ProseToken {
-          type
-          en
-          ko
-        }
-      }
-    }
-    rarity
-    AP
-    HP
-    zone
-    traits
-    links {
-      __typename
-      ... on LinkPilot {
-        pilot {
-          name {
-            en
-            ko
-          }
-        }
-      }
-      ... on LinkTrait {
-        trait
-      }
-    }
   }
 `;
 

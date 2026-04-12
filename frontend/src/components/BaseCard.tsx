@@ -40,28 +40,6 @@ export function BaseCardBody({
         HP
         zone
         traits
-        description {
-          tokens {
-            ... on TriggerToken {
-              type
-              keyword
-              qualifier {
-                en
-                ko
-              }
-            }
-            ... on AbilityToken {
-              type
-              keyword
-              n
-            }
-            ... on ProseToken {
-              type
-              en
-              ko
-            }
-          }
-        }
       }
     `,
     baseCardRef,
@@ -190,40 +168,7 @@ const Fragment = graphql`
   fragment BaseCardFragment on BaseCard {
     ...BaseCard_BaseCardBody
     id
-    name {
-      en
-      ko
-    }
-    level
-    cost
     color
-    rarity
-    AP
-    HP
-    zone
-    traits
-    description {
-      tokens {
-        ... on TriggerToken {
-          type
-          keyword
-          qualifier {
-            en
-            ko
-          }
-        }
-        ... on AbilityToken {
-          type
-          keyword
-          n
-        }
-        ... on ProseToken {
-          type
-          en
-          ko
-        }
-      }
-    }
   }
 `;
 

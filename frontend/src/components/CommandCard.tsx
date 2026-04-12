@@ -188,45 +188,7 @@ const Fragment = graphql`
   fragment CommandCardFragment on CommandCard {
     ...CommandCard_CommandCardBody
     id
-    name {
-      en
-      ko
-    }
-    level
-    cost
     color
-    rarity
-    traits
-    commandPilot: pilot {
-      name {
-        en
-        ko
-      }
-      AP
-      HP
-    }
-    description {
-      tokens {
-        ... on TriggerToken {
-          type
-          keyword
-          qualifier {
-            en
-            ko
-          }
-        }
-        ... on AbilityToken {
-          type
-          keyword
-          n
-        }
-        ... on ProseToken {
-          type
-          en
-          ko
-        }
-      }
-    }
   }
 `;
 
