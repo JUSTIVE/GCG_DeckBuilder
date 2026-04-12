@@ -198,7 +198,7 @@ export function DeckPanel({
                         <button type="button" className="block" onClick={() => onOpenCard(info.id)}>
                           <img
                             className="h-10 w-8 rounded object-cover cutout cutout-br-md"
-                            src={info.imageUrl ?? undefined}
+                            src={info.imageUrl?.replace(/\.webp$/, "-sm.webp") ?? undefined}
                             style={{
                               backgroundColor: COLOR_HEX[info.color]
                                 ? `${COLOR_HEX[info.color]}33`

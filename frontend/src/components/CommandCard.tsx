@@ -53,6 +53,8 @@ export function CommandCardBody({
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
         src={commandCard.imageUrl}
+        srcSet={`${commandCard.imageUrl.replace(/\.webp$/, "-sm.webp")} 200w, ${commandCard.imageUrl} 800w`}
+        sizes="(max-width: 640px) 200px, 400px"
         alt={localize(commandCard.name)}
       />
       <div className="flex flex-col gap-[5cqw]">

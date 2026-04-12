@@ -299,7 +299,7 @@ export function QuickSearch() {
                         >
                           {item.imageUrl ? (
                             <img
-                              src={item.imageUrl}
+                              src={item.imageUrl.replace(/\.webp$/, "-sm.webp")}
                               className="h-8 w-6 shrink-0 rounded object-cover object-top"
                               style={
                                 item.color

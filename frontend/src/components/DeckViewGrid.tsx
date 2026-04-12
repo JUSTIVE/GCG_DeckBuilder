@@ -64,7 +64,7 @@ export function DeckViewGrid({
                       }}
                     >
                       <img
-                        src={info.imageUrl ?? undefined}
+                        src={info.imageUrl?.replace(/\.webp$/, "-sm.webp") ?? undefined}
                         alt=""
                         className="w-full h-full object-cover"
                         style={{
@@ -84,6 +84,12 @@ export function DeckViewGrid({
                   >
                     <img
                       src={info.imageUrl ?? undefined}
+                      srcSet={
+                        info.imageUrl
+                          ? `${info.imageUrl.replace(/\.webp$/, "-sm.webp")} 200w, ${info.imageUrl} 800w`
+                          : undefined
+                      }
+                      sizes="(max-width: 640px) 200px, 400px"
                       alt={info.name}
                       className="w-full rounded-lg object-cover aspect-800/1117"
                       style={{

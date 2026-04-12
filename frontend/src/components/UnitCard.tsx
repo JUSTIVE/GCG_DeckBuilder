@@ -68,6 +68,8 @@ export function UnitCardBody({
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
         src={unitCard.imageUrl}
+        srcSet={`${unitCard.imageUrl.replace(/\.webp$/, "-sm.webp")} 200w, ${unitCard.imageUrl} 800w`}
+        sizes="(max-width: 640px) 200px, 400px"
         alt={""}
       />
       <div className="flex flex-col gap-[11cqw]">

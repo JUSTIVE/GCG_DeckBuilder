@@ -256,7 +256,7 @@ export function DeckListPage() {
                   {deckPreviewImages(deck.cards).map((url, i) => (
                     <img
                       key={i}
-                      src={url}
+                      src={url.replace(/\.webp$/, "-sm.webp")}
                       className="h-14 w-10 rounded object-cover shrink-0"
                       alt=""
                     />

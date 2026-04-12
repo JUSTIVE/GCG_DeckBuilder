@@ -49,6 +49,8 @@ export function BaseCardBody({
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
         src={baseCard.imageUrl}
+        srcSet={`${baseCard.imageUrl.replace(/\.webp$/, "-sm.webp")} 200w, ${baseCard.imageUrl} 800w`}
+        sizes="(max-width: 640px) 200px, 400px"
         alt={localize(baseCard.name)}
       />
       <div className="flex flex-col gap-[5cqw]">

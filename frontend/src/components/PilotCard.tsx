@@ -44,6 +44,8 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
         src={pilotCard.imageUrl}
+        srcSet={`${pilotCard.imageUrl.replace(/\.webp$/, "-sm.webp")} 200w, ${pilotCard.imageUrl} 800w`}
+        sizes="(max-width: 640px) 200px, 400px"
         alt={localize(pilotCard.pilot.name)}
       />
       <div className="flex flex-col gap-[5cqw]">
