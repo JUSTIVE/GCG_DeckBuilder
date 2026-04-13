@@ -105,13 +105,20 @@ export function cardSearchTokens(card: AnyRecord): {
     if (n.ko) name.push(n.ko);
   }
   if (Array.isArray(card["description"])) {
-    for (const line of card["description"] as Array<Array<{ type: string; ko?: string }>>) {
+    for (const line of card["description"] as Array<
+      Array<{ type: string; en?: string; ko?: string }>
+    >) {
       if (!Array.isArray(line)) continue;
       const ko = line
         .filter((t) => t.type === "prose" && t.ko)
         .map((t) => t.ko!)
         .join(" ");
       if (ko) description.push(ko);
+      const en = line
+        .filter((t) => t.type === "prose" && t.en)
+        .map((t) => t.en!)
+        .join(" ");
+      if (en) description.push(en);
     }
   }
   if (Array.isArray(card["trait"])) {
