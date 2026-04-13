@@ -663,6 +663,7 @@ export function DeckDetailPage() {
                 onCardAdd={handleAdd}
                 onCardRemove={handleRemove}
                 onCardOpen={setOverlayCardId}
+                deckFull={totalCards >= 50}
                 scrollClassName="overflow-y-auto h-full py-5"
                 deckCardCounts={deckCardCounts}
                 deckColors={deckColors}

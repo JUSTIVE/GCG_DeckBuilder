@@ -153,6 +153,7 @@ type Props = {
   onOpen?: (cardId: string) => void;
   deckCardCount?: number;
   deckColors?: string[];
+  deckFull?: boolean;
 };
 
 export function Card({
@@ -163,6 +164,7 @@ export function Card({
   onOpen,
   deckCardCount = 0,
   deckColors,
+  deckFull = false,
 }: Props) {
   const card = useFragment(Fragment, cardRef);
 
@@ -215,10 +217,11 @@ export function Card({
     deckColors.length >= 2 &&
     !deckColors.includes(card.color);
   const atLimit = blocked || colorBlocked || deckCardCount >= cardLimit;
+  const dimmed = onAdd && (deckFull ? deckCardCount === 0 : atLimit);
 
   return (
     <div className="flex flex-col">
-      <div className={cn("relative group", atLimit && onAdd && "opacity-50")}>
+      <div className={cn("relative group", dimmed && "opacity-50")}>
         {(onAdd || onRemove) && cardId && (
           <div className="absolute bottom-0 left-0 right-0 h-1/2 z-10 flex rounded-b-xl overflow-hidden sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
             {onRemove && deckCardCount > 0 && (
