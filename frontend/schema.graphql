@@ -17,8 +17,7 @@ type AbilityToken {
 
 type ProseToken {
   type: String!
-  en: String!
-  ko: String!
+  text: LocalizedString!
 }
 
 union DescriptionToken = TriggerToken | AbilityToken | ProseToken

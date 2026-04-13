@@ -10,6 +10,10 @@ function descriptionToGraphQL(rawDesc: unknown): { tokens: object[] }[] {
       const t = token?.type;
       const __typename =
         t === "trigger" ? "TriggerToken" : t === "ability" ? "AbilityToken" : "ProseToken";
+      if (__typename === "ProseToken") {
+        const { en, ko, ...rest } = token as any;
+        return { __typename, ...rest, text: { en: en ?? "", ko: ko ?? "" } };
+      }
       return { __typename, ...token };
     }),
   }));

@@ -94,7 +94,7 @@ export function abilityClassByKeyword(keyword: CardKeyword): string {
 export type DescriptionToken =
   | { type: "trigger"; keyword: string; qualifier?: { en: string; ko: string } }
   | { type: "ability"; keyword: string; n?: number }
-  | { type: "prose"; en: string; ko: string };
+  | { type: "prose"; text: { en: string; ko: string } };
 
 export type DescriptionLine = readonly DescriptionToken[];
 
@@ -162,7 +162,7 @@ export function CardDescription({ lines, className, borderClass }: Props) {
               );
             }
 
-            return <span key={j}>{token[proseLocale]}</span>;
+            return <span key={j}>{token.text[proseLocale]}</span>;
           })}
         </li>
       ))}

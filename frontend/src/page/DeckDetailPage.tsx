@@ -66,8 +66,10 @@ export const Query = graphql`
                   }
                   ... on ProseToken {
                     type
-                    en
-                    ko
+                    text {
+                      en
+                      ko
+                    }
                   }
                 }
               }
@@ -101,8 +103,10 @@ export const Query = graphql`
                   }
                   ... on ProseToken {
                     type
-                    en
-                    ko
+                    text {
+                      en
+                      ko
+                    }
                   }
                 }
               }
@@ -134,8 +138,10 @@ export const Query = graphql`
                   }
                   ... on ProseToken {
                     type
-                    en
-                    ko
+                    text {
+                      en
+                      ko
+                    }
                   }
                 }
               }
@@ -167,8 +173,10 @@ export const Query = graphql`
                   }
                   ... on ProseToken {
                     type
-                    en
-                    ko
+                    text {
+                      en
+                      ko
+                    }
                   }
                 }
               }

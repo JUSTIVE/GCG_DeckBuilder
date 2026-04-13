@@ -34,8 +34,10 @@ const Fragment = graphql`
           }
           ... on ProseToken {
             type
-            en
-            ko
+            text {
+              en
+              ko
+            }
           }
         }
       }
@@ -63,8 +65,10 @@ const Fragment = graphql`
           }
           ... on ProseToken {
             type
-            en
-            ko
+            text {
+              en
+              ko
+            }
           }
         }
       }
@@ -92,8 +96,10 @@ const Fragment = graphql`
           }
           ... on ProseToken {
             type
-            en
-            ko
+            text {
+              en
+              ko
+            }
           }
         }
       }
@@ -121,8 +127,10 @@ const Fragment = graphql`
           }
           ... on ProseToken {
             type
-            en
-            ko
+            text {
+              en
+              ko
+            }
           }
         }
       }

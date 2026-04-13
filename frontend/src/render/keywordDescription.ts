@@ -6,7 +6,7 @@ type KeywordEntry = {
 };
 
 function prose(ko: string, en: string): DescriptionLine {
-  return [{ type: "prose", en, ko }];
+  return [{ type: "prose", text: { en, ko } }];
 }
 
 export const KEYWORD_DESCRIPTIONS: Record<string, KeywordEntry> = {
@@ -111,7 +111,7 @@ export const KEYWORD_DESCRIPTIONS: Record<string, KeywordEntry> = {
   REPAIR: {
     name: [
       { type: "ability", keyword: "REPAIR" },
-      { type: "prose", en: " X", ko: " X" },
+      { type: "prose", text: { en: " X", ko: " X" } },
     ],
     description: prose(
       "자신의 턴 종료 시 X만큼 회복한다.",
@@ -121,7 +121,7 @@ export const KEYWORD_DESCRIPTIONS: Record<string, KeywordEntry> = {
   BREACH: {
     name: [
       { type: "ability", keyword: "BREACH" },
-      { type: "prose", en: " X", ko: " X" },
+      { type: "prose", text: { en: " X", ko: " X" } },
     ],
     description: prose(
       "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대 유닛을 파괴했을 때, 그 유닛의 소유자의 실드 에어리어에 X 대미지를 준다.",
@@ -131,7 +131,7 @@ export const KEYWORD_DESCRIPTIONS: Record<string, KeywordEntry> = {
   SUPPORT: {
     name: [
       { type: "ability", keyword: "SUPPORT" },
-      { type: "prose", en: " X", ko: " X" },
+      { type: "prose", text: { en: " X", ko: " X" } },
     ],
     description: prose(
       "이 유닛을 레스트시키는 것으로, 다른 유닛을 1기 고른다. 이 턴 동안, 그 유닛을 AP +X 한다.",
