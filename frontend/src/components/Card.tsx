@@ -224,7 +224,7 @@ export function Card({
       <div className={cn("relative group", dimmed && "opacity-50")}>
         {(onAdd || onRemove) && cardId && (
           <div className="absolute bottom-0 left-0 right-0 h-1/2 z-10 flex rounded-b-xl overflow-hidden sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
-            {onRemove && deckCardCount > 0 && (
+            {onRemove && deckCardCount > 0 ? (
               <button
                 type="button"
                 className="flex-1 flex items-center justify-center bg-black/50 cursor-pointer"
@@ -232,8 +232,10 @@ export function Card({
               >
                 <MinusIcon className="size-7 text-white drop-shadow" />
               </button>
+            ) : (
+              <div className="flex-1" />
             )}
-            {onAdd && !atLimit && (
+            {onAdd && !atLimit ? (
               <button
                 type="button"
                 className="flex-1 flex items-center justify-center bg-black/50 cursor-pointer"
@@ -241,8 +243,9 @@ export function Card({
               >
                 <PlusIcon className="size-7 text-white drop-shadow" />
               </button>
+            ) : (
+              <div className="flex-1" onClick={(e) => e.stopPropagation()} />
             )}
-            {onAdd && atLimit && <div className="flex-1" onClick={(e) => e.stopPropagation()} />}
           </div>
         )}
         {onAdd && deckCardCount > 0 && (
