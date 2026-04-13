@@ -661,6 +661,7 @@ export function DeckDetailPage() {
                 sort={sort}
                 showDescription={showDescription}
                 onCardAdd={handleAdd}
+                onCardRemove={handleRemove}
                 onCardOpen={setOverlayCardId}
                 scrollClassName="overflow-y-auto h-full py-5"
                 deckCardCounts={deckCardCounts}

@@ -58,6 +58,7 @@ type Props = {
   sort?: CardSort | null;
   showDescription?: boolean;
   onCardAdd?: (cardId: string) => void;
+  onCardRemove?: (cardId: string) => void;
   onCardOpen?: (cardId: string) => void;
   onCardIdsChange?: (ids: string[]) => void;
   scrollClassName?: string;
@@ -71,6 +72,7 @@ export function CardList({
   sort,
   showDescription = false,
   onCardAdd,
+  onCardRemove,
   onCardOpen,
   onCardIdsChange,
   scrollClassName = "overflow-y-auto h-[calc(100dvh-65px-48px)] py-5",
@@ -201,6 +203,7 @@ export function CardList({
                     cardRef={edge.node}
                     showDescription={showDescription}
                     onAdd={onCardAdd}
+                    onRemove={onCardRemove}
                     onOpen={onCardOpen}
                     deckCardCount={
                       deckCardCounts ? (deckCardCounts[(edge.node as any).id] ?? 0) : 0

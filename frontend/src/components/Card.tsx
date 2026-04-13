@@ -9,7 +9,7 @@ import { ResourceCard } from "./ResourceCard";
 import { CardDescription } from "./CardDescription";
 import { COLOR_BORDER50 } from "src/render/color";
 import { cn } from "src/lib/utils";
-import { PlusIcon } from "lucide-react";
+import { MinusIcon, PlusIcon } from "lucide-react";
 
 const Fragment = graphql`
   fragment CardFragment on Card {
@@ -149,6 +149,7 @@ type Props = {
   cardRef: CardFragment$key;
   showDescription: boolean;
   onAdd?: (cardId: string) => void;
+  onRemove?: (cardId: string) => void;
   onOpen?: (cardId: string) => void;
   deckCardCount?: number;
   deckColors?: string[];
@@ -158,6 +159,7 @@ export function Card({
   cardRef,
   showDescription,
   onAdd,
+  onRemove,
   onOpen,
   deckCardCount = 0,
   deckColors,
@@ -217,20 +219,28 @@ export function Card({
   return (
     <div className="flex flex-col">
       <div className={cn("relative group", atLimit && onAdd && "opacity-50")}>
-        {onAdd && cardId && !atLimit && (
-          <button
-            type="button"
-            className="absolute bottom-0 left-0 right-0 h-1/2 z-10 flex items-center justify-center rounded-b-xl bg-black/50 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity cursor-pointer"
-            onClick={() => onAdd(cardId)}
-          >
-            <PlusIcon className="size-8 text-white drop-shadow" />
-          </button>
-        )}
-        {onAdd && atLimit && (
-          <div
-            className="absolute bottom-0 left-0 right-0 h-1/2 z-10"
-            onClick={(e) => e.stopPropagation()}
-          />
+        {(onAdd || onRemove) && cardId && (
+          <div className="absolute bottom-0 left-0 right-0 h-1/2 z-10 flex rounded-b-xl overflow-hidden sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+            {onRemove && deckCardCount > 0 && (
+              <button
+                type="button"
+                className="flex-1 flex items-center justify-center bg-black/50 cursor-pointer"
+                onClick={() => onRemove(cardId)}
+              >
+                <MinusIcon className="size-7 text-white drop-shadow" />
+              </button>
+            )}
+            {onAdd && !atLimit && (
+              <button
+                type="button"
+                className="flex-1 flex items-center justify-center bg-black/50 cursor-pointer"
+                onClick={() => onAdd(cardId)}
+              >
+                <PlusIcon className="size-7 text-white drop-shadow" />
+              </button>
+            )}
+            {onAdd && atLimit && <div className="flex-1" onClick={(e) => e.stopPropagation()} />}
+          </div>
         )}
         {onAdd && deckCardCount > 0 && (
           <div className="absolute top-1.5 right-1.5 z-10 min-w-7 h-7 rounded-full bg-white text-black text-sm font-black flex items-center justify-center px-1 leading-none pointer-events-none shadow-lg ring-2 ring-black/20">
