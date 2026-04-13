@@ -1,5 +1,3 @@
-import { cardById, type AnyRecord } from "./cards";
-
 export const SEARCH_HISTORY_KEY = "gcg_search_history";
 export const SEARCH_HISTORY_MAX = 15;
 export const SEARCH_HISTORY_LIST_ID = "SearchHistoryList:singleton";
@@ -29,8 +27,6 @@ export interface CardViewHistory {
   __typename: "CardViewHistory";
   id: string;
   cardId: string;
-  cardName: string;
-  color: string | null;
   searchedAt: string;
 }
 
@@ -95,20 +91,11 @@ export function addFilterSearch({
 }
 
 export function addCardView({ cardId }: { cardId: string }): SearchHistoryList {
-  const card = cardById.get(cardId) as AnyRecord | undefined;
-  let cardName = cardId;
-  let color: string | null = null;
-  if (card) {
-    if (typeof card["name"] === "string") cardName = card["name"];
-    if (typeof card["color"] === "string") color = card["color"];
-  }
   const searchedAt = new Date().toISOString();
   const entry: CardViewHistory = {
     __typename: "CardViewHistory",
     id: btoa(`CardViewHistory:${searchedAt}`),
     cardId,
-    cardName,
-    color,
     searchedAt,
   };
   const existing = readSearchHistory().filter(

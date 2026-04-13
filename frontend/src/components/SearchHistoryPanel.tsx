@@ -10,6 +10,7 @@ import { renderPackage } from "@/render/package";
 import { renderZone } from "@/render/zone";
 import { renderKeyword } from "@/render/keyword";
 import { ClockIcon, EyeIcon, SearchIcon, Trash2Icon, XIcon } from "lucide-react";
+import { localize } from "@/lib/localize";
 import type { SearchHistoryPanel_query$key } from "@/__generated__/SearchHistoryPanel_query.graphql";
 import type { SearchHistoryPanel_list$key } from "@/__generated__/SearchHistoryPanel_list.graphql";
 import type { SearchHistoryPanel_filterSearch$key } from "@/__generated__/SearchHistoryPanel_filterSearch.graphql";
@@ -67,10 +68,53 @@ const FilterSearchFragment = graphql`
 const CardViewFragment = graphql`
   fragment SearchHistoryPanel_cardView on CardViewHistory {
     id
-    cardId
-    cardName
-    color
-    imageUrl
+    card {
+      __typename
+      ... on UnitCard {
+        id
+        name {
+          en
+          ko
+        }
+        color
+        imageUrl
+      }
+      ... on PilotCard {
+        id
+        pilot {
+          name {
+            en
+            ko
+          }
+        }
+        color
+        imageUrl
+      }
+      ... on BaseCard {
+        id
+        name {
+          en
+          ko
+        }
+        imageUrl
+      }
+      ... on CommandCard {
+        id
+        name {
+          en
+          ko
+        }
+        color
+        imageUrl
+      }
+      ... on Resource {
+        id
+        name {
+          en
+          ko
+        }
+      }
+    }
     searchedAt
   }
 `;
@@ -288,13 +332,26 @@ function CardViewRow({
   onRestore: (cardId: string) => void;
   onRemove: (id: string, e: React.MouseEvent) => void;
 }) {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const entry = useFragment(CardViewFragment, entryRef);
 
-  const borderColor = entry.color
-    ? entry.color === "WHITE"
+  const card = entry.card;
+  const cardId = card.__typename !== "%other" ? card.id : "";
+  const nameObj =
+    card.__typename === "PilotCard"
+      ? card.pilot?.name
+      : card.__typename !== "%other" && "name" in card
+        ? card.name
+        : undefined;
+  const cardName = localize(nameObj ?? null, i18n.language);
+  const color = card.__typename !== "%other" && "color" in card ? (card.color ?? null) : null;
+  const imageUrl =
+    card.__typename !== "%other" && "imageUrl" in card ? (card.imageUrl ?? null) : null;
+
+  const borderColor = color
+    ? color === "WHITE"
       ? "var(--border)"
-      : COLOR_HEX[entry.color]
+      : COLOR_HEX[color]
     : "var(--border)";
 
   return (
@@ -305,7 +362,7 @@ function CardViewRow({
       <div className="flex items-start gap-1 cutout cutout-tl-md bg-card group-hover:bg-accent transition-colors rounded-md">
         <button
           type="button"
-          onClick={() => onRestore(entry.cardId)}
+          onClick={() => onRestore(cardId)}
           className="flex p-2 pr-0 text-left cursor-pointer flex-1 min-w-0"
         >
           <div className="flex flex-col gap-1.5 min-w-0 w-full">
@@ -316,17 +373,17 @@ function CardViewRow({
             <div className="flex items-start gap-2">
               <img
                 className="h-10 w-10 shrink-0 rounded object-cover cutout cutout-br-md"
-                src={entry.imageUrl?.replace(/\.webp$/, "-sm.webp")}
+                src={imageUrl?.replace(/\.webp$/, "-sm.webp")}
                 style={
-                  entry.color
-                    ? { backgroundColor: COLOR_HEX[entry.color] + "33" }
+                  color
+                    ? { backgroundColor: COLOR_HEX[color] + "33" }
                     : { backgroundColor: "var(--muted)" }
                 }
-                alt={entry.cardName}
+                alt={cardName}
               />
               <div className="flex flex-col gap-0.5 min-w-0">
-                <span className="text-xs font-medium truncate">{entry.cardName}</span>
-                <span className="text-[10px] text-muted-foreground">{entry.cardId}</span>
+                <span className="text-xs font-medium truncate">{cardName}</span>
+                <span className="text-[10px] text-muted-foreground">{cardId}</span>
               </div>
             </div>
             <span className="text-[10px] text-muted-foreground">

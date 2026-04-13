@@ -117,8 +117,9 @@ export function fieldResolver(
     return `/cards/${source["id"]}.webp`;
   }
 
-  if (typeName === "CardViewHistory" && fieldName === "imageUrl") {
-    return `/cards/${source["cardId"]}.webp`;
+  if (typeName === "CardViewHistory" && fieldName === "card") {
+    const id = source["cardId"] as string | undefined;
+    return id ? (cardById.get(id) ?? null) : null;
   }
 
   if (

@@ -358,10 +358,7 @@ type FilterSearchHistory implements Node {
 
 type CardViewHistory implements Node {
   id: ID!
-  cardId: ID!
-  cardName: String!
-  color: CardColor
-  imageUrl: String!
+  card: Card!
   searchedAt: String!
 }
 

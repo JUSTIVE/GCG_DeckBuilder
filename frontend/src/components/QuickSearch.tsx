@@ -17,10 +17,14 @@ const HISTORY_QUERY = `
         __typename
         ... on CardViewHistory {
           id
-          cardId
-          cardName
-          color
-          imageUrl
+          card {
+            __typename
+            ... on UnitCard    { id name { en ko } color imageUrl }
+            ... on PilotCard   { id pilot { name { en ko } } color imageUrl }
+            ... on BaseCard    { id name { en ko } imageUrl }
+            ... on CommandCard { id name { en ko } color imageUrl }
+            ... on Resource    { id name { en ko } }
+          }
           searchedAt
         }
       }
@@ -86,10 +90,15 @@ type SearchResult = UnitResult | PilotResult | BaseResult | CommandResult | Reso
 
 type CardViewHistoryItem = {
   id: string;
-  cardId: string;
-  cardName: string;
-  color: string | null;
-  imageUrl: string | null;
+  card: {
+    __typename: string;
+    id: string;
+    name?: { en: string; ko: string };
+    pilot?: { name: { en: string; ko: string } };
+    color?: string | null;
+    imageUrl?: string | null;
+  };
+  searchedAt?: string;
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -288,43 +297,49 @@ export function QuickSearch() {
                     {t("search.history")}
                   </div>
                   <ul>
-                    {history.map((item) => (
-                      <li key={item.id}>
-                        <button
-                          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-accent hover:text-accent-foreground"
-                          onClick={() => {
-                            setOpen(false);
-                            setOverlayCardId(item.cardId);
-                          }}
-                        >
-                          {item.imageUrl ? (
-                            <img
-                              src={item.imageUrl.replace(/\.webp$/, "-sm.webp")}
-                              className="h-8 w-6 shrink-0 rounded object-cover object-top"
-                              style={
-                                item.color
-                                  ? { backgroundColor: COLOR_HEX[item.color] + "33" }
-                                  : undefined
-                              }
-                              alt=""
-                            />
-                          ) : (
-                            <span
-                              className="h-8 w-6 shrink-0 rounded"
-                              style={{
-                                backgroundColor: item.color
-                                  ? COLOR_HEX[item.color] + "33"
-                                  : "var(--muted)",
-                              }}
-                            />
-                          )}
-                          <span className="flex-1 truncate text-sm">{item.cardName}</span>
-                          <span className="shrink-0 font-mono text-[10px] text-muted-foreground">
-                            {item.cardId}
-                          </span>
-                        </button>
-                      </li>
-                    ))}
+                    {history.map((item) => {
+                      const cardId = item.card.id;
+                      const nameObj =
+                        item.card.__typename === "PilotCard"
+                          ? item.card.pilot?.name
+                          : item.card.name;
+                      const cardName = localize(nameObj ?? null, i18nInstance.language);
+                      const color = item.card.color ?? null;
+                      const imageUrl = item.card.imageUrl ?? null;
+                      return (
+                        <li key={item.id}>
+                          <button
+                            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-accent hover:text-accent-foreground"
+                            onClick={() => {
+                              setOpen(false);
+                              setOverlayCardId(cardId);
+                            }}
+                          >
+                            {imageUrl ? (
+                              <img
+                                src={imageUrl.replace(/\.webp$/, "-sm.webp")}
+                                className="h-8 w-6 shrink-0 rounded object-cover object-top"
+                                style={
+                                  color ? { backgroundColor: COLOR_HEX[color] + "33" } : undefined
+                                }
+                                alt=""
+                              />
+                            ) : (
+                              <span
+                                className="h-8 w-6 shrink-0 rounded"
+                                style={{
+                                  backgroundColor: color ? COLOR_HEX[color] + "33" : "var(--muted)",
+                                }}
+                              />
+                            )}
+                            <span className="flex-1 truncate text-sm">{cardName}</span>
+                            <span className="shrink-0 font-mono text-[10px] text-muted-foreground">
+                              {cardId}
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}
