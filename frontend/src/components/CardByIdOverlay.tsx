@@ -482,7 +482,7 @@ export function CardByIdOverlay({
               <div
                 ref={cardRef}
                 className={cn(
-                  "@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl border-2",
+                  "@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl border-2 [contain:paint]",
                   node && "color" in node
                     ? COLOR_BORDER[
                         (node.color as { value: string } | null | undefined)?.value ?? ""
