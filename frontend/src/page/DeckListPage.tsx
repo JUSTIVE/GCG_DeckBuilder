@@ -313,14 +313,7 @@ export function DeckListPage() {
                   })
                 }
               >
-                <div className="flex items-center gap-1.5 mt-2">
-                  <span className="font-semibold truncate">{deck.name}</span>
-                  {deckHasLinkWarning(deck.cards) && (
-                    <span title={t("deck.linkWarning.hasUnlinked")} className="shrink-0">
-                      <AlertTriangleIcon className="size-3.5 text-amber-500" />
-                    </span>
-                  )}
-                </div>
+                <div className="font-semibold truncate mt-2">{deck.name}</div>
                 <div className="flex items-center gap-2 mt-1">
                   {totalCards(deck.cards) === 50 ? (
                     <span className="text-xs text-muted-foreground">
@@ -333,6 +326,12 @@ export function DeckListPage() {
                         count: totalCards(deck.cards),
                         max: 50,
                       })}
+                    </span>
+                  )}
+                  {deckHasLinkWarning(deck.cards) && (
+                    <span className="flex items-center gap-0.5 text-xs font-medium text-amber-600 dark:text-amber-400 shrink-0">
+                      <AlertTriangleIcon className="size-3 shrink-0" />
+                      {t("deck.linkWarning.hasUnlinked")}
                     </span>
                   )}
                   <div className="flex gap-1 p-1">

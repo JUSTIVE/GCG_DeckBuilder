@@ -257,20 +257,22 @@ export function DeckPanel({
                           {info.cost ?? "-"}
                         </div>
                       </div>
-                      <span className="flex-1 flex-col text-xs truncate">
-                        <div>{info.name}</div>
-                        <div>{info.id}</div>
+                      <span className="flex-1 min-w-0 flex flex-col text-xs">
+                        <div className="truncate">{info.name}</div>
+                        <div className="truncate text-muted-foreground">{info.id}</div>
+                        {unitHasNoLinkedPilot(dc.card) && (
+                          <div className="flex items-center gap-0.5 text-amber-600 dark:text-amber-400 font-medium">
+                            <AlertTriangleIcon className="size-3 shrink-0" />
+                            {t("deck.linkWarning.unitNoPilot")}
+                          </div>
+                        )}
+                        {pilotHasNoLinkedUnit(dc.card) && (
+                          <div className="flex items-center gap-0.5 text-amber-600 dark:text-amber-400 font-medium">
+                            <AlertTriangleIcon className="size-3 shrink-0" />
+                            {t("deck.linkWarning.pilotNoUnit")}
+                          </div>
+                        )}
                       </span>
-                      {unitHasNoLinkedPilot(dc.card) && (
-                        <span title={t("deck.linkWarning.unitNoPilot")}>
-                          <AlertTriangleIcon className="size-3.5 text-amber-500 shrink-0" />
-                        </span>
-                      )}
-                      {pilotHasNoLinkedUnit(dc.card) && (
-                        <span title={t("deck.linkWarning.pilotNoUnit")}>
-                          <AlertTriangleIcon className="size-3.5 text-amber-500 shrink-0" />
-                        </span>
-                      )}
                       <span className="text-xs font-semibold text-muted-foreground w-5 text-center">
                         ×{dc.count}
                       </span>

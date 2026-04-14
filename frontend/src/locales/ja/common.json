@@ -72,9 +72,9 @@
       "generic": "カードを追加できません。"
     },
     "linkWarning": {
-      "unitNoPilot": "リンク可能なパイロットがデッキにいません",
-      "pilotNoUnit": "リンク可能なユニットがデッキにいません",
-      "hasUnlinked": "リンク不一致のカードがあります"
+      "unitNoPilot": "パイロットなし",
+      "pilotNoUnit": "ユニットなし",
+      "hasUnlinked": "リンク不一致"
     }
   },
   "filter": {

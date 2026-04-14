@@ -73,9 +73,9 @@
       "generic": "Cannot add card."
     },
     "linkWarning": {
-      "unitNoPilot": "No linkable pilot in deck",
-      "pilotNoUnit": "No linkable unit in deck",
-      "hasUnlinked": "Deck has unlinked cards"
+      "unitNoPilot": "No linked pilot",
+      "pilotNoUnit": "No linked unit",
+      "hasUnlinked": "Link mismatch"
     }
   },
   "filter": {

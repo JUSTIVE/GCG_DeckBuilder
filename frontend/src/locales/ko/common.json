@@ -73,9 +73,9 @@
       "generic": "카드를 추가할 수 없습니다."
     },
     "linkWarning": {
-      "unitNoPilot": "덱에 링크 가능한 파일럿이 없습니다",
-      "pilotNoUnit": "덱에 링크 가능한 유닛이 없습니다",
-      "hasUnlinked": "링크 불일치 카드가 있습니다"
+      "unitNoPilot": "파일럿 없음",
+      "pilotNoUnit": "유닛 없음",
+      "hasUnlinked": "링크 불일치"
     }
   },
   "filter": {
