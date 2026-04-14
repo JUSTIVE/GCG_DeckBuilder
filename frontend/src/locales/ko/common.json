@@ -71,6 +71,11 @@
       "colorLimit": "색상 제한 초과 (최대 {{max}}색)",
       "copyLimit": "복사 한도 초과 (최대 {{limit}}장)",
       "generic": "카드를 추가할 수 없습니다."
+    },
+    "linkWarning": {
+      "unitNoPilot": "덱에 링크 가능한 파일럿이 없습니다",
+      "pilotNoUnit": "덱에 링크 가능한 유닛이 없습니다",
+      "hasUnlinked": "링크 불일치 카드가 있습니다"
     }
   },
   "filter": {

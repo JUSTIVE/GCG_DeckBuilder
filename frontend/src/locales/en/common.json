@@ -71,6 +71,11 @@
       "colorLimit": "Color limit exceeded (max {{max}} colors)",
       "copyLimit": "Copy limit exceeded (max {{limit}} copies)",
       "generic": "Cannot add card."
+    },
+    "linkWarning": {
+      "unitNoPilot": "No linkable pilot in deck",
+      "pilotNoUnit": "No linkable unit in deck",
+      "hasUnlinked": "Deck has unlinked cards"
     }
   },
   "filter": {

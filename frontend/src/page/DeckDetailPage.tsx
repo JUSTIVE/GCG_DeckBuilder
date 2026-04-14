@@ -51,6 +51,17 @@ export const Query = graphql`
                 value
               }
               imageUrl
+              links {
+                __typename
+                ... on LinkPilot {
+                  pilot {
+                    name {
+                      en
+                      ko
+                    }
+                  }
+                }
+              }
               description {
                 tokens {
                   ... on TriggerToken {
@@ -218,6 +229,17 @@ const ADD_CARD_MUTATION = graphql`
                 color {
                   value
                 }
+                links {
+                  __typename
+                  ... on LinkPilot {
+                    pilot {
+                      name {
+                        en
+                        ko
+                      }
+                    }
+                  }
+                }
               }
               ... on PilotCard {
                 id
@@ -294,6 +316,17 @@ const REMOVE_CARD_MUTATION = graphql`
             color {
               value
             }
+            links {
+              __typename
+              ... on LinkPilot {
+                pilot {
+                  name {
+                    en
+                    ko
+                  }
+                }
+              }
+            }
           }
           ... on PilotCard {
             id
@@ -365,6 +398,17 @@ const SET_DECK_CARDS_MUTATION = graphql`
             level
             color {
               value
+            }
+            links {
+              __typename
+              ... on LinkPilot {
+                pilot {
+                  name {
+                    en
+                    ko
+                  }
+                }
+              }
             }
           }
           ... on PilotCard {

@@ -10,7 +10,7 @@ import { useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PlusIcon, Trash2Icon, LayersIcon, AlertCircleIcon } from "lucide-react";
+import { PlusIcon, Trash2Icon, LayersIcon, AlertCircleIcon, AlertTriangleIcon } from "lucide-react";
 import { COLOR_BG } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
@@ -36,9 +36,26 @@ export const Query = graphql`
             __typename
             ... on UnitCard {
               imageUrl
+              links {
+                __typename
+                ... on LinkPilot {
+                  pilot {
+                    name {
+                      en
+                      ko
+                    }
+                  }
+                }
+              }
             }
             ... on PilotCard {
               imageUrl
+              pilot {
+                name {
+                  en
+                  ko
+                }
+              }
             }
             ... on BaseCard {
               imageUrl
@@ -70,9 +87,26 @@ const CREATE_DECK_MUTATION = graphql`
             __typename
             ... on UnitCard {
               imageUrl
+              links {
+                __typename
+                ... on LinkPilot {
+                  pilot {
+                    name {
+                      en
+                      ko
+                    }
+                  }
+                }
+              }
             }
             ... on PilotCard {
               imageUrl
+              pilot {
+                name {
+                  en
+                  ko
+                }
+              }
             }
             ... on BaseCard {
               imageUrl
@@ -104,9 +138,26 @@ const DELETE_DECK_MUTATION = graphql`
             __typename
             ... on UnitCard {
               imageUrl
+              links {
+                __typename
+                ... on LinkPilot {
+                  pilot {
+                    name {
+                      en
+                      ko
+                    }
+                  }
+                }
+              }
             }
             ... on PilotCard {
               imageUrl
+              pilot {
+                name {
+                  en
+                  ko
+                }
+              }
             }
             ... on BaseCard {
               imageUrl
@@ -184,6 +235,44 @@ export function DeckListPage() {
     return urls;
   }
 
+  function deckHasLinkWarning(cards: readonly { count: number; card: any }[]): boolean {
+    const pilotNamesInDeck = new Set<string>();
+    const linkablePilotNames = new Set<string>();
+    for (const { card } of cards) {
+      if (card?.__typename === "PilotCard") {
+        const ko = card?.pilot?.name?.ko;
+        if (ko) pilotNamesInDeck.add(ko);
+      }
+    }
+    for (const { card } of cards) {
+      if (card?.__typename === "UnitCard") {
+        for (const link of (card?.links ?? []) as any[]) {
+          if (link?.__typename === "LinkPilot") {
+            const ko = link?.pilot?.name?.ko;
+            if (ko) linkablePilotNames.add(ko);
+          }
+        }
+      }
+    }
+    for (const { card } of cards) {
+      if (card?.__typename === "UnitCard") {
+        const links = (card?.links ?? []) as any[];
+        const pilotLinks = links.filter((l) => l?.__typename === "LinkPilot");
+        if (
+          pilotLinks.length > 0 &&
+          !pilotLinks.some((l) => pilotNamesInDeck.has(l?.pilot?.name?.ko))
+        ) {
+          return true;
+        }
+      }
+      if (card?.__typename === "PilotCard") {
+        const ko = card?.pilot?.name?.ko;
+        if (ko && !linkablePilotNames.has(ko)) return true;
+      }
+    }
+    return false;
+  }
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col gap-6">
       <div className="flex items-center gap-2">
@@ -224,7 +313,14 @@ export function DeckListPage() {
                   })
                 }
               >
-                <div className="font-semibold truncate mt-2">{deck.name}</div>
+                <div className="flex items-center gap-1.5 mt-2">
+                  <span className="font-semibold truncate">{deck.name}</span>
+                  {deckHasLinkWarning(deck.cards) && (
+                    <span title={t("deck.linkWarning.hasUnlinked")} className="shrink-0">
+                      <AlertTriangleIcon className="size-3.5 text-amber-500" />
+                    </span>
+                  )}
+                </div>
                 <div className="flex items-center gap-2 mt-1">
                   {totalCards(deck.cards) === 50 ? (
                     <span className="text-xs text-muted-foreground">

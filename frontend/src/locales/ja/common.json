@@ -70,6 +70,11 @@
       "colorLimit": "カラー制限超過 (最大{{max}}色)",
       "copyLimit": "コピー上限超過 (最大{{limit}}枚)",
       "generic": "カードを追加できません。"
+    },
+    "linkWarning": {
+      "unitNoPilot": "リンク可能なパイロットがデッキにいません",
+      "pilotNoUnit": "リンク可能なユニットがデッキにいません",
+      "hasUnlinked": "リンク不一致のカードがあります"
     }
   },
   "filter": {
