@@ -23,9 +23,13 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
         level
         cost
         rarity
-        color
+        color {
+          value
+        }
         imageUrl
-        traits
+        traits {
+          value
+        }
         pilot {
           name {
             en
@@ -54,8 +58,8 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
             <div
               className={cn(
                 "text-white text-[6cqw] w-[20cqw] leading-[8cqw] cutout cutout-br-sm text-center",
-                COLOR_BG[pilotCard.color],
-                pilotCard.color === "WHITE" ? "text-gray-400" : undefined,
+                COLOR_BG[pilotCard.color.value],
+                pilotCard.color.value === "WHITE" ? "text-gray-400" : undefined,
               )}
             >
               <span className="text-[3cqw]">Lv.</span>
@@ -64,8 +68,8 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
             <div
               className={cn(
                 "text-white w-[16cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-[4px] -translate-y-px text-center",
-                COLOR_BG[pilotCard.color],
-                pilotCard.color === "WHITE" ? "text-gray-400" : undefined,
+                COLOR_BG[pilotCard.color.value],
+                pilotCard.color.value === "WHITE" ? "text-gray-400" : undefined,
               )}
             >
               {pilotCard.cost}
@@ -79,13 +83,13 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
           <div
             className={cn(
               "w-[8cqw] cutout cutout-r-2xl h-[55cqw] text-[4cqw] font-semibold pl-0.5 flex items-center",
-              COLOR_BG[pilotCard.color],
+              COLOR_BG[pilotCard.color.value],
             )}
           >
             <span
               className={cn(
                 "rotate-90 min-w-[20cqw] translate-x-[-7cqw] scale-y-80",
-                pilotCard.color === "WHITE" ? "text-gray-400" : "text-white/80",
+                pilotCard.color.value === "WHITE" ? "text-gray-400" : "text-white/80",
               )}
             >
               {getKindLabel("PILOT")}
@@ -94,7 +98,7 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
           <div
             className={cn(
               "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[2cqh]",
-              COLOR_BG[pilotCard.color],
+              COLOR_BG[pilotCard.color.value],
             )}
           />
         </div>
@@ -111,8 +115,8 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
               <div
                 className={cn(
                   "w-12 bg-black -mr-5 text-[3cqw] px-2 items-center flex",
-                  COLOR_BG[pilotCard.color],
-                  pilotCard.color !== "WHITE" ? "text-white" : "text-black",
+                  COLOR_BG[pilotCard.color.value],
+                  pilotCard.color.value !== "WHITE" ? "text-white" : "text-black",
                 )}
               >
                 {getKindLabel("PILOT")}
@@ -120,14 +124,14 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
               <div
                 className={cn(
                   "w-[calc(100%-12px)] ml-3 overflow-hidden  px-2 py-px",
-                  COLOR_BG20[pilotCard.color],
+                  COLOR_BG20[pilotCard.color.value],
                 )}
               >
                 <div className="flex text-end text-gray-900 text-[4cqw]">
                   <Marquee speed={8} gap={0}>
                     {pilotCard.traits.map((x) => (
-                      <span key={x} className="px-1">
-                        ({renderTrait(x)})
+                      <span key={x.value} className="px-1">
+                        ({renderTrait(x.value)})
                       </span>
                     ))}
                   </Marquee>
@@ -139,7 +143,7 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
             <div
               className={cn(
                 "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
-                COLOR_TEXT20[pilotCard.color],
+                COLOR_TEXT20[pilotCard.color.value],
               )}
             >
               +{pilotCard.pilot.AP}
@@ -147,7 +151,7 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
             <div
               className={cn(
                 "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
-                COLOR_TEXT20[pilotCard.color],
+                COLOR_TEXT20[pilotCard.color.value],
               )}
             >
               +{pilotCard.pilot.HP}
@@ -163,7 +167,9 @@ const Fragment = graphql`
   fragment PilotCardFragment on PilotCard {
     ...PilotCard_PilotCardBody
     id
-    color
+    color {
+      value
+    }
   }
 `;
 
@@ -199,8 +205,8 @@ export function PilotCard({ pilotCardRef, onOpen }: Props) {
         type="button"
         className={cn(
           "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline border-2 [contain:paint]",
-          COLOR_BORDER[pilotCard.color],
-          COLOR_SHADOW[pilotCard.color],
+          COLOR_BORDER[pilotCard.color.value],
+          COLOR_SHADOW[pilotCard.color.value],
           open && "z-10",
         )}
         onClick={openDialog}

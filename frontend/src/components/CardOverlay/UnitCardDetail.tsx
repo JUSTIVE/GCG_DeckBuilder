@@ -44,8 +44,16 @@ export function UnitCardDetail({
           <button
             type="button"
             className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/20 cursor-pointer hover:scale-125 transition-transform"
-            style={{ background: COLOR_HEX[node.color ?? ""] ?? "#000" }}
-            onClick={() => navigateWithFilter({ color: [node.color as any] })}
+            style={{
+              background:
+                COLOR_HEX[(node.color as { value: string } | null | undefined)?.value ?? ""] ??
+                "#000",
+            }}
+            onClick={() =>
+              navigateWithFilter({
+                color: [(node.color as { value: string })?.value as any],
+              })
+            }
           />
           <h2 className="text-sm font-bold leading-tight">{localize(node.name)}</h2>
         </div>
@@ -59,7 +67,9 @@ export function UnitCardDetail({
       </div>
 
       <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-white/60">
-        <span>{renderSeries(node.series ?? "")}</span>
+        <span>
+          {renderSeries((node.series as { value: string } | null | undefined)?.value ?? "")}
+        </span>
         <button
           type="button"
           className="hover:text-white cursor-pointer"
@@ -95,14 +105,14 @@ export function UnitCardDetail({
             {t("card.trait")}
           </span>
           <div className="flex flex-wrap gap-1">
-            {(node.traits ?? []).map((t: string) => (
+            {(node.traits ?? []).map((t: { value: string }) => (
               <button
-                key={t}
+                key={t.value}
                 type="button"
-                onClick={() => navigateWithFilter({ trait: [t as CardTrait] })}
+                onClick={() => navigateWithFilter({ trait: [t.value as CardTrait] })}
                 className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
               >
-                {renderTrait(t)}
+                {renderTrait(t.value)}
               </button>
             ))}
           </div>
@@ -114,14 +124,14 @@ export function UnitCardDetail({
             {t("card.relatedTrait")}
           </span>
           <div className="flex flex-wrap gap-1">
-            {(node.relatedTraits ?? []).map((t: string) => (
+            {(node.relatedTraits ?? []).map((t: { value: string }) => (
               <button
-                key={t}
+                key={t.value}
                 type="button"
-                onClick={() => navigateWithFilter({ trait: [t as CardTrait] })}
+                onClick={() => navigateWithFilter({ trait: [t.value as CardTrait] })}
                 className="rounded border border-white/20 bg-white/10 px-2 py-0.5 text-xs hover:bg-white/20 cursor-pointer"
               >
-                {renderTrait(t)}
+                {renderTrait(t.value)}
               </button>
             ))}
           </div>
@@ -158,7 +168,11 @@ export function UnitCardDetail({
       )}
       {(node.keywords?.length ?? 0) > 0 && (
         <div className="sm:hidden">
-          <KeywordContent keywords={(node.keywords as string[] | undefined) ?? []} />
+          <KeywordContent
+            keywords={((node.keywords as { value: string }[] | undefined) ?? []).map(
+              (k) => k.value,
+            )}
+          />
         </div>
       )}
     </div>

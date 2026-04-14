@@ -16,7 +16,9 @@ const Fragment = graphql`
     __typename
     ... on UnitCard {
       id
-      color
+      color {
+        value
+      }
       description {
         tokens {
           ... on TriggerToken {
@@ -47,7 +49,9 @@ const Fragment = graphql`
     }
     ... on PilotCard {
       id
-      color
+      color {
+        value
+      }
       description {
         tokens {
           ... on TriggerToken {
@@ -78,7 +82,9 @@ const Fragment = graphql`
     }
     ... on BaseCard {
       id
-      color
+      color {
+        value
+      }
       description {
         tokens {
           ... on TriggerToken {
@@ -109,7 +115,9 @@ const Fragment = graphql`
     }
     ... on CommandCard {
       id
-      color
+      color {
+        value
+      }
       description {
         tokens {
           ... on TriggerToken {
@@ -181,7 +189,7 @@ export function Card({
     card.__typename === "PilotCard" ||
     card.__typename === "BaseCard" ||
     card.__typename === "CommandCard"
-      ? COLOR_BORDER50[card.color]
+      ? COLOR_BORDER50[card.color.value]
       : undefined;
 
   const cardEl = (() => {
@@ -215,7 +223,7 @@ export function Card({
     isPlayable &&
     deckColors !== undefined &&
     deckColors.length >= 2 &&
-    !deckColors.includes(card.color);
+    !deckColors.includes(card.color.value);
   const atLimit = blocked || colorBlocked || deckCardCount >= cardLimit;
   const dimmed = onAdd && (deckFull ? deckCardCount === 0 : atLimit);
 

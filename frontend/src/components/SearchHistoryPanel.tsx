@@ -76,7 +76,9 @@ const CardViewFragment = graphql`
           en
           ko
         }
-        color
+        color {
+          value
+        }
         imageUrl
       }
       ... on PilotCard {
@@ -87,7 +89,9 @@ const CardViewFragment = graphql`
             ko
           }
         }
-        color
+        color {
+          value
+        }
         imageUrl
       }
       ... on BaseCard {
@@ -104,7 +108,9 @@ const CardViewFragment = graphql`
           en
           ko
         }
-        color
+        color {
+          value
+        }
         imageUrl
       }
       ... on Resource {
@@ -344,7 +350,10 @@ function CardViewRow({
         ? card.name
         : undefined;
   const cardName = localize(nameObj ?? null, i18n.language);
-  const color = card.__typename !== "%other" && "color" in card ? (card.color ?? null) : null;
+  const color =
+    card.__typename !== "%other" && "color" in card
+      ? ((card.color as { value: string } | null | undefined)?.value ?? null)
+      : null;
   const imageUrl =
     card.__typename !== "%other" && "imageUrl" in card ? (card.imageUrl ?? null) : null;
 

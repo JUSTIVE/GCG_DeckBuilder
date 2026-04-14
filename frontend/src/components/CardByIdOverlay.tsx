@@ -43,14 +43,24 @@ const Query = graphql`
         }
         level
         cost
-        color
+        color {
+          value
+        }
         AP
         HP
         zone
-        traits
-        relatedTraits
-        keywords
-        series
+        traits {
+          value
+        }
+        relatedTraits {
+          value
+        }
+        keywords {
+          value
+        }
+        series {
+          value
+        }
         package
         description {
           tokens {
@@ -96,11 +106,21 @@ const Query = graphql`
         id
         level
         cost
-        color
-        traits
-        relatedTraits
-        keywords
-        series
+        color {
+          value
+        }
+        traits {
+          value
+        }
+        relatedTraits {
+          value
+        }
+        keywords {
+          value
+        }
+        series {
+          value
+        }
         package
         description {
           tokens {
@@ -144,14 +164,24 @@ const Query = graphql`
         }
         level
         cost
-        color
+        color {
+          value
+        }
         AP
         HP
         zone
-        traits
-        relatedTraits
-        keywords
-        series
+        traits {
+          value
+        }
+        relatedTraits {
+          value
+        }
+        keywords {
+          value
+        }
+        series {
+          value
+        }
         package
         description {
           tokens {
@@ -187,11 +217,21 @@ const Query = graphql`
         }
         level
         cost
-        color
-        traits
-        relatedTraits
-        keywords
-        series
+        color {
+          value
+        }
+        traits {
+          value
+        }
+        relatedTraits {
+          value
+        }
+        keywords {
+          value
+        }
+        series {
+          value
+        }
         package
         description {
           tokens {
@@ -394,7 +434,7 @@ export function CardByIdOverlay({
   function renderKeywords() {
     if (!node || node.__typename === "%other" || node.__typename === "Resource") return null;
     if (!("keywords" in node) || !node.keywords?.length) return null;
-    return <KeywordPanel keywords={node.keywords as string[]} />;
+    return <KeywordPanel keywords={(node.keywords as { value: string }[]).map((k) => k.value)} />;
   }
 
   function renderThumbnail() {
@@ -403,13 +443,21 @@ export function CardByIdOverlay({
       return (
         <UnitCardBody
           unitCardRefs={node}
-          cardBg={COLOR_BG[node.color ?? ""] ?? "bg-black"}
-          isWhite={node.color === "WHITE"}
+          cardBg={
+            COLOR_BG[(node.color as { value: string } | null | undefined)?.value ?? ""] ??
+            "bg-black"
+          }
+          isWhite={(node.color as { value: string } | null | undefined)?.value === "WHITE"}
         />
       );
     if (node.__typename === "PilotCard") return <PilotCardBody pilotCardRef={node} />;
     if (node.__typename === "BaseCard")
-      return <BaseCardBody baseCardRef={node} isWhite={node.color === "WHITE"} />;
+      return (
+        <BaseCardBody
+          baseCardRef={node}
+          isWhite={(node.color as { value: string } | null | undefined)?.value === "WHITE"}
+        />
+      );
     if (node.__typename === "CommandCard") return <CommandCardBody commandCardRef={node} />;
     if (node.__typename === "Resource") return <ResourceCardBody resourceCardRef={node} />;
     return null;
@@ -435,8 +483,16 @@ export function CardByIdOverlay({
                 ref={cardRef}
                 className={cn(
                   "@container pointer-events-auto relative flex w-72 sm:w-80 shrink-0 flex-col aspect-800/1117 justify-between text-white overflow-hidden rounded-xl border-2",
-                  node && "color" in node ? COLOR_BORDER[node.color as string] : undefined,
-                  node && "color" in node ? COLOR_SHADOW[node.color as string] : undefined,
+                  node && "color" in node
+                    ? COLOR_BORDER[
+                        (node.color as { value: string } | null | undefined)?.value ?? ""
+                      ]
+                    : undefined,
+                  node && "color" in node
+                    ? COLOR_SHADOW[
+                        (node.color as { value: string } | null | undefined)?.value ?? ""
+                      ]
+                    : undefined,
                 )}
                 style={{
                   transform: `perspective(800px) rotateX(${tilt.rotX}deg) rotateY(${tilt.rotY}deg)`,

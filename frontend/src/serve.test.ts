@@ -275,7 +275,7 @@ describe("Query.cards – filter combinations", () => {
       `query($f: CardFilterInput!) {
         cards(filter: $f) {
           totalCount
-          edges { node { ... on UnitCard { id keywords } } }
+          edges { node { ... on UnitCard { id keywords { value } } } }
         }
       }`,
       { f: { kind: "UNIT", keyword: ["BLOCKER"] } },
@@ -283,12 +283,12 @@ describe("Query.cards – filter combinations", () => {
 
     const conn = data["cards"] as {
       totalCount: number;
-      edges: Array<{ node: { keywords: string[] } }>;
+      edges: Array<{ node: { keywords: Array<{ value: string }> } }>;
     };
 
     expect(conn.totalCount).toBeGreaterThan(0);
     for (const edge of conn.edges) {
-      expect(edge.node.keywords).toContain("BLOCKER");
+      expect(edge.node.keywords.map((k) => k.value)).toContain("BLOCKER");
     }
   });
 

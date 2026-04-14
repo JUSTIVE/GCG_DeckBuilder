@@ -34,12 +34,16 @@ export function BaseCardBody({
           en
           ko
         }
-        color
+        color {
+          value
+        }
         imageUrl
         AP
         HP
         zone
-        traits
+        traits {
+          value
+        }
       }
     `,
     baseCardRef,
@@ -59,8 +63,8 @@ export function BaseCardBody({
             <div
               className={cn(
                 "text-white text-[6cqw] w-[20cqw] leading-[8cqw] cutout cutout-br-sm text-center",
-                COLOR_BG[baseCard.color],
-                baseCard.color === "WHITE" ? "text-gray-400" : undefined,
+                COLOR_BG[baseCard.color.value],
+                baseCard.color.value === "WHITE" ? "text-gray-400" : undefined,
               )}
             >
               <span className="text-[3cqw]">Lv.</span>
@@ -69,8 +73,8 @@ export function BaseCardBody({
             <div
               className={cn(
                 "text-white w-[16cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-[4px] -translate-y-px text-center",
-                COLOR_BG[baseCard.color],
-                baseCard.color === "WHITE" ? "text-gray-400" : undefined,
+                COLOR_BG[baseCard.color.value],
+                baseCard.color.value === "WHITE" ? "text-gray-400" : undefined,
               )}
             >
               {baseCard.cost}
@@ -84,13 +88,13 @@ export function BaseCardBody({
           <div
             className={cn(
               "w-[8cqw] cutout cutout-r-2xl h-[55cqw] text-[4cqw] font-semibold pl-0.5 flex items-center",
-              COLOR_BG[baseCard.color],
+              COLOR_BG[baseCard.color.value],
             )}
           >
             <span
               className={cn(
                 "rotate-90 min-w-[20cqw] translate-x-[-7cqw] scale-y-80",
-                baseCard.color === "WHITE" ? "text-gray-400" : "text-white/80",
+                baseCard.color.value === "WHITE" ? "text-gray-400" : "text-white/80",
               )}
             >
               {getKindLabel("BASE")}
@@ -99,7 +103,7 @@ export function BaseCardBody({
           <div
             className={cn(
               "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -mt-[2cqh]",
-              COLOR_BG[baseCard.color],
+              COLOR_BG[baseCard.color.value],
             )}
           />
         </div>
@@ -115,7 +119,7 @@ export function BaseCardBody({
             {baseCard.zone.map((x) => (
               <ZoneChip
                 zone={x}
-                className={cn(COLOR_BG[baseCard.color], isWhite ? "text-black" : "")}
+                className={cn(COLOR_BG[baseCard.color.value], isWhite ? "text-black" : "")}
                 key={x}
               />
             ))}
@@ -129,8 +133,8 @@ export function BaseCardBody({
                   <div className="flex text-end text-gray-900 text-[4cqw]">
                     <Marquee speed={8} gap={0}>
                       {baseCard.traits.map((x) => (
-                        <span key={x} className="px-1">
-                          ({renderTrait(x)})
+                        <span key={x.value} className="px-1">
+                          ({renderTrait(x.value)})
                         </span>
                       ))}
                     </Marquee>
@@ -143,8 +147,10 @@ export function BaseCardBody({
               <div
                 className={cn(
                   "aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
-                  COLOR_BG20[baseCard.color],
-                  baseCard.color === "WHITE" ? "text-gray-400" : COLOR_TEXT[baseCard.color],
+                  COLOR_BG20[baseCard.color.value],
+                  baseCard.color.value === "WHITE"
+                    ? "text-gray-400"
+                    : COLOR_TEXT[baseCard.color.value],
                 )}
               >
                 {baseCard.AP}
@@ -152,8 +158,10 @@ export function BaseCardBody({
               <div
                 className={cn(
                   "bg-black aspect-100/160 flex-1 flex justify-center items-center font-bold text-[8cqw] px-1",
-                  COLOR_BG20[baseCard.color],
-                  baseCard.color === "WHITE" ? "text-gray-400" : COLOR_TEXT[baseCard.color],
+                  COLOR_BG20[baseCard.color.value],
+                  baseCard.color.value === "WHITE"
+                    ? "text-gray-400"
+                    : COLOR_TEXT[baseCard.color.value],
                 )}
               >
                 {baseCard.HP}
@@ -170,7 +178,9 @@ const Fragment = graphql`
   fragment BaseCardFragment on BaseCard {
     ...BaseCard_BaseCardBody
     id
-    color
+    color {
+      value
+    }
   }
 `;
 
@@ -187,7 +197,7 @@ export function BaseCard({ baseCardRef, onOpen }: Props) {
 
   const open = search.cardId === baseCard.id;
 
-  const isWhite = baseCard.color === "WHITE";
+  const isWhite = baseCard.color.value === "WHITE";
 
   function openDialog() {
     if (onOpen) {
@@ -207,8 +217,8 @@ export function BaseCard({ baseCardRef, onOpen }: Props) {
       type="button"
       className={cn(
         "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline border-2 [contain:paint]",
-        COLOR_BORDER[baseCard.color],
-        COLOR_SHADOW[baseCard.color],
+        COLOR_BORDER[baseCard.color.value],
+        COLOR_SHADOW[baseCard.color.value],
         open && "z-10",
       )}
       onClick={openDialog}

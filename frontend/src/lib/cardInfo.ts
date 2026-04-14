@@ -12,7 +12,9 @@ export type CardInfo = {
 
 export function extractCardInfo(card: any, lang = "ko"): CardInfo | null {
   if (!card) return null;
-  const { __typename, id, cost, level, color, imageUrl } = card;
+  const { __typename, id, cost, level, imageUrl } = card;
+  const rawColor = card.color;
+  const color = rawColor && typeof rawColor === "object" ? rawColor.value : rawColor;
   const rawName = card.name ?? card.pilot?.name;
   if (!id || !rawName || !color) return null;
   const name =

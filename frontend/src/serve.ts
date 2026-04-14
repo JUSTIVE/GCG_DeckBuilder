@@ -14,6 +14,10 @@ import {
   cardSearchTokens,
   encodeCursor,
   decodeCursor,
+  makeTrait,
+  makeKeyword,
+  makeColor,
+  makeSeries,
 } from "./serve/cards";
 import { applyFilter, applySort, type CardFilterInput } from "./serve/filter";
 import {
@@ -57,13 +61,19 @@ const resolveNodeType = (obj: { __typename: string }): string =>
 (schema.getType("AddCardToDeckResult") as GraphQLUnionType).resolveType = (obj: {
   __typename: string;
 }) => obj.__typename;
+(schema.getType("CardGrouping") as GraphQLUnionType).resolveType = (obj: { __typename: string }) =>
+  obj.__typename;
 (schema.getType("Node") as GraphQLInterfaceType).resolveType = (obj: { __typename: string }) => {
   if (
     obj.__typename === "FilterSearchHistory" ||
     obj.__typename === "CardViewHistory" ||
     obj.__typename === "SearchHistoryList" ||
     obj.__typename === "Deck" ||
-    obj.__typename === "DeckList"
+    obj.__typename === "DeckList" ||
+    obj.__typename === "Trait" ||
+    obj.__typename === "Keyword" ||
+    obj.__typename === "Color" ||
+    obj.__typename === "Series"
   )
     return obj.__typename;
   return resolveNodeType(obj);
@@ -86,7 +96,33 @@ const rootValue = {
     if (historyEntry) return historyEntry;
     const deck = readDecks().find((d) => d.id === id);
     if (deck) return deck;
+    // Check grouping IDs before card IDs
+    try {
+      const decoded = atob(id);
+      if (decoded.startsWith("Trait:")) return makeTrait(decoded.slice(6));
+      if (decoded.startsWith("Keyword:")) return makeKeyword(decoded.slice(8));
+      if (decoded.startsWith("Color:")) return makeColor(decoded.slice(6));
+      if (decoded.startsWith("Series:")) return makeSeries(decoded.slice(7));
+    } catch {
+      /* ignore malformed ids */
+    }
     return cardById.get(id) ?? null;
+  },
+
+  trait({ value }: { value: string }) {
+    return makeTrait(value);
+  },
+
+  keyword({ value }: { value: string }) {
+    return makeKeyword(value);
+  },
+
+  color({ value }: { value: string }) {
+    return makeColor(value);
+  },
+
+  series({ value }: { value: string }) {
+    return makeSeries(value);
   },
 
   cards({ first = 20, after, filter, sort }: CardsArgs) {

@@ -1,6 +1,15 @@
 import { defaultFieldResolver } from "graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { cardById, pilotByName, type AnyRecord } from "./cards";
+import {
+  allCards,
+  cardById,
+  pilotByName,
+  makeTrait,
+  makeKeyword,
+  makeColor,
+  makeSeries,
+  type AnyRecord,
+} from "./cards";
 import { type DeckCard, DECK_MAX_COPIES } from "./decks";
 
 function descriptionToGraphQL(rawDesc: unknown): { tokens: object[] }[] {
@@ -134,26 +143,65 @@ export function fieldResolver(
     return fieldName === "limit" ? limit : limit === 0;
   }
 
-  if (
-    (typeName === "UnitCard" ||
-      typeName === "BaseCard" ||
-      typeName === "PilotCard" ||
-      typeName === "CommandCard") &&
-    fieldName === "traits"
-  ) {
-    const raw = source["trait"];
-    return Array.isArray(raw) ? raw : [];
+  const isPlayableCard =
+    typeName === "UnitCard" ||
+    typeName === "BaseCard" ||
+    typeName === "PilotCard" ||
+    typeName === "CommandCard";
+
+  if (isPlayableCard && fieldName === "color") {
+    const raw = source["color"] as string | undefined;
+    return raw ? makeColor(raw) : makeColor("BLUE");
   }
 
-  if (
-    (typeName === "UnitCard" ||
-      typeName === "BaseCard" ||
-      typeName === "PilotCard" ||
-      typeName === "CommandCard") &&
-    fieldName === "relatedTraits"
-  ) {
+  if (isPlayableCard && fieldName === "traits") {
+    const raw = source["trait"];
+    return Array.isArray(raw) ? (raw as string[]).map(makeTrait) : [];
+  }
+
+  if (isPlayableCard && fieldName === "relatedTraits") {
     const raw = source["relatedTrait"];
-    return Array.isArray(raw) ? raw : [];
+    return Array.isArray(raw) ? (raw as string[]).map(makeTrait) : [];
+  }
+
+  if (isPlayableCard && fieldName === "keywords") {
+    const raw = source["keywords"];
+    return Array.isArray(raw) ? (raw as string[]).map(makeKeyword) : [];
+  }
+
+  if (isPlayableCard && fieldName === "series") {
+    const raw = source["series"] as string | undefined;
+    return raw ? makeSeries(raw) : null;
+  }
+
+  if (typeName === "Trait" && fieldName === "cards") {
+    const v = source["value"] as string;
+    return (allCards as AnyRecord[]).filter((c) => {
+      const traits = c["trait"];
+      return Array.isArray(traits) && (traits as string[]).includes(v);
+    });
+  }
+
+  if (typeName === "Keyword" && fieldName === "cards") {
+    const v = source["value"] as string;
+    return (allCards as AnyRecord[]).filter((c) => {
+      const kws = c["keywords"];
+      return Array.isArray(kws) && (kws as string[]).includes(v);
+    });
+  }
+
+  if (typeName === "Color" && fieldName === "cards") {
+    const v = source["value"] as string;
+    return (allCards as AnyRecord[]).filter(
+      (c) => c["color"] === v && c["__typename"] !== "ResourceCard",
+    );
+  }
+
+  if (typeName === "Series" && fieldName === "cards") {
+    const v = source["value"] as string;
+    return (allCards as AnyRecord[]).filter(
+      (c) => c["series"] === v && c["__typename"] !== "ResourceCard",
+    );
   }
 
   if (typeName === "UnitCard" && fieldName === "links") {

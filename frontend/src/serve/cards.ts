@@ -28,6 +28,18 @@ export const pilotByName = new Map<string, AnyRecord>(
     }),
 );
 
+// ─── CardGrouping factories ───────────────────────────────────────────────────
+
+export const traitId = (v: string) => btoa(`Trait:${v}`);
+export const keywordId = (v: string) => btoa(`Keyword:${v}`);
+export const colorId = (v: string) => btoa(`Color:${v}`);
+export const seriesId = (v: string) => btoa(`Series:${v}`);
+
+export const makeTrait = (v: string) => ({ __typename: "Trait", id: traitId(v), value: v });
+export const makeKeyword = (v: string) => ({ __typename: "Keyword", id: keywordId(v), value: v });
+export const makeColor = (v: string) => ({ __typename: "Color", id: colorId(v), value: v });
+export const makeSeries = (v: string) => ({ __typename: "Series", id: seriesId(v), value: v });
+
 // ─── FZF-style search ─────────────────────────────────────────────────────────
 
 export function fzfScore(pattern: string, target: string): number {

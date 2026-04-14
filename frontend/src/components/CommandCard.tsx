@@ -32,9 +32,13 @@ export function CommandCardBody({
           ko
         }
         rarity
-        color
+        color {
+          value
+        }
         imageUrl
-        traits
+        traits {
+          value
+        }
         commandPilot: pilot {
           name {
             en
@@ -63,8 +67,8 @@ export function CommandCardBody({
             <div
               className={cn(
                 "text-white text-[6cqw] w-[20cqw] leading-[8cqw] cutout cutout-br-sm text-center",
-                COLOR_BG[commandCard.color],
-                commandCard.color === "WHITE" ? "text-gray-400" : undefined,
+                COLOR_BG[commandCard.color.value],
+                commandCard.color.value === "WHITE" ? "text-gray-400" : undefined,
               )}
             >
               <span className="text-[3cqw]">Lv.</span>
@@ -73,8 +77,8 @@ export function CommandCardBody({
             <div
               className={cn(
                 "text-white w-[16cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-[4px] -translate-y-px text-center",
-                COLOR_BG[commandCard.color],
-                commandCard.color === "WHITE" ? "text-gray-400" : undefined,
+                COLOR_BG[commandCard.color.value],
+                commandCard.color.value === "WHITE" ? "text-gray-400" : undefined,
               )}
             >
               {commandCard.cost}
@@ -88,13 +92,13 @@ export function CommandCardBody({
           <div
             className={cn(
               "w-[8cqw] cutout cutout-r-2xl h-[55cqw] text-[4cqw] font-semibold pl-0.5 flex items-center",
-              COLOR_BG[commandCard.color],
+              COLOR_BG[commandCard.color.value],
             )}
           >
             <span
               className={cn(
                 "rotate-90 min-w-[20cqw] translate-x-[-7cqw] scale-y-80",
-                commandCard.color === "WHITE" ? "text-gray-400" : "text-white/80",
+                commandCard.color.value === "WHITE" ? "text-gray-400" : "text-white/80",
               )}
             >
               {getKindLabel("COMMAND")}
@@ -103,7 +107,7 @@ export function CommandCardBody({
           <div
             className={cn(
               "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[2cqh]",
-              COLOR_BG[commandCard.color],
+              COLOR_BG[commandCard.color.value],
             )}
           />
         </div>
@@ -123,7 +127,7 @@ export function CommandCardBody({
                   <div
                     className={cn(
                       "flex text-white text-[5cqw] w-full overflow-hidden",
-                      COLOR_TEXT20[commandCard.color],
+                      COLOR_TEXT20[commandCard.color.value],
                     )}
                   >
                     <Marquee speed={6} gap={16}>
@@ -137,8 +141,8 @@ export function CommandCardBody({
                 <div
                   className={cn(
                     "w-12 bg-black -mr-5 text-[3cqw] px-2 items-center flex shrink-0",
-                    COLOR_BG[commandCard.color],
-                    commandCard.color !== "WHITE" ? "text-white" : "text-black",
+                    COLOR_BG[commandCard.color.value],
+                    commandCard.color.value !== "WHITE" ? "text-white" : "text-black",
                   )}
                 >
                   {getKindLabel("PILOT")}
@@ -146,14 +150,14 @@ export function CommandCardBody({
                 <div
                   className={cn(
                     "w-[calc(100%-12px)] ml-3 overflow-hidden bg-gray-100/80 px-2 flex items-center",
-                    COLOR_BG20[commandCard.color],
+                    COLOR_BG20[commandCard.color.value],
                   )}
                 >
                   <div className="flex text-gray-900 text-[4cqw] justify-end w-full">
                     <Marquee speed={8} gap={0}>
                       {commandCard.traits.map((x) => (
-                        <span key={x} className="px-1">
-                          ({renderTrait(x)})
+                        <span key={x.value} className="px-1">
+                          ({renderTrait(x.value)})
                         </span>
                       ))}
                     </Marquee>
@@ -165,7 +169,7 @@ export function CommandCardBody({
               <div
                 className={cn(
                   "bg-black flex-1 h-full flex justify-center items-center font-bold text-[8cqw] px-1",
-                  COLOR_TEXT20[commandCard.color],
+                  COLOR_TEXT20[commandCard.color.value],
                 )}
               >
                 +{commandCard.commandPilot?.AP}
@@ -173,7 +177,7 @@ export function CommandCardBody({
               <div
                 className={cn(
                   "bg-black flex-1 h-full flex justify-center items-center font-bold text-[8cqw] px-1",
-                  COLOR_TEXT20[commandCard.color],
+                  COLOR_TEXT20[commandCard.color.value],
                 )}
               >
                 +{commandCard.commandPilot?.HP}
@@ -190,7 +194,9 @@ const Fragment = graphql`
   fragment CommandCardFragment on CommandCard {
     ...CommandCard_CommandCardBody
     id
-    color
+    color {
+      value
+    }
   }
 `;
 
@@ -226,8 +232,8 @@ export function CommandCard({ commandCardRef, onOpen }: Props) {
         type="button"
         className={cn(
           "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline border-2 font-semibold [contain:paint]",
-          COLOR_BORDER[commandCard.color],
-          COLOR_SHADOW[commandCard.color],
+          COLOR_BORDER[commandCard.color.value],
+          COLOR_SHADOW[commandCard.color.value],
           open && "z-10",
         )}
         onClick={openDialog}

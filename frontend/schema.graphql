@@ -1,17 +1,12 @@
-type TokenQualifier {
-  en: String!
-  ko: String!
-}
-
 type TriggerToken {
   type: String!
-  keyword: String!
-  qualifier: TokenQualifier
+  keyword: CardKeyword!
+  qualifier: LocalizedString
 }
 
 type AbilityToken {
   type: String!
-  keyword: String!
+  keyword: CardKeyword!
   n: Int
 }
 
@@ -180,6 +175,32 @@ enum CardPackage {
   PROMOTION_CARD # 프로모션 카드
 }
 
+type Trait implements Node {
+  id: ID!
+  value: CardTrait!
+  cards: [PlayableCard!]!
+}
+
+type Keyword implements Node {
+  id: ID!
+  value: CardKeyword!
+  cards: [PlayableCard!]!
+}
+
+type Color implements Node {
+  id: ID!
+  value: CardColor!
+  cards: [PlayableCard!]!
+}
+
+type Series implements Node {
+  id: ID!
+  value: GundamSeries!
+  cards: [PlayableCard!]!
+}
+
+union CardGrouping = Trait | Keyword | Color | Series
+
 union UnitLink = LinkTrait | LinkPilot
 
 type LinkTrait {
@@ -195,13 +216,13 @@ type PilotCard implements Node {
   pilot: Pilot!
   level: Int! #레벨
   cost: Int! # 비용
-  series: GundamSeries! # 시리즈
-  color: CardColor! # 색상
+  series: Series! # 시리즈
+  color: Color! # 색상
   rarity: CardRarity! #희귀도
   package: CardPackage! # 패키지
-  keywords: [CardKeyword!]! #키워드
-  traits: [CardTrait!]!
-  relatedTraits: [CardTrait!]!
+  keywords: [Keyword!]! #키워드
+  traits: [Trait!]!
+  relatedTraits: [Trait!]!
   description: [DescriptionLine!]! # 효과 정보
   limit: Int! # 덱에 넣을 수 있는 최대 장 수
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
@@ -224,13 +245,13 @@ type UnitCard implements Node {
   name: LocalizedString!
   level: Int! #레벨
   cost: Int! # 비용
-  series: GundamSeries! # 시리즈
-  color: CardColor! # 색상
+  series: Series! # 시리즈
+  color: Color! # 색상
   rarity: CardRarity! #희귀도
   package: CardPackage! # 패키지
-  keywords: [CardKeyword!]! #키워드
-  traits: [CardTrait!]!
-  relatedTraits: [CardTrait!]!
+  keywords: [Keyword!]! #키워드
+  traits: [Trait!]!
+  relatedTraits: [Trait!]!
   zone: [Zone!]! # 지형
   AP: Int! # 공격력
   HP: Int! # 체력
@@ -253,15 +274,15 @@ type BaseCard implements Node {
   AP: Int!
   HP: Int!
   zone: [Zone!]!
-  traits: [CardTrait!]!
-  relatedTraits: [CardTrait!]!
+  traits: [Trait!]!
+  relatedTraits: [Trait!]!
   level: Int!
   cost: Int!
-  series: GundamSeries!
-  color: CardColor!
+  series: Series!
+  color: Color!
   rarity: CardRarity!
   package: CardPackage!
-  keywords: [CardKeyword!]!
+  keywords: [Keyword!]!
   description: [DescriptionLine!]!
   limit: Int! # 덱에 넣을 수 있는 최대 장 수
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
@@ -272,14 +293,14 @@ type CommandCard implements Node {
   id: ID!
   name: LocalizedString!
   level: Int!
-  color: CardColor!
+  color: Color!
   rarity: CardRarity!
   package: CardPackage!
-  keywords: [CardKeyword!]!
-  traits: [CardTrait!]!
-  relatedTraits: [CardTrait!]!
+  keywords: [Keyword!]!
+  traits: [Trait!]!
+  relatedTraits: [Trait!]!
   cost: Int!
-  series: GundamSeries!
+  series: Series!
   pilot: Pilot
   description: [DescriptionLine!]!
   limit: Int! # 덱에 넣을 수 있는 최대 장 수
@@ -435,6 +456,10 @@ type Query {
   deckList: DeckList!
   randomCard(kind: CardKind!): Card
   randomCards(kind: CardKind!, count: Int!): [Card!]!
+  trait(value: CardTrait!): Trait
+  keyword(value: CardKeyword!): Keyword
+  color(value: CardColor!): Color
+  series(value: GundamSeries!): Series
 }
 
 input DeckCardInput {

@@ -14,22 +14,30 @@ const Fragment = graphql`
     __typename
     ... on UnitCard {
       id
-      color
+      color {
+        value
+      }
       ...UnitCard_UnitCardBody
     }
     ... on PilotCard {
       id
-      color
+      color {
+        value
+      }
       ...PilotCard_PilotCardBody
     }
     ... on BaseCard {
       id
-      color
+      color {
+        value
+      }
       ...BaseCard_BaseCardBody
     }
     ... on CommandCard {
       id
-      color
+      color {
+        value
+      }
       ...CommandCard_CommandCardBody
     }
     ... on Resource {
@@ -50,7 +58,7 @@ export function CardPreview({
 
   const color =
     card.__typename !== "Resource" && card.__typename !== "%other"
-      ? (card as { color: string }).color
+      ? (card as { color: { value: string } }).color.value
       : null;
 
   const borderCls = color ? COLOR_BORDER[color] : "border-gray-300";

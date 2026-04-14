@@ -35,7 +35,9 @@ const CardsQuery = graphql`
               en
               ko
             }
-            color
+            color {
+              value
+            }
           }
           ... on PilotCard {
             id
@@ -45,7 +47,9 @@ const CardsQuery = graphql`
                 ko
               }
             }
-            color
+            color {
+              value
+            }
           }
           ... on BaseCard {
             id
@@ -53,7 +57,9 @@ const CardsQuery = graphql`
               en
               ko
             }
-            color
+            color {
+              value
+            }
           }
           ... on CommandCard {
             id
@@ -61,7 +67,9 @@ const CardsQuery = graphql`
               en
               ko
             }
-            color
+            color {
+              value
+            }
           }
         }
       }
@@ -133,7 +141,7 @@ function KeywordCardList({ keyword, onOpen }: { keyword: string; onOpen: (id: st
         const id: string = n.id ?? "";
         const rawName = n.name ?? n.pilot?.name;
         const name: string = rawName ? localize(rawName, i18n.language) : id;
-        const color: string = n.color ?? "";
+        const color: string = n.color?.value ?? "";
         return (
           <button
             key={id}

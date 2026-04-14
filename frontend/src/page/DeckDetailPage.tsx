@@ -47,7 +47,9 @@ export const Query = graphql`
               }
               cost
               level
-              color
+              color {
+                value
+              }
               imageUrl
               description {
                 tokens {
@@ -84,7 +86,9 @@ export const Query = graphql`
               }
               cost
               level
-              color
+              color {
+                value
+              }
               imageUrl
               description {
                 tokens {
@@ -119,7 +123,9 @@ export const Query = graphql`
               }
               cost
               level
-              color
+              color {
+                value
+              }
               imageUrl
               description {
                 tokens {
@@ -154,7 +160,9 @@ export const Query = graphql`
               }
               cost
               level
-              color
+              color {
+                value
+              }
               imageUrl
               description {
                 tokens {
@@ -207,7 +215,9 @@ const ADD_CARD_MUTATION = graphql`
                   ko
                 }
                 cost
-                color
+                color {
+                  value
+                }
               }
               ... on PilotCard {
                 id
@@ -218,7 +228,9 @@ const ADD_CARD_MUTATION = graphql`
                   }
                 }
                 cost
-                color
+                color {
+                  value
+                }
               }
               ... on BaseCard {
                 id
@@ -227,7 +239,9 @@ const ADD_CARD_MUTATION = graphql`
                   ko
                 }
                 cost
-                color
+                color {
+                  value
+                }
               }
               ... on CommandCard {
                 id
@@ -236,7 +250,9 @@ const ADD_CARD_MUTATION = graphql`
                   ko
                 }
                 cost
-                color
+                color {
+                  value
+                }
               }
             }
           }
@@ -275,7 +291,9 @@ const REMOVE_CARD_MUTATION = graphql`
               ko
             }
             cost
-            color
+            color {
+              value
+            }
           }
           ... on PilotCard {
             id
@@ -286,7 +304,9 @@ const REMOVE_CARD_MUTATION = graphql`
               }
             }
             cost
-            color
+            color {
+              value
+            }
           }
           ... on BaseCard {
             id
@@ -295,7 +315,9 @@ const REMOVE_CARD_MUTATION = graphql`
               ko
             }
             cost
-            color
+            color {
+              value
+            }
           }
           ... on CommandCard {
             id
@@ -304,7 +326,9 @@ const REMOVE_CARD_MUTATION = graphql`
               ko
             }
             cost
-            color
+            color {
+              value
+            }
           }
         }
       }
@@ -339,7 +363,9 @@ const SET_DECK_CARDS_MUTATION = graphql`
             }
             cost
             level
-            color
+            color {
+              value
+            }
           }
           ... on PilotCard {
             id
@@ -351,7 +377,9 @@ const SET_DECK_CARDS_MUTATION = graphql`
             }
             cost
             level
-            color
+            color {
+              value
+            }
           }
           ... on BaseCard {
             id
@@ -361,7 +389,9 @@ const SET_DECK_CARDS_MUTATION = graphql`
             }
             cost
             level
-            color
+            color {
+              value
+            }
           }
           ... on CommandCard {
             id
@@ -371,7 +401,9 @@ const SET_DECK_CARDS_MUTATION = graphql`
             }
             cost
             level
-            color
+            color {
+              value
+            }
           }
         }
       }

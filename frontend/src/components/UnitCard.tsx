@@ -38,12 +38,16 @@ export function UnitCardBody({
         level
         rarity
         cost
-        color
+        color {
+          value
+        }
         imageUrl
         AP
         HP
         zone
-        traits
+        traits {
+          value
+        }
         links {
           __typename
           ... on LinkPilot {
@@ -78,8 +82,8 @@ export function UnitCardBody({
             <div
               className={cn(
                 "text-white text-[6cqw] w-[20cqw] leading-[8cqw] cutout cutout-br-sm text-center",
-                COLOR_BG[unitCard.color],
-                unitCard.color === "WHITE" ? "text-gray-400" : undefined,
+                COLOR_BG[unitCard.color.value],
+                unitCard.color.value === "WHITE" ? "text-gray-400" : undefined,
               )}
             >
               <span className="text-[3cqw]">Lv.</span>
@@ -88,8 +92,8 @@ export function UnitCardBody({
             <div
               className={cn(
                 "text-white w-[15cqw] text-[12cqw] leading-[12cqw] pb-2 cutout cutout-br-sm -translate-y-px text-center",
-                COLOR_BG[unitCard.color],
-                unitCard.color === "WHITE" ? "text-gray-400" : undefined,
+                COLOR_BG[unitCard.color.value],
+                unitCard.color.value === "WHITE" ? "text-gray-400" : undefined,
               )}
             >
               {unitCard.cost}
@@ -103,13 +107,13 @@ export function UnitCardBody({
           <div
             className={cn(
               "w-[7cqw] cutout cutout-r-lg h-[40cqw] text-[4cqw] font-semibold pl-0.5 flex items-center",
-              COLOR_BG[unitCard.color],
+              COLOR_BG[unitCard.color.value],
             )}
           >
             <span
               className={cn(
                 "rotate-90 min-w-[20cqw] translate-x-[-7cqw] scale-y-80",
-                unitCard.color === "WHITE" ? "text-gray-400" : "text-white/80",
+                unitCard.color.value === "WHITE" ? "text-gray-400" : "text-white/80",
               )}
             >
               {getKindLabel("UNIT")}
@@ -118,7 +122,7 @@ export function UnitCardBody({
           <div
             className={cn(
               "w-[3.5cqw] cutout cutout-br-lg h-[15cqw] font-semibold pl-0.5 flex items-center -translate-y-[1cqh]",
-              COLOR_BG[unitCard.color],
+              COLOR_BG[unitCard.color.value],
             )}
           />
         </div>
@@ -143,14 +147,14 @@ export function UnitCardBody({
                 <div
                   className={cn(
                     "w-[calc(100%-12px)] ml-3 overflow-hidden px-2 py-px",
-                    COLOR_BG20[unitCard.color],
+                    COLOR_BG20[unitCard.color.value],
                   )}
                 >
                   <div className="flex text-end text-gray-900 text-[4cqw]">
                     <Marquee speed={8} gap={0}>
                       {unitCard.traits.map((x) => (
-                        <span key={x} className="px-1">
-                          ({renderTrait(x)})
+                        <span key={x.value} className="px-1">
+                          ({renderTrait(x.value)})
                         </span>
                       ))}
                     </Marquee>
@@ -195,7 +199,9 @@ const Fragment = graphql`
   fragment UnitCardFragment on UnitCard {
     ...UnitCard_UnitCardBody
     id
-    color
+    color {
+      value
+    }
   }
 `;
 
@@ -212,8 +218,8 @@ export function UnitCard({ unitCardRef, onOpen }: Props) {
 
   const open = search.cardId === unitCard.id;
 
-  const cardBg = COLOR_BG[unitCard.color] ?? "bg-black";
-  const isWhite = unitCard.color === "WHITE";
+  const cardBg = COLOR_BG[unitCard.color.value] ?? "bg-black";
+  const isWhite = unitCard.color.value === "WHITE";
 
   function openDialog() {
     if (onOpen) {
@@ -235,8 +241,8 @@ export function UnitCard({ unitCardRef, onOpen }: Props) {
         type="button"
         className={cn(
           "@container relative flex flex-col aspect-800/1117 min-w-40 w-full rounded-xl justify-between cursor-pointer text-white overflow-hidden outline border-2 [contain:paint]",
-          COLOR_BORDER[unitCard.color],
-          COLOR_SHADOW[unitCard.color],
+          COLOR_BORDER[unitCard.color.value],
+          COLOR_SHADOW[unitCard.color.value],
           open && "z-10",
         )}
         onClick={openDialog}
