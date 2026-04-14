@@ -1,3 +1,4 @@
+import { CardBlurOverlay } from "./CardBlurOverlay";
 import { useLocalize } from "@/lib/localize";
 import { getKindLabel } from "@/lib/filterConstants";
 import { useTranslation } from "react-i18next";
@@ -103,7 +104,7 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
           />
         </div>
       </div>
-      <div className="absolute bottom-0 inset-x-0 h-[58cqw] backdrop-blur-md bg-black/20 pointer-events-none [mask-image:linear-gradient(to_top,black_80%,transparent)]" />
+      <CardBlurOverlay imageUrl={pilotCard.imageUrl} />
       <div className="flex flex-col gap-2 z-1">
         <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm h-[35cqw] items-start">
           <div className="flex flex-col justify-end flex-1 overflow-hidden">

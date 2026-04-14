@@ -1,3 +1,4 @@
+import { CardBlurOverlay } from "./CardBlurOverlay";
 import { useLocalize } from "@/lib/localize";
 import { getKindLabel } from "@/lib/filterConstants";
 import { useTranslation } from "react-i18next";
@@ -127,7 +128,7 @@ export function UnitCardBody({
           />
         </div>
       </div>
-      <div className="absolute bottom-0 inset-x-0 h-[65cqw] backdrop-blur-md bg-black/20 pointer-events-none [mask-image:linear-gradient(to_top,black_80%,transparent)]" />
+      <CardBlurOverlay imageUrl={unitCard.imageUrl} />
       <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
           <div className="p-2 bg-black/80 whitespace-pre-wrap break-words cutout-tl-sm cutout text-[6cqw] font-bold text-center backdrop-blur-sm">
