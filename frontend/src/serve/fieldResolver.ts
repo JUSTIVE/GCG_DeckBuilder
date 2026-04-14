@@ -11,7 +11,12 @@ import {
   type AnyRecord,
 } from "./cards";
 import { type DeckCard, DECK_MAX_COPIES } from "./decks";
-import { computeDeckLinkSets, unitHasNoLinkedPilot, pilotHasNoLinkedUnit } from "../lib/deckLinks";
+import {
+  computeDeckLinkSets,
+  unitHasNoLinkedPilot,
+  pilotHasNoLinkedUnit,
+  splitPilotAliases,
+} from "../lib/deckLinks";
 
 // Card __typename → DeckCard variant __typename.
 const DECK_CARD_VARIANT: Record<string, string> = {
@@ -343,6 +348,30 @@ export function fieldResolver(
   if (typeName === "UnitCard" && fieldName === "links") {
     const raw = source["link"];
     return raw == null ? [] : [raw];
+  }
+
+  if (typeName === "UnitCard" && fieldName === "linkablePilots") {
+    const link = source["link"] as { __typename?: string; pilotName?: { ko?: string } } | undefined;
+    if (!link || link.__typename !== "LinkPilot") return [];
+    const linkAliases = splitPilotAliases(link.pilotName?.ko);
+    if (linkAliases.length === 0) return [];
+    return (allCards as AnyRecord[]).filter((c) => {
+      if (c["__typename"] !== "PilotCard") return false;
+      const name = (c["name"] as { ko?: string } | undefined)?.ko;
+      return splitPilotAliases(name).some((a) => linkAliases.includes(a));
+    });
+  }
+
+  if (typeName === "PilotCard" && fieldName === "linkableUnits") {
+    const name = (source["name"] as { ko?: string } | undefined)?.ko;
+    const pilotAliases = splitPilotAliases(name);
+    if (pilotAliases.length === 0) return [];
+    return (allCards as AnyRecord[]).filter((c) => {
+      if (c["__typename"] !== "UnitCard") return false;
+      const link = c["link"] as { __typename?: string; pilotName?: { ko?: string } } | undefined;
+      if (!link || link.__typename !== "LinkPilot") return false;
+      return splitPilotAliases(link.pilotName?.ko).some((a) => pilotAliases.includes(a));
+    });
   }
 
   if (

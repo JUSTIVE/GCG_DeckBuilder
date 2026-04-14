@@ -58,6 +58,7 @@
     "cardCount": "{{count}}장",
     "cardCountOf": "{{count}} / {{max}}장",
     "view": "덱 보기",
+    "graphView": "그래프",
     "confirmDelete": "\"{{name}}\" 덱을 삭제하시겠습니까?",
     "confirmClear": "덱의 모든 카드를 삭제하시겠습니까?",
     "copyMsaCode": "MSA 코드 복사",
