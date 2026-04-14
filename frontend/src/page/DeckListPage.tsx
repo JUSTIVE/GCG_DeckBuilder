@@ -17,6 +17,7 @@ import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
 import { renderTrait } from "@/render/trait";
 import { triggerClassByKeyword, abilityClassByKeyword } from "@/components/CardDescription";
 import { renderKeyword } from "@/render/keyword";
+import { computeDeckLinkSets, unitHasNoLinkedPilot, pilotHasNoLinkedUnit } from "@/lib/deckLinks";
 import type { CardKeyword } from "@/routes/$locale/cardlist";
 
 export const Query = graphql`
@@ -236,39 +237,10 @@ export function DeckListPage() {
   }
 
   function deckHasLinkWarning(cards: readonly { count: number; card: any }[]): boolean {
-    const pilotNamesInDeck = new Set<string>();
-    const linkablePilotNames = new Set<string>();
+    const { pilotNamesInDeck, linkablePilotNames } = computeDeckLinkSets(cards);
     for (const { card } of cards) {
-      if (card?.__typename === "PilotCard") {
-        const ko = card?.pilot?.name?.ko;
-        if (ko) pilotNamesInDeck.add(ko);
-      }
-    }
-    for (const { card } of cards) {
-      if (card?.__typename === "UnitCard") {
-        for (const link of (card?.links ?? []) as any[]) {
-          if (link?.__typename === "LinkPilot") {
-            const ko = link?.pilot?.name?.ko;
-            if (ko) linkablePilotNames.add(ko);
-          }
-        }
-      }
-    }
-    for (const { card } of cards) {
-      if (card?.__typename === "UnitCard") {
-        const links = (card?.links ?? []) as any[];
-        const pilotLinks = links.filter((l) => l?.__typename === "LinkPilot");
-        if (
-          pilotLinks.length > 0 &&
-          !pilotLinks.some((l) => pilotNamesInDeck.has(l?.pilot?.name?.ko))
-        ) {
-          return true;
-        }
-      }
-      if (card?.__typename === "PilotCard") {
-        const ko = card?.pilot?.name?.ko;
-        if (ko && !linkablePilotNames.has(ko)) return true;
-      }
+      if (unitHasNoLinkedPilot(card, pilotNamesInDeck)) return true;
+      if (pilotHasNoLinkedUnit(card, linkablePilotNames)) return true;
     }
     return false;
   }

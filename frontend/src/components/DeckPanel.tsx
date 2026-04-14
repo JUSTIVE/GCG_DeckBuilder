@@ -18,6 +18,11 @@ import { CostHistogram, LevelHistogram } from "@/components/DeckHistograms";
 import { extractCardInfo } from "@/lib/cardInfo";
 import { encodeDeckCode, decodeDeckCode } from "@/lib/deckCode";
 import { downloadDeckExcel } from "@/lib/deckExcel";
+import {
+  computeDeckLinkSets,
+  unitHasNoLinkedPilot as unitHasNoLinkedPilotFn,
+  pilotHasNoLinkedUnit as pilotHasNoLinkedUnitFn,
+} from "@/lib/deckLinks";
 import { useTranslation } from "react-i18next";
 import i18n from "@/i18n";
 
@@ -81,37 +86,9 @@ export function DeckPanel({
     if (grouped.has(t)) grouped.get(t)!.push(dc);
   }
 
-  // Compute link warnings
-  const pilotNamesInDeck = new Set<string>();
-  const linkablePilotNames = new Set<string>();
-  for (const { card } of cards) {
-    if (card?.__typename === "PilotCard") {
-      const ko = card?.pilot?.name?.ko;
-      if (ko) pilotNamesInDeck.add(ko);
-    }
-  }
-  for (const { card } of cards) {
-    if (card?.__typename === "UnitCard") {
-      for (const link of (card?.links ?? []) as any[]) {
-        if (link?.__typename === "LinkPilot") {
-          const ko = link?.pilot?.name?.ko;
-          if (ko) linkablePilotNames.add(ko);
-        }
-      }
-    }
-  }
-  function unitHasNoLinkedPilot(card: any): boolean {
-    if (card?.__typename !== "UnitCard") return false;
-    const links = (card?.links ?? []) as any[];
-    const pilotLinks = links.filter((l) => l?.__typename === "LinkPilot");
-    if (pilotLinks.length === 0) return false;
-    return !pilotLinks.some((l) => pilotNamesInDeck.has(l?.pilot?.name?.ko));
-  }
-  function pilotHasNoLinkedUnit(card: any): boolean {
-    if (card?.__typename !== "PilotCard") return false;
-    const ko = card?.pilot?.name?.ko;
-    return ko ? !linkablePilotNames.has(ko) : false;
-  }
+  const { pilotNamesInDeck, linkablePilotNames } = computeDeckLinkSets(cards);
+  const unitHasNoLinkedPilot = (card: any) => unitHasNoLinkedPilotFn(card, pilotNamesInDeck);
+  const pilotHasNoLinkedUnit = (card: any) => pilotHasNoLinkedUnitFn(card, linkablePilotNames);
 
   return (
     <div className={scrollAll ? "flex flex-col" : "flex flex-col h-full"}>
