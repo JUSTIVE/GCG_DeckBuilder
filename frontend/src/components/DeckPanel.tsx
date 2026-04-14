@@ -18,11 +18,6 @@ import { CostHistogram, LevelHistogram } from "@/components/DeckHistograms";
 import { extractCardInfo } from "@/lib/cardInfo";
 import { encodeDeckCode, decodeDeckCode } from "@/lib/deckCode";
 import { downloadDeckExcel } from "@/lib/deckExcel";
-import {
-  computeDeckLinkSets,
-  unitHasNoLinkedPilot as unitHasNoLinkedPilotFn,
-  pilotHasNoLinkedUnit as pilotHasNoLinkedUnitFn,
-} from "@/lib/deckLinks";
 import { useTranslation } from "react-i18next";
 import i18n from "@/i18n";
 
@@ -40,7 +35,12 @@ function getKindLabel(kind: string): string {
 export type DeckPanelProps = {
   deckName: string;
   colors: string[];
-  cards: readonly { count: number; card: any }[];
+  cards: readonly {
+    count: number;
+    card: any;
+    pilotLinked?: boolean;
+    hasLinkingUnit?: boolean;
+  }[];
   totalCards: number;
   errorMessage: string | null;
   onRemove: (cardId: string) => void;
@@ -79,16 +79,15 @@ export function DeckPanel({
     setEditing(false);
   }
 
-  const grouped = new Map<string, { count: number; card: any }[]>();
+  const grouped = new Map<
+    string,
+    { count: number; card: any; pilotLinked?: boolean; hasLinkingUnit?: boolean }[]
+  >();
   for (const k of KIND_ORDER) grouped.set(k, []);
   for (const dc of cards) {
     const t = dc.card?.__typename;
     if (grouped.has(t)) grouped.get(t)!.push(dc);
   }
-
-  const { pilotNamesInDeck, linkablePilotNames } = computeDeckLinkSets(cards);
-  const unitHasNoLinkedPilot = (card: any) => unitHasNoLinkedPilotFn(card, pilotNamesInDeck);
-  const pilotHasNoLinkedUnit = (card: any) => pilotHasNoLinkedUnitFn(card, linkablePilotNames);
 
   return (
     <div className={scrollAll ? "flex flex-col" : "flex flex-col h-full"}>
@@ -237,13 +236,13 @@ export function DeckPanel({
                       <span className="flex-1 min-w-0 flex flex-col text-xs">
                         <div className="truncate">{info.name}</div>
                         <div className="truncate text-muted-foreground">{info.id}</div>
-                        {unitHasNoLinkedPilot(dc.card) && (
+                        {dc.pilotLinked === false && (
                           <div className="flex items-center gap-0.5 text-amber-600 dark:text-amber-400 font-medium">
                             <AlertTriangleIcon className="size-3 shrink-0" />
                             {t("deck.linkWarning.unitNoPilot")}
                           </div>
                         )}
-                        {pilotHasNoLinkedUnit(dc.card) && (
+                        {dc.hasLinkingUnit === false && (
                           <div className="flex items-center gap-0.5 text-amber-600 dark:text-amber-400 font-medium">
                             <AlertTriangleIcon className="size-3 shrink-0" />
                             {t("deck.linkWarning.pilotNoUnit")}

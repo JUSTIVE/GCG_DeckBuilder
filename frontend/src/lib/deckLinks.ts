@@ -1,10 +1,12 @@
 // Normalize a pilot name for link matching:
-// 1. Split on "/" to handle dual-personality pilots (e.g. "알레루야 햅티즘 / 할레루야 햅티즘").
+// 1. Split on "/" and "&" — "/" handles dual-personality pilots
+//    (e.g. "알레루야 햅티즘 / 할레루야 햅티즘"), "&" handles composite/team
+//    pilot cards (e.g. "가로드 란 & 티파 아딜") so any constituent can match.
 // 2. Strip parenthetical disambiguators (e.g. "록온 스트라토스 (닐)" → "록온 스트라토스"),
 //    so a pilot card variant still matches a link that names the base pilot.
 export function splitPilotAliases(name: string | undefined | null): string[] {
   return (name ?? "")
-    .split("/")
+    .split(/[\/&]/)
     .map((s) => s.replace(/\([^)]*\)/g, "").trim())
     .filter(Boolean);
 }

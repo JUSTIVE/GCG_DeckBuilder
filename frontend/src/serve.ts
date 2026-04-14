@@ -63,6 +63,8 @@ const resolveNodeType = (obj: { __typename: string }): string =>
 }) => obj.__typename;
 (schema.getType("CardGrouping") as GraphQLUnionType).resolveType = (obj: { __typename: string }) =>
   obj.__typename;
+(schema.getType("DeckCard") as GraphQLUnionType).resolveType = (obj: { __typename: string }) =>
+  obj.__typename;
 (schema.getType("Node") as GraphQLInterfaceType).resolveType = (obj: { __typename: string }) => {
   if (
     obj.__typename === "FilterSearchHistory" ||

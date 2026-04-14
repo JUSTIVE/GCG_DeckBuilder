@@ -9,6 +9,7 @@ import { navMain } from "@/lib/nav";
 import { COLOR_BG } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { SearchIcon, LayersIcon, WrenchIcon, ChevronRightIcon } from "lucide-react";
+import { flattenDeckCards } from "@/lib/deckCards";
 
 export const Query = graphql`
   query MainPageQuery {
@@ -18,21 +19,33 @@ export const Query = graphql`
         name
         colors
         cards {
-          count
-          card {
-            __typename
-            ... on UnitCard {
+          __typename
+          ... on UnitDeckCard {
+            count
+            card {
               imageUrl
             }
-            ... on PilotCard {
+          }
+          ... on PilotDeckCard {
+            count
+            card {
               imageUrl
             }
-            ... on BaseCard {
+          }
+          ... on BaseDeckCard {
+            count
+            card {
               imageUrl
             }
-            ... on CommandCard {
+          }
+          ... on CommandDeckCard {
+            count
+            card {
               imageUrl
             }
+          }
+          ... on ResourceDeckCard {
+            count
           }
         }
       }
@@ -143,10 +156,10 @@ export function MainPage() {
                   className="w-full flex items-center gap-3 rounded-xl border border-border bg-muted/30 px-4 py-3 hover:bg-muted/60 transition-colors text-left"
                 >
                   <div className="flex gap-1 shrink-0">
-                    {deckPreviewImages(deck.cards).map((url, i) => (
+                    {deckPreviewImages(flattenDeckCards(deck.cards)).map((url, i) => (
                       <img key={i} src={url} className="h-10 w-7 rounded object-cover" alt="" />
                     ))}
-                    {deckPreviewImages(deck.cards).length === 0 && (
+                    {deckPreviewImages(flattenDeckCards(deck.cards)).length === 0 && (
                       <div className="h-10 w-7 rounded bg-muted" />
                     )}
                   </div>
@@ -154,7 +167,11 @@ export function MainPage() {
                     <div className="font-semibold text-sm truncate">{deck.name}</div>
                     <div className="flex items-center gap-2 mt-0.5">
                       <span className="text-xs text-muted-foreground">
-                        {t("deck.cardCount" as any, { count: totalCards(deck.cards) }) as string}
+                        {
+                          t("deck.cardCount" as any, {
+                            count: totalCards(flattenDeckCards(deck.cards)),
+                          }) as string
+                        }
                       </span>
                       <div className="flex gap-1">
                         {deck.colors.map((color) => (

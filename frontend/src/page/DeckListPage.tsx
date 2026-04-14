@@ -17,7 +17,7 @@ import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
 import { renderTrait } from "@/render/trait";
 import { triggerClassByKeyword, abilityClassByKeyword } from "@/components/CardDescription";
 import { renderKeyword } from "@/render/keyword";
-import { computeDeckLinkSets, unitHasNoLinkedPilot, pilotHasNoLinkedUnit } from "@/lib/deckLinks";
+import { flattenDeckCards } from "@/lib/deckCards";
 import type { CardKeyword } from "@/routes/$locale/cardlist";
 
 export const Query = graphql`
@@ -31,39 +31,35 @@ export const Query = graphql`
         colors
         topKeywords
         topTraits
+        hasLinkWarning
         cards {
-          count
-          card {
-            __typename
-            ... on UnitCard {
-              imageUrl
-              links {
-                __typename
-                ... on LinkPilot {
-                  pilot {
-                    name {
-                      en
-                      ko
-                    }
-                  }
-                }
-              }
-            }
-            ... on PilotCard {
-              imageUrl
-              pilot {
-                name {
-                  en
-                  ko
-                }
-              }
-            }
-            ... on BaseCard {
+          __typename
+          ... on UnitDeckCard {
+            count
+            card {
               imageUrl
             }
-            ... on CommandCard {
+          }
+          ... on PilotDeckCard {
+            count
+            card {
               imageUrl
             }
+          }
+          ... on BaseDeckCard {
+            count
+            card {
+              imageUrl
+            }
+          }
+          ... on CommandDeckCard {
+            count
+            card {
+              imageUrl
+            }
+          }
+          ... on ResourceDeckCard {
+            count
           }
         }
       }
@@ -82,39 +78,35 @@ const CREATE_DECK_MUTATION = graphql`
         colors
         topKeywords
         topTraits
+        hasLinkWarning
         cards {
-          count
-          card {
-            __typename
-            ... on UnitCard {
-              imageUrl
-              links {
-                __typename
-                ... on LinkPilot {
-                  pilot {
-                    name {
-                      en
-                      ko
-                    }
-                  }
-                }
-              }
-            }
-            ... on PilotCard {
-              imageUrl
-              pilot {
-                name {
-                  en
-                  ko
-                }
-              }
-            }
-            ... on BaseCard {
+          __typename
+          ... on UnitDeckCard {
+            count
+            card {
               imageUrl
             }
-            ... on CommandCard {
+          }
+          ... on PilotDeckCard {
+            count
+            card {
               imageUrl
             }
+          }
+          ... on BaseDeckCard {
+            count
+            card {
+              imageUrl
+            }
+          }
+          ... on CommandDeckCard {
+            count
+            card {
+              imageUrl
+            }
+          }
+          ... on ResourceDeckCard {
+            count
           }
         }
       }
@@ -133,39 +125,35 @@ const DELETE_DECK_MUTATION = graphql`
         colors
         topKeywords
         topTraits
+        hasLinkWarning
         cards {
-          count
-          card {
-            __typename
-            ... on UnitCard {
-              imageUrl
-              links {
-                __typename
-                ... on LinkPilot {
-                  pilot {
-                    name {
-                      en
-                      ko
-                    }
-                  }
-                }
-              }
-            }
-            ... on PilotCard {
-              imageUrl
-              pilot {
-                name {
-                  en
-                  ko
-                }
-              }
-            }
-            ... on BaseCard {
+          __typename
+          ... on UnitDeckCard {
+            count
+            card {
               imageUrl
             }
-            ... on CommandCard {
+          }
+          ... on PilotDeckCard {
+            count
+            card {
               imageUrl
             }
+          }
+          ... on BaseDeckCard {
+            count
+            card {
+              imageUrl
+            }
+          }
+          ... on CommandDeckCard {
+            count
+            card {
+              imageUrl
+            }
+          }
+          ... on ResourceDeckCard {
+            count
           }
         }
       }
@@ -236,15 +224,6 @@ export function DeckListPage() {
     return urls;
   }
 
-  function deckHasLinkWarning(cards: readonly { count: number; card: any }[]): boolean {
-    const { pilotNamesInDeck, linkablePilotNames } = computeDeckLinkSets(cards);
-    for (const { card } of cards) {
-      if (unitHasNoLinkedPilot(card, pilotNamesInDeck)) return true;
-      if (pilotHasNoLinkedUnit(card, linkablePilotNames)) return true;
-    }
-    return false;
-  }
-
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col gap-6">
       <div className="flex items-center gap-2">
@@ -287,7 +266,7 @@ export function DeckListPage() {
               >
                 <div className="font-semibold truncate mt-2">{deck.name}</div>
                 <div className="flex items-center gap-2 mt-1">
-                  {totalCards(deck.cards) === 50 ? (
+                  {totalCards(flattenDeckCards(deck.cards)) === 50 ? (
                     <span className="text-xs text-muted-foreground">
                       {t("deck.cardCount", { count: 50 })}
                     </span>
@@ -295,12 +274,12 @@ export function DeckListPage() {
                     <span className="flex items-center gap-1 text-xs font-medium text-amber-600 dark:text-amber-400">
                       <AlertCircleIcon className="size-3 shrink-0" />
                       {t("deck.cardCountOf", {
-                        count: totalCards(deck.cards),
+                        count: totalCards(flattenDeckCards(deck.cards)),
                         max: 50,
                       })}
                     </span>
                   )}
-                  {deckHasLinkWarning(deck.cards) && (
+                  {deck.hasLinkWarning && (
                     <span className="flex items-center gap-0.5 text-xs font-medium text-amber-600 dark:text-amber-400 shrink-0">
                       <AlertTriangleIcon className="size-3 shrink-0" />
                       {t("deck.linkWarning.hasUnlinked")}
@@ -320,7 +299,7 @@ export function DeckListPage() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  {deckPreviewImages(deck.cards).map((url, i) => (
+                  {deckPreviewImages(flattenDeckCards(deck.cards)).map((url, i) => (
                     <img
                       key={i}
                       src={url.replace(/\.webp$/, "-sm.webp")}
@@ -331,7 +310,7 @@ export function DeckListPage() {
                 </div>
 
                 {(() => {
-                  const counts = deckKindCounts(deck.cards);
+                  const counts = deckKindCounts(flattenDeckCards(deck.cards));
                   const parts = KIND_ORDER.filter((k) => counts[k]);
                   if (parts.length === 0) return null;
                   return (

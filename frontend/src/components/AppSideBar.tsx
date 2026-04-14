@@ -21,6 +21,7 @@ import { graphql, useLazyLoadQuery } from "react-relay";
 import type { AppSideBarDeckListQuery } from "@/__generated__/AppSideBarDeckListQuery.graphql";
 import { COLOR_BG } from "src/render/color";
 import { cn } from "@/lib/utils";
+import { AlertTriangleIcon } from "lucide-react";
 import icon from "/favicon.ico";
 
 const DeckListQuery = graphql`
@@ -30,6 +31,7 @@ const DeckListQuery = graphql`
         id
         name
         colors
+        hasLinkWarning
       }
     }
   }
@@ -52,6 +54,9 @@ function DeckSubItems({ onNavigate, locale }: { onNavigate: () => void; locale: 
                 onClick={onNavigate}
               >
                 <span className="truncate flex-1">{deck.name}</span>
+                {deck.hasLinkWarning && (
+                  <AlertTriangleIcon className="size-3 shrink-0 text-amber-600 dark:text-amber-400" />
+                )}
                 <span className="flex gap-0.5 shrink-0">
                   {deck.colors.map((color) => (
                     <span

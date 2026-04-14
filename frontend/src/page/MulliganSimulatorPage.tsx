@@ -40,15 +40,44 @@ const DeckCardsQuery = graphql`
       ... on Deck {
         id
         cards {
-          count
-          card {
-            ...CardFragment
+          __typename
+          ... on UnitDeckCard {
+            count
+            card {
+              ...CardFragment
+            }
+          }
+          ... on PilotDeckCard {
+            count
+            card {
+              ...CardFragment
+            }
+          }
+          ... on BaseDeckCard {
+            count
+            card {
+              ...CardFragment
+            }
+          }
+          ... on CommandDeckCard {
+            count
+            card {
+              ...CardFragment
+            }
+          }
+          ... on ResourceDeckCard {
+            count
+            card {
+              ...CardFragment
+            }
           }
         }
       }
     }
   }
 `;
+
+import { flattenDeckCards } from "@/lib/deckCards";
 
 type DeckCardEntry = {
   readonly count: number;
@@ -74,12 +103,13 @@ function DeckDrawer({ deckId }: { deckId: string }) {
   const { t } = useTranslation("common");
   const data = useLazyLoadQuery<MulliganSimulatorPageDeckCardsQuery>(DeckCardsQuery, { deckId });
   const deck = data.node?.__typename === "Deck" ? data.node : null;
+  const flatCards = flattenDeckCards(deck?.cards) as unknown as DeckCardEntry[];
 
   const [animPhase, setAnimPhase] = useState<"idle" | "out" | "in">("idle");
   const [history, setHistory] = useState<{ id: number; cards: CardFragment$key[] }[]>([]);
   const [drawn, setDrawn] = useState<{ id: number; cards: CardFragment$key[] }>(() => ({
     id: 1,
-    cards: deck ? drawCards(deck.cards, 5) : [],
+    cards: deck ? drawCards(flatCards, 5) : [],
   }));
   const [overlayCardId, setOverlayCardId] = useState<string | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -93,11 +123,11 @@ function DeckDrawer({ deckId }: { deckId: string }) {
 
   if (!deck) return <p className="text-muted-foreground text-sm">{t("deck.notFound")}</p>;
 
-  const totalCards = deck.cards.reduce((s, c) => s + c.count, 0);
+  const totalCards = flatCards.reduce((s, c) => s + c.count, 0);
   const nextRound = drawn.id + 1;
 
   function redraw() {
-    const next = { id: nextRound, cards: drawCards(deck!.cards, 5) };
+    const next = { id: nextRound, cards: drawCards(flatCards, 5) };
     setAnimPhase("out");
     timerRef.current = setTimeout(() => {
       setHistory((h) => [drawn, ...h].slice(0, 10));

@@ -20,7 +20,9 @@ function Histogram({
   const colorMap: Record<number, Record<string, number>> = {};
   for (const { card, count } of cards) {
     const val = getValue(card);
-    const color = card?.color;
+    const rawColor = card?.color;
+    const color: string | undefined =
+      rawColor && typeof rawColor === "object" ? rawColor.value : rawColor;
     if (val == null || !color) continue;
     const bucket = Math.min(val, maxBucket);
     if (!colorMap[bucket]) colorMap[bucket] = {};

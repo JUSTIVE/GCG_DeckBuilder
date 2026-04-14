@@ -11,6 +11,50 @@ import {
   type AnyRecord,
 } from "./cards";
 import { type DeckCard, DECK_MAX_COPIES } from "./decks";
+import { computeDeckLinkSets, unitHasNoLinkedPilot, pilotHasNoLinkedUnit } from "../lib/deckLinks";
+
+// Card __typename → DeckCard variant __typename.
+const DECK_CARD_VARIANT: Record<string, string> = {
+  UnitCard: "UnitDeckCard",
+  PilotCard: "PilotDeckCard",
+  BaseCard: "BaseDeckCard",
+  CommandCard: "CommandDeckCard",
+  ResourceCard: "ResourceDeckCard",
+};
+
+type TaggedDeckCard = {
+  __typename: string;
+  card: AnyRecord;
+  count: number;
+  pilotLinked?: boolean;
+  hasLinkingUnit?: boolean;
+};
+
+/**
+ * Resolve raw deck card entries ({cardId, count}) into tagged DeckCard union
+ * variants with link status computed for UnitDeckCard / PilotDeckCard.
+ */
+function buildTaggedDeckCards(rawCards: DeckCard[]): TaggedDeckCard[] {
+  const resolved = rawCards
+    .map((dc) => {
+      const card = cardById.get(dc.cardId) as AnyRecord | undefined;
+      return card ? { card, count: dc.count } : null;
+    })
+    .filter((x): x is { card: AnyRecord; count: number } => x != null);
+
+  const { pilotNamesInDeck, linkablePilotNames } = computeDeckLinkSets(resolved);
+
+  return resolved.map(({ card, count }) => {
+    const variant = DECK_CARD_VARIANT[card["__typename"] as string] ?? "BaseDeckCard";
+    const tagged: TaggedDeckCard = { __typename: variant, card, count };
+    if (variant === "UnitDeckCard") {
+      tagged.pilotLinked = !unitHasNoLinkedPilot(card as never, pilotNamesInDeck);
+    } else if (variant === "PilotDeckCard") {
+      tagged.hasLinkingUnit = !pilotHasNoLinkedUnit(card as never, linkablePilotNames);
+    }
+    return tagged;
+  });
+}
 
 function descriptionToGraphQL(rawDesc: unknown): { tokens: object[] }[] {
   if (!Array.isArray(rawDesc)) return [];
@@ -245,9 +289,16 @@ export function fieldResolver(
       .map(([kw]) => kw);
   }
 
-  if (typeName === "DeckCard" && fieldName === "card") {
-    const id = source["cardId"] as string | undefined;
-    return id ? (cardById.get(id) ?? null) : null;
+  if (typeName === "Deck" && fieldName === "cards") {
+    const raw = (source["cards"] as DeckCard[] | undefined) ?? [];
+    return buildTaggedDeckCards(raw);
+  }
+
+  if (typeName === "Deck" && fieldName === "hasLinkWarning") {
+    const raw = (source["cards"] as DeckCard[] | undefined) ?? [];
+    return buildTaggedDeckCards(raw).some(
+      (c) => c.pilotLinked === false || c.hasLinkingUnit === false,
+    );
   }
 
   if (fieldName === "rarity") {

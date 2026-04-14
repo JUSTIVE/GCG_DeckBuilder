@@ -19,6 +19,7 @@ import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 import { DeckPanel } from "@/components/DeckPanel";
 import type { DeckPanelProps } from "@/components/DeckPanel";
 import { DeckViewGrid } from "@/components/DeckViewGrid";
+import { flattenDeckCards } from "@/lib/deckCards";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { LayersIcon, SlidersHorizontalIcon, FileTextIcon, LayoutGridIcon } from "lucide-react";
@@ -35,11 +36,13 @@ export const Query = graphql`
         id
         name
         colors
+        hasLinkWarning
         cards {
-          count
-          card {
-            __typename
-            ... on UnitCard {
+          __typename
+          ... on UnitDeckCard {
+            count
+            pilotLinked
+            card {
               id
               name {
                 en
@@ -87,7 +90,11 @@ export const Query = graphql`
                 }
               }
             }
-            ... on PilotCard {
+          }
+          ... on PilotDeckCard {
+            count
+            hasLinkingUnit
+            card {
               id
               pilot {
                 name {
@@ -126,44 +133,10 @@ export const Query = graphql`
                 }
               }
             }
-            ... on BaseCard {
-              id
-              name {
-                en
-                ko
-              }
-              cost
-              level
-              color {
-                value
-              }
-              imageUrl
-              description {
-                tokens {
-                  ... on TriggerToken {
-                    type
-                    keyword
-                    qualifier {
-                      en
-                      ko
-                    }
-                  }
-                  ... on AbilityToken {
-                    type
-                    keyword
-                    n
-                  }
-                  ... on ProseToken {
-                    type
-                    text {
-                      en
-                      ko
-                    }
-                  }
-                }
-              }
-            }
-            ... on CommandCard {
+          }
+          ... on BaseDeckCard {
+            count
+            card {
               id
               name {
                 en
@@ -201,6 +174,52 @@ export const Query = graphql`
               }
             }
           }
+          ... on CommandDeckCard {
+            count
+            card {
+              id
+              name {
+                en
+                ko
+              }
+              cost
+              level
+              color {
+                value
+              }
+              imageUrl
+              description {
+                tokens {
+                  ... on TriggerToken {
+                    type
+                    keyword
+                    qualifier {
+                      en
+                      ko
+                    }
+                  }
+                  ... on AbilityToken {
+                    type
+                    keyword
+                    n
+                  }
+                  ... on ProseToken {
+                    type
+                    text {
+                      en
+                      ko
+                    }
+                  }
+                }
+              }
+            }
+          }
+          ... on ResourceDeckCard {
+            count
+            card {
+              id
+            }
+          }
         }
       }
     }
@@ -215,11 +234,13 @@ const ADD_CARD_MUTATION = graphql`
         deck {
           id
           colors
+          hasLinkWarning
           cards {
-            count
-            card {
-              __typename
-              ... on UnitCard {
+            __typename
+            ... on UnitDeckCard {
+              count
+              pilotLinked
+              card {
                 id
                 name {
                   en
@@ -241,7 +262,11 @@ const ADD_CARD_MUTATION = graphql`
                   }
                 }
               }
-              ... on PilotCard {
+            }
+            ... on PilotDeckCard {
+              count
+              hasLinkingUnit
+              card {
                 id
                 pilot {
                   name {
@@ -254,7 +279,10 @@ const ADD_CARD_MUTATION = graphql`
                   value
                 }
               }
-              ... on BaseCard {
+            }
+            ... on BaseDeckCard {
+              count
+              card {
                 id
                 name {
                   en
@@ -265,7 +293,10 @@ const ADD_CARD_MUTATION = graphql`
                   value
                 }
               }
-              ... on CommandCard {
+            }
+            ... on CommandDeckCard {
+              count
+              card {
                 id
                 name {
                   en
@@ -275,6 +306,12 @@ const ADD_CARD_MUTATION = graphql`
                 color {
                   value
                 }
+              }
+            }
+            ... on ResourceDeckCard {
+              count
+              card {
+                id
               }
             }
           }
@@ -302,11 +339,13 @@ const REMOVE_CARD_MUTATION = graphql`
     removeCardFromDeck(deckId: $deckId, cardId: $cardId) {
       id
       colors
+      hasLinkWarning
       cards {
-        count
-        card {
-          __typename
-          ... on UnitCard {
+        __typename
+        ... on UnitDeckCard {
+          count
+          pilotLinked
+          card {
             id
             name {
               en
@@ -328,7 +367,11 @@ const REMOVE_CARD_MUTATION = graphql`
               }
             }
           }
-          ... on PilotCard {
+        }
+        ... on PilotDeckCard {
+          count
+          hasLinkingUnit
+          card {
             id
             pilot {
               name {
@@ -341,7 +384,10 @@ const REMOVE_CARD_MUTATION = graphql`
               value
             }
           }
-          ... on BaseCard {
+        }
+        ... on BaseDeckCard {
+          count
+          card {
             id
             name {
               en
@@ -352,7 +398,10 @@ const REMOVE_CARD_MUTATION = graphql`
               value
             }
           }
-          ... on CommandCard {
+        }
+        ... on CommandDeckCard {
+          count
+          card {
             id
             name {
               en
@@ -362,6 +411,12 @@ const REMOVE_CARD_MUTATION = graphql`
             color {
               value
             }
+          }
+        }
+        ... on ResourceDeckCard {
+          count
+          card {
+            id
           }
         }
       }
@@ -384,11 +439,13 @@ const SET_DECK_CARDS_MUTATION = graphql`
     setDeckCards(deckId: $deckId, cards: $cards) {
       id
       colors
+      hasLinkWarning
       cards {
-        count
-        card {
-          __typename
-          ... on UnitCard {
+        __typename
+        ... on UnitDeckCard {
+          count
+          pilotLinked
+          card {
             id
             name {
               en
@@ -411,7 +468,11 @@ const SET_DECK_CARDS_MUTATION = graphql`
               }
             }
           }
-          ... on PilotCard {
+        }
+        ... on PilotDeckCard {
+          count
+          hasLinkingUnit
+          card {
             id
             pilot {
               name {
@@ -425,7 +486,10 @@ const SET_DECK_CARDS_MUTATION = graphql`
               value
             }
           }
-          ... on BaseCard {
+        }
+        ... on BaseDeckCard {
+          count
+          card {
             id
             name {
               en
@@ -437,7 +501,10 @@ const SET_DECK_CARDS_MUTATION = graphql`
               value
             }
           }
-          ... on CommandCard {
+        }
+        ... on CommandDeckCard {
+          count
+          card {
             id
             name {
               en
@@ -448,6 +515,12 @@ const SET_DECK_CARDS_MUTATION = graphql`
             color {
               value
             }
+          }
+        }
+        ... on ResourceDeckCard {
+          count
+          card {
+            id
           }
         }
       }
@@ -524,10 +597,11 @@ export function DeckDetailPage() {
   }
 
   const deck = node;
-  const totalCards = deck.cards.reduce((s, c) => s + c.count, 0);
+  const flatCards = flattenDeckCards(deck.cards);
+  const totalCards = flatCards.reduce((s, c) => s + c.count, 0);
   const deckColors = deck.colors as readonly string[] as string[];
   const deckCardCounts: Record<string, number> = {};
-  for (const { card, count } of deck.cards) {
+  for (const { card, count } of flatCards) {
     const id = (card as any)?.id;
     if (id) deckCardCounts[id] = count;
   }
@@ -595,7 +669,7 @@ export function DeckDetailPage() {
   const panelProps: DeckPanelProps = {
     deckName: deck.name,
     colors: deckColors,
-    cards: deck.cards,
+    cards: flatCards,
     totalCards,
     errorMessage,
     onRemove: handleRemove,
@@ -725,7 +799,7 @@ export function DeckDetailPage() {
           <div className="flex-1 min-h-0">
             {isDeckView ? (
               <DeckViewGrid
-                cards={deck.cards}
+                cards={flatCards}
                 onRemove={handleRemove}
                 onOpenCard={setOverlayCardId}
                 showDescription={showDescription}

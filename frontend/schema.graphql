@@ -390,10 +390,37 @@ type SearchHistoryList implements Node {
   items: [SearchHistory!]!
 }
 
-type DeckCard {
-  card: PlayableCard!
+type UnitDeckCard {
+  card: UnitCard!
+  count: Int!
+  # true if the unit has no LinkPilot requirement, or at least one required
+  # pilot (by name, with aliases and parenthetical variants handled) is in the deck.
+  pilotLinked: Boolean!
+}
+
+type PilotDeckCard {
+  card: PilotCard!
+  count: Int!
+  # true if at least one unit in the deck links to this pilot.
+  hasLinkingUnit: Boolean!
+}
+
+type BaseDeckCard {
+  card: BaseCard!
   count: Int!
 }
+
+type CommandDeckCard {
+  card: CommandCard!
+  count: Int!
+}
+
+type ResourceDeckCard {
+  card: Resource!
+  count: Int!
+}
+
+union DeckCard = UnitDeckCard | PilotDeckCard | BaseDeckCard | CommandDeckCard | ResourceDeckCard
 
 type Deck implements Node {
   id: ID!
@@ -403,6 +430,7 @@ type Deck implements Node {
   colors: [CardColor!]!
   topKeywords(limit: Int): [CardKeyword!]!
   topTraits(limit: Int): [CardTrait!]!
+  hasLinkWarning: Boolean!
 }
 
 type DeckList implements Node {
