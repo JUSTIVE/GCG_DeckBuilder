@@ -108,7 +108,7 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
         <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm h-[35cqw] items-start">
           <div className="flex flex-col justify-end flex-1 overflow-hidden">
             <div className="">
-              <div className="p-2 py-1 bg-black whitespace-pre-wrap cutout-tr-sm cutout text-[6cqw] font-bold text-center">
+              <div className="p-2 py-1 bg-black/80 whitespace-pre-wrap cutout-tr-sm cutout text-[6cqw] font-bold text-center backdrop-blur-sm">
                 {localize(pilotCard.pilot.name)}
               </div>
             </div>

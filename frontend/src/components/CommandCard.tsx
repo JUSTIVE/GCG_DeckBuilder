@@ -115,16 +115,16 @@ export function CommandCardBody({
       <div className="absolute bottom-0 inset-x-0 h-[58cqw] backdrop-blur-md bg-black/20 pointer-events-none [mask-image:linear-gradient(to_top,black_80%,transparent)]" />
       <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
-          <div className="p-2 bg-black break-words cutout-tl-sm cutout text-[6cqw] font-bold text-center line-clamp-2">
+          <div className="p-2 bg-black/80 break-words cutout-tl-sm cutout text-[6cqw] font-bold text-center line-clamp-2 backdrop-blur-sm">
             {localize(commandCard.name)}
           </div>
         </div>
         {commandCard.commandPilot != null ? (
-          <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm">
+          <div className="flex flex-row gap-0.5 pr-2 ">
             <div className="flex flex-col flex-1">
               <div className="flex flex-row h-[8cqw] overflow-hidden">
-                <div className={cn("w-4 bg-black -mr-4 shrink-0")} />
-                <div className="bg-black overflow-hidden w-full pl-7 cutout cutout-tr-sm px-2 flex items-center">
+                <div className={cn("w-4 bg-black/80 -mr-4 shrink-0 backdrop-blur-sm")} />
+                <div className="bg-black/80 overflow-hidden w-full pl-7 cutout cutout-tr-sm px-2 flex items-center backdrop-blur-sm">
                   <div
                     className={cn(
                       "flex text-white text-[5cqw] w-full overflow-hidden",
