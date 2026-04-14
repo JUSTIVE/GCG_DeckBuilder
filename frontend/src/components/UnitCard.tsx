@@ -127,7 +127,8 @@ export function UnitCardBody({
           />
         </div>
       </div>
-      <div className="flex flex-col gap-2 ">
+      <div className="absolute bottom-0 inset-x-0 h-[65cqw] backdrop-blur-md bg-black/20 pointer-events-none [mask-image:linear-gradient(to_top,black_80%,transparent)]" />
+      <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
           <div className="p-2 bg-black whitespace-pre-wrap break-words cutout-tl-sm cutout text-[6cqw] font-bold text-center">
             {localize(unitCard.name)}
