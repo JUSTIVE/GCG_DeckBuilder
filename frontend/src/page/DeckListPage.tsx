@@ -10,7 +10,25 @@ import { useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PlusIcon, Trash2Icon, LayersIcon, AlertCircleIcon, AlertTriangleIcon } from "lucide-react";
+import {
+  PlusIcon,
+  Trash2Icon,
+  LayersIcon,
+  AlertCircleIcon,
+  AlertTriangleIcon,
+  SwordsIcon,
+  UserIcon,
+  WarehouseIcon,
+  SparklesIcon,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+const KIND_ICONS: Record<string, LucideIcon> = {
+  UnitCard: SwordsIcon,
+  PilotCard: UserIcon,
+  BaseCard: WarehouseIcon,
+  CommandCard: SparklesIcon,
+};
 import { COLOR_BG } from "src/render/color";
 import { cn } from "@/lib/utils";
 import { KEYWORD_DESCRIPTIONS } from "@/render/keywordDescription";
@@ -315,12 +333,21 @@ export function DeckListPage() {
                   if (parts.length === 0) return null;
                   return (
                     <div className="flex gap-2 mt-1">
-                      {parts.map((k) => (
-                        <span key={k} className="text-[11px] text-muted-foreground">
-                          <span className="font-medium text-foreground/70">{KIND_LABELS[k]}</span>{" "}
-                          {counts[k]}
-                        </span>
-                      ))}
+                      {parts.map((k) => {
+                        const Icon = KIND_ICONS[k];
+                        return (
+                          <span
+                            key={k}
+                            className="flex items-center gap-0.5 text-[11px] text-muted-foreground"
+                          >
+                            {Icon && <Icon className="size-3" />}
+                            <span className="font-medium text-foreground/70">
+                              {KIND_LABELS[k]}
+                            </span>{" "}
+                            {counts[k]}
+                          </span>
+                        );
+                      })}
                     </div>
                   );
                 })()}
