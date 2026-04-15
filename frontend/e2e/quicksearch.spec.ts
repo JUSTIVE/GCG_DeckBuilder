@@ -1,4 +1,6 @@
-import { test, expect, type Page } from "@playwright/test";
+import { expect, test } from "bun:test";
+import type { Page } from "playwright";
+import { useBrowser, waitForCount } from "./helpers";
 
 // Regression: The schema refactor changed `color: CardColor!` (scalar) to
 // `color: Color!` (object type). QuickSearch.tsx still queried `color`
@@ -11,61 +13,71 @@ import { test, expect, type Page } from "@playwright/test";
 // drift fails loudly instead of silently degrading.
 
 const DIALOG = "[data-popup], [role='dialog']";
+const b = useBrowser();
 
 async function openQuickSearch(page: Page) {
+  // QuickSearch's Ctrl+k listener is registered in a useEffect, so wait for
+  // the cardlist content to mount before pressing the hotkey — otherwise the
+  // keypress fires before React has hooked up the global keydown handler.
+  await page
+    .locator("button[class*='aspect-800']")
+    .first()
+    .waitFor({ state: "visible", timeout: 15000 });
   await page.keyboard.press("Control+k");
   const dialog = page.locator(DIALOG).first();
-  await expect(dialog).toBeVisible({ timeout: 15000 });
+  await dialog.waitFor({ state: "visible", timeout: 15000 });
   // Wait for the QuickSearch input to be focused before typing.
-  await expect(dialog.getByPlaceholder(/검색/)).toBeVisible();
+  await dialog.locator("input.h-12[placeholder*='검색']").waitFor({ state: "visible" });
   return dialog;
 }
 
-test("QuickSearch returns search results for a known query", async ({ page }) => {
-  await page.goto("/ko/cardlist");
-  const dialog = await openQuickSearch(page);
+test("QuickSearch returns search results for a known query", async () => {
+  await b.page.goto("/ko/cardlist");
+  const dialog = await openQuickSearch(b.page);
 
   // "건담" must match multiple cards in the dataset.
-  await dialog.getByPlaceholder(/검색/).fill("건담");
+  await dialog.locator("input.h-12[placeholder*='검색']").fill("건담");
 
   const resultButtons = dialog.locator("ul button");
-  await expect(resultButtons.first()).toBeVisible({ timeout: 5000 });
+  await resultButtons.first().waitFor({ state: "visible", timeout: 5000 });
   expect(await resultButtons.count()).toBeGreaterThan(0);
 
   // Result rows must contain the card name — proves the query returned real
   // data and the component didn't fall through to the "no results" branch.
-  await expect(resultButtons.first()).toContainText("건담");
+  const firstText = (await resultButtons.first().textContent()) ?? "";
+  expect(firstText).toContain("건담");
 });
 
-test("QuickSearch result click opens the card detail overlay", async ({ page }) => {
-  await page.goto("/ko/cardlist");
-  const dialog = await openQuickSearch(page);
+test("QuickSearch result click opens the card detail overlay", async () => {
+  await b.page.goto("/ko/cardlist");
+  const dialog = await openQuickSearch(b.page);
 
-  await dialog.getByPlaceholder(/검색/).fill("건담");
+  await dialog.locator("input.h-12[placeholder*='검색']").fill("건담");
   const firstResult = dialog.locator("ul button").first();
-  await expect(firstResult).toBeVisible({ timeout: 5000 });
+  await firstResult.waitFor({ state: "visible", timeout: 5000 });
   await firstResult.click();
 
-  // The QuickSearch input disappears when its dialog closes, and
-  // CardByIdOverlay mounts a new dialog in its place.
-  await expect(page.getByPlaceholder(/검색/)).toHaveCount(0);
-  await expect(page.locator(DIALOG).first()).toBeVisible({ timeout: 15000 });
+  // The QuickSearch input (matched by its unique h-12 class — CardFilterControls
+  // keeps its own search input with h-7 mounted on the cardlist page) disappears
+  // when the dialog closes, and CardByIdOverlay mounts a new dialog in its place.
+  await waitForCount(b.page.locator("input.h-12[placeholder*='검색']"), 0);
+  await b.page.locator(DIALOG).first().waitFor({ state: "visible", timeout: 15000 });
 });
 
-test("QuickSearch history renders without broken color styles", async ({ page }) => {
+test("QuickSearch history renders without broken color styles", async () => {
   // Visit a card detail URL so a CardViewHistory entry is created via
   // CardByIdOverlay's addCardView mutation.
-  await page.goto("/ko/cardlist?cardId=ST01-001");
-  await expect(page.locator(DIALOG).first()).toBeVisible({ timeout: 15000 });
-  await page.keyboard.press("Escape");
+  await b.page.goto("/ko/cardlist?cardId=ST01-001");
+  await b.page.locator(DIALOG).first().waitFor({ state: "visible", timeout: 15000 });
+  await b.page.keyboard.press("Escape");
 
   // Reopen the page and the QuickSearch dialog with an empty query so the
   // history section is rendered.
-  await page.goto("/ko/cardlist");
-  const dialog = await openQuickSearch(page);
+  await b.page.goto("/ko/cardlist");
+  const dialog = await openQuickSearch(b.page);
 
   const historyItem = dialog.locator("ul button").first();
-  await expect(historyItem).toBeVisible({ timeout: 5000 });
+  await historyItem.waitFor({ state: "visible", timeout: 5000 });
 
   // Any element with an inline background-color must not contain literal
   // "undefined" — that is the signature of `COLOR_HEX[{}] + "33"` produced
