@@ -508,9 +508,17 @@ function useCenterNodes(
         pilot: { name: { ko: string; en: string } };
       }[];
       if (linkable.length > 0) {
+        // LinkPilot units typically match 1–2 named pilots (and variants); show
+        // those names as the label. LinkTrait units (e.g. G-스카이 Ez →
+        // WHITE_BASE_TEAM) can match many pilots — concatenating every name is
+        // unreadable, so fall back to the generic "linkable" label in that case.
+        const label =
+          linkable.length <= 2
+            ? linkable.map((p) => localize(p.pilot.name)).join(", ")
+            : t("deck.linkable");
         branches.push({
           key: "linkablePilots",
-          label: linkable.map((p) => localize(p.pilot.name)).join(", "),
+          label,
           cards: linkable,
         });
       }
