@@ -1,4 +1,5 @@
-import { Suspense, useCallback, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 import { graphql, useFragment, useLazyLoadQuery } from "react-relay";
 import {
   ReactFlow,
@@ -8,6 +9,7 @@ import {
   BaseEdge,
   getStraightPath,
   useInternalNode,
+  type ReactFlowInstance,
   type Node,
   type Edge,
   type NodeTypes,
@@ -24,6 +26,8 @@ import type { DeckGraphViewCenterQuery } from "@/__generated__/DeckGraphViewCent
 import { Card } from "@/components/Card";
 import { useLocalize } from "@/lib/localize";
 import { renderTrait } from "@/render/trait";
+import { renderSeries } from "@/render/series";
+import { useTranslation } from "react-i18next";
 
 // ─── Dimensions ───────────────────────────────────────────────────────────────
 
@@ -320,7 +324,7 @@ const hiddenHandleStyle: React.CSSProperties = {
 function CardNode({ data }: { data: CardNodeData }) {
   const scale = data.scale ?? 1;
   return (
-    <div style={{ width: CARD_W * scale, cursor: "pointer" }}>
+    <div className="deck-graph-node-enter" style={{ width: CARD_W * scale, cursor: "pointer" }}>
       <Handle id="t" type="target" position={Position.Top} style={hiddenHandleStyle} />
       <Handle id="s" type="source" position={Position.Top} style={hiddenHandleStyle} />
       {/* Card's internal button is disabled via pointer-events so ReactFlow's
@@ -342,7 +346,7 @@ type CategoryNodeData = {
 
 function CategoryNode({ data }: { data: CategoryNodeData }) {
   return (
-    <div className="rounded-full bg-muted/90 backdrop-blur border border-border px-4 py-2 text-sm font-medium whitespace-nowrap shadow-sm">
+    <div className="deck-graph-node-enter rounded-full bg-muted/90 backdrop-blur border border-border px-4 py-2 text-sm font-medium whitespace-nowrap shadow-sm">
       <Handle id="t" type="target" position={Position.Top} style={hiddenHandleStyle} />
       <Handle id="s" type="source" position={Position.Top} style={hiddenHandleStyle} />
       {data.label}
@@ -425,14 +429,16 @@ function useListNodes(
   }, [data.cards.edges, onSelect]);
 }
 
+type SelectOptions = { element: HTMLElement; cardRef: unknown };
+
 function ListMode({
   queryRef,
   onSelect,
 }: {
   queryRef: DeckGraphViewList_query$key;
-  onSelect: (id: string) => void;
+  onSelect: (id: string, opts?: SelectOptions) => void;
 }) {
-  const { nodes, edges } = useListNodes(queryRef, onSelect);
+  const { nodes, edges } = useListNodes(queryRef, (id) => onSelect(id));
   return (
     <ReactFlow
       nodes={nodes}
@@ -440,13 +446,15 @@ function ListMode({
       nodeTypes={nodeTypes}
       edgeTypes={edgeTypes}
       fitView
-      fitViewOptions={{ padding: 0.2 }}
+      fitViewOptions={{ padding: 0.2, duration: 600 }}
       minZoom={0.2}
       maxZoom={2}
       proOptions={{ hideAttribution: true }}
-      onNodeClick={(_e, node) => {
-        console.log("[DeckGraphView] onNodeClick", node.id, node.type);
-        if (node.type === "card") onSelect((node.data as CardNodeData).id);
+      onNodeClick={(e, node) => {
+        if (node.type !== "card") return;
+        const cardData = node.data as CardNodeData;
+        const element = (e.target as HTMLElement | null)?.closest<HTMLElement>(".react-flow__node");
+        onSelect(cardData.id, element ? { element, cardRef: cardData.cardRef } : undefined);
       }}
     >
       <Background gap={24} size={1} />
@@ -468,6 +476,7 @@ function useCenterNodes(
   onSelect: (id: string) => void,
 ): { nodes: Node[]; edges: Edge[] } {
   const localize = useLocalize();
+  const { t } = useTranslation("common");
   const data = useLazyLoadQuery<DeckGraphViewCenterQuery>(CenterQuery, { id: cardId });
   return useMemo(() => {
     const node = data.node;
@@ -488,7 +497,7 @@ function useCenterNodes(
     if (series) {
       branches.push({
         key: `series:${series.value}`,
-        label: String(series.value),
+        label: renderSeries(series.value),
         cards: series.cards.filter((c) => (c as { id?: string }).id !== cardId),
       });
     }
@@ -515,7 +524,7 @@ function useCenterNodes(
       if (linkable.length > 0) {
         branches.push({
           key: "linkableUnits",
-          label: linkable.map((u) => localize(u.name)).join(", "),
+          label: t("deck.linkable"),
           cards: linkable,
         });
       }
@@ -595,7 +604,7 @@ function useCenterNodes(
     });
 
     return { nodes, edges };
-  }, [data.node, cardId, onSelect, localize]);
+  }, [data.node, cardId, onSelect, localize, t]);
 }
 
 function CenterMode({
@@ -608,6 +617,19 @@ function CenterMode({
   onBack: () => void;
 }) {
   const { nodes, edges } = useCenterNodes(cardId, onSelect);
+  const instanceRef = useRef<ReactFlowInstance | null>(null);
+  const prevCardIdRef = useRef<string>(cardId);
+
+  // Smoothly pan to the new center when cardId changes (but not on first mount —
+  // the initial fitView handles that case).
+  useEffect(() => {
+    if (prevCardIdRef.current === cardId) return;
+    prevCardIdRef.current = cardId;
+    const inst = instanceRef.current;
+    if (!inst) return;
+    inst.setCenter(0, 0, { duration: 500, zoom: inst.getZoom() });
+  }, [cardId]);
+
   return (
     <ReactFlow
       nodes={nodes}
@@ -615,10 +637,13 @@ function CenterMode({
       nodeTypes={nodeTypes}
       edgeTypes={edgeTypes}
       fitView
-      fitViewOptions={{ padding: 0.15 }}
+      fitViewOptions={{ padding: 0.15, duration: 600 }}
       minZoom={0.2}
       maxZoom={2}
       proOptions={{ hideAttribution: true }}
+      onInit={(inst) => {
+        instanceRef.current = inst;
+      }}
       onNodeClick={(_e, node) => {
         if (node.type === "card") onSelect((node.data as CardNodeData).id);
       }}
@@ -639,34 +664,160 @@ function CenterMode({
 
 // ─── Top-level view ───────────────────────────────────────────────────────────
 
+const TRANSITION_MS = 450;
+const FLY_MS = 500;
+
+type FlyingCard = {
+  // Initial rect of the source list node, relative to the container.
+  startX: number;
+  startY: number;
+  width: number;
+  height: number;
+  cardRef: unknown;
+  // Flipped to true on the next frame so the CSS transition animates to center.
+  atCenter: boolean;
+};
+
 export function DeckGraphView({ queryRef }: { queryRef: DeckGraphViewList_query$key }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
-  const handleSelect = useCallback((id: string) => {
-    console.log("[DeckGraphView] handleSelect", id);
+  // `mountedCenter` lets us keep the center view mounted during the fade-out
+  // after back navigation, so the cross-fade works in both directions.
+  const [mountedCenter, setMountedCenter] = useState<string | null>(null);
+  // `mountedList` lets us keep the list view mounted while the center is
+  // rendered on top, so list cards continue fading out during the transition.
+  const [mountedList, setMountedList] = useState(true);
+  const [flyingCard, setFlyingCard] = useState<FlyingCard | null>(null);
+
+  useEffect(() => {
+    if (selectedCardId) {
+      setMountedCenter(selectedCardId);
+      setMountedList(true);
+      const t = setTimeout(() => setMountedList(false), TRANSITION_MS + 50);
+      return () => clearTimeout(t);
+    } else {
+      setMountedList(true);
+      const t = setTimeout(() => setMountedCenter(null), TRANSITION_MS + 50);
+      return () => clearTimeout(t);
+    }
+  }, [selectedCardId]);
+
+  // Flip the ghost card to its target transform on the next frame so the
+  // browser interpolates via CSS transition.
+  useEffect(() => {
+    if (!flyingCard || flyingCard.atCenter) return;
+    const raf = requestAnimationFrame(() => {
+      setFlyingCard((prev) => (prev ? { ...prev, atCenter: true } : prev));
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [flyingCard]);
+
+  useEffect(() => {
+    if (!flyingCard?.atCenter) return;
+    const t = setTimeout(() => setFlyingCard(null), FLY_MS);
+    return () => clearTimeout(t);
+  }, [flyingCard?.atCenter]);
+
+  const handleSelect = useCallback((id: string, opts?: SelectOptions) => {
+    if (opts && containerRef.current) {
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const nodeRect = opts.element.getBoundingClientRect();
+      setFlyingCard({
+        startX: nodeRect.left - containerRect.left,
+        startY: nodeRect.top - containerRect.top,
+        width: nodeRect.width,
+        height: nodeRect.height,
+        cardRef: opts.cardRef,
+        atCenter: false,
+      });
+    }
     setSelectedCardId(id);
   }, []);
   const handleBack = useCallback(() => setSelectedCardId(null), []);
 
+  const showCenter = selectedCardId != null;
+
   return (
-    <div className="relative w-full h-full">
-      <Suspense
-        fallback={
-          <div className="absolute inset-0 flex items-center justify-center text-sm text-muted-foreground">
-            loading…
-          </div>
+    <div ref={containerRef} className="relative w-full h-full">
+      <style>{`
+        @keyframes deck-graph-node-in {
+          from { opacity: 0; transform: scale(0.4); }
+          to { opacity: 1; transform: scale(1); }
         }
-      >
-        {selectedCardId ? (
-          <CenterMode
-            key={selectedCardId}
-            cardId={selectedCardId}
-            onSelect={handleSelect}
-            onBack={handleBack}
-          />
-        ) : (
-          <ListMode queryRef={queryRef} onSelect={handleSelect} />
-        )}
-      </Suspense>
+        .deck-graph-node-enter {
+          animation: deck-graph-node-in 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+          transform-origin: center;
+        }
+        /* Raise hovered nodes above siblings so they're never clipped. */
+        .react-flow__node:hover {
+          z-index: 10 !important;
+        }
+      `}</style>
+      {mountedList && (
+        <div
+          className={cn(
+            "absolute inset-0 transition-opacity ease-in-out",
+            showCenter ? "opacity-0 pointer-events-none" : "opacity-100",
+          )}
+          style={{ transitionDuration: `${TRANSITION_MS}ms` }}
+        >
+          <Suspense fallback={null}>
+            <ListMode queryRef={queryRef} onSelect={handleSelect} />
+          </Suspense>
+        </div>
+      )}
+      {mountedCenter && (
+        <div
+          className={cn(
+            "absolute inset-0 transition-opacity ease-in-out",
+            showCenter ? "opacity-100" : "opacity-0 pointer-events-none",
+          )}
+          style={{ transitionDuration: `${TRANSITION_MS}ms` }}
+        >
+          <Suspense
+            fallback={
+              <div className="absolute inset-0 flex items-center justify-center text-sm text-muted-foreground">
+                loading…
+              </div>
+            }
+          >
+            <CenterMode
+              cardId={mountedCenter}
+              onSelect={(id) => handleSelect(id)}
+              onBack={handleBack}
+            />
+          </Suspense>
+        </div>
+      )}
+      {flyingCard &&
+        (() => {
+          const containerRect = containerRef.current?.getBoundingClientRect();
+          const cw = containerRect?.width ?? 0;
+          const ch = containerRect?.height ?? 0;
+          const targetX = cw / 2 - flyingCard.width / 2;
+          const targetY = ch / 2 - flyingCard.height / 2;
+          const dx = flyingCard.atCenter ? targetX - flyingCard.startX : 0;
+          const dy = flyingCard.atCenter ? targetY - flyingCard.startY : 0;
+          return (
+            <div
+              className="absolute pointer-events-none z-20"
+              style={{
+                left: flyingCard.startX,
+                top: flyingCard.startY,
+                width: flyingCard.width,
+                height: flyingCard.height,
+                transform: `translate(${dx}px, ${dy}px)`,
+                transition: `transform ${FLY_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`,
+              }}
+            >
+              <Card
+                cardRef={flyingCard.cardRef as Parameters<typeof Card>[0]["cardRef"]}
+                showDescription={false}
+                onOpen={() => {}}
+              />
+            </div>
+          );
+        })()}
     </div>
   );
 }
