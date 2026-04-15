@@ -223,6 +223,9 @@ type PilotCard implements Node {
   keywords: [Keyword!]! #키워드
   traits: [Trait!]!
   relatedTraits: [Trait!]!
+  # 이 파일럿을 링크 가능한 유닛 카드 목록 (역방향).
+  # LinkPilot 유닛은 파일럿 이름으로, LinkTrait 유닛은 파일럿 특성으로 매칭된다.
+  linkableUnits: [UnitCard!]!
   description: [DescriptionLine!]! # 효과 정보
   limit: Int! # 덱에 넣을 수 있는 최대 장 수
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
@@ -256,6 +259,9 @@ type UnitCard implements Node {
   AP: Int! # 공격력
   HP: Int! # 체력
   links: [UnitLink!]! # 링크 정보
+  # 이 유닛이 링크할 수 있는 파일럿 카드 목록.
+  # LinkPilot 유닛은 파일럿 이름으로, LinkTrait 유닛은 파일럿 특성으로 매칭된다.
+  linkablePilots: [PilotCard!]!
   description: [DescriptionLine!]! # 효과 정보
   limit: Int! # 덱에 넣을 수 있는 최대 장 수
   blocked: Boolean! # limit이 0인 카드 (금지 카드)

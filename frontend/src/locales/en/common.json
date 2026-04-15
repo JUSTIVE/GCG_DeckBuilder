@@ -58,6 +58,8 @@
     "cardCount": "{{count}} cards",
     "cardCountOf": "{{count}} / {{max}} cards",
     "view": "Deck View",
+    "graphView": "Graph",
+    "linkable": "Linkable",
     "confirmDelete": "Delete \"{{name}}\" deck?",
     "confirmClear": "Clear all cards from deck?",
     "copyMsaCode": "Copy MSA Code",
