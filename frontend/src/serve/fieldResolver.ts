@@ -351,26 +351,48 @@ export function fieldResolver(
   }
 
   if (typeName === "UnitCard" && fieldName === "linkablePilots") {
-    const link = source["link"] as { __typename?: string; pilotName?: { ko?: string } } | undefined;
-    if (!link || link.__typename !== "LinkPilot") return [];
-    const linkAliases = splitPilotAliases(link.pilotName?.ko);
-    if (linkAliases.length === 0) return [];
-    return (allCards as AnyRecord[]).filter((c) => {
-      if (c["__typename"] !== "PilotCard") return false;
-      const name = (c["name"] as { ko?: string } | undefined)?.ko;
-      return splitPilotAliases(name).some((a) => linkAliases.includes(a));
-    });
+    const link = source["link"] as
+      | { __typename?: string; pilotName?: { ko?: string }; trait?: string }
+      | undefined;
+    if (!link) return [];
+    if (link.__typename === "LinkPilot") {
+      const linkAliases = splitPilotAliases(link.pilotName?.ko);
+      if (linkAliases.length === 0) return [];
+      return (allCards as AnyRecord[]).filter((c) => {
+        if (c["__typename"] !== "PilotCard") return false;
+        const name = (c["name"] as { ko?: string } | undefined)?.ko;
+        return splitPilotAliases(name).some((a) => linkAliases.includes(a));
+      });
+    }
+    if (link.__typename === "LinkTrait" && link.trait) {
+      const trait = link.trait;
+      return (allCards as AnyRecord[]).filter((c) => {
+        if (c["__typename"] !== "PilotCard") return false;
+        const traits = c["trait"];
+        return Array.isArray(traits) && (traits as string[]).includes(trait);
+      });
+    }
+    return [];
   }
 
   if (typeName === "PilotCard" && fieldName === "linkableUnits") {
     const name = (source["name"] as { ko?: string } | undefined)?.ko;
     const pilotAliases = splitPilotAliases(name);
-    if (pilotAliases.length === 0) return [];
+    const pilotTraits = Array.isArray(source["trait"]) ? (source["trait"] as string[]) : [];
+    if (pilotAliases.length === 0 && pilotTraits.length === 0) return [];
     return (allCards as AnyRecord[]).filter((c) => {
       if (c["__typename"] !== "UnitCard") return false;
-      const link = c["link"] as { __typename?: string; pilotName?: { ko?: string } } | undefined;
-      if (!link || link.__typename !== "LinkPilot") return false;
-      return splitPilotAliases(link.pilotName?.ko).some((a) => pilotAliases.includes(a));
+      const link = c["link"] as
+        | { __typename?: string; pilotName?: { ko?: string }; trait?: string }
+        | undefined;
+      if (!link) return false;
+      if (link.__typename === "LinkPilot") {
+        return splitPilotAliases(link.pilotName?.ko).some((a) => pilotAliases.includes(a));
+      }
+      if (link.__typename === "LinkTrait" && link.trait) {
+        return pilotTraits.includes(link.trait);
+      }
+      return false;
     });
   }
 

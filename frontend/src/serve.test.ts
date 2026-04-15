@@ -687,6 +687,62 @@ describe("LinkPilot.pilot – pilotName → Pilot lookup", () => {
   });
 });
 
+// ─── linkablePilots / linkableUnits ──────────────────────────────────────────
+
+describe("UnitCard.linkablePilots – matches both LinkPilot (name) and LinkTrait", () => {
+  it("LinkPilot unit returns pilots whose name matches", async () => {
+    // ST01-001 (Gundam) → LinkPilot "아무로 레이"
+    const data = await gql(
+      `{ node(id: "ST01-001") {
+          ... on UnitCard { linkablePilots { id pilot { name { ko } } } }
+        }
+      }`,
+    );
+    const node = data["node"] as {
+      linkablePilots: Array<{ id: string; pilot: { name: { ko: string } } }>;
+    };
+    expect(node.linkablePilots.length).toBeGreaterThan(0);
+    const ids = node.linkablePilots.map((p) => p.id);
+    expect(ids).toContain("ST01-010"); // Amuro Ray
+  });
+
+  it("LinkTrait unit returns pilots whose trait matches (regression: G-스카이 Ez)", async () => {
+    // GD01-014 (G-Sky Easy) → LinkTrait "WHITE_BASE_TEAM"
+    // Prior to the fix this returned [] because the resolver only handled LinkPilot.
+    const data = await gql(
+      `{ node(id: "GD01-014") {
+          ... on UnitCard { linkablePilots { id pilot { name { ko } } } }
+        }
+      }`,
+    );
+    const node = data["node"] as {
+      linkablePilots: Array<{ id: string; pilot: { name: { ko: string } } }>;
+    };
+    expect(node.linkablePilots.length).toBeGreaterThan(0);
+    const ids = node.linkablePilots.map((p) => p.id);
+    // Both WHITE_BASE_TEAM-trait pilots should be linkable.
+    expect(ids).toEqual(expect.arrayContaining(["ST01-010", "GD01-087"]));
+  });
+});
+
+describe("PilotCard.linkableUnits – matches both LinkPilot (name) and LinkTrait", () => {
+  it("Pilot returns trait-linked units via the pilot's traits (regression)", async () => {
+    // ST01-010 (Amuro Ray) has trait WHITE_BASE_TEAM, so trait-linked units
+    // like GD01-014 (G-Sky Easy) must appear in linkableUnits.
+    const data = await gql(
+      `{ node(id: "ST01-010") {
+          ... on PilotCard { linkableUnits { id } }
+        }
+      }`,
+    );
+    const node = data["node"] as { linkableUnits: Array<{ id: string }> };
+    const ids = node.linkableUnits.map((u) => u.id);
+    expect(ids).toContain("GD01-014");
+    // The name-match path still works: Gundam (ST01-001) links to Amuro Ray.
+    expect(ids).toContain("ST01-001");
+  });
+});
+
 // ─── PilotCard.pilot field ────────────────────────────────────────────────────
 
 describe("PilotCard.pilot – flat raw fields → Pilot object", () => {
