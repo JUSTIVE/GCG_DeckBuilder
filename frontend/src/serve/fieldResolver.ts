@@ -167,7 +167,7 @@ export function fieldResolver(
       typeName === "CommandCard") &&
     fieldName === "imageUrl"
   ) {
-    return `/cards/${source["id"]}.webp`;
+    return `/cards/${source["imageFile"] ?? source["id"]}.webp`;
   }
 
   if (typeName === "CardViewHistory" && fieldName === "card") {
@@ -304,6 +304,12 @@ export function fieldResolver(
   if (fieldName === "rarity") {
     const value = source["rarity"];
     return typeof value === "string" ? value : "COMMON";
+  }
+
+  if (isPlayableCard && fieldName === "printings") {
+    const raw = source["printings"] as Array<{ rarity: string; imageFile: string }> | undefined;
+    if (!raw) return [{ rarity: source["rarity"] ?? "COMMON", imageUrl: `/cards/${source["imageFile"] ?? source["id"]}.webp` }];
+    return raw.map((p) => ({ rarity: p.rarity ?? "COMMON", imageUrl: `/cards/${p.imageFile}.webp` }));
   }
 
   if (

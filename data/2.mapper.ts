@@ -234,13 +234,33 @@ const descriptionTokenMapper = (cards: unknown[]) =>
     };
   });
 
+// ─── Printing grouper ────────────────────────────────────────────────────────
+
+function groupPrintings(cards: unknown[]): unknown[] {
+  const grouped = new Map<string, unknown[]>();
+  for (const card of cards) {
+    const id = (card as any).id as string;
+    if (!grouped.has(id)) grouped.set(id, []);
+    grouped.get(id)!.push(card);
+  }
+
+  return [...grouped.values()].map((group) => {
+    // imageFile === id 인 베이스 카드 우선, 없으면 첫 번째
+    const base = (group.find((c: any) => c.imageFile === c.id) ?? group[0]) as object;
+    const printings = group.map((c: any) => ({ rarity: c.rarity, imageFile: c.imageFile }));
+    return { ...base, printings };
+  });
+}
+
 // ─── Pipeline ─────────────────────────────────────────────────────────────────
 
 await writeFile(
   "../data/2.mapped.json",
   JSON.stringify(
-    descriptionTokenMapper(
-      pilotNameMapper(commandNameMapper(baseNameMapper(unitNameMapper(raw)))),
+    groupPrintings(
+      descriptionTokenMapper(
+        pilotNameMapper(commandNameMapper(baseNameMapper(unitNameMapper(raw)))),
+      ),
     ),
     null,
     2,
