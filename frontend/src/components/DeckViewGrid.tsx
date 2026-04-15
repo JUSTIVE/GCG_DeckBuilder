@@ -1,6 +1,7 @@
 import { MinusIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { COLOR_HEX } from "src/render/color";
+import { COLOR_HEX, COLOR_BORDER50 } from "src/render/color";
+import { cn } from "@/lib/utils";
 import { CardDescription, type DescriptionLine } from "@/components/CardDescription";
 import { extractCardInfo } from "@/lib/cardInfo";
 
@@ -41,11 +42,8 @@ export function DeckViewGrid({
   const ROTATION_STEP = 3;
 
   return (
-    <div className="overflow-y-auto h-full py-4 px-3">
-      <div
-        className="grid gap-8"
-        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))" }}
-      >
+    <div className="overflow-y-auto overflow-x-hidden h-full py-4 px-3">
+      <div className="grid gap-3 sm:gap-8 grid-cols-[repeat(auto-fill,minmax(130px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(160px,1fr))]">
         {items.map((info) => {
           const stackLayers = Math.min(info.count - 1, 2);
           return (
@@ -114,7 +112,12 @@ export function DeckViewGrid({
                 </div>
               </div>
               {showDescription && info.description.length > 0 && (
-                <div className="rounded-md bg-black/80 px-2 py-1.5">
+                <div
+                  className={cn(
+                    "mt-2 rounded-xl bg-black px-3 py-3 text-white border",
+                    COLOR_BORDER50[info.color],
+                  )}
+                >
                   <CardDescription lines={info.description} />
                 </div>
               )}
