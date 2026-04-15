@@ -5,15 +5,20 @@ import {
   Background,
   Controls,
   MiniMap,
+  BaseEdge,
+  getStraightPath,
+  useInternalNode,
   type Node,
   type Edge,
   type NodeTypes,
+  type EdgeTypes,
+  type EdgeProps,
+  type InternalNode,
   MarkerType,
   Handle,
   Position,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { cluster, hierarchy } from "d3-hierarchy";
 import type { DeckGraphViewList_query$key } from "@/__generated__/DeckGraphViewList_query.graphql";
 import type { DeckGraphViewCenterQuery } from "@/__generated__/DeckGraphViewCenterQuery.graphql";
 import { Card } from "@/components/Card";
@@ -28,8 +33,17 @@ const GRID_COLS = 6;
 const GRID_COL_GAP = 24;
 const GRID_ROW_GAP = 40;
 
-// Outer ring radius — branch cards land here. Category labels sit halfway.
-const LEAF_RADIUS = 620;
+// Fractal radial layout.
+//  • The selected card sits at (0, 0).
+//  • Category nodes radiate outward at equal 2π/N angles.
+//  • Each category's own cards radiate around THAT category on a semicircle
+//    that faces away from the center — so no card ever sits "behind" its
+//    category toward the original selected card.
+const CATEGORY_RADIUS = 380;
+// Distance from a category node to each of its branch cards.
+const BRANCH_CARD_RADIUS = 340;
+// Angular spread of the branch-card semicircle (radians, ≤ π).
+const BRANCH_SPREAD = Math.PI;
 
 // ─── Fragments ────────────────────────────────────────────────────────────────
 
@@ -288,12 +302,27 @@ type CardNodeData = {
   scale?: number;
 };
 
+// Invisible handles are only required so React Flow accepts source/target
+// connections. FloatingEdge ignores their positions and computes intersection
+// points from the node's bounding box instead.
+const hiddenHandleStyle: React.CSSProperties = {
+  opacity: 0,
+  pointerEvents: "none",
+  top: "50%",
+  left: "50%",
+  width: 1,
+  height: 1,
+  border: "none",
+  minWidth: 0,
+  minHeight: 0,
+};
+
 function CardNode({ data }: { data: CardNodeData }) {
   const scale = data.scale ?? 1;
   return (
     <div style={{ width: CARD_W * scale, cursor: "pointer" }}>
-      <Handle type="target" position={Position.Left} style={{ opacity: 0 }} />
-      <Handle type="source" position={Position.Right} style={{ opacity: 0 }} />
+      <Handle id="t" type="target" position={Position.Top} style={hiddenHandleStyle} />
+      <Handle id="s" type="source" position={Position.Top} style={hiddenHandleStyle} />
       {/* Card's internal button is disabled via pointer-events so ReactFlow's
           onNodeClick handler on the parent ReactFlow can receive the click. */}
       <div style={{ pointerEvents: "none" }}>
@@ -314,12 +343,53 @@ type CategoryNodeData = {
 function CategoryNode({ data }: { data: CategoryNodeData }) {
   return (
     <div className="rounded-full bg-muted/90 backdrop-blur border border-border px-4 py-2 text-sm font-medium whitespace-nowrap shadow-sm">
-      <Handle type="target" position={Position.Left} style={{ opacity: 0 }} />
-      <Handle type="source" position={Position.Right} style={{ opacity: 0 }} />
+      <Handle id="t" type="target" position={Position.Top} style={hiddenHandleStyle} />
+      <Handle id="s" type="source" position={Position.Top} style={hiddenHandleStyle} />
       {data.label}
     </div>
   );
 }
+
+// ─── Floating edge ────────────────────────────────────────────────────────────
+// Computes the intersection of the line between the two nodes' centers and
+// each node's bounding box, so the edge always attaches on the side that faces
+// the other node (independent of Handle positions).
+
+function getNodeIntersection(node: InternalNode, other: InternalNode) {
+  const w = node.measured?.width ?? 0;
+  const h = node.measured?.height ?? 0;
+  const ow = other.measured?.width ?? 0;
+  const oh = other.measured?.height ?? 0;
+  const nx = (node.internals.positionAbsolute?.x ?? 0) + w / 2;
+  const ny = (node.internals.positionAbsolute?.y ?? 0) + h / 2;
+  const ox = (other.internals.positionAbsolute?.x ?? 0) + ow / 2;
+  const oy = (other.internals.positionAbsolute?.y ?? 0) + oh / 2;
+  const dx = ox - nx;
+  const dy = oy - ny;
+  if (dx === 0 && dy === 0) return { x: nx, y: ny };
+  // Scale the direction vector so it lands exactly on the bounding box edge.
+  const scale = 1 / Math.max((2 * Math.abs(dx)) / w, (2 * Math.abs(dy)) / h);
+  return { x: nx + dx * scale, y: ny + dy * scale };
+}
+
+function FloatingEdge({ id, source, target, markerEnd, style }: EdgeProps) {
+  const sourceNode = useInternalNode(source);
+  const targetNode = useInternalNode(target);
+  if (!sourceNode || !targetNode) return null;
+  const s = getNodeIntersection(sourceNode, targetNode);
+  const t = getNodeIntersection(targetNode, sourceNode);
+  const [edgePath] = getStraightPath({
+    sourceX: s.x,
+    sourceY: s.y,
+    targetX: t.x,
+    targetY: t.y,
+  });
+  return <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} style={style} />;
+}
+
+const edgeTypes: EdgeTypes = {
+  floating: FloatingEdge,
+};
 
 const nodeTypes: NodeTypes = {
   card: CardNode as unknown as NodeTypes[string],
@@ -368,6 +438,7 @@ function ListMode({
       nodes={nodes}
       edges={edges}
       nodeTypes={nodeTypes}
+      edgeTypes={edgeTypes}
       fitView
       fitViewOptions={{ padding: 0.2 }}
       minZoom={0.2}
@@ -467,90 +538,60 @@ function useCenterNodes(
     const BRANCH_CARD_W = CARD_W * BRANCH_CARD_SCALE;
     const BRANCH_CARD_H = CARD_H * BRANCH_CARD_SCALE;
 
-    // Build a hierarchy: center → categories → branch cards. d3-hierarchy's
-    // `cluster` places every leaf on the same ring and distributes them by
-    // equal angular spacing, giving a clean radial layout automatically.
-    type H = {
-      kind: "center" | "category" | "card";
-      id: string;
-      branchKey?: string;
-      label?: string;
-      cardRef?: unknown;
-      children?: H[];
-    };
+    branches.forEach((branch, bi) => {
+      // Category angle from the origin.
+      const catAngle = (bi / branches.length) * Math.PI * 2 - Math.PI / 2;
+      const catX = Math.cos(catAngle) * CATEGORY_RADIUS;
+      const catY = Math.sin(catAngle) * CATEGORY_RADIUS;
 
-    const root: H = {
-      kind: "center",
-      id: `center:${cardId}`,
-      children: branches.map<H>((branch) => ({
-        kind: "category",
-        id: `cat:${branch.key}`,
-        branchKey: branch.key,
-        label: branch.label,
-        children: branch.cards
-          .slice(0, 12)
-          .map<H | null>((card) => {
-            const id = (card as { id?: string }).id;
-            return id
-              ? {
-                  kind: "card",
-                  id: `branch:${branch.key}:${id}`,
-                  cardRef: card,
-                  branchKey: branch.key,
-                }
-              : null;
-          })
-          .filter((x): x is H => x != null),
-      })),
-    };
+      const categoryId = `cat:${branch.key}`;
+      nodes.push({
+        id: categoryId,
+        type: "category",
+        position: { x: catX - 60, y: catY - 20 },
+        data: { label: branch.label },
+        draggable: false,
+        selectable: false,
+      });
+      edges.push({
+        id: `edge-center-${branch.key}`,
+        source: `center:${cardId}`,
+        target: categoryId,
+        type: "floating",
+        animated: false,
+        style: { strokeDasharray: "4 4", strokeOpacity: 0.5 },
+        markerEnd: { type: MarkerType.ArrowClosed },
+      });
 
-    const d3Root = hierarchy(root);
-    cluster<H>().size([2 * Math.PI, LEAF_RADIUS])(d3Root);
-
-    // d3 assigns .x (angle in radians, 0..2π) and .y (radial distance).
-    // Convert polar → cartesian for React Flow positions.
-    d3Root.each((n) => {
-      const angle = (n.x ?? 0) - Math.PI / 2; // rotate so root is at top
-      const radius = n.y ?? 0;
-      const cx = Math.cos(angle) * radius;
-      const cy = Math.sin(angle) * radius;
-      if (n.data.kind === "center") {
-        // Already pushed above — nothing to do.
-      } else if (n.data.kind === "category") {
+      // Arrange cards on a semicircle around the category that faces AWAY
+      // from the center (i.e. excludes the arc pointing back to origin).
+      const branchCards = branch.cards.slice(0, 12);
+      const n = branchCards.length;
+      branchCards.forEach((card, ci) => {
+        const id = (card as { id?: string }).id;
+        if (!id) return;
+        // Single card: straight outward. Multiple: spread across semicircle.
+        const offset = n === 1 ? 0 : (ci / (n - 1) - 0.5) * BRANCH_SPREAD;
+        const cardAngle = catAngle + offset;
+        const cx = catX + Math.cos(cardAngle) * BRANCH_CARD_RADIUS;
+        const cy = catY + Math.sin(cardAngle) * BRANCH_CARD_RADIUS;
+        const nodeId = `branch:${branch.key}:${id}`;
         nodes.push({
-          id: n.data.id,
-          type: "category",
-          position: { x: cx - 60, y: cy - 20 },
-          data: { label: n.data.label ?? "" },
-          draggable: false,
-          selectable: false,
-        });
-        edges.push({
-          id: `edge-center-${n.data.branchKey}`,
-          source: `center:${cardId}`,
-          target: n.data.id,
-          animated: false,
-          style: { strokeDasharray: "4 4", strokeOpacity: 0.5 },
-          markerEnd: { type: MarkerType.ArrowClosed },
-        });
-      } else if (n.data.kind === "card") {
-        const parentId = n.parent?.data.id ?? "";
-        const id = n.data.id.split(":").pop() ?? "";
-        nodes.push({
-          id: n.data.id,
+          id: nodeId,
           type: "card",
           position: { x: cx - BRANCH_CARD_W / 2, y: cy - BRANCH_CARD_H / 2 },
-          data: { cardRef: n.data.cardRef, onSelect, id, scale: BRANCH_CARD_SCALE },
+          data: { cardRef: card, onSelect, id, scale: BRANCH_CARD_SCALE },
           draggable: false,
           selectable: false,
         });
         edges.push({
-          id: `edge-${n.data.id}`,
-          source: parentId,
-          target: n.data.id,
+          id: `edge-${nodeId}`,
+          source: categoryId,
+          target: nodeId,
+          type: "floating",
           style: { strokeOpacity: 0.3 },
         });
-      }
+      });
     });
 
     return { nodes, edges };
@@ -572,6 +613,7 @@ function CenterMode({
       nodes={nodes}
       edges={edges}
       nodeTypes={nodeTypes}
+      edgeTypes={edgeTypes}
       fitView
       fitViewOptions={{ padding: 0.15 }}
       minZoom={0.2}
