@@ -55,7 +55,9 @@ function DeckSubItems({ onNavigate, locale }: { onNavigate: () => void; locale: 
               >
                 <span className="truncate flex-1">{deck.name}</span>
                 {deck.hasLinkWarning && (
-                  <AlertTriangleIcon className="size-3 shrink-0 text-amber-600 dark:text-amber-400" />
+                  <span className="shrink-0 text-amber-600 dark:text-amber-400 animate-pulse">
+                    <AlertTriangleIcon className="size-3" />
+                  </span>
                 )}
                 <span className="flex gap-0.5 shrink-0">
                   {deck.colors.map((color) => (

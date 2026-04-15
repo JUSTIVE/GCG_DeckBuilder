@@ -237,13 +237,13 @@ export function DeckPanel({
                         <div className="truncate">{info.name}</div>
                         <div className="truncate text-muted-foreground">{info.id}</div>
                         {dc.pilotLinked === false && (
-                          <div className="flex items-center gap-0.5 text-amber-600 dark:text-amber-400 font-medium">
+                          <div className="flex items-center gap-0.5 text-amber-600 dark:text-amber-400 font-medium animate-pulse">
                             <AlertTriangleIcon className="size-3 shrink-0" />
                             {t("deck.linkWarning.unitNoPilot")}
                           </div>
                         )}
                         {dc.hasLinkingUnit === false && (
-                          <div className="flex items-center gap-0.5 text-amber-600 dark:text-amber-400 font-medium">
+                          <div className="flex items-center gap-0.5 text-amber-600 dark:text-amber-400 font-medium animate-pulse">
                             <AlertTriangleIcon className="size-3 shrink-0" />
                             {t("deck.linkWarning.pilotNoUnit")}
                           </div>
