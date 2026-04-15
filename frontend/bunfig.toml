@@ -1,0 +1,3 @@
+[test]
+# Restrict `bun test` to ./src so it doesn't pick up Playwright e2e specs in ./e2e
+root = "./src"
