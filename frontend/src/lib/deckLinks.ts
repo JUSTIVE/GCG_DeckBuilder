@@ -6,7 +6,7 @@
 //    so a pilot card variant still matches a link that names the base pilot.
 export function splitPilotAliases(name: string | undefined | null): string[] {
   return (name ?? "")
-    .split(/[\/&]/)
+    .split(/[/&]/)
     .map((s) => s.replace(/\([^)]*\)/g, "").trim())
     .filter(Boolean);
 }
