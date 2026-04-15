@@ -19,10 +19,10 @@ const HISTORY_QUERY = `
           id
           card {
             __typename
-            ... on UnitCard    { id name { en ko } color imageUrl }
-            ... on PilotCard   { id pilot { name { en ko } } color imageUrl }
+            ... on UnitCard    { id name { en ko } color { value } imageUrl }
+            ... on PilotCard   { id pilot { name { en ko } } color { value } imageUrl }
             ... on BaseCard    { id name { en ko } imageUrl }
-            ... on CommandCard { id name { en ko } color imageUrl }
+            ... on CommandCard { id name { en ko } color { value } imageUrl }
             ... on Resource    { id name { en ko } }
           }
           searchedAt
@@ -36,10 +36,10 @@ const QUICKSEARCH_QUERY = `
   query QuickSearchQuery($q: String!, $first: Int) {
     quicksearch(query: $q, first: $first) {
       __typename
-      ... on UnitCard    { id name { en ko } level cost color AP HP }
-      ... on PilotCard   { id pilot { name { en ko } AP HP } level cost color }
+      ... on UnitCard    { id name { en ko } level cost AP HP }
+      ... on PilotCard   { id pilot { name { en ko } AP HP } level cost }
       ... on BaseCard    { id name { en ko } level cost AP HP }
-      ... on CommandCard { id name { en ko } cost color commandPilot: pilot { name { en ko } AP HP } }
+      ... on CommandCard { id name { en ko } cost commandPilot: pilot { name { en ko } AP HP } }
       ... on Resource    { id name { en ko } }
     }
   }
@@ -55,7 +55,6 @@ type UnitResult = {
   name: LocalizedString;
   level: number;
   cost: number;
-  color: string;
   AP: number;
   HP: number;
 };
@@ -65,7 +64,6 @@ type PilotResult = {
   pilot: { name: LocalizedString; AP: number; HP: number };
   level: number;
   cost: number;
-  color: string;
 };
 type BaseResult = {
   __typename: "BaseCard";
@@ -81,7 +79,6 @@ type CommandResult = {
   id: string;
   name: LocalizedString;
   cost: number;
-  color: string;
   commandPilot?: { name: LocalizedString; AP: number; HP: number } | null;
 };
 type ResourceResult = { __typename: "Resource"; id: string; name: LocalizedString };
@@ -95,7 +92,7 @@ type CardViewHistoryItem = {
     id: string;
     name?: { en: string; ko: string };
     pilot?: { name: { en: string; ko: string } };
-    color?: string | null;
+    color?: { value: string } | null;
     imageUrl?: string | null;
   };
   searchedAt?: string;
@@ -304,7 +301,7 @@ export function QuickSearch() {
                           ? item.card.pilot?.name
                           : item.card.name;
                       const cardName = localize(nameObj ?? null, i18nInstance.language);
-                      const color = item.card.color ?? null;
+                      const color = item.card.color?.value ?? null;
                       const imageUrl = item.card.imageUrl ?? null;
                       return (
                         <li key={item.id}>
