@@ -17,7 +17,7 @@ import {
 } from "@/lib/gameConstants";
 
 export type DeckDetailSearch = {
-  view?: "deck" | "graph";
+  view?: "deck";
   kind?: Array<(typeof ALL_KINDS)[number]>;
   cost?: number[];
   level?: number[];
@@ -69,7 +69,7 @@ export const Route = createFileRoute("/$locale/deck/$deckId")({
       sort: (deps.sort as any) ?? null,
     }),
   validateSearch: (raw: Record<string, unknown>): DeckDetailSearch => ({
-    view: raw.view === "deck" ? "deck" : raw.view === "graph" ? "graph" : undefined,
+    view: raw.view === "deck" ? "deck" : undefined,
     kind: arr(raw.kind, ALL_KINDS),
     cost: Array.isArray(raw.cost)
       ? (raw.cost as unknown[]).map(Number).filter((n) => !isNaN(n as number))

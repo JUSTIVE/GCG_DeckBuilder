@@ -19,17 +19,10 @@ import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 import { DeckPanel } from "@/components/DeckPanel";
 import type { DeckPanelProps } from "@/components/DeckPanel";
 import { DeckViewGrid } from "@/components/DeckViewGrid";
-import { DeckGraphView } from "@/components/DeckGraphView";
 import { flattenDeckCards } from "@/lib/deckCards";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import {
-  LayersIcon,
-  SlidersHorizontalIcon,
-  FileTextIcon,
-  LayoutGridIcon,
-  NetworkIcon,
-} from "lucide-react";
+import { LayersIcon, SlidersHorizontalIcon, FileTextIcon, LayoutGridIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FilterControls, activeFilterCount } from "@/components/CardFilterControls";
 
@@ -231,7 +224,6 @@ export const Query = graphql`
       }
     }
     ...CardListFragment @arguments(first: 20, filter: $filter, sort: $sort)
-    ...DeckGraphViewList_query @arguments(first: 20, filter: $filter, sort: $sort)
   }
 `;
 
@@ -578,7 +570,6 @@ export function DeckDetailPage() {
   const search = Route.useSearch();
   const router = useRouter();
   const isDeckView = search.view === "deck";
-  const isGraphView = search.view === "graph";
   const filter = searchToFilter(search);
   const sort = (search.sort as CardSort | undefined) ?? null;
 
@@ -626,9 +617,6 @@ export function DeckDetailPage() {
   }
   function toggleView() {
     navigate((prev) => ({ ...prev, view: isDeckView ? undefined : "deck" }));
-  }
-  function toggleGraphView() {
-    navigate((prev) => ({ ...prev, view: isGraphView ? undefined : "graph" }));
   }
   function setFilter(f: CardFilterInput) {
     navigate((prev) => ({ ...prev, ...filterToSearch(f) }));
@@ -734,19 +722,6 @@ export function DeckDetailPage() {
             </button>
             <button
               type="button"
-              onClick={toggleGraphView}
-              className={cn(
-                "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
-                isGraphView
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-              )}
-            >
-              <NetworkIcon className="h-3.5 w-3.5" />
-              {t("deck.graphView")}
-            </button>
-            <button
-              type="button"
               onClick={() => setShowDescription((v) => !v)}
               className={cn(
                 "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
@@ -808,19 +783,6 @@ export function DeckDetailPage() {
             </button>
             <button
               type="button"
-              onClick={toggleGraphView}
-              className={cn(
-                "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
-                isGraphView
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-              )}
-            >
-              <NetworkIcon className="h-3.5 w-3.5" />
-              {t("deck.graphView")}
-            </button>
-            <button
-              type="button"
               onClick={() => setShowDescription((v) => !v)}
               className={cn(
                 "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer",
@@ -842,8 +804,6 @@ export function DeckDetailPage() {
                 onOpenCard={setOverlayCardId}
                 showDescription={showDescription}
               />
-            ) : isGraphView ? (
-              <DeckGraphView queryRef={data} />
             ) : (
               <CardList
                 queryRef={data}

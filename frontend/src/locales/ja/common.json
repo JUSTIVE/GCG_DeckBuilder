@@ -57,8 +57,6 @@
     "cardCount": "{{count}}枚",
     "cardCountOf": "{{count}} / {{max}}枚",
     "view": "デッキ表示",
-    "graphView": "グラフ",
-    "linkable": "リンク可能",
     "confirmDelete": "「{{name}}」デッキを削除しますか？",
     "confirmClear": "デッキの全カードを削除しますか？",
     "copyMsaCode": "MSAコードをコピー",
