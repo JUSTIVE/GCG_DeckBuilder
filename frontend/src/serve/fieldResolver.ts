@@ -38,16 +38,26 @@ type TaggedDeckCard = {
  */
 function normalizeRawCardForLinks(card: AnyRecord): AnyRecord {
   if (card["__typename"] === "PilotCard") {
-    return { __typename: "PilotCard", pilot: { name: card["name"] } };
+    return {
+      __typename: "PilotCard",
+      pilot: { name: card["name"] },
+      traits: Array.isArray(card["trait"]) ? (card["trait"] as string[]) : [],
+    };
   }
   if (card["__typename"] === "UnitCard") {
     const link = card["link"] as
-      | { __typename?: string; pilotName?: { ko?: string; en?: string } }
+      | {
+          __typename?: string;
+          pilotName?: { ko?: string; en?: string };
+          trait?: string;
+        }
       | undefined;
-    const links =
-      link && link.__typename === "LinkPilot"
-        ? [{ __typename: "LinkPilot", pilot: { name: link.pilotName } }]
-        : [];
+    const links: AnyRecord[] = [];
+    if (link?.__typename === "LinkPilot") {
+      links.push({ __typename: "LinkPilot", pilot: { name: link.pilotName } });
+    } else if (link?.__typename === "LinkTrait" && link.trait) {
+      links.push({ __typename: "LinkTrait", trait: link.trait });
+    }
     return { __typename: "UnitCard", links };
   }
   return { __typename: card["__typename"] as string };
@@ -66,17 +76,15 @@ function buildTaggedDeckCards(rawCards: DeckCard[]): TaggedDeckCard[] {
     })
     .filter((x): x is { card: AnyRecord; normCard: AnyRecord; count: number } => x != null);
 
-  const { pilotNamesInDeck, linkablePilotNames } = computeDeckLinkSets(
-    resolved.map((r) => ({ card: r.normCard })),
-  );
+  const linkSets = computeDeckLinkSets(resolved.map((r) => ({ card: r.normCard })));
 
   return resolved.map(({ card, normCard, count }) => {
     const variant = DECK_CARD_VARIANT[card["__typename"] as string] ?? "BaseDeckCard";
     const tagged: TaggedDeckCard = { __typename: variant, card, count };
     if (variant === "UnitDeckCard") {
-      tagged.pilotLinked = !unitHasNoLinkedPilot(normCard as never, pilotNamesInDeck);
+      tagged.pilotLinked = !unitHasNoLinkedPilot(normCard as never, linkSets);
     } else if (variant === "PilotDeckCard") {
-      tagged.hasLinkingUnit = !pilotHasNoLinkedUnit(normCard as never, linkablePilotNames);
+      tagged.hasLinkingUnit = !pilotHasNoLinkedUnit(normCard as never, linkSets);
     }
     return tagged;
   });

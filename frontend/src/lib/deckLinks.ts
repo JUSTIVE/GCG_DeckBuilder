@@ -11,52 +11,79 @@ export function splitPilotAliases(name: string | undefined | null): string[] {
     .filter(Boolean);
 }
 
-type AnyCard = { __typename?: string; pilot?: { name?: { ko?: string } }; links?: unknown[] };
+type AnyLink = {
+  __typename?: string;
+  pilot?: { name?: { ko?: string } };
+  trait?: string;
+};
+
+type AnyCard = {
+  __typename?: string;
+  pilot?: { name?: { ko?: string } };
+  traits?: readonly string[];
+  links?: readonly AnyLink[];
+};
 
 export type DeckLinkSets = {
   pilotNamesInDeck: Set<string>;
+  pilotTraitsInDeck: Set<string>;
   linkablePilotNames: Set<string>;
+  linkableTraits: Set<string>;
 };
 
 export function computeDeckLinkSets(
   cards: readonly { card: AnyCard | null | undefined }[],
 ): DeckLinkSets {
   const pilotNamesInDeck = new Set<string>();
+  const pilotTraitsInDeck = new Set<string>();
   const linkablePilotNames = new Set<string>();
+  const linkableTraits = new Set<string>();
   for (const { card } of cards) {
     if (card?.__typename === "PilotCard") {
       for (const alias of splitPilotAliases(card.pilot?.name?.ko)) {
         pilotNamesInDeck.add(alias);
       }
+      for (const trait of card.traits ?? []) {
+        pilotTraitsInDeck.add(trait);
+      }
     } else if (card?.__typename === "UnitCard") {
-      for (const link of (card.links ?? []) as {
-        __typename?: string;
-        pilot?: { name?: { ko?: string } };
-      }[]) {
+      for (const link of card.links ?? []) {
         if (link?.__typename === "LinkPilot") {
           for (const alias of splitPilotAliases(link.pilot?.name?.ko)) {
             linkablePilotNames.add(alias);
           }
+        } else if (link?.__typename === "LinkTrait" && link.trait) {
+          linkableTraits.add(link.trait);
         }
       }
     }
   }
-  return { pilotNamesInDeck, linkablePilotNames };
+  return { pilotNamesInDeck, pilotTraitsInDeck, linkablePilotNames, linkableTraits };
 }
 
-export function unitHasNoLinkedPilot(card: AnyCard, pilotNamesInDeck: Set<string>): boolean {
+export function unitHasNoLinkedPilot(card: AnyCard, sets: DeckLinkSets): boolean {
   if (card?.__typename !== "UnitCard") return false;
-  const links = (card.links ?? []) as { __typename?: string; pilot?: { name?: { ko?: string } } }[];
-  const pilotLinks = links.filter((l) => l?.__typename === "LinkPilot");
-  if (pilotLinks.length === 0) return false;
-  return !pilotLinks.some((l) =>
-    splitPilotAliases(l.pilot?.name?.ko).some((a) => pilotNamesInDeck.has(a)),
-  );
+  const links = card.links ?? [];
+  if (links.length === 0) return false;
+  // Satisfied iff ANY of the unit's links is met by the current deck.
+  return !links.some((l) => {
+    if (l?.__typename === "LinkPilot") {
+      return splitPilotAliases(l.pilot?.name?.ko).some((a) => sets.pilotNamesInDeck.has(a));
+    }
+    if (l?.__typename === "LinkTrait" && l.trait) {
+      return sets.pilotTraitsInDeck.has(l.trait);
+    }
+    return false;
+  });
 }
 
-export function pilotHasNoLinkedUnit(card: AnyCard, linkablePilotNames: Set<string>): boolean {
+export function pilotHasNoLinkedUnit(card: AnyCard, sets: DeckLinkSets): boolean {
   if (card?.__typename !== "PilotCard") return false;
   const aliases = splitPilotAliases(card.pilot?.name?.ko);
-  if (aliases.length === 0) return false;
-  return !aliases.some((a) => linkablePilotNames.has(a));
+  const traits = card.traits ?? [];
+  if (aliases.length === 0 && traits.length === 0) return false;
+  // A pilot is linked if some unit references either its name or its trait.
+  const byName = aliases.some((a) => sets.linkablePilotNames.has(a));
+  const byTrait = traits.some((t) => sets.linkableTraits.has(t));
+  return !(byName || byTrait);
 }
