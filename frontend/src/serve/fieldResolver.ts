@@ -31,6 +31,29 @@ type TaggedDeckCard = {
 };
 
 /**
+ * Raw card JSON uses `card.name` for pilot names and `card.link` (singular)
+ * for unit link data. The deckLinks helpers expect the GraphQL-resolved shape
+ * (`card.pilot.name.ko`, `card.links[].pilot.name.ko`). Convert here so the
+ * same helpers work on both sides.
+ */
+function normalizeRawCardForLinks(card: AnyRecord): AnyRecord {
+  if (card["__typename"] === "PilotCard") {
+    return { __typename: "PilotCard", pilot: { name: card["name"] } };
+  }
+  if (card["__typename"] === "UnitCard") {
+    const link = card["link"] as
+      | { __typename?: string; pilotName?: { ko?: string; en?: string } }
+      | undefined;
+    const links =
+      link && link.__typename === "LinkPilot"
+        ? [{ __typename: "LinkPilot", pilot: { name: link.pilotName } }]
+        : [];
+    return { __typename: "UnitCard", links };
+  }
+  return { __typename: card["__typename"] as string };
+}
+
+/**
  * Resolve raw deck card entries ({cardId, count}) into tagged DeckCard union
  * variants with link status computed for UnitDeckCard / PilotDeckCard.
  */
@@ -38,19 +61,22 @@ function buildTaggedDeckCards(rawCards: DeckCard[]): TaggedDeckCard[] {
   const resolved = rawCards
     .map((dc) => {
       const card = cardById.get(dc.cardId) as AnyRecord | undefined;
-      return card ? { card, count: dc.count } : null;
+      if (!card) return null;
+      return { card, normCard: normalizeRawCardForLinks(card), count: dc.count };
     })
-    .filter((x): x is { card: AnyRecord; count: number } => x != null);
+    .filter((x): x is { card: AnyRecord; normCard: AnyRecord; count: number } => x != null);
 
-  const { pilotNamesInDeck, linkablePilotNames } = computeDeckLinkSets(resolved);
+  const { pilotNamesInDeck, linkablePilotNames } = computeDeckLinkSets(
+    resolved.map((r) => ({ card: r.normCard })),
+  );
 
-  return resolved.map(({ card, count }) => {
+  return resolved.map(({ card, normCard, count }) => {
     const variant = DECK_CARD_VARIANT[card["__typename"] as string] ?? "BaseDeckCard";
     const tagged: TaggedDeckCard = { __typename: variant, card, count };
     if (variant === "UnitDeckCard") {
-      tagged.pilotLinked = !unitHasNoLinkedPilot(card as never, pilotNamesInDeck);
+      tagged.pilotLinked = !unitHasNoLinkedPilot(normCard as never, pilotNamesInDeck);
     } else if (variant === "PilotDeckCard") {
-      tagged.hasLinkingUnit = !pilotHasNoLinkedUnit(card as never, linkablePilotNames);
+      tagged.hasLinkingUnit = !pilotHasNoLinkedUnit(normCard as never, linkablePilotNames);
     }
     return tagged;
   });
