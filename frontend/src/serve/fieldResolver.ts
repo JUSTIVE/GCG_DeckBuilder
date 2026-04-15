@@ -30,6 +30,33 @@ type TaggedDeckCard = {
   hasLinkingUnit?: boolean;
 };
 
+// Command cards with the PILOT keyword are "Pilot Commands" — they carry a
+// pilot whose name is embedded in the description prose inside brackets like
+// "[Quatre Raberba Winner]". Extract that so they count as pilots for link
+// matching alongside regular PilotCard entries.
+function extractCommandPilotName(card: AnyRecord): { ko: string; en: string } | null {
+  const desc = card["description"];
+  if (!Array.isArray(desc)) return null;
+  let ko = "";
+  let en = "";
+  for (const line of desc as unknown[][]) {
+    if (!Array.isArray(line)) continue;
+    for (const token of line as Array<{ type: string; ko?: string; en?: string }>) {
+      if (token.type !== "prose") continue;
+      if (!ko && token.ko) {
+        const m = /\[([^\]]+)\]/.exec(token.ko);
+        if (m?.[1]) ko = m[1];
+      }
+      if (!en && token.en) {
+        const m = /\[([^\]]+)\]/.exec(token.en);
+        if (m?.[1]) en = m[1];
+      }
+      if (ko && en) return { ko, en };
+    }
+  }
+  return ko || en ? { ko, en } : null;
+}
+
 /**
  * Raw card JSON uses `card.name` for pilot names and `card.link` (singular)
  * for unit link data. The deckLinks helpers expect the GraphQL-resolved shape
@@ -43,6 +70,21 @@ function normalizeRawCardForLinks(card: AnyRecord): AnyRecord {
       pilot: { name: card["name"] },
       traits: Array.isArray(card["trait"]) ? (card["trait"] as string[]) : [],
     };
+  }
+  if (card["__typename"] === "CommandCard") {
+    // Pilot-command cards satisfy LinkPilot requirements like a pilot card.
+    const keywords = Array.isArray(card["keywords"]) ? (card["keywords"] as string[]) : [];
+    if (keywords.includes("PILOT")) {
+      const pilotName = extractCommandPilotName(card);
+      if (pilotName) {
+        return {
+          __typename: "PilotCard",
+          pilot: { name: pilotName },
+          traits: Array.isArray(card["trait"]) ? (card["trait"] as string[]) : [],
+        };
+      }
+    }
+    return { __typename: "CommandCard" };
   }
   if (card["__typename"] === "UnitCard") {
     const link = card["link"] as
