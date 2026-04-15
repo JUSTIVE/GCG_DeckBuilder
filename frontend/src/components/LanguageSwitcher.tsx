@@ -24,6 +24,7 @@ export function LanguageSwitcher() {
         <Link
           key={loc}
           to={buildPath(loc)}
+          search={((prev: Record<string, unknown>) => prev) as any}
           className={
             locale === loc
               ? "px-2 py-1 text-xs font-bold text-foreground"
