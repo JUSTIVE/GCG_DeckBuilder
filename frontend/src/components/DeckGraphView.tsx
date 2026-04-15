@@ -21,6 +21,7 @@ import {
   Position,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+import { forceCollide, forceSimulation, forceX, forceY } from "d3-force";
 import type { DeckGraphViewList_query$key } from "@/__generated__/DeckGraphViewList_query.graphql";
 import type { DeckGraphViewCenterQuery } from "@/__generated__/DeckGraphViewCenterQuery.graphql";
 import { Card } from "@/components/Card";
@@ -64,6 +65,61 @@ function hashUnit(str: string): number {
     h = Math.imul(h, 16777619);
   }
   return ((h >>> 0) % 10000) / 10000 - 0.5;
+}
+
+// ─── Collision resolution (d3-force) ─────────────────────────────────────────
+// Runs a synchronous d3-force simulation that combines:
+//  • forceCollide — bounding-circle collision avoidance (anti-overlap)
+//  • forceX / forceY — soft tether to the initial radial position so nodes
+//    don't drift far from where we wanted to place them
+// The center card is pinned (fx/fy) so everything else orbits around it.
+
+type CollidableNode = Node & {
+  width: number;
+  height: number;
+  pinned?: boolean;
+};
+
+type SimNode = {
+  id: string;
+  x: number;
+  y: number;
+  // Target position (forceX/forceY tether); the original placement.
+  tx: number;
+  ty: number;
+  r: number;
+  fx?: number;
+  fy?: number;
+};
+
+function resolveCollisions(nodes: CollidableNode[]) {
+  const simNodes: SimNode[] = nodes.map((n) => {
+    const cx = n.position.x + n.width / 2;
+    const cy = n.position.y + n.height / 2;
+    // Use the half-diagonal as the collision radius — a bit loose but keeps
+    // rectangles from clipping each other regardless of orientation.
+    const r = Math.hypot(n.width, n.height) / 2 + 4;
+    const base: SimNode = { id: n.id, x: cx, y: cy, tx: cx, ty: cy, r };
+    if (n.pinned) {
+      base.fx = cx;
+      base.fy = cy;
+    }
+    return base;
+  });
+
+  forceSimulation(simNodes as never)
+    .force("collide", forceCollide<SimNode>((d) => d.r).iterations(3))
+    .force("x", forceX<SimNode>((d) => d.tx).strength(0.15))
+    .force("y", forceY<SimNode>((d) => d.ty).strength(0.15))
+    .stop()
+    .tick(120);
+
+  // Write positions back to React Flow nodes (top-left corner, not center).
+  simNodes.forEach((sim, i) => {
+    const n = nodes[i];
+    n.position.x = sim.x - n.width / 2;
+    n.position.y = sim.y - n.height / 2;
+  });
 }
 
 // ─── Fragments ────────────────────────────────────────────────────────────────
@@ -596,22 +652,28 @@ function useCenterNodes(
       }
     }
 
-    const nodes: Node[] = [];
+    const collidable: CollidableNode[] = [];
     const edges: Edge[] = [];
 
-    // Center card
-    nodes.push({
+    // Center card (pinned — other nodes move around it).
+    collidable.push({
       id: `center:${cardId}`,
       type: "card",
       position: { x: -CARD_W / 2, y: -CARD_H / 2 },
       data: { cardRef: node, onSelect, id: cardId, controls: centerControls },
       draggable: false,
       selectable: false,
+      width: CARD_W,
+      height: CARD_H,
+      pinned: true,
     });
 
     const BRANCH_CARD_SCALE = 0.7;
     const BRANCH_CARD_W = CARD_W * BRANCH_CARD_SCALE;
     const BRANCH_CARD_H = CARD_H * BRANCH_CARD_SCALE;
+    // Rough visual footprint of a CategoryNode pill (text varies in width).
+    const CATEGORY_W = 160;
+    const CATEGORY_H = 44;
 
     // When there are ≤2 branches they never collide, so keep them all on the
     // inner ring. Otherwise alternate inner/outer rings by branch index so
@@ -626,13 +688,15 @@ function useCenterNodes(
       const catY = Math.sin(catAngle) * catRadius;
 
       const categoryId = `cat:${branch.key}`;
-      nodes.push({
+      collidable.push({
         id: categoryId,
         type: "category",
-        position: { x: catX - 60, y: catY - 20 },
+        position: { x: catX - CATEGORY_W / 2, y: catY - CATEGORY_H / 2 },
         data: { label: branch.label },
         draggable: false,
         selectable: false,
+        width: CATEGORY_W,
+        height: CATEGORY_H,
       });
       edges.push({
         id: `edge-center-${branch.key}`,
@@ -666,13 +730,15 @@ function useCenterNodes(
         const cx = catX + Math.cos(cardAngle) * radius;
         const cy = catY + Math.sin(cardAngle) * radius;
         const nodeId = `branch:${branch.key}:${id}`;
-        nodes.push({
+        collidable.push({
           id: nodeId,
           type: "card",
           position: { x: cx - BRANCH_CARD_W / 2, y: cy - BRANCH_CARD_H / 2 },
           data: { cardRef: card, onSelect, id, scale: BRANCH_CARD_SCALE },
           draggable: false,
           selectable: false,
+          width: BRANCH_CARD_W,
+          height: BRANCH_CARD_H,
         });
         edges.push({
           id: `edge-${nodeId}`,
@@ -683,6 +749,11 @@ function useCenterNodes(
         });
       });
     });
+
+    resolveCollisions(collidable);
+
+    // Strip the collision-only fields before handing the nodes to React Flow.
+    const nodes: Node[] = collidable.map(({ width: _w, height: _h, pinned: _p, ...n }) => n);
 
     return { nodes, edges };
   }, [data.node, cardId, onSelect, localize, t, centerControls]);
