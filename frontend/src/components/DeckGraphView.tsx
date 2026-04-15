@@ -40,14 +40,31 @@ const GRID_ROW_GAP = 40;
 // Fractal radial layout.
 //  • The selected card sits at (0, 0).
 //  • Category nodes radiate outward at equal 2π/N angles.
-//  • Each category's own cards radiate around THAT category on a semicircle
-//    that faces away from the center — so no card ever sits "behind" its
-//    category toward the original selected card.
-const CATEGORY_RADIUS = 380;
+//  • Each category's own cards radiate on a semicircle around THAT category.
+//  • Adjacent branches would overlap at full spread (π), so we STAGGER the
+//    per-branch radius (inner/outer ring, alternating by index) — that way
+//    cards can keep their wide spread without colliding with neighbours.
+const CATEGORY_RADIUS_INNER = 340;
+const CATEGORY_RADIUS_OUTER = 640;
 // Distance from a category node to each of its branch cards.
-const BRANCH_CARD_RADIUS = 340;
-// Angular spread of the branch-card semicircle (radians, ≤ π).
+const BRANCH_CARD_RADIUS = 320;
+// Angular spread of the branch-card arc (radians, ≤ π).
 const BRANCH_SPREAD = Math.PI;
+// Deterministic jitter amplitudes so cards don't sit on a perfect arc. Kept
+// small enough that jitter doesn't overlap the gap the dynamic radius gives us.
+const JITTER_RADIUS = 24;
+const JITTER_ANGLE = 0.05; // ±radians (~3°)
+
+// Cheap deterministic hash → [-1, 1) so the same card id always jitters the
+// same way (no flicker on re-render).
+function hashUnit(str: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return ((h >>> 0) % 10000) / 10000 - 0.5;
+}
 
 // ─── Fragments ────────────────────────────────────────────────────────────────
 
@@ -304,6 +321,12 @@ type CardNodeData = {
   onSelect: (id: string) => void;
   id: string;
   scale?: number;
+  // When set, the node renders +/- deck controls alongside the card.
+  controls?: {
+    count: number;
+    onAdd: (id: string) => void;
+    onRemove: (id: string) => void;
+  };
 };
 
 // Invisible handles are only required so React Flow accepts source/target
@@ -323,6 +346,7 @@ const hiddenHandleStyle: React.CSSProperties = {
 
 function CardNode({ data }: { data: CardNodeData }) {
   const scale = data.scale ?? 1;
+  const controls = data.controls;
   return (
     <div className="deck-graph-node-enter" style={{ width: CARD_W * scale, cursor: "pointer" }}>
       <Handle id="t" type="target" position={Position.Top} style={hiddenHandleStyle} />
@@ -336,6 +360,38 @@ function CardNode({ data }: { data: CardNodeData }) {
           onOpen={data.onSelect}
         />
       </div>
+      {controls && (
+        <div
+          className="absolute left-1/2 -translate-x-1/2 top-full mt-3 flex items-center gap-2 rounded-full border border-border bg-background px-2 py-1 shadow-md"
+          style={{ pointerEvents: "auto" }}
+          onMouseDown={(e) => e.stopPropagation()}
+        >
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              controls.onRemove(data.id);
+            }}
+            disabled={controls.count <= 0}
+            className="flex size-7 items-center justify-center rounded-full bg-muted text-foreground hover:bg-accent disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+          >
+            −
+          </button>
+          <span className="min-w-6 text-center text-sm font-semibold tabular-nums">
+            {controls.count}
+          </span>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              controls.onAdd(data.id);
+            }}
+            className="flex size-7 items-center justify-center rounded-full bg-primary text-primary-foreground hover:brightness-110 cursor-pointer"
+          >
+            +
+          </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -450,6 +506,7 @@ function ListMode({
       minZoom={0.2}
       maxZoom={2}
       proOptions={{ hideAttribution: true }}
+      zoomOnDoubleClick={false}
       onNodeClick={(e, node) => {
         if (node.type !== "card") return;
         const cardData = node.data as CardNodeData;
@@ -474,6 +531,7 @@ type CategoryBranch = {
 function useCenterNodes(
   cardId: string,
   onSelect: (id: string) => void,
+  centerControls: CardNodeData["controls"],
 ): { nodes: Node[]; edges: Edge[] } {
   const localize = useLocalize();
   const { t } = useTranslation("common");
@@ -546,7 +604,7 @@ function useCenterNodes(
       id: `center:${cardId}`,
       type: "card",
       position: { x: -CARD_W / 2, y: -CARD_H / 2 },
-      data: { cardRef: node, onSelect, id: cardId },
+      data: { cardRef: node, onSelect, id: cardId, controls: centerControls },
       draggable: false,
       selectable: false,
     });
@@ -555,11 +613,17 @@ function useCenterNodes(
     const BRANCH_CARD_W = CARD_W * BRANCH_CARD_SCALE;
     const BRANCH_CARD_H = CARD_H * BRANCH_CARD_SCALE;
 
+    // When there are ≤2 branches they never collide, so keep them all on the
+    // inner ring. Otherwise alternate inner/outer rings by branch index so
+    // each branch can keep a full-π spread without overlapping its neighbours.
+    const useStagger = branches.length >= 3;
+
     branches.forEach((branch, bi) => {
       // Category angle from the origin.
       const catAngle = (bi / branches.length) * Math.PI * 2 - Math.PI / 2;
-      const catX = Math.cos(catAngle) * CATEGORY_RADIUS;
-      const catY = Math.sin(catAngle) * CATEGORY_RADIUS;
+      const catRadius = useStagger && bi % 2 === 1 ? CATEGORY_RADIUS_OUTER : CATEGORY_RADIUS_INNER;
+      const catX = Math.cos(catAngle) * catRadius;
+      const catY = Math.sin(catAngle) * catRadius;
 
       const categoryId = `cat:${branch.key}`;
       nodes.push({
@@ -581,17 +645,26 @@ function useCenterNodes(
       });
 
       // Arrange cards on a semicircle around the category that faces AWAY
-      // from the center (i.e. excludes the arc pointing back to origin).
+      // from the centre. The arc radius is computed from the card count so
+      // cards never overlap along the arc (angular gap ≥ card width / radius).
+      // Deterministic per-card jitter breaks up the perfect arc for organic
+      // look — jitter amplitude stays smaller than the gap so it doesn't
+      // re-introduce overlap.
       const branchCards = branch.cards.slice(0, 12);
       const n = branchCards.length;
+      const desiredArcLength = Math.max(n - 1, 0) * (BRANCH_CARD_W + 24);
+      const minRadius = desiredArcLength / BRANCH_SPREAD;
+      const branchRadius = Math.max(BRANCH_CARD_RADIUS, minRadius);
       branchCards.forEach((card, ci) => {
         const id = (card as { id?: string }).id;
         if (!id) return;
-        // Single card: straight outward. Multiple: spread across semicircle.
-        const offset = n === 1 ? 0 : (ci / (n - 1) - 0.5) * BRANCH_SPREAD;
+        const base = n === 1 ? 0 : (ci / (n - 1) - 0.5) * BRANCH_SPREAD;
+        const jitterKey = `${branch.key}:${id}`;
+        const offset = base + hashUnit(`${jitterKey}:a`) * 2 * JITTER_ANGLE;
+        const radius = branchRadius + hashUnit(`${jitterKey}:r`) * 2 * JITTER_RADIUS;
         const cardAngle = catAngle + offset;
-        const cx = catX + Math.cos(cardAngle) * BRANCH_CARD_RADIUS;
-        const cy = catY + Math.sin(cardAngle) * BRANCH_CARD_RADIUS;
+        const cx = catX + Math.cos(cardAngle) * radius;
+        const cy = catY + Math.sin(cardAngle) * radius;
         const nodeId = `branch:${branch.key}:${id}`;
         nodes.push({
           id: nodeId,
@@ -612,19 +685,21 @@ function useCenterNodes(
     });
 
     return { nodes, edges };
-  }, [data.node, cardId, onSelect, localize, t]);
+  }, [data.node, cardId, onSelect, localize, t, centerControls]);
 }
 
 function CenterMode({
   cardId,
   onSelect,
   onBack,
+  centerControls,
 }: {
   cardId: string;
   onSelect: (id: string) => void;
   onBack: () => void;
+  centerControls: CardNodeData["controls"];
 }) {
-  const { nodes, edges } = useCenterNodes(cardId, onSelect);
+  const { nodes, edges } = useCenterNodes(cardId, onSelect, centerControls);
   const instanceRef = useRef<ReactFlowInstance | null>(null);
   const prevCardIdRef = useRef<string>(cardId);
 
@@ -649,6 +724,7 @@ function CenterMode({
       minZoom={0.2}
       maxZoom={2}
       proOptions={{ hideAttribution: true }}
+      zoomOnDoubleClick={false}
       onInit={(inst) => {
         instanceRef.current = inst;
       }}
@@ -686,7 +762,17 @@ type FlyingCard = {
   atCenter: boolean;
 };
 
-export function DeckGraphView({ queryRef }: { queryRef: DeckGraphViewList_query$key }) {
+export function DeckGraphView({
+  queryRef,
+  deckCardCounts,
+  onAdd,
+  onRemove,
+}: {
+  queryRef: DeckGraphViewList_query$key;
+  deckCardCounts: Record<string, number>;
+  onAdd: (cardId: string) => void;
+  onRemove: (cardId: string) => void;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
   // `mountedCenter` lets us keep the center view mounted during the fade-out
@@ -793,6 +879,11 @@ export function DeckGraphView({ queryRef }: { queryRef: DeckGraphViewList_query$
               cardId={mountedCenter}
               onSelect={(id) => handleSelect(id)}
               onBack={handleBack}
+              centerControls={{
+                count: deckCardCounts[mountedCenter] ?? 0,
+                onAdd,
+                onRemove,
+              }}
             />
           </Suspense>
         </div>

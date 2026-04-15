@@ -843,7 +843,12 @@ export function DeckDetailPage() {
                 showDescription={showDescription}
               />
             ) : isGraphView ? (
-              <DeckGraphView queryRef={data} />
+              <DeckGraphView
+                queryRef={data}
+                deckCardCounts={deckCardCounts}
+                onAdd={handleAdd}
+                onRemove={handleRemove}
+              />
             ) : (
               <CardList
                 queryRef={data}

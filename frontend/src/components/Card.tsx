@@ -229,39 +229,40 @@ export function Card({
 
   return (
     <div className="flex flex-col">
-      <div className={cn("relative group", dimmed && "opacity-50")}>
-        {(onAdd || onRemove) && cardId && (
-          <div className="absolute bottom-0 left-0 right-0 h-1/2 z-10 flex rounded-b-xl overflow-hidden sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
-            {onRemove && deckCardCount > 0 ? (
-              <button
-                type="button"
-                className="flex-1 flex items-center justify-center bg-black/50 cursor-pointer"
-                onClick={() => onRemove(cardId)}
-              >
-                <MinusIcon className="size-7 text-white drop-shadow" />
-              </button>
-            ) : (
-              <div className="flex-1" />
-            )}
-            {onAdd && !atLimit ? (
-              <button
-                type="button"
-                className="flex-1 flex items-center justify-center bg-black/50 cursor-pointer"
-                onClick={() => onAdd(cardId)}
-              >
-                <PlusIcon className="size-7 text-white drop-shadow" />
-              </button>
-            ) : (
-              <div className="flex-1" onClick={(e) => e.stopPropagation()} />
-            )}
-          </div>
-        )}
-        {onAdd && deckCardCount > 0 && (
-          <div className="absolute top-1.5 right-1.5 z-10 min-w-7 h-7 rounded-full bg-white text-black text-sm font-black flex items-center justify-center px-1 leading-none pointer-events-none shadow-lg ring-2 ring-black/20">
-            ×{deckCardCount}
-          </div>
-        )}
+      <div className={cn("relative", dimmed && "opacity-50")}>
         {cardEl}
+        {(onAdd || onRemove) && cardId && (
+          <div
+            className="absolute left-1/2 -translate-x-1/2 bottom-2 z-10 flex items-center gap-2 rounded-full border border-border bg-background/90 backdrop-blur px-2 py-1 shadow-md"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (cardId) onRemove?.(cardId);
+              }}
+              disabled={!onRemove || deckCardCount <= 0}
+              className="flex size-7 items-center justify-center rounded-full bg-muted text-foreground hover:bg-accent disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            >
+              <MinusIcon className="size-4" />
+            </button>
+            <span className="min-w-6 text-center text-sm font-semibold tabular-nums">
+              {deckCardCount}
+            </span>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (cardId) onAdd?.(cardId);
+              }}
+              disabled={!onAdd || atLimit}
+              className="flex size-7 items-center justify-center rounded-full bg-primary text-primary-foreground hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            >
+              <PlusIcon className="size-4" />
+            </button>
+          </div>
+        )}
       </div>
       {showDescription && description.length > 0 && (
         <div className={cn("mt-2 rounded-xl bg-black px-3 py-3 text-white border", borderClass)}>
