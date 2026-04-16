@@ -7,11 +7,23 @@
 #
 # Hashed assets (*.js, *.css, *.woff2) are content-addressed and safe to
 # cache forever (immutable).
+#
+# The service worker (sw.js) and webmanifest must revalidate on every load
+# so new deployments ship their updated SW immediately.
 
 /*.html
   Cache-Control: no-cache, no-store, must-revalidate
 
 /
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/workbox-*.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/manifest.webmanifest
   Cache-Control: no-cache, no-store, must-revalidate
 
 /assets/*
