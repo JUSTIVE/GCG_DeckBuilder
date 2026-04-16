@@ -101,7 +101,7 @@ export default function Scaffold({ children }: PropsWithChildren) {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b sticky top-0 z-2 bg-background">
+        <header className="flex h-[calc(4rem+env(safe-area-inset-top))] shrink-0 items-center gap-2 border-b sticky top-0 z-2 bg-background pt-[env(safe-area-inset-top)]">
           <div className="flex items-center gap-2 px-3">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
