@@ -20,7 +20,8 @@
     "deleteAll": "전체 삭제",
     "create": "만들기",
     "import": "불러오기",
-    "copy": "복사"
+    "copy": "복사",
+    "close": "닫기"
   },
   "search": {
     "label": "검색",
@@ -113,5 +114,9 @@
     "useExResource": "EX 리소스 사용",
     "turnStart": "턴 시작 (+1 레벨 / 리소스 회복)",
     "turnEnd": "턴 종료"
+  },
+  "pwa": {
+    "updateAvailable": "새 버전이 있습니다.",
+    "update": "업데이트"
   }
 }

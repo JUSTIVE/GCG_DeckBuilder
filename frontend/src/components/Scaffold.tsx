@@ -13,6 +13,7 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import { QuickSearch } from "@/components/QuickSearch";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { PWAUpdatePrompt } from "@/components/PWAUpdatePrompt";
 import { useRouterState, Link, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { resolveBreadcrumb } from "@/lib/nav";
@@ -113,6 +114,7 @@ export default function Scaffold({ children }: PropsWithChildren) {
           </div>
         </header>
         {children}
+        <PWAUpdatePrompt />
       </SidebarInset>
     </SidebarProvider>
   );

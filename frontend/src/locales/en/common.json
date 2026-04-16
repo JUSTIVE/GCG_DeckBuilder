@@ -20,7 +20,8 @@
     "deleteAll": "Delete All",
     "create": "Create",
     "import": "Import",
-    "copy": "Copy"
+    "copy": "Copy",
+    "close": "Close"
   },
   "search": {
     "label": "Search",
@@ -113,5 +114,9 @@
     "useExResource": "Use EX Resource",
     "turnStart": "Turn Start (+1 Level / Resource Recovery)",
     "turnEnd": "Turn End"
+  },
+  "pwa": {
+    "updateAvailable": "A new version is available.",
+    "update": "Update"
   }
 }

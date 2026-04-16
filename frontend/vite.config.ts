@@ -29,8 +29,11 @@ const config = defineConfig({
       },
     }),
     VitePWA({
-      registerType: "autoUpdate",
-      injectRegister: "auto",
+      // "prompt" lets us show a toast when a new version is available so the
+      // user explicitly confirms the update. The registration is driven from
+      // `<PWAUpdatePrompt>` via `virtual:pwa-register/react`.
+      registerType: "prompt",
+      injectRegister: false,
       // The old Create-React-App–style manifest.json shipped by TanStack is
       // replaced by vite-plugin-pwa's generated manifest.webmanifest.
       filename: "sw.js",
@@ -82,8 +85,10 @@ const config = defineConfig({
         // handled by TanStack Router (the service worker serves index.html).
         navigateFallbackDenylist: [/^\/api\//, /^\/graphql/],
         cleanupOutdatedCaches: true,
-        clientsClaim: true,
-        skipWaiting: true,
+        // Leave the new SW in "waiting" state until the user confirms the
+        // update in the prompt; activation happens when `updateSW()` is called.
+        clientsClaim: false,
+        skipWaiting: false,
         runtimeCaching: [
           {
             // Card artwork — cache-first, long TTL. Assets are content-
