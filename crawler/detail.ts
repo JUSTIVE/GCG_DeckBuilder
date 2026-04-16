@@ -19,9 +19,23 @@ import type {
 import CardList from "./cards.json";
 import pLimit from "p-limit";
 import { writeFile } from "node:fs/promises";
-import type z from "zod";
+import type { CardRarity } from "../data/dataTypes";
 
 const BASE = "https://www.gundam-gcg.com/en/cards/";
+
+const RARITY_MAP: Record<string, CardRarity> = {
+  "C": "COMMON",
+  "U": "UNCOMMON",
+  "R": "RARE",
+  "LR": "LEGENDARY_RARE",
+  "C+": "COMMON_PLUS",
+  "U+": "UNCOMMON_PLUS",
+  "R+": "RARE_PLUS",
+  "LR+": "LEGENDARY_RARE_PLUS",
+  "C++": "COMMON_PLUS_PLUS",
+  "LR++": "LEGENDARY_RARE_PLUS_PLUS",
+  "P": "P",
+};
 
 const VALID_TRAITS = new Set<string>([
   "ACADEMY", "OZ", "NEO_ZEON", "ZEON", "EARTH_ALLIANCE", "EARTH_FEDERATION",
@@ -46,6 +60,8 @@ function field($: cheerio.CheerioAPI, label: string) {
 function parsePlayableCardSchema(html: string): PlayableCard {
   const $ = cheerio.load(html);
   const id = $(".cardNo").text().trim();
+  const rarity = RARITY_MAP[$(".rarity").text().replaceAll(" ", "").replaceAll("\n", "")];
+  const block = $(".blockIcon").text().trim();
   const name = $(".cardName").text().trim();
   const level = Number(field($, "Lv."));
   const cost = Number(field($, "COST"));
@@ -89,7 +105,10 @@ function parsePlayableCardSchema(html: string): PlayableCard {
   )] as CardTrait[];
 
   return {
+    id,
     name,
+    rarity,
+    block,
     level,
     cost,
     color,
@@ -104,7 +123,6 @@ function parsePlayableCardSchema(html: string): PlayableCard {
 
 function parseUnitCard(html: string): UnitCard {
   const $ = cheerio.load(html);
-  const id = $(".cardNo").text().trim();
   const AP = Number(field($, "AP"));
   const HP = Number(field($, "HP"));
 
@@ -135,7 +153,6 @@ function parseUnitCard(html: string): UnitCard {
   return {
     ...parsePlayableCardSchema(html),
     __typename: "UnitCard",
-    id,
     AP,
     HP,
     link,
@@ -145,7 +162,6 @@ function parseUnitCard(html: string): UnitCard {
 
 function parseBaseCard(html: string): BaseCard {
   const $ = cheerio.load(html);
-  const id = $(".cardNo").text().trim();
   const AP = Number(field($, "AP"));
   const HP = Number(field($, "HP"));
   const zone: Zone[] = field($, "Zone")
@@ -155,7 +171,6 @@ function parseBaseCard(html: string): BaseCard {
   return {
     ...parsePlayableCardSchema(html),
     __typename: "BaseCard",
-    id,
     AP,
     HP,
     zone,
@@ -164,7 +179,6 @@ function parseBaseCard(html: string): BaseCard {
 
 function parseCommandCard(html: string): CommandCard {
   const $ = cheerio.load(html);
-  const id = $(".cardNo").text().trim();
 
   const _ = parsePlayableCardSchema(html);
 
@@ -183,19 +197,16 @@ function parseCommandCard(html: string): CommandCard {
   return {
     ..._,
     __typename: "CommandCard",
-    id,
     pilot,
   };
 }
 function parsePilotCard(html: string): PilotCard {
   const $ = cheerio.load(html);
-  const id = $(".cardNo").text().trim();
   const AP = Number(field($, "AP"));
   const HP = Number(field($, "HP"));
   return {
     ...parsePlayableCardSchema(html),
     __typename: "PilotCard",
-    id,
     AP,
     HP,
   };
@@ -243,14 +254,16 @@ function parseCard(html: string): Card {
 async function fetchCard(cardUrl: string): Promise<Card> {
   const url = `${BASE}${cardUrl}`;
   const res = await (await fetch(url)).text();
-  return parseCard(res);
+  const card = parseCard(res);
+  const imageFile = new URLSearchParams(cardUrl.split("?")[1]).get("detailSearch") ?? card.id;
+  return { ...card, imageFile };
 }
 
 const limit = pLimit(3);
 
 let completed = 0;
 
-const dedupe = [...new Set(CardList.map((x) => x.split("_")[0] ?? ""))];
+const dedupe = [...new Set(CardList)];
 
 const total = dedupe.length;
 

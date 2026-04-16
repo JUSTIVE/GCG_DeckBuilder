@@ -13,6 +13,7 @@ import { useRouter, useSearch, useParams } from "@tanstack/react-router";
 import { COLOR_BG, COLOR_BG20, COLOR_TEXT20, COLOR_BORDER, COLOR_SHADOW } from "src/render/color";
 import type { PilotCard_PilotCardBody$key } from "src/__generated__/PilotCard_PilotCardBody.graphql";
 import { renderRarity } from "src/render/rarity";
+import { usePreferredPrinting } from "@/lib/printingPreference";
 
 export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotCardBody$key }) {
   useTranslation("game"); // language-change subscription for getKindLabel
@@ -39,17 +40,28 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
           AP
           HP
         }
+        printings {
+          rarity
+          imageUrl
+        }
       }
     `,
     pilotCardRef,
   );
+  const printing = usePreferredPrinting(
+    pilotCard.id,
+    { rarity: pilotCard.rarity, imageUrl: pilotCard.imageUrl },
+    pilotCard.printings,
+  );
+  const imageUrl = printing.imageUrl;
+  const rarity = printing.rarity;
 
   return (
     <>
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
-        src={pilotCard.imageUrl}
-        srcSet={`${pilotCard.imageUrl.replace(/\.webp$/, "-sm.webp")} 200w, ${pilotCard.imageUrl} 800w`}
+        src={imageUrl}
+        srcSet={`${imageUrl.replace(/\.webp$/, "-sm.webp")} 200w, ${imageUrl} 800w`}
         sizes="(max-width: 640px) 200px, 400px"
         alt={localize(pilotCard.pilot.name)}
       />
@@ -77,7 +89,7 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
             </div>
           </div>
           <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
-            {pilotCard.id}-{renderRarity(pilotCard.rarity)}
+            {pilotCard.id}-{renderRarity(rarity)}
           </div>
         </div>
         <div>
@@ -104,7 +116,7 @@ export function PilotCardBody({ pilotCardRef }: { pilotCardRef: PilotCard_PilotC
           />
         </div>
       </div>
-      <CardBlurOverlay imageUrl={pilotCard.imageUrl} />
+      <CardBlurOverlay imageUrl={imageUrl} />
       <div className="flex flex-col gap-2 z-1">
         <div className="flex flex-row gap-0.5 pr-2 bg-white/20 backdrop-blur-sm h-[35cqw] items-start">
           <div className="flex flex-col justify-end flex-1 overflow-hidden">

@@ -171,7 +171,7 @@ export const NodeSchema = z.object({
   id: z.string(),
 });
 
-export const PlayableCardSchema = z.object({
+export const PlayableCardSchema = NodeSchema.extend({
   level: z.number().int().catch(0),
   cost: z.number().int().catch(0),
   name: z.string(),
@@ -183,6 +183,8 @@ export const PlayableCardSchema = z.object({
   relatedTrait: z.array(CardTraitSchema).default([]),
   description: z.array(DescriptionLineSchema),
   rarity: CardRaritySchema.optional(),
+  block: z.string().optional(),
+  imageFile: z.string(),
 });
 
 /* UNIT LINK */
@@ -204,56 +206,49 @@ export const UnitLinkSchema = z.discriminatedUnion("__typename", [
 
 /* UNIT */
 
-export const UnitCardSchema = NodeSchema.merge(
-  PlayableCardSchema.safeExtend({
-    __typename: z.literal("UnitCard"),
-    zone: z.array(ZoneSchema),
-    AP: z.number().int().catch(0),
-    HP: z.number().int().catch(0),
-    link: UnitLinkSchema.optional(),
-  }),
-);
+export const UnitCardSchema = PlayableCardSchema.safeExtend({
+  __typename: z.literal("UnitCard"),
+  zone: z.array(ZoneSchema),
+  AP: z.number().int().catch(0),
+  HP: z.number().int().catch(0),
+  link: UnitLinkSchema.optional(),
+});
 
 /* BASE */
 
-export const BaseCardSchema = NodeSchema.merge(
-  PlayableCardSchema.safeExtend({
-    __typename: z.literal("BaseCard"),
-    AP: z.number().int().catch(0),
-    HP: z.number().int().catch(0),
-    zone: z.array(ZoneSchema),
-  }),
-);
+export const BaseCardSchema = PlayableCardSchema.safeExtend({
+  __typename: z.literal("BaseCard"),
+  AP: z.number().int().catch(0),
+  HP: z.number().int().catch(0),
+  zone: z.array(ZoneSchema),
+});
 
 /* COMMAND */
 
-export const CommandCardSchema = NodeSchema.merge(
-  PlayableCardSchema.safeExtend({
-    __typename: z.literal("CommandCard"),
-    pilot: z
-      .object({
-        name: z.string(),
-        AP: z.number().int().catch(0),
-        HP: z.number().int().catch(0),
-      })
-      .optional(),
-  }),
-);
+export const CommandCardSchema = PlayableCardSchema.safeExtend({
+  __typename: z.literal("CommandCard"),
+  pilot: z
+    .object({
+      name: z.string(),
+      AP: z.number().int().catch(0),
+      HP: z.number().int().catch(0),
+    })
+    .optional(),
+});
 
 /* PILOT */
-export const PilotCardSchema = NodeSchema.merge(
-  PlayableCardSchema.extend({
-    __typename: z.literal("PilotCard"),
-    AP: z.number().int().catch(0),
-    HP: z.number().int().catch(0),
-  }),
-);
+export const PilotCardSchema = PlayableCardSchema.safeExtend({
+  __typename: z.literal("PilotCard"),
+  AP: z.number().int().catch(0),
+  HP: z.number().int().catch(0),
+});
 
 /* RESOURCE */
 
 export const ResourceSchema = NodeSchema.safeExtend({
   __typename: z.literal("ResourceCard"),
   name: z.string(),
+  imageFile: z.string(),
 });
 
 /* UNION CARD */

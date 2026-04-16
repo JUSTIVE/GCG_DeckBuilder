@@ -227,6 +227,14 @@ type PilotCard implements Node {
   limit: Int! # 덱에 넣을 수 있는 최대 장 수
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
   imageUrl: String!
+  printings: [Printing!]!
+  defaultPrinting: Printing!
+}
+
+type Printing {
+  rarity: CardRarity!
+  imageUrl: String!
+  block: String!
 }
 
 type LocalizedString {
@@ -260,6 +268,8 @@ type UnitCard implements Node {
   limit: Int! # 덱에 넣을 수 있는 최대 장 수
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
   imageUrl: String!
+  printings: [Printing!]!
+  defaultPrinting: Printing!
 }
 
 type Resource implements Node {
@@ -287,6 +297,8 @@ type BaseCard implements Node {
   limit: Int! # 덱에 넣을 수 있는 최대 장 수
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
   imageUrl: String!
+  printings: [Printing!]!
+  defaultPrinting: Printing!
 }
 
 type CommandCard implements Node {
@@ -306,6 +318,8 @@ type CommandCard implements Node {
   limit: Int! # 덱에 넣을 수 있는 최대 장 수
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
   imageUrl: String!
+  printings: [Printing!]!
+  defaultPrinting: Printing!
 }
 
 union Card = Resource | BaseCard | UnitCard | PilotCard | CommandCard

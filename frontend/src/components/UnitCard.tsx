@@ -14,6 +14,7 @@ import { renderTrait } from "@/render/trait";
 import { useRouter, useSearch, useParams } from "@tanstack/react-router";
 import { COLOR_BG, COLOR_BG20, COLOR_BORDER, COLOR_SHADOW } from "src/render/color";
 import { renderRarity } from "src/render/rarity";
+import { usePreferredPrinting } from "@/lib/printingPreference";
 
 // Shared card body used in both thumbnail and dialog.
 export function UnitCardBody({
@@ -63,17 +64,28 @@ export function UnitCardBody({
             trait
           }
         }
+        printings {
+          rarity
+          imageUrl
+        }
       }
     `,
     unitCardRefs,
   );
+  const printing = usePreferredPrinting(
+    unitCard.id,
+    { rarity: unitCard.rarity, imageUrl: unitCard.imageUrl },
+    unitCard.printings,
+  );
+  const imageUrl = printing.imageUrl;
+  const rarity = printing.rarity;
 
   return (
     <>
       <img
         className="absolute w-full h-full object-cover top-0 bg-gray-100"
-        src={unitCard.imageUrl}
-        srcSet={`${unitCard.imageUrl.replace(/\.webp$/, "-sm.webp")} 200w, ${unitCard.imageUrl} 800w`}
+        src={imageUrl}
+        srcSet={`${imageUrl.replace(/\.webp$/, "-sm.webp")} 200w, ${imageUrl} 800w`}
         sizes="(max-width: 640px) 200px, 400px"
         alt={""}
       />
@@ -101,7 +113,7 @@ export function UnitCardBody({
             </div>
           </div>
           <div className="bg-black text-white z-1 w-fit px-6 text-[3cqw] parallelogramx parallelogram-lg h-5 flex items-center ">
-            {unitCard.id}-{renderRarity(unitCard.rarity)}
+            {unitCard.id}-{renderRarity(rarity)}
           </div>
         </div>
         <div>
@@ -128,7 +140,7 @@ export function UnitCardBody({
           />
         </div>
       </div>
-      <CardBlurOverlay imageUrl={unitCard.imageUrl} />
+      <CardBlurOverlay imageUrl={imageUrl} />
       <div className="flex flex-col gap-2 z-1">
         <div className="px-2">
           <div className="p-2 bg-black/80 whitespace-pre-wrap break-words cutout-tl-sm cutout text-[6cqw] font-bold text-center backdrop-blur-sm">

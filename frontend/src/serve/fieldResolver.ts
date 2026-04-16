@@ -148,6 +148,28 @@ function descriptionToGraphQL(rawDesc: unknown): { tokens: object[] }[] {
   }));
 }
 
+function getPrintings(source: AnyRecord) {
+  const raw = source["printings"] as
+    | Array<{ rarity: string; imageFile: string; block?: string }>
+    | undefined;
+  const fallback = {
+    rarity: source["rarity"] ?? "COMMON",
+    imageUrl: `/cards/${source["imageFile"] ?? source["id"]}.webp`,
+    block: (source["block"] as string | undefined) ?? "",
+  };
+  return raw?.length
+    ? raw.map((p) => ({
+        rarity: p.rarity ?? "COMMON",
+        imageUrl: `/cards/${p.imageFile}.webp`,
+        block: (p.block as string | undefined) ?? "",
+      }))
+    : [fallback];
+}
+
+function getDefaultPrinting(source: AnyRecord) {
+  return getPrintings(source)[0]!;
+}
+
 export function fieldResolver(
   source: AnyRecord,
   args: AnyRecord,
@@ -236,16 +258,6 @@ export function fieldResolver(
     return typeof raw === "object" && raw !== null ? raw : { en: raw ?? "", ko: raw ?? "" };
   }
 
-  if (
-    (typeName === "UnitCard" ||
-      typeName === "PilotCard" ||
-      typeName === "BaseCard" ||
-      typeName === "CommandCard") &&
-    fieldName === "imageUrl"
-  ) {
-    return `/cards/${source["id"]}.webp`;
-  }
-
   if (typeName === "CardViewHistory" && fieldName === "card") {
     const id = source["cardId"] as string | undefined;
     return id ? (cardById.get(id) ?? null) : null;
@@ -268,6 +280,10 @@ export function fieldResolver(
     typeName === "BaseCard" ||
     typeName === "PilotCard" ||
     typeName === "CommandCard";
+
+  if (isPlayableCard && fieldName === "imageUrl") {
+    return getDefaultPrinting(source).imageUrl;
+  }
 
   if (isPlayableCard && fieldName === "color") {
     const raw = source["color"] as string | undefined;
@@ -378,8 +394,12 @@ export function fieldResolver(
   }
 
   if (fieldName === "rarity") {
-    const value = source["rarity"];
-    return typeof value === "string" ? value : "COMMON";
+    return isPlayableCard ? getDefaultPrinting(source).rarity : (source["rarity"] ?? "COMMON");
+  }
+
+  if (isPlayableCard && (fieldName === "printings" || fieldName === "defaultPrinting")) {
+    const list = getPrintings(source);
+    return fieldName === "defaultPrinting" ? getDefaultPrinting(source) : list;
   }
 
   if (
