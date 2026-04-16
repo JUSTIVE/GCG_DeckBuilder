@@ -116,6 +116,7 @@ export function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[
           typeof rawName === "object" &&
           (((rawName as { en?: string }).en ?? "").toLowerCase().includes(q) ||
             ((rawName as { ko?: string }).ko ?? "").toLowerCase().includes(q)));
+      const idHit = typeof c["id"] === "string" && (c["id"] as string).toLowerCase().includes(q);
       const descHit =
         Array.isArray(c["description"]) &&
         (c["description"] as Array<Array<{ type: string; ko?: string }>>).some(
@@ -123,7 +124,7 @@ export function applyFilter(cards: RawCard[], filter: CardFilterInput): RawCard[
             Array.isArray(line) &&
             line.some((t) => t.type === "prose" && t.ko?.toLowerCase().includes(q)),
         );
-      if (!nameHit && !descHit) return false;
+      if (!nameHit && !idHit && !descHit) return false;
     }
 
     return true;

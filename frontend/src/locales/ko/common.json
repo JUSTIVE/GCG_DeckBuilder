@@ -24,7 +24,7 @@
   },
   "search": {
     "label": "검색",
-    "placeholder": "카드 이름, 효과, 특성으로 검색…",
+    "placeholder": "카드 이름·번호·효과·특성으로 검색…",
     "prompt": "검색어를 입력하세요",
     "searching": "검색 중…",
     "noResults": "결과 없음",

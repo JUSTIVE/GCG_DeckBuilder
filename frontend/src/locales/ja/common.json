@@ -23,7 +23,7 @@
   },
   "search": {
     "label": "検索",
-    "placeholder": "カード名・効果・特性で検索…",
+    "placeholder": "カード名・番号・効果・特性で検索…",
     "prompt": "検索ワードを入力",
     "searching": "検索中…",
     "noResults": "結果なし",
