@@ -8,6 +8,7 @@ import { BaseCardBody } from "./BaseCard";
 import { CommandCardBody } from "./CommandCard";
 import { ResourceCardBody } from "./ResourceCard";
 import { renderRarity } from "@/render/rarity";
+import { setPrintingPreference } from "@/lib/printingPreference";
 import { useLocalize } from "@/lib/localize";
 import { COLOR_BG, COLOR_BORDER, COLOR_SHADOW } from "src/render/color";
 import { cn } from "@/lib/utils";
@@ -62,6 +63,11 @@ const Query = graphql`
           value
         }
         package
+        printings {
+          rarity
+          imageUrl
+          block
+        }
         description {
           tokens {
             ... on TriggerToken {
@@ -122,6 +128,11 @@ const Query = graphql`
           value
         }
         package
+        printings {
+          rarity
+          imageUrl
+          block
+        }
         description {
           tokens {
             ... on TriggerToken {
@@ -183,6 +194,11 @@ const Query = graphql`
           value
         }
         package
+        printings {
+          rarity
+          imageUrl
+          block
+        }
         description {
           tokens {
             ... on TriggerToken {
@@ -233,6 +249,11 @@ const Query = graphql`
           value
         }
         package
+        printings {
+          rarity
+          imageUrl
+          block
+        }
         description {
           tokens {
             ... on TriggerToken {
@@ -288,7 +309,8 @@ export function CardByIdOverlay({
   onClose?: () => void;
   cardIds?: string[];
 }) {
-  const data = useLazyLoadQuery<CardByIdOverlayQuery>(Query, { id: cardId });
+  const [fetchKey, setFetchKey] = useState(0);
+  const data = useLazyLoadQuery<CardByIdOverlayQuery>(Query, { id: cardId }, { fetchKey });
   const router = useRouter();
   const { locale = "ko" } = useParams({ strict: false });
   const localize = useLocalize();
@@ -437,6 +459,61 @@ export function CardByIdOverlay({
     return <KeywordPanel keywords={(node.keywords as { value: string }[]).map((k) => k.value)} />;
   }
 
+  function renderPrintings() {
+    if (!node || node.__typename === "%other" || node.__typename === "Resource") return null;
+    if (!("printings" in node)) return null;
+    const printings = (node.printings ?? []) as readonly {
+      rarity: string;
+      imageUrl: string;
+      block: string;
+    }[];
+    if (printings.length <= 1) return null;
+    const currentUrl = "imageUrl" in node ? (node.imageUrl as string | undefined) : undefined;
+    return (
+      <div className="flex flex-wrap justify-center gap-2 max-w-[18rem]">
+        {printings.map((p) => {
+          const active = p.imageUrl === currentUrl;
+          // Extract the imageFile stem (e.g. "GD01-001_p1") from the URL.
+          const m = new RegExp("/cards/(.+)\\.webp$").exec(p.imageUrl);
+          const imageFile = m?.[1];
+          return (
+            <button
+              key={p.imageUrl}
+              type="button"
+              onClick={() => {
+                if (!imageFile) return;
+                setPrintingPreference(cardId, imageFile);
+                setFetchKey((k) => k + 1);
+              }}
+              className={cn(
+                "relative w-12 overflow-hidden rounded border-2 transition-all cursor-pointer",
+                active
+                  ? "border-white ring-2 ring-white/40"
+                  : "border-white/20 hover:border-white/60 opacity-80 hover:opacity-100",
+              )}
+              title={renderRarity(p.rarity)}
+            >
+              <img
+                src={p.imageUrl.replace(/\.webp$/, "-sm.webp")}
+                onError={(e) => {
+                  const img = e.currentTarget;
+                  // Fall back to the full-resolution webp if the -sm variant
+                  // doesn't exist for this printing.
+                  if (img.src !== p.imageUrl) img.src = p.imageUrl;
+                }}
+                alt={renderRarity(p.rarity)}
+                className="w-full aspect-800/1117 object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-black/70 py-0.5 text-center text-[9px] font-semibold leading-none text-white">
+                {renderRarity(p.rarity)}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
+
   function renderThumbnail() {
     if (!node) return null;
     if (node.__typename === "UnitCard")
@@ -538,6 +615,7 @@ export function CardByIdOverlay({
                   {t("gyro.label")}
                 </button>
               )}
+              {renderPrintings()}
               {renderDetail()}
             </div>
             <div onClick={(e) => e.stopPropagation()}>{renderKeywords()}</div>
