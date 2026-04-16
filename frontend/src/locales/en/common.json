@@ -24,7 +24,7 @@
   },
   "search": {
     "label": "Search",
-    "placeholder": "Search by name, effect, trait…",
+    "placeholder": "Search by name, number, effect, trait…",
     "prompt": "Type to search",
     "searching": "Searching…",
     "noResults": "No results",
