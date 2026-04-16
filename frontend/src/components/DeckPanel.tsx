@@ -11,7 +11,19 @@ import {
   Trash2Icon,
   FileSpreadsheetIcon,
   AlertTriangleIcon,
+  SwordsIcon,
+  UserIcon,
+  WarehouseIcon,
+  SparklesIcon,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+const KIND_ICONS: Record<string, LucideIcon> = {
+  UnitCard: SwordsIcon,
+  PilotCard: UserIcon,
+  BaseCard: WarehouseIcon,
+  CommandCard: SparklesIcon,
+};
 import { cn } from "@/lib/utils";
 import { COLOR_BG, COLOR_HEX } from "src/render/color";
 import { CostHistogram, LevelHistogram } from "@/components/DeckHistograms";
@@ -191,7 +203,11 @@ export function DeckPanel({
           const groupTotal = group.reduce((s, c) => s + c.count, 0);
           return (
             <div key={kind} className="mb-3">
-              <div className="px-1 mb-1 text-xs font-semibold text-muted-foreground">
+              <div className="px-1 mb-1 text-xs font-semibold text-muted-foreground flex items-center gap-1">
+                {(() => {
+                  const Icon = KIND_ICONS[kind];
+                  return Icon ? <Icon className="size-3.5" /> : null;
+                })()}
                 {getKindLabel(kind)} ({groupTotal})
               </div>
               <ul className="flex flex-col gap-0.5">
