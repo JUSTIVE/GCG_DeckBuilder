@@ -247,7 +247,7 @@ function groupPrintings(cards: unknown[]): unknown[] {
   return [...grouped.values()].map((group) => {
     // imageFile === id 인 베이스 카드 우선, 없으면 첫 번째
     const base = (group.find((c: any) => c.imageFile === c.id) ?? group[0]) as object;
-    const printings = group.map((c: any) => ({ rarity: c.rarity, imageFile: c.imageFile }));
+    const printings = group.map((c: any) => ({ rarity: c.rarity, imageFile: c.imageFile, block: c.block }));
     return { ...base, printings };
   });
 }

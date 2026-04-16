@@ -73,13 +73,20 @@ function descriptionToGraphQL(rawDesc: unknown): { tokens: object[] }[] {
 }
 
 function getPrintings(source: AnyRecord) {
-  const raw = source["printings"] as Array<{ rarity: string; imageFile: string }> | undefined;
+  const raw = source["printings"] as
+    | Array<{ rarity: string; imageFile: string; block?: string }>
+    | undefined;
   const fallback = {
     rarity: source["rarity"] ?? "COMMON",
     imageUrl: `/cards/${source["imageFile"] ?? source["id"]}.webp`,
+    block: (source["block"] as string | undefined) ?? "",
   };
   return raw?.length
-    ? raw.map((p) => ({ rarity: p.rarity ?? "COMMON", imageUrl: `/cards/${p.imageFile}.webp` }))
+    ? raw.map((p) => ({
+        rarity: p.rarity ?? "COMMON",
+        imageUrl: `/cards/${p.imageFile}.webp`,
+        block: (p.block as string | undefined) ?? "",
+      }))
     : [fallback];
 }
 
