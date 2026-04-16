@@ -337,8 +337,6 @@ describe("Query.cards – filter combinations", () => {
   });
 
   it("filters by rarity — absent rarity defaults to COMMON", async () => {
-    // All cards in the dataset have no rarity field; absent rarity → "COMMON".
-    // Filtering by COMMON should return all units; filtering by RARE → 0.
     const commonData = await gql(
       `query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`,
       { f: { kind: ["UNIT"], rarity: "COMMON" } },
@@ -346,18 +344,18 @@ describe("Query.cards – filter combinations", () => {
     const rareData = await gql(`query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`, {
       f: { kind: ["UNIT"], rarity: "RARE" },
     });
-
-    const commonCount = (commonData["cards"] as { totalCount: number }).totalCount;
-    const rareCount = (rareData["cards"] as { totalCount: number }).totalCount;
-
-    // Every unit has rarity=COMMON (default), so common === all units
     const allData = await gql(`query($f: CardFilterInput!) { cards(filter: $f) { totalCount } }`, {
       f: { kind: ["UNIT"] },
     });
+
+    const commonCount = (commonData["cards"] as { totalCount: number }).totalCount;
+    const rareCount = (rareData["cards"] as { totalCount: number }).totalCount;
     const allCount = (allData["cards"] as { totalCount: number }).totalCount;
 
-    expect(commonCount).toBe(allCount);
-    expect(rareCount).toBe(0);
+    // Cards now have real rarities — COMMON and RARE should each be a strict subset
+    expect(commonCount).toBeGreaterThan(0);
+    expect(rareCount).toBeGreaterThan(0);
+    expect(commonCount + rareCount).toBeLessThanOrEqual(allCount);
   });
 
   it("returns 0 results for an impossible filter combination", async () => {
@@ -783,8 +781,8 @@ describe("CommandCard.pilot – nullable Pilot", () => {
 // ─── rarity field — defaults to "COMMON" ─────────────────────────────────────
 
 describe("rarity: CardRarity! – defaults to COMMON when absent from data", () => {
-  it("UnitCard.rarity is 'COMMON' (data has no rarity field)", async () => {
-    const data = await gql(`{ node(id: "ST01-001") { ... on UnitCard { id rarity } } }`);
+  it("UnitCard.rarity is 'COMMON'", async () => {
+    const data = await gql(`{ node(id: "ST01-002") { ... on UnitCard { id rarity } } }`);
     const node = data["node"] as { id: string; rarity: string };
     expect(node.rarity).toBe("COMMON");
   });
@@ -867,7 +865,7 @@ describe("Query.node", () => {
     expect(node.name.ko).toBe("건담");
     expect(node.AP).toBe(3);
     expect(node.HP).toBe(4);
-    expect(node.rarity).toBe("COMMON");
+    expect(node.rarity).toBe("LEGENDARY_RARE");
   });
 
   it("returns null for an unknown id", async () => {

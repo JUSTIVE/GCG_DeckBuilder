@@ -228,11 +228,13 @@ type PilotCard implements Node {
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
   imageUrl: String!
   printings: [Printing!]!
+  defaultPrinting: Printing!
 }
 
 type Printing {
   rarity: CardRarity!
   imageUrl: String!
+  block: String!
 }
 
 type LocalizedString {
@@ -267,6 +269,7 @@ type UnitCard implements Node {
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
   imageUrl: String!
   printings: [Printing!]!
+  defaultPrinting: Printing!
 }
 
 type Resource implements Node {
@@ -295,6 +298,7 @@ type BaseCard implements Node {
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
   imageUrl: String!
   printings: [Printing!]!
+  defaultPrinting: Printing!
 }
 
 type CommandCard implements Node {
@@ -315,6 +319,7 @@ type CommandCard implements Node {
   blocked: Boolean! # limit이 0인 카드 (금지 카드)
   imageUrl: String!
   printings: [Printing!]!
+  defaultPrinting: Printing!
 }
 
 union Card = Resource | BaseCard | UnitCard | PilotCard | CommandCard
