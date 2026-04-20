@@ -94,6 +94,9 @@ export const cardResolvers = {
       if (f.kind && (f.kind as string[]).length) {
         const typenames = (f.kind as string[]).map((k) => KIND_TO_TYPENAME[k]).filter(Boolean);
         if (typenames.length) q = q.where("typename", "in", typenames);
+      } else {
+        // kind 미지정 시 Resource 제외 (프론트엔드 동작과 동일)
+        q = q.where("typename", "!=", "ResourceCard");
       }
       if ((f.color as string[] | undefined)?.length)   q = q.where("color", "in", f.color as string[]);
       if ((f.level as number[] | undefined)?.length)   q = q.where("level", "in", f.level as number[]);
@@ -237,6 +240,37 @@ export const cardResolvers = {
   UnitCard:    { ...sharedCardFields, ...withApHp, links: (obj: AnyObj) => { const link = obj.link as AnyObj | null | undefined; return link ? [link] : []; } },
   PilotCard:   { ...sharedCardFields, pilot: (obj: AnyObj) => ({ name: obj.name, AP: obj.AP as number, HP: obj.HP as number }) },
   BaseCard:    { ...sharedCardFields, ...withApHp },
-  CommandCard: { ...sharedCardFields },
-  Resource:    {},
+  CommandCard: {
+    ...sharedCardFields,
+    pilot(obj: AnyObj) {
+      const p = obj.pilot as AnyObj | null | undefined;
+      if (!p) return null;
+      const name = p.name as { ko?: string; en?: string } | string | undefined;
+      // name이 LocalizedString 객체인 경우만 반환 (빈 문자열 등은 description에서 파싱)
+      if (name && typeof name === "object" && (name.ko || name.en)) {
+        return { name, AP: (p.AP as number) ?? 0, HP: (p.HP as number) ?? 0 };
+      }
+      // description prose에서 [이름] 패턴으로 파일럿 이름 추출
+      const desc = obj.description as Array<Array<{ type: string; ko?: string; en?: string }>> | undefined;
+      if (!desc) return null;
+      let ko = "", en = "";
+      for (const line of desc) {
+        for (const token of line) {
+          if (token.type !== "prose") continue;
+          if (!ko && token.ko) { const m = /\[([^\]]+)\]/.exec(token.ko); if (m?.[1]) ko = m[1]; }
+          if (!en && token.en) { const m = /\[([^\]]+)\]/.exec(token.en); if (m?.[1]) en = m[1]; }
+        }
+      }
+      if (!ko && !en) return null;
+      return { name: { ko: ko || en, en: en || ko }, AP: (p.AP as number) ?? 0, HP: (p.HP as number) ?? 0 };
+    },
+  },
+  Resource: {
+    name(obj: AnyObj) {
+      const n = obj.name;
+      if (typeof n === "string") return { en: n, ko: n };
+      return n as AnyObj;
+    },
+    rarity(obj: AnyObj) { return getPrintings(obj)[0]!.rarity; },
+  },
 };
