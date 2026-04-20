@@ -1,0 +1,33 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - 'data/2.mapped.json'
+      - 'Dockerfile'
+      - 'fly.toml'
+      - '.dockerignore'
+
+jobs:
+  deploy:
+    name: Deploy to Fly.io
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-action/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+  seed:
+    name: Seed Database
+    needs: deploy
+    if: contains(toJson(github.event.commits.*.modified), 'data/2.mapped.json')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: superfly/flyctl-action/setup-flyctl@master
+      - run: flyctl ssh console --app gcg-builder --command "bun db/seed.ts"
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
