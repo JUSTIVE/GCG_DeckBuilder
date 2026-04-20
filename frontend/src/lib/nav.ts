@@ -20,7 +20,10 @@ export const navMain: NavItem[] = [
   {
     titleKey: "nav.tools",
     path: "",
-    items: [{ titleKey: "nav.mulliganSimulator", path: "/tools/mulligan" }],
+    items: [
+      { titleKey: "nav.mulliganSimulator", path: "/tools/mulligan" },
+      { titleKey: "nav.cardScanner", path: "/tools/card-scanner" },
+    ],
   },
   {
     titleKey: "nav.info",

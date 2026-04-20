@@ -7,6 +7,7 @@
     "deckList": "Deck List",
     "tools": "Tools",
     "mulliganSimulator": "Mulligan Simulator",
+    "cardScanner": "Card Scanner",
     "info": "Info",
     "gameRules": "Game Rules",
     "keywordDictionary": "Keyword Dictionary",
@@ -104,6 +105,22 @@
     "drawCount": "5 of {{count}} cards",
     "redraw": "Redraw",
     "drawLabel": "Draw #{{id}}"
+  },
+  "scanner": {
+    "title": "Card Scanner",
+    "uploadPrompt": "Upload a photo of your cards",
+    "dropHint": "Drag & drop or click to select",
+    "initializing": "Loading recognition engine…",
+    "detecting": "Detecting cards…",
+    "matching": "Matching card {{current}} of {{total}}…",
+    "resultsTitle": "Recognized Cards",
+    "confidence": "{{percent}}% match",
+    "noCardsFound": "No cards detected. Try a clearer photo with good lighting.",
+    "createDeck": "Create Deck from Results",
+    "defaultDeckName": "Scanned Deck",
+    "retry": "Try Another Photo",
+    "error": "Recognition failed. Please try again.",
+    "tips": "Tips: Place cards on a contrasting surface, ensure good lighting, avoid glare."
   },
   "game": {
     "firstPlayer": "First",

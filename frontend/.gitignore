@@ -16,3 +16,8 @@ src/routeTree.gen.ts
 .omc/
 test-results/
 playwright-report/
+
+# OpenCV.js WASM build (downloaded from npm, not checked in)
+public/opencv/
+# Generated ORB descriptor database
+public/orb-descriptors.bin

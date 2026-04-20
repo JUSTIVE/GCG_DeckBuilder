@@ -7,6 +7,7 @@
     "deckList": "덱 목록",
     "tools": "도구",
     "mulliganSimulator": "멀리건 시뮬레이터",
+    "cardScanner": "카드 스캐너",
     "info": "정보",
     "gameRules": "게임 규칙",
     "keywordDictionary": "키워드 사전",
@@ -104,6 +105,22 @@
     "drawCount": "{{count}}장 중 5장",
     "redraw": "다시 뽑기",
     "drawLabel": "뽑기 #{{id}}"
+  },
+  "scanner": {
+    "title": "카드 스캐너",
+    "uploadPrompt": "카드 사진을 업로드하세요",
+    "dropHint": "드래그 & 드롭 또는 클릭하여 선택",
+    "initializing": "인식 엔진 로딩 중…",
+    "detecting": "카드 감지 중…",
+    "matching": "카드 {{current}}/{{total}} 매칭 중…",
+    "resultsTitle": "인식된 카드",
+    "confidence": "{{percent}}% 일치",
+    "noCardsFound": "카드가 감지되지 않았습니다. 밝고 선명한 사진으로 다시 시도해보세요.",
+    "createDeck": "인식 결과로 덱 생성",
+    "defaultDeckName": "스캔 덱",
+    "retry": "다른 사진으로 다시",
+    "error": "인식에 실패했습니다. 다시 시도해주세요.",
+    "tips": "팁: 대비가 뚜렷한 바닥 위에 카드를 놓고, 밝은 곳에서 빛 반사를 피해 찍어주세요."
   },
   "game": {
     "firstPlayer": "선공",
