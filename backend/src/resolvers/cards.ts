@@ -1,6 +1,6 @@
 import { sql } from "kysely";
 import {
-  allCards, cardById as cardByIdMap,
+  allCards, cardById as cardByIdMap, pilotByName,
   makeTrait, makeKeyword, makeColor, makeSeries,
   encodeCursor, decodeCursor,
 } from "../serve/cards";
@@ -215,13 +215,10 @@ export const cardResolvers = {
   CardGrouping:   { __resolveType: (obj: AnyObj) => obj.__typename as string },
   SearchHistory:  { __resolveType: (obj: AnyObj) => obj.__typename as string },
 
-  ProseToken: {
-    text: (obj: AnyObj) => ({ en: obj.en as string, ko: obj.ko as string }),
-  },
   LinkPilot: {
     pilot(obj: AnyObj) {
       const pilotName = obj.pilotName as { en: string; ko: string } | undefined;
-      const card = pilotName ? cardByIdMap.get(pilotName.ko) as AnyObj | undefined : undefined;
+      const card = pilotName ? pilotByName.get(pilotName.ko) as AnyObj | undefined : undefined;
       return { name: pilotName ?? { en: "", ko: "" }, AP: (card?.["AP"] as number) ?? 0, HP: (card?.["HP"] as number) ?? 0 };
     },
   },
