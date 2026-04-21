@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'backend/**'
-      - 'data/2.mapped.json'
+      - 'data/3.processed.json'
       - 'backend/Dockerfile'
       - 'fly.toml'
       - '.dockerignore'
@@ -24,7 +24,7 @@ jobs:
   seed:
     name: Seed Database
     needs: deploy
-    if: contains(toJson(github.event.commits.*.modified), 'data/2.mapped.json')
+    if: contains(toJson(github.event.commits.*.modified), 'data/3.processed.json')
     runs-on: ubuntu-latest
     steps:
       - uses: superfly/flyctl-action/setup-flyctl@master

@@ -3,7 +3,6 @@ FROM oven/bun:1
 WORKDIR /app
 
 # data/ 디렉토리 (backend가 읽는 카드 데이터)
-COPY data/2.mapped.json data/2.mapped.json
 COPY data/3.processed.json data/3.processed.json
 
 # backend
