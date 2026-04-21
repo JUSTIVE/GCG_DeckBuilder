@@ -18,13 +18,11 @@ import {
 import { useRef, useState, Suspense, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { SearchHistoryPanel } from "@/components/SearchHistoryPanel";
-import type { SearchHistoryPanel_query$key } from "@/__generated__/SearchHistoryPanel_query.graphql";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 export const Query = graphql`
   query CardListPageQuery($filter: CardFilterInput!, $sort: CardSort) {
     ...CardListFragment @arguments(first: 20, filter: $filter, sort: $sort)
-    ...SearchHistoryPanel_query
   }
 `;
 
@@ -84,12 +82,10 @@ function FilterBar({
   onSortChange,
   onRestore,
   onRestoreCardView,
-  historyQueryRef,
   historyFetchKey,
 }: FilterControlsProps & {
   onRestore: (f: CardFilterInput, s: CardSort | null) => void;
   onRestoreCardView: (cardId: string) => void;
-  historyQueryRef: SearchHistoryPanel_query$key;
   historyFetchKey: string;
 }) {
   const { t } = useTranslation("common");
@@ -108,12 +104,13 @@ function FilterBar({
         </button>
       )}
       <div className="border-t border-border pt-3">
-        <SearchHistoryPanel
-          queryRef={historyQueryRef}
-          fetchKey={historyFetchKey}
-          onRestore={onRestore}
-          onRestoreCardView={onRestoreCardView}
-        />
+        <Suspense fallback={null}>
+          <SearchHistoryPanel
+            fetchKey={historyFetchKey}
+            onRestore={onRestore}
+            onRestoreCardView={onRestoreCardView}
+          />
+        </Suspense>
       </div>
     </aside>
   );
@@ -130,14 +127,12 @@ function FilterBottomSheet({
   onToggleDescription,
   onRestore,
   onRestoreCardView,
-  historyQueryRef,
   historyFetchKey,
 }: FilterControlsProps & {
   showDescription: boolean;
   onToggleDescription: () => void;
   onRestore: (f: CardFilterInput, s: CardSort | null) => void;
   onRestoreCardView: (cardId: string) => void;
-  historyQueryRef: SearchHistoryPanel_query$key;
   historyFetchKey: string;
 }) {
   const { t } = useTranslation("common");
@@ -229,18 +224,19 @@ function FilterBottomSheet({
             <SheetTitle>{t("search.history")}</SheetTitle>
           </SheetHeader>
           <div className="overflow-y-auto pb-8">
-            <SearchHistoryPanel
-              queryRef={historyQueryRef}
-              fetchKey={historyFetchKey}
-              onRestore={(f, s) => {
-                onRestore(f, s);
-                setHistoryOpen(false);
-              }}
-              onRestoreCardView={(id) => {
-                onRestoreCardView(id);
-                setHistoryOpen(false);
-              }}
-            />
+            <Suspense fallback={null}>
+              <SearchHistoryPanel
+                fetchKey={historyFetchKey}
+                onRestore={(f, s) => {
+                  onRestore(f, s);
+                  setHistoryOpen(false);
+                }}
+                onRestoreCardView={(id) => {
+                  onRestoreCardView(id);
+                  setHistoryOpen(false);
+                }}
+              />
+            </Suspense>
           </div>
         </SheetContent>
       </Sheet>
@@ -376,7 +372,6 @@ export function CardListPage() {
         onSortChange={handleSortChange}
         onRestore={handleRestore}
         onRestoreCardView={handleRestoreCardView}
-        historyQueryRef={data}
         historyFetchKey={historyFetchKey}
       />
       <div className="flex flex-col flex-1 min-w-0">
@@ -389,7 +384,6 @@ export function CardListPage() {
           onToggleDescription={() => setShowDescription((v) => !v)}
           onRestore={handleRestore}
           onRestoreCardView={handleRestoreCardView}
-          historyQueryRef={data}
           historyFetchKey={historyFetchKey}
         />
         <div className="hidden md:flex items-center gap-2 border-b border-border px-4 py-2">
