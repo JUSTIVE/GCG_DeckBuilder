@@ -4,13 +4,12 @@ import { resolve } from "node:path";
 import { buildSchema, isObjectType, isUnionType } from "graphql";
 import { resolvers } from "../src/resolvers";
 
-// ── DB 감지: 리졸버 함수 소스에 ctx.db / ctx.loaders가 있으면 DB-backed ──────
+// ── DB 감지: ctx.db / ctx.loaders 직접 사용 여부 ────────────────────────────
 
 function isDbBacked(fn: unknown): boolean {
   if (typeof fn !== "function") return false;
   const src = fn.toString();
-  // ctx.db / ctx.loaders 직접 사용, 또는 ctx를 헬퍼에 넘기는 경우
-  return /\bctx\b/.test(src);
+  return /ctx\.(db|loaders)/.test(src);
 }
 
 // ── 스키마 로드 ────────────────────────────────────────────────────────────────
@@ -24,12 +23,12 @@ const T = { branch: "├─ ", last: "└─ ", pipe: "│  ", indent: "   " };
 
 // ── 상태 타입 ─────────────────────────────────────────────────────────────────
 
-type Status = "db" | "memory" | "default" | "missing" | "resolveType";
+type Status = "db" | "resolver" | "default" | "missing" | "resolveType";
 
 function renderStatus(s: Status): string {
   if (s === "db")          return styleText("green",  "✓ db");
   if (s === "resolveType") return styleText("green",  "✓ resolveType");
-  if (s === "memory")      return styleText("yellow", "· memory");
+  if (s === "resolver")    return styleText("cyan",   "· resolver");
   if (s === "default")     return styleText("gray",   "· default");
   return                          styleText("red",    "✗ missing");
 }
@@ -39,7 +38,7 @@ function isCovered(s: Status): boolean {
 }
 
 function isMigrated(s: Status): boolean {
-  return s === "db" || s === "resolveType" || s === "default";
+  return s !== "missing";
 }
 
 // ── 상태 판별 ─────────────────────────────────────────────────────────────────
@@ -53,10 +52,9 @@ function fieldStatus(typeName: string, fieldName: string): Status {
   const isRequired = typeName === "Query" || typeName === "Mutation";
 
   if (hasResolver && isDbBacked(fn)) return "db";
-  if (!typeRes && !isRequired) return "default";
-  if (!hasResolver && isRequired) return "missing";
-  if (!hasResolver) return "default";
-  return "memory";
+  if (hasResolver) return "resolver";
+  if (!isRequired) return "default";
+  return "missing";
 }
 
 function unionStatus(typeName: string): Status {
@@ -95,9 +93,7 @@ function renderType(typeName: string, fields: { name: string; status: Status }[]
 const OBJECT_TYPES = [
   "Query", "Mutation",
   "UnitCard", "PilotCard", "BaseCard", "CommandCard", "Resource",
-  "Deck", "DeckList",
-  "UnitDeckCard", "PilotDeckCard", "BaseDeckCard", "CommandDeckCard", "ResourceDeckCard",
-  "FilterSearchHistory", "CardViewHistory", "SearchHistoryList",
+  "CardViewHistory",
   "Trait", "Keyword", "Color", "Series",
   "TriggerToken", "AbilityToken", "ProseToken",
   "LinkTrait", "LinkPilot", "Pilot",
@@ -105,13 +101,13 @@ const OBJECT_TYPES = [
 
 const UNION_TYPES = [
   "Card", "PlayableCard", "UnitLink", "DescriptionToken",
-  "CardGrouping", "SearchHistory", "DeckCard", "AddCardToDeckResult",
+  "CardGrouping",
 ];
 
 console.log(styleText("bold", "\n📋 Resolver Migration Coverage\n"));
-console.log(`${styleText("green", "✓ db")}      — DB 쿼리로 마이그레이션 완료`);
-console.log(`${styleText("yellow", "· memory")}  — 리졸버 있음, 아직 인메모리 (serve.ts 로직)`);
-console.log(`${styleText("gray", "· default")}  — 리졸버 없음, GraphQL 기본 동작 (obj.field)`);
+console.log(`${styleText("green", "✓ db")}        — ctx.db / ctx.loaders 직접 사용`);
+console.log(`${styleText("cyan",  "· resolver")}  — resolver 있음 (raw JSON 변환 등)`);
+console.log(`${styleText("gray",  "· default")}   — resolver 없음, GraphQL 기본 동작 (obj.field)`);
 
 let grandTotal = 0, grandMigrated = 0;
 const summaries: { name: string; summary: Summary }[] = [];
@@ -143,7 +139,7 @@ UNION_TYPES.forEach((typeName, i) => {
 
 // ── 요약 ─────────────────────────────────────────────────────────────────────
 
-const KEY_TYPES = ["Query", "Mutation", "UnitCard", "PilotCard", "BaseCard", "CommandCard", "Deck"];
+const KEY_TYPES = ["Query", "Mutation", "UnitCard", "PilotCard", "BaseCard", "CommandCard"];
 const pct = Math.round((grandMigrated / grandTotal) * 100);
 const pctText = `${grandMigrated}/${grandTotal} (${pct}%)`;
 

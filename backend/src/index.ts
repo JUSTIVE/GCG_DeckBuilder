@@ -17,4 +17,4 @@ const yoga = createYoga({
 new Elysia()
   .all("/graphql", ({ request }) => yoga.fetch(request))
   .get("/", () => "GCG DeckBuilder API")
-  .listen(process.env.PORT ?? 4000);
+  .listen({ port: Number(process.env.PORT ?? 4000), hostname: "0.0.0.0" });

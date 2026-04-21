@@ -4,11 +4,7 @@ import {
   makeTrait, makeKeyword, makeColor, makeSeries,
   encodeCursor, decodeCursor,
 } from "../serve/cards";
-import {
-  readSearchHistory, makeSearchHistoryList,
-  addFilterSearch, addCardView, removeSearchHistory, clearSearchHistory,
-} from "../serve/history";
-import { DECK_MAX_COPIES } from "../serve/decks";
+const DECK_MAX_COPIES = 4;
 import type { Context } from "../context";
 
 type AnyObj = Record<string, unknown>;
@@ -163,7 +159,8 @@ export const cardResolvers = {
       return results as never;
     },
 
-    searchHistory() { return makeSearchHistoryList(readSearchHistory()) as never; },
+    searchHistory: () => ({ __typename: "SearchHistoryList", id: "SearchHistoryList:singleton", items: [] } as never),
+    deckList: () => ({ __typename: "DeckList", id: "DeckList:singleton", decks: [] } as never),
 
     async randomCard(_: unknown, { kind }: { kind: string }, ctx: Context) {
       const target = KIND_TO_TYPENAME[kind];
@@ -187,12 +184,6 @@ export const cardResolvers = {
     series(_: unknown, { value }: { value: string })  { return makeSeries(value) as never; },
   },
 
-  Mutation: {
-    addFilterSearch(_: unknown, { filter, sort }: AnyObj) { return addFilterSearch({ filter, sort } as never) as never; },
-    addCardView(_: unknown, { cardId }: { cardId: string }) { return addCardView({ cardId }) as never; },
-    removeSearchHistory(_: unknown, { id }: { id: string }) { return removeSearchHistory({ id }) as never; },
-    clearSearchHistory() { return clearSearchHistory() as never; },
-  },
 
   Card: {
     __resolveType(obj: AnyObj) {
