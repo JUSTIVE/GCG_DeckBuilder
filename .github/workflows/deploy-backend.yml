@@ -6,7 +6,7 @@ on:
     paths:
       - 'backend/**'
       - 'data/2.mapped.json'
-      - 'Dockerfile'
+      - 'backend/Dockerfile'
       - 'fly.toml'
       - '.dockerignore'
 
