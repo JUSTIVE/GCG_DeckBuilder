@@ -2,6 +2,7 @@ app = "gcg-builder"
 primary_region = "nrt"
 
 [build]
+  dockerfile = "backend/Dockerfile"
 
 [env]
   PORT = "8080"
