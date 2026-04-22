@@ -211,7 +211,12 @@ export function CardScannerPage() {
                         className="h-16 w-auto shrink-0 rounded"
                       />
                       <div className="flex-1 space-y-1">
-                        <p className="text-sm font-medium">{r.cardId}</p>
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm font-medium">{r.cardId}</p>
+                          <span className="rounded bg-primary/10 px-1.5 py-0.5 text-xs font-semibold text-primary">
+                            ×{r.count}
+                          </span>
+                        </div>
                         <div className="flex items-center gap-2">
                           <div className="h-1.5 flex-1 rounded-full bg-muted">
                             <div
@@ -268,7 +273,7 @@ export function CardScannerPage() {
 function aggregateCards(cards: RecognizedCard[]): { cardId: string; count: number }[] {
   const map = new Map<string, number>();
   for (const c of cards) {
-    map.set(c.cardId, (map.get(c.cardId) ?? 0) + 1);
+    map.set(c.cardId, (map.get(c.cardId) ?? 0) + c.count);
   }
   return Array.from(map, ([cardId, count]) => ({ cardId, count }));
 }

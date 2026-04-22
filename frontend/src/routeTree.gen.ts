@@ -18,6 +18,7 @@ import { Route as LocaleInfoRouteImport } from './routes/$locale/info'
 import { Route as LocaleDecklistRouteImport } from './routes/$locale/decklist'
 import { Route as LocaleCardlistRouteImport } from './routes/$locale/cardlist'
 import { Route as LocaleToolsMulliganRouteImport } from './routes/$locale/tools/mulligan'
+import { Route as LocaleToolsCardScannerRouteImport } from './routes/$locale/tools/card-scanner'
 import { Route as LocaleDeckDeckIdRouteImport } from './routes/$locale/deck/$deckId'
 
 const LocaleRoute = LocaleRouteImport.update({
@@ -65,6 +66,11 @@ const LocaleToolsMulliganRoute = LocaleToolsMulliganRouteImport.update({
   path: '/tools/mulligan',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleToolsCardScannerRoute = LocaleToolsCardScannerRouteImport.update({
+  id: '/tools/card-scanner',
+  path: '/tools/card-scanner',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleDeckDeckIdRoute = LocaleDeckDeckIdRouteImport.update({
   id: '/deck/$deckId',
   path: '/deck/$deckId',
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/$locale/rules': typeof LocaleRulesRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/deck/$deckId': typeof LocaleDeckDeckIdRoute
+  '/$locale/tools/card-scanner': typeof LocaleToolsCardScannerRoute
   '/$locale/tools/mulligan': typeof LocaleToolsMulliganRoute
 }
 export interface FileRoutesByTo {
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/$locale/rules': typeof LocaleRulesRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/deck/$deckId': typeof LocaleDeckDeckIdRoute
+  '/$locale/tools/card-scanner': typeof LocaleToolsCardScannerRoute
   '/$locale/tools/mulligan': typeof LocaleToolsMulliganRoute
 }
 export interface FileRoutesById {
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/$locale/rules': typeof LocaleRulesRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/deck/$deckId': typeof LocaleDeckDeckIdRoute
+  '/$locale/tools/card-scanner': typeof LocaleToolsCardScannerRoute
   '/$locale/tools/mulligan': typeof LocaleToolsMulliganRoute
 }
 export interface FileRouteTypes {
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/$locale/rules'
     | '/$locale/'
     | '/$locale/deck/$deckId'
+    | '/$locale/tools/card-scanner'
     | '/$locale/tools/mulligan'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/$locale/rules'
     | '/$locale'
     | '/$locale/deck/$deckId'
+    | '/$locale/tools/card-scanner'
     | '/$locale/tools/mulligan'
   id:
     | '__root__'
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | '/$locale/rules'
     | '/$locale/'
     | '/$locale/deck/$deckId'
+    | '/$locale/tools/card-scanner'
     | '/$locale/tools/mulligan'
   fileRoutesById: FileRoutesById
 }
@@ -214,6 +226,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleToolsMulliganRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/tools/card-scanner': {
+      id: '/$locale/tools/card-scanner'
+      path: '/tools/card-scanner'
+      fullPath: '/$locale/tools/card-scanner'
+      preLoaderRoute: typeof LocaleToolsCardScannerRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/deck/$deckId': {
       id: '/$locale/deck/$deckId'
       path: '/deck/$deckId'
@@ -233,6 +252,7 @@ interface LocaleRouteChildren {
   LocaleRulesRoute: typeof LocaleRulesRoute
   LocaleIndexRoute: typeof LocaleIndexRoute
   LocaleDeckDeckIdRoute: typeof LocaleDeckDeckIdRoute
+  LocaleToolsCardScannerRoute: typeof LocaleToolsCardScannerRoute
   LocaleToolsMulliganRoute: typeof LocaleToolsMulliganRoute
 }
 
@@ -245,6 +265,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleRulesRoute: LocaleRulesRoute,
   LocaleIndexRoute: LocaleIndexRoute,
   LocaleDeckDeckIdRoute: LocaleDeckDeckIdRoute,
+  LocaleToolsCardScannerRoute: LocaleToolsCardScannerRoute,
   LocaleToolsMulliganRoute: LocaleToolsMulliganRoute,
 }
 

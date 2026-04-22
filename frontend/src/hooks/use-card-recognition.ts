@@ -14,6 +14,7 @@ export function useCardRecognition() {
   const [progress, setProgress] = useState<Progress>({ stage: "", percent: 0 });
   const [results, setResults] = useState<RecognizedCard[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [version, setVersion] = useState(0);
 
   useEffect(() => {
     const worker = new Worker(new URL("../workers/card-recognition.worker.ts", import.meta.url), {
@@ -55,7 +56,7 @@ export function useCardRecognition() {
     worker.postMessage({ type: "init" });
 
     return () => worker.terminate();
-  }, []);
+  }, [version]);
 
   const recognize = useCallback(
     async (file: File) => {
@@ -73,11 +74,16 @@ export function useCardRecognition() {
   );
 
   const reset = useCallback(() => {
-    setState("ready");
     setResults([]);
     setError(null);
     setProgress({ stage: "", percent: 0 });
-  }, []);
+    if (state === "error") {
+      // Worker may be in a broken state — recreate it via useEffect.
+      setVersion((v) => v + 1);
+    } else {
+      setState("ready");
+    }
+  }, [state]);
 
   return { state, progress, results, error, recognize, reset };
 }

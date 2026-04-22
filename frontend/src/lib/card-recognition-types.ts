@@ -2,6 +2,7 @@ export interface RecognizedCard {
   cardId: string;
   confidence: number;
   matchCount: number;
+  count: number;
   boundingBox: { x: number; y: number; width: number; height: number };
 }
 
