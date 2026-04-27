@@ -814,7 +814,7 @@ export function DeckDetailPage() {
                 onCardRemove={handleRemove}
                 onCardOpen={setOverlayCardId}
                 deckFull={totalCards >= 50}
-                scrollClassName="overflow-y-auto h-full py-5"
+                scrollClassName="overflow-y-auto h-full py-5 docket-grid-bg"
                 deckCardCounts={deckCardCounts}
                 deckColors={deckColors}
               />

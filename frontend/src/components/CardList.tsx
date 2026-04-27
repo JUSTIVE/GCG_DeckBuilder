@@ -76,7 +76,7 @@ export function CardList({
   onCardRemove,
   onCardOpen,
   onCardIdsChange,
-  scrollClassName = "overflow-y-auto h-[calc(100dvh-65px-48px)] py-5",
+  scrollClassName = "overflow-y-auto h-[calc(100dvh-65px-48px)] py-5 docket-grid-bg",
   deckCardCounts,
   deckColors,
   deckFull,
