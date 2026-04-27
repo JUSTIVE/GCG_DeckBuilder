@@ -264,6 +264,89 @@ function getBattleSteps(t: TFunction<"rules">) {
   ];
 }
 
+// ── version history selector ─────────────────────────────────────────────────
+
+type VersionEntry = {
+  version: string;
+  originalDate: string;
+  translationDate: string;
+  changes: string[];
+};
+
+function VersionHistorySection({ t }: { t: TFunction<"rules"> }) {
+  const versions = t("versionHistory.versions", { returnObjects: true }) as VersionEntry[];
+  const [selected, setSelected] = useState(0);
+  const cur = versions[selected];
+
+  return (
+    <div className="border border-foreground bg-card">
+      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 px-3 sm:px-4 py-2 border-b border-foreground/30">
+        <span className="docket-meta-strong">§ {t("versionHistory.title")}</span>
+        <span className="docket-meta">/ {t("versionHistory.selectLabel")}</span>
+      </div>
+      <div className="flex flex-wrap gap-0 border-b border-foreground/30">
+        {versions.map((v, i) => {
+          const isActive = i === selected;
+          const isLatest = i === 0;
+          return (
+            <button
+              key={v.version}
+              type="button"
+              onClick={() => setSelected(i)}
+              className={cn(
+                "docket-mono text-xs px-3 py-2 border-r border-foreground/30 last:border-r-0",
+                "transition-colors cursor-pointer flex items-baseline gap-1.5",
+                isActive
+                  ? "bg-foreground text-background"
+                  : "bg-card text-muted-foreground hover:bg-foreground/10 hover:text-foreground",
+              )}
+            >
+              <span className="font-bold tracking-wider">v{v.version}</span>
+              {isLatest && (
+                <span
+                  className={cn(
+                    "text-[9px] px-1 leading-tight",
+                    isActive ? "bg-accent text-foreground" : "bg-accent/80 text-foreground",
+                  )}
+                >
+                  {t("versionHistory.currentLabel")}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+      <div className="px-3 sm:px-4 py-3 flex flex-col gap-3">
+        <div className="flex flex-wrap gap-x-4 gap-y-1 docket-meta">
+          <span>
+            {t("versionHistory.originalLabel")}{" "}
+            <span className="text-foreground tabular-nums">{cur.originalDate}</span>
+          </span>
+          <span className="opacity-30">·</span>
+          <span>
+            {t("versionHistory.translationLabel")}{" "}
+            <span className="text-foreground tabular-nums">{cur.translationDate}</span>
+          </span>
+        </div>
+        <div>
+          <div className="docket-meta mb-2">{t("versionHistory.changesLabel")}</div>
+          <ul className="docket-mono text-xs flex flex-col gap-1.5 text-foreground leading-relaxed">
+            {cur.changes.map((change, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="text-accent shrink-0">▸</span>
+                <span>{change}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="docket-meta text-[10px] leading-relaxed border-t border-foreground/20 pt-2">
+          {t("versionHistory.note")}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // ── interactive: game setup walkthrough ──────────────────────────────────────
 
 const EMPTY_BOARD: SetupBoardState = {
@@ -1200,6 +1283,9 @@ export function RulesPage() {
         edition="MK.II"
       />
       <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-4 w-full">
+        {/* ── version history ── */}
+        <VersionHistorySection t={t} />
+
         {/* ── objective ── */}
         <Section title={t("sections.objective.title")} defaultOpen>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -1492,8 +1578,12 @@ export function RulesPage() {
                 "exclude",
                 "discard",
                 "draw",
+                "shuffle",
                 "play",
                 "recover",
+                "gain",
+                "token",
+                "counter",
                 "battleDamage",
                 "turnPlayer",
                 "slash",
