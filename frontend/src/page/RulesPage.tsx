@@ -83,16 +83,19 @@ function TBadge({
 
 // ── layout helpers ────────────────────────────────────────────────────────────
 
+type SectionChildren = React.ReactNode | ((open: boolean) => React.ReactNode);
+
 function Section({
   title,
   children,
   defaultOpen = false,
 }: {
   title: string;
-  children: React.ReactNode;
+  children: SectionChildren;
   defaultOpen?: boolean;
 }) {
   const [open, setOpen] = useState(defaultOpen);
+  const content = typeof children === "function" ? children(open) : children;
   return (
     <div className="rounded-lg border border-border overflow-hidden">
       <button
@@ -116,11 +119,37 @@ function Section({
       >
         <div className="overflow-hidden">
           <div className="border-t border-border px-3 py-3 sm:px-4 sm:py-4 flex flex-col gap-3 sm:gap-4">
-            {children}
+            {content}
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function AnimatedBigNumber({
+  value,
+  play,
+  delay = 0,
+}: {
+  value: string | number;
+  play: boolean;
+  delay?: number;
+}) {
+  return (
+    <span
+      className={cn(
+        "absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none",
+        "transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] origin-bottom-right",
+        play
+          ? "translate-y-0 opacity-100 scale-100 rotate-0"
+          : "translate-y-10 opacity-0 scale-50 rotate-12",
+      )}
+      style={{ transitionDelay: play ? `${delay}ms` : "0ms" }}
+      aria-hidden
+    >
+      {value}
+    </span>
   );
 }
 
@@ -1072,12 +1101,16 @@ function CardTypeItem({
   cardRefs,
   onOpen,
   viewOtherCardLabel,
+  play = true,
+  delay = 0,
 }: {
   ct: CardTypeEntry;
   cardRef: CardPreview_card$key | null | undefined;
   cardRefs?: readonly (CardPreview_card$key | null | undefined)[];
   onOpen: (id: string) => void;
   viewOtherCardLabel: string;
+  play?: boolean;
+  delay?: number;
 }) {
   const pool = cardRefs && cardRefs.length > 0 ? cardRefs : cardRef ? [cardRef] : [];
   const [idx, setIdx] = useState(0);
@@ -1140,10 +1173,14 @@ function CardTypeItem({
         {/* peeking card — half-overlapping right edge, slightly tilted */}
         {currentRef && (
           <div
-            className="absolute top-1/2 right-0 z-10 drop-shadow-lg"
+            className="absolute top-1/2 right-0 z-10 drop-shadow-lg transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
             style={{
               width: 96,
-              transform: `translateX(45%) translateY(-50%) rotate(${rotation}deg)`,
+              transform: play
+                ? `translateX(45%) translateY(-50%) rotate(${rotation}deg)`
+                : `translateX(180%) translateY(-50%) rotate(-25deg)`,
+              opacity: play ? 1 : 0,
+              transitionDelay: play ? `${delay}ms` : "0ms",
             }}
           >
             <div
@@ -1319,157 +1356,167 @@ export function RulesPage() {
 
         {/* ── deck rules ── */}
         <Section title={t("sections.deckRules.title")}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <div className="relative rounded-md border p-3 overflow-hidden">
-              <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">
-                50
-              </span>
-              <p className="text-xs font-semibold mb-2">{t("sections.deckRules.mainDeck.label")}</p>
-              <ul className="text-xs text-muted-foreground flex flex-col gap-1">
-                {(t("sections.deckRules.mainDeck.rules", { returnObjects: true }) as string[]).map(
-                  (r, i) => (
-                    <li key={i}>· {r}</li>
-                  ),
-                )}
-              </ul>
-            </div>
-            <div className="relative rounded-md border p-3 overflow-hidden">
-              <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">
-                10
-              </span>
-              <p className="text-xs font-semibold mb-2">
-                {t("sections.deckRules.resourceDeck.label")}
-              </p>
-              <ul className="text-xs text-muted-foreground flex flex-col gap-1">
-                {(
-                  t("sections.deckRules.resourceDeck.rules", { returnObjects: true }) as string[]
-                ).map((r, i) => (
-                  <li key={i}>· {r}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="rounded-md border p-3 flex flex-col gap-2 text-xs">
-            <p className="font-semibold">{t("sections.deckRules.playConditions.label")}</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-muted-foreground">
-              <div>
-                <span className="font-medium text-foreground">
-                  {t("sections.deckRules.playConditions.level.name")}
-                </span>
-                <p>{t("sections.deckRules.playConditions.level.desc")}</p>
+          {(open) => (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="relative rounded-md border p-3 overflow-hidden">
+                  <AnimatedBigNumber value="50" play={open} delay={120} />
+                  <p className="text-xs font-semibold mb-2">
+                    {t("sections.deckRules.mainDeck.label")}
+                  </p>
+                  <ul className="text-xs text-muted-foreground flex flex-col gap-1">
+                    {(
+                      t("sections.deckRules.mainDeck.rules", { returnObjects: true }) as string[]
+                    ).map((r, i) => (
+                      <li key={i}>· {r}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="relative rounded-md border p-3 overflow-hidden">
+                  <AnimatedBigNumber value="10" play={open} delay={260} />
+                  <p className="text-xs font-semibold mb-2">
+                    {t("sections.deckRules.resourceDeck.label")}
+                  </p>
+                  <ul className="text-xs text-muted-foreground flex flex-col gap-1">
+                    {(
+                      t("sections.deckRules.resourceDeck.rules", {
+                        returnObjects: true,
+                      }) as string[]
+                    ).map((r, i) => (
+                      <li key={i}>· {r}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div>
-                <span className="font-medium text-foreground">
-                  {t("sections.deckRules.playConditions.cost.name")}
-                </span>
-                <p>{t("sections.deckRules.playConditions.cost.desc")}</p>
+              <div className="rounded-md border p-3 flex flex-col gap-2 text-xs">
+                <p className="font-semibold">{t("sections.deckRules.playConditions.label")}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-muted-foreground">
+                  <div>
+                    <span className="font-medium text-foreground">
+                      {t("sections.deckRules.playConditions.level.name")}
+                    </span>
+                    <p>{t("sections.deckRules.playConditions.level.desc")}</p>
+                  </div>
+                  <div>
+                    <span className="font-medium text-foreground">
+                      {t("sections.deckRules.playConditions.cost.name")}
+                    </span>
+                    <p>{t("sections.deckRules.playConditions.cost.desc")}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <Note>{t("sections.deckRules.note")}</Note>
+              <Note>{t("sections.deckRules.note")}</Note>
+            </>
+          )}
         </Section>
 
         {/* ── card types ── */}
         <Section title={t("sections.cardTypes.title")}>
-          <div className="flex flex-col gap-2">
-            {(
-              [
-                {
-                  name: t("sections.cardTypes.items.unit.name"),
-                  color: "bg-blue-50 border-blue-200",
-                  head: "text-blue-700",
-                  desc: t("sections.cardTypes.items.unit.desc"),
-                  attrs: t("sections.cardTypes.items.unit.attrs", {
-                    returnObjects: true,
-                  }) as string[],
-                  notes: t("sections.cardTypes.items.unit.notes", {
-                    returnObjects: true,
-                  }) as string[],
-                  rotate: 6,
-                  cardRef: data.unitSample,
-                  cardRefs: data.unitSamples,
-                },
-                {
-                  name: t("sections.cardTypes.items.pilot.name"),
-                  color: "bg-pink-50 border-pink-200",
-                  head: "text-pink-700",
-                  desc: t("sections.cardTypes.items.pilot.desc"),
-                  attrs: t("sections.cardTypes.items.pilot.attrs", {
-                    returnObjects: true,
-                  }) as string[],
-                  notes: t("sections.cardTypes.items.pilot.notes", {
-                    returnObjects: true,
-                  }) as string[],
-                  rotate: -5,
-                  cardRef: data.pilotSample,
-                  cardRefs: data.pilotSamples,
-                },
-                {
-                  name: t("sections.cardTypes.items.command.name"),
-                  color: "bg-teal-50 border-teal-200",
-                  head: "text-teal-700",
-                  desc: t("sections.cardTypes.items.command.desc"),
-                  attrs: t("sections.cardTypes.items.command.attrs", {
-                    returnObjects: true,
-                  }) as string[],
-                  notes: t("sections.cardTypes.items.command.notes", {
-                    returnObjects: true,
-                  }) as string[],
-                  rotate: 8,
-                  cardRef: data.commandSample,
-                  cardRefs: data.commandSamples,
-                },
-                {
-                  name: t("sections.cardTypes.items.base.name"),
-                  color: "bg-gray-50 border-gray-200",
-                  head: "text-gray-700",
-                  desc: t("sections.cardTypes.items.base.desc"),
-                  attrs: t("sections.cardTypes.items.base.attrs", {
-                    returnObjects: true,
-                  }) as string[],
-                  notes: t("sections.cardTypes.items.base.notes", {
-                    returnObjects: true,
-                  }) as string[],
-                  rotate: -7,
-                  cardRef: data.baseSample,
-                  cardRefs: data.baseSamples,
-                },
-                {
-                  name: t("sections.cardTypes.items.resource.name"),
-                  color: "bg-yellow-50 border-yellow-200",
-                  head: "text-yellow-700",
-                  desc: t("sections.cardTypes.items.resource.desc"),
-                  attrs: t("sections.cardTypes.items.resource.attrs", {
-                    returnObjects: true,
-                  }) as string[],
-                  notes: t("sections.cardTypes.items.resource.notes", {
-                    returnObjects: true,
-                  }) as string[],
-                  rotate: 5,
-                  cardRef: data.resourceSample,
-                  cardRefs: data.resourceSamples,
-                },
-              ] as const
-            ).map((ct) => (
-              <CardTypeItem
-                key={ct.name}
-                ct={ct}
-                cardRef={ct.cardRef}
-                cardRefs={ct.cardRefs}
-                onOpen={setOverlayCardId}
-                viewOtherCardLabel={viewOtherCardLabel}
-              />
-            ))}
-          </div>
-          <Note>
-            <span className="font-medium">EX {t("sections.cardTypes.items.base.name")}:</span>{" "}
-            {t("sections.cardTypes.note").split("\n")[0]}
-            {"\n"}
-            <span className="font-medium">
-              EX {t("sections.cardTypes.items.resource.name")}:
-            </span>{" "}
-            {t("sections.cardTypes.note").split("\n")[1]}
-          </Note>
+          {(open) => (
+            <>
+              <div className="flex flex-col gap-2">
+                {(
+                  [
+                    {
+                      name: t("sections.cardTypes.items.unit.name"),
+                      color: "bg-blue-50 border-blue-200",
+                      head: "text-blue-700",
+                      desc: t("sections.cardTypes.items.unit.desc"),
+                      attrs: t("sections.cardTypes.items.unit.attrs", {
+                        returnObjects: true,
+                      }) as string[],
+                      notes: t("sections.cardTypes.items.unit.notes", {
+                        returnObjects: true,
+                      }) as string[],
+                      rotate: 6,
+                      cardRef: data.unitSample,
+                      cardRefs: data.unitSamples,
+                    },
+                    {
+                      name: t("sections.cardTypes.items.pilot.name"),
+                      color: "bg-pink-50 border-pink-200",
+                      head: "text-pink-700",
+                      desc: t("sections.cardTypes.items.pilot.desc"),
+                      attrs: t("sections.cardTypes.items.pilot.attrs", {
+                        returnObjects: true,
+                      }) as string[],
+                      notes: t("sections.cardTypes.items.pilot.notes", {
+                        returnObjects: true,
+                      }) as string[],
+                      rotate: -5,
+                      cardRef: data.pilotSample,
+                      cardRefs: data.pilotSamples,
+                    },
+                    {
+                      name: t("sections.cardTypes.items.command.name"),
+                      color: "bg-teal-50 border-teal-200",
+                      head: "text-teal-700",
+                      desc: t("sections.cardTypes.items.command.desc"),
+                      attrs: t("sections.cardTypes.items.command.attrs", {
+                        returnObjects: true,
+                      }) as string[],
+                      notes: t("sections.cardTypes.items.command.notes", {
+                        returnObjects: true,
+                      }) as string[],
+                      rotate: 8,
+                      cardRef: data.commandSample,
+                      cardRefs: data.commandSamples,
+                    },
+                    {
+                      name: t("sections.cardTypes.items.base.name"),
+                      color: "bg-gray-50 border-gray-200",
+                      head: "text-gray-700",
+                      desc: t("sections.cardTypes.items.base.desc"),
+                      attrs: t("sections.cardTypes.items.base.attrs", {
+                        returnObjects: true,
+                      }) as string[],
+                      notes: t("sections.cardTypes.items.base.notes", {
+                        returnObjects: true,
+                      }) as string[],
+                      rotate: -7,
+                      cardRef: data.baseSample,
+                      cardRefs: data.baseSamples,
+                    },
+                    {
+                      name: t("sections.cardTypes.items.resource.name"),
+                      color: "bg-yellow-50 border-yellow-200",
+                      head: "text-yellow-700",
+                      desc: t("sections.cardTypes.items.resource.desc"),
+                      attrs: t("sections.cardTypes.items.resource.attrs", {
+                        returnObjects: true,
+                      }) as string[],
+                      notes: t("sections.cardTypes.items.resource.notes", {
+                        returnObjects: true,
+                      }) as string[],
+                      rotate: 5,
+                      cardRef: data.resourceSample,
+                      cardRefs: data.resourceSamples,
+                    },
+                  ] as const
+                ).map((ct, i) => (
+                  <CardTypeItem
+                    key={ct.name}
+                    ct={ct}
+                    cardRef={ct.cardRef}
+                    cardRefs={ct.cardRefs}
+                    onOpen={setOverlayCardId}
+                    viewOtherCardLabel={viewOtherCardLabel}
+                    play={open}
+                    delay={i * 130}
+                  />
+                ))}
+              </div>
+              <Note>
+                <span className="font-medium">EX {t("sections.cardTypes.items.base.name")}:</span>{" "}
+                {t("sections.cardTypes.note").split("\n")[0]}
+                {"\n"}
+                <span className="font-medium">
+                  EX {t("sections.cardTypes.items.resource.name")}:
+                </span>{" "}
+                {t("sections.cardTypes.note").split("\n")[1]}
+              </Note>
+            </>
+          )}
         </Section>
 
         {/* ── game setup ── */}
