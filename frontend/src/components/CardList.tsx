@@ -169,6 +169,18 @@ export function CardList({
 
   return (
     <div ref={parentRef} className={scrollClassName}>
+      <style>{`
+        @keyframes card-grid-enter {
+          from {
+            opacity: 0;
+            transform: translate(-14px, -14px) scale(0.94);
+          }
+          to {
+            opacity: 1;
+            transform: translate(0, 0) scale(1);
+          }
+        }
+      `}</style>
       <div
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
@@ -180,6 +192,9 @@ export function CardList({
           const startIndex = virtualRow.index * columns;
           const endIndex = Math.min(startIndex + columns, data.cards.edges.length);
           const rowItems = data.cards.edges.slice(startIndex, endIndex);
+          // Diagonal wave: row contribution capped so later scrolled-in rows
+          // don't accumulate unbounded delay. First ~6 rows get the full wave.
+          const rowStep = Math.min(virtualRow.index, 4);
 
           return (
             <div
@@ -199,21 +214,31 @@ export function CardList({
                   gridTemplateColumns: `repeat(${columns}, 1fr)`,
                 }}
               >
-                {rowItems.map((edge) => (
-                  <Card
-                    key={edge.cursor}
-                    cardRef={edge.node}
-                    showDescription={showDescription}
-                    onAdd={onCardAdd}
-                    onRemove={onCardRemove}
-                    onOpen={onCardOpen}
-                    deckFull={deckFull}
-                    deckCardCount={
-                      deckCardCounts ? (deckCardCounts[(edge.node as any).id] ?? 0) : 0
-                    }
-                    deckColors={deckColors}
-                  />
-                ))}
+                {rowItems.map((edge, colIdx) => {
+                  const diagonal = rowStep + colIdx;
+                  return (
+                    <div
+                      key={edge.cursor}
+                      style={{
+                        animation: "card-grid-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both",
+                        animationDelay: `${diagonal * 11}ms`,
+                      }}
+                    >
+                      <Card
+                        cardRef={edge.node}
+                        showDescription={showDescription}
+                        onAdd={onCardAdd}
+                        onRemove={onCardRemove}
+                        onOpen={onCardOpen}
+                        deckFull={deckFull}
+                        deckCardCount={
+                          deckCardCounts ? (deckCardCounts[(edge.node as any).id] ?? 0) : 0
+                        }
+                        deckColors={deckColors}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           );
