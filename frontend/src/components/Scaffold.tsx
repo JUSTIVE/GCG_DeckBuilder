@@ -103,7 +103,7 @@ function MonobarBrand() {
   return (
     <Link
       to={`/${locale}` as any}
-      className="flex items-baseline gap-2 docket-meta-strong text-foreground hover:opacity-80 transition-opacity"
+      className="hidden sm:flex items-baseline gap-2 docket-meta-strong text-foreground hover:opacity-80 transition-opacity"
     >
       <span className="display-title text-sm sm:text-base font-bold tracking-tight">
         GCG DECKBUILDER
@@ -134,13 +134,12 @@ export default function Scaffold({ children }: PropsWithChildren) {
         <header className="flex justify-between h-[calc(3.25rem+env(safe-area-inset-top))] shrink-0 items-center border-b border-foreground/30 sticky top-0 z-2 bg-background pt-[env(safe-area-inset-top)]">
           <div className="flex items-center gap-2 px-3 h-full min-w-0">
             <SidebarTrigger />
-            <Separator orientation="vertical" className="mr-1 h-4" />
+            <Separator orientation="vertical" className="mr-1 h-4 hidden sm:block" />
             <MonobarBrand />
             <MonobarMeta />
+            <AppBreadcrumb />
           </div>
           <div className="flex items-center gap-1 px-3 h-full border-l border-foreground/20 shrink-0">
-            <AppBreadcrumb />
-            <Separator orientation="vertical" className="mx-2 h-4" />
             <LanguageSwitcher />
             <ThemeToggle />
             <QuickSearch />
