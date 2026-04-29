@@ -19,7 +19,8 @@
     "deleteAll": "全削除",
     "create": "作成",
     "import": "インポート",
-    "copy": "コピー"
+    "copy": "コピー",
+    "close": "閉じる"
   },
   "search": {
     "label": "検索",
@@ -112,5 +113,9 @@
     "useExResource": "EXリソース使用",
     "turnStart": "ターン開始 (+1レベル / リソース回復)",
     "turnEnd": "ターン終了"
+  },
+  "pwa": {
+    "updateAvailable": "新しいバージョンがあります。",
+    "update": "更新"
   }
 }
