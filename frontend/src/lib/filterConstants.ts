@@ -114,7 +114,7 @@ export const TRAIT_LABELS: Record<CardTrait, string> = {
   UN: "UN",
   MINERVA_SQUAD: "미네르바",
   LEAGUE_MILITAIRE: "리그 밀리테르",
-  SATYRICON: "새티리콘",
+  SATYRICON: "사티리콘",
   MILITIA: "밀리샤",
   SHRIKE_TEAM: "슈라크 부대",
   MOONRACE: "문레이스",
