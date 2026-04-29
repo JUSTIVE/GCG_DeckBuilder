@@ -6,7 +6,15 @@ import processed from "../data/3.processed.json";
 const BASE = "https://www.gundam-gcg.com/en/images/cards/card";
 const OUT_DIR = join(import.meta.dir, "../frontend/public/cards");
 
-const imageFiles: string[] = (processed as { imageFile: string }[]).map((c) => c.imageFile);
+type ProcessedCard = { imageFile: string; printings?: { imageFile: string }[] };
+const imageFiles: string[] = [
+  ...new Set(
+    (processed as ProcessedCard[]).flatMap((c) => [
+      c.imageFile,
+      ...(c.printings ?? []).map((p) => p.imageFile),
+    ]),
+  ),
+];
 
 const limit = pLimit(5);
 
