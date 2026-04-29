@@ -1,7 +1,7 @@
-import { useTransition, useRef, useEffect } from "react";
+import { useTransition, useState } from "react";
 import { useTranslation } from "react-i18next";
 import i18n from "@/i18n";
-import { graphql, useRefetchableFragment, useFragment } from "react-relay";
+import { graphql, useLazyLoadQuery, useFragment } from "react-relay";
 import { serveGraphQL } from "@/serve";
 import { cn } from "@/lib/utils";
 import { COLOR_BG, COLOR_HEX } from "src/render/color";
@@ -11,7 +11,7 @@ import { renderZone } from "@/render/zone";
 import { renderKeyword } from "@/render/keyword";
 import { ClockIcon, EyeIcon, SearchIcon, Trash2Icon, XIcon } from "lucide-react";
 import { localize } from "@/lib/localize";
-import type { SearchHistoryPanel_query$key } from "@/__generated__/SearchHistoryPanel_query.graphql";
+import type { SearchHistoryPanelQuery } from "@/__generated__/SearchHistoryPanelQuery.graphql";
 import type { SearchHistoryPanel_list$key } from "@/__generated__/SearchHistoryPanel_list.graphql";
 import type { SearchHistoryPanel_filterSearch$key } from "@/__generated__/SearchHistoryPanel_filterSearch.graphql";
 import type { SearchHistoryPanel_cardView$key } from "@/__generated__/SearchHistoryPanel_cardView.graphql";
@@ -19,6 +19,14 @@ import type { CardFilterInput } from "@/__generated__/CardListFragmentRefetchQue
 import type { CardSort } from "@/__generated__/CardListPageQuery.graphql";
 
 // ─── Fragments ────────────────────────────────────────────────────────────────
+
+const HistoryQuery = graphql`
+  query SearchHistoryPanelQuery {
+    searchHistory {
+      ...SearchHistoryPanel_list
+    }
+  }
+`;
 
 export const SearchHistoryListFragment = graphql`
   fragment SearchHistoryPanel_list on SearchHistoryList {
@@ -32,15 +40,6 @@ export const SearchHistoryListFragment = graphql`
         id
         ...SearchHistoryPanel_cardView
       }
-    }
-  }
-`;
-
-export const SearchHistoryPanelFragment = graphql`
-  fragment SearchHistoryPanel_query on Query
-  @refetchable(queryName: "SearchHistoryPanelRefetchQuery") {
-    searchHistory {
-      ...SearchHistoryPanel_list
     }
   }
 `;
@@ -416,25 +415,20 @@ function CardViewRow({
 // ─── Public component ─────────────────────────────────────────────────────────
 
 type Props = {
-  queryRef: SearchHistoryPanel_query$key;
   onRestore: (filter: CardFilterInput, sort: CardSort | null) => void;
   onRestoreCardView?: (cardId: string) => void;
   fetchKey?: string;
 };
 
-export function SearchHistoryPanel({ queryRef, onRestore, onRestoreCardView, fetchKey }: Props) {
+export function SearchHistoryPanel({ onRestore, onRestoreCardView, fetchKey }: Props) {
   const { t } = useTranslation("common");
   const [, startTransition] = useTransition();
-  const [data, refetch] = useRefetchableFragment(SearchHistoryPanelFragment, queryRef);
-
-  const prevFetchKeyRef = useRef(fetchKey);
-  useEffect(() => {
-    if (fetchKey === undefined || fetchKey === prevFetchKeyRef.current) return;
-    prevFetchKeyRef.current = fetchKey;
-    startTransition(() => {
-      refetch({}, { fetchPolicy: "network-only" });
-    });
-  }, [fetchKey, refetch]);
+  const [internalKey, setInternalKey] = useState(0);
+  const data = useLazyLoadQuery<SearchHistoryPanelQuery>(
+    HistoryQuery,
+    {},
+    { fetchKey: `${fetchKey ?? ""}:${internalKey}`, fetchPolicy: "network-only" },
+  );
 
   const historyList = useFragment(
     SearchHistoryListFragment,
@@ -445,7 +439,7 @@ export function SearchHistoryPanel({ queryRef, onRestore, onRestoreCardView, fet
 
   function refetchHistory() {
     startTransition(() => {
-      refetch({}, { fetchPolicy: "network-only" });
+      setInternalKey((k) => k + 1);
     });
   }
 
