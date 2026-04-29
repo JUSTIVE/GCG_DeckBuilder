@@ -25,7 +25,7 @@ jobs:
   seed:
     name: Seed Database
     needs: deploy
-    if: contains(toJson(github.event.commits.*.modified), 'data/3.processed.json')
+    if: github.event_name == 'workflow_dispatch' || contains(toJson(github.event.commits.*.modified), 'data/3.processed.json')
     runs-on: ubuntu-latest
     steps:
       - uses: superfly/flyctl-actions/setup-flyctl@master
