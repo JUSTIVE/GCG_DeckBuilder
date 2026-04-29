@@ -113,6 +113,15 @@ export const TRAIT_LABELS: Record<CardTrait, string> = {
   CYCLOPS_TEAM: "사이클롭스",
   UN: "UN",
   MINERVA_SQUAD: "미네르바",
+  LEAGUE_MILITAIRE: "리그 밀리테르",
+  SATYRICON: "사티리콘",
+  MILITIA: "밀리샤",
+  SHRIKE_TEAM: "슈라크 부대",
+  MOONRACE: "문레이스",
+  TRINITY: "트리니티",
+  VICTORY_TYPE: "V 타입",
+  ZANSCARE: "잔스카르",
+  DAWN_OF_FOLD: "폴드의 새벽",
 };
 
 export const getSeriesLabels = () =>
@@ -128,6 +137,7 @@ export const getPackGroups = () => {
         { value: "GD01", label: "GD01" },
         { value: "GD02", label: "GD02" },
         { value: "GD03", label: "GD03" },
+        { value: "GD04", label: "GD04" },
       ],
     },
     {

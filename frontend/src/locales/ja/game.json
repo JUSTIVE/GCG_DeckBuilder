@@ -76,7 +76,16 @@
     "JUPITRIS": "ジュピトリス",
     "CYCLOPS_TEAM": "サイクロプス隊",
     "UN": "UN",
-    "MINERVA_SQUAD": "ミネルバ隊"
+    "MINERVA_SQUAD": "ミネルバ隊",
+    "LEAGUE_MILITAIRE": "リガ・ミリティア",
+    "SATYRICON": "サテリコン",
+    "MILITIA": "ミリシャ",
+    "SHRIKE_TEAM": "シュラク隊",
+    "MOONRACE": "ムーンレィス",
+    "TRINITY": "トリニティ",
+    "VICTORY_TYPE": "V型",
+    "ZANSCARE": "ザンスカール",
+    "DAWN_OF_FOLD": "夜明けのフォールド"
   },
   "series": {
     "MOBILE_SUIT_GUNDAM": "機動戦士ガンダム",
@@ -93,7 +102,9 @@
     "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS": "機動戦士ガンダム 鉄血のオルフェンズ",
     "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH": "機動戦士ガンダム 閃光のハサウェイ",
     "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY": "機動戦士ガンダム 水星の魔女",
-    "MOBILE_SUIT_GUNDAM_GQUUUUUUX": "機動戦士ガンダムGUUUUUUX"
+    "MOBILE_SUIT_GUNDAM_GQUUUUUUX": "機動戦士ガンダムGUUUUUUX",
+    "MOBILE_SUIT_V_GUNDAM": "機動戦士Vガンダム",
+    "TURN_A_GUNDAM": "∀ガンダム"
   },
   "zone": {
     "SPACE": "宇宙",
@@ -103,6 +114,7 @@
     "GD01": "ブースターパック1",
     "GD02": "ブースターパック2",
     "GD03": "ブースターパック3",
+    "GD04": "ブースターパック4",
     "ST01": "スターターデッキ1",
     "ST02": "スターターデッキ2",
     "ST03": "スターターデッキ3",

@@ -47,6 +47,8 @@ const VALID_TRAITS = new Set<string>([
   "NEW_UNE", "UE", "VAGAN", "BIOLOGICAL_CPU", "ASUNO_FAMILY", "X_ROUNDER",
   "SUPERPOWER_BLOC", "CB", "INNOVADE", "GN_DRIVE", "SUPER_SOLDIER", "MAFTY",
   "SRA", "OLD_UNE", "JUPITRIS", "CYCLOPS_TEAM", "UN", "MINERVA_SQUAD",
+  "LEAGUE_MILITAIRE", "SATYRICON", "MILITIA", "SHRIKE_TEAM", "MOONRACE",
+  "TRINITY", "VICTORY_TYPE", "ZANSCARE", "DAWN_OF_FOLD",
 ]);
 
 function toTraitKey(s: string): string {
@@ -89,10 +91,13 @@ function parsePlayableCardSchema(html: string): PlayableCard {
     .map((x) => (x.includes("DURING_LINK") ? "DURING_LINK" : x))
     .map((x) => (x.includes("DURING_PAIR") ? "DURING_PAIR" : x));
   const series: GundamSeries = field($, "Source Title")
+    .replaceAll("∀", "TURN_A")
     .replaceAll(" ", "_")
     .replaceAll("-", "_")
     .replaceAll(":", "")
     .replaceAll("'", "")
+    .replaceAll("'", "")
+    .replaceAll('"', "")
     .toUpperCase() as GundamSeries;
   const trait = [...field($, "Trait").matchAll(/\((.*?)\)/g)].map(
     (m) => toTraitKey(m[1] ?? ""),

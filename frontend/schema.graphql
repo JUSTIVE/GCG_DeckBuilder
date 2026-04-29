@@ -83,6 +83,15 @@ enum CardTrait {
   CYCLOPS_TEAM # 사이클롭스 부대
   UN # UN
   MINERVA_SQUAD # 미네르바 부대
+  LEAGUE_MILITAIRE # 리그 밀리테르
+  SATYRICON # 사티리콘
+  MILITIA # 밀리샤
+  SHRIKE_TEAM # 슈라크 부대
+  MOONRACE # 문레이스
+  TRINITY # 트리니티
+  VICTORY_TYPE # V 타입
+  ZANSCARE # 잔스카르
+  DAWN_OF_FOLD # 폴드의 새벽
 }
 
 enum CardColor {
@@ -110,6 +119,8 @@ enum GundamSeries {
   MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH # 기동전사 건담 섬광의 하사웨이
   MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY # 기동전사 건담 수성의 마녀
   MOBILE_SUIT_GUNDAM_GQUUUUUUX # 기동전사 건담 GQUUUUUUX
+  MOBILE_SUIT_V_GUNDAM # 기동전사 V건담
+  TURN_A_GUNDAM # ∀건담
 }
 
 enum CardKeyword {
@@ -160,6 +171,7 @@ enum CardPackage {
   GD01 # 부스트팩 1
   GD02 # 부스트팩 2
   GD03 # 부스트팩 3
+  GD04 # 부스트팩 4
   ST01 # 스타터덱 1
   ST02 # 스타터덱 2
   ST03 # 스타터덱 3

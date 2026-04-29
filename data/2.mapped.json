@@ -1666,6 +1666,11 @@
         "rarity": "LEGENDARY_RARE_PLUS",
         "imageFile": "ST04-001_p1",
         "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "ST04-001_p4",
+        "block": "1"
       }
     ]
   },
@@ -2054,6 +2059,16 @@
         "rarity": "COMMON",
         "imageFile": "ST04-015_p3",
         "block": "1"
+      },
+      {
+        "rarity": "COMMON",
+        "imageFile": "ST04-015_p4",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "ST04-015_p5",
+        "block": "1"
       }
     ]
   },
@@ -2439,6 +2454,11 @@
       {
         "rarity": "COMMON",
         "imageFile": "GD01-013_p2",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD01-013_p3",
         "block": "1"
       }
     ]
@@ -4709,6 +4729,11 @@
         "rarity": "COMMON_PLUS",
         "imageFile": "ST01-014_p3",
         "block": "1"
+      },
+      {
+        "rarity": "COMMON",
+        "imageFile": "ST01-014_p7",
+        "block": "1"
       }
     ]
   },
@@ -5631,6 +5656,11 @@
       {
         "rarity": "LEGENDARY_RARE_PLUS",
         "imageFile": "ST03-006_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "ST03-006_p2",
         "block": "1"
       }
     ]
@@ -7722,6 +7752,11 @@
         "rarity": "COMMON_PLUS",
         "imageFile": "ST05-015_p1",
         "block": "1"
+      },
+      {
+        "rarity": "COMMON",
+        "imageFile": "ST05-015_p2",
+        "block": "1"
       }
     ]
   },
@@ -8284,6 +8319,16 @@
       {
         "rarity": "COMMON",
         "imageFile": "ST06-009_p2",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON",
+        "imageFile": "ST06-009_p3",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "ST06-009_p4",
         "block": "1"
       }
     ]
@@ -10653,6 +10698,11 @@
         "rarity": "LEGENDARY_RARE",
         "imageFile": "ST09-001",
         "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "ST09-001_p1",
+        "block": "1"
       }
     ]
   },
@@ -10709,6 +10759,11 @@
       {
         "rarity": "LEGENDARY_RARE",
         "imageFile": "ST09-002",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "ST09-002_p1",
         "block": "1"
       }
     ]
@@ -10779,6 +10834,11 @@
       {
         "rarity": "LEGENDARY_RARE",
         "imageFile": "ST09-003",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "ST09-003_p1",
         "block": "1"
       }
     ]
@@ -10860,6 +10920,11 @@
         "rarity": "LEGENDARY_RARE",
         "imageFile": "ST09-004",
         "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "ST09-004_p1",
+        "block": "1"
       }
     ]
   },
@@ -10895,6 +10960,11 @@
       {
         "rarity": "COMMON",
         "imageFile": "ST09-005",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "ST09-005_p1",
         "block": "1"
       }
     ]
@@ -10949,6 +11019,11 @@
       {
         "rarity": "COMMON",
         "imageFile": "ST09-006",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "ST09-006_p1",
         "block": "1"
       }
     ]
@@ -11006,6 +11081,11 @@
       {
         "rarity": "COMMON",
         "imageFile": "ST09-007",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "ST09-007_p1",
         "block": "1"
       }
     ]
@@ -11066,6 +11146,11 @@
         "rarity": "COMMON",
         "imageFile": "ST09-008",
         "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "ST09-008_p1",
+        "block": "1"
       }
     ]
   },
@@ -11116,6 +11201,11 @@
       {
         "rarity": "COMMON",
         "imageFile": "ST09-009",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "ST09-009_p1",
         "block": "1"
       }
     ]
@@ -11179,6 +11269,11 @@
       {
         "rarity": "COMMON",
         "imageFile": "ST09-010",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "ST09-010_p1",
         "block": "1"
       }
     ]
@@ -11539,6 +11634,9 @@
     "printings": [
       {
         "imageFile": "R-030"
+      },
+      {
+        "imageFile": "R-030_p1"
       }
     ]
   },
@@ -11550,6 +11648,9 @@
     "printings": [
       {
         "imageFile": "EXB-002"
+      },
+      {
+        "imageFile": "EXB-002_p1"
       }
     ]
   },
@@ -11561,6 +11662,9 @@
     "printings": [
       {
         "imageFile": "EXR-002"
+      },
+      {
+        "imageFile": "EXR-002_p1"
       }
     ]
   },
@@ -11720,6 +11824,11 @@
       {
         "rarity": "LEGENDARY_RARE_PLUS",
         "imageFile": "GD01-002_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD01-002_p2",
         "block": "1"
       }
     ]
@@ -17579,6 +17688,16 @@
         "rarity": "RARE",
         "imageFile": "GD02-006",
         "block": "1"
+      },
+      {
+        "rarity": "RARE",
+        "imageFile": "GD02-006_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD02-006_p2",
+        "block": "1"
       }
     ]
   },
@@ -19406,6 +19525,16 @@
         "rarity": "RARE",
         "imageFile": "GD02-039",
         "block": "1"
+      },
+      {
+        "rarity": "RARE",
+        "imageFile": "GD02-039_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD02-039_p2",
+        "block": "1"
       }
     ]
   },
@@ -20475,6 +20604,11 @@
       {
         "rarity": "RARE",
         "imageFile": "GD02-058",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE",
+        "imageFile": "GD02-058_p1",
         "block": "1"
       }
     ]
@@ -22204,6 +22338,16 @@
         "rarity": "COMMON",
         "imageFile": "GD02-090",
         "block": "1"
+      },
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD02-090_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "GD02-090_p2",
+        "block": "1"
       }
     ]
   },
@@ -22587,6 +22731,16 @@
       {
         "rarity": "COMMON",
         "imageFile": "GD02-096",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD02-096_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "GD02-096_p2",
         "block": "1"
       }
     ]
@@ -23065,6 +23219,16 @@
       {
         "rarity": "UNCOMMON",
         "imageFile": "GD02-104",
+        "block": "1"
+      },
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD02-104_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "UNCOMMON_PLUS",
+        "imageFile": "GD02-104_p2",
         "block": "1"
       }
     ]
@@ -26488,6 +26652,11 @@
         "rarity": "UNCOMMON",
         "imageFile": "GD03-026",
         "block": "1"
+      },
+      {
+        "rarity": "UNCOMMON_PLUS",
+        "imageFile": "GD03-026_p1",
+        "block": "1"
       }
     ]
   },
@@ -26526,6 +26695,11 @@
       {
         "rarity": "COMMON",
         "imageFile": "GD03-027",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD03-027_p1",
         "block": "1"
       }
     ]
@@ -26917,6 +27091,11 @@
         "rarity": "LEGENDARY_RARE_PLUS",
         "imageFile": "GD03-034_p1",
         "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD03-034_p2",
+        "block": "1"
       }
     ]
   },
@@ -27267,6 +27446,11 @@
       {
         "rarity": "RARE",
         "imageFile": "GD03-039",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD03-039_p1",
         "block": "1"
       }
     ]
@@ -27863,6 +28047,11 @@
         "rarity": "LEGENDARY_RARE_PLUS",
         "imageFile": "GD03-050_p1",
         "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD03-050_p3",
+        "block": "1"
       }
     ]
   },
@@ -28210,6 +28399,11 @@
         "rarity": "RARE",
         "imageFile": "GD03-055",
         "block": "1"
+      },
+      {
+        "rarity": "RARE",
+        "imageFile": "GD03-055_p1",
+        "block": "1"
       }
     ]
   },
@@ -28266,6 +28460,11 @@
       {
         "rarity": "RARE",
         "imageFile": "GD03-056",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD03-056_p1",
         "block": "1"
       }
     ]
@@ -30033,6 +30232,16 @@
         "rarity": "COMMON",
         "imageFile": "GD03-087",
         "block": "1"
+      },
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD03-087_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "GD03-087_p2",
+        "block": "1"
       }
     ]
   },
@@ -30864,6 +31073,11 @@
         "rarity": "COMMON",
         "imageFile": "GD03-100",
         "block": "1"
+      },
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD03-100_p1",
+        "block": "1"
       }
     ]
   },
@@ -31393,6 +31607,11 @@
         "rarity": "RARE_PLUS",
         "imageFile": "GD03-109_p1",
         "block": "1"
+      },
+      {
+        "rarity": "RARE",
+        "imageFile": "GD03-109_p2",
+        "block": "1"
       }
     ]
   },
@@ -31627,6 +31846,16 @@
       {
         "rarity": "COMMON",
         "imageFile": "GD03-113",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD03-113_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "COMMON_PLUS",
+        "imageFile": "GD03-113_p2",
         "block": "1"
       }
     ]
@@ -33106,6 +33335,8166 @@
     ]
   },
   {
+    "id": "GD04-001",
+    "name": {
+      "en": "Gundam",
+      "ko": "건담"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 6,
+    "cost": 4,
+    "color": "BLUE",
+    "keywords": [
+      "DURING_LINK",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION",
+      "WHITE_BASE_TEAM"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "If you are attacking an enemy Unit, you may return a blue Pilot paired with this Unit to its owner's hand.",
+          "ko": "상대의 유닛에게 어택하고 있다면, 이 유닛에 세트되어 있는 청색의 파일럿을 주인의 패로 되돌린다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 6,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Amuro Ray",
+        "ko": "아무로 레이"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-001",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-001",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-001_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-002",
+    "name": {
+      "en": "Penelope (Flight Form)",
+      "ko": "페넬로페 (플라이트 폼)"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 6,
+    "cost": 5,
+    "color": "BLUE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "prose",
+          "en": "During your turn, all your (Earth Federation) Units get AP+1.",
+          "ko": "자신의 턴 동안, (지구연방)인 자신의 유닛 전부를 AP+1한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "During this turn, when one of your (Earth Federation) Units destroys an enemy Unit with battle damage, choose 1 enemy Unit with 5 or less HP. Rest it.",
+          "ko": "이 턴 동안, (지구연방)인 자신의 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, HP5 이하인 상대의 유닛 1개를 선택한다. 그것을 레스트한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Lane Aim",
+        "ko": "레인 에임"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-002",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-002",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-002_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-003",
+    "name": {
+      "en": "Victory Gundam",
+      "ko": "V 건담"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 4,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE",
+      "VICTORY_TYPE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "If you have 3 or more (League Militaire) Units in play, draw 1.",
+          "ko": "(리가 밀리티어)인 자신의 유닛이 3개 이상 있다면, 자신은 1장 드로우한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "LEAGUE_MILITAIRE"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-003",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-003",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-003_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-004",
+    "name": {
+      "en": "Psycho Gundam Mk-Ⅱ",
+      "ko": "사이코 건담 Mk-Ⅱ"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 8,
+    "cost": 7,
+    "color": "BLUE",
+    "keywords": [
+      "REPAIR",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "TITANS"
+    ],
+    "relatedTrait": [
+      "CYBER_NEWTYPE"
+    ],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "REPAIR",
+          "n": 2
+        },
+        {
+          "type": "prose",
+          "en": "(At the end of your turn, this Unit recovers the specified number of HP.)",
+          "ko": "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "When you pair a (Cyber-Newtype) Pilot with one of your blue Units, draw 1.",
+          "ko": "청색인 자신의 유닛에 (강화인간)인 파일럿이 세트되었을 때, 자신은 1장 드로우한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 7,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Rosamia Badam",
+        "ko": "로자미아 바담"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-004",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-004",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-005",
+    "name": {
+      "en": "GM III",
+      "ko": "짐Ⅲ"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 2,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-005",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-005",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-006",
+    "name": {
+      "en": "V-Dash Gundam",
+      "ko": "V 대시 건담"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 6,
+    "cost": 4,
+    "color": "BLUE",
+    "keywords": [
+      "BREACH",
+      "ACTIVATE_MAIN",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE",
+      "VICTORY_TYPE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "BREACH",
+          "n": 3
+        },
+        {
+          "type": "prose",
+          "en": "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+          "ko": "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ACTIVATE_MAIN"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "Rest 1 of your other (League Militaire) Units：Choose 1 enemy Unit with 4 or less HP. Rest it.",
+          "ko": "이 유닛 이외의, (리가 밀리티어)인 자신의 유닛 1개를 레스트한다 : HP4 이하인 상대의 유닛 1개를 선택한다. 그것을 레스트한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Üso Ewin",
+        "ko": "웃소 에빈"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-006",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-006",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-006_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-007",
+    "name": {
+      "en": "Victory Gundam Hexa",
+      "ko": "V 건담 헥사"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 4,
+    "color": "BLUE",
+    "keywords": [
+      "DURING_PAIR",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE",
+      "VICTORY_TYPE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_PAIR"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy 1 [Parts]((League Militaire)･AP1･HP1･This Unit can't choose the enemy player as its attack target) Unit token.",
+          "ko": "[파츠] 유닛 토큰 1개를 배치한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "LEAGUE_MILITAIRE"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-007",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-007",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-008",
+    "name": {
+      "en": "Gundam",
+      "ko": "건담"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "BLUE",
+    "keywords": [
+      "DURING_LINK",
+      "HIGH_MANEUVER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION",
+      "WHITE_BASE_TEAM"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "prose",
+          "en": "This Unit gains",
+          "ko": "이 유닛은"
+        },
+        {
+          "type": "ability",
+          "keyword": "HIGH_MANEUVER"
+        },
+        {
+          "type": "prose",
+          "en": ".",
+          "ko": "을 얻는다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "(This Unit can't be blocked.)",
+          "ko": "(이 유닛은 블록당하지 않는다.)"
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Amuro Ray",
+        "ko": "아무로 레이"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-008",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-008",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-009",
+    "name": {
+      "en": "Guncannon (108) & Guncannon (109)",
+      "ko": "건캐논 (108) & 건캐논 (109)"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 4,
+    "color": "BLUE",
+    "keywords": [
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION",
+      "WHITE_BASE_TEAM"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "WHEN_LINKED"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your other (White Base Team) Units that is Lv.4 or higher. Set it as active.",
+          "ko": "이 유닛 이외의, Lv. 4 이상의 (WB 대)인 자신의 유닛 1개를 선택한다. 그것을 액티브한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Kai Shiden / Hayato Kobayashi",
+        "ko": "카이 시덴 / 하야토 코바야시"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-009",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-009",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-009_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-010",
+    "name": {
+      "en": "Gaplant",
+      "ko": "갸프랑"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "TITANS"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "TITANS"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-010",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-010",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-011",
+    "name": {
+      "en": "Victory Gundam",
+      "ko": "V 건담"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE",
+      "VICTORY_TYPE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DESTROYED"
+        },
+        {
+          "type": "prose",
+          "en": "If another friendly (League Militaire) Unit is in play, deploy 1 [Parts]((League Militaire)･AP1･HP1･This Unit can't choose the enemy player as its attack target) Unit token.",
+          "ko": "이 유닛 이외의, (리가 밀리티어)인 아군의 유닛이 있다면, [파츠] 유닛 토큰 1개를 배치한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-011",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-011",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-012",
+    "name": {
+      "en": "Core Booster (005) & Core Booster (006)",
+      "ko": "코어 부스터 (005) & 코어 부스터 (006)"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION",
+      "WHITE_BASE_TEAM"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Sleggar Law / Sayla Mass",
+        "ko": "슬레거 로우 / 세일러 마스"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-012",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-012",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-013",
+    "name": {
+      "en": "Core Fighter",
+      "ko": "코어 파이터"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE",
+      "VICTORY_TYPE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "prose",
+          "en": "While this Unit is rested, all your (League Militaire) Unit tokens gain",
+          "ko": "이 유닛이 레스트인 동안, (리가 밀리티어)인 자신의 유닛 토큰 전부는"
+        },
+        {
+          "type": "ability",
+          "keyword": "BLOCKER"
+        },
+        {
+          "type": "prose",
+          "en": ".",
+          "ko": "를 얻는다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "(Rest this Unit to change the attack target to it.)",
+          "ko": "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "LEAGUE_MILITAIRE"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-013",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-013",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-014",
+    "name": {
+      "en": "Shokew",
+      "ko": "샷코"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 2,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE",
+      "ZANSCARE"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 3,
+    "zone": [
+      "EARTH"
+    ],
+    "imageFile": "GD04-014",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-014",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-015",
+    "name": {
+      "en": "Gun EZ",
+      "ko": "건이지"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE",
+      "SHRIKE_TEAM"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your active (League Militaire) Units and 1 enemy Unit that is Lv.3 or lower. Rest them.",
+          "ko": "액티브의 (리가 밀리티어)인 자신의 유닛 1개와, Lv. 3 이하인 상대의 유닛 1개를 선택한다. 그것들을 레스트한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "SHRIKE_TEAM"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-015",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-015",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-016",
+    "name": {
+      "en": "Zoloat (League Militaire)",
+      "ko": "조로아트  (리가 밀리티어 사양)"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 2,
+    "cost": 2,
+    "color": "BLUE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "BLOCKER"
+        },
+        {
+          "type": "prose",
+          "en": "(Rest this Unit to change the attack target to it.)",
+          "ko": "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "This Unit can't choose the enemy player as its attack target.",
+          "ko": "이 유닛은, 상대 플레이어를 공격 대상으로 선택할 수 없다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 2,
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-016",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-016",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-017",
+    "name": {
+      "en": "Zeong",
+      "ko": "지옹"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 6,
+    "cost": 5,
+    "color": "GREEN",
+    "keywords": [
+      "WHEN_PAIRED",
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "ZEON"
+    ],
+    "relatedTrait": [
+      "NEWTYPE"
+    ],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "WHEN_PAIRED",
+          "qualifier": {
+            "en": "･(Newtype) Pilot",
+            "ko": "･(뉴타입)인 파일럿"
+          }
+        },
+        {
+          "type": "prose",
+          "en": "Deploy 2 [Wire-Guided Arm]((Zeon)･AP2･HP1・This Unit can't be paired with a Pilot) Unit tokens.",
+          "ko": "[유선식 암] 유닛 토큰 2개를 배치한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DESTROYED"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy 1 rested [Zeong (Head)]((Zeon)･AP3･HP1) Unit token.",
+          "ko": "[지옹 (헤드)] 유닛 토큰 1개를 배치한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Char Aznable",
+        "ko": "샤아 아즈나블"
+      }
+    },
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-017",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-017",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-017_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS_PLUS",
+        "imageFile": "GD04-017_p2",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-018",
+    "name": {
+      "en": "Gundam Pharact",
+      "ko": "건담 파렉트"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 6,
+    "cost": 4,
+    "color": "GREEN",
+    "keywords": [
+      "BREACH",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "ACADEMY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "BREACH",
+          "n": 5
+        },
+        {
+          "type": "prose",
+          "en": "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+          "ko": "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "During your turn, when one of your other (Academy) Units receives damage from an enemy, place 1 EX Resource.",
+          "ko": "자신의 턴 동안, 이 유닛 이외의, (학원)인 자신의 유닛이 상대로부터 대미지를 받았을 때, 자신은 EX 리소스 1개를 추가한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Elan Ceres",
+        "ko": "엘란 케레스"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-018",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-018",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-018_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-019",
+    "name": {
+      "en": "GN Armor Type-D (Trans-Am)",
+      "ko": "GN 아머 Type-D (트란잠)"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 6,
+    "cost": 5,
+    "color": "GREEN",
+    "keywords": [
+      "BREACH",
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "BREACH",
+          "n": 3
+        },
+        {
+          "type": "prose",
+          "en": "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+          "ko": "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DESTROYED"
+        },
+        {
+          "type": "prose",
+          "en": "Look at the top 3 cards of your deck. You may reveal 1 (CB) Unit card that is Lv.5 or lower among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck.",
+          "ko": "자신의 덱을 위에서 3장 보고, 그중에, Lv. 5 이하의 (CB)인 유닛 카드 1장을 공개하고 패에 추가할 수 있다. 남은 카드는 무작위로 덱 아래로 되돌린다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Lockon Stratos",
+        "ko": "록온 스트라토스"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-019",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-019",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-020",
+    "name": {
+      "en": "Gundam Lfrith Ur",
+      "ko": "건담 르브리스 울"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 4,
+    "cost": 3,
+    "color": "GREEN",
+    "keywords": [
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "DAWN_OF_FOLD",
+      "ACADEMY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "During your turn, when you play and activate a (Dawn of Fold) Command card using an EX Resource, draw 1.",
+          "ko": "자신의 턴 동안, 자신이 EX 리소스를 사용해 (폴드의 새벽)인 커맨드 카드를 플레이해 발동했을 때, 자신은 1장 드로우한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Sophie Pulone",
+        "ko": "소피 플로네"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-020",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-020",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-021",
+    "name": {
+      "en": "Gundam Lfrith Thorn",
+      "ko": "건담 르브리스 손"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "GREEN",
+    "keywords": [
+      "BREACH"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "DAWN_OF_FOLD",
+      "ACADEMY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "BREACH",
+          "n": 3
+        },
+        {
+          "type": "prose",
+          "en": "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+          "ko": "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "During your turn, when you play and activate a (Dawn of Fold) Command card using an EX Resource, you may pair that card from your trash with one of your Units with \"Gundam Lfrith\" in its card name.",
+          "ko": "자신의 턴 동안, 자신이 EX 리소스를 사용해 (폴드의 새벽)인 커맨드 카드를 플레이해 발동했을 때,  트래시의 그 카드를, 카드명에 「건담 르브리스」를 포함한 자신의 유닛에 세트할 수 있다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Norea Du Noc",
+        "ko": "노레아 듀노크"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-021",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-021",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-021_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-022",
+    "name": {
+      "en": "Kikeroga (MS Mode) (GQ)",
+      "ko": "키케로가 (MS 형태) (GQ)"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 7,
+    "cost": 4,
+    "color": "GREEN",
+    "keywords": [
+      "BREACH",
+      "DURING_LINK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD04",
+    "trait": [
+      "ZEON"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "prose",
+          "en": "All your Unit tokens gain",
+          "ko": "자신의 유닛 토큰 전부는"
+        },
+        {
+          "type": "ability",
+          "keyword": "BREACH",
+          "n": 1
+        },
+        {
+          "type": "prose",
+          "en": ".",
+          "ko": "을 얻는다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+          "ko": "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "prose",
+          "en": "All Units that are Lv.3 or lower other than Unit tokens are deployed rested.",
+          "ko": "유닛 토큰 이외의, Lv. 3 이하인 유닛 전부는, 레스트로 배치된다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 6,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Challia Bull",
+        "ko": "샤리아 불"
+      }
+    },
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-022",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-022",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-022_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-023",
+    "name": {
+      "en": "Gundam Kyrios (Tail Booster)",
+      "ko": "건담 큐리오스 (테일 부스터 장비)"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 4,
+    "color": "GREEN",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [
+      "SUPER_SOLDIER"
+    ],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your Units paired with a (Super Soldier) Pilot. During this turn, it may choose an active enemy Unit that is Lv.4 or lower as its attack target.",
+          "ko": "(초병)인 파일럿이 세트되어 있는 자신의 유닛 1개를 선택한다. 이 턴 동안, 그것은 액티브의 Lv. 4 이하인 상대의 유닛을 어택 대상으로 선택할 수 있다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Allelujah Haptism / Hallelujah Haptism",
+        "ko": "알레루야 햅티즘 / 할레루야 햅티즘"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-023",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-023",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-024",
+    "name": {
+      "en": "Gundam Aerial Rebuild",
+      "ko": "에어리얼 건담 (개수형)"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 7,
+    "cost": 5,
+    "color": "GREEN",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "ACADEMY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Look at the top 3 cards of your deck. You may reveal 1 (Academy) Unit card/Command card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck.",
+          "ko": "자신의 덱을 위에서 3장 보고, 그중에 (학원)인, 유닛 카드 1장 / 커맨드 카드 1장을 공개하고 패에 추가할 수 있다. 남은 카드는 무작위로 덱 아래로 되돌린다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Suletta Mercury",
+        "ko": "슬레타 머큐리"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-024",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-024",
+        "block": "1"
+      },
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-024_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-025",
+    "name": {
+      "en": "Gundvölva",
+      "ko": "건드 볼바"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "DAWN_OF_FOLD",
+      "ACADEMY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DESTROYED"
+        },
+        {
+          "type": "prose",
+          "en": "During your turn, if you have another (Dawn of Fold) Unit in play, place 1 EX Resource.",
+          "ko": "자신의 턴 동안, 이 유닛 이외의, (폴드의 새벽)인 자신의 유닛이 있다면, 자신은 EX 리소스 1개를 추가한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-025",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-025",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-026",
+    "name": {
+      "en": "Garma's Dopp",
+      "ko": "돕 (가르마 자비 전용)"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "ZEON"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Look at the top card of your deck. Return it to the top of your deck or place it into your trash.",
+          "ko": "자신의 덱을 위에서 1장 보고, 덱 위에 두거나, 자신의 트래시에 둔다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 1,
+    "HP": 1,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Garma Zabi",
+        "ko": "가르마 자비"
+      }
+    },
+    "zone": [
+      "EARTH"
+    ],
+    "imageFile": "GD04-026",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-026",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-027",
+    "name": {
+      "en": "Bigro",
+      "ko": "비그로"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "ZEON"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Tokwan",
+        "ko": "토쿠완"
+      }
+    },
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-027",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-027",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-028",
+    "name": {
+      "en": "Zakrello",
+      "ko": "자쿠레로"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "ATTACK",
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "ZEON"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 active enemy Unit. It gains",
+          "ko": "액티브인 상대의 유닛 1개를 선택한다. 이 턴 동안, 그것은"
+        },
+        {
+          "type": "ability",
+          "keyword": "BLOCKER"
+        },
+        {
+          "type": "prose",
+          "en": "during this turn.",
+          "ko": "를 얻는다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "(Rest this Unit to change the attack target to it.)",
+          "ko": "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": null,
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-028",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-028",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-029",
+    "name": {
+      "en": "Gundam Dynames (GN Full Shield)",
+      "ko": "건담 듀나메스 (GN 풀 실드)"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "If you have a (CB) Pilot in play, when this Unit receives damage from an enemy, reduce it by 1.",
+          "ko": "(CB)인 자신의 파일럿이 있다면, 이 유닛은 상대로부터 대미지를 받을 때, 그 대미지를 1 감소시킨다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Lockon Stratos",
+        "ko": "록온 스트라토스"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-029",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-029",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-030",
+    "name": {
+      "en": "Chuchu's Demi Trainer",
+      "ko": "데미 트레이너 츄츄 전용기"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "ACADEMY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your other (Academy) Units. During this turn, it may choose an active enemy Unit that is Lv.3 or lower as its attack target.",
+          "ko": "이 유닛 이외의, (학원)인 자신의 유닛 1개를 선택한다. 이 턴 동안, 그것은 액티브의 Lv. 3 이하인 상대의 유닛을 어택 대상으로 선택할 수 있다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "ACADEMY"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-030",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-030",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-031",
+    "name": {
+      "en": "Heindree",
+      "ko": "하인드리"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 2,
+    "cost": 2,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "ACADEMY"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-031",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-031",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-032",
+    "name": {
+      "en": "Xavier's Gyan Hakuji-Packs (GQ)",
+      "ko": "이그자베 전용 걍 (햐쿠지 장비) (GQ)"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "GREEN",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD04",
+    "trait": [
+      "ZEON"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Xavier Olivette",
+        "ko": "이그자베 올리베"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-032",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-032",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-033",
+    "name": {
+      "en": "Neo Zeong",
+      "ko": "네오 지옹"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 9,
+    "cost": 8,
+    "color": "RED",
+    "keywords": [
+      "DURING_LINK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "NEO_ZEON"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "prose",
+          "en": "When this Unit or one of your (Neo Zeon) Units is deployed, choose 1 enemy Unit. Deal 3 damage to it.",
+          "ko": "이 유닛이나, (네오 지온)인 자신의 유닛이 배치되었을 때, 상대의 유닛 1개를 선택한다. 그것에 3 대미지를 준다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "prose",
+          "en": "All your Units gain (Neo Zeon).",
+          "ko": "자신의 유닛 전부는 (네오 지온)을 얻는다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 6,
+    "HP": 7,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Full Frontal",
+        "ko": "풀 프론탈"
+      }
+    },
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-033",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-033",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-033_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-034",
+    "name": {
+      "en": "Gundam Kyrios",
+      "ko": "건담 큐리오스"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 4,
+    "cost": 3,
+    "color": "RED",
+    "keywords": [
+      "FIRST_STRIKE",
+      "DURING_LINK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "FIRST_STRIKE"
+        },
+        {
+          "type": "prose",
+          "en": "(While this Unit is attacking, it deals damage before the enemy Unit.)",
+          "ko": ""
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "prose",
+          "en": "This Unit gets AP+2 for each of your rested (CB) Units.",
+          "ko": "이 유닛을, 레스트의 (CB)인 자신의 유닛 1개당 AP+2한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 1,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Allelujah Haptism / Hallelujah Haptism",
+        "ko": "알레루야 햅티즘 / 할레루야 햅티즘"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-034",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-034",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-034_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-035",
+    "name": {
+      "en": "Ξ Gundam",
+      "ko": "크시 건담"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 4,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
+    "package": "GD04",
+    "trait": [
+      "MAFTY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your (Mafty) Units. When it destroys an enemy Unit with battle damage during this turn, if you have 3 or less cards in your hand, draw 1.",
+          "ko": "(마프티)인 자신의 유닛 1개를 선택한다. 이 턴 동안, 그것이 배틀 대미지로 상대의 유닛을 파괴했을 때, 자신의 패가 3장 이하라면, 자신은 1장 드로우 한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Hathaway Noa",
+        "ko": "하사웨이 노아"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-035",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-035",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-036",
+    "name": {
+      "en": "Gundam Throne Eins",
+      "ko": "건담 쓰로네 아인"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 6,
+    "cost": 4,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "TRINITY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "You may choose 1 to 2 of your other active (CB) Units. Rest them. If you do, deal damage equal to the number of Units rested with this effect to all enemy Units that are Lv.6 or lower.",
+          "ko": "이 유닛 이외의, 액티브의 (CB)인 자신의 유닛 1~2개를 선택할 수 있다. 그것들을 레스트한다. 그렇게 했다면, Lv. 6 이하의 상대의 유닛 모두에, 이 효과로 레스트한 유닛의 수만큼 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "TRINITY"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-036",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-036",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-036_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-037",
+    "name": {
+      "en": "Gundam Kyrios (Trans-Am)",
+      "ko": "건담 큐리오스 (트란잠)"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 6,
+    "cost": 5,
+    "color": "RED",
+    "keywords": [
+      "FIRST_STRIKE",
+      "BREACH"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [
+      "SUPER_SOLDIER"
+    ],
+    "description": [
+      [
+        {
+          "type": "prose",
+          "en": "While you have a red (Super Soldier) Pilot in play, this Unit gains",
+          "ko": "적색의 (초병)인 자신의 파일럿이 있는 동안, 이 유닛은"
+        },
+        {
+          "type": "ability",
+          "keyword": "FIRST_STRIKE"
+        },
+        {
+          "type": "prose",
+          "en": ".",
+          "ko": "을 얻는다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "(While this Unit is attacking, it deals damage before the enemy Unit.)",
+          "ko": "(공격 중의 이 유닛은, 상대보다 먼저 대미지를 준다.)"
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "While you have a green (Super Soldier) Pilot in play, this Unit gains",
+          "ko": "녹색의 (초병)인 자신의 파일럿이 있는 동안, 이 유닛은"
+        },
+        {
+          "type": "ability",
+          "keyword": "BREACH",
+          "n": 3
+        },
+        {
+          "type": "prose",
+          "en": ".",
+          "ko": "을 얻는다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+          "ko": "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Allelujah Haptism / Hallelujah Haptism",
+        "ko": "알레루야 햅티즘 / 할레루야 햅티즘"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-037",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-037",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-038",
+    "name": {
+      "en": "Gundam Exia",
+      "ko": "건담 엑시아"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "If 2 or more enemy Units are in play, choose 1 enemy Unit that is Lv.2 or lower. Deal 2 damage to it.",
+          "ko": "상대의 유닛이 2개 이상 있다면, Lv. 2 이하인 상대의 유닛 1개를 선택한다. 그것에 2 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 1,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Setsuna F. Seiei",
+        "ko": "세츠나 F. 세이에이"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-038",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-038",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-039",
+    "name": {
+      "en": "Rozen Zulu",
+      "ko": "로젠 줄루"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 6,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY",
+      "REPAIR"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "NEO_ZEON"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "prose",
+          "en": "If there are 8 or more (Neo Zeon) cards in your trash, this card in your hand gets cost -4.",
+          "ko": "자신의 트래시에 (네오 지온)인 카드가 8장 이상 있다면, 패의 이 카드는 코스트가 4 줄어든다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 enemy Unit. Deal 1 damage to it. If it has",
+          "ko": "상대의 유닛 1개를 선택한다. 그것에 1 대미지를 준다. 그것이"
+        },
+        {
+          "type": "ability",
+          "keyword": "REPAIR"
+        },
+        {
+          "type": "prose",
+          "en": ", deal 3 damage instead.",
+          "ko": "를 가지고 있다면 대신에 3 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Angelo Sauper",
+        "ko": "안젤로 자우퍼"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-039",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-039",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-040",
+    "name": {
+      "en": "Schuzrum-Galluss",
+      "ko": "슈츠룸 갈루스"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "NEO_ZEON"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "NEO_ZEON"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-040",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-040",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-041",
+    "name": {
+      "en": "Gundam Throne Drei",
+      "ko": "건담 쓰로네 드라이"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "TRINITY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "When this Unit is rested by an effect, set it as active.",
+          "ko": "이 유닛이 효과로 레스트되었을 때, 이것을 액티브한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "TRINITY"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-041",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-041",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-042",
+    "name": {
+      "en": "Psycho Gundam (GQ)",
+      "ko": "사이코 건담 (GQ)"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 7,
+    "cost": 5,
+    "color": "RED",
+    "keywords": [
+      "DURING_LINK",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "relatedTrait": [
+      "CYBER_NEWTYPE"
+    ],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "When damage from one of your Units paired with a (Cyber-Newtype) Pilot destroys an enemy shield area card, choose 1 enemy Unit with 5 or less AP. Deal 2 damage to it.",
+          "ko": "(강화인간)인 파일럿이 세트되어 있는 자신의 유닛이 대미지로 상대의 실드 에리어의 카드를 파괴했을 때, AP5 이하인 상대의 유닛 1개를 선택한다. 그것에 2 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Deux Murasame",
+        "ko": "두 무라사메"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-042",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-042",
+        "block": "1"
+      },
+      {
+        "rarity": "UNCOMMON_PLUS",
+        "imageFile": "GD04-042_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-043",
+    "name": {
+      "en": "Zssa (Sleeves)",
+      "ko": "즈사 (소데츠키 사양)"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "NEO_ZEON"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 enemy Base. Deal 1 damage to it.",
+          "ko": "상대의 베이스 1개를 선택한다. 그것에 1 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 3,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-043",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-043",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-044",
+    "name": {
+      "en": "Gadeel",
+      "ko": "가딜"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "RED",
+    "keywords": [
+      "ATTACK",
+      "BREACH"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [
+      "NEW_UNE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "If you are attacking a damaged enemy Unit, this Unit gains",
+          "ko": "대미지를 받은 상태인 상대의 유닛에게 어택하고 있다면, 이 배틀 동안, 이 유닛은"
+        },
+        {
+          "type": "ability",
+          "keyword": "BREACH",
+          "n": 3
+        },
+        {
+          "type": "prose",
+          "en": "during this battle.",
+          "ko": "을 얻는다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "(When this Unit's attack destroys an enemy Unit, deal the specified amount of damage to the first card in that opponent's shield area.)",
+          "ko": "(공격으로 상대의 유닛을 파괴했을 때, 그 상대의 실드 에리어의 가장 위의 카드 1장에 지정된 수의 대미지를 준다.)"
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 3,
+    "zone": [
+      "EARTH"
+    ],
+    "imageFile": "GD04-044",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-044",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-045",
+    "name": {
+      "en": "Gundam Throne Zwei",
+      "ko": "건담 쓰로네 쯔바이"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 3,
+    "color": "RED",
+    "keywords": [
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "TRINITY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "WHEN_LINKED"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your (CB) Units. During this turn, it may choose a damaged active enemy Unit as its attack target.",
+          "ko": "(CB)인 자신의 유닛 1개를 선택한다. 이 턴 동안, 그것은 대미지를 받은 상태의 액티브인 상대의 유닛을 공격 대상으로 선택할 수 있다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "TRINITY"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-045",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-045",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-046",
+    "name": {
+      "en": "Gundam Dynames",
+      "ko": "건담 듀나메스"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 4,
+    "color": "RED",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "You may rest this Unit. If you do, choose 1 enemy Unit that is Lv.3 or lower. Deal 2 damage to it.",
+          "ko": "이 유닛을 레스트할 수 있다. 그렇게 했다면, Lv. 3 이하인 상대의 유닛 1개를 선택한다. 그것에 2 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Lockon Stratos",
+        "ko": "록온 스트라토스"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-046",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-046",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-047",
+    "name": {
+      "en": "Gundam Virtue",
+      "ko": "건담 버체"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 1,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Tieria Erde",
+        "ko": "티에리아 아데"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-047",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-047",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-048",
+    "name": {
+      "en": "Hambrabi (GQ)",
+      "ko": "함브라비 (GQ)"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "RED",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "EARTH_FEDERATION"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-048",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-048",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-049",
+    "name": {
+      "en": "Gundam DX",
+      "ko": "건담 DX"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 8,
+    "cost": 7,
+    "color": "PURPLE",
+    "keywords": [
+      "SUPPRESSION",
+      "DURING_PAIR",
+      "ATTACK"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [
+      "VULTURE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "SUPPRESSION"
+        },
+        {
+          "type": "prose",
+          "en": "(Damage to Shields by an attack is dealt to the first 2 cards simultaneously.)",
+          "ko": "(공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)"
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_PAIR"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "If you are attacking the enemy player, you may choose 7 (Vulture) cards from your trash. Exile them from the game. If you do, choose 1 enemy Unit/Base that is Lv.8 or lower. Destroy it.",
+          "ko": "상대 플레이어에게 어택하고 있다면, 자신의 트래시의 (벌처)인 카드 7장을 선택할 수 있다. 그것들을 게임에서 제외한다. 그렇게 했다면, Lv. 8 이하인 상대의, 유닛 1개 / 베이스 1개를 선택한다. 그것을 파괴한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 6,
+    "HP": 6,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Garrod Ran",
+        "ko": "가로드 란"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-049",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-049",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-049_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-050",
+    "name": {
+      "en": "Destiny Gundam",
+      "ko": "데스티니 건담"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 7,
+    "cost": 5,
+    "color": "PURPLE",
+    "keywords": [
+      "HIGH_MANEUVER",
+      "DURING_PAIR",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+    "package": "GD04",
+    "trait": [
+      "ZAFT",
+      "MINERVA_SQUAD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "HIGH_MANEUVER"
+        },
+        {
+          "type": "prose",
+          "en": "(This Unit can't be blocked.)",
+          "ko": "(이 유닛은 블록당하지 않는다.)"
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_PAIR"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "You may choose 1 (Minerva Squad) Unit card from your trash. Pay its cost to deploy it.",
+          "ko": "자신의 트래시의 (미네르바 대)인 유닛 카드 1장을 선택할 수 있다. 그것을 코스트를 지불하고 배치한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Shinn Asuka",
+        "ko": "신 아스카"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-050",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-050",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-050_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS_PLUS",
+        "imageFile": "GD04-050_p2",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-051",
+    "name": {
+      "en": "Gundam Airmaster Burst",
+      "ko": "건담 에어마스터 버스트"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 4,
+    "color": "PURPLE",
+    "keywords": [
+      "DURING_PAIR"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [
+      "VULTURE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_PAIR",
+          "qualifier": {
+            "en": "･(Vulture) Pilot",
+            "ko": "･(벌처)인 파일럿"
+          }
+        },
+        {
+          "type": "prose",
+          "en": "If there are 7 or more cards in your trash, this Unit may choose an active enemy Unit with a keyword effect as its attack target.",
+          "ko": "자신의 트래시에 카드가 7장 이상 있다면, 이 유닛은, 키워드 효과를 가진 액티브인 상대의 유닛을 어택 대상으로 선택할 수 있다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Witz Sou",
+        "ko": "위츠 수"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-051",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-051",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-052",
+    "name": {
+      "en": "Gundam Leopard Destroy",
+      "ko": "건담 레오파드 디스트로이"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 6,
+    "cost": 4,
+    "color": "PURPLE",
+    "keywords": [
+      "DURING_PAIR",
+      "ATTACK"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [
+      "VULTURE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_PAIR"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "You may choose 1 enemy Unit. Deal 2 damage to it and this Unit.",
+          "ko": "상대의 유닛 1개를 선택할 수 있다. 그것과, 이 유닛에 2 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "VULTURE"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-052",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-052",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-053",
+    "name": {
+      "en": "Rey's Blaze Zaku Phantom",
+      "ko": "블레이즈 자쿠 팬텀 (레이 전용기)"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 4,
+    "cost": 3,
+    "color": "PURPLE",
+    "keywords": [
+      "DURING_LINK",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+    "package": "GD04",
+    "trait": [
+      "ZAFT",
+      "MINERVA_SQUAD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "When this Unit receives damage from an enemy, reduce it by 1.",
+          "ko": "이 유닛이 상대로부터 대미지를 받을 때, 그 대미지를 1 감소시킨다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "MINERVA_SQUAD"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-053",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-053",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-053_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-054",
+    "name": {
+      "en": "Gundam Virtue (Trans-Am)",
+      "ko": "건담 버체 (트란잠)"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 7,
+    "cost": 5,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "prose",
+          "en": "When this Unit deals battle damage to an enemy Unit, destroy that enemy Unit.",
+          "ko": "이 유닛이 상대의 유닛에게 배틀 대미지를 주었을 때, 그 상대의 유닛을 파괴한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 6,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Tieria Erde",
+        "ko": "티에리아 아데"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-054",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-054",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-055",
+    "name": {
+      "en": "Heine's Gouf Ignited",
+      "ko": "구프 이그나이티드 (하이네 베스텐플루스 전용기)"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+    "package": "GD04",
+    "trait": [
+      "ZAFT",
+      "MINERVA_SQUAD"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Heine Westenfluss",
+        "ko": "하이네 베스텐플루스"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-055",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-055",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-056",
+    "name": {
+      "en": "Sword Impulse Gundam",
+      "ko": "소드 임펄스 건담"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+    "package": "GD04",
+    "trait": [
+      "ZAFT",
+      "MINERVA_SQUAD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Deal 1 damage to this Unit. If you do, choose 1 enemy Unit with 3 or less AP. Rest it.",
+          "ko": "이 유닛에 1 대미지를 준다. 그렇게 했다면, AP3 이하인 상대의 유닛 1개를 선택한다. 그것을 레스트한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Shinn Asuka / Lunamaria Hawke",
+        "ko": "신 아스카 / 루나마리아 호크"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-056",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-056",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-057",
+    "name": {
+      "en": "Gundam Nadleeh",
+      "ko": "건담 나드레"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 3,
+    "color": "PURPLE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 enemy Unit that is Lv.6 or lower. During this turn, reduce its AP by an amount equal to the number of Unit cards with \"Gundam Virtue\" in their card names in your trash.",
+          "ko": "Lv. 6 이하인 상대의 유닛 1개를 선택한다. 이 턴 동안, 그것을, 자신의 트래시의 카드명에 「건담 버체」를 포함하는 유닛 카드의 수만큼 AP-한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Tieria Erde",
+        "ko": "티에리아 아데"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-057",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-057",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-058",
+    "name": {
+      "en": "Jamil's Gundam X",
+      "ko": "건담 X (쟈밀 기)"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "DURING_PAIR",
+      "DESTROYED"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [
+      "OLD_UNE"
+    ],
+    "relatedTrait": [
+      "VULTURE"
+    ],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_PAIR",
+          "qualifier": {
+            "en": "･(Vulture) Pilot",
+            "ko": "･(벌처)인 파일럿"
+          }
+        },
+        {
+          "type": "trigger",
+          "keyword": "DESTROYED"
+        },
+        {
+          "type": "prose",
+          "en": "If it is your turn, return this Unit's paired Pilot to its owner's hand.",
+          "ko": "자신의 턴이라면, 이 유닛에 세트되어 있는 파일럿을 주인의 패로 되돌린다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 1,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-058",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-058",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-059",
+    "name": {
+      "en": "Daughtress High Mobility Command Wise Wallaby",
+      "ko": "도트레스 HMC 와이즈 와라비"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 2,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [
+      "VULTURE"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 2,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "VULTURE"
+    },
+    "zone": [
+      "EARTH"
+    ],
+    "imageFile": "GD04-059",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-059",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-060",
+    "name": {
+      "en": "Esperansa",
+      "ko": "에스페란자"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [
+      "VULTURE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "If you deploy this Unit from your trash, draw 1.",
+          "ko": "이 유닛을 트래시에서 배치했다면, 자신은 1장 드로우한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 1,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Ennil El",
+        "ko": "에닐 엘"
+      }
+    },
+    "zone": [
+      "EARTH"
+    ],
+    "imageFile": "GD04-060",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-060",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-061",
+    "name": {
+      "en": "G-Falcon",
+      "ko": "G팔콘"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 2,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [
+      "VULTURE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "BLOCKER"
+        },
+        {
+          "type": "prose",
+          "en": "(Rest this Unit to change the attack target to it.)",
+          "ko": "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "This Unit can't attack while there are 6 or less cards in your trash.",
+          "ko": "이 유닛은, 자신의 트래시에 카드가 6장 이하인 동안, 어택할 수 없다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 1,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Pala Sys",
+        "ko": "파라 시스"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-061",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-061",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-062",
+    "name": {
+      "en": "Lunamaria's Gunner Zaku Warrior",
+      "ko": "거너 자쿠 워리어 (루나마리아 호크 전용기)"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+    "package": "GD04",
+    "trait": [
+      "ZAFT",
+      "MINERVA_SQUAD"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "MINERVA_SQUAD"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-062",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-062",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-063",
+    "name": {
+      "en": "GN Armor Type-E",
+      "ko": "GN 아머 Type-E"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 enemy Unit that is Lv.1 or lower or has 1 or less AP. Destroy it.",
+          "ko": "Lv. 1 이하 / AP1 이하인 상대의 유닛 1개를 선택한다. 그것을 파괴한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Setsuna F. Seiei",
+        "ko": "세츠나 F. 세이에이"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-063",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-063",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-064",
+    "name": {
+      "en": "Gundam Exia",
+      "ko": "건담 엑시아"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 2,
+    "cost": 2,
+    "color": "PURPLE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "GN_DRIVE"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 3,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-064",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-064",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-065",
+    "name": {
+      "en": "Unicorn Gundam 02 Banshee Norn (Destroy Mode)",
+      "ko": "유니콘 건담 2호기 밴시 노른 (디스트로이 모드)"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 7,
+    "cost": 5,
+    "color": "WHITE",
+    "keywords": [
+      "DURING_LINK",
+      "ACTIVATE_MAIN",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTIVATE_MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "Exile 3 blue cards from your trash：Set this Unit as active. It can't choose the enemy player as its attack target during this turn.",
+          "ko": "자신의 트래시의 청색의 카드 3장을 게임에서 제외한다 : 이 유닛을 액티브한다. 이 턴 동안, 이것은 더이상 상대 플레이어를 어택 대상으로 선택할 수 없다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "All enemy Units get AP-1 during this turn.",
+          "ko": "이 턴 동안, 상대의 유닛 전부를 AP-1한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 5,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Riddhe Marcenas",
+        "ko": "리디 마세나스"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-065",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-065",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-065_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-066",
+    "name": {
+      "en": "Unicorn Gundam (Awakened)",
+      "ko": "유니콘 건담 (각성)"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 7,
+    "cost": 5,
+    "color": "WHITE",
+    "keywords": [
+      "SUPPRESSION",
+      "MAIN",
+      "ACTION"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "CIVILIAN"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "SUPPRESSION"
+        },
+        {
+          "type": "prose",
+          "en": "(Damage to Shields by an attack is dealt to the first 2 cards simultaneously.)",
+          "ko": "(공격으로 실드에 주는 대미지는, 선두부터 2개에 동시에 부여된다.)"
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "When you activate a Command's",
+          "ko": "자신이 커맨드의"
+        },
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "effect, choose 1 enemy Unit. It gets AP-2 during this turn.",
+          "ko": "을 발동했을 때, 상대의 유닛 1개를 선택한다. 이 턴 동안 그것을 AP-2한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 6,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Banagher Links",
+        "ko": "바나지 링크스"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-066",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-066",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-066_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-067",
+    "name": {
+      "en": "∀ Gundam",
+      "ko": "∀ 건담"
+    },
+    "rarity": "LEGENDARY_RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [
+      "ACTIVATE_MAIN",
+      "ONCE_PER_TURN",
+      "REPAIR",
+      "BREACH",
+      "FIRST_STRIKE",
+      "SUPPORT",
+      "HIGH_MANEUVER",
+      "SUPPRESSION",
+      "BLOCKER",
+      "REPAIR",
+      "BREACH",
+      "FIRST_STRIKE",
+      "SUPPORT",
+      "HIGH_MANEUVER",
+      "SUPPRESSION",
+      "BLOCKER"
+    ],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "MILITIA"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "ACTIVATE_MAIN"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "①：Choose 1 Unit card with",
+          "ko": "① : 트래시의,"
+        },
+        {
+          "type": "ability",
+          "keyword": "REPAIR"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "BREACH"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "FIRST_STRIKE"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "SUPPORT"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "HIGH_MANEUVER"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "SUPPRESSION"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "BLOCKER"
+        },
+        {
+          "type": "prose",
+          "en": "from your trash. During this turn, this Unit gets AP+1 and all",
+          "ko": "를 가진 유닛 카드 1장을 선택한다. 이 턴 동안, 이 유닛은 AP+1과, 그것이 가진"
+        },
+        {
+          "type": "ability",
+          "keyword": "REPAIR"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "BREACH"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "FIRST_STRIKE"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "SUPPORT"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "HIGH_MANEUVER"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "SUPPRESSION"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "ability",
+          "keyword": "BLOCKER"
+        },
+        {
+          "type": "prose",
+          "en": "on that Unit card.",
+          "ko": "전부를 얻는다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Loran Cehack",
+        "ko": "로랑 세아크"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-067",
+    "printings": [
+      {
+        "rarity": "LEGENDARY_RARE",
+        "imageFile": "GD04-067",
+        "block": "1"
+      },
+      {
+        "rarity": "LEGENDARY_RARE_PLUS",
+        "imageFile": "GD04-067_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-068",
+    "name": {
+      "en": "Silver Bullet",
+      "ko": "실버 불릿"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "CIVILIAN"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "BLOCKER"
+        },
+        {
+          "type": "prose",
+          "en": "(Rest this Unit to change the attack target to it.)",
+          "ko": "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "When this Unit receives effect damage from an enemy, reduce it by 3.",
+          "ko": "이 유닛이 상대로부터 효과대미지를 받을 때, 그 대미지를 3 감소시킨다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Gael Chan",
+        "ko": "가엘 창"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-068",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-068",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-068_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-069",
+    "name": {
+      "en": "∀ Gundam",
+      "ko": "∀ 건담"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [
+      "BLOCKER",
+      "DURING_LINK"
+    ],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "MILITIA"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "BLOCKER"
+        },
+        {
+          "type": "prose",
+          "en": "(Rest this Unit to change the attack target to it.)",
+          "ko": "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "prose",
+          "en": "At the end of a turn where you have paid ① or more for one of your other (Militia)/(Dianna Counter) Units' effects, choose 1 of your (Militia) Units. Set it as active.",
+          "ko": "이 유닛 이외의, (밀리샤) / (디아나 카운터)인 자신의 유닛의 효과로 ① 이상을 지불한 턴 종료 시, (밀리샤)인 자신의 유닛 1개를 선택한다. 그것을 액티브한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Loran Cehack",
+        "ko": "로랑 세아크"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-069",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-069",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-070",
+    "name": {
+      "en": "Al-Saachez's AEU Enact Custom Moralia Development Experiment Type",
+      "ko": "서셰스 전용 AEU 이낙트 커스텀 (모랄리아 개발 실험형)"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 2,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "SUPERPOWER_BLOC"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "You may pair 1 Pilot card with \"Ali al-Saachez\" in its card name from your hand with this Unit.",
+          "ko": "자신의 패의 카드명에 「아리 알 서셰스」를 포함하는 파일럿 카드 1장을, 이 유닛에 세트할 수 있다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 1,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Ali al-Saachez",
+        "ko": "알리 알 서셰스"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-070",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-070",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-071",
+    "name": {
+      "en": "Graham's Union Flag Custom Ⅱ (GN Flag)",
+      "ko": "그라함 전용 유니온 플래그 커스텀Ⅱ (GN 플래그)"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "ACTIVATE_MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "UN"
+    ],
+    "relatedTrait": [
+      "CB",
+      "SUPERPOWER_BLOC"
+    ],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "If an enemy (CB) Unit is in play, add this card to your hand.",
+          "ko": "(CB)인 상대의 유닛이 있다면, 이 카드를 패에 넣는다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ACTIVATE_MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 (Superpower Bloc) card and 1 (UN) card from your trash. Exile them from the game. If you do, set this Unit as active. It can't attack during this turn.",
+          "ko": "지산의 트래시의, (초강대국)인 카드 1장과, (UN)인 카드 1장을 선택한다. 그것들을 게임에서 제외한다. 그렇게 했다면, 이 유닛을 액티브한다. 이 턴 동안, 이것은 더이상 어택할 수 없다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Graham Aker",
+        "ko": "그라함 에이커"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-071",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-071",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-071_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-072",
+    "name": {
+      "en": "Unicorn Gundam 02 Banshee Norn (Unicorn Mode)",
+      "ko": "유니콘 건담 2호기 밴시 노른 (유니콘 모드)"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "WHEN_LINKED"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand.",
+          "ko": "HP3 이하인 상대의 유닛 1개를 선택한다. 그것을 주인의 패로 되돌린다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Riddhe Marcenas",
+        "ko": "리디 마세나스"
+      }
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-072",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-072",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-073",
+    "name": {
+      "en": "∀ Gundam",
+      "ko": "∀ 건담"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "ACTIVATE_MAIN",
+      "ONCE_PER_TURN"
+    ],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "MILITIA"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "ACTIVATE_MAIN"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "①：This Unit gets AP+2 during this turn.",
+          "ko": "① : 이 턴 동안, 이 유닛을 AP+2한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "MILITIA"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-073",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-073",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-074",
+    "name": {
+      "en": "Kapool",
+      "ko": "카풀"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "ATTACK"
+    ],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "MILITIA"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "You may pay ①. If you do, draw 1. Then, discard 1.",
+          "ko": "① 지불할 수 있다. 그렇게 했다면, 자신은 1장 드로우한다. 그 후, 자신의 패 1장을 버린다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 3,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "MILITIA"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-074",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-074",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-075",
+    "name": {
+      "en": "GN-X",
+      "ko": "징크스"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 6,
+    "color": "WHITE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "UN"
+    ],
+    "relatedTrait": [
+      "SUPERPOWER_BLOC"
+    ],
+    "description": [
+      [
+        {
+          "type": "prose",
+          "en": "Reduce the cost of this card in your hand by an amount equal to the number of (UN)/(Superpower Bloc) Command cards in your trash.",
+          "ko": "패의 이 카드는, 자신의 트래시의, (UN) / (초강대국)인 커맨드 카드의 수만큼 코스트가 줄어든다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 3,
+    "link": {
+      "__typename": "LinkTrait",
+      "trait": "UN"
+    },
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-075",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-075",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-076",
+    "name": {
+      "en": "Hipheavy",
+      "ko": "힙헤비"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 1,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "MILITIA"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 1,
+    "HP": 2,
+    "zone": [
+      "EARTH"
+    ],
+    "imageFile": "GD04-076",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-076",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-077",
+    "name": {
+      "en": "Flat (Militia)",
+      "ko": "플랫 (밀리샤 사양)"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "BLOCKER"
+    ],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "MILITIA"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "ability",
+          "keyword": "BLOCKER"
+        },
+        {
+          "type": "prose",
+          "en": "(Rest this Unit to change the attack target to it.)",
+          "ko": "(레스트 하는 것으로 공격 대상을 이 유닛으로 한다.)"
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 4,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-077",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-077",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-078",
+    "name": {
+      "en": "Borjarnon",
+      "ko": "볼자논"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 2,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "MILITIA"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 2,
+    "HP": 2,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-078",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-078",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-079",
+    "name": {
+      "en": "Agrissa",
+      "ko": "아그릿사"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "WHITE",
+    "keywords": [],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "SUPERPOWER_BLOC"
+    ],
+    "relatedTrait": [],
+    "description": [],
+    "__typename": "UnitCard",
+    "AP": 5,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Ali al-Saachez",
+        "ko": "알리 알 서셰스"
+      }
+    },
+    "zone": [
+      "EARTH"
+    ],
+    "imageFile": "GD04-079",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-079",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-080",
+    "name": {
+      "en": "Alvatore",
+      "ko": "알바토레"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 4,
+    "color": "WHITE",
+    "keywords": [
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "UN"
+    ],
+    "relatedTrait": [
+      "SUPERPOWER_BLOC"
+    ],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "DESTROYED"
+        },
+        {
+          "type": "prose",
+          "en": "If you have another (UN)/(Superpower Bloc) Unit in play, deploy 1 rested [Alvaaron]((UN)･AP4･HP1) Unit token.",
+          "ko": "이 유닛 이외의, (UN) / (초강대국)인 자신의 유닛이 있다면, [알바아론] 유닛 토큰 1개를 레스트로 배치한다."
+        }
+      ]
+    ],
+    "__typename": "UnitCard",
+    "AP": 4,
+    "HP": 4,
+    "link": {
+      "__typename": "LinkPilot",
+      "pilotName": {
+        "en": "Alejandro Corner",
+        "ko": "알레한드로 코너"
+      }
+    },
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-080",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-080",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-081",
+    "name": {
+      "en": "Üso Ewin",
+      "ko": "웃소 에빈"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "WHEN_PAIRED"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE",
+      "NEWTYPE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "WHEN_PAIRED"
+        },
+        {
+          "type": "prose",
+          "en": "If this is a (League Militaire) Unit, deploy 1 [Parts]((League Militaire)･AP1･HP1･This Unit can't choose the enemy player as its attack target) Unit token.",
+          "ko": "이 유닛이 (리가 밀리티어)라면, [파츠] 유닛 토큰 1개를 배치한다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 2,
+    "HP": 1,
+    "imageFile": "GD04-081",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-081",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-081_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-082",
+    "name": {
+      "en": "Rosamia Badam",
+      "ko": "로자미아 바담"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_Z_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "TITANS",
+      "CYBER_NEWTYPE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "WHEN_LINKED"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 rested Unit. Deal 1 damage to it.",
+          "ko": "레스트인 유닛 1개를 선택한다. 그것에 1 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 2,
+    "HP": 0,
+    "imageFile": "GD04-082",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-082",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-083",
+    "name": {
+      "en": "Marbet Fingerhat",
+      "ko": "마베트 핑거햇"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "All your (League Militaire) Unit tokens get AP+1.",
+          "ko": "(리가 밀리티어)인 자신의 모든 유닛 토큰을 AP+1한다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 1,
+    "HP": 1,
+    "imageFile": "GD04-083",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-083",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-084",
+    "name": {
+      "en": "Sleggar Law",
+      "ko": "슬레거 로우"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION",
+      "WHITE_BASE_TEAM"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your (White Base Team) Units. It gets AP+1 during this turn.",
+          "ko": "(WB 대)인 자신의 유닛 1개를 선택한다. 이 턴 동안, 그것을 AP+1한다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 1,
+    "HP": 1,
+    "imageFile": "GD04-084",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-084",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-085",
+    "name": {
+      "en": "Suletta Mercury",
+      "ko": "슬레타 머큐리"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "DURING_LINK",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "ACADEMY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "When you play and activate an (Academy) Command card using an EX Resource, if you have no remaining EX Resources, place 1 rested EX Resource.",
+          "ko": "자신이 EX 리소스를 사용해서 (학원)인 커맨드 카드를 플레이하고 발동했을 때, 자신의 EX 리소스가 없다면, 자신은 EX 리소스 1개를 레스트로 추가한다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 2,
+    "HP": 2,
+    "imageFile": "GD04-085",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-085",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-085_p1",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-085_p2",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-086",
+    "name": {
+      "en": "Garma Zabi",
+      "ko": "가르마 자비"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "DURING_LINK",
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "ZEON"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "trigger",
+          "keyword": "DESTROYED"
+        },
+        {
+          "type": "prose",
+          "en": "If you have no EX Resources, place 1 EX Resource.",
+          "ko": "자신의 EX 리소스가 없다면, 자신은 EX 리소스 1개를 추가한다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 1,
+    "HP": 0,
+    "imageFile": "GD04-086",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-086",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-087",
+    "name": {
+      "en": "Elan Ceres (Enhanced Person Number 5)",
+      "ko": "엘란 케레스 (Enhanced Person Number 5)"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "DURING_LINK",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "ACADEMY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "You may choose 1 of your (Academy) Units. During this battle, battle damage this Unit would receive is dealt to that Unit instead.",
+          "ko": "(학원)인 자신의 유닛 1개를 선택할 수 있다. 이 배틀 동안, 이 유닛이 받는 배틀 대미지는, 대신에 그것이 받는다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 1,
+    "HP": 2,
+    "imageFile": "GD04-087",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-087",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-088",
+    "name": {
+      "en": "Tokwan",
+      "ko": "토쿠완"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "ZEON"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "When this Unit is blocked by an enemy Unit that is Lv.4 or lower, it can't receive battle damage during this battle.",
+          "ko": "이 유닛이 Lv. 4 이하인 상대의 유닛에 블록당했을 때, 이 배틀 동안, 이것은 배틀 대미지를 받지 않는다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 2,
+    "HP": 0,
+    "imageFile": "GD04-088",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-088",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-089",
+    "name": {
+      "en": "Nena Trinity",
+      "ko": "네나 트리니티"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "ACTIVATE_MAIN",
+      "SUPPORT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "TRINITY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ACTIVATE_MAIN"
+        },
+        {
+          "type": "ability",
+          "keyword": "SUPPORT",
+          "n": 2
+        },
+        {
+          "type": "prose",
+          "en": "(Rest this Unit. 1 other friendly Unit gets AP+(specified amount) during this turn.)",
+          "ko": "(레스트하는 것으로 이 턴 동안 다른 아군의 유닛 1개를 AP+(지정된 수)한다.)"
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 0,
+    "HP": 3,
+    "imageFile": "GD04-089",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-089",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-089_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-090",
+    "name": {
+      "en": "Hallelujah Haptism",
+      "ko": "할레루야 햅티즘"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "DURING_LINK",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "SUPER_SOLDIER"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "During your turn, when this Unit destroys an enemy Unit with battle damage, look at the top card of your deck. If it is a (CB) card, you may reveal it and add it to your hand. Return any remaining card to the bottom of your deck.",
+          "ko": "자신의 턴 동안, 이 유닛이 배틀 대미지로 상대의 유닛을 파괴했을 때, 자신의 덱을 위에서 1장 본다. 그것이, (CB)인 카드라면 공개하고 패에 추가할 수 있다. 남은 카드는 무작위로 덱 아래로 되돌린다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 2,
+    "HP": 1,
+    "imageFile": "GD04-090",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-090",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-091",
+    "name": {
+      "en": "Deux Murasame",
+      "ko": "두 무라사메"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION",
+      "CYBER_NEWTYPE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DESTROYED"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 undamaged enemy Unit. Deal 1 damage to it.",
+          "ko": "대미지를 받지 않은 상대의 유닛 1개를 선택한다. 그것에 1 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 2,
+    "HP": 1,
+    "imageFile": "GD04-091",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-091",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-092",
+    "name": {
+      "en": "Michael Trinity",
+      "ko": "미하일 트리니티"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "TRINITY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "WHEN_LINKED"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 damaged enemy Unit. Deal 1 damage to it.",
+          "ko": "대미지를 받은 상태인 상대의 유닛 1개를 선택한다. 그것에 1 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 2,
+    "HP": 1,
+    "imageFile": "GD04-092",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-092",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-093",
+    "name": {
+      "en": "Rey Za Burrel",
+      "ko": "레이 자 바렐"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+    "package": "GD04",
+    "trait": [
+      "ZAFT",
+      "MINERVA_SQUAD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "WHEN_LINKED"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your (ZAFT) Link Units. During this turn, reduce the next damage it receives by 2.",
+          "ko": "(자프트)인 자신의 링크 유닛 1개를 선택한다. 이 턴 동안, 그것이 다음에 받는 대미지를 2 감소시킨다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 1,
+    "HP": 2,
+    "imageFile": "GD04-093",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-093",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-093_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-094",
+    "name": {
+      "en": "Pala Sys",
+      "ko": "파라 시스"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED",
+      "SUPPRESSION"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [
+      "SATYRICON",
+      "VULTURE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "WHEN_LINKED"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 purple Unit card with",
+          "ko": "자신의 트래시의"
+        },
+        {
+          "type": "ability",
+          "keyword": "SUPPRESSION"
+        },
+        {
+          "type": "prose",
+          "en": "from your trash. Add it to your hand.",
+          "ko": "을 가진 자색 유닛 카드 1장을 선택한다. 그것을 패에 추가한다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 1,
+    "HP": 1,
+    "imageFile": "GD04-094",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-094",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-095",
+    "name": {
+      "en": "Lunamaria Hawke",
+      "ko": "루나마리아 호크"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+    "package": "GD04",
+    "trait": [
+      "ZAFT",
+      "MINERVA_SQUAD",
+      "COORDINATOR"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "WHEN_LINKED"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your (Minerva Squad) Units. During this turn, battle damage it would receive is dealt to this Unit instead.",
+          "ko": "(미네르바 대)인 자신의 유닛 1개를 선택한다. 이 턴 동안, 그것이 받는 배틀 대미지는, 대신에 이 유닛이 받는다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 1,
+    "HP": 1,
+    "imageFile": "GD04-095",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-095",
+        "block": "1"
+      },
+      {
+        "rarity": "UNCOMMON_PLUS",
+        "imageFile": "GD04-095_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-096",
+    "name": {
+      "en": "Ennil El",
+      "ko": "에닐 엘"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "DURING_LINK"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [
+      "VULTURE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "prose",
+          "en": "When this Unit deals battle damage to an enemy Unit that is Lv.5 or lower, destroy that enemy Unit.",
+          "ko": "이 유닛이 Lv. 5 이하인 상대의 유닛에게 배틀 대미지를 주었을 때, 그 상대의 유닛을 파괴한다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 1,
+    "HP": 2,
+    "imageFile": "GD04-096",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-096",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-097",
+    "name": {
+      "en": "Loran Cehack",
+      "ko": "로랑 세아크"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "WHEN_LINKED"
+    ],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "MILITIA",
+      "MOONRACE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "WHEN_LINKED"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 enemy Unit with 3 or less HP. Return it to its owner's hand.",
+          "ko": "HP3 이하인 상대의 유닛 1개를 선택한다. 그것을 주인의 패로 되돌린다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 2,
+    "HP": 1,
+    "imageFile": "GD04-097",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-097",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-097_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-098",
+    "name": {
+      "en": "Riddhe Marcenas",
+      "ko": "리디 마세나스"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "DURING_LINK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION",
+      "NEWTYPE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "prose",
+          "en": "When this Unit receives effect damage from an enemy, reduce it by 2.",
+          "ko": "이 유닛이 상대로부터 효과 대미지를 받을 때, 그 대미지를 2 감소시킨다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 1,
+    "HP": 2,
+    "imageFile": "GD04-098",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-098",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-099",
+    "name": {
+      "en": "Ali al-Saachez",
+      "ko": "알리 알 서셰스"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "DURING_LINK",
+      "ATTACK"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "SUPERPOWER_BLOC",
+      "UN"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DURING_LINK"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ATTACK"
+        },
+        {
+          "type": "prose",
+          "en": "You may choose 1 enemy Pilot. Return it to its owner's hand.",
+          "ko": "상대의 파일럿 1개를 선택할 수 있다. 그것을 주인의 패로 되돌린다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 2,
+    "HP": 1,
+    "imageFile": "GD04-099",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-099",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-100",
+    "name": {
+      "en": "Sochie Heim",
+      "ko": "소시에 하임"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "ONCE_PER_TURN"
+    ],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "MILITIA"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "When you pay ① or more cost for one of your Units' effects, you may increase this Unit's AP during this turn by an amount equal to the cost paid.",
+          "ko": "자신의 유닛의 효과로 ① 이상의 코스트를 지불했을 때, 이 턴 동안, 이 유닛을, 지불한 코스트의 수만큼 AP+할 수 있다."
+        }
+      ]
+    ],
+    "__typename": "PilotCard",
+    "AP": 0,
+    "HP": 2,
+    "imageFile": "GD04-100",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-100",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-101",
+    "name": {
+      "en": "Kindhearted",
+      "ko": "상냥한 마음씨"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "MAIN",
+      "MAIN",
+      "ACTION"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Activate this card's",
+          "ko": "이 카드의"
+        },
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": ".",
+          "ko": "을 발동한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "During this turn, friendly Units can't be destroyed by enemy effects. Then, draw 1.",
+          "ko": "이 턴 동안, 아군의 유닛 전부는 상대의 효과로 파괴되지 않는다. 그 후 자신은 1장 드로우한다."
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "imageFile": "GD04-101",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-101",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-102",
+    "name": {
+      "en": "Moment of Rest",
+      "ko": "잠깐의 휴식"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Draw 1.",
+          "ko": "자신은 1장 드로우 한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 rested enemy Unit that is Lv.5 or lower. It won't be set as active during the start phase of your opponent's next turn.",
+          "ko": "레스트의 Lv. 5 이하인 상대의 유닛 1개를 선택한다. 그것은 다음 상대의 턴 스타트 페이즈에 액티브되지 않는다."
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "imageFile": "GD04-102",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-102",
+        "block": "1"
+      },
+      {
+        "rarity": "UNCOMMON_PLUS",
+        "imageFile": "GD04-102_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-103",
+    "name": {
+      "en": "Spiritual Support",
+      "ko": "정신적 지주"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "MAIN",
+      "REPAIR"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your Units. It gains",
+          "ko": "자신의 유닛 1개를 선택한다. 이 턴 동안, 그것은"
+        },
+        {
+          "type": "ability",
+          "keyword": "REPAIR",
+          "n": 2
+        },
+        {
+          "type": "prose",
+          "en": "during this turn.",
+          "ko": "를 얻는다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "(At the end of your turn, this Unit recovers the specified number of HP.)",
+          "ko": "(자신의 턴 종료 시, 이 유닛을 지정된 수 회복한다.)"
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "imageFile": "GD04-103",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-103",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-104",
+    "name": {
+      "en": "Shrike Team's Bulwark",
+      "ko": "슈라크 부대의 방벽"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE",
+      "SHRIKE_TEAM"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 to 2 enemy Units that are Lv.2 or lower. Rest them.",
+          "ko": "Lv.2 이하의 상대의 유닛 1~2개를 선택한다. 그 카드들을 레스트로 한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "PILOT"
+        },
+        {
+          "type": "prose",
+          "en": "[Junko Jenko]",
+          "ko": "[준코 젠코]"
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "pilot": {
+      "AP": 1,
+      "HP": 1,
+      "name": ""
+    },
+    "imageFile": "GD04-104",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-104",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-105",
+    "name": {
+      "en": "Encounter",
+      "ko": "해후"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "MAIN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD04",
+    "trait": [],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "Look at the top 5 cards of your deck. You may reveal 1 Pilot card among them and add it to your hand. Return the remaining cards randomly to the bottom of your deck.",
+          "ko": "자신의 덱을 위에서 5장 보고, 그중에, 파일럿 카드 1장을 공개하고 패에 추가할 수 있다. 남은 카드는 무작위로 덱 아래로 되돌린다."
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "imageFile": "GD04-105",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-105",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-105_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-106",
+    "name": {
+      "en": "Indiscriminate Violence",
+      "ko": "무차별한 폭력"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "MAIN",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "ACADEMY",
+      "DAWN_OF_FOLD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 friendly (Academy) Unit. During this turn, it may choose an active enemy Unit with 5 or less AP as its attack target. If you use an EX Resource to play this card, choose 1 to 2 friendly (Academy) Units instead.",
+          "ko": "(학원)인 아군의 유닛 1개를 선택한다. 이 턴 동안, 그것은 액티브의 AP5 이하인 상대의 유닛을 어택 대상으로 선택할 수 있다. EX 리소스를 사용해서 이 카드를 플레이했다면, 대신에 (학원)인 아군의 유닛 1~2개를 선택한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "PILOT"
+        },
+        {
+          "type": "prose",
+          "en": "[Norea Du Noc]",
+          "ko": "[노레아 듀노크]"
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "pilot": {
+      "AP": 2,
+      "HP": 0,
+      "name": ""
+    },
+    "imageFile": "GD04-106",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-106",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-107",
+    "name": {
+      "en": "Destined Battle",
+      "ko": "숙명의 전투"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 2,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "ACTION"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Add this card to your hand.",
+          "ko": "이 카드를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your rested Units. During this turn, all enemy Units must choose that Unit as their attack target when attacking.",
+          "ko": "레스트인 자신의 유닛 1개를 선택한다. 이 턴 동안, 상대의 유닛 전부는 어택할 때, 그것을 어택 대상으로 선택해야 한다."
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "imageFile": "GD04-107",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-107",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-108",
+    "name": {
+      "en": "Witches from Earth",
+      "ko": "지구의 마녀"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "ACADEMY",
+      "DAWN_OF_FOLD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 friendly (Academy) Unit. During this turn, reduce the next damage it receives by 2. If you use an EX Resource to play this card, reduce by 4 instead.",
+          "ko": "(학원)인 아군의 유닛 1개를 선택한다. 이 턴 동안, 그것이 다음에 받는 대미지를 2 감소시킨다. EX 리소스를 사용하여 이 카드를 플레이했다면, 대신에 4 감소시킨다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "PILOT"
+        },
+        {
+          "type": "prose",
+          "en": "[Sophie Pulone]",
+          "ko": "[소피 플로네]"
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "pilot": {
+      "AP": 1,
+      "HP": 1,
+      "name": ""
+    },
+    "imageFile": "GD04-108",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-108",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-109",
+    "name": {
+      "en": "Overwhelming Pressure",
+      "ko": "강대한 압력"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 5,
+    "cost": 3,
+    "color": "RED",
+    "keywords": [
+      "MAIN",
+      "ACTION"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 enemy Unit that is Lv.6 or lower. Deal 4 damage to it.",
+          "ko": "Lv.6 이하의 상대의 유닛 1개를 선택한다. 그것에 4 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "imageFile": "GD04-109",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-109",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-110",
+    "name": {
+      "en": "Financier",
+      "ko": "출자자"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 6,
+    "cost": 3,
+    "color": "RED",
+    "keywords": [
+      "MAIN",
+      "ACTION"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy 1 EX Base.",
+          "ko": "자신은 EX 베이스 1개를 배치한다."
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "imageFile": "GD04-110",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-110",
+        "block": "1"
+      },
+      {
+        "rarity": "UNCOMMON_PLUS",
+        "imageFile": "GD04-110_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-111",
+    "name": {
+      "en": "Trinity",
+      "ko": "트리니티"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "TRINITY"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 to 3 of your (CB) Units. They get AP+2 during this turn.",
+          "ko": "(CB)인 자신의 유닛 1~3개를 선택한다. 이 턴 동안, 그것들을 AP+2한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "PILOT"
+        },
+        {
+          "type": "prose",
+          "en": "[Johann Trinity]",
+          "ko": "[요한 트리니티]"
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "pilot": {
+      "AP": 1,
+      "HP": 1,
+      "name": ""
+    },
+    "imageFile": "GD04-111",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-111",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-112",
+    "name": {
+      "en": "Inspector",
+      "ko": "감시역"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "MAIN",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION",
+      "CYBER_NEWTYPE"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "Deal 1 damage to all Units that are Lv.2 or lower.",
+          "ko": "Lv. 2 이하인 유닛 전부에 1 대미지를 준다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "PILOT"
+        },
+        {
+          "type": "prose",
+          "en": "[Gates Capa]",
+          "ko": "[게이츠 캐파]"
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "pilot": {
+      "AP": 1,
+      "HP": 1,
+      "name": ""
+    },
+    "imageFile": "GD04-112",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-112",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-113",
+    "name": {
+      "en": "Damage Control",
+      "ko": "대미지 컨트롤"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "ACTION"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+    "package": "GD04",
+    "trait": [],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 enemy Unit. It gets AP-2 during this turn.",
+          "ko": "상대의 유닛 1개를 선택한다. 이 턴 동안, 그것을 AP-2한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your Units. During this battle, reduce battle damage it receives by 3.",
+          "ko": "자신의 유닛 1개를 선택한다. 이 배틀 동안, 그것이 받는 배틀 대미지를 3 감소시킨다."
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "imageFile": "GD04-113",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-113",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-114",
+    "name": {
+      "en": "Reformationist",
+      "ko": "변혁을 가져오는 자"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 2,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "MAIN",
+      "ACTION"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 Unit card with \"Trans-Am\" in its card name from your trash. Add it to your hand.",
+          "ko": "자신의 트래시의 카드명에 「트란잠」을 포함하는 유닛 카드 1장을 선택한다. 그것을 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your Units and 1 enemy Unit. Deal 1 damage to them.",
+          "ko": "자신의 유닛 1개와, 상대의 유닛 1개를 선택한다. 그것들에 1 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "imageFile": "GD04-114",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-114",
+        "block": "1"
+      },
+      {
+        "rarity": "UNCOMMON_PLUS",
+        "imageFile": "GD04-114_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-115",
+    "name": {
+      "en": "Backup",
+      "ko": "백업"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "MAIN"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 enemy Unit. Deal 1 damage to it.",
+          "ko": "상대의 유닛 1개를 선택한다. 그 유닛에 1 대미지를 준다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 of your Units. When it deals battle damage to an enemy Unit that is Lv.5 or lower during this turn, destroy that enemy Unit.",
+          "ko": "자신의 유닛 1개를 선택한다. 이 턴 동안, 그것이 Lv. 5 이하인 상대의 유닛에게 배틀 대미지를 주었을 때, 그 상대의 유닛을 파괴한다."
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "imageFile": "GD04-115",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-115",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-116",
+    "name": {
+      "en": "Reliable Big Brother",
+      "ko": "의지할 수 있는 형님"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "MAIN",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+    "package": "GD04",
+    "trait": [
+      "ZAFT",
+      "MINERVA_SQUAD",
+      "COORDINATOR"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "Place the top 2 cards of your deck into your trash. If you do, choose 1 enemy Unit with 4 or less AP. Deal an amount of damage equal to the number of (Minerva Squad) cards placed with this effect to that enemy Unit.",
+          "ko": "자신의 덱을 위에서 2장, 자신의 트래시에 둔다. 그렇게 했다면, AP4 이하인 상대의 유닛 1개를 선택한다. 그것에, 이 효과로 트래시에 둔 (미네르바 대)인 카드의 수만큼 대미지를 준다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "PILOT"
+        },
+        {
+          "type": "prose",
+          "en": "[Heine Westenfluss]",
+          "ko": "[하이네 베스텐플루스]"
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "pilot": {
+      "AP": 0,
+      "HP": 2,
+      "name": ""
+    },
+    "imageFile": "GD04-116",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-116",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-117",
+    "name": {
+      "en": "Graceful Demeanor",
+      "ko": "우아한 몸가짐"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 4,
+    "cost": 2,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "ACTION",
+      "ACTION"
+    ],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Activate this card's",
+          "ko": "이 카드의"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": ".",
+          "ko": "을 발동한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 to 2 enemy Units that are Lv.3 or lower. Return them to their owners' hands.",
+          "ko": "Lv. 3 이하의 상대의 유닛 1~2개를 선택한다. 그것들을 주인의 패로 되돌린다."
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "imageFile": "GD04-117",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-117",
+        "block": "1"
+      },
+      {
+        "rarity": "RARE_PLUS",
+        "imageFile": "GD04-117_p1",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-118",
+    "name": {
+      "en": "World Distortion",
+      "ko": "세계의 왜곡"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "UN"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "If 2 or more friendly (UN) Units are in play, choose 1 enemy Unit with 5 or less HP. Return it to its owner's hand.",
+          "ko": "(UN)인 아군의 유닛이 2개 이상 있다면, HP5 이하인 상대의 유닛 1개를 선택한다. 그것을 주인의 패로 되돌린다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "PILOT"
+        },
+        {
+          "type": "prose",
+          "en": "[Alejandro Corner]",
+          "ko": "[알레한드로 코너]"
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    },
+    "imageFile": "GD04-118",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-118",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-119",
+    "name": {
+      "en": "Fighting Alone",
+      "ko": "고군분투"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "CIVILIAN"
+    ],
+    "relatedTrait": [
+      "NEWTYPE"
+    ],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 friendly Unit paired with a (Newtype) Pilot. It can't receive effect damage from enemy Units during this turn.",
+          "ko": "(뉴타입)인 파일럿이 세트되어 있는 아군의 유닛 1개를 선택한다. 이 턴 동안, 그것은 상대의 유닛으로부터 효과 대미지를 받지 않는다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "PILOT"
+        },
+        {
+          "type": "prose",
+          "en": "[Gael Chan]",
+          "ko": "[가엘 창]"
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "pilot": {
+      "AP": 1,
+      "HP": 1,
+      "name": "Newtype"
+    },
+    "imageFile": "GD04-119",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-119",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-120",
+    "name": {
+      "en": "Machine Doll Squad",
+      "ko": "기계인형 부대"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 2,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "MAIN",
+      "ACTION",
+      "PILOT"
+    ],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "MILITIA"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "MAIN"
+        },
+        {
+          "type": "prose",
+          "en": "/",
+          "ko": "/"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ACTION"
+        },
+        {
+          "type": "prose",
+          "en": "Choose 1 friendly (Militia)/(Dianna Counter) Unit. It gets AP+2 during this turn.",
+          "ko": "(밀리샤) / (디아나 카운터)인 아군의 유닛 1개를 선택한다. 이 턴 동안, 그것을 AP+2한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "PILOT"
+        },
+        {
+          "type": "prose",
+          "en": "[Miashei Kune]",
+          "ko": "[메셰 쿤]"
+        }
+      ]
+    ],
+    "__typename": "CommandCard",
+    "pilot": {
+      "AP": 1,
+      "HP": 0,
+      "name": ""
+    },
+    "imageFile": "GD04-120",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-120",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-121",
+    "name": {
+      "en": "Reineforce Jr.",
+      "ko": "린호스 Jr."
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_V_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "LEAGUE_MILITAIRE",
+      "WARSHIP"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy this card.",
+          "ko": "이 카드를 배치한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Add 1 of your Shields to your hand. Then, during your turn, if a friendly (League Militaire) Unit is in play, deploy 1 [Parts]((League Militaire)･AP1･HP1･This Unit can't choose the enemy player as its attack target) Unit token.",
+          "ko": "자신의 실드 1개를 패에 추가한다. 그 후, 자신의 턴이고, (리가 밀리티어)인 아군의 유닛이 있다면, [파츠] 유닛 토큰 1개를 배치한다."
+        }
+      ]
+    ],
+    "__typename": "BaseCard",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-121",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-121",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-122",
+    "name": {
+      "en": "Jaburo",
+      "ko": "자브로"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "BLUE",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "ACTIVATE_MAIN",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "EARTH_FEDERATION",
+      "STRONGHOLD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy this card.",
+          "ko": "이 카드를 배치한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Add 1 of your Shields to your hand.",
+          "ko": "자신의 실드 1장을 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ACTIVATE_MAIN"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "Rest 1 of your (Earth Federation) Units：Choose 1 enemy Unit that is Lv.3 or lower. Rest it.",
+          "ko": "(지구연방)인 자신의 유닛 1개를 레스트한다 : Lv. 3 이하인 상대의 유닛 1개를 선택한다. 그것을 레스트한다."
+        }
+      ]
+    ],
+    "__typename": "BaseCard",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "EARTH"
+    ],
+    "imageFile": "GD04-122",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-122",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-123",
+    "name": {
+      "en": "A Baoa Qu",
+      "ko": "아 바오아 쿠"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 5,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "ZEON",
+      "STRONGHOLD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy this card.",
+          "ko": "이 카드를 배치한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Add 1 of your Shields to your hand.",
+          "ko": "자신의 실드 1장을 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "While you have a rested (Zeon) Unit in play, this Base can't receive battle damage from enemy Units that are Lv.4 or lower.",
+          "ko": "레스트의 (지온)인 자신의 유닛이 있는 동안, 이 베이스는 Lv. 4 이하의 상대의 유닛으로부터 배틀 대미지를 받지 않는다."
+        }
+      ]
+    ],
+    "__typename": "BaseCard",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-123",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-123",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-124",
+    "name": {
+      "en": "9th Tactical Testing Sector",
+      "ko": "제9전술시험구역"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "GREEN",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
+    "package": "GD04",
+    "trait": [
+      "ACADEMY",
+      "STRONGHOLD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy this card.",
+          "ko": "이 카드를 배치한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Add 1 of your Shields to your hand.",
+          "ko": "자신의 실드 1장을 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "When you place an EX Resource, choose 1 friendly (Academy) Unit. It gets AP+2 during this turn.",
+          "ko": "자신의 EX 리소스가 추가됐을 때, (학원)인 아군의 유닛 1개를 선택한다. 이 턴 동안, 그것을 AP+2한다."
+        }
+      ]
+    ],
+    "__typename": "BaseCard",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-124",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-124",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-125",
+    "name": {
+      "en": "Trinity Warship",
+      "ko": "트리니티 함"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "ACTIVATE_MAIN",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_00",
+    "package": "GD04",
+    "trait": [
+      "CB",
+      "WARSHIP"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy this card.",
+          "ko": "이 카드를 배치한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Add 1 of your Shields to your hand.",
+          "ko": "자신의 실드 1장을 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ACTIVATE_MAIN"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "①, rest 1 friendly (CB) Unit：Choose 1 enemy Unit that is Lv.5 or lower. Deal 1 damage to it.",
+          "ko": "①, (CB)인 아군의 유닛 1개를 레스트한다 : Lv. 5 이하인 상대의 유닛 1개를 선택한다. 그것에 1 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "BaseCard",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-125",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-125",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-126",
+    "name": {
+      "en": "Izuma Colony",
+      "ko": "이즈마 콜로니"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 1,
+    "cost": 1,
+    "color": "RED",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+    "package": "GD04",
+    "trait": [
+      "CLAN",
+      "STRONGHOLD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy this card.",
+          "ko": "이 카드를 배치한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Add 1 of your Shields to your hand.",
+          "ko": "자신의 실드 1장을 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "prose",
+          "en": "When this Base receives battle damage from an enemy Unit with 3 or less AP, deal 1 damage to that Unit.",
+          "ko": "이 베이스가 AP3 이하인 상대의 유닛으로부터 배틀 대미지를 받았을 때, 그 유닛에 1 대미지를 준다."
+        }
+      ]
+    ],
+    "__typename": "BaseCard",
+    "AP": null,
+    "HP": 4,
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-126",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-126",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-127",
+    "name": {
+      "en": "Freeden Ⅱ",
+      "ko": "프리덴Ⅱ"
+    },
+    "rarity": "UNCOMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "DEPLOY"
+    ],
+    "series": "AFTER_WAR_GUNDAM_X",
+    "package": "GD04",
+    "trait": [
+      "VULTURE",
+      "WARSHIP"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy this card.",
+          "ko": "이 카드를 배치한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Add 1 of your Shields to your hand. Then, if there are 7 or more (Vulture) cards in your trash, choose 1 enemy Unit with 2 or less AP. Destroy it.",
+          "ko": "자신의 실드 1개를 패에 추가한다. 그 후, 자신의 트래시에 (벌처)인 카드가 7장 이상 있다면, AP2 이하인 상대의 유닛 1개를 선택한다. 그것을 파괴한다."
+        }
+      ]
+    ],
+    "__typename": "BaseCard",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-127",
+    "printings": [
+      {
+        "rarity": "UNCOMMON",
+        "imageFile": "GD04-127",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-128",
+    "name": {
+      "en": "Armory One",
+      "ko": "아머리 원"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "PURPLE",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "DESTROYED"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_SEED_DESTINY",
+    "package": "GD04",
+    "trait": [
+      "ZAFT",
+      "STRONGHOLD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy this card.",
+          "ko": "이 카드를 배치한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Add 1 of your Shields to your hand.",
+          "ko": "자신의 실드 1장을 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DESTROYED"
+        },
+        {
+          "type": "prose",
+          "en": "All players draw 1.",
+          "ko": "플레이어 전부는 1장 드로우한다."
+        }
+      ]
+    ],
+    "__typename": "BaseCard",
+    "AP": null,
+    "HP": 6,
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-128",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-128",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-129",
+    "name": {
+      "en": "Willgem",
+      "ko": "윌 게임"
+    },
+    "rarity": "RARE",
+    "block": "1",
+    "level": 3,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "ONCE_PER_TURN"
+    ],
+    "series": "TURN_A_GUNDAM",
+    "package": "GD04",
+    "trait": [
+      "MILITIA",
+      "WARSHIP"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy this card.",
+          "ko": "이 카드를 배치한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Add 1 of your Shields to your hand. Then, deal 3 damage to this Base.",
+          "ko": "자신의 실드 1개를 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "During your turn, when you pay ① or more for a friendly Unit's effect, this Base recovers 2 HP.",
+          "ko": "자신의 턴 동안, 아군의 유닛이 효과로 ① 이상을 지불했을 때, 이 베이스를 2 회복한다."
+        }
+      ]
+    ],
+    "__typename": "BaseCard",
+    "AP": null,
+    "HP": 7,
+    "zone": [
+      "SPACE",
+      "EARTH"
+    ],
+    "imageFile": "GD04-129",
+    "printings": [
+      {
+        "rarity": "RARE",
+        "imageFile": "GD04-129",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "id": "GD04-130",
+    "name": {
+      "en": "Industrial 7",
+      "ko": "인더스트리얼7"
+    },
+    "rarity": "COMMON",
+    "block": "1",
+    "level": 4,
+    "cost": 1,
+    "color": "WHITE",
+    "keywords": [
+      "BURST",
+      "DEPLOY",
+      "ACTIVATE_MAIN",
+      "ONCE_PER_TURN"
+    ],
+    "series": "MOBILE_SUIT_GUNDAM_UNICORN",
+    "package": "GD04",
+    "trait": [
+      "CIVILIAN",
+      "STRONGHOLD"
+    ],
+    "relatedTrait": [],
+    "description": [
+      [
+        {
+          "type": "trigger",
+          "keyword": "BURST"
+        },
+        {
+          "type": "prose",
+          "en": "Deploy this card.",
+          "ko": "이 카드를 배치한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "DEPLOY"
+        },
+        {
+          "type": "prose",
+          "en": "Add 1 of your Shields to your hand.",
+          "ko": "자신의 실드 1장을 패에 추가한다."
+        }
+      ],
+      [
+        {
+          "type": "trigger",
+          "keyword": "ACTIVATE_MAIN"
+        },
+        {
+          "type": "trigger",
+          "keyword": "ONCE_PER_TURN"
+        },
+        {
+          "type": "prose",
+          "en": "Exile 1 Command card from your trash：Choose 1 enemy Unit. It gets AP-1 during this turn.",
+          "ko": "자신의 트래시의 커맨드 카드 1장을 게임에서 제외한다 : 상대의 유닛 1개를 선택한다. 이 턴 동안, 그것을 AP-1한다."
+        }
+      ]
+    ],
+    "__typename": "BaseCard",
+    "AP": null,
+    "HP": 5,
+    "zone": [
+      "SPACE"
+    ],
+    "imageFile": "GD04-130",
+    "printings": [
+      {
+        "rarity": "COMMON",
+        "imageFile": "GD04-130",
+        "block": "1"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "T-021",
+    "name": "Parts",
+    "imageFile": "T-021",
+    "printings": [
+      {
+        "imageFile": "T-021"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "T-022",
+    "name": "Wire-Guided Arm",
+    "imageFile": "T-022",
+    "printings": [
+      {
+        "imageFile": "T-022"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "T-023",
+    "name": "Zeong (Head)",
+    "imageFile": "T-023",
+    "printings": [
+      {
+        "imageFile": "T-023"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "T-024",
+    "name": "Alvaaron",
+    "imageFile": "T-024",
+    "printings": [
+      {
+        "imageFile": "T-024"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "R-031",
+    "name": "Resource",
+    "imageFile": "R-031",
+    "printings": [
+      {
+        "imageFile": "R-031"
+      },
+      {
+        "imageFile": "R-031_p1"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "R-032",
+    "name": "Resource",
+    "imageFile": "R-032",
+    "printings": [
+      {
+        "imageFile": "R-032"
+      },
+      {
+        "imageFile": "R-032_p1"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "R-033",
+    "name": "Resource",
+    "imageFile": "R-033",
+    "printings": [
+      {
+        "imageFile": "R-033"
+      },
+      {
+        "imageFile": "R-033_p1"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "R-034",
+    "name": "Resource",
+    "imageFile": "R-034",
+    "printings": [
+      {
+        "imageFile": "R-034"
+      },
+      {
+        "imageFile": "R-034_p1"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "R-035",
+    "name": "Resource",
+    "imageFile": "R-035",
+    "printings": [
+      {
+        "imageFile": "R-035"
+      },
+      {
+        "imageFile": "R-035_p1"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "R-036",
+    "name": "Resource",
+    "imageFile": "R-036",
+    "printings": [
+      {
+        "imageFile": "R-036"
+      },
+      {
+        "imageFile": "R-036_p1"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "R-037",
+    "name": "Resource",
+    "imageFile": "R-037",
+    "printings": [
+      {
+        "imageFile": "R-037"
+      },
+      {
+        "imageFile": "R-037_p1"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "R-038",
+    "name": "Resource",
+    "imageFile": "R-038",
+    "printings": [
+      {
+        "imageFile": "R-038"
+      },
+      {
+        "imageFile": "R-038_p1"
+      },
+      {
+        "imageFile": "R-038_p2"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "R-039",
+    "name": "Resource",
+    "imageFile": "R-039",
+    "printings": [
+      {
+        "imageFile": "R-039"
+      },
+      {
+        "imageFile": "R-039_p1"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "R-040",
+    "name": "Resource",
+    "imageFile": "R-040",
+    "printings": [
+      {
+        "imageFile": "R-040"
+      },
+      {
+        "imageFile": "R-040_p1"
+      }
+    ]
+  },
+  {
     "__typename": "ResourceCard",
     "id": "RP-024",
     "name": "Resource",
@@ -33580,6 +41969,17 @@
   },
   {
     "__typename": "ResourceCard",
+    "id": "RP-044",
+    "name": "Resource",
+    "imageFile": "RP-044",
+    "printings": [
+      {
+        "imageFile": "RP-044"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
     "id": "EXBP-001",
     "name": "EX Base",
     "imageFile": "EXBP-001",
@@ -33696,6 +42096,17 @@
     "printings": [
       {
         "imageFile": "EXBP-011"
+      }
+    ]
+  },
+  {
+    "__typename": "ResourceCard",
+    "id": "EXBP-019",
+    "name": "EX Base",
+    "imageFile": "EXBP-019",
+    "printings": [
+      {
+        "imageFile": "EXBP-019"
       }
     ]
   },
