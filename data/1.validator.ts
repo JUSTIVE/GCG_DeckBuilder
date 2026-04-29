@@ -115,6 +115,15 @@ export const CardTraitSchema = z.enum([
   "CYCLOPS_TEAM",
   "UN",
   "MINERVA_SQUAD",
+  "LEAGUE_MILITAIRE",
+  "SATYRICON",
+  "MILITIA",
+  "SHRIKE_TEAM",
+  "MOONRACE",
+  "TRINITY",
+  "VICTORY_TYPE",
+  "ZANSCARE",
+  "DAWN_OF_FOLD",
 ]);
 
 export const GundamSeriesSchema = z.enum([
@@ -133,6 +142,8 @@ export const GundamSeriesSchema = z.enum([
   "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
   "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY",
   "MOBILE_SUIT_GUNDAM_GQUUUUUUX",
+  "MOBILE_SUIT_V_GUNDAM",
+  "TURN_A_GUNDAM",
 ]);
 
 export const CardKindSchema = z.enum(["RESOURCE", "BASE", "UNIT", "PILOT", "COMMAND"]);

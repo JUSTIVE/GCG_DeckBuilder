@@ -90,6 +90,7 @@ export const ALL_PACKAGES = [
   "GD01",
   "GD02",
   "GD03",
+  "GD04",
   "ST01",
   "ST02",
   "ST03",

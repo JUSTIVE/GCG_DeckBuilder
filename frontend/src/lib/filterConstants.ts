@@ -128,6 +128,7 @@ export const getPackGroups = () => {
         { value: "GD01", label: "GD01" },
         { value: "GD02", label: "GD02" },
         { value: "GD03", label: "GD03" },
+        { value: "GD04", label: "GD04" },
       ],
     },
     {

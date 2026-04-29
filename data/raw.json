@@ -27103,7 +27103,7 @@
     "keywords": [
       "DEPLOY"
     ],
-    "series": "MOBILE_SUIT_GUNDAM_HATHAWAY\"S_FLASH",
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
     "package": "GD04",
     "trait": [
       "EARTH_FEDERATION"
@@ -27137,7 +27137,7 @@
     "keywords": [
       "DEPLOY"
     ],
-    "series": "MOBILE_SUIT_GUNDAM_HATHAWAY\"S_FLASH",
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
     "package": "GD04",
     "trait": [
       "EARTH_FEDERATION"
@@ -28562,7 +28562,7 @@
     "keywords": [
       "DEPLOY"
     ],
-    "series": "MOBILE_SUIT_GUNDAM_HATHAWAY\"S_FLASH",
+    "series": "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH",
     "package": "GD04",
     "trait": [
       "MAFTY"
@@ -29918,7 +29918,7 @@
       "SUPPRESSION",
       "BLOCKER"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA"
@@ -29966,7 +29966,7 @@
       "SUPPRESSION",
       "BLOCKER"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA"
@@ -30068,7 +30068,7 @@
       "BLOCKER",
       "DURING_LINK"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA"
@@ -30245,7 +30245,7 @@
       "ACTIVATE_MAIN",
       "ONCE_PER_TURN"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA"
@@ -30278,7 +30278,7 @@
     "keywords": [
       "ATTACK"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA"
@@ -30342,7 +30342,7 @@
     "cost": 1,
     "color": "WHITE",
     "keywords": [],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA"
@@ -30368,7 +30368,7 @@
     "keywords": [
       "BLOCKER"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA"
@@ -30395,7 +30395,7 @@
     "cost": 1,
     "color": "WHITE",
     "keywords": [],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA"
@@ -31074,7 +31074,7 @@
       "BURST",
       "WHEN_LINKED"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA",
@@ -31102,7 +31102,7 @@
       "BURST",
       "WHEN_LINKED"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA",
@@ -31187,7 +31187,7 @@
       "BURST",
       "ONCE_PER_TURN"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA"
@@ -31724,7 +31724,7 @@
       "ACTION",
       "ACTION"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [],
     "relatedTrait": [],
@@ -31748,7 +31748,7 @@
       "ACTION",
       "ACTION"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [],
     "relatedTrait": [],
@@ -31836,7 +31836,7 @@
       "ACTION",
       "PILOT"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA"
@@ -32127,7 +32127,7 @@
       "DEPLOY",
       "ONCE_PER_TURN"
     ],
-    "series": "∀_GUNDAM",
+    "series": "TURN_A_GUNDAM",
     "package": "GD04",
     "trait": [
       "MILITIA",
