@@ -7,6 +7,7 @@ import { COLOR_HEX } from "src/render/color";
 import i18n from "@/i18n";
 import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "lucide-react";
+import { Dossier } from "@/components/docket";
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 
@@ -221,63 +222,72 @@ export function InfoPage() {
   const isUnavailable = coverage.total === 0;
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-6 w-full">
-      <div>
-        <h1 className="text-lg font-bold mb-3">{t("nav.translationCoverage" as any)}</h1>
+    <div className="flex flex-col w-full">
+      <Dossier
+        docId="GCG-I18N-COV"
+        category="DISPATCH / 翻訳"
+        title={t("nav.translationCoverage" as any) as string}
+        description={t("nav.translationCoverage" as any) as string}
+        edition="ROLLING"
+      />
+      <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-6 w-full">
+        <div>
+          {/* Language tabs */}
+          <div className="flex border-b border-border mb-4">
+            {LOCALE_TABS.map(({ locale, label, sublabel }) => (
+              <button
+                key={locale}
+                type="button"
+                onClick={() => setActiveLocale(locale)}
+                className={cn(
+                  "px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors",
+                  activeLocale === locale
+                    ? "border-primary text-foreground"
+                    : "border-transparent text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {label}
+                <span className="ml-1.5 text-xs text-muted-foreground font-normal hidden sm:inline">
+                  {sublabel}
+                </span>
+              </button>
+            ))}
+          </div>
 
-        {/* Language tabs */}
-        <div className="flex border-b border-border mb-4">
-          {LOCALE_TABS.map(({ locale, label, sublabel }) => (
-            <button
-              key={locale}
-              type="button"
-              onClick={() => setActiveLocale(locale)}
-              className={cn(
-                "px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors",
-                activeLocale === locale
-                  ? "border-primary text-foreground"
-                  : "border-transparent text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {label}
-              <span className="ml-1.5 text-xs text-muted-foreground font-normal hidden sm:inline">
-                {sublabel}
+          {isUnavailable ? (
+            <div className="flex items-center justify-center py-12 text-muted-foreground text-sm">
+              준비 중
+            </div>
+          ) : (
+            <div className="flex items-center gap-3 p-4 rounded-lg border border-border bg-muted/30">
+              <div className="flex-1 min-w-0">
+                <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
+                  <div
+                    className={cn("h-full rounded-full transition-all", barClass(overall))}
+                    style={{ width: `${overall}%` }}
+                  />
+                </div>
+              </div>
+              <span
+                className={cn("text-sm font-semibold tabular-nums shrink-0", pctClass(overall))}
+              >
+                {overall}%
               </span>
-            </button>
-          ))}
+              <span className="text-xs text-muted-foreground tabular-nums shrink-0">
+                {coverage.translated}/{coverage.total}
+              </span>
+            </div>
+          )}
         </div>
 
-        {isUnavailable ? (
-          <div className="flex items-center justify-center py-12 text-muted-foreground text-sm">
-            준비 중
-          </div>
-        ) : (
-          <div className="flex items-center gap-3 p-4 rounded-lg border border-border bg-muted/30">
-            <div className="flex-1 min-w-0">
-              <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-                <div
-                  className={cn("h-full rounded-full transition-all", barClass(overall))}
-                  style={{ width: `${overall}%` }}
-                />
-              </div>
-            </div>
-            <span className={cn("text-sm font-semibold tabular-nums shrink-0", pctClass(overall))}>
-              {overall}%
-            </span>
-            <span className="text-xs text-muted-foreground tabular-nums shrink-0">
-              {coverage.translated}/{coverage.total}
-            </span>
+        {!isUnavailable && (
+          <div className="flex flex-col gap-2">
+            {coverage.packages.map((pkg) => (
+              <PackageSection key={pkg.package} pkg={pkg} />
+            ))}
           </div>
         )}
       </div>
-
-      {!isUnavailable && (
-        <div className="flex flex-col gap-2">
-          {coverage.packages.map((pkg) => (
-            <PackageSection key={pkg.package} pkg={pkg} />
-          ))}
-        </div>
-      )}
     </div>
   );
 }

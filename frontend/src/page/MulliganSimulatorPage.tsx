@@ -8,8 +8,9 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { CardByIdOverlay } from "@/components/CardByIdOverlay";
 import { Button } from "@/components/ui/button";
-import { ShuffleIcon, DicesIcon, ChevronsUpDownIcon } from "lucide-react";
+import { ShuffleIcon, ChevronsUpDownIcon } from "lucide-react";
 import { Card } from "@/components/Card";
+import { Dossier } from "@/components/docket";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Command,
@@ -223,62 +224,66 @@ export function MulliganSimulatorPage() {
   const selectedName = decks.find((d) => d.id === selectedId)?.name;
 
   return (
-    <div className="max-w-xl mx-auto w-full px-6 py-8 flex flex-col gap-6">
-      <div className="flex items-center gap-2">
-        <DicesIcon className="size-5 text-muted-foreground" />
-        <h1 className="text-xl font-bold">{t("nav.mulliganSimulator")}</h1>
+    <div className="flex flex-col w-full">
+      <Dossier
+        docId="GCG-MULLI-SIM"
+        category="TOOLS / マリガン"
+        title={t("nav.mulliganSimulator")}
+        description={t("nav.mulliganSimulator") as string}
+        edition="LAB"
+      />
+      <div className="max-w-xl mx-auto w-full px-6 py-8 flex flex-col gap-6">
+        {decks.length === 0 ? (
+          <p className="text-muted-foreground text-sm">{t("mulligan.noDecks")}</p>
+        ) : (
+          <>
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger
+                className={cn(
+                  "flex w-56 items-center justify-between rounded-lg border border-border bg-background px-3 py-1.5 text-sm",
+                  "hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-ring",
+                )}
+              >
+                <span className={cn(!selectedName && "text-muted-foreground")}>
+                  {selectedName ?? t("mulligan.selectDeck")}
+                </span>
+                <ChevronsUpDownIcon className="size-4 shrink-0 opacity-50" />
+              </PopoverTrigger>
+              <PopoverContent className="w-56 p-0">
+                <Command>
+                  <CommandInput placeholder={t("mulligan.searchDeck")} />
+                  <CommandList>
+                    <CommandEmpty>{t("deck.notFound")}</CommandEmpty>
+                    <CommandGroup>
+                      {decks.map((deck) => (
+                        <CommandItem
+                          key={deck.id}
+                          value={deck.name}
+                          data-checked={selectedId === deck.id}
+                          onSelect={() => {
+                            setSelectedId(deck.id);
+                            setOpen(false);
+                          }}
+                        >
+                          {deck.name}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
+
+            {selectedId && (
+              <Suspense
+                fallback={<p className="text-muted-foreground text-sm">{t("search.searching")}</p>}
+              >
+                <DeckDrawer key={selectedId} deckId={selectedId} />
+              </Suspense>
+            )}
+          </>
+        )}
       </div>
-
-      {decks.length === 0 ? (
-        <p className="text-muted-foreground text-sm">{t("mulligan.noDecks")}</p>
-      ) : (
-        <>
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger
-              className={cn(
-                "flex w-56 items-center justify-between rounded-lg border border-border bg-background px-3 py-1.5 text-sm",
-                "hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-ring",
-              )}
-            >
-              <span className={cn(!selectedName && "text-muted-foreground")}>
-                {selectedName ?? t("mulligan.selectDeck")}
-              </span>
-              <ChevronsUpDownIcon className="size-4 shrink-0 opacity-50" />
-            </PopoverTrigger>
-            <PopoverContent className="w-56 p-0">
-              <Command>
-                <CommandInput placeholder={t("mulligan.searchDeck")} />
-                <CommandList>
-                  <CommandEmpty>{t("deck.notFound")}</CommandEmpty>
-                  <CommandGroup>
-                    {decks.map((deck) => (
-                      <CommandItem
-                        key={deck.id}
-                        value={deck.name}
-                        data-checked={selectedId === deck.id}
-                        onSelect={() => {
-                          setSelectedId(deck.id);
-                          setOpen(false);
-                        }}
-                      >
-                        {deck.name}
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </CommandList>
-              </Command>
-            </PopoverContent>
-          </Popover>
-
-          {selectedId && (
-            <Suspense
-              fallback={<p className="text-muted-foreground text-sm">{t("search.searching")}</p>}
-            >
-              <DeckDrawer key={selectedId} deckId={selectedId} />
-            </Suspense>
-          )}
-        </>
-      )}
     </div>
   );
 }

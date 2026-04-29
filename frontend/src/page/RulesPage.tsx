@@ -28,6 +28,7 @@ import { triggerClass, TRIGGER_FALLBACK } from "@/components/CardDescription";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 import type { UrlLocale } from "@/i18n";
+import { Dossier } from "@/components/docket";
 
 // ── badge helpers ─────────────────────────────────────────────────────────────
 
@@ -82,16 +83,19 @@ function TBadge({
 
 // ── layout helpers ────────────────────────────────────────────────────────────
 
+type SectionChildren = React.ReactNode | ((open: boolean) => React.ReactNode);
+
 function Section({
   title,
   children,
   defaultOpen = false,
 }: {
   title: string;
-  children: React.ReactNode;
+  children: SectionChildren;
   defaultOpen?: boolean;
 }) {
   const [open, setOpen] = useState(defaultOpen);
+  const content = typeof children === "function" ? children(open) : children;
   return (
     <div className="rounded-lg border border-border overflow-hidden">
       <button
@@ -115,11 +119,37 @@ function Section({
       >
         <div className="overflow-hidden">
           <div className="border-t border-border px-3 py-3 sm:px-4 sm:py-4 flex flex-col gap-3 sm:gap-4">
-            {children}
+            {content}
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function AnimatedBigNumber({
+  value,
+  play,
+  delay = 0,
+}: {
+  value: string | number;
+  play: boolean;
+  delay?: number;
+}) {
+  return (
+    <span
+      className={cn(
+        "absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none",
+        "transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] origin-bottom-right",
+        play
+          ? "translate-y-0 opacity-100 scale-100 rotate-0"
+          : "translate-y-10 opacity-0 scale-50 rotate-12",
+      )}
+      style={{ transitionDelay: play ? `${delay}ms` : "0ms" }}
+      aria-hidden
+    >
+      {value}
+    </span>
   );
 }
 
@@ -261,6 +291,89 @@ function getBattleSteps(t: TFunction<"rules">) {
       desc: t("battleSteps.battleEnd.desc"),
     },
   ];
+}
+
+// ── version history selector ─────────────────────────────────────────────────
+
+type VersionEntry = {
+  version: string;
+  originalDate: string;
+  translationDate: string;
+  changes: string[];
+};
+
+function VersionHistorySection({ t }: { t: TFunction<"rules"> }) {
+  const versions = t("versionHistory.versions", { returnObjects: true }) as VersionEntry[];
+  const [selected, setSelected] = useState(0);
+  const cur = versions[selected];
+
+  return (
+    <div className="border border-foreground bg-card">
+      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 px-3 sm:px-4 py-2 border-b border-foreground/30">
+        <span className="docket-meta-strong">§ {t("versionHistory.title")}</span>
+        <span className="docket-meta">/ {t("versionHistory.selectLabel")}</span>
+      </div>
+      <div className="flex flex-wrap gap-0 border-b border-foreground/30">
+        {versions.map((v, i) => {
+          const isActive = i === selected;
+          const isLatest = i === 0;
+          return (
+            <button
+              key={v.version}
+              type="button"
+              onClick={() => setSelected(i)}
+              className={cn(
+                "docket-mono text-xs px-3 py-2 border-r border-foreground/30 last:border-r-0",
+                "transition-colors cursor-pointer flex items-baseline gap-1.5",
+                isActive
+                  ? "bg-foreground text-background"
+                  : "bg-card text-muted-foreground hover:bg-foreground/10 hover:text-foreground",
+              )}
+            >
+              <span className="font-bold tracking-wider">v{v.version}</span>
+              {isLatest && (
+                <span
+                  className={cn(
+                    "text-[9px] px-1 leading-tight",
+                    isActive ? "bg-accent text-foreground" : "bg-accent/80 text-foreground",
+                  )}
+                >
+                  {t("versionHistory.currentLabel")}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+      <div className="px-3 sm:px-4 py-3 flex flex-col gap-3">
+        <div className="flex flex-wrap gap-x-4 gap-y-1 docket-meta">
+          <span>
+            {t("versionHistory.originalLabel")}{" "}
+            <span className="text-foreground tabular-nums">{cur.originalDate}</span>
+          </span>
+          <span className="opacity-30">·</span>
+          <span>
+            {t("versionHistory.translationLabel")}{" "}
+            <span className="text-foreground tabular-nums">{cur.translationDate}</span>
+          </span>
+        </div>
+        <div>
+          <div className="docket-meta mb-2">{t("versionHistory.changesLabel")}</div>
+          <ul className="docket-mono text-xs flex flex-col gap-1.5 text-foreground leading-relaxed">
+            {cur.changes.map((change, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="text-accent shrink-0">▸</span>
+                <span>{change}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="docket-meta text-[10px] leading-relaxed border-t border-foreground/20 pt-2">
+          {t("versionHistory.note")}
+        </p>
+      </div>
+    </div>
+  );
 }
 
 // ── interactive: game setup walkthrough ──────────────────────────────────────
@@ -988,12 +1101,16 @@ function CardTypeItem({
   cardRefs,
   onOpen,
   viewOtherCardLabel,
+  play = true,
+  delay = 0,
 }: {
   ct: CardTypeEntry;
   cardRef: CardPreview_card$key | null | undefined;
   cardRefs?: readonly (CardPreview_card$key | null | undefined)[];
   onOpen: (id: string) => void;
   viewOtherCardLabel: string;
+  play?: boolean;
+  delay?: number;
 }) {
   const pool = cardRefs && cardRefs.length > 0 ? cardRefs : cardRef ? [cardRef] : [];
   const [idx, setIdx] = useState(0);
@@ -1056,10 +1173,14 @@ function CardTypeItem({
         {/* peeking card — half-overlapping right edge, slightly tilted */}
         {currentRef && (
           <div
-            className="absolute top-1/2 right-0 z-10 drop-shadow-lg"
+            className="absolute top-1/2 right-0 z-10 drop-shadow-lg transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
             style={{
               width: 96,
-              transform: `translateX(45%) translateY(-50%) rotate(${rotation}deg)`,
+              transform: play
+                ? `translateX(45%) translateY(-50%) rotate(${rotation}deg)`
+                : `translateX(180%) translateY(-50%) rotate(-25deg)`,
+              opacity: play ? 1 : 0,
+              transitionDelay: play ? `${delay}ms` : "0ms",
             }}
           >
             <div
@@ -1187,325 +1308,346 @@ export function RulesPage() {
   const viewOtherCardLabel = t("sections.cardTypes.viewOtherCard");
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-4 w-full">
+    <div className="flex flex-col w-full">
       {overlayCardId && (
         <CardByIdOverlay cardId={overlayCardId} onClose={() => setOverlayCardId(null)} />
       )}
-      <div>
-        <h1 className="text-lg font-bold">{t("title")}</h1>
-        <p className="text-xs text-muted-foreground mt-0.5">{t("subtitle")}</p>
-      </div>
+      <Dossier
+        docId="GCG-RULES-MK2"
+        category="STUDIO / 規則書"
+        title={t("title")}
+        description={t("subtitle")}
+        edition="MK.II"
+      />
+      <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-4 w-full">
+        {/* ── version history ── */}
+        <VersionHistorySection t={t} />
 
-      {/* ── objective ── */}
-      <Section title={t("sections.objective.title")} defaultOpen>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <div className="rounded-md border border-green-200 bg-green-50 p-3">
-            <p className="text-xs font-semibold text-green-700 mb-1.5">
-              {t("sections.objective.win.label")}
-            </p>
-            <ul className="text-xs text-green-800 flex flex-col gap-1">
-              {(t("sections.objective.win.conditions", { returnObjects: true }) as string[]).map(
-                (c, i) => (
-                  <li key={i}>· {c}</li>
-                ),
-              )}
-            </ul>
-          </div>
-          <div className="rounded-md border border-red-200 bg-red-50 p-3">
-            <p className="text-xs font-semibold text-red-700 mb-1.5">
-              {t("sections.objective.lose.label")}
-            </p>
-            <ul className="text-xs text-red-800 flex flex-col gap-1">
-              {(t("sections.objective.lose.conditions", { returnObjects: true }) as string[]).map(
-                (c, i) => (
-                  <li key={i}>· {c}</li>
-                ),
-              )}
-            </ul>
-          </div>
-        </div>
-        <Note>{t("sections.objective.note")}</Note>
-      </Section>
-
-      {/* ── deck rules ── */}
-      <Section title={t("sections.deckRules.title")}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <div className="relative rounded-md border p-3 overflow-hidden">
-            <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">
-              50
-            </span>
-            <p className="text-xs font-semibold mb-2">{t("sections.deckRules.mainDeck.label")}</p>
-            <ul className="text-xs text-muted-foreground flex flex-col gap-1">
-              {(t("sections.deckRules.mainDeck.rules", { returnObjects: true }) as string[]).map(
-                (r, i) => (
-                  <li key={i}>· {r}</li>
-                ),
-              )}
-            </ul>
-          </div>
-          <div className="relative rounded-md border p-3 overflow-hidden">
-            <span className="absolute right-2 bottom-[-0.22em] text-[7rem] font-black text-foreground/5 leading-none select-none pointer-events-none">
-              10
-            </span>
-            <p className="text-xs font-semibold mb-2">
-              {t("sections.deckRules.resourceDeck.label")}
-            </p>
-            <ul className="text-xs text-muted-foreground flex flex-col gap-1">
-              {(
-                t("sections.deckRules.resourceDeck.rules", { returnObjects: true }) as string[]
-              ).map((r, i) => (
-                <li key={i}>· {r}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="rounded-md border p-3 flex flex-col gap-2 text-xs">
-          <p className="font-semibold">{t("sections.deckRules.playConditions.label")}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-muted-foreground">
-            <div>
-              <span className="font-medium text-foreground">
-                {t("sections.deckRules.playConditions.level.name")}
-              </span>
-              <p>{t("sections.deckRules.playConditions.level.desc")}</p>
-            </div>
-            <div>
-              <span className="font-medium text-foreground">
-                {t("sections.deckRules.playConditions.cost.name")}
-              </span>
-              <p>{t("sections.deckRules.playConditions.cost.desc")}</p>
-            </div>
-          </div>
-        </div>
-        <Note>{t("sections.deckRules.note")}</Note>
-      </Section>
-
-      {/* ── card types ── */}
-      <Section title={t("sections.cardTypes.title")}>
-        <div className="flex flex-col gap-2">
-          {(
-            [
-              {
-                name: t("sections.cardTypes.items.unit.name"),
-                color: "bg-blue-50 border-blue-200",
-                head: "text-blue-700",
-                desc: t("sections.cardTypes.items.unit.desc"),
-                attrs: t("sections.cardTypes.items.unit.attrs", {
-                  returnObjects: true,
-                }) as string[],
-                notes: t("sections.cardTypes.items.unit.notes", {
-                  returnObjects: true,
-                }) as string[],
-                rotate: 6,
-                cardRef: data.unitSample,
-                cardRefs: data.unitSamples,
-              },
-              {
-                name: t("sections.cardTypes.items.pilot.name"),
-                color: "bg-pink-50 border-pink-200",
-                head: "text-pink-700",
-                desc: t("sections.cardTypes.items.pilot.desc"),
-                attrs: t("sections.cardTypes.items.pilot.attrs", {
-                  returnObjects: true,
-                }) as string[],
-                notes: t("sections.cardTypes.items.pilot.notes", {
-                  returnObjects: true,
-                }) as string[],
-                rotate: -5,
-                cardRef: data.pilotSample,
-                cardRefs: data.pilotSamples,
-              },
-              {
-                name: t("sections.cardTypes.items.command.name"),
-                color: "bg-teal-50 border-teal-200",
-                head: "text-teal-700",
-                desc: t("sections.cardTypes.items.command.desc"),
-                attrs: t("sections.cardTypes.items.command.attrs", {
-                  returnObjects: true,
-                }) as string[],
-                notes: t("sections.cardTypes.items.command.notes", {
-                  returnObjects: true,
-                }) as string[],
-                rotate: 8,
-                cardRef: data.commandSample,
-                cardRefs: data.commandSamples,
-              },
-              {
-                name: t("sections.cardTypes.items.base.name"),
-                color: "bg-gray-50 border-gray-200",
-                head: "text-gray-700",
-                desc: t("sections.cardTypes.items.base.desc"),
-                attrs: t("sections.cardTypes.items.base.attrs", {
-                  returnObjects: true,
-                }) as string[],
-                notes: t("sections.cardTypes.items.base.notes", {
-                  returnObjects: true,
-                }) as string[],
-                rotate: -7,
-                cardRef: data.baseSample,
-                cardRefs: data.baseSamples,
-              },
-              {
-                name: t("sections.cardTypes.items.resource.name"),
-                color: "bg-yellow-50 border-yellow-200",
-                head: "text-yellow-700",
-                desc: t("sections.cardTypes.items.resource.desc"),
-                attrs: t("sections.cardTypes.items.resource.attrs", {
-                  returnObjects: true,
-                }) as string[],
-                notes: t("sections.cardTypes.items.resource.notes", {
-                  returnObjects: true,
-                }) as string[],
-                rotate: 5,
-                cardRef: data.resourceSample,
-                cardRefs: data.resourceSamples,
-              },
-            ] as const
-          ).map((ct) => (
-            <CardTypeItem
-              key={ct.name}
-              ct={ct}
-              cardRef={ct.cardRef}
-              cardRefs={ct.cardRefs}
-              onOpen={setOverlayCardId}
-              viewOtherCardLabel={viewOtherCardLabel}
-            />
-          ))}
-        </div>
-        <Note>
-          <span className="font-medium">EX {t("sections.cardTypes.items.base.name")}:</span>{" "}
-          {t("sections.cardTypes.note").split("\n")[0]}
-          {"\n"}
-          <span className="font-medium">
-            EX {t("sections.cardTypes.items.resource.name")}:
-          </span>{" "}
-          {t("sections.cardTypes.note").split("\n")[1]}
-        </Note>
-      </Section>
-
-      {/* ── game setup ── */}
-      <Section title={t("sections.gameSetup.title")}>
-        <GameSetupWalkthrough
-          p1HandImages={p1HandImages}
-          p2HandImages={p2HandImages}
-          newP1HandImages={newP1HandImages}
-          newP2HandImages={newP2HandImages}
-          setupSteps={setupSteps}
-          t={t}
-        />
-      </Section>
-
-      {/* ── turn flow ── */}
-      <Section title={t("sections.turnFlow.title")}>
-        <TurnPhaseWalkthrough phases={phases} t={t} />
-        <Note>{t("sections.turnFlow.note")}</Note>
-      </Section>
-
-      {/* ── battle ── */}
-      <Section title={t("sections.battle.title")}>
-        <div className="flex flex-col gap-3">
-          <Note>
-            <span className="font-medium">
-              {t("sections.battle.attackConditionNote").split("\n")[0]}
-            </span>
-            {"\n"}
-            {t("sections.battle.attackConditionNote").split("\n")[1]}
-          </Note>
-
-          <p className="text-xs text-muted-foreground">{t("sections.battle.clickHint")}</p>
-          <BattleStepsWalkthrough battleSteps={battleSteps} />
-
-          <UnitBattleSimulator />
-
-          <Note>{t("sections.battle.note")}</Note>
-        </div>
-      </Section>
-
-      {/* ── zones ── */}
-      <ZoneSection t={t} />
-
-      {/* ── triggers ── */}
-      <Section title={t("sections.triggers.title")}>
-        <div className="flex flex-col gap-3">
-          {(
-            [
-              "activateMain",
-              "activateAction",
-              "main",
-              "action",
-              "burst",
-              "onPlace",
-              "onAttack",
-              "onDestroy",
-              "onSet",
-              "whileSet",
-              "onLink",
-              "whileLink",
-              "oncePer",
-            ] as const
-          ).map((key) => (
-            <div key={key} className="flex flex-col gap-1">
-              <div>
-                <TBadge
-                  name={t(`sections.triggers.items.${key}.badge`)}
-                  triggerKey={key}
-                  locale={locale}
-                />
-              </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                {t(`sections.triggers.items.${key}.desc`)}
+        {/* ── objective ── */}
+        <Section title={t("sections.objective.title")} defaultOpen>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="rounded-md border border-green-200 bg-green-50 p-3">
+              <p className="text-xs font-semibold text-green-700 mb-1.5">
+                {t("sections.objective.win.label")}
               </p>
+              <ul className="text-xs text-green-800 flex flex-col gap-1">
+                {(t("sections.objective.win.conditions", { returnObjects: true }) as string[]).map(
+                  (c, i) => (
+                    <li key={i}>· {c}</li>
+                  ),
+                )}
+              </ul>
             </div>
-          ))}
-        </div>
-      </Section>
+            <div className="rounded-md border border-red-200 bg-red-50 p-3">
+              <p className="text-xs font-semibold text-red-700 mb-1.5">
+                {t("sections.objective.lose.label")}
+              </p>
+              <ul className="text-xs text-red-800 flex flex-col gap-1">
+                {(t("sections.objective.lose.conditions", { returnObjects: true }) as string[]).map(
+                  (c, i) => (
+                    <li key={i}>· {c}</li>
+                  ),
+                )}
+              </ul>
+            </div>
+          </div>
+          <Note>{t("sections.objective.note")}</Note>
+        </Section>
 
-      {/* ── effects ── */}
-      <Section title={t("sections.effects.title")}>
-        <div className="flex flex-col gap-2 text-xs">
-          {(["continuous", "triggered", "activated", "command", "replacement"] as const).map(
-            (key) => (
-              <div key={key} className="rounded border p-2">
-                <p className="font-semibold mb-0.5">{t(`sections.effects.items.${key}.name`)}</p>
-                <p className="text-muted-foreground leading-relaxed">
-                  {t(`sections.effects.items.${key}.desc`)}
+        {/* ── deck rules ── */}
+        <Section title={t("sections.deckRules.title")}>
+          {(open) => (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="relative rounded-md border p-3 overflow-hidden">
+                  <AnimatedBigNumber value="50" play={open} delay={120} />
+                  <p className="text-xs font-semibold mb-2">
+                    {t("sections.deckRules.mainDeck.label")}
+                  </p>
+                  <ul className="text-xs text-muted-foreground flex flex-col gap-1">
+                    {(
+                      t("sections.deckRules.mainDeck.rules", { returnObjects: true }) as string[]
+                    ).map((r, i) => (
+                      <li key={i}>· {r}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="relative rounded-md border p-3 overflow-hidden">
+                  <AnimatedBigNumber value="10" play={open} delay={260} />
+                  <p className="text-xs font-semibold mb-2">
+                    {t("sections.deckRules.resourceDeck.label")}
+                  </p>
+                  <ul className="text-xs text-muted-foreground flex flex-col gap-1">
+                    {(
+                      t("sections.deckRules.resourceDeck.rules", {
+                        returnObjects: true,
+                      }) as string[]
+                    ).map((r, i) => (
+                      <li key={i}>· {r}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="rounded-md border p-3 flex flex-col gap-2 text-xs">
+                <p className="font-semibold">{t("sections.deckRules.playConditions.label")}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-muted-foreground">
+                  <div>
+                    <span className="font-medium text-foreground">
+                      {t("sections.deckRules.playConditions.level.name")}
+                    </span>
+                    <p>{t("sections.deckRules.playConditions.level.desc")}</p>
+                  </div>
+                  <div>
+                    <span className="font-medium text-foreground">
+                      {t("sections.deckRules.playConditions.cost.name")}
+                    </span>
+                    <p>{t("sections.deckRules.playConditions.cost.desc")}</p>
+                  </div>
+                </div>
+              </div>
+              <Note>{t("sections.deckRules.note")}</Note>
+            </>
+          )}
+        </Section>
+
+        {/* ── card types ── */}
+        <Section title={t("sections.cardTypes.title")}>
+          {(open) => (
+            <>
+              <div className="flex flex-col gap-2">
+                {(
+                  [
+                    {
+                      name: t("sections.cardTypes.items.unit.name"),
+                      color: "bg-blue-50 border-blue-200",
+                      head: "text-blue-700",
+                      desc: t("sections.cardTypes.items.unit.desc"),
+                      attrs: t("sections.cardTypes.items.unit.attrs", {
+                        returnObjects: true,
+                      }) as string[],
+                      notes: t("sections.cardTypes.items.unit.notes", {
+                        returnObjects: true,
+                      }) as string[],
+                      rotate: 6,
+                      cardRef: data.unitSample,
+                      cardRefs: data.unitSamples,
+                    },
+                    {
+                      name: t("sections.cardTypes.items.pilot.name"),
+                      color: "bg-pink-50 border-pink-200",
+                      head: "text-pink-700",
+                      desc: t("sections.cardTypes.items.pilot.desc"),
+                      attrs: t("sections.cardTypes.items.pilot.attrs", {
+                        returnObjects: true,
+                      }) as string[],
+                      notes: t("sections.cardTypes.items.pilot.notes", {
+                        returnObjects: true,
+                      }) as string[],
+                      rotate: -5,
+                      cardRef: data.pilotSample,
+                      cardRefs: data.pilotSamples,
+                    },
+                    {
+                      name: t("sections.cardTypes.items.command.name"),
+                      color: "bg-teal-50 border-teal-200",
+                      head: "text-teal-700",
+                      desc: t("sections.cardTypes.items.command.desc"),
+                      attrs: t("sections.cardTypes.items.command.attrs", {
+                        returnObjects: true,
+                      }) as string[],
+                      notes: t("sections.cardTypes.items.command.notes", {
+                        returnObjects: true,
+                      }) as string[],
+                      rotate: 8,
+                      cardRef: data.commandSample,
+                      cardRefs: data.commandSamples,
+                    },
+                    {
+                      name: t("sections.cardTypes.items.base.name"),
+                      color: "bg-gray-50 border-gray-200",
+                      head: "text-gray-700",
+                      desc: t("sections.cardTypes.items.base.desc"),
+                      attrs: t("sections.cardTypes.items.base.attrs", {
+                        returnObjects: true,
+                      }) as string[],
+                      notes: t("sections.cardTypes.items.base.notes", {
+                        returnObjects: true,
+                      }) as string[],
+                      rotate: -7,
+                      cardRef: data.baseSample,
+                      cardRefs: data.baseSamples,
+                    },
+                    {
+                      name: t("sections.cardTypes.items.resource.name"),
+                      color: "bg-yellow-50 border-yellow-200",
+                      head: "text-yellow-700",
+                      desc: t("sections.cardTypes.items.resource.desc"),
+                      attrs: t("sections.cardTypes.items.resource.attrs", {
+                        returnObjects: true,
+                      }) as string[],
+                      notes: t("sections.cardTypes.items.resource.notes", {
+                        returnObjects: true,
+                      }) as string[],
+                      rotate: 5,
+                      cardRef: data.resourceSample,
+                      cardRefs: data.resourceSamples,
+                    },
+                  ] as const
+                ).map((ct, i) => (
+                  <CardTypeItem
+                    key={ct.name}
+                    ct={ct}
+                    cardRef={ct.cardRef}
+                    cardRefs={ct.cardRefs}
+                    onOpen={setOverlayCardId}
+                    viewOtherCardLabel={viewOtherCardLabel}
+                    play={open}
+                    delay={i * 130}
+                  />
+                ))}
+              </div>
+              <Note>
+                <span className="font-medium">EX {t("sections.cardTypes.items.base.name")}:</span>{" "}
+                {t("sections.cardTypes.note").split("\n")[0]}
+                {"\n"}
+                <span className="font-medium">
+                  EX {t("sections.cardTypes.items.resource.name")}:
+                </span>{" "}
+                {t("sections.cardTypes.note").split("\n")[1]}
+              </Note>
+            </>
+          )}
+        </Section>
+
+        {/* ── game setup ── */}
+        <Section title={t("sections.gameSetup.title")}>
+          <GameSetupWalkthrough
+            p1HandImages={p1HandImages}
+            p2HandImages={p2HandImages}
+            newP1HandImages={newP1HandImages}
+            newP2HandImages={newP2HandImages}
+            setupSteps={setupSteps}
+            t={t}
+          />
+        </Section>
+
+        {/* ── turn flow ── */}
+        <Section title={t("sections.turnFlow.title")}>
+          <TurnPhaseWalkthrough phases={phases} t={t} />
+          <Note>{t("sections.turnFlow.note")}</Note>
+        </Section>
+
+        {/* ── battle ── */}
+        <Section title={t("sections.battle.title")}>
+          <div className="flex flex-col gap-3">
+            <Note>
+              <span className="font-medium">
+                {t("sections.battle.attackConditionNote").split("\n")[0]}
+              </span>
+              {"\n"}
+              {t("sections.battle.attackConditionNote").split("\n")[1]}
+            </Note>
+
+            <p className="text-xs text-muted-foreground">{t("sections.battle.clickHint")}</p>
+            <BattleStepsWalkthrough battleSteps={battleSteps} />
+
+            <UnitBattleSimulator />
+
+            <Note>{t("sections.battle.note")}</Note>
+          </div>
+        </Section>
+
+        {/* ── zones ── */}
+        <ZoneSection t={t} />
+
+        {/* ── triggers ── */}
+        <Section title={t("sections.triggers.title")}>
+          <div className="flex flex-col gap-3">
+            {(
+              [
+                "activateMain",
+                "activateAction",
+                "main",
+                "action",
+                "burst",
+                "onPlace",
+                "onAttack",
+                "onDestroy",
+                "onSet",
+                "whileSet",
+                "onLink",
+                "whileLink",
+                "oncePer",
+              ] as const
+            ).map((key) => (
+              <div key={key} className="flex flex-col gap-1">
+                <div>
+                  <TBadge
+                    name={t(`sections.triggers.items.${key}.badge`)}
+                    triggerKey={key}
+                    locale={locale}
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {t(`sections.triggers.items.${key}.desc`)}
                 </p>
               </div>
-            ),
-          )}
-        </div>
-        <Note>{t("sections.effects.note")}</Note>
-      </Section>
+            ))}
+          </div>
+        </Section>
 
-      {/* ── glossary ── */}
-      <Section title={t("sections.glossary.title")}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-          {(
-            [
-              "activeRest",
-              "place",
-              "set",
-              "destroy",
-              "exclude",
-              "discard",
-              "draw",
-              "play",
-              "recover",
-              "battleDamage",
-              "turnPlayer",
-              "slash",
-            ] as const
-          ).map((key) => (
-            <div key={key} className="rounded border p-2">
-              <p className="font-semibold mb-0.5">{t(`sections.glossary.items.${key}.term`)}</p>
-              <p className="text-muted-foreground leading-relaxed">
-                {t(`sections.glossary.items.${key}.def`)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </Section>
+        {/* ── effects ── */}
+        <Section title={t("sections.effects.title")}>
+          <div className="flex flex-col gap-2 text-xs">
+            {(["continuous", "triggered", "activated", "command", "replacement"] as const).map(
+              (key) => (
+                <div key={key} className="rounded border p-2">
+                  <p className="font-semibold mb-0.5">{t(`sections.effects.items.${key}.name`)}</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {t(`sections.effects.items.${key}.desc`)}
+                  </p>
+                </div>
+              ),
+            )}
+          </div>
+          <Note>{t("sections.effects.note")}</Note>
+        </Section>
 
-      <p className="text-xs text-muted-foreground text-center">{t("footer")}</p>
+        {/* ── glossary ── */}
+        <Section title={t("sections.glossary.title")}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            {(
+              [
+                "activeRest",
+                "place",
+                "set",
+                "destroy",
+                "exclude",
+                "discard",
+                "draw",
+                "shuffle",
+                "play",
+                "recover",
+                "gain",
+                "token",
+                "counter",
+                "battleDamage",
+                "turnPlayer",
+                "slash",
+              ] as const
+            ).map((key) => (
+              <div key={key} className="rounded border p-2">
+                <p className="font-semibold mb-0.5">{t(`sections.glossary.items.${key}.term`)}</p>
+                <p className="text-muted-foreground leading-relaxed">
+                  {t(`sections.glossary.items.${key}.def`)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        <p className="text-xs text-muted-foreground text-center">{t("footer")}</p>
+      </div>
     </div>
   );
 }

@@ -13,6 +13,7 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import { QuickSearch } from "@/components/QuickSearch";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useRouterState, Link, useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { resolveBreadcrumb } from "@/lib/nav";
@@ -96,19 +97,51 @@ function AppBreadcrumb() {
   );
 }
 
+function MonobarBrand() {
+  const { t } = useTranslation("common");
+  const { locale = "ko" } = useParams({ strict: false });
+  return (
+    <Link
+      to={`/${locale}` as any}
+      className="hidden sm:flex items-baseline gap-2 docket-meta-strong text-foreground hover:opacity-80 transition-opacity"
+    >
+      <span className="display-title text-sm sm:text-base font-bold tracking-tight">
+        GCG DECKBUILDER
+      </span>
+      <span className="hidden sm:inline docket-meta opacity-70">{t("nav.title")}</span>
+    </Link>
+  );
+}
+
+function MonobarMeta() {
+  const today = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
+  return (
+    <div className="hidden md:flex items-center gap-3 docket-meta px-3 border-l border-foreground/20 h-full">
+      <span>EST. 2026</span>
+      <span className="opacity-30">·</span>
+      <span>SEOUL</span>
+      <span className="opacity-30">·</span>
+      <span className="tabular-nums">{today}</span>
+    </div>
+  );
+}
+
 export default function Scaffold({ children }: PropsWithChildren) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-[calc(4rem+env(safe-area-inset-top))] shrink-0 items-center gap-2 border-b sticky top-0 z-2 bg-background pt-[env(safe-area-inset-top)]">
-          <div className="flex items-center gap-2 px-3">
+      <SidebarInset className="min-w-0 overflow-x-hidden">
+        <header className="flex justify-between h-[calc(3.25rem+env(safe-area-inset-top))] shrink-0 items-center border-b border-foreground/30 sticky top-0 z-2 bg-background pt-[env(safe-area-inset-top)]">
+          <div className="flex items-center gap-2 px-3 h-full min-w-0">
             <SidebarTrigger />
-            <Separator orientation="vertical" className="mr-2 h-4" />
+            <Separator orientation="vertical" className="mr-1 h-4 hidden sm:block" />
+            <MonobarBrand />
+            <MonobarMeta />
             <AppBreadcrumb />
           </div>
-          <div className="ml-auto flex items-center gap-1 px-3">
+          <div className="flex items-center gap-1 px-3 h-full border-l border-foreground/20 shrink-0">
             <LanguageSwitcher />
+            <ThemeToggle />
             <QuickSearch />
           </div>
         </header>

@@ -18,6 +18,14 @@
     <script>
       var l = (navigator.languages && navigator.languages[0]) || navigator.language || "";
       document.documentElement.lang = l.startsWith("ko") ? "ko" : "en";
+      try {
+        var stored = localStorage.getItem("gcg.theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme =
+          stored === "light" || stored === "dark" ? stored : prefersDark ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+        if (theme === "dark") document.documentElement.classList.add("dark");
+      } catch (_) {}
     </script>
   </head>
   <body>

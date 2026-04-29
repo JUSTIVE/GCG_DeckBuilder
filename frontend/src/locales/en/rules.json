@@ -1,7 +1,72 @@
 {
   "title": "Game Rules",
-  "subtitle": "Gundam Card Game Comprehensive Rules Ver. 1.4.1 Summary",
-  "footer": "Gundam Card Game Comprehensive Rules Ver. 1.4.1 (based on original text dated January 16, 2026)",
+  "subtitle": "Gundam Card Game Comprehensive Rules Ver. 1.5.0 Summary",
+  "footer": "Gundam Card Game Comprehensive Rules Ver. 1.5.0 (original Jan 30, 2026 / translation Apr 14, 2026)",
+  "versionHistory": {
+    "title": "Version History",
+    "currentLabel": "Latest",
+    "selectLabel": "Select version",
+    "originalLabel": "Original",
+    "translationLabel": "Translation",
+    "changesLabel": "Changes",
+    "note": "The rules content on this page always reflects the latest version (Ver. 1.5.0). The dropdown only shows what was added or revised in each version.",
+    "versions": [
+      {
+        "version": "1.5.0",
+        "originalDate": "2026.01.30",
+        "translationDate": "2026.04.14",
+        "changes": [
+          "2-11-3. Expanded the activation area of pilot card effect text",
+          "3-3-9-2. Expanded the activation area of pilot card effect text",
+          "3-3-9-2-1. Added rules for pilot cards that activate from hand/trash",
+          "5-17-4. Added token rules (off-game storage, ≤6 of same No., quantity public / contents private)"
+        ]
+      },
+      {
+        "version": "1.4.1",
+        "originalDate": "2026.01.16",
+        "translationDate": "2026.01.18",
+        "changes": [
+          "13-2-10-1. Reworded [While Set] keyword description",
+          "13-2-12-1. Reworded [While Linked] keyword description"
+        ]
+      },
+      {
+        "version": "1.4.0",
+        "originalDate": "2025.11.21",
+        "translationDate": "2025.12.30",
+        "changes": [
+          "2-4-2-1. Added 'Purple' color",
+          "3-2-6-4. Added explanation for name-based link conditions",
+          "5-20. Added clarification on 'If you did' vs 'Then' text",
+          "10-1-6-8-1. Added clarification on effects triggered while resolving multiple [Burst] effects",
+          "10-1-8-1-2. Clarified target selection rules for commands with 'Then' / 'If you did' text",
+          "10-2-2-1. Added explanation on target selection in effect conditions",
+          "12-3-14. Added battle area limit rule for team battle",
+          "13-1-7. Added explanation for the keyword effect [Suppress]",
+          "13-2-10-2. Added example for [While Set·(condition)]",
+          "13-2-12-2. Added example for [While Linked]"
+        ]
+      },
+      {
+        "version": "1.1.0",
+        "originalDate": "2025.07.24",
+        "translationDate": "2025.07.30",
+        "changes": [
+          "Typo fixes, table of contents revision, consolidated items",
+          "Updated information on card placement display format",
+          "2-6. Added terrain information",
+          "3. Specified card type information",
+          "5-10. Specified destruction information",
+          "7-2-2. Added start phase transition rule",
+          "7-5-2. Specified card play rules",
+          "12. Added multiplayer rules",
+          "13-2-11. Added [On Link] description",
+          "13-2-12. Added [While Linked] description"
+        ]
+      }
+    ]
+  },
   "nav": {
     "prev": "Prev",
     "next": "Next"
@@ -270,7 +335,7 @@
     "cardTypes": {
       "title": "Card Types (5 Types)",
       "viewOtherCard": "View another card",
-      "note": "EX Base: A Base token with AP 0 / HP 3. Automatically placed in the Base Zone at game start.\nEX Resource: A one-time-use Resource token. Given to the second player (1 copy). Removed after use.",
+      "note": "EX Base: A Base token with AP 0 / HP 3. Automatically placed in the Base Zone at game start.\nEX Resource: A one-time-use Resource token. Given to the second player (1 copy). Removed after use.\nToken storage rule (Ver. 1.5.0): Stored face down outside the game. Up to 6 of the same No., quantity is public information but contents are private.",
       "items": {
         "unit": {
           "name": "Unit",
@@ -289,7 +354,8 @@
           "attrs": ["AP modifier (+N)", "HP modifier (+N)"],
           "notes": [
             "Text above card name → Pilot's own effects (usually [Burst]).",
-            "Text below card name → Effects granted to the set unit.",
+            "Text below card name → Effects without a zone specifier are granted to the set unit.",
+            "Effects with hand/trash zone specifiers are activated by the pilot card itself (Ver. 1.5.0).",
             "Pilot's traits are not added to the unit.",
             "Cannot be voluntarily replaced or removed. Moves with the unit when the unit is moved."
           ]
@@ -514,6 +580,22 @@
         "slash": {
           "term": "/ (Slash)",
           "def": "When used in traits, means \"or\". Example: [Zeon]/[Neo-Zeon] = either one."
+        },
+        "shuffle": {
+          "term": "Shuffle",
+          "def": "Randomize the order of cards in the deck. Treated as shuffled even if the deck has only 1 card."
+        },
+        "gain": {
+          "term": "Gain",
+          "def": "When a card receives a new effect through some other effect."
+        },
+        "token": {
+          "term": "Token",
+          "def": "Unit/Base/Resource cards placed from outside the game by an effect. No color, Lv./cost are treated as 0. Removed from the game when placed outside their original area."
+        },
+        "counter": {
+          "term": "Counter",
+          "def": "A marker placed on a card (mainly damage). Represented by chips, dice, etc."
         }
       }
     }

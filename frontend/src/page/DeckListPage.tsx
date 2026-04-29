@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import {
   PlusIcon,
   Trash2Icon,
-  LayersIcon,
   AlertCircleIcon,
   AlertTriangleIcon,
   SwordsIcon,
@@ -21,6 +20,7 @@ import {
   WarehouseIcon,
   SparklesIcon,
 } from "lucide-react";
+import { Dossier } from "@/components/docket";
 import type { LucideIcon } from "lucide-react";
 
 const KIND_ICONS: Record<string, LucideIcon> = {
@@ -243,179 +243,183 @@ export function DeckListPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col gap-6">
-      <div className="flex items-center gap-2">
-        <LayersIcon className="size-5 text-muted-foreground" />
-        <h1 className="text-xl font-bold">{t("deck.list")}</h1>
-      </div>
+    <div className="flex flex-col w-full">
+      <Dossier
+        docId="GCG-DECK-IDX"
+        category="CATALOGUE / 構築デッキ"
+        title={t("deck.list")}
+        description={t("deck.list") as string}
+        edition={`№ ${String(decks.length).padStart(3, "0")}`}
+      />
+      <div className="max-w-6xl mx-auto w-full px-4 py-8 flex flex-col gap-6">
+        <form onSubmit={handleCreate} className="flex gap-2">
+          <Input
+            placeholder={t("deck.newDeckName")}
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            className="flex-1"
+          />
+          <Button type="submit" disabled={isCreating || !newName.trim()}>
+            <PlusIcon />
+            {t("action.create")}
+          </Button>
+        </form>
 
-      <form onSubmit={handleCreate} className="flex gap-2">
-        <Input
-          placeholder={t("deck.newDeckName")}
-          value={newName}
-          onChange={(e) => setNewName(e.target.value)}
-          className="flex-1"
-        />
-        <Button type="submit" disabled={isCreating || !newName.trim()}>
-          <PlusIcon />
-          {t("action.create")}
-        </Button>
-      </form>
-
-      {decks.length === 0 ? (
-        <p className="text-muted-foreground text-sm text-center py-8">{t("deck.empty")}</p>
-      ) : (
-        <ul className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {decks.map((deck) => (
-            <li
-              key={deck.id}
-              className="flex items-start gap-3 rounded-lg border border-border bg-muted/30 px-4 py-3 hover:bg-muted/60 transition-colors"
-            >
-              <button
-                type="button"
-                className="flex-1 text-left min-w-0 flex flex-col gap-1"
-                onClick={() =>
-                  router.navigate({
-                    to: "/$locale/deck/$deckId",
-                    params: { locale, deckId: deck.id },
-                    search: deck.colors.length >= 2 ? { color: deck.colors as any } : {},
-                  })
-                }
+        {decks.length === 0 ? (
+          <p className="text-muted-foreground text-sm text-center py-8">{t("deck.empty")}</p>
+        ) : (
+          <ul className="docket-grid-bg p-4 grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {decks.map((deck) => (
+              <li
+                key={deck.id}
+                className="flex items-start gap-3 rounded-lg border border-border bg-card px-4 py-3 hover:bg-card/30 transition-colors "
               >
-                <div className="font-semibold truncate mt-2">{deck.name}</div>
-                <div className="flex items-center gap-2 mt-1">
-                  {totalCards(flattenDeckCards(deck.cards)) === 50 ? (
-                    <span className="text-xs text-muted-foreground">
-                      {t("deck.cardCount", { count: 50 })}
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-1 text-xs font-medium text-amber-600 dark:text-amber-400">
-                      <AlertCircleIcon className="size-3 shrink-0" />
-                      {t("deck.cardCountOf", {
-                        count: totalCards(flattenDeckCards(deck.cards)),
-                        max: 50,
-                      })}
-                    </span>
-                  )}
-                  {deck.hasLinkWarning && (
-                    <span className="flex items-center gap-0.5 text-xs font-medium text-amber-600 dark:text-amber-400 shrink-0">
-                      <AlertTriangleIcon className="size-3 shrink-0" />
-                      {t("deck.linkWarning.hasUnlinked")}
-                    </span>
-                  )}
-                  <div className="flex gap-1 p-1">
-                    {deck.colors.map((color) => (
-                      <span
-                        key={color}
-                        className={cn(
-                          "inline-block w-3 h-3 rounded-full",
-                          COLOR_BG[color],
-                          color === "WHITE" && "border border-gray-200",
-                        )}
+                <button
+                  type="button"
+                  className="flex-1 text-left min-w-0 flex flex-col gap-1"
+                  onClick={() =>
+                    router.navigate({
+                      to: "/$locale/deck/$deckId",
+                      params: { locale, deckId: deck.id },
+                      search: deck.colors.length >= 2 ? { color: deck.colors as any } : {},
+                    })
+                  }
+                >
+                  <div className="font-semibold truncate mt-2">{deck.name}</div>
+                  <div className="flex items-center gap-2 mt-1">
+                    {totalCards(flattenDeckCards(deck.cards)) === 50 ? (
+                      <span className="text-xs text-muted-foreground">
+                        {t("deck.cardCount", { count: 50 })}
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-1 text-xs font-medium text-amber-600 dark:text-amber-400">
+                        <AlertCircleIcon className="size-3 shrink-0" />
+                        {t("deck.cardCountOf", {
+                          count: totalCards(flattenDeckCards(deck.cards)),
+                          max: 50,
+                        })}
+                      </span>
+                    )}
+                    {deck.hasLinkWarning && (
+                      <span className="flex items-center gap-0.5 text-xs font-medium text-amber-600 dark:text-amber-400 shrink-0">
+                        <AlertTriangleIcon className="size-3 shrink-0" />
+                        {t("deck.linkWarning.hasUnlinked")}
+                      </span>
+                    )}
+                    <div className="flex gap-1 p-1">
+                      {deck.colors.map((color) => (
+                        <span
+                          key={color}
+                          className={cn(
+                            "inline-block w-3 h-3 rounded-full",
+                            COLOR_BG[color],
+                            color === "WHITE" && "border border-gray-200",
+                          )}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    {deckPreviewImages(flattenDeckCards(deck.cards)).map((url, i) => (
+                      <img
+                        key={i}
+                        src={url.replace(/\.webp$/, "-sm.webp")}
+                        className="h-14 w-10 rounded object-cover shrink-0"
+                        alt=""
                       />
                     ))}
                   </div>
-                </div>
-                <div className="flex gap-2">
-                  {deckPreviewImages(flattenDeckCards(deck.cards)).map((url, i) => (
-                    <img
-                      key={i}
-                      src={url.replace(/\.webp$/, "-sm.webp")}
-                      className="h-14 w-10 rounded object-cover shrink-0"
-                      alt=""
-                    />
-                  ))}
-                </div>
 
-                {(() => {
-                  const counts = deckKindCounts(flattenDeckCards(deck.cards));
-                  const parts = KIND_ORDER.filter((k) => counts[k]);
-                  if (parts.length === 0) return null;
-                  return (
-                    <div className="flex gap-2 mt-1">
-                      {parts.map((k) => {
-                        const Icon = KIND_ICONS[k];
-                        return (
-                          <span
-                            key={k}
-                            className="flex items-center gap-0.5 text-[11px] text-muted-foreground"
-                          >
-                            {Icon && <Icon className="size-3" />}
-                            <span className="font-medium text-foreground/70">
-                              {KIND_LABELS[k]}
-                            </span>{" "}
-                            {counts[k]}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  );
-                })()}
-                {(() => {
-                  const kws = deck.topKeywords;
-                  if (kws.length === 0) return null;
-                  return (
-                    <div className="flex flex-wrap gap-1 mt-1.5">
-                      {kws.map((kw) => {
-                        const firstToken = KEYWORD_DESCRIPTIONS[kw]?.name[0];
-                        const keyword = kw as CardKeyword;
-                        const label = renderKeyword(keyword);
-                        if (firstToken?.type === "trigger") {
+                  {(() => {
+                    const counts = deckKindCounts(flattenDeckCards(deck.cards));
+                    const parts = KIND_ORDER.filter((k) => counts[k]);
+                    if (parts.length === 0) return null;
+                    return (
+                      <div className="flex gap-2 mt-1">
+                        {parts.map((k) => {
+                          const Icon = KIND_ICONS[k];
+                          return (
+                            <span
+                              key={k}
+                              className="flex items-center gap-0.5 text-[11px] text-muted-foreground"
+                            >
+                              {Icon && <Icon className="size-3" />}
+                              <span className="font-medium text-foreground/70">
+                                {KIND_LABELS[k]}
+                              </span>{" "}
+                              {counts[k]}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    );
+                  })()}
+                  {(() => {
+                    const kws = deck.topKeywords;
+                    if (kws.length === 0) return null;
+                    return (
+                      <div className="flex flex-wrap gap-1 mt-1.5">
+                        {kws.map((kw) => {
+                          const firstToken = KEYWORD_DESCRIPTIONS[kw]?.name[0];
+                          const keyword = kw as CardKeyword;
+                          const label = renderKeyword(keyword);
+                          if (firstToken?.type === "trigger") {
+                            return (
+                              <span
+                                key={kw}
+                                className={cn(
+                                  "inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold leading-none",
+                                  triggerClassByKeyword(keyword),
+                                )}
+                              >
+                                {label}
+                              </span>
+                            );
+                          }
                           return (
                             <span
                               key={kw}
                               className={cn(
-                                "inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold leading-none",
-                                triggerClassByKeyword(keyword),
+                                "inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] leading-none",
+                                abilityClassByKeyword(keyword),
                               )}
                             >
                               {label}
                             </span>
                           );
-                        }
-                        return (
+                        })}
+                      </div>
+                    );
+                  })()}
+                  {(() => {
+                    const traits = deck.topTraits;
+                    if (traits.length === 0) return null;
+                    return (
+                      <div className="flex flex-wrap gap-1 mt-1">
+                        {traits.map((tr) => (
                           <span
-                            key={kw}
-                            className={cn(
-                              "inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] leading-none",
-                              abilityClassByKeyword(keyword),
-                            )}
+                            key={tr}
+                            className="text-[10px] bg-muted rounded px-1.5 py-0.5 text-muted-foreground"
                           >
-                            {label}
+                            {renderTrait(tr)}
                           </span>
-                        );
-                      })}
-                    </div>
-                  );
-                })()}
-                {(() => {
-                  const traits = deck.topTraits;
-                  if (traits.length === 0) return null;
-                  return (
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {traits.map((tr) => (
-                        <span
-                          key={tr}
-                          className="text-[10px] bg-muted rounded px-1.5 py-0.5 text-muted-foreground"
-                        >
-                          {renderTrait(tr)}
-                        </span>
-                      ))}
-                    </div>
-                  );
-                })()}
-              </button>
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                onClick={() => handleDelete(deck.id, deck.name)}
-              >
-                <Trash2Icon className="text-destructive" />
-              </Button>
-            </li>
-          ))}
-        </ul>
-      )}
+                        ))}
+                      </div>
+                    );
+                  })()}
+                </button>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  onClick={() => handleDelete(deck.id, deck.name)}
+                >
+                  <Trash2Icon className="text-destructive" />
+                </Button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
