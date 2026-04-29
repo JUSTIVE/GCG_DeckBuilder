@@ -76,7 +76,16 @@
     "JUPITRIS": "Jupitris",
     "CYCLOPS_TEAM": "Cyclops Team",
     "UN": "UN",
-    "MINERVA_SQUAD": "Minerva Squad"
+    "MINERVA_SQUAD": "Minerva Squad",
+    "LEAGUE_MILITAIRE": "League Militaire",
+    "SATYRICON": "Satyricon",
+    "MILITIA": "Militia",
+    "SHRIKE_TEAM": "Shrike Team",
+    "MOONRACE": "Moonrace",
+    "TRINITY": "Trinity",
+    "VICTORY_TYPE": "Victory Type",
+    "ZANSCARE": "Zanscare",
+    "DAWN_OF_FOLD": "Dawn of Fold"
   },
   "series": {
     "MOBILE_SUIT_GUNDAM": "Mobile Suit Gundam",
@@ -93,7 +102,9 @@
     "MOBILE_SUIT_GUNDAM_IRON_BLOODED_ORPHANS": "Iron-Blooded Orphans",
     "MOBILE_SUIT_GUNDAM_HATHAWAYS_FLASH": "Hathaway's Flash",
     "MOBILE_SUIT_GUNDAM_THE_WITCH_FROM_MERCURY": "The Witch from Mercury",
-    "MOBILE_SUIT_GUNDAM_GQUUUUUUX": "GQUUUUUUX"
+    "MOBILE_SUIT_GUNDAM_GQUUUUUUX": "GQUUUUUUX",
+    "MOBILE_SUIT_V_GUNDAM": "Mobile Suit Victory Gundam",
+    "TURN_A_GUNDAM": "Turn A Gundam"
   },
   "zone": {
     "SPACE": "Space",
