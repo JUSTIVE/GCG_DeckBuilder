@@ -36,6 +36,7 @@ const packages = [
   616101,
   616102,
   616103,
+  616104,
   616701, // other product
   616801, // basic
   616901, // promo
