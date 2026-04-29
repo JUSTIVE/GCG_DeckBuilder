@@ -1,6 +1,7 @@
 name: Deploy Backend
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -27,7 +28,7 @@ jobs:
     if: contains(toJson(github.event.commits.*.modified), 'data/3.processed.json')
     runs-on: ubuntu-latest
     steps:
-      - uses: superfly/flyctl-action/setup-flyctl@master
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl ssh console --app gcg-builder --command "bun db/seed.ts"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
